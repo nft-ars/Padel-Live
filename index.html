@@ -359,20 +359,24 @@ const isIOS = () => /iphone|ipad|ipod/i.test(navigator.userAgent);
 window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); installEvt = e; if (S.view === "me" || S.view === "home") render(); });
 window.addEventListener("appinstalled", () => { installEvt = null; render(); });
 
+const within = (p, ms) => Promise.race([p, new Promise((_, no) => setTimeout(() => no(new Error("timeout")), ms || 12000))]);
+const noLock = async (_name, _wait, fn) => await fn();
 async function boot(){
   try {
-    sb = window.__MOCK || window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    sb = window.__MOCK || window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {auth:{lock: noLock, persistSession:true, autoRefreshToken:true, detectSessionInUrl:true}});
   } catch (e) { S.err = t("loadErr"); render(); return; }
-  const { data } = await sb.auth.getSession();
-  S.user = data && data.session ? data.session.user : null;
-  sb.auth.onAuthStateChange((ev, session) => { if (ev === "PASSWORD_RECOVERY"){ S.user = session ? session.user : S.user; S.view = "reset"; render(); return; } const u = session ? session.user : null; if ((u && u.id) !== (S.user && S.user.id)) { S.user = u; afterAuth(); } });
-  await loadClubs();
-  await afterAuth(true);
+  try {
+    let data = null;
+    try { data = (await within(sb.auth.getSession(), 8000)).data; } catch (e) { data = null; }
+    S.user = data && data.session ? data.session.user : null;
+    sb.auth.onAuthStateChange((ev, session) => { if (ev === "PASSWORD_RECOVERY"){ S.user = session ? session.user : S.user; S.view = "reset"; setTimeout(render, 0); return; } const u = session ? session.user : null; if ((u && u.id) !== (S.user && S.user.id)) { S.user = u; setTimeout(afterAuth, 0); } });
+    await within(loadClubs());
+    await within(afterAuth(true));
+  } catch (e) { S.err = t("loadErr"); S.clubs = []; render(); return; }
   const h = location.hash.slice(1); if (V[h]) S.view = h;
   if (RECOVERY && S.user){ S.view = "reset"; history.replaceState(null, "", location.pathname + "#reset"); }
   S.loaded = true; render();
-  setInterval(poll, 15000);
-  document.addEventListener("visibilitychange", () => { if (!document.hidden) poll(true); });
+  if (!boot.started){ boot.started = true; setInterval(poll, 15000); document.addEventListener("visibilitychange", () => { if (!document.hidden) poll(true); }); }
 }
 async function loadClubs(){
   const [c, ct, p, cl] = await Promise.all([
@@ -626,7 +630,7 @@ const errMsg = e => (e && (e.message || e.error_description)) || String(e);
 app.addEventListener("click", async e => {
   const b = e.target.closest("button,a"); if (!b) return; const d = b.dataset;
   if (d.go){ e.preventDefault(); go(d.go); return; }
-  if ("retry" in d){ S.err = null; await loadClubs(); S.loaded = true; render(); return; }
+  if ("retry" in d){ location.reload(); return; }
   if ("lang" in d){ lang = lang === "en" ? "ar" : "en"; try { localStorage.setItem("pl-lang", lang); } catch (x) {} render(); return; }
   if (d.club){ S.club = S.clubs.find(c => c.id === d.club); S.slot = null; go("club"); return; }
   if (d.day){ S.day = d.day; S.slot = null; await loadBusy(); render(); return; }
@@ -701,8 +705,10 @@ boot();
   if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(function(){});
   if (window.__MOCK) return __padelApp();
   var a = document.createElement("script"); a.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.50.0";
-  a.onload = __padelApp;
-  a.onerror = function(){ var b = document.createElement("script"); b.src = "https://unpkg.com/@supabase/supabase-js@2.50.0/dist/umd/supabase.js"; b.onload = __padelApp; b.onerror = __padelApp; document.body.appendChild(b); };
+  var started = false; var start = function(){ if (started) return; started = true; __padelApp(); };
+  setTimeout(start, 15000);
+  a.onload = start;
+  a.onerror = function(){ var b = document.createElement("script"); b.src = "https://unpkg.com/@supabase/supabase-js@2.50.0/dist/umd/supabase.js"; b.onload = start; b.onerror = start; document.body.appendChild(b); };
   document.body.appendChild(a);
 })();
 </script>
