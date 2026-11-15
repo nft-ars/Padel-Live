@@ -272,6 +272,58 @@ html[dir="rtl"] .signin .slogan{font-style:normal}
 .inst img{border-radius:11px;flex:none}
 .inst > div{flex:1 1 180px}
 .inst .cta{flex:1 1 100%;width:100%}
+
+/* ===== levels, notifications, split, clubs, results, chat ===== */
+.cta.sm{height:40px;padding:0 14px;font-size:14px;border-radius:11px}
+.ghost.sm{height:40px;width:auto;padding:0 14px;font-size:14px;display:inline-flex;align-items:center;justify-content:center;text-decoration:none;color:var(--ink)}
+.bell{position:relative;width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;color:var(--ink)}
+.bell svg{width:20px;height:20px}
+.bell .badge{position:absolute;top:-6px;inset-inline-end:-6px;min-width:20px;height:20px;padding:0 5px;border-radius:10px;background:var(--red);color:#fff;font:800 11px/20px var(--body);text-align:center}
+.lv{display:inline-flex;align-items:center;justify-content:center;min-width:38px;height:22px;padding:0 6px;border-radius:7px;font:800 12px var(--body);color:#fff;background:var(--ink-3)}
+.lv.cA{background:#7A3FB0}.lv.cB{background:#B0702E}.lv.cC{background:#2C5FAE}.lv.cD{background:#2E7D4F}.lv.none{background:var(--line);color:var(--ink-2)}
+.lvbig{font-size:34px;font-weight:800;line-height:1;letter-spacing:-.5px}
+.lvcard{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.lvcard small{display:block}
+.lvprompt{display:flex;flex-direction:column;gap:4px;text-align:start;border:2px dashed var(--blue);background:var(--card);color:var(--ink);width:100%}
+.lvres{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.plist{display:flex;gap:10px;flex-wrap:wrap;margin:4px 0}
+.pp{display:flex;flex-direction:column;align-items:center;gap:3px;min-width:52px}
+.pp .av{margin:0}
+.pp small{font-size:11px;color:var(--ink-2);max-width:60px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.jsheet{display:flex;flex-direction:column;gap:10px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+.prow{display:flex;align-items:center;gap:10px}
+.prow .av{margin:0;flex:none}
+.resbox{display:flex;flex-direction:column;gap:8px}
+.rteam{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--bg)}
+.rteam b{font-size:20px;letter-spacing:6px}
+.rteam.win{background:color-mix(in srgb,var(--green) 14%,var(--card));font-weight:700}
+.sets{display:flex;flex-direction:column;gap:6px}
+.sets .sh,.sets .sr{display:grid;grid-template-columns:1fr 54px 54px 54px;gap:6px;align-items:center}
+.sets .sh b{font-size:12px;color:var(--ink-2);text-align:center}
+.sets .sr span{font-size:13px;font-weight:700;overflow:hidden;text-overflow:ellipsis}
+.sets input{height:46px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);text-align:center;font:800 20px var(--body);width:100%;box-sizing:border-box}
+.chat{display:flex;flex-direction:column;gap:10px}
+.msgs{display:flex;flex-direction:column;gap:8px;max-height:46vh;overflow-y:auto;padding:2px}
+.msg{align-self:flex-start;max-width:80%;display:flex;flex-direction:column;gap:2px;padding:8px 12px;border-radius:14px 14px 14px 4px;background:var(--bg)}
+.msg.mine{align-self:flex-end;background:var(--blue);color:#fff;border-radius:14px 14px 4px 14px}
+.msg small{font-weight:700;font-size:11px;color:var(--blue)}
+.msg time{font-size:10px;opacity:.65;align-self:flex-end}
+.chatin{display:flex;gap:8px}
+.chatin input{flex:1;min-width:0;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:0 12px;font:500 15px var(--body)}
+.hrow{display:flex;align-items:center;gap:10px;width:100%;color:var(--ink)}
+.wl{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font:800 12px var(--body);color:#fff}
+.wl.w{background:var(--green)}.wl.l{background:var(--red)}
+.hs{display:flex;flex-direction:column;align-items:flex-end;gap:2px;white-space:nowrap}
+.up{color:var(--green);font-weight:800}.down{color:var(--red);font-weight:800}
+.nrow{display:flex;align-items:flex-start;gap:10px;width:100%;color:var(--ink);font-size:14px;line-height:1.4}
+.nrow .ndot{flex:none;width:9px;height:9px;border-radius:50%;margin-top:6px;background:transparent}
+.nrow.unread .ndot{background:var(--blue)}
+.nrow.unread{border-color:var(--blue)}
+.cpic{height:170px;border-radius:16px;overflow:hidden;background:linear-gradient(180deg,#16324F,#2C5FAE)}
+.cpic img,.pic img{width:100%;height:100%;object-fit:cover;display:block}
+.cpic svg{width:100%;height:100%}
+.sbtn.wa{background:#25D366;color:#fff;border-color:#25D366;text-decoration:none;display:inline-flex;align-items:center}
+textarea{border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:10px 12px;font:500 15px var(--body);resize:vertical}
 </style>
 </head>
 <body>
@@ -302,7 +354,22 @@ const W = {
   forgot:"Forgot password?", needEmail:"Type your email above first.", resetSent:"Check your email for a link to set a new password.", newPassT:"Set a new password", newPass:"New password (6+ characters)", setPass:"Save new password", passSaved:"Password changed. You're signed in.",
   delAcc:"Delete my account", delQ:"Delete your account? Your upcoming bookings will be cancelled. This can't be undone.", delDone:"Your account was deleted.",
   install:"Add Padel Live to your phone", installS:"Get the icon on your home screen. It opens full screen like a normal app.", installBtn:"Add to home screen", iosHow:"In Safari, tap the Share button, then Add to Home Screen.", andHow:"Tap ⋮ in Chrome, then Add to Home screen (or Install app).",
-  newBk:"New booking", taken:"Someone just booked that time. Pick another one.", autoUp:"Updates automatically"},
+  evLive:"Live scores", lvTitle:"Your level", lvIntro:"Answer 5 quick questions. Your level then goes up or down with every confirmed match result.", lvYour:"Your level", lvCat:"Category", lvAnswer:"Answer all 5 questions", lvNote:"Levels go from 0.5 to 7. Category D is about 1.5–2.5, C 2.5–3.5, B 3.5–4.5, A 4.5 and up.",
+  q1:"How long have you played padel?", q1a:"I'm just starting", q1b:"Less than a year", q1c:"1 to 3 years", q1d:"More than 3 years",
+  q2:"Other racket sports?", q2a:"None", q2b:"A little", q2c:"Tennis or squash regularly",
+  q3:"Your game", q3a:"I'm learning to keep the ball in play", q3b:"I can rally at a steady pace", q3c:"I rally well and volley at the net", q3d:"I attack with bandeja, víbora and smash",
+  q4:"The walls", q4a:"I avoid playing off the walls", q4b:"I sometimes return off the back wall", q4c:"I use back and side walls with control",
+  q5:"Tournaments", q5a:"Never played one", q5b:"Friendly or club tournaments", q5c:"Category B or higher",
+  setLevel:"Set my level", redoLevel:"Retake the level quiz", yourLevel:"Your level", ratedN:"rated matches", levelCardHint:"Set your level so you can join matches at the right level.", myResults:"My results", noResults:"Play a match with 3 other Padel Live players, then report the score here.",
+  inbox:"Notifications", noNotes:"Nothing new yet.", someone:"Someone",
+  nJoined:"{n} joined your match on {w}.", nLeft:"{n} left your match on {w}.", nDepOk:"Your deposit was confirmed. See you on court!", nClubCancel:"The club cancelled the booking on {w}.", nShareOk:"The club confirmed your payment.", nShareNo:"The club couldn't find your transfer. Check the reference or pay at the desk.", nResult:"{n} reported the score. Please confirm it.", nResultOk:"Result confirmed. Your level was updated.", nResultNo:"{n} says the score isn't right. Report it again.", nChat:"{n} wrote in your match chat.",
+  match:"Match", players:"Players", booker:"Booked the court", openSpot:"Open spot", splitInfo:"Split payment: each player pays {x}.", atClub:"At the club", paidS:"Paid", checking:"Checking", payAtDesk:"Pays at desk", code:"Code",
+  result:"Result", waitConfirm:"Waiting for confirmation", confirmRes:"Confirm score", notRight:"Not right", reportRes:"Report the score", disputed:"The other team said the score wasn't right. Enter it again.", pickPartner:"Who was your partner?", set:"Set", you:"You", sendRes:"Send score", resNote:"A player from the other team confirms it, then everyone's level updates.", resLater:"You can report the score once the match starts.", resNeed4:"Results count when all 4 players are on Padel Live.", won:"Won", lost:"Lost", vs:"vs", disputedS:"Disputed",
+  chat:"Match chat", chatEmpty:"Say hi to the other players.", chatPh:"Write a message…", sendBtn:"Send", details:"Details", openMatch:"Open",
+  anyLvl:"Any level", splitTag:"split payment", notYourLvl:"Not your level", joinHow:"How will you pay your share?", joinGo:"Join and pay", lvRange:"Who can join?", aroundMe:"Around my level", setLvFirst:"Set your level to choose a level range.", payWho:"Who pays the court?", payAll:"I pay the whole court", payShare:"Split 4 ways", yourShare:"Your share (1/4)", payNow:"You pay now",
+  map:"Map", call:"Call", clubPage:"Club page", photo:"Club photo", area:"Area", about:"About the club", mapLink:"Google Maps link", clubPhone:"Club phone / WhatsApp", share1:"share",
+  addClub:"Add a club", clubName:"Club name", city:"City", courtsList:"Courts (separate with commas)", clubAdded:"Club added. Its staff code is", areaAll:"All areas", waConfirm:"WhatsApp",
+evDone:"Results", newBk:"New booking", taken:"Someone just booked that time. Pick another one.", autoUp:"Updates automatically"},
  ar:{hi:"أهلاً", guest:"أهلاً بك في بادل لايف", next:"مباراتك القادمة", none:"لا توجد حجوزات بعد", bookFirst:"احجز ملعباً وسيظهر هنا.", book:"احجز ملعب", find:"ابحث عن لعبة", events:"البطولات", open:"مباريات مفتوحة", all:"عرض الكل",
   home:"الرئيسية", tBook:"احجز", tMatches:"المباريات", tEvents:"البطولات", tProfile:"حسابي", findCourt:"ابحث عن ملعب", from:"من", hr:"/ساعة",
   length:"المدة", closedDay:"النادي مغلق هذا اليوم.", pick:"اختر وقتاً", each:"للشخص", cont:"احجز", min:"د",
@@ -318,7 +385,22 @@ const W = {
   forgot:"نسيت كلمة السر؟", needEmail:"اكتب بريدك الإلكتروني أولاً.", resetSent:"تفقد بريدك، أرسلنا رابطاً لتعيين كلمة سر جديدة.", newPassT:"تعيين كلمة سر جديدة", newPass:"كلمة السر الجديدة (٦ أحرف أو أكثر)", setPass:"حفظ كلمة السر", passSaved:"تم تغيير كلمة السر وتسجيل دخولك.",
   delAcc:"حذف حسابي", delQ:"حذف حسابك؟ سيتم إلغاء حجوزاتك القادمة ولا يمكن التراجع.", delDone:"تم حذف حسابك.",
   install:"أضف بادل لايف إلى هاتفك", installS:"ضع الأيقونة على الشاشة الرئيسية ليفتح كتطبيق عادي.", installBtn:"إضافة إلى الشاشة الرئيسية", iosHow:"في سفاري اضغط زر المشاركة ثم «إضافة إلى الشاشة الرئيسية».", andHow:"في كروم اضغط ⋮ ثم «إضافة إلى الشاشة الرئيسية» أو «تثبيت التطبيق».",
-  newBk:"حجز جديد", taken:"تم حجز هذا الوقت للتو. اختر وقتاً آخر.", autoUp:"يتحدث تلقائياً"}
+  evLive:"نتائج مباشرة", lvTitle:"مستواك", lvIntro:"جاوب على ٥ أسئلة سريعة. بعدها مستواك بيطلع أو بينزل مع كل نتيجة مباراة مؤكدة.", lvYour:"مستواك", lvCat:"الفئة", lvAnswer:"جاوب على الأسئلة الخمسة", lvNote:"المستويات من ٠٫٥ إلى ٧. الفئة D تقريباً ١٫٥–٢٫٥، C ٢٫٥–٣٫٥، B ٣٫٥–٤٫٥، A من ٤٫٥ وفوق.",
+  q1:"من قديش عم تلعب بادل؟", q1a:"لسا عم ابدأ", q1b:"أقل من سنة", q1c:"من سنة لـ ٣ سنين", q1d:"أكتر من ٣ سنين",
+  q2:"رياضات مضرب تانية؟", q2a:"لا", q2b:"شوي", q2c:"تنس أو سكواش بشكل منتظم",
+  q3:"لعبك", q3a:"عم اتعلم خلي الطابة بالملعب", q3b:"بقدر كمّل تبادل بسرعة ثابتة", q3c:"بتبادل منيح وبلعب فولي عالشبكة", q3d:"بهاجم بالبانديخا والفيبورا والسماش",
+  q4:"الجدران", q4a:"بتجنب اللعب عالجدران", q4b:"أحياناً برجّع من الجدار الخلفي", q4c:"بستخدم الجدار الخلفي والجانبي بتحكم",
+  q5:"البطولات", q5a:"ما لعبت ولا بطولة", q5b:"بطولات ودية أو بالنادي", q5c:"فئة B أو أعلى",
+  setLevel:"حدد مستواي", redoLevel:"أعد اختبار المستوى", yourLevel:"مستواك", ratedN:"مباريات محسوبة", levelCardHint:"حدد مستواك لتنضم لمباريات بمستواك.", myResults:"نتائجي", noResults:"العب مباراة مع ٣ لاعبين على Padel Live، وبعدها سجّل النتيجة هون.",
+  inbox:"الإشعارات", noNotes:"ما في شي جديد.", someone:"لاعب",
+  nJoined:"{n} انضم لمباراتك يوم {w}.", nLeft:"{n} طلع من مباراتك يوم {w}.", nDepOk:"تم تأكيد العربون. منشوفك بالملعب!", nClubCancel:"النادي ألغى الحجز يوم {w}.", nShareOk:"النادي أكد دفعتك.", nShareNo:"النادي ما لقى تحويلك. تأكد من الرقم أو ادفع بالنادي.", nResult:"{n} سجّل النتيجة. أكّدها لو سمحت.", nResultOk:"تم تأكيد النتيجة وتحديث مستواك.", nResultNo:"{n} بيقول النتيجة مو صحيحة. سجّلها من جديد.", nChat:"{n} كتب بمحادثة المباراة.",
+  match:"المباراة", players:"اللاعبين", booker:"حجز الملعب", openSpot:"مكان فاضي", splitInfo:"دفع مقسوم: كل لاعب بيدفع {x}.", atClub:"بالنادي", paidS:"مدفوع", checking:"قيد التحقق", payAtDesk:"بيدفع بالنادي", code:"الرمز",
+  result:"النتيجة", waitConfirm:"بانتظار التأكيد", confirmRes:"تأكيد النتيجة", notRight:"مو صحيحة", reportRes:"سجّل النتيجة", disputed:"الفريق التاني قال النتيجة مو صحيحة. سجّلها من جديد.", pickPartner:"مين كان شريكك؟", set:"شوط", you:"أنت", sendRes:"إرسال النتيجة", resNote:"لاعب من الفريق التاني بيأكدها، وبعدها بيتحدث مستوى الكل.", resLater:"فيك تسجل النتيجة بعد ما تبلش المباراة.", resNeed4:"النتائج بتنحسب لما يكون الـ ٤ لاعبين على Padel Live.", won:"ربح", lost:"خسارة", vs:"ضد", disputedS:"معترض عليها",
+  chat:"محادثة المباراة", chatEmpty:"سلّم عاللاعبين.", chatPh:"اكتب رسالة…", sendBtn:"إرسال", details:"التفاصيل", openMatch:"فتح",
+  anyLvl:"أي مستوى", splitTag:"دفع مقسوم", notYourLvl:"مو مستواك", joinHow:"كيف بدك تدفع حصتك؟", joinGo:"انضم وادفع", lvRange:"مين فيه ينضم؟", aroundMe:"قريب من مستواي", setLvFirst:"حدد مستواك لتختار مستوى المباراة.", payWho:"مين بيدفع الملعب؟", payAll:"أنا بدفع كل الملعب", payShare:"تقسيم على ٤", yourShare:"حصتك (١/٤)", payNow:"بتدفع هلق",
+  map:"الخريطة", call:"اتصال", clubPage:"صفحة النادي", photo:"صورة النادي", area:"المنطقة", about:"عن النادي", mapLink:"رابط خرائط جوجل", clubPhone:"هاتف / واتساب النادي", share1:"حصة",
+  addClub:"إضافة نادي", clubName:"اسم النادي", city:"المدينة", courtsList:"الملاعب (افصل بفواصل)", clubAdded:"تمت إضافة النادي. رمز الموظفين هو", areaAll:"كل المناطق", waConfirm:"واتساب",
+evDone:"النتائج", newBk:"حجز جديد", taken:"تم حجز هذا الوقت للتو. اختر وقتاً آخر.", autoUp:"يتحدث تلقائياً"}
 };
 let lang = "en";
 try { lang = localStorage.getItem("pl-lang") || "en"; } catch (e) {}
@@ -333,6 +415,7 @@ const IC = {
  ppl:svg('<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c3 0 6 2 6 5.5"/>'),
  cup:svg('<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 6h3a3 3 0 0 1-3 3M7 6H4a3 3 0 0 0 3 3"/>'),
  me:svg('<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>'),
+ bell:svg('<path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/>'),
  back:svg('<path d="M15 6l-6 6 6 6"/>',2.2), go:svg('<path d="M9 6l6 6-6 6"/>'), ok:svg('<path d="M5 12l5 5 9-10"/>',3)
 };
 
@@ -350,7 +433,7 @@ function nextDays(n){ const out = [], today = localDate(new Date()); for (let i 
 const money = n => n == null ? "–" : "$" + (Math.round(n * 100) / 100).toString();
 
 /* ---------- state ---------- */
-const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false};
+const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
 const VERSION = "v4";
 const T0 = Date.now();
@@ -395,7 +478,7 @@ async function boot(){
 }
 async function loadClubs(){
   const [c, ct, p, cl] = await Promise.all([
-    sb.from("clubs").select("id,slug,name,city,about,opens,closes,peak_from,late_from,usd_syp_rate,cancel_hours").order("name"),
+    sb.from("clubs").select("id,slug,name,city,about,opens,closes,peak_from,late_from,usd_syp_rate,cancel_hours,area,photo,maps_url,phone").order("name"),
     sb.from("courts").select("*").order("sort"),
     sb.from("prices").select("*"),
     sb.from("closures").select("*")]);
@@ -406,8 +489,8 @@ async function loadClubs(){
 async function afterAuth(silent){
   if (S.user){
     const [p, mine, st] = await Promise.all([sb.from("profiles").select("*").eq("id", S.user.id).maybeSingle(), sb.rpc("my_bookings"), sb.rpc("my_clubs")]);
-    S.profile = p.data || null; S.mine = mine.data || []; S.staff = st.data || [];
-  } else { S.profile = null; S.mine = []; S.staff = []; }
+    S.profile = p.data || null; S.mine = mine.data || []; S.staff = st.data || []; await loadNotifN();
+  } else { S.profile = null; S.mine = []; S.staff = []; S.notifN = 0; }
   const m = await sb.rpc("open_matches"); S.matches = m.data || [];
   if (!silent) render();
 }
@@ -424,14 +507,17 @@ function gameRow(b){
   const d = new Date(b.starts_at);
   return `<div class="mrow"><div class="when"><small>${esc(fmtDay(d).split(" ")[0])}</small><b>${esc(fmtTime(d).replace(/\s?(am|pm|ص|م)$/i, ""))}</b><small>${esc(fmtDay(d).split(" ").slice(1).join(" "))}</small></div>
    <div class="mid"><b>${esc(b.club_name)} · ${esc(b.court_name)}</b><span>${b.minutes} ${t("min")} · ${money(b.price)}${b.code ? ` · #${b.booking_no} · <b>${esc(b.code)}</b>` : ""}${b.open_spots ? ` · ${b.open_spots} ${t("openN")}` : ""}</span></div>
-   <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">${statusTag(b.status)}${b.status !== "cancelled" && new Date(b.starts_at) > new Date() ? (b.mine ? `<button class="sbtn" data-cancel="${b.id}">${t("cancel")}</button>` : `<button class="sbtn" data-leave="${b.id}">${t("leave")}</button>`) : ""}</div></div>`;
+   <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">${statusTag(b.status)}${b.status !== "cancelled" ? `<button class="sbtn" data-match="${b.id}">${b.result === "pending" ? "⚑ " : ""}${t("details")}</button>` : ""}${b.status !== "cancelled" && new Date(b.starts_at) > new Date() ? (b.mine ? `<button class="sbtn" data-cancel="${b.id}">${t("cancel")}</button>` : `<button class="sbtn" data-leave="${b.id}">${t("leave")}</button>`) : ""}</div></div>`;
 }
 function matchRow(m){
-  const d = new Date(m.starts_at), ppl = m.players || [];
+  const d = new Date(m.starts_at), ppl = m.players || [], myL = myLevel(), ok = inRange(m, myL), each = money(m.price / 4);
+  const range = m.level_min != null ? `${lvl2(m.level_min)}–${lvl2(m.level_max)}` : t("anyLvl");
+  const sheet = S.joinFor === m.id ? `<div class="jsheet"><b>${t("joinHow")} · ${each}</b><div class="chips" style="flex-wrap:wrap">${["club","shamcash","syriatel"].map(k => `<button class="chip" data-joinpay="${k}" aria-pressed="${S.joinPay === k}">${payName(k)}</button>`).join("")}</div>${S.joinPay !== "club" ? `<label class="fld"><span>${t("ref")}</span><input id="join-ref" inputmode="numeric" value="${esc(S.joinRef)}"></label>` : ""}<button class="cta blue sm" data-joingo="${m.id}">${t("joinGo")}</button></div>` : "";
   return `<div class="card match"><div class="between"><b>${esc(fmtDay(d))} · ${esc(fmtTime(d))}</b>${m.open_spots > 0 ? `<span class="tag g">${m.open_spots} ${m.open_spots === 1 ? t("spotLeft") : t("spotsLeft")}</span>` : `<span class="tag b">Full</span>`}</div>
-   <span class="note">${esc(m.club_name)} · ${esc(m.court_name)} · ${m.minutes} ${t("min")}${m.match_level ? ` · ${t("lvl")} ${esc(m.match_level)}` : ""} · ${money(m.price / 4)} ${t("each")}</span>
-   <div class="between" style="align-items:center"><div class="avs">${ppl.map(p => av(p)).join("")}${Array.from({length: m.open_spots}, () => av("", 1)).join("")}</div>
-   ${m.joined ? `<span class="tag l">✓ ${t("joined")}</span>` : m.open_spots > 0 ? `<button class="cta blue sm" data-join="${m.id}">${t("join")} · ${money(m.price / 4)}</button>` : ""}</div></div>`;
+   <span class="note">${esc(m.club_name)} · ${esc(m.court_name)} · ${m.minutes} ${t("min")} · ${t("lvl")} ${range}${m.split ? ` · ${t("splitTag")}` : ""}</span>
+   <div class="plist">${ppl.map(p => `<span class="pp">${av(p.n)}<small>${esc(String(p.n || "").split(" ")[0])}</small>${lvChip(p.l)}</span>`).join("")}${Array.from({length: m.open_spots}, () => `<span class="pp">${av("", 1)}<small>&nbsp;</small></span>`).join("")}</div>
+   <div class="between" style="align-items:center"><span class="note">${each} ${t("each")}</span>
+   ${m.joined ? `<button class="sbtn" data-match="${m.id}">${t("openMatch")} →</button>` : m.open_spots > 0 ? (ok ? `<button class="cta blue sm" data-join="${m.id}">${t("join")} · ${each}</button>` : `<span class="tag b">${t("notYourLvl")}</span>`) : ""}</div>${sheet}</div>`;
 }
 
 /* ---------- views ---------- */
@@ -440,7 +526,8 @@ V.home = () => { const next = S.mine.find(b => b.status !== "cancelled" && new D
  const name = S.profile && S.profile.full_name ? S.profile.full_name.split(" ")[0] : "";
  return `<main>
   <div class="top"><div><div class="hello">${S.user ? `${t("hi")} ${esc(name)}` : t("guest")}</div><div class="logo">Padel <i>Live</i></div></div>
-   <div class="row"><button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button>${S.user ? "" : `<button class="pill" data-go="auth">${t("signin")}</button>`}</div></div>
+   <div class="row">${bell()}<button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button>${S.user ? "" : `<button class="pill" data-go="auth">${t("signin")}</button>`}</div></div>
+  ${S.user && S.profile && !S.profile.level_set ? `<button class="card lvprompt" data-go="level"><b>${t("setLevel")} →</b><span class="note">${t("levelCardHint")}</span></button>` : ""}
   ${next ? `<div class="hero"><div class="between" style="width:100%"><span class="kick2">${t("next")}</span>${statusTag(next.status).replace('tag g','tag w').replace('tag pend','tag w')}</div>
     <span class="big">${esc(fmtDay(new Date(next.starts_at)))} · ${esc(fmtTime(new Date(next.starts_at)))}</span>
     <span style="opacity:.92;font-size:14px">${esc(next.club_name)} · ${esc(next.court_name)} · ${next.minutes} ${t("min")}${next.code ? ` · ${t("booking")} #${next.booking_no} · <b>${esc(next.code)}</b>` : ""}</span></div>`
@@ -451,12 +538,14 @@ V.home = () => { const next = S.mine.find(b => b.status !== "cancelled" && new D
   ${installCard()}
  </main>${nav("home")}`; };
 
-V.clubs = () => `<main>${backBar(t("findCourt"), "home")}
-  ${S.clubs.map(c => { const min = Math.min(...S.prices.filter(p => p.club_id === c.id && p.price != null && p.minutes === 60).map(p => +p.price));
+V.clubs = () => { const areas = [...new Set(S.clubs.map(c => c.area).filter(Boolean))];
+ return `<main>${backBar(t("findCourt"), "home")}
+  ${areas.length > 1 ? `<div class="chips">${[["", t("areaAll")]].concat(areas.map(a => [a, a])).map(([k, l]) => `<button class="chip" data-area="${esc(k)}" aria-pressed="${S.area === k}">${esc(l)}</button>`).join("")}</div>` : ""}
+  ${S.clubs.filter(c => !S.area || c.area === S.area).map(c => { const min = Math.min(...S.prices.filter(p => p.club_id === c.id && p.price != null && p.minutes === 60).map(p => +p.price));
    const n = S.courts.filter(x => x.club_id === c.id).length;
-   return `<button class="card club" data-club="${c.id}"><div class="pic">${courtsArt()}</div><div class="bd"><div class="between"><h2>${esc(c.name)}</h2>${isFinite(min) ? `<span><b>${t("from")} $${min}</b><span class="note">${t("hr")}</span></span>` : ""}</div><span class="note">${esc(c.city)} · ${n} courts · ${esc(c.opens.slice(0,5))}–${esc(c.closes.slice(0,5))}</span><span class="note">${esc(c.about)}</span></div></button>`; }).join("") || `<div class="card note">No clubs yet.</div>`}
+   return `<button class="card club" data-club="${c.id}"><div class="pic">${clubPic(c)}</div><div class="bd"><div class="between"><h2>${esc(c.name)}</h2>${isFinite(min) ? `<span><b>${t("from")} $${min}</b><span class="note">${t("hr")}</span></span>` : ""}</div><span class="note">${esc([c.area, c.city].filter(Boolean).join(", "))} · ${n} courts · ${esc(c.opens.slice(0,5))}–${esc(c.closes.slice(0,5))}</span><span class="note">${esc(c.about)}</span></div></button>`; }).join("") || `<div class="card note">No clubs yet.</div>`}
   <div class="card note" style="text-align:center">More clubs coming. Club owners can list their courts for free.</div>
- </main>${nav("clubs")}`;
+ </main>${nav("clubs")}`; };
 
 function slotsFor(c){
   const len = openLen(c), out = [], now = new Date();
@@ -474,12 +563,13 @@ function slotsFor(c){
 V.club = () => { const c = S.club; if (!c) return V.clubs();
  const courts = S.courts.filter(x => x.club_id === c.id), days = nextDays(7), sl = slotsFor(c), pick = sl.list.find(x => x.iso === S.slot && !x.off);
  return `<main>${backBar(c.name, "clubs")}
-  <span class="note" style="margin-top:-8px">${esc(c.city)} · ${esc(c.opens.slice(0,5))}–${esc(c.closes.slice(0,5))} · ${courts.length} courts</span>
+  ${c.photo ? `<div class="cpic">${clubPic(c)}</div>` : ""}
+  <span class="note" style="margin-top:-8px">${esc([c.area, c.city].filter(Boolean).join(", "))} · ${esc(c.opens.slice(0,5))}–${esc(c.closes.slice(0,5))} · ${courts.length} courts</span>
   <div class="days">${days.map(d => { const dd = at(d, "12:00"); return `<button class="day" data-day="${d}" aria-pressed="${S.day === d}"><small>${esc(new Intl.DateTimeFormat(lang === "ar" ? "ar-SY" : "en-GB",{timeZone:TZ,weekday:"short"}).format(dd))}</small><b>${esc(new Intl.DateTimeFormat(lang === "ar" ? "ar-SY" : "en-GB",{timeZone:TZ,day:"numeric"}).format(dd))}</b></button>`; }).join("")}</div>
   <div class="seg">${courts.map(x => `<button data-court="${x.id}" aria-pressed="${S.court === x.id}" class="c-${esc(x.color)}">${esc(x.name)}</button>`).join("")}</div>
   <div class="row" style="flex-wrap:wrap"><b style="font-size:13px;color:var(--ink-2)">${t("length")}</b>${[60,90,120].map(m => `<button class="chip" data-dur="${m}" aria-pressed="${S.dur === m}">${m} ${t("min")}</button>`).join("")}</div>
   ${sl.closed ? `<div class="notice">${t("closedDay")}</div>` : `<div class="slots">${sl.list.map(x => `<button class="slot" data-slot="${x.iso}" aria-pressed="${S.slot === x.iso && !x.off}"${x.off ? " disabled" : ""}><b>${esc(fmtTime(x.d).replace(/\s?(am|pm)$/i,""))}</b>${x.off || x.price == null ? "" : `<small>$${x.price}</small>`}</button>`).join("")}</div>`}
-  <div class="card"><p class="note" style="margin:0">${esc(c.about)}</p></div>
+  <div class="card" style="display:flex;flex-direction:column;gap:10px"><p class="note" style="margin:0">${esc(c.about)}</p>${clubLinks(c)}</div>
  </main><div class="bar"><div class="sum"><small>${esc(fmtDay(at(S.day,"12:00")))}${pick ? ` · ${esc(fmtTime(pick.d))}` : ""} · ${S.dur} ${t("min")}</small><b>${pick ? money(pick.price) : t("pick")}</b>${pick ? ` <span class="note">· ${money(pick.price / 4)} ${t("each")}</span>` : ""}</div><button class="cta" data-go="checkout"${pick ? "" : " disabled"}>${t("cont")}</button></div>`; };
 
 V.checkout = () => { const c = S.club; const sl = c && slotsFor(c).list.find(x => x.iso === S.slot && !x.off);
@@ -491,13 +581,14 @@ V.checkout = () => { const c = S.club; const sl = c && slotsFor(c).list.find(x =
   <div class="card"><b>${esc(c.name)} · ${esc(ct.name)}</b><div class="note">${esc(fmtDay(sl.d))} · ${esc(fmtTime(sl.d))}–${esc(fmtTime(addMin(sl.d, S.dur)))} · ${S.dur} ${t("min")}</div></div>
   <div class="card" style="display:flex;flex-direction:column;gap:10px"><b>${t("openSpots")}</b><span class="note" style="margin-top:-6px">${t("openSpotsS")}</span>
    <div class="chips" style="flex-wrap:wrap">${[0,1,2,3].map(n => `<button class="chip" data-spots="${n}" aria-pressed="${S.openSpots === n}">${t("spots" + n)}</button>`).join("")}</div>
-   ${S.openSpots ? `<div class="chips">${["D","C","B","A","Any"].map(l => `<button class="chip" data-mlvl="${l}" aria-pressed="${S.level === l}">${t("lvl")} ${l}</button>`).join("")}</div>` : ""}</div>
+   ${S.openSpots ? `<b>${t("lvRange")}</b>${myLevel() == null ? `<span class="note">${t("setLvFirst")}</span>` : `<div class="chips" style="flex-wrap:wrap">${[["any", t("anyLvl")], ["0.5", `${t("aroundMe")} ±0.5`], ["1", `${t("aroundMe")} ±1`]].map(([k, l]) => `<button class="chip" data-lvr="${k}" aria-pressed="${S.lvRange === k}">${esc(l)}</button>`).join("")}</div>${S.lvRange !== "any" ? `<span class="note">${t("lvl")} ${lvl2(Math.max(0.5, myLevel() - +S.lvRange))}–${lvl2(Math.min(7, myLevel() + +S.lvRange))}</span>` : ""}`}
+   <b>${t("payWho")}</b><div class="chips"><button class="chip" data-split="0" aria-pressed="${!S.split}">${t("payAll")}</button><button class="chip" data-split="1" aria-pressed="${S.split}">${t("payShare")}</button></div>` : ""}</div>
   <h2>${t("how")}</h2>
   <div style="display:flex;flex-direction:column;gap:8px">${opt("club","p1","p1s")}${opt("shamcash","p2","p2s")}${opt("syriatel","p3","p3s")}</div>
   ${S.pay !== "club" ? `<label class="fld"><span>${t("ref")}</span><input id="ref" inputmode="numeric" autocomplete="off" value="${esc(S.ref)}"></label>` : ""}
-  <div class="card lines"><div><span>${t("court")} · ${S.dur} ${t("min")}</span><span>${money(sl.price)}</span></div><div><span>${t("each")} (÷4)</span><span>${money(sl.price / 4)}</span></div><div class="tot"><span>${t("total")}</span><span>${money(sl.price)}</span></div></div>
+  <div class="card lines"><div><span>${t("court")} · ${S.dur} ${t("min")}</span><span>${money(sl.price)}</span></div><div><span>${t("each")} (÷4)</span><span>${money(sl.price / 4)}</span></div><div class="tot"><span>${S.split && S.openSpots ? t("yourShare") : t("total")}</span><span>${money(S.split && S.openSpots ? sl.price / 4 : sl.price)}</span></div></div>
   <p class="note" style="margin:0">${t("cancelTxt")}</p>
- </main><div class="bar"><div class="sum"><small>${t("total")}</small><b>${money(sl.price)}</b></div><button class="cta blue" data-confirm${S.busyOp ? " disabled" : ""}>${S.busyOp ? "…" : t("confirm")}</button></div>`; };
+ </main><div class="bar"><div class="sum"><small>${S.split && S.openSpots ? t("payNow") : t("total")}</small><b>${money(S.split && S.openSpots ? sl.price / 4 : sl.price)}</b></div><button class="cta blue" data-confirm${S.busyOp ? " disabled" : ""}>${S.busyOp ? "…" : t("confirm")}</button></div>`; };
 
 V.done = () => { const b = S.last; if (!b) return V.home();
  const ct = S.courts.find(x => x.id === b.court_id) || {}, d = new Date(b.starts_at);
@@ -515,7 +606,8 @@ V.matches = () => `<main>${backBar(t("open"), "home")}
  </main>${nav("matches")}`;
 
 V.events = () => `<main>${backBar(t("events"), "home")}
-  <div class="ev"><div class="in"><span class="tag l" style="align-self:flex-start">Soon</span><div class="t">${t("evSoon")}</div><div class="sm">${t("evTxt")}</div></div></div>
+  ${(S.tours || []).map(x => `<a class="ev" href="t.html?${encodeURIComponent(x.slug)}" style="display:block;text-decoration:none;color:inherit"><div class="in"><span class="tag l" style="align-self:flex-start">${x.ends_on && new Date(x.ends_on + "T23:59:00+03:00") < new Date() ? t("evDone") : t("evLive")}</span><div class="t">${esc(x.name)}</div><div class="sm">${esc([x.club, x.starts_on && x.ends_on ? fmtDay(new Date(x.starts_on + "T12:00:00+03:00")) + " – " + fmtDay(new Date(x.ends_on + "T12:00:00+03:00")) : ""].filter(Boolean).join(" · "))} →</div></div></a>`).join("")
+   || `<div class="ev"><div class="in"><span class="tag l" style="align-self:flex-start">Soon</span><div class="t">${t("evSoon")}</div><div class="sm">${t("evTxt")}</div></div></div>`}
  </main>${nav("events")}`;
 
 V.auth = (why) => { const up = S.authMode === "up";
@@ -534,13 +626,17 @@ V.auth = (why) => { const up = S.authMode === "up";
 V.me = () => { if (!S.user) return V.auth();
  const p = S.profile || {};
  return `<main>${backBar(t("profile"), "home", `<button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button>`)}
-  <div class="row" style="gap:14px"><span class="av" style="width:56px;height:56px;font-size:18px;margin:0">${esc(initials(p.full_name))}</span><div><h2>${esc(p.full_name || "")}</h2><span class="note">${esc(S.user.email || "")}</span></div><span class="tag b" style="margin-inline-start:auto">${t("lvl")} ${Number(p.level || 3).toFixed(2)}</span></div>
+  <div class="row" style="gap:14px"><span class="av" style="width:56px;height:56px;font-size:18px;margin:0">${esc(initials(p.full_name))}</span><div><h2>${esc(p.full_name || "")}</h2><span class="note">${esc(S.user.email || "")}</span></div>${bell()}</div>
+  <div class="card lvcard"><div><small class="note">${t("yourLevel")}</small><div class="row" style="gap:10px;align-items:baseline"><b class="lvbig">${p.level_set ? lvl2(p.level) : "–"}</b>${p.level_set ? `<span class="tag l">${t("lvCat")} ${lvCat(+p.level)}</span>` : ""}</div><small class="note">${p.rated || 0} ${t("ratedN")}</small></div>${!(p.rated > 0) ? `<button class="ghost sm" data-go="level">${p.level_set ? t("redoLevel") : t("setLevel")}</button>` : ""}</div>
   <h2>${t("myGames")}</h2>
   <div style="display:flex;flex-direction:column;gap:10px">${S.mine.map(gameRow).join("") || `<div class="card note">${t("bookFirst")}</div>`}</div>
+  <h2>${t("myResults")}</h2>
+  <div style="display:flex;flex-direction:column;gap:8px">${(S.results || []).map(resultRow).join("") || `<div class="card note">${t("noResults")}</div>`}</div>
   <form id="pf" class="card" style="display:flex;flex-direction:column;gap:10px"><label class="fld"><span>${t("name")}</span><input id="p-name" value="${esc(p.full_name)}"></label><label class="fld"><span>${t("phone")}</span><input id="p-phone" value="${esc(p.phone)}" inputmode="tel" dir="ltr"></label><button class="ghost" type="submit">${t("save")}</button></form>
   <div class="card"><div class="set"><span>${t("dark")}</span><button class="tg" data-dark aria-pressed="${document.documentElement.dataset.theme === "dark"}" aria-label="${t("dark")}"></button></div></div>
   ${S.staff.length ? `<button class="cta wide" data-go="manager">${t("mgr")} · ${esc(S.staff.map(c => c.name).join(", "))} →</button>`
    : `<form id="staffF" class="card" style="display:flex;flex-direction:column;gap:10px"><b>${t("staffQ")}</b><label class="fld"><span>${t("staffCode")}</span><input id="s-code" autocomplete="off" dir="ltr"></label><button class="ghost" type="submit">${t("staffJoin")}</button></form>`}
+  ${adminCard()}
   ${installCard()}
   <button class="ghost" data-signout style="color:var(--red)">${t("signout")}</button>
   <button class="linkbtn" data-delacc style="color:var(--ink-3)">${t("delAcc")}</button>
@@ -561,7 +657,7 @@ V.manager = () => { if (!S.user || !S.staff.length) return V.me();
  const live = md.day.filter(b => b.status !== "cancelled");
  const nowT = new Date(), nowP = nowT > start && nowT < addMin(start, len) ? pos(nowT) : null;
  const grid = hours.map(h => `<i class="gl" style="left:${pos(h)}%"></i>`).join("") + (nowP != null ? `<i class="now" style="left:${nowP}%"></i>` : "");
- const cash = live.filter(b => b.status === "confirmed" && b.pay_method === "club").reduce((a, b) => a + (+b.price || 0), 0);
+ const cash = live.reduce((a, b) => a + (b.desk != null ? +b.desk : (b.status === "confirmed" && b.pay_method === "club" ? +b.price || 0 : 0)), 0);
  const used = live.filter(b => b.status !== "blocked").reduce((a, b) => a + b.minutes, 0), fill = courts.length ? Math.round(used / (len * courts.length) * 100) : 0;
  const startOpts = []; for (let m = 0; m < len; m += 30) startOpts.push(addMin(start, m));
  const pr = (band, mins) => { const x = S.prices.find(p => p.club_id === club.id && p.band === band && p.minutes === mins); return x && x.price != null ? x.price : ""; };
@@ -573,8 +669,8 @@ V.manager = () => { if (!S.user || !S.staff.length) return V.me();
   <div class="tl" dir="ltr"><div class="tl-in"><div class="tl-h"><span></span><div class="hrs">${hours.map(h => `<span style="left:${pos(h)}%">${esc(fmtTime(h).replace(":00",""))}</span>`).join("")}</div></div>
    ${courts.map(ct => `<div class="tl-r"><b>${esc(ct.name)}</b><div class="tl-track">${grid}${live.filter(b => b.court_id === ct.id).map(b => { const l = pos(b.starts_at), w = pos(b.ends_at) - l; const cls = b.status === "blocked" ? "blk" : b.status === "deposit_pending" ? "dep" : b.open_spots ? "open" : "paid"; return `<div class="bk ${cls}" style="left:${l}%;width:${w}%" title="${esc(b.who)}">${esc(b.who || "—")} · ${esc(fmtTime(new Date(b.starts_at)))}</div>`; }).join("")}</div></div>`).join("")}
   </div></div>
-  <div class="card"><h2 style="font-size:17px">${t("deps")}</h2>${md.deps.length ? md.deps.map(d => `<div class="dep-row"><div class="who"><b>${esc(d.who)}</b><small>${esc(fmtDay(new Date(d.starts_at)))} ${esc(fmtTime(new Date(d.starts_at)))} · ${esc(d.court_name)} · ${esc(d.pay_method)} · ${money(d.price)}</small><small>Ref ${esc(d.pay_ref || "–")}${d.phone ? ` · ${esc(d.phone)}` : ""}</small></div><button class="sbtn ok" data-st="${d.id}" data-to="confirmed">${t("okBtn")}</button><button class="sbtn" data-st="${d.id}" data-to="cancelled">${t("rej")}</button></div>`).join("") : `<p class="note" style="margin:6px 0 0">${t("noDeps")}</p>`}</div>
-  <div class="card"><h2 style="font-size:17px">${t("mToday")}</h2>${live.length ? live.map(b => `<div class="dep-row"><div class="who"><b>${esc(fmtTime(new Date(b.starts_at)))} · ${esc((courts.find(c => c.id === b.court_id) || {}).name || "")}</b><small>${esc(b.who || "—")}${b.phone ? ` · ${esc(b.phone)}` : ""} · ${b.minutes} ${t("min")} · ${b.status === "blocked" ? "Blocked" : money(b.price) + " · " + esc(b.pay_method)}${b.code ? ` · code ${esc(b.code)}` : ""}</small></div>${b.status === "deposit_pending" ? `<span class="tag pend">${t("pending")}</span>` : ""}<button class="sbtn" data-st="${b.id}" data-to="cancelled">${t("cancel")}</button></div>`).join("") : `<p class="note" style="margin:6px 0 0">${t("noBk")}</p>`}</div>
+  <div class="card"><h2 style="font-size:17px">${t("deps")}</h2>${md.deps.length ? md.deps.map(d => `<div class="dep-row"><div class="who"><b>${esc(d.who)}${d.kind === "share" ? ` · ${t("share1")}` : ""}</b><small>${esc(fmtDay(new Date(d.starts_at)))} ${esc(fmtTime(new Date(d.starts_at)))} · ${esc(d.court_name)} · ${esc(payName(d.pay_method))} · ${money(d.price)}</small><small>Ref ${esc(d.pay_ref || "–")}${d.phone ? ` · ${esc(d.phone)}` : ""}</small></div>${d.player_id ? `<button class="sbtn ok" data-share="${d.id}|${d.player_id}|paid">${t("okBtn")}</button><button class="sbtn" data-share="${d.id}|${d.player_id}|unpaid">${t("rej")}</button>` : `<button class="sbtn ok" data-st="${d.id}" data-to="confirmed">${t("okBtn")}</button><button class="sbtn" data-st="${d.id}" data-to="cancelled">${t("rej")}</button>`}</div>`).join("") : `<p class="note" style="margin:6px 0 0">${t("noDeps")}</p>`}</div>
+  <div class="card"><h2 style="font-size:17px">${t("mToday")}</h2>${live.length ? live.map(b => `<div class="dep-row"><div class="who"><b>${esc(fmtTime(new Date(b.starts_at)))} · ${esc((courts.find(c => c.id === b.court_id) || {}).name || "")}</b><small>${esc(b.who || "—")}${b.phone ? ` · ${esc(b.phone)}` : ""} · ${b.minutes} ${t("min")} · ${b.status === "blocked" ? "Blocked" : money(b.price) + " · " + esc(b.pay_method)}${b.code ? ` · code ${esc(b.code)}` : ""}</small></div>${b.status === "deposit_pending" ? `<span class="tag pend">${t("pending")}</span>` : ""}${b.phone ? `<a class="sbtn wa" href="${esc(waLink(b.phone, `Padel Live · ${club.name}: your booking on ${fmtDay(new Date(b.starts_at))} at ${fmtTime(new Date(b.starts_at))} (${(courts.find(c => c.id === b.court_id) || {}).name || ""}) is ${b.status === "deposit_pending" ? "waiting for your deposit" : "confirmed"}.${b.code ? ` Code ${b.code}.` : ""}`))}" target="_blank" rel="noopener">${t("waConfirm")}</a>` : ""}<button class="sbtn" data-st="${b.id}" data-to="cancelled">${t("cancel")}</button></div>`).join("") : `<p class="note" style="margin:6px 0 0">${t("noBk")}</p>`}</div>
   <form id="addF" class="card" style="display:flex;flex-direction:column;gap:10px"><h2 style="font-size:17px">${t("add")}</h2>
    <div class="grid2"><label class="fld"><span>${t("court")}</span><select id="ad-court">${courts.map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join("")}</select></label>
    <label class="fld"><span>${t("time")}</span><select id="ad-time">${startOpts.map(d => `<option value="${d.toISOString()}">${esc(fmtTime(d))}</option>`).join("")}</select></label>
@@ -584,7 +680,128 @@ V.manager = () => { if (!S.user || !S.staff.length) return V.me();
    <button class="cta blue" type="submit">${t("addBtn")}</button></form>
   <div class="card"><h2 style="font-size:17px">${t("prices")}</h2><div style="overflow-x:auto"><table class="ptable"><thead><tr><th></th>${[60,90,120].map(m => `<th>${m} ${t("min")}</th>`).join("")}</tr></thead><tbody>${["day","peak","late"].map(bd => `<tr><td><b>${t("band_" + bd)}</b></td>${[60,90,120].map(m => `<td><input class="pin" inputmode="decimal" data-price="${bd}|${m}" value="${pr(bd, m)}" aria-label="${t("band_" + bd)} ${m}"></td>`).join("")}</tr>`).join("")}</tbody></table></div>
    <label class="fld" style="margin-top:10px"><span>${t("rate")}</span><input id="rate" inputmode="numeric" value="${club.usd_syp_rate || ""}"></label></div>
+  ${clubForm(club)}
  </main>`; };
+
+/* ---------- levels ---------- */
+const LV_Q = [
+  ["q1", [["q1a", 0], ["q1b", 0.5], ["q1c", 1.0], ["q1d", 1.5]]],
+  ["q2", [["q2a", 0], ["q2b", 0.25], ["q2c", 0.5]]],
+  ["q3", [["q3a", 0], ["q3b", 0.5], ["q3c", 1.0], ["q3d", 1.5]]],
+  ["q4", [["q4a", 0], ["q4b", 0.4], ["q4c", 0.8]]],
+  ["q5", [["q5a", 0], ["q5b", 0.4], ["q5c", 0.8]]]];
+const lvl2 = l => l == null ? "–" : Number(l).toFixed(2);
+const lvCat = l => l == null ? "" : l >= 4.5 ? "A" : l >= 3.5 ? "B" : l >= 2.5 ? "C" : "D";
+const lvChip = l => l == null ? `<span class="lv none">?</span>` : `<span class="lv c${lvCat(l)}">${lvl2(l)}</span>`;
+const myLevel = () => S.profile && S.profile.level_set ? Number(S.profile.level) : null;
+const inRange = (m, l) => m.level_min == null || l == null || (l >= +m.level_min && l <= +m.level_max);
+V.level = () => { if (!S.user) return V.auth();
+  const a = S.quiz || {}, done = LV_Q.every(([q]) => a[q] != null);
+  const score = Math.max(0.5, Math.min(5.5, 1 + LV_Q.reduce((s, [q, opts]) => s + (a[q] != null ? opts[a[q]][1] : 0), 0)));
+  return `<main>${backBar(t("lvTitle"), "me")}
+   <p class="note" style="margin:-6px 0 0">${t("lvIntro")}</p>
+   ${LV_Q.map(([q, opts]) => `<div class="card" style="display:flex;flex-direction:column;gap:8px"><b>${t(q)}</b>${opts.map(([k], i) => `<button class="opt" data-quiz="${q}|${i}" aria-pressed="${a[q] === i}"><i></i><span><b>${t(k)}</b></span></button>`).join("")}</div>`).join("")}
+   <div class="card lvres"><span class="note">${t("lvYour")}</span>${done ? `<b class="lvbig">${lvl2(score)}</b><span class="tag l">${t("lvCat")} ${lvCat(score)}</span>` : `<span class="note">${t("lvAnswer")}</span>`}</div>
+   <p class="note" style="margin:0">${t("lvNote")}</p>
+  </main><div class="bar"><div class="sum"><small>${t("lvYour")}</small><b>${done ? lvl2(score) : "–"}</b></div><button class="cta blue" data-setlevel="${done ? score.toFixed(2) : ""}"${done ? "" : " disabled"}>${t("save")}</button></div>`; };
+
+/* ---------- notifications ---------- */
+function nText(n){ const d = n.data || {}, nm = esc(d.name || t("someone")), w = esc(d.when || "");
+  return ({ joined: t("nJoined").replace("{n}", nm).replace("{w}", w), left: t("nLeft").replace("{n}", nm).replace("{w}", w),
+    deposit_ok: t("nDepOk"), club_cancelled: t("nClubCancel").replace("{w}", w), share_ok: t("nShareOk"), share_no: t("nShareNo"),
+    result: t("nResult").replace("{n}", nm), result_ok: t("nResultOk"), result_no: t("nResultNo").replace("{n}", nm), chat: t("nChat").replace("{n}", nm) })[n.kind] || n.kind; }
+const bell = () => S.user ? `<button class="ib bell" data-go="inbox" aria-label="${t("inbox")}">${IC.bell}${S.notifN ? `<span class="badge">${S.notifN > 9 ? "9+" : S.notifN}</span>` : ""}</button>` : "";
+V.inbox = () => { if (!S.user) return V.auth();
+  return `<main>${backBar(t("inbox"), "home")}
+   <div style="display:flex;flex-direction:column;gap:8px">${(S.inbox || []).map(n => `<button class="card nrow${n.unread ? " unread" : ""}" ${n.booking_id ? `data-match="${n.booking_id}"` : ""}><span class="ndot"></span><span style="flex:1;text-align:start">${nText(n)}<small class="note" style="display:block">${esc(fmtDay(new Date(n.created_at)))} · ${esc(fmtTime(new Date(n.created_at)))}</small></span></button>`).join("") || `<div class="card note">${t("noNotes")}</div>`}</div>
+  </main>${nav("me")}`; };
+async function loadInbox(){ const r = await sb.rpc("my_notifications"); S.inbox = r.data || []; await sb.rpc("read_notifications", {p_booking: null}); S.notifN = 0; }
+async function loadNotifN(){ if (!S.user) { S.notifN = 0; return; } try { const r = await sb.rpc("notif_count"); if (!r.error) S.notifN = r.data || 0; } catch (e) {} }
+
+/* ---------- match page: players, payments, result, chat ---------- */
+const payName = k => k === "shamcash" ? "ShamCash" : k === "syriatel" ? "Syriatel Cash" : t("atClub");
+const paidTag = p => p === "paid" ? `<span class="tag g">${t("paidS")}</span>` : p === "pending" ? `<span class="tag pend">${t("checking")}</span>` : `<span class="tag b">${t("payAtDesk")}</span>`;
+async function loadMatch(id){
+  const [d, m] = await Promise.all([sb.rpc("match_detail", {p_booking: id}), sb.rpc("match_messages", {p_booking: id, p_after: 0})]);
+  if (d.error){ toast(errMsg(d.error)); S.match = null; return; }
+  S.match = d.data; S.chat = m.data || []; S.chatLast = S.chat.length ? S.chat[S.chat.length - 1].id : 0;
+  sb.rpc("read_notifications", {p_booking: id}).then(() => loadNotifN());
+}
+function setsStr(sets){ return (sets || []).map(s => `${s[0]}-${s[1]}`).join("  "); }
+V.match = () => { const m = S.match; if (!m) return V.me();
+  const d = new Date(m.starts_at), me = m.players.find(p => p.me) || {}, started = d <= new Date(), full = m.players.length === 4;
+  const nameOf = id => (m.players.find(p => p.id === id) || {}).name || "?";
+  const share = m.split ? m.price / 4 : null;
+  let res = "";
+  const r = m.result;
+  if (r && (r.status === "pending" || r.status === "confirmed")){
+    const myTeam = r.team_a.includes(me.id) ? 0 : 1, repTeam = r.team_a.includes(r.reported_by) ? 0 : 1;
+    const delta = r.deltas && r.deltas[me.id] != null ? +r.deltas[me.id] : null;
+    res = `<div class="card resbox"><div class="between"><b>${t("result")}</b>${r.status === "confirmed" ? `<span class="tag g">${t("confirmedS")}</span>` : `<span class="tag pend">${t("waitConfirm")}</span>`}</div>
+      <div class="rteam${r.winner === 0 ? " win" : ""}"><span>${esc(nameOf(r.team_a[0]))} / ${esc(nameOf(r.team_a[1]))}</span><b>${r.sets.map(s => s[0]).join(" ")}</b></div>
+      <div class="rteam${r.winner === 1 ? " win" : ""}"><span>${esc(nameOf(r.team_b[0]))} / ${esc(nameOf(r.team_b[1]))}</span><b>${r.sets.map(s => s[1]).join(" ")}</b></div>
+      ${delta != null ? `<p class="note" style="margin:0">${t("yourLevel")}: <b class="${delta >= 0 ? "up" : "down"}">${delta >= 0 ? "+" : ""}${delta.toFixed(2)}</b></p>` : ""}
+      ${r.status === "pending" && myTeam !== repTeam ? `<div class="row"><button class="cta blue sm" data-confres="1">${t("confirmRes")}</button><button class="ghost sm" data-confres="0">${t("notRight")}</button></div>` : ""}</div>`;
+  }
+  if ((!r || r.status === "disputed") && started && full && m.status !== "cancelled"){
+    const others = m.players.filter(p => !p.me), partner = S.partner && others.some(p => p.id === S.partner) ? S.partner : others[0].id;
+    const opp = others.filter(p => p.id !== partner);
+    res += `<form id="resF" class="card" style="display:flex;flex-direction:column;gap:10px"><b>${t("reportRes")}</b>${r && r.status === "disputed" ? `<span class="note">${t("disputed")}</span>` : ""}
+      <span class="note">${t("pickPartner")}</span><div class="chips" style="flex-wrap:wrap">${others.map(p => `<button type="button" class="chip" data-partner="${p.id}" aria-pressed="${p.id === partner}">${esc(p.name)}</button>`).join("")}</div>
+      <div class="sets"><div class="sh"><span></span><b>${t("set")} 1</b><b>${t("set")} 2</b><b>${t("set")} 3</b></div>
+       <div class="sr"><span>${t("you")} + ${esc(nameOf(partner))}</span>${[0,1,2].map(i => `<input inputmode="numeric" maxlength="2" id="sa${i}" aria-label="${t("set")} ${i + 1}">`).join("")}</div>
+       <div class="sr"><span>${esc(opp.map(p => p.name).join(" + "))}</span>${[0,1,2].map(i => `<input inputmode="numeric" maxlength="2" id="sb${i}" aria-label="${t("set")} ${i + 1}">`).join("")}</div></div>
+      <input type="hidden" id="r-partner" value="${partner}"><button class="cta blue" type="submit">${t("sendRes")}</button><span class="note">${t("resNote")}</span></form>`;
+  } else if (!r && !started) res = `<div class="card note">${t("resLater")}</div>`;
+  else if (!r && !full) res = `<div class="card note">${t("resNeed4")}</div>`;
+  return `<main>${backBar(t("match"), "me")}
+   <div class="card"><div class="between"><b>${esc(fmtDay(d))} · ${esc(fmtTime(d))}</b>${statusTag(m.status)}</div><span class="note">${esc(m.club)} · ${esc(m.court)} · ${m.minutes} ${t("min")}${m.level_min != null ? ` · ${t("lvl")} ${lvl2(m.level_min)}–${lvl2(m.level_max)}` : ""}</span>${m.code ? `<span class="note" style="display:block">${t("booking")} #${m.booking_no} · ${t("code")} <b>${esc(m.code)}</b></span>` : ""}</div>
+   <h2>${t("players")}</h2>
+   <div class="card" style="display:flex;flex-direction:column;gap:10px">${m.players.map(p => `<div class="prow">${av(p.name)}<div style="flex:1;min-width:0"><b>${esc(p.name)}${p.me ? ` <span class="note">(${t("you")})</span>` : ""}</b>${p.booker ? `<small class="note" style="display:block">${t("booker")}</small>` : ""}</div>${lvChip(p.level)}${m.split ? paidTag(p.paid) : ""}</div>`).join("")}
+    ${Array.from({length: m.open_spots}, () => `<div class="prow">${av("", 1)}<span class="note">${t("openSpot")}</span></div>`).join("")}
+    ${m.split ? `<p class="note" style="margin:0">${t("splitInfo").replace("{x}", money(share))}</p>` : ""}</div>
+   ${res}
+   <h2>${t("chat")}</h2>
+   <div class="card chat"><div class="msgs" id="msgs">${(S.chat || []).map(x => `<div class="msg${x.mine ? " mine" : ""}">${x.mine ? "" : `<small>${esc(x.name)}</small>`}<span>${esc(x.body)}</span><time>${esc(fmtTime(new Date(x.created_at)))}</time></div>`).join("") || `<p class="note" style="margin:0;text-align:center">${t("chatEmpty")}</p>`}</div>
+    <form id="chatF" class="chatin"><input id="chat-in" maxlength="500" autocomplete="off" placeholder="${t("chatPh")}"><button class="cta blue sm" type="submit">${t("sendBtn")}</button></form></div>
+  </main>`; };
+async function chatPoll(){
+  if (S.view !== "match" || !S.match || document.hidden) return;
+  try { const r = await sb.rpc("match_messages", {p_booking: S.match.id, p_after: S.chatLast || 0});
+    if (r.data && r.data.length){ S.chat = (S.chat || []).concat(r.data); S.chatLast = r.data[r.data.length - 1].id; sb.rpc("read_notifications", {p_booking: S.match.id});
+      const box = document.getElementById("msgs"), atEnd = box && box.scrollHeight - box.scrollTop - box.clientHeight < 60; softRender(); const b2 = document.getElementById("msgs"); if (b2 && atEnd) b2.scrollTop = b2.scrollHeight; } } catch (e) {}
+}
+setInterval(chatPoll, 5000);
+
+/* ---------- my results ---------- */
+function resultRow(x){ const won = x.my_team === x.winner, mine = x.my_team === 0 ? x.team_a : x.team_b, th = x.my_team === 0 ? x.team_b : x.team_a;
+  return `<button class="card hrow" data-match="${x.booking_id}"><span class="wl ${won ? "w" : "l"}">${won ? t("won") : t("lost")}</span><span style="flex:1;min-width:0;text-align:start"><b>${esc(mine.join(" / "))}</b><small class="note" style="display:block">${t("vs")} ${esc(th.join(" / "))} · ${esc(fmtDay(new Date(x.starts_at)))}</small></span><span class="hs"><b>${esc(setsStr(x.sets.map(s => x.my_team === 0 ? s : [s[1], s[0]])))}</b>${x.status === "confirmed" && x.delta != null ? `<small class="${+x.delta >= 0 ? "up" : "down"}">${+x.delta >= 0 ? "+" : ""}${(+x.delta).toFixed(2)}</small>` : `<small class="note">${x.status === "pending" ? t("waitConfirm") : t("disputedS")}</small>`}</span></button>`; }
+
+/* ---------- WhatsApp + photos ---------- */
+const waNum = p => { let s = String(p || "").replace(/[^\d+]/g, ""); if (s.startsWith("+")) s = s.slice(1); else if (s.startsWith("00")) s = s.slice(2); else if (s.startsWith("0")) s = "963" + s.slice(1); return s; };
+const waLink = (p, msg) => `https://wa.me/${waNum(p)}?text=${encodeURIComponent(msg)}`;
+function shrinkPhoto(file){ return new Promise((ok, no) => { const fr = new FileReader(); fr.onerror = no; fr.onload = () => { const im = new Image(); im.onerror = no; im.onload = () => {
+  const s = Math.min(1, 900 / Math.max(im.width, im.height)), c = document.createElement("canvas"); c.width = Math.round(im.width * s); c.height = Math.round(im.height * s);
+  c.getContext("2d").drawImage(im, 0, 0, c.width, c.height); ok(c.toDataURL("image/jpeg", 0.72)); }; im.src = fr.result; }; fr.readAsDataURL(file); }); }
+function clubPic(c){ return c.photo ? `<img src="${esc(c.photo)}" alt="" loading="lazy">` : courtsArt(); }
+function clubLinks(c){ const l = [];
+  if (c.maps_url) l.push(`<a class="ghost sm" href="${esc(c.maps_url)}" target="_blank" rel="noopener">${t("map")}</a>`);
+  if (c.phone) l.push(`<a class="ghost sm" href="${esc(waLink(c.phone, "Hi, I found you on Padel Live."))}" target="_blank" rel="noopener">WhatsApp</a>`, `<a class="ghost sm" href="tel:${esc(c.phone)}">${t("call")} ${esc(c.phone)}</a>`);
+  return l.length ? `<div class="row" style="flex-wrap:wrap;gap:8px">${l.join("")}</div>` : ""; }
+function clubForm(club){ return `<form id="clubF" class="card" style="display:flex;flex-direction:column;gap:10px"><h2 style="font-size:17px">${t("clubPage")}</h2>
+   <div class="cpic">${clubPic(Object.assign({}, club, S.newPhoto != null ? {photo: S.newPhoto} : {}))}</div>
+   <label class="fld"><span>${t("photo")}</span><input type="file" id="cf-photo" accept="image/*"></label>
+   <label class="fld"><span>${t("area")}</span><input id="cf-area" value="${esc(club.area || "")}" placeholder="Mezzeh, Kafr Souseh…"></label>
+   <label class="fld"><span>${t("about")}</span><textarea id="cf-about" rows="3">${esc(club.about || "")}</textarea></label>
+   <label class="fld"><span>${t("mapLink")}</span><input id="cf-maps" value="${esc(club.maps_url || "")}" placeholder="https://maps.app.goo.gl/…" dir="ltr"></label>
+   <label class="fld"><span>${t("clubPhone")}</span><input id="cf-phone" value="${esc(club.phone || "")}" inputmode="tel" dir="ltr"></label>
+   <button class="cta blue" type="submit">${t("save")}</button></form>`; }
+function adminCard(){ if (!S.profile || !S.profile.is_admin) return "";
+  return `<form id="newClubF" class="card" style="display:flex;flex-direction:column;gap:10px"><b>${t("addClub")}</b>
+   <label class="fld"><span>${t("clubName")}</span><input id="nc-name" required></label>
+   <div class="grid2"><label class="fld"><span>${t("city")}</span><input id="nc-city" value="Damascus"></label><label class="fld"><span>${t("area")}</span><input id="nc-area"></label></div>
+   <label class="fld"><span>${t("courtsList")}</span><input id="nc-courts" placeholder="Court 1, Court 2, Court 3"></label>
+   <button class="ghost" type="submit">${t("addClub")}</button>${S.newClub ? `<div class="notice">${t("clubAdded")} <b dir="ltr">${esc(S.newClub.staff_code)}</b></div>` : ""}</form>`; }
 
 /* ---------- render + actions ---------- */
 const app = document.getElementById("app");
@@ -603,10 +820,15 @@ async function go(v){
   if (!V[v]) v = "home"; S.view = v;
   if (location.hash !== "#" + v) history.replaceState(null, "", "#" + v);
   if (v === "club" && S.club){ if (!S.day) S.day = nextDays(1)[0]; const cs = S.courts.filter(x => x.club_id === S.club.id); if (!cs.some(x => x.id === S.court) && cs[0]) S.court = cs[0].id; await loadBusy(); }
+  if (v === "events"){ try { const r = await within(sb.rpc("t_list"), 8000); S.tours = r.data || []; } catch (e) {} }
   if (v === "matches" || v === "home"){ const m = await sb.rpc("open_matches"); S.matches = m.data || S.matches; }
-  if (v === "me" && S.user){ const mine = await sb.rpc("my_bookings"); S.mine = mine.data || []; }
+  if (v === "me" && S.user){ const [mine, rs, pf] = await Promise.all([sb.rpc("my_bookings"), sb.rpc("my_results"), sb.from("profiles").select("*").eq("id", S.user.id).maybeSingle()]); S.mine = mine.data || []; S.results = rs.data || []; if (pf.data) S.profile = pf.data; loadNotifN(); }
+  if (v === "inbox" && S.user){ await loadInbox(); }
+  if (v === "match"){ if (S.matchId) await loadMatch(S.matchId); }
+  if (v === "level"){ S.quiz = S.quiz || {}; }
   if (v === "manager"){ if (!S.mClub && S.staff[0]) S.mClub = S.staff[0].id; if (!S.mDay) S.mDay = nextDays(1)[0]; await loadManager(); }
   render(); window.scrollTo(0, 0);
+  if (v === "match"){ const mb = document.getElementById("msgs"); if (mb) mb.scrollTop = mb.scrollHeight; }
 }
 async function loadBusy(){ const r = await sb.rpc("busy_slots", {p_club: S.club.id, p_day: S.day}); S.busy = r.data || []; }
 async function loadManager(){
@@ -641,6 +863,7 @@ async function poll(force){
         softRender();
       }
     } else if (S.dirty) softRender();
+    if (S.user && tick % 2 === 0){ const old = S.notifN; await loadNotifN(); if (old !== S.notifN && ["home","me","matches"].includes(S.view)) softRender(); }
   } catch (e) {} finally { polling = false; }
 }
 document.addEventListener("focusout", () => { if (S.dirty) setTimeout(() => { if (S.dirty) softRender(); }, 300); });
@@ -675,15 +898,28 @@ app.addEventListener("click", async e => {
   if ("confirm" in d){
     const refEl = document.getElementById("ref"); if (refEl) S.ref = refEl.value;
     S.busyOp = true; render();
-    const r = await sb.rpc("create_booking", {p_court: S.court, p_start: S.slot, p_minutes: S.dur, p_pay: S.pay, p_ref: S.pay === "club" ? null : S.ref, p_open: S.openSpots, p_level: S.openSpots ? (S.level || null) : null});
+    const r = await sb.rpc("create_booking", {p_court: S.court, p_start: S.slot, p_minutes: S.dur, p_pay: S.pay, p_ref: S.pay === "club" ? null : S.ref, p_open: S.openSpots, p_level: null, p_split: !!(S.split && S.openSpots), p_lmin: S.openSpots && S.lvRange !== "any" && myLevel() != null ? Math.max(0.5, myLevel() - +S.lvRange) : null, p_lmax: S.openSpots && S.lvRange !== "any" && myLevel() != null ? Math.min(7, myLevel() + +S.lvRange) : null});
     S.busyOp = false;
     if (r.error){ toast(errMsg(r.error)); await loadBusy(); render(); return; }
     S.last = Array.isArray(r.data) ? r.data[0] : r.data; S.slot = null; S.ref = ""; S.openSpots = 0;
     const mine = await sb.rpc("my_bookings"); S.mine = mine.data || [];
     go("done"); return; }
-  if (d.join){ if (!S.user){ go("auth"); toast(t("needSign")); return; } const r = await sb.rpc("join_match", {p_booking: d.join}); if (r.error) toast(errMsg(r.error)); else toast("✓ " + t("joined")); await afterAuth(true); render(); return; }
+  if (d.join){ if (!S.user){ go("auth"); toast(t("needSign")); return; } const jm = S.matches.find(x => x.id === d.join); if (jm && jm.split){ S.joinFor = S.joinFor === d.join ? null : d.join; S.joinPay = "club"; render(); return; } const r = await sb.rpc("join_match", {p_booking: d.join}); if (r.error) toast(errMsg(r.error)); else toast("✓ " + t("joined")); await afterAuth(true); render(); return; }
   if (d.leave){ const r = await sb.rpc("leave_match", {p_booking: d.leave}); if (r.error) toast(errMsg(r.error)); await afterAuth(true); render(); return; }
   if (d.cancel){ const r = await sb.rpc("cancel_my_booking", {p_booking: d.cancel}); if (r.error) toast(errMsg(r.error)); else toast(t("cancelled")); await afterAuth(true); render(); return; }
+  if (d.match){ S.matchId = d.match; S.partner = null; go("match"); return; }
+  if (d.quiz){ const [q, i] = d.quiz.split("|"); S.quiz[q] = +i; render(); return; }
+  if ("setlevel" in d && d.setlevel){ const r = await sb.rpc("set_my_level", {p_level: +d.setlevel}); if (r.error){ toast(errMsg(r.error)); return; } toast(t("saved")); await afterAuth(true); go("me"); return; }
+  if (d.partner){ S.partner = d.partner; render(); return; }
+  if ("confres" in d){ const r = await sb.rpc("confirm_result", {p_booking: S.match.id, p_ok: d.confres === "1"}); if (r.error) toast(errMsg(r.error)); else toast("✓"); await afterAuth(true); await loadMatch(S.match.id); render(); return; }
+  if (d.lvr){ S.lvRange = d.lvr; render(); return; }
+  if ("split" in d && d.split !== undefined && b.closest(".card")){ S.split = d.split === "1"; render(); return; }
+  if (d.joinpay){ const rf = document.getElementById("join-ref"); if (rf) S.joinRef = rf.value; S.joinPay = d.joinpay; render(); return; }
+  if (d.joingo){ const rf = document.getElementById("join-ref"); if (rf) S.joinRef = rf.value;
+    const r = await sb.rpc("join_match", {p_booking: d.joingo, p_pay: S.joinPay, p_ref: S.joinPay === "club" ? null : S.joinRef});
+    if (r.error){ toast(errMsg(r.error)); return; } toast("✓ " + t("joined")); S.joinFor = null; S.joinRef = ""; await afterAuth(true); S.matchId = d.joingo; go("match"); return; }
+  if (d.area !== undefined && "area" in d){ S.area = d.area; render(); return; }
+  if (d.share){ const [bk, pl, to] = d.share.split("|"); const r = await sb.rpc("staff_set_share", {p_booking: bk, p_player: pl, p_paid: to}); if (r.error) toast(errMsg(r.error)); else toast("✓"); await loadManager(); render(); return; }
   if (d.mday){ S.mDay = d.mday; await loadManager(); render(); return; }
   if (d.st){ const r = await sb.rpc("staff_set_status", {p_booking: d.st, p_status: d.to}); if (r.error) toast(errMsg(r.error)); else toast("✓"); await loadManager(); render(); return; }
 });
@@ -707,6 +943,17 @@ app.addEventListener("submit", async e => {
     if (r.error) toast(errMsg(r.error)); else { toast(t("saved")); await afterAuth(true); render(); } return; }
   if (f.id === "staffF"){ const r = await sb.rpc("join_club_staff", {p_code: document.getElementById("s-code").value});
     if (r.error){ toast(errMsg(r.error)); return; } await afterAuth(true); S.mClub = r.data; go("manager"); return; }
+  if (f.id === "chatF"){ const inp = document.getElementById("chat-in"), v = inp.value.trim(); if (!v) return; inp.value = "";
+    const r = await sb.rpc("send_message", {p_booking: S.match.id, p_body: v}); if (r.error){ toast(errMsg(r.error)); inp.value = v; return; } await chatPoll(); const mb = document.getElementById("msgs"); if (mb) mb.scrollTop = mb.scrollHeight; const ni = document.getElementById("chat-in"); if (ni) ni.focus(); return; }
+  if (f.id === "resF"){ const m = S.match, partner = document.getElementById("r-partner").value, me = m.players.find(p => p.me);
+    const ta = [me.id, partner], tb = m.players.map(p => p.id).filter(id => !ta.includes(id)), sets = [];
+    for (let i = 0; i < 3; i++){ const a = document.getElementById("sa" + i).value.trim(), bb = document.getElementById("sb" + i).value.trim(); if (a === "" && bb === "") continue; sets.push([+a || 0, +bb || 0]); }
+    const r = await sb.rpc("report_result", {p_booking: m.id, p_team_a: ta, p_team_b: tb, p_sets: sets}); if (r.error){ toast(errMsg(r.error)); return; }
+    toast("✓"); await loadMatch(m.id); render(); return; }
+  if (f.id === "clubF"){ const r = await sb.rpc("staff_update_club", {p_club: S.mClub, p_about: document.getElementById("cf-about").value, p_area: document.getElementById("cf-area").value.trim(), p_maps: document.getElementById("cf-maps").value.trim(), p_phone: document.getElementById("cf-phone").value.trim(), p_photo: S.newPhoto != null ? S.newPhoto : null});
+    if (r.error){ toast(errMsg(r.error)); return; } S.newPhoto = null; toast(t("saved")); await loadClubs(); render(); return; }
+  if (f.id === "newClubF"){ const r = await sb.rpc("admin_create_club", {p_name: document.getElementById("nc-name").value, p_city: document.getElementById("nc-city").value, p_area: document.getElementById("nc-area").value, p_courts: document.getElementById("nc-courts").value.split(",").map(x => x.trim()).filter(Boolean)});
+    if (r.error){ toast(errMsg(r.error)); return; } S.newClub = r.data; await loadClubs(); await afterAuth(true); render(); return; }
   if (f.id === "addF"){ const r = await sb.rpc("staff_add", {p_court: document.getElementById("ad-court").value, p_start: document.getElementById("ad-time").value, p_minutes: +document.getElementById("ad-min").value, p_name: document.getElementById("ad-name").value, p_block: document.getElementById("ad-block").checked, p_note: null});
     if (r.error) toast(errMsg(r.error)); else toast("✓"); await loadManager(); render(); return; }
 });
@@ -715,6 +962,7 @@ app.addEventListener("change", async e => {
   if (el.dataset.price){ const [band, mins] = el.dataset.price.split("|"); const v = el.value.trim() === "" ? null : Number(el.value);
     const r = await sb.rpc("staff_set_price", {p_club: S.mClub, p_band: band, p_minutes: +mins, p_price: v});
     if (r.error) toast(errMsg(r.error)); else { toast(t("saved")); const p = await sb.from("prices").select("*"); S.prices = p.data || S.prices; } return; }
+  if (el.id === "cf-photo" && el.files && el.files[0]){ try { S.newPhoto = await shrinkPhoto(el.files[0]); render(); } catch (x) { toast("Could not read that photo."); } return; }
   if (el.id === "rate"){ const r = await sb.rpc("staff_set_rate", {p_club: S.mClub, p_rate: el.value.trim() === "" ? null : Number(el.value)}); if (r.error) toast(errMsg(r.error)); else toast(t("saved")); }
 });
 window.addEventListener("hashchange", () => { const v = location.hash.slice(1); if (v && v !== S.view && V[v]) go(v); });
