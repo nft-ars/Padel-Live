@@ -4,6 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#10201A">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Padel Live">
 <title>Padel Live</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;1,700;1,800;1,900&family=Barlow:wght@400;500;600;700&family=Cairo:wght@700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
@@ -251,6 +258,20 @@ html[dir="rtl"] .signin .slogan{font-style:normal}
 .pin{width:70px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:700 15px var(--body);text-align:center}
 .seg button.c-red[aria-pressed="true"]{background:var(--red);border-color:var(--red)}
 .hero .tag.w{background:rgba(255,255,255,.18);color:#fff}
+.tl-in{min-width:640px;padding:10px 24px 10px 10px}
+.tl-h .hrs{position:relative;display:block;height:16px;font-size:11px;font-weight:700;color:var(--ink-2)}
+.tl-h .hrs span{position:absolute;top:0;transform:translateX(-50%);white-space:nowrap}
+.tl-track .gl{position:absolute;top:0;bottom:0;width:1px;background:var(--line)}
+.tl-track .now{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--red);z-index:2;border-radius:2px}
+.bk{z-index:1}
+.live-dot{display:flex;align-items:center;gap:6px;margin:-6px 0 -6px}
+.live-dot::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.3}}
+.linkbtn{background:none;border:0;padding:6px;font-weight:700;font-size:14px;color:var(--blue);align-self:center}
+.inst{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.inst img{border-radius:11px;flex:none}
+.inst > div{flex:1 1 180px}
+.inst .cta{flex:1 1 100%;width:100%}
 </style>
 </head>
 <body>
@@ -277,7 +298,11 @@ const W = {
   signin:"Sign in", signup:"Create account", name:"Full name", phone:"WhatsApp number", email:"Email", pass:"Password (6+ characters)", haveAcc:"I have an account", newAcc:"New here? Create an account", needSign:"Sign in to book courts and join matches.", look:"Look around first", signout:"Sign out",
   profile:"My profile", save:"Save", saved:"Saved", lang:"Language", dark:"Dark mode", mgr:"Club manager", staffQ:"Do you manage a club?", staffCode:"Staff code", staffJoin:"Unlock manager",
   evSoon:"Tournaments are coming to the app soon.", evTxt:"Live scores, draws and brackets, like the Core Padel Tournament.",
-  mToday:"Bookings", deps:"Deposits to confirm", noDeps:"No deposits waiting.", okBtn:"Confirm", rej:"Reject", add:"Add booking or block", who:"Name", block:"Block the court (repair, coaching…)", addBtn:"Add", prices:"Court prices (USD)", band_day:"Daytime", band_peak:"Peak", band_late:"Late", rate:"Pound rate (1 USD = ? SYP)", noBk:"No bookings this day.", bookingsN:"bookings", cash:"Expected at desk", filled:"Courts filled", walkin:"Walk-in", back:"Back to app", loadErr:"Can't reach the server. Check your connection and try again.", retry:"Try again"},
+  mToday:"Bookings", deps:"Deposits to confirm", noDeps:"No deposits waiting.", okBtn:"Confirm", rej:"Reject", add:"Add booking or block", who:"Name", block:"Block the court (repair, coaching…)", addBtn:"Add", prices:"Court prices (USD)", band_day:"Daytime", band_peak:"Peak", band_late:"Late", rate:"Pound rate (1 USD = ? SYP)", noBk:"No bookings this day.", bookingsN:"bookings", cash:"Expected at desk", filled:"Courts filled", walkin:"Walk-in", back:"Back to app", loadErr:"Can't reach the server. Check your connection and try again.", retry:"Try again",
+  forgot:"Forgot password?", needEmail:"Type your email above first.", resetSent:"Check your email for a link to set a new password.", newPassT:"Set a new password", newPass:"New password (6+ characters)", setPass:"Save new password", passSaved:"Password changed. You're signed in.",
+  delAcc:"Delete my account", delQ:"Delete your account? Your upcoming bookings will be cancelled. This can't be undone.", delDone:"Your account was deleted.",
+  install:"Add Padel Live to your phone", installS:"Get the icon on your home screen. It opens full screen like a normal app.", installBtn:"Add to home screen", iosHow:"In Safari, tap the Share button, then Add to Home Screen.", andHow:"Tap ⋮ in Chrome, then Add to Home screen (or Install app).",
+  newBk:"New booking", taken:"Someone just booked that time. Pick another one.", autoUp:"Updates automatically"},
  ar:{hi:"أهلاً", guest:"أهلاً بك في بادل لايف", next:"مباراتك القادمة", none:"لا توجد حجوزات بعد", bookFirst:"احجز ملعباً وسيظهر هنا.", book:"احجز ملعب", find:"ابحث عن لعبة", events:"البطولات", open:"مباريات مفتوحة", all:"عرض الكل",
   home:"الرئيسية", tBook:"احجز", tMatches:"المباريات", tEvents:"البطولات", tProfile:"حسابي", findCourt:"ابحث عن ملعب", from:"من", hr:"/ساعة",
   length:"المدة", closedDay:"النادي مغلق هذا اليوم.", pick:"اختر وقتاً", each:"للشخص", cont:"احجز", min:"د",
@@ -289,7 +314,11 @@ const W = {
   signin:"تسجيل الدخول", signup:"إنشاء حساب", name:"الاسم الكامل", phone:"رقم واتساب", email:"البريد الإلكتروني", pass:"كلمة السر (٦ أحرف أو أكثر)", haveAcc:"لدي حساب", newAcc:"جديد؟ أنشئ حساباً", needSign:"سجّل الدخول لتحجز الملاعب وتنضم للمباريات.", look:"تصفح أولاً", signout:"تسجيل الخروج",
   profile:"ملفي", save:"حفظ", saved:"تم الحفظ", lang:"اللغة", dark:"الوضع الليلي", mgr:"لوحة النادي", staffQ:"تدير نادياً؟", staffCode:"رمز الموظفين", staffJoin:"فتح لوحة النادي",
   evSoon:"البطولات قادمة إلى التطبيق قريباً.", evTxt:"نتائج مباشرة وقرعة وأدوار، مثل بطولة كور بادل.",
-  mToday:"الحجوزات", deps:"عربونات للتأكيد", noDeps:"لا توجد عربونات بانتظارك.", okBtn:"تأكيد", rej:"رفض", add:"إضافة حجز أو إغلاق", who:"الاسم", block:"إغلاق الملعب (صيانة، تدريب…)", addBtn:"إضافة", prices:"أسعار الملاعب (دولار)", band_day:"نهاري", band_peak:"ذروة", band_late:"متأخر", rate:"سعر الصرف (١ دولار = ؟ ليرة)", noBk:"لا حجوزات هذا اليوم.", bookingsN:"حجوزات", cash:"المتوقع في الاستقبال", filled:"نسبة الإشغال", walkin:"حضوري", back:"العودة للتطبيق", loadErr:"تعذر الاتصال بالخادم. تحقق من الاتصال وحاول مجدداً.", retry:"حاول مجدداً"}
+  mToday:"الحجوزات", deps:"عربونات للتأكيد", noDeps:"لا توجد عربونات بانتظارك.", okBtn:"تأكيد", rej:"رفض", add:"إضافة حجز أو إغلاق", who:"الاسم", block:"إغلاق الملعب (صيانة، تدريب…)", addBtn:"إضافة", prices:"أسعار الملاعب (دولار)", band_day:"نهاري", band_peak:"ذروة", band_late:"متأخر", rate:"سعر الصرف (١ دولار = ؟ ليرة)", noBk:"لا حجوزات هذا اليوم.", bookingsN:"حجوزات", cash:"المتوقع في الاستقبال", filled:"نسبة الإشغال", walkin:"حضوري", back:"العودة للتطبيق", loadErr:"تعذر الاتصال بالخادم. تحقق من الاتصال وحاول مجدداً.", retry:"حاول مجدداً",
+  forgot:"نسيت كلمة السر؟", needEmail:"اكتب بريدك الإلكتروني أولاً.", resetSent:"تفقد بريدك، أرسلنا رابطاً لتعيين كلمة سر جديدة.", newPassT:"تعيين كلمة سر جديدة", newPass:"كلمة السر الجديدة (٦ أحرف أو أكثر)", setPass:"حفظ كلمة السر", passSaved:"تم تغيير كلمة السر وتسجيل دخولك.",
+  delAcc:"حذف حسابي", delQ:"حذف حسابك؟ سيتم إلغاء حجوزاتك القادمة ولا يمكن التراجع.", delDone:"تم حذف حسابك.",
+  install:"أضف بادل لايف إلى هاتفك", installS:"ضع الأيقونة على الشاشة الرئيسية ليفتح كتطبيق عادي.", installBtn:"إضافة إلى الشاشة الرئيسية", iosHow:"في سفاري اضغط زر المشاركة ثم «إضافة إلى الشاشة الرئيسية».", andHow:"في كروم اضغط ⋮ ثم «إضافة إلى الشاشة الرئيسية» أو «تثبيت التطبيق».",
+  newBk:"حجز جديد", taken:"تم حجز هذا الوقت للتو. اختر وقتاً آخر.", autoUp:"يتحدث تلقائياً"}
 };
 let lang = "en";
 try { lang = localStorage.getItem("pl-lang") || "en"; } catch (e) {}
@@ -323,6 +352,12 @@ const money = n => n == null ? "–" : "$" + (Math.round(n * 100) / 100).toStrin
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false};
 let sb = null;
+const RECOVERY = /type=recovery/.test(location.hash);
+let installEvt = null;
+const standalone = () => (window.matchMedia && matchMedia("(display-mode: standalone)").matches) || navigator.standalone === true;
+const isIOS = () => /iphone|ipad|ipod/i.test(navigator.userAgent);
+window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); installEvt = e; if (S.view === "me" || S.view === "home") render(); });
+window.addEventListener("appinstalled", () => { installEvt = null; render(); });
 
 async function boot(){
   try {
@@ -330,11 +365,14 @@ async function boot(){
   } catch (e) { S.err = t("loadErr"); render(); return; }
   const { data } = await sb.auth.getSession();
   S.user = data && data.session ? data.session.user : null;
-  sb.auth.onAuthStateChange((_e, session) => { const u = session ? session.user : null; if ((u && u.id) !== (S.user && S.user.id)) { S.user = u; afterAuth(); } });
+  sb.auth.onAuthStateChange((ev, session) => { if (ev === "PASSWORD_RECOVERY"){ S.user = session ? session.user : S.user; S.view = "reset"; render(); return; } const u = session ? session.user : null; if ((u && u.id) !== (S.user && S.user.id)) { S.user = u; afterAuth(); } });
   await loadClubs();
   await afterAuth(true);
   const h = location.hash.slice(1); if (V[h]) S.view = h;
+  if (RECOVERY && S.user){ S.view = "reset"; history.replaceState(null, "", location.pathname + "#reset"); }
   S.loaded = true; render();
+  setInterval(poll, 15000);
+  document.addEventListener("visibilitychange", () => { if (!document.hidden) poll(true); });
 }
 async function loadClubs(){
   const [c, ct, p, cl] = await Promise.all([
@@ -356,6 +394,7 @@ async function afterAuth(silent){
 }
 
 /* ---------- pieces ---------- */
+const installCard = () => standalone() ? "" : `<div class="card inst"><img src="icon-192.png" alt="" width="44" height="44"><div style="flex:1;min-width:0"><b>${t("install")}</b><div class="note">${t("installS")}</div></div><button class="cta sm" data-install>${t("installBtn")}</button></div>`;
 const av = (s, o) => `<span class="av${o ? " o" : ""}">${esc(o ? "+" : initials(s))}</span>`;
 const initials = n => (String(n || "?").trim().split(/\s+/).map(x => x[0]).join("").slice(0,2) || "?").toUpperCase();
 const nav = cur => `<nav class="tabs" aria-label="Main">${[["home",IC.home,"home"],["clubs",IC.cal,"tBook"],["matches",IC.ppl,"tMatches"],["events",IC.cup,"tEvents"],["me",IC.me,"tProfile"]].map(([v,i,k]) => `<button data-go="${v}"${cur === v ? ' aria-current="page"' : ""}>${i}${t(k)}</button>`).join("")}</nav>`;
@@ -390,6 +429,7 @@ V.home = () => { const next = S.mine.find(b => b.status !== "cancelled" && new D
   <div class="quick"><button data-go="clubs">${IC.cal}${t("book")}</button><button data-go="matches">${IC.ppl}${t("find")}</button><button data-go="events">${IC.cup}${t("events")}</button></div>
   <div class="between"><h2>${t("open")}</h2><a href="#matches" data-go="matches" style="font-weight:700;font-size:13px;white-space:nowrap">${t("all")}</a></div>
   <div style="display:flex;flex-direction:column;gap:10px">${S.matches.filter(m => m.open_spots > 0).slice(0,3).map(matchRow).join("") || `<div class="card note">${t("noMatches")}</div>`}</div>
+  ${installCard()}
  </main>${nav("home")}`; };
 
 V.clubs = () => `<main>${backBar(t("findCourt"), "home")}
@@ -467,6 +507,7 @@ V.auth = (why) => { const up = S.authMode === "up";
    <label class="fld"><span>${t("email")}</span><input id="a-email" type="email" autocomplete="email" required dir="ltr"></label>
    <label class="fld"><span>${t("pass")}</span><input id="a-pass" type="password" minlength="6" autocomplete="${up ? "new-password" : "current-password"}" required dir="ltr"></label>
    <button class="cta blue wide" type="submit"${S.busyOp ? " disabled" : ""}>${S.busyOp ? "…" : up ? t("signup") : t("signin")}</button>
+   ${up ? "" : `<button class="linkbtn" type="button" data-forgot>${t("forgot")}</button>`}
    <button class="ghost" type="button" data-mode>${up ? t("haveAcc") : t("newAcc")}</button>
   </form>
  </main>${nav("me")}`; };
@@ -481,8 +522,15 @@ V.me = () => { if (!S.user) return V.auth();
   <div class="card"><div class="set"><span>${t("dark")}</span><button class="tg" data-dark aria-pressed="${document.documentElement.dataset.theme === "dark"}" aria-label="${t("dark")}"></button></div></div>
   ${S.staff.length ? `<button class="cta wide" data-go="manager">${t("mgr")} · ${esc(S.staff.map(c => c.name).join(", "))} →</button>`
    : `<form id="staffF" class="card" style="display:flex;flex-direction:column;gap:10px"><b>${t("staffQ")}</b><label class="fld"><span>${t("staffCode")}</span><input id="s-code" autocomplete="off" dir="ltr"></label><button class="ghost" type="submit">${t("staffJoin")}</button></form>`}
+  ${installCard()}
   <button class="ghost" data-signout style="color:var(--red)">${t("signout")}</button>
+  <button class="linkbtn" data-delacc style="color:var(--ink-3)">${t("delAcc")}</button>
  </main>${nav("me")}`; };
+
+V.reset = () => { if (!S.user) return V.auth();
+ return `<main>${backBar(t("newPassT"), "home")}
+  <form id="resetF" class="card" style="display:flex;flex-direction:column;gap:12px"><label class="fld"><span>${t("newPass")}</span><input id="r-pass" type="password" minlength="6" autocomplete="new-password" required></label><button class="cta blue wide" type="submit">${t("setPass")}</button></form>
+ </main>`; };
 
 V.manager = () => { if (!S.user || !S.staff.length) return V.me();
  const club = S.clubs.find(c => c.id === S.mClub) || S.clubs.find(c => c.id === S.staff[0].id); if (!club) return V.me();
@@ -491,6 +539,8 @@ V.manager = () => { if (!S.user || !S.staff.length) return V.me();
  const pos = d => Math.max(0, Math.min(100, (new Date(d) - start) / 60000 / len * 100));
  const hours = []; for (let m = 0; m <= len; m += 60) hours.push(addMin(start, m));
  const live = md.day.filter(b => b.status !== "cancelled");
+ const nowT = new Date(), nowP = nowT > start && nowT < addMin(start, len) ? pos(nowT) : null;
+ const grid = hours.map(h => `<i class="gl" style="left:${pos(h)}%"></i>`).join("") + (nowP != null ? `<i class="now" style="left:${nowP}%"></i>` : "");
  const cash = live.filter(b => b.status === "confirmed" && b.pay_method === "club").reduce((a, b) => a + (+b.price || 0), 0);
  const used = live.filter(b => b.status !== "blocked").reduce((a, b) => a + b.minutes, 0), fill = courts.length ? Math.round(used / (len * courts.length) * 100) : 0;
  const startOpts = []; for (let m = 0; m < len; m += 30) startOpts.push(addMin(start, m));
@@ -499,8 +549,9 @@ V.manager = () => { if (!S.user || !S.staff.length) return V.me();
   <div class="top"><div><div class="hello">${t("mgr")}</div><div class="logo">${esc(club.name)}</div></div><button class="pill" data-go="me">${t("back")}</button></div>
   <div class="chips">${days.map(d => `<button class="chip" data-mday="${d}" aria-pressed="${S.mDay === d}">${esc(fmtDay(at(d,"12:00")))}</button>`).join("")}</div>
   <div class="stats"><div class="card stat"><small>${t("mToday")}</small><b>${live.filter(b => b.status !== "blocked").length}</b></div><div class="card stat"><small>${t("filled")}</small><b>${fill}%</b></div><div class="card stat"><small>${t("cash")}</small><b>${money(cash)}</b></div><div class="card stat"><small>${t("deps")}</small><b>${md.deps.length}</b></div></div>
-  <div class="tl" dir="ltr"><div class="tl-in"><div class="tl-h"><span></span><div class="hrs" style="grid-template-columns:repeat(${hours.length},1fr)">${hours.map(h => `<span>${esc(fmtTime(h).replace(":00",""))}</span>`).join("")}</div></div>
-   ${courts.map(ct => `<div class="tl-r"><b>${esc(ct.name)}</b><div class="tl-track">${live.filter(b => b.court_id === ct.id).map(b => { const l = pos(b.starts_at), w = pos(b.ends_at) - l; const cls = b.status === "blocked" ? "blk" : b.status === "deposit_pending" ? "dep" : b.open_spots ? "open" : "paid"; return `<div class="bk ${cls}" style="left:${l}%;width:${w}%" title="${esc(b.who)}">${esc(b.who || "—")} · ${esc(fmtTime(new Date(b.starts_at)))}</div>`; }).join("")}</div></div>`).join("")}
+  <div class="note live-dot">${t("autoUp")}</div>
+  <div class="tl" dir="ltr"><div class="tl-in"><div class="tl-h"><span></span><div class="hrs">${hours.map(h => `<span style="left:${pos(h)}%">${esc(fmtTime(h).replace(":00",""))}</span>`).join("")}</div></div>
+   ${courts.map(ct => `<div class="tl-r"><b>${esc(ct.name)}</b><div class="tl-track">${grid}${live.filter(b => b.court_id === ct.id).map(b => { const l = pos(b.starts_at), w = pos(b.ends_at) - l; const cls = b.status === "blocked" ? "blk" : b.status === "deposit_pending" ? "dep" : b.open_spots ? "open" : "paid"; return `<div class="bk ${cls}" style="left:${l}%;width:${w}%" title="${esc(b.who)}">${esc(b.who || "—")} · ${esc(fmtTime(new Date(b.starts_at)))}</div>`; }).join("")}</div></div>`).join("")}
   </div></div>
   <div class="card"><h2 style="font-size:17px">${t("deps")}</h2>${md.deps.length ? md.deps.map(d => `<div class="dep-row"><div class="who"><b>${esc(d.who)}</b><small>${esc(fmtDay(new Date(d.starts_at)))} ${esc(fmtTime(new Date(d.starts_at)))} · ${esc(d.court_name)} · ${esc(d.pay_method)} · ${money(d.price)}</small><small>Ref ${esc(d.pay_ref || "–")}${d.phone ? ` · ${esc(d.phone)}` : ""}</small></div><button class="sbtn ok" data-st="${d.id}" data-to="confirmed">${t("okBtn")}</button><button class="sbtn" data-st="${d.id}" data-to="cancelled">${t("rej")}</button></div>`).join("") : `<p class="note" style="margin:6px 0 0">${t("noDeps")}</p>`}</div>
   <div class="card"><h2 style="font-size:17px">${t("mToday")}</h2>${live.length ? live.map(b => `<div class="dep-row"><div class="who"><b>${esc(fmtTime(new Date(b.starts_at)))} · ${esc((courts.find(c => c.id === b.court_id) || {}).name || "")}</b><small>${esc(b.who || "—")}${b.phone ? ` · ${esc(b.phone)}` : ""} · ${b.minutes} ${t("min")} · ${b.status === "blocked" ? "Blocked" : money(b.price) + " · " + esc(b.pay_method)}${b.code ? ` · code ${esc(b.code)}` : ""}</small></div>${b.status === "deposit_pending" ? `<span class="tag pend">${t("pending")}</span>` : ""}<button class="sbtn" data-st="${b.id}" data-to="cancelled">${t("cancel")}</button></div>`).join("") : `<p class="note" style="margin:6px 0 0">${t("noBk")}</p>`}</div>
@@ -536,8 +587,39 @@ async function go(v){
 async function loadBusy(){ const r = await sb.rpc("busy_slots", {p_club: S.club.id, p_day: S.day}); S.busy = r.data || []; }
 async function loadManager(){
   const [d, p] = await Promise.all([sb.rpc("club_day", {p_club: S.mClub, p_day: S.mDay}), sb.rpc("pending_deposits", {p_club: S.mClub})]);
-  S.mData = {day: d.data || [], deps: p.data || []};
+  S.mData = {day: d.data || [], deps: p.data || []}; S.mKey = S.mClub + S.mDay;
 }
+function softRender(){
+  const ae = document.activeElement;
+  if (ae && app.contains(ae) && /^(INPUT|SELECT|TEXTAREA)$/.test(ae.tagName)){ S.dirty = true; return; }
+  const tl = document.querySelector(".tl"), sx = tl ? tl.scrollLeft : 0, ch = document.querySelector(".chips"), cx = ch ? ch.scrollLeft : 0;
+  S.dirty = false; render();
+  const tl2 = document.querySelector(".tl"); if (tl2) tl2.scrollLeft = sx; const ch2 = document.querySelector(".chips"); if (ch2) ch2.scrollLeft = cx;
+}
+function ding(){ try { const A = window.AudioContext || window.webkitAudioContext; if (!A) return; const c = ding.c || (ding.c = new A()); const o = c.createOscillator(), g = c.createGain(); o.frequency.value = 880; g.gain.setValueAtTime(.15, c.currentTime); g.gain.exponentialRampToValueAtTime(.001, c.currentTime + .5); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime + .5); } catch (e) {} try { navigator.vibrate && navigator.vibrate([120, 60, 120]); } catch (e) {} }
+let polling = false, tick = 0;
+async function poll(force){
+  if (polling || !sb || document.hidden || !S.loaded) return; polling = true; tick++;
+  try {
+    if (S.view === "manager" && S.mClub && S.mDay){
+      const old = S.mData, key = S.mClub + S.mDay, sameDay = S.mKey === key;
+      await loadManager(); S.mKey = key;
+      if (JSON.stringify(old) !== JSON.stringify(S.mData)){
+        if (old && sameDay){ const seen = new Set(old.day.map(b => b.id).concat(old.deps.map(b => b.id)));
+          const fresh = S.mData.day.concat(S.mData.deps).filter(b => !seen.has(b.id) && b.status !== "blocked");
+          if (fresh.length){ const b = fresh[0]; toast(`🔔 ${t("newBk")} · ${b.who || ""} · ${fmtDay(new Date(b.starts_at))} ${fmtTime(new Date(b.starts_at))}`); ding(); } }
+        softRender();
+      } else if (S.dirty) softRender();
+    } else if (S.view === "club" && S.club && S.day && (force || tick % 2 === 0)){
+      const old = JSON.stringify(S.busy); await loadBusy();
+      if (old !== JSON.stringify(S.busy)){
+        if (S.slot){ const x = slotsFor(S.club).list.find(y => y.iso === S.slot); if (!x || x.off){ S.slot = null; toast(t("taken")); } }
+        softRender();
+      }
+    } else if (S.dirty) softRender();
+  } catch (e) {} finally { polling = false; }
+}
+document.addEventListener("focusout", () => { if (S.dirty) setTimeout(() => { if (S.dirty) softRender(); }, 300); });
 let tt; function toast(msg){ const el = document.getElementById("toast"); el.textContent = msg; el.classList.add("on"); clearTimeout(tt); tt = setTimeout(() => el.classList.remove("on"), 2800); }
 const errMsg = e => (e && (e.message || e.error_description)) || String(e);
 
@@ -556,6 +638,12 @@ app.addEventListener("click", async e => {
   if (d.mlvl){ S.level = d.mlvl; render(); return; }
   if ("mode" in d){ S.authMode = S.authMode === "up" ? "in" : "up"; render(); return; }
   if ("dark" in d){ const r = document.documentElement; r.dataset.theme = r.dataset.theme === "dark" ? "light" : "dark"; render(); return; }
+  if ("install" in d){ if (installEvt){ installEvt.prompt(); try { await installEvt.userChoice; } catch (x) {} installEvt = null; render(); } else toast(isIOS() ? t("iosHow") : t("andHow")); return; }
+  if ("forgot" in d){ const em = (document.getElementById("a-email") || {}).value || ""; if (!em.trim()){ toast(t("needEmail")); document.getElementById("a-email").focus(); return; }
+    b.disabled = true; const r = await sb.auth.resetPasswordForEmail(em.trim(), {redirectTo: location.origin + location.pathname}); b.disabled = false;
+    toast(r.error ? errMsg(r.error) : t("resetSent")); return; }
+  if ("delacc" in d){ if (!confirm(t("delQ"))) return; const r = await sb.rpc("delete_my_account"); if (r.error){ toast(errMsg(r.error)); return; }
+    try { await sb.auth.signOut({scope:"local"}); } catch (x) {} S.user = null; await afterAuth(true); go("home"); toast(t("delDone")); return; }
   if ("signout" in d){ await sb.auth.signOut(); S.user = null; await afterAuth(true); go("home"); return; }
   if ("copy" in d){ const x = S.last, ct = S.courts.find(c => c.id === x.court_id) || {}; const txt = `Padel Live · ${S.club.name} · ${ct.name}\n${fmtDay(new Date(x.starts_at))} ${fmtTime(new Date(x.starts_at))} · ${x.minutes} min\nBooking #${x.booking_no}`;
     try { await navigator.clipboard.writeText(txt); toast("✓"); } catch (er) { toast(txt); } return; }
@@ -588,6 +676,8 @@ app.addEventListener("submit", async e => {
     if (r.error){ if (sbtn){ sbtn.disabled = false; sbtn.textContent = S.authMode === "up" ? t("signup") : t("signin"); } toast(errMsg(r.error)); return; }
     S.user = r.data.user || (r.data.session && r.data.session.user); await afterAuth(true);
     go(S.slot ? "checkout" : "home"); return; }
+  if (f.id === "resetF"){ const r = await sb.auth.updateUser({password: document.getElementById("r-pass").value});
+    if (r.error){ toast(errMsg(r.error)); return; } toast(t("passSaved")); await afterAuth(true); go("home"); return; }
   if (f.id === "pf"){ const r = await sb.from("profiles").update({full_name: document.getElementById("p-name").value.trim(), phone: document.getElementById("p-phone").value.trim()}).eq("id", S.user.id);
     if (r.error) toast(errMsg(r.error)); else { toast(t("saved")); await afterAuth(true); render(); } return; }
   if (f.id === "staffF"){ const r = await sb.rpc("join_club_staff", {p_code: document.getElementById("s-code").value});
@@ -608,6 +698,7 @@ boot();
 
 }
 (function(){
+  if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(function(){});
   if (window.__MOCK) return __padelApp();
   var a = document.createElement("script"); a.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.50.0";
   a.onload = __padelApp;
