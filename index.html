@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Padel Live</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,700;0,800;1,700;1,800;1,900&family=Barlow:wght@400;500;600;700&family=Cairo:wght@700;800;900&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: one phone-width app column (bottom tab bar, stacked cards), centred on a tinted stage on wide screens */
+:root{
+  --bg:#F2F5F3; --card:#FFFFFF; --ink:#10201A; --ink-2:#4A5A53; --ink-3:#8A9690; --line:#DCE3DF; --chip:#EEF1EF;
+  --blue:#2C5FAE; --blue-2:#1B3F7A; --blue-soft:#E3EBF7; --lime:#E3EE3A; --red:#C4452F; --red-soft:#FBE7E2; --green:#1A6B3C; --green-soft:#DDF2E4;
+  --stage:#DDE5E1; --night:#10201A;
+  --disp:"Barlow Condensed","Arial Narrow",Arial,sans-serif; --body:"Barlow",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0E1714; --card:#16221D; --ink:#E9EFEB; --ink-2:#A7B5AE; --ink-3:#71807A; --line:#26352E; --chip:#1D2B25;
+  --blue:#5B8FE0; --blue-2:#8DB2EE; --blue-soft:#1B2A40; --red:#E06A54; --red-soft:#3A1E19; --green:#6CC08F; --green-soft:#183326; --stage:#070C0A; --night:#060B09; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1714; --card:#16221D; --ink:#E9EFEB; --ink-2:#A7B5AE; --ink-3:#71807A; --line:#26352E; --chip:#1D2B25;
+  --blue:#5B8FE0; --blue-2:#8DB2EE; --blue-soft:#1B2A40; --red:#E06A54; --red-soft:#3A1E19; --green:#6CC08F; --green-soft:#183326; --stage:#070C0A; --night:#060B09; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--stage);color:var(--ink);font:500 15px/1.4 var(--body);-webkit-text-size-adjust:100%}
+html[dir="rtl"] body{--disp:"Cairo",Tahoma,sans-serif;--body:"IBM Plex Sans Arabic",Tahoma,sans-serif}
+button{font:inherit;color:inherit;cursor:pointer}
+a{color:var(--blue);text-decoration:none}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--lime);outline-offset:2px}
+.app{max-width:440px;margin:0 auto;min-height:100%;background:var(--bg);position:relative;display:flex;flex-direction:column;box-shadow:0 0 60px rgba(0,0,0,.12)}
+.demo{background:var(--night);color:#F2F5F3;font:600 12px var(--body);text-align:center;padding:6px max(16px,env(safe-area-inset-right,0px)) 6px max(16px,env(safe-area-inset-left,0px))}
+.demo b{color:var(--lime)}
+main{flex:1;padding:16px max(16px,env(safe-area-inset-right,0px)) 104px max(16px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:16px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.hello{font-size:13px;color:var(--ink-2)}
+.logo{font:italic 900 28px/1 var(--disp);letter-spacing:.3px;text-transform:uppercase}
+.logo i{color:var(--blue);font-style:italic}
+html[dir="rtl"] .logo,html[dir="rtl"] h1{font-style:normal;text-transform:none}
+h1{margin:0;font:italic 800 30px/1.05 var(--disp);text-transform:uppercase;letter-spacing:.3px}
+h2{margin:0;font:italic 800 20px var(--disp);text-transform:uppercase;letter-spacing:.3px}
+html[dir="rtl"] h2{font-style:normal}
+.row{display:flex;align-items:center;gap:8px}
+.between{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.ib{width:40px;height:40px;border-radius:20px;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;position:relative;flex:none}
+.ib svg{width:20px;height:20px}
+.ib .dot{position:absolute;top:7px;right:8px;width:9px;height:9px;border-radius:50%;background:var(--red);border:2px solid var(--card)}
+.pill{white-space:nowrap;height:36px;padding:0 13px;border-radius:18px;border:1px solid var(--line);background:var(--card);font-weight:700;font-size:13px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px}
+.hero{background:var(--blue);color:#fff;border-radius:18px;padding:16px 18px;display:flex;flex-direction:column;gap:8px;position:relative;overflow:hidden;border:0}
+.hero::after{content:"";position:absolute;right:-30px;top:-30px;width:140px;height:140px;border:2px solid rgba(255,255,255,.18);border-radius:10px;transform:rotate(-14deg)}
+.hero .big{font:italic 900 32px/1 var(--disp);text-transform:uppercase}
+.tag{font:700 11.5px var(--body);letter-spacing:.5px;border-radius:9px;padding:3px 9px;display:inline-block}
+.tag.w{background:rgba(255,255,255,.18);color:#fff}
+.tag.g{background:var(--green-soft);color:var(--green)}
+.tag.r{background:var(--red);color:#fff}
+.tag.b{background:var(--blue-soft);color:var(--blue)}
+.tag.l{background:var(--lime);color:#10201A}
+.avs{display:flex}
+.av{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:700 12px var(--body);background:#fff;color:var(--blue);border:2px solid var(--blue);margin-inline-end:-8px}
+.av.o{border-style:dashed;background:transparent;color:inherit}
+.hero .av{border-color:var(--blue)}
+.quick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.quick button{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 6px;display:flex;flex-direction:column;align-items:center;gap:8px;font-weight:700;font-size:14px}
+.quick svg{width:26px;height:26px;stroke:var(--blue)}
+.live{display:flex;align-items:center;gap:12px;background:var(--night);color:#fff;border-radius:14px;padding:12px 14px;border:0;width:100%;text-align:start}
+.live > svg{width:20px;height:20px;flex:none}
+.live small{display:block;color:#B8C7C0;font-size:12px}
+.blink{animation:blink 1.4s infinite}
+@keyframes blink{50%{opacity:.45}}
+.mrow{display:flex;align-items:center;gap:12px;width:100%;text-align:start;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.when{width:58px;flex:none;display:flex;flex-direction:column;align-items:center;border-inline-end:1px solid var(--line);padding-inline-end:10px}
+.when small{font-size:11px;font-weight:700;color:var(--ink-2);text-transform:uppercase}
+.when b{font:800 21px var(--disp)}
+.mid{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.mid b{font-size:15px}
+.mid span{font-size:13px;color:var(--ink-2)}
+nav.tabs{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:440px;background:var(--card);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding:6px max(6px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(6px,env(safe-area-inset-left,0px));z-index:5}
+nav.tabs button{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--ink-2);min-height:46px;justify-content:center}
+nav.tabs button[aria-current="page"]{color:var(--blue);font-weight:800}
+nav.tabs svg{width:22px;height:22px}
+.back{display:flex;align-items:center;gap:10px}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.chip{flex:none;height:36px;padding:0 14px;border-radius:18px;border:1px solid var(--line);background:var(--card);font-weight:700;font-size:13px;white-space:nowrap}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.day{display:flex;flex-direction:column;align-items:center;padding:6px 0;border-radius:10px;border:1px solid var(--line);background:var(--card)}
+.day small{font-size:10px;font-weight:700;color:var(--ink-2)}
+.day b{font-size:16px}
+.day[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.day[aria-pressed="true"] small{color:var(--bg)}
+.day.closed{background:var(--red-soft);border-color:transparent;color:var(--red)}
+.day.closed small{color:var(--red)}
+.seg{display:flex;gap:8px}
+.seg button{flex:1;height:42px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-weight:700}
+.seg button[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.slots{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.slot{height:54px;border-radius:10px;border:1px solid var(--line);background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center}
+.slot b{font-size:15px}
+.slot small{font-size:11px;color:var(--ink-2)}
+.slot:disabled{background:var(--chip);color:var(--ink-3);text-decoration:line-through;cursor:default}
+.slot[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 0 0 3px var(--lime)}
+.slot[aria-pressed="true"] small{color:#fff}
+.note{font-size:13px;color:var(--ink-2)}
+.notice{background:var(--red-soft);color:var(--red);border-radius:12px;padding:10px 12px;font-weight:700;font-size:13px}
+.bar{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:440px;background:var(--card);border-top:1px solid var(--line);padding:12px max(16px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));display:flex;align-items:center;gap:12px;z-index:6}
+.bar .sum{flex:1;min-width:0}
+.bar .sum small{display:block;font-size:12px;color:var(--ink-2)}
+.bar .sum b{font-size:19px}
+.cta{height:52px;padding:0 24px;border-radius:14px;border:0;background:var(--ink);color:var(--bg);font-weight:800;font-size:16px}
+.cta.blue{background:var(--blue);color:#fff}
+.cta:disabled{opacity:.4;cursor:default}
+.cta.wide{width:100%}
+.ghost{height:46px;border-radius:12px;border:1px solid var(--line);background:var(--card);font-weight:700;width:100%}
+.opt{display:flex;gap:12px;align-items:flex-start;text-align:start;width:100%;background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:12px 14px}
+.opt i{flex:none;width:20px;height:20px;border-radius:50%;border:2px solid var(--ink-3);margin-top:2px}
+.opt[aria-pressed="true"]{border-color:var(--blue);background:var(--blue-soft)}
+.opt[aria-pressed="true"] i{border:6px solid var(--blue)}
+.opt b{display:block}
+.opt span{font-size:13px;color:var(--ink-2)}
+.lines{display:flex;flex-direction:column;gap:8px}
+.lines div{display:flex;justify-content:space-between;gap:10px}
+.lines .tot{border-top:1px solid var(--line);padding-top:8px;font-weight:800;font-size:17px}
+.code{font:800 44px/1 var(--disp);letter-spacing:6px;text-align:center;background:var(--chip);border-radius:14px;padding:14px;font-variant-numeric:tabular-nums}
+.check{width:72px;height:72px;border-radius:50%;background:var(--green);display:grid;place-items:center;margin:8px auto 0;box-shadow:0 0 0 10px var(--green-soft)}
+.check svg{width:36px;height:36px;stroke:#fff}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.kv small{display:block;font-size:11px;font-weight:700;color:var(--ink-2);text-transform:uppercase;letter-spacing:.5px}
+.kv b{font-size:16px}
+.team{display:flex;flex-direction:column;align-items:center;gap:6px;flex:1}
+.team .av{width:52px;height:52px;font-size:15px;margin:0}
+.team span{font-size:12px;color:var(--ink-2)}
+.vs{font:italic 800 22px var(--disp);color:var(--ink-3)}
+.court{display:flex;gap:6px;align-items:stretch;background:var(--blue);border-radius:16px;padding:14px 10px;position:relative}
+.court::before{content:"";position:absolute;top:10px;bottom:10px;left:50%;border-left:2px dashed rgba(255,255,255,.7)}
+.court .side{flex:1;display:flex;justify-content:space-around;color:#fff}
+.court .side span{color:#DCE7FA}
+.court .av{background:#fff;border-color:#fff;color:#2C5FAE}
+.court .av.o{background:transparent;border-color:#fff;color:#fff}
+.chat{display:flex;flex-direction:column;gap:8px}
+.msg{display:flex;gap:8px;align-items:flex-end}
+.msg p{margin:0;background:var(--chip);border-radius:14px 14px 14px 4px;padding:8px 12px;font-size:14px}
+.msg .av{width:28px;height:28px;font-size:10px;margin:0}
+.ev{border-radius:18px;overflow:hidden;border:0;padding:0;background:var(--night);color:#fff}
+.ev .in{padding:16px;display:flex;flex-direction:column;gap:8px;background:radial-gradient(120% 120% at 100% 0%,rgba(44,95,174,.6),transparent 60%)}
+.ev .t{font:italic 900 26px/1 var(--disp);text-transform:uppercase}
+.ev .sm{font-size:13px;color:#B8C7C0}
+.ev .acts{display:flex;gap:8px;flex-wrap:wrap}
+.ev .acts button{height:36px;border-radius:10px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;padding:0 12px;font-weight:700;font-size:13px}
+.ev .acts button.y{background:var(--lime);color:#10201A;border-color:var(--lime)}
+.date{width:56px;flex:none;border-radius:12px;background:var(--blue-soft);color:var(--blue);display:flex;flex-direction:column;align-items:center;padding:6px 0}
+.date small{font-size:11px;font-weight:800}
+.date b{font:800 24px/1 var(--disp)}
+.score{background:var(--night);color:#fff;border-radius:16px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.score .hd{display:flex;justify-content:space-between;font-size:11px;font-weight:800;letter-spacing:.8px;color:#B8C7C0;text-transform:uppercase}
+.score .sp{color:var(--lime)}
+.score .ln{display:grid;grid-template-columns:1fr 30px 30px 40px;gap:6px;align-items:center;font-weight:700}
+.score .ln span{text-align:center;font:800 22px var(--disp);font-variant-numeric:tabular-nums}
+.score .ln .pt{background:var(--lime);color:#10201A;border-radius:8px}
+.score .ln.srv b::before{content:"● ";color:var(--lime);font-size:10px;vertical-align:2px}
+.flash{animation:flash .6s}
+@keyframes flash{0%{background:var(--lime);color:#10201A}}
+.rank{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.rank:last-child{border-bottom:0}
+.rank .n{width:26px;font:800 20px var(--disp);text-align:center}
+.rank .mv{font-size:12px;font-weight:800;width:32px}
+.up{color:var(--green)}.down{color:var(--red)}
+.rank .pts{margin-inline-start:auto;font-weight:800;font-variant-numeric:tabular-nums}
+.rank.me{background:var(--blue-soft);border-radius:12px;padding-inline:10px;border:0}
+.podium{display:grid;grid-template-columns:1fr 1fr 1fr;align-items:end;gap:8px;text-align:center}
+.podium div{display:flex;flex-direction:column;align-items:center;gap:6px}
+.podium .blk{width:100%;border-radius:12px 12px 0 0;background:var(--blue);color:#fff;font:800 26px var(--disp);display:grid;place-items:center}
+.podium .av{margin:0;width:46px;height:46px}
+.lvl{display:flex;align-items:center;gap:16px}
+.ring{width:110px;height:110px;flex:none;position:relative}
+.ring b{position:absolute;inset:0;display:grid;place-items:center;font:800 32px var(--disp)}
+.spark{width:100%;height:80px}
+.res{display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+.res:last-child{border-bottom:0}
+.res .wl{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-weight:800;color:#fff;flex:none}
+.wl.w{background:var(--green)}.wl.l{background:var(--red)}
+.set{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}
+.set:last-child{border-bottom:0}
+.tg{width:48px;height:28px;border-radius:14px;background:var(--line);border:0;position:relative;flex:none}
+.tg::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.2s}
+.tg[aria-pressed="true"]{background:var(--green)}
+.tg[aria-pressed="true"]::after{inset-inline-start:23px}
+.al{display:flex;gap:12px;padding:12px 0;border-bottom:1px solid var(--line);align-items:flex-start}
+.al:last-child{border-bottom:0}
+.al .ic{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;flex:none;font-weight:800}
+.al small{display:block;color:var(--ink-3);font-size:12px;margin-top:2px}
+.al.new{background:var(--blue-soft);margin-inline:-14px;padding-inline:14px}
+.club{display:flex;flex-direction:column;gap:10px;text-align:start;width:100%;padding:0;overflow:hidden}
+.club .pic{height:110px;position:relative;background:linear-gradient(180deg,#16324F,#2C5FAE)}
+.club .pic svg{position:absolute;inset:0;width:100%;height:100%}
+.club .bd{padding:0 14px 14px;display:flex;flex-direction:column;gap:8px}
+.mini-slots{display:flex;gap:6px;flex-wrap:wrap}
+.mini-slots span{background:var(--chip);border-radius:8px;padding:5px 10px;font-weight:700;font-size:13px}
+.signin{min-height:100vh;background:var(--night);color:#fff;display:flex;flex-direction:column;justify-content:space-between;padding:28px max(22px,env(safe-area-inset-right,0px)) calc(28px + env(safe-area-inset-bottom,0px)) max(22px,env(safe-area-inset-left,0px));position:relative;overflow:hidden}
+.signin .art{position:absolute;inset:0;opacity:.9;pointer-events:none}
+.signin > *{position:relative}
+.signin .slogan{font:italic 900 56px/.9 var(--disp);text-transform:uppercase}
+.signin .slogan em{color:var(--lime);font-style:italic}
+html[dir="rtl"] .signin .slogan{font-style:normal}
+.phone{display:flex;gap:8px}
+.phone span,.phone input{height:52px;border-radius:12px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font:700 17px var(--body);padding:0 14px;display:flex;align-items:center}
+.phone input{flex:1;min-width:0}
+.otp{display:flex;gap:8px;justify-content:center}
+.otp input{width:46px;height:56px;text-align:center;font:800 24px var(--disp);border-radius:12px;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff}
+.toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:12px;font-weight:700;font-size:14px;opacity:0;transition:.25s;z-index:20;max-width:90%;text-align:center;pointer-events:none}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+/* manager */
+.mgr{max-width:none}
+.mgr-wrap{display:flex;flex-direction:column;gap:14px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat small{display:block;font-size:12px;font-weight:700;color:var(--ink-2)}
+.stat b{font:800 30px/1.1 var(--disp)}
+.stat span{display:block;font-size:12px;color:var(--green);font-weight:700}
+.tl{overflow-x:auto;border:1px solid var(--line);border-radius:14px;background:var(--card)}
+.tl-in{min-width:640px;padding:10px}
+.tl-h,.tl-r{display:grid;grid-template-columns:80px 1fr;align-items:center}
+.tl-h .hrs{display:grid;grid-template-columns:repeat(11,1fr);font-size:11px;font-weight:700;color:var(--ink-2)}
+.tl-r{height:52px;border-top:1px solid var(--line)}
+.tl-r > b{font-size:13px}
+.tl-track{position:relative;height:40px}
+.bk{position:absolute;top:2px;bottom:2px;border-radius:8px;padding:3px 7px;font-size:11px;font-weight:700;overflow:hidden;white-space:nowrap}
+.bk.paid{background:var(--blue);color:#fff}.bk.open{background:var(--lime);color:#10201A}.bk.dep{background:#F6D9A8;color:#5A3A08}.bk.blk{background:repeating-linear-gradient(-45deg,var(--chip) 0 6px,var(--line) 6px 12px);color:var(--ink-2)}
+.dep-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.dep-row:last-child{border-bottom:0}
+.dep-row .who{flex:1 1 160px;min-width:0}
+.dep-row .who small{display:block;color:var(--ink-2);font-size:12px}
+.sbtn{height:36px;border-radius:10px;border:1px solid var(--line);background:var(--card);padding:0 12px;font-weight:700;font-size:13px}
+.sbtn.ok{background:var(--green);border-color:var(--green);color:#fff}
+.legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--ink-2)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-inline-end:4px}
+@media (min-width:900px){
+  .app.mgr{max-width:980px}
+  .app.mgr .stats{grid-template-columns:repeat(4,1fr)}
+}
+@media (prefers-reduced-motion:reduce){.blink,.flash{animation:none}.toast,.tg::after{transition:none}}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+"use strict";
+/* ---------- words ---------- */
+const W = {
+ en:{demo:"Prototype · example data · nothing is booked for real", hi:"Good evening, Talal", next:"Your next game", payClub:"Pay at club", tomorrow:"Tomorrow 9:00 PM", book:"Book court", find:"Find match", events:"Tournaments", open:"Open matches at your level", all:"See all", today:"Today", fri:"Fri", spot1:"1 spot", spots:"spots",
+  home:"Home", tBook:"Book", tMatches:"Matches", tEvents:"Events", tProfile:"Profile", findCourt:"Find a court", tomorrowC:"Tomorrow", after8:"After 8 PM", indoor:"Indoor", venue:"Tournament venue", from:"from", hr:"/hr", more:"more",
+  blue:"Blue Court", red:"Red Court", length:"Length", closed:"12–14 Nov: courts closed for Core Padel Tournament", notify:"Notify", peak:"Peak 7 PM–12 AM", rent:"Rackets $3 · Balls $5", info:"Club info", infoTxt:"Outdoor glass courts with lights · Shami Cafe on site · Showers · Free parking. Cancel free up to 12 hours before.", pick:"Pick a time", each:"each", cont:"Book",
+  checkout:"Checkout", players:"Players", invite:"Invite", fill:"Fill the last spot", fillTxt:"Post as an open match for level C players", how:"How do you want to pay?", p1:"Pay at the club", p1s:"Cash at reception · USD or SYP", p2:"ShamCash deposit", p2s:"Send a deposit, upload the receipt, the club confirms", p3:"Syriatel Cash deposit", p3s:"Same steps, from your Syriatel line", split:"Split the cost", court:"Court", total:"Total", cancelTxt:"Free cancellation up to 12 hours before. After that the club may charge 50%.", confirm:"Confirm booking",
+  booked:"Court booked", bookedTxt:"Core Club has your booking. Pay at reception.", date:"Date", time:"Time", booking:"Booking", showCode:"Show this code at reception", share:"Share with players", cal:"Add to calendar", done:"Done", posted:"Your last spot is posted as an open match. We'll message you when a player joins.",
+  openM:"Open matches", create:"+ Create", myLvl:"My level (C)", men:"Men", women:"Women", mixed:"Mixed", friendly:"Friendly", left:"left", join:"Join a match", fits:"Your level fits", lvl:"Level", type:"Type", comp:"Competitive · counts for level", yourShare:"Your share", chat:"Match chat", joinB:"Join · ", joined:"You're in! See you on court.",
+  tourn:"Tournaments", liveUp:"Live & upcoming", mine:"My entries", results:"Results", liveNow:"Live now", liveScores:"Live scores", brackets:"Brackets", sched:"Schedule", openReg:"Open for registration", register:"Register with a partner", soon:"Registration opens soon", remind:"Remind me", orgTxt:"Organizing an event? Create a tournament, take registrations and run live scores from the club manager.",
+  liveT:"Live scores", courts:"Courts", nextUp:"Next up", follow:"Follow a team to get a WhatsApp alert 10 minutes before they play.", gp:"Golden point",
+  ranks:"Rankings", season:"Season 1 · Nov–Jan", you:"You", ptsTxt:"Points: win a competitive match +20 · tournament winner +300, runner-up +180, semifinal +100.",
+  profile:"Player profile", since:"Right side · Damascus · Since Oct 2026", toB:"0.58 to Level B", rel:"Reliability 92% · confirmed by 14 match results", matches:"Matches", wins:"Wins", inDam:"In Damascus", last10:"Level, last 10 matches", lang:"Language", wa:"WhatsApp alerts", dark:"Dark mode", mgr:"Open club manager", signout:"Sign out",
+  alerts:"Notifications", markAll:"Mark all read", newA:"New", earlier:"Earlier", waTxt:"Important alerts also arrive on WhatsApp, so you don't miss them on a weak connection.",
+  slogan1:"Book. Play.", slogan2:"Level up.", signTxt:"Book padel courts across Syria, find players at your level and follow tournaments live.", yourWa:"Your WhatsApp number", sendCode:"Send me a code on WhatsApp", codeTxt:"We send a 6-digit code to WhatsApp. No password needed.", enterCode:"Enter the code", demoCode:"Prototype: type any 6 digits", skip:"Look around first", own:"Own a club?",
+  mTitle:"Club manager", mToday:"Today", newBk:"+ New booking", block:"Block a court", bkToday:"Bookings today", filled:"Courts filled", cash:"Cash expected at desk", deps:"Deposits to confirm", depTitle:"Deposits waiting for you", depTxt:"Check the transfer in your ShamCash or Syriatel Cash app, then confirm.", okBtn:"Confirm", rej:"Reject", noRec:"No receipt yet", remindWa:"Remind on WhatsApp", prices:"Court prices", perB:"per court, per booking", day:"Daytime 2–7 PM", late:"Late 12–1 AM", backApp:"Back to player app", lgPaid:"Paid / pay at club", lgOpen:"Open match", lgDep:"Deposit pending", lgBlk:"Blocked", confirmed:"Deposit confirmed", rejected:"Deposit rejected", allDone:"All deposits handled."},
+ ar:{demo:"نموذج تجريبي · بيانات مثال · لا يتم حجز أي شيء فعلياً", hi:"مساء الخير يا طلال", next:"مباراتك القادمة", payClub:"الدفع في النادي", tomorrow:"غداً ٩:٠٠ مساءً", book:"احجز ملعب", find:"ابحث عن لعبة", events:"البطولات", open:"مباريات مفتوحة بمستواك", all:"عرض الكل", today:"اليوم", fri:"الجمعة", spot1:"مكان واحد", spots:"أماكن",
+  home:"الرئيسية", tBook:"احجز", tMatches:"المباريات", tEvents:"البطولات", tProfile:"حسابي", findCourt:"ابحث عن ملعب", tomorrowC:"غداً", after8:"بعد ٨ مساءً", indoor:"داخلي", venue:"مكان البطولة", from:"من", hr:"/ساعة", more:"المزيد",
+  blue:"الملعب الأزرق", red:"الملعب الأحمر", length:"المدة", closed:"١٢–١٤ تشرين الثاني: الملاعب مغلقة لبطولة كور بادل", notify:"نبّهني", peak:"الذروة ٧ م – ١٢ ص", rent:"مضارب $3 · كرات $5", info:"عن النادي", infoTxt:"ملاعب زجاجية خارجية مضاءة · شامي كافيه · حمامات · موقف مجاني. الإلغاء مجاني حتى ١٢ ساعة قبل الموعد.", pick:"اختر وقتاً", each:"للشخص", cont:"احجز",
+  checkout:"الدفع", players:"اللاعبون", invite:"دعوة", fill:"املأ المكان الأخير", fillTxt:"انشرها كمباراة مفتوحة للاعبين بمستوى C", how:"كيف تريد الدفع؟", p1:"الدفع في النادي", p1s:"نقداً في الاستقبال · دولار أو ليرة", p2:"عربون شام كاش", p2s:"أرسل العربون وارفع الإيصال والنادي يؤكد", p3:"عربون سيريتل كاش", p3s:"نفس الخطوات من خط سيريتل", split:"تقسيم التكلفة", court:"الملعب", total:"المجموع", cancelTxt:"الإلغاء مجاني حتى ١٢ ساعة قبل الموعد، بعدها قد يحتسب النادي ٥٠٪.", confirm:"تأكيد الحجز",
+  booked:"تم الحجز", bookedTxt:"كور كلوب استلم حجزك. الدفع في الاستقبال.", date:"التاريخ", time:"الوقت", booking:"الحجز", showCode:"أظهر هذا الرمز في الاستقبال", share:"شارك مع اللاعبين", cal:"أضف للتقويم", done:"تم", posted:"المكان الأخير منشور كمباراة مفتوحة. سنرسل لك عندما ينضم لاعب.",
+  openM:"مباريات مفتوحة", create:"+ إنشاء", myLvl:"مستواي (C)", men:"رجال", women:"نساء", mixed:"مختلط", friendly:"ودية", left:"متبقي", join:"انضم لمباراة", fits:"مستواك مناسب", lvl:"المستوى", type:"النوع", comp:"تنافسية · تحتسب للمستوى", yourShare:"حصتك", chat:"دردشة المباراة", joinB:"انضم · ", joined:"أنت معنا! نراك في الملعب.",
+  tourn:"البطولات", liveUp:"مباشر وقادم", mine:"مشاركاتي", results:"النتائج", liveNow:"مباشر الآن", liveScores:"النتائج المباشرة", brackets:"الأدوار", sched:"الجدول", openReg:"التسجيل مفتوح", register:"سجّل مع شريك", soon:"التسجيل يفتح قريباً", remind:"ذكّرني", orgTxt:"تنظم بطولة؟ أنشئها واستقبل التسجيلات وشغّل النتائج المباشرة من لوحة النادي.",
+  liveT:"النتائج المباشرة", courts:"الملاعب", nextUp:"التالي", follow:"تابع فريقاً لتصلك رسالة واتساب قبل ١٠ دقائق من مباراته.", gp:"النقطة الذهبية",
+  ranks:"الترتيب", season:"الموسم ١ · تشرين الثاني – كانون الثاني", you:"أنت", ptsTxt:"النقاط: فوز بمباراة تنافسية +٢٠ · بطل بطولة +٣٠٠، الوصيف +١٨٠، نصف النهائي +١٠٠.",
+  profile:"ملف اللاعب", since:"الجهة اليمنى · دمشق · منذ تشرين الأول ٢٠٢٦", toB:"٠٫٥٨ للوصول إلى B", rel:"الموثوقية ٩٢٪ · من ١٤ نتيجة مؤكدة", matches:"مباريات", wins:"انتصارات", inDam:"في دمشق", last10:"المستوى، آخر ١٠ مباريات", lang:"اللغة", wa:"تنبيهات واتساب", dark:"الوضع الليلي", mgr:"افتح لوحة النادي", signout:"تسجيل الخروج",
+  alerts:"الإشعارات", markAll:"تحديد الكل كمقروء", newA:"جديد", earlier:"سابقاً", waTxt:"التنبيهات المهمة تصلك على واتساب أيضاً حتى مع ضعف الاتصال.",
+  slogan1:"احجز. العب.", slogan2:"تطوّر.", signTxt:"احجز ملاعب البادل في سوريا، وجد لاعبين بمستواك، وتابع البطولات مباشرة.", yourWa:"رقم واتساب", sendCode:"أرسل لي رمزاً على واتساب", codeTxt:"نرسل رمزاً من ٦ أرقام على واتساب. بدون كلمة سر.", enterCode:"أدخل الرمز", demoCode:"نموذج تجريبي: اكتب أي ٦ أرقام", skip:"تصفح أولاً", own:"تملك نادياً؟",
+  mTitle:"لوحة النادي", mToday:"اليوم", newBk:"+ حجز جديد", block:"إغلاق ملعب", bkToday:"حجوزات اليوم", filled:"نسبة الإشغال", cash:"النقد المتوقع", deps:"عربونات للتأكيد", depTitle:"عربونات بانتظارك", depTxt:"تحقق من التحويل في تطبيق شام كاش أو سيريتل كاش ثم أكّد.", okBtn:"تأكيد", rej:"رفض", noRec:"لا يوجد إيصال بعد", remindWa:"تذكير على واتساب", prices:"أسعار الملاعب", perB:"للملعب، لكل حجز", day:"نهاري ٢–٧ م", late:"متأخر ١٢–١ ص", backApp:"العودة لتطبيق اللاعب", lgPaid:"مدفوع / في النادي", lgOpen:"مباراة مفتوحة", lgDep:"عربون معلّق", lgBlk:"مغلق", confirmed:"تم تأكيد العربون", rejected:"تم رفض العربون", allDone:"تمت معالجة كل العربونات."}
+};
+let lang = "en";
+try { lang = localStorage.getItem("pl-lang") || "en"; } catch (e) {}
+const t = k => (W[lang] && W[lang][k]) || W.en[k] || k;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* ---------- icons ---------- */
+const svg = (d, w) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="${w || 2}" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${d}</svg>`;
+const IC = {
+ home:svg('<path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>'),
+ cal:svg('<rect x="3" y="4" width="18" height="17" rx="3"/><path d="M3 10h18M8 2v4M16 2v4"/>'),
+ ppl:svg('<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M15 14.5c3 0 6 2 6 5.5"/>'),
+ cup:svg('<path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 0 1-10 0z"/><path d="M17 6h3a3 3 0 0 1-3 3M7 6H4a3 3 0 0 0 3 3"/>'),
+ me:svg('<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>'),
+ bell:svg('<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.9 1.9 0 0 0 3.4 0"/>'),
+ back:svg('<path d="M15 6l-6 6 6 6"/>',2.2), go:svg('<path d="M9 6l6 6-6 6"/>'),
+ ok:svg('<path d="M5 12l5 5 9-10"/>',3), bars:svg('<path d="M5 20V10M12 20V4M19 20v-7"/>')
+};
+const CN = {1:"blue",2:"red"};
+
+/* ---------- example data ---------- */
+const PRICES = {day:{60:14,90:20,120:26}, peak:{60:20,90:30,120:38}, late:{60:16,90:24,120:null}};
+const SLOT_TIMES = ["4:00","5:30","7:00","7:30","9:00","10:30","12:00"];
+const TAKEN = {blue:["4:00","7:00"], red:["5:30","9:00"]};
+const band = s => { const h = parseInt(s); return s === "12:00" ? "late" : (h >= 7 && h <= 11) ? "peak" : "day"; };
+const DAYS = [["Mon","الاثنين",9],["Tue","الثلاثاء",10],["Wed","الأربعاء",11],["Thu","الخميس",12],["Fri","الجمعة",13],["Sat","السبت",14],["Sun","الأحد",15]];
+const MATCHES = [
+ {id:"m1", day:"today", time:"8:30 PM", club:"Core Club", court:"Red Court", lvl:"C", kind:"mixed", mode:"comp", price:10, a:[["KA","Karam","C · 3.4"],["OM","Omar","C · 3.1"]], b:[["SA","Saif","C · 3.6"]]},
+ {id:"m2", day:"today", time:"10:30 PM", club:"Core Club", court:"Blue Court", lvl:"B–C", kind:"men", mode:"comp", price:7.5, a:[["HA","Hashem","B · 3.9"],["MO","Mohammad","C · 3.5"]], b:[]},
+ {id:"m3", day:"fri", time:"7:00 PM", club:"Qasioun Padel", court:"Court 2", lvl:"D", kind:"women", mode:"friendly", price:8, a:[["NA","Nada","D · 2.4"],["RA","Rama","D · 2.2"]], b:[]},
+ {id:"m4", day:"fri", time:"9:30 PM", club:"Qasioun Padel", court:"Court 1", lvl:"C", kind:"men", mode:"friendly", price:9, a:[["LA","Laith","C · 3.0"]], b:[["AN","Anas","C · 3.3"],["ZA","Zaid","C · 2.9"]]}
+];
+const S = {view:"signin", step:0, day:0, court:"blue", dur:90, slot:"9:00", pay:"club", split:true, mfilter:"all", match:"m1", joined:{}, deps:[{n:"Omar",b:"Today 7:30 PM · Red",m:"ShamCash",a:"$10",r:"Ref 88231"},{n:"Nawras",b:"Tue 8:00 PM · Blue",m:"Syriatel Cash",a:"$15",r:"Ref 51420"},{n:"Dani",b:"Wed 10:30 PM · Red",m:"ShamCash",a:"$15",r:null}], alertsRead:false, wa:true, code:"", bookings:0};
+const price = () => { const p = PRICES[band(S.slot)][S.dur]; return p == null ? null : p; };
+
+/* ---------- live score demo ---------- */
+const LIVE = [
+ {court:"red", label:"Cat. D quarterfinal", sp:"Shami Cafe", A:"Hamzeh / Fahed", B:"Zaid / Joud", g:[[6,4],[3,2]], p:[2,1], srv:0},
+ {court:"blue", label:"Cat. D quarterfinal", sp:"Movara", A:"Karam / Ghaith", B:"Aref / Mohammad", g:[[5,6]], p:[3,3], srv:1}
+];
+const PTS = ["0","15","30","40"];
+function tick(){
+  const m = LIVE[Math.floor(Math.random() * 2)], w = Math.random() < .5 ? 0 : 1;
+  const set = m.g[m.g.length - 1];
+  if (m.p[0] === 3 && m.p[1] === 3) { m.p = [0,0]; set[w]++; m.srv = 1 - m.srv; }
+  else if (m.p[w] === 3) { m.p = [0,0]; set[w]++; m.srv = 1 - m.srv; }
+  else m.p[w]++;
+  if ((set[w] >= 6 && set[w] - set[1 - w] >= 2) || set[w] === 7) { m.g.push([0,0]); if (m.g.length > 3) m.g = [[0,0]]; }
+  m.flash = w;
+  if (S.view === "live") { const el = document.getElementById("live-" + m.court); if (el) el.outerHTML = scoreCard(m); }
+}
+setInterval(tick, 3200);
+
+/* ---------- pieces ---------- */
+const av = (i, o) => `<span class="av${o ? " o" : ""}">${esc(i)}</span>`;
+const nav = cur => `<nav class="tabs" aria-label="Main">${[["home",IC.home,"home"],["clubs",IC.cal,"tBook"],["matches",IC.ppl,"tMatches"],["events",IC.cup,"tEvents"],["profile",IC.me,"tProfile"]].map(([v,i,k]) => `<button data-go="${v}"${cur === v ? ' aria-current="page"' : ""}>${i}${t(k)}</button>`).join("")}</nav>`;
+const backBar = (title, to, extra) => `<div class="top"><div class="back"><button class="ib" data-go="${to}" aria-label="Back">${IC.back}</button><h1>${title}</h1></div>${extra || ""}</div>`;
+const courtsArt = `<svg viewBox="0 0 400 110" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="cs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0E1A2C"/><stop offset="1" stop-color="#1F3F70"/></linearGradient></defs><rect width="400" height="110" fill="url(#cs)"/><g fill="#FFE7A8" opacity=".85"><circle cx="40" cy="18" r="3"/><circle cx="360" cy="18" r="3"/></g><path d="M40 18 L10 110 H80Z M360 18 L320 110 H390Z" fill="#FFE7A8" opacity=".08"/><polygon points="120,40 200,40 196,110 90,110" fill="#2C5FAE" stroke="#fff" stroke-width="2"/><polygon points="210,40 290,40 320,110 214,110" fill="#C4452F" stroke="#fff" stroke-width="2"/><line x1="105" y1="72" x2="198" y2="72" stroke="#fff" stroke-width="2"/><line x1="212" y1="72" x2="305" y2="72" stroke="#fff" stroke-width="2"/><circle cx="170" cy="92" r="4" fill="#E3EE3A"/></svg>`;
+function mrow(m){
+  const free = 4 - m.a.length - m.b.length - (S.joined[m.id] ? 1 : 0);
+  const dayLbl = m.day === "today" ? t("today") : t("fri");
+  const [hh, ap] = m.time.split(" ");
+  return `<button class="mrow" data-match="${m.id}"><div class="when"><small>${dayLbl}</small><b>${hh}</b><small>${ap}</small></div><div class="mid"><b>${esc(m.club)} · ${esc(m.court)}</b><span>${t("lvl")} ${m.lvl} · ${t(m.kind)} · $${m.price} ${t("each")}</span></div>${free > 0 ? `<span class="tag g">${free === 1 ? t("spot1") : free + " " + t("spots")}</span>` : `<span class="tag b">Full</span>`}</button>`;
+}
+function scoreCard(m){
+  const set = m.g[m.g.length - 1], prev = m.g.slice(0, -1);
+  const ptxt = i => (m.p[0] === 3 && m.p[1] === 3) ? "GP" : PTS[m.p[i]];
+  const line = (n, i) => `<div class="ln${m.srv === i ? " srv" : ""}"><b>${esc(n)}</b><span>${prev[0] ? prev[0][i] : ""}</span><span class="${m.flash === i ? "flash" : ""}">${set[i]}</span><span class="pt">${ptxt(i)}</span></div>`;
+  return `<div class="score" id="live-${m.court}"><div class="hd"><span>${t(m.court)} · ${esc(m.label)}</span><span class="sp">${esc(m.sp)}</span></div>${line(m.A,0)}${line(m.B,1)}${m.p[0] === 3 && m.p[1] === 3 ? `<div class="hd"><span class="sp">${t("gp")}</span></div>` : ""}</div>`;
+}
+
+/* ---------- views ---------- */
+const V = {};
+V.signin = () => `<div class="signin">
+  <svg class="art" viewBox="0 0 400 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><radialGradient id="g1" cx=".8" cy=".1" r=".8"><stop offset="0" stop-color="#2C5FAE" stop-opacity=".7"/><stop offset="1" stop-color="#10201A" stop-opacity="0"/></radialGradient></defs><rect width="400" height="800" fill="url(#g1)"/><g stroke="#fff" stroke-opacity=".12" stroke-width="3" fill="none" transform="rotate(-16 200 400)"><rect x="60" y="360" width="300" height="520" rx="6"/><line x1="60" y1="620" x2="360" y2="620"/><line x1="60" y1="440" x2="360" y2="440"/><line x1="60" y1="800" x2="360" y2="800"/><line x1="210" y1="440" x2="210" y2="800"/></g><circle cx="320" cy="150" r="34" fill="#E3EE3A"/><path d="M296 128c14 10 14 34 0 46M344 128c-14 10-14 34 0 46" stroke="#fff" stroke-width="3" fill="none" opacity=".8"/></svg>
+  <div class="top"><span class="logo" style="color:#fff">Padel <i style="color:#E3EE3A">Live</i></span><button class="pill" data-lang style="background:transparent;color:#fff;border-color:rgba(255,255,255,.35)">${lang === "en" ? "عربي" : "EN"}</button></div>
+  <div style="display:flex;flex-direction:column;gap:16px">
+    <div class="slogan">${t("slogan1")}<br><em>${t("slogan2")}</em></div>
+    <p style="margin:0;color:#C9D6CF;font-size:16px;max-width:30ch">${t("signTxt")}</p>
+  </div>
+  <form id="sform" style="display:flex;flex-direction:column;gap:12px">
+   ${S.step === 0 ? `<label for="ph" style="font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#C9D6CF">${t("yourWa")}</label>
+    <div class="phone" dir="ltr"><span>+963</span><input id="ph" inputmode="tel" autocomplete="tel" placeholder="9XX XXX XXX" value="944 123 456"></div>
+    <button class="cta wide" style="background:#E3EE3A;color:#10201A" type="submit">${t("sendCode")}</button>
+    <p class="note" style="color:#9FB0A7;margin:0;text-align:center">${t("codeTxt")}</p>`
+   : `<label style="font-size:12px;font-weight:800;letter-spacing:1px;text-transform:uppercase;color:#C9D6CF;text-align:center">${t("enterCode")}</label>
+    <div class="otp" dir="ltr">${[0,1,2,3,4,5].map(i => `<input inputmode="numeric" maxlength="1" aria-label="Digit ${i + 1}" id="o${i}">`).join("")}</div>
+    <p class="note" style="color:#9FB0A7;margin:0;text-align:center">${t("demoCode")}</p>`}
+   <button class="ghost" type="button" data-go="home" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.3)">${t("skip")}</button>
+   <button type="button" data-go="manager" style="background:none;border:0;color:#E3EE3A;font-weight:700">${t("own")} ${t("mgr")} →</button>
+  </form></div>`;
+
+V.home = () => `<main>
+  <div class="top"><div><div class="hello">${t("hi")}</div><div class="logo">Padel <i>Live</i></div></div>
+   <div class="row"><button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button><button class="ib" data-go="alerts" aria-label="${t("alerts")}">${IC.bell}${S.alertsRead ? "" : '<i class="dot"></i>'}</button></div></div>
+  <button class="hero" data-go="booked-view" style="text-align:start;width:100%"><div class="between" style="width:100%"><span style="font-weight:800;font-size:13px;letter-spacing:.6px;text-transform:uppercase">${t("next")}</span><span class="tag w">${t("payClub")}</span></div>
+   <span class="big">${t("tomorrow")}</span><span style="opacity:.92;font-size:14px">Core Club · ${t("blue")} · 90 min</span>
+   <div class="avs">${av("TA")}${av("AN")}${av("LK")}${av("+",1)}</div></button>
+  <div class="quick"><button data-go="clubs">${IC.cal}${t("book")}</button><button data-go="matches">${IC.ppl}${t("find")}</button><button data-go="events">${IC.cup}${t("events")}</button></div>
+  <button class="live" data-go="live"><span class="tag r blink">LIVE</span><span style="flex:1;min-width:0"><b>Core Padel Tournament · Round 2</b><small>Cat. D quarterfinal · ${t("red")}</small></span>${IC.go}</button>
+  <div class="between"><h2>${t("open")}</h2><a href="#matches" data-go="matches" style="font-weight:700;font-size:13px;white-space:nowrap">${t("all")}</a></div>
+  <div style="display:flex;flex-direction:column;gap:10px">${MATCHES.slice(0,3).map(mrow).join("")}</div>
+ </main>${nav("home")}`;
+
+V.clubs = () => `<main>${backBar(t("findCourt"), "home")}
+  <div class="chips">${["today","tomorrowC","after8","indoor"].map((k,i) => `<button class="chip" aria-pressed="${i === 0}">${t(k)}</button>`).join("")}</div>
+  <button class="card club" data-go="club"><div class="pic">${courtsArt}<span class="tag l" style="position:absolute;top:10px;inset-inline-start:10px">${t("venue")}</span></div><div class="bd"><div class="between"><h2>Core Club</h2><span><b>${t("from")} $20</b><span class="note">${t("hr")}</span></span></div><span class="note">Damascus · 2 outdoor courts · Lights · Café · Parking</span><div class="mini-slots"><span>7:30 PM</span><span>9:00 PM</span><span>10:30 PM</span><span>+3 ${t("more")}</span></div></div></button>
+  <button class="card club" data-go="club"><div class="pic" style="background:linear-gradient(180deg,#123526,#1A6B3C)"><svg viewBox="0 0 400 110" preserveAspectRatio="xMidYMid slice"><rect width="400" height="110" fill="#123526"/><rect x="0" y="0" width="400" height="22" fill="#0B2219"/>${[0,1,2].map(i => `<rect x="${40 + i * 120}" y="38" width="90" height="62" fill="#1A6B3C" stroke="#fff" stroke-width="2"/><line x1="${40 + i * 120}" y1="69" x2="${130 + i * 120}" y2="69" stroke="#fff" stroke-width="2"/>`).join("")}</svg></div><div class="bd"><div class="between"><h2>Qasioun Padel</h2><span><b>${t("from")} $18</b><span class="note">${t("hr")}</span></span></div><span class="note">Damascus · 3 indoor courts · Shop · Coaching</span><div class="mini-slots"><span>8:00 PM</span><span>9:30 PM</span><span>11:00 PM</span></div></div></button>
+  <div class="card note" style="text-align:center">More clubs coming. Club owners can list their courts for free.</div>
+ </main>${nav("clubs")}`;
+
+V.club = () => { const p = price(), d = DAYS[S.day];
+ return `<main>${backBar("Core Club", "clubs", `<button class="pill">USD</button>`)}
+  <span class="note" style="margin-top:-8px">Damascus · Open 2 PM – 1 AM · 2 courts</span>
+  <div class="days">${DAYS.map((x,i) => { const cl = i >= 3 && i <= 5; return `<button class="day${cl ? " closed" : ""}" data-day="${i}" aria-pressed="${S.day === i}"${cl ? " disabled" : ""}><small>${lang === "ar" ? x[1] : x[0]}</small><b>${x[2]}</b></button>`; }).join("")}</div>
+  <div class="notice">${t("closed")}</div>
+  <div class="seg">${["blue","red"].map(c => `<button data-court="${c}" aria-pressed="${S.court === c}">${t(c)}</button>`).join("")}</div>
+  <div class="row"><b style="font-size:13px;color:var(--ink-2)">${t("length")}</b>${[60,90,120].map(m => `<button class="chip" data-dur="${m}" aria-pressed="${S.dur === m}">${m} min</button>`).join("")}</div>
+  <div class="slots">${SLOT_TIMES.map(s => { const tk = TAKEN[S.court].includes(s), pr = PRICES[band(s)][S.dur]; return `<button class="slot" data-slot="${s}" aria-pressed="${S.slot === s && !tk}"${tk || pr == null ? " disabled" : ""}><b>${s}</b>${tk || pr == null ? "" : `<small>$${pr}</small>`}</button>`; }).join("")}<button class="slot" style="background:#FFF8D6;border-color:#EBD98A;color:#6B5600" data-toast="We'll tell you on WhatsApp if a slot frees up."><b style="font-size:12px">${t("notify")}</b></button></div>
+  <div class="note">${t("peak")} · ${t("rent")}</div>
+  <div class="card"><h2 style="font-size:16px">${t("info")}</h2><p class="note" style="margin:6px 0 0">${t("infoTxt")}</p></div>
+ </main><div class="bar"><div class="sum"><small>${lang === "ar" ? d[1] : d[0]} ${d[2]} Nov · ${S.slot} · ${S.dur} min · ${t(S.court)}</small><b>${p == null ? t("pick") : `$${p}`}</b>${p ? ` <span class="note">· $${(p / 4).toFixed(2)} ${t("each")}</span>` : ""}</div><button class="cta" data-go="checkout"${p == null ? " disabled" : ""}>${t("cont")}</button></div>`; };
+
+V.checkout = () => { const p = price() || 0, d = DAYS[S.day];
+ const opt = (k, a, b) => `<button class="opt" data-pay="${k}" aria-pressed="${S.pay === k}"><i></i><span><b>${t(a)}</b><span>${t(b)}</span></span></button>`;
+ return `<main>${backBar(t("checkout"), "club")}
+  <div class="card"><b>Core Club · ${t(S.court)}</b><div class="note">${lang === "ar" ? d[1] : d[0]} ${d[2]} Nov · ${S.slot} · ${S.dur} min</div></div>
+  <div class="card" style="display:flex;flex-direction:column;gap:10px"><div class="between"><b>${t("players")}</b><span class="note">3 / 4</span></div>
+   <div class="row" style="gap:16px"><div class="team" style="flex:none">${av("TA")}<span>Talal</span></div><div class="team" style="flex:none">${av("AN")}<span>Anas</span></div><div class="team" style="flex:none">${av("LK")}<span>Laith</span></div><div class="team" style="flex:none">${av("+",1)}<span>${t("invite")}</span></div></div>
+   <div class="set" style="padding:6px 0;border:0"><span><b>${t("fill")}</b><br><span class="note">${t("fillTxt")}</span></span><button class="tg" aria-pressed="true" data-tg aria-label="${t("fill")}"></button></div></div>
+  <h2>${t("how")}</h2>
+  <div style="display:flex;flex-direction:column;gap:8px">${opt("club","p1","p1s")}${opt("sham","p2","p2s")}${opt("syr","p3","p3s")}</div>
+  <div class="set card" style="padding:12px 14px"><span><b>${t("split")}</b><br><span class="note">$${(p / 4).toFixed(2)} ${t("each")}</span></span><button class="tg" data-split aria-pressed="${S.split}" aria-label="${t("split")}"></button></div>
+  <div class="card lines"><div><span>${t("court")} · ${S.dur} min</span><span>$${p.toFixed(2)}</span></div><div class="tot"><span>${t("total")}</span><span>$${p.toFixed(2)}</span></div></div>
+  <p class="note" style="margin:0">${t("cancelTxt")}</p>
+ </main><div class="bar"><div class="sum"><small>${t("total")}</small><b>$${p.toFixed(2)}</b></div><button class="cta blue" data-confirm>${t("confirm")}</button></div>`; };
+
+V["booked-view"] = () => { const d = DAYS[S.day];
+ return `<main>
+  <div class="check">${IC.ok}</div>
+  <h1 style="text-align:center">${t("booked")}</h1><p class="note" style="text-align:center;margin:-8px 0 0">${S.pay === "club" ? t("bookedTxt") : (S.pay === "sham" ? "Send the deposit on ShamCash and upload the receipt. The club confirms within the hour." : "Send the deposit on Syriatel Cash and upload the receipt. The club confirms within the hour.")}</p>
+  <div class="card grid2"><div class="kv"><small>${t("date")}</small><b>${lang === "ar" ? d[1] : d[0]} ${d[2]} Nov</b></div><div class="kv"><small>${t("time")}</small><b>${S.slot} · ${S.dur} min</b></div><div class="kv"><small>${t("court")}</small><b>${t(S.court)}</b></div><div class="kv"><small>${t("booking")}</small><b>#PL-${48213 + S.bookings}</b></div></div>
+  <div class="code" dir="ltr">${4821 + S.bookings}</div><p class="note" style="text-align:center;margin:-8px 0 0">${t("showCode")}</p>
+  <div class="grid2"><button class="ghost" data-toast="Link copied. Paste it in your WhatsApp group.">${t("share")}</button><button class="ghost" data-toast="Added to your calendar (prototype).">${t("cal")}</button></div>
+  <div class="card note">${t("posted")}</div>
+  <button class="cta wide" data-go="home">${t("done")}</button>
+ </main>`; };
+
+V.matches = () => { const f = S.mfilter, list = MATCHES.filter(m => f === "all" || m.kind === f || (f === "friendly" && m.mode === "friendly"));
+ return `<main>${backBar(t("openM"), "home", `<button class="pill" data-toast="Pick a club, time and level, then share the link.">${t("create")}</button>`)}
+  <div class="chips">${[["all","myLvl"],["men","men"],["women","women"],["mixed","mixed"],["friendly","friendly"]].map(([k,l]) => `<button class="chip" data-mf="${k}" aria-pressed="${f === k}">${t(l)}</button>`).join("")}</div>
+  <div style="display:flex;flex-direction:column;gap:10px">${list.length ? list.map(mrow).join("") : `<div class="card note">No open matches with this filter right now.</div>`}</div>
+ </main>${nav("matches")}`; };
+
+V.match = () => { const m = MATCHES.find(x => x.id === S.match) || MATCHES[0], j = S.joined[m.id];
+ const side = arr => { const out = arr.map(p => `<div class="team">${av(p[0])}<b style="font-size:13px">${esc(p[1])}</b><span>${esc(p[2])}</span></div>`); return out; };
+ const A = side(m.a), B = side(m.b);
+ if (j) (A.length < 2 ? A : B).push(`<div class="team">${av("TA")}<b style="font-size:13px">Talal</b><span>C · 3.42</span></div>`);
+ while (A.length < 2) A.push(`<div class="team">${av("+",1)}<span style="color:#DCE7FA">${t("you")}?</span></div>`);
+ while (B.length < 2) B.push(`<div class="team">${av("+",1)}<span style="color:#DCE7FA">${t("you")}?</span></div>`);
+ const free = 4 - m.a.length - m.b.length - (j ? 1 : 0);
+ return `<main>${backBar(t("join"), "matches")}
+  <div><h1 style="font-size:34px">${m.day === "today" ? t("today") : t("fri")} ${esc(m.time)}</h1><span class="note">${esc(m.club)} · ${esc(m.court)} · 90 min</span></div>
+  <div class="court"><div class="side">${A.join("")}</div><div class="side">${B.join("")}</div></div>
+  <span class="tag g" style="align-self:flex-start">✓ ${t("fits")}</span>
+  <div class="card grid2"><div class="kv"><small>${t("lvl")}</small><b>${m.lvl}</b></div><div class="kv"><small>${t("type")}</small><b style="font-size:14px">${m.mode === "comp" ? t("comp") : t("friendly")}</b></div><div class="kv"><small>${t("players")}</small><b>${t(m.kind)}</b></div><div class="kv"><small>${t("yourShare")}</small><b>$${m.price} · ${t("payClub")}</b></div></div>
+  <h2>${t("chat")}</h2>
+  <div class="card chat"><div class="msg">${av("KA")}<p>I'll bring new balls. Need one more!</p></div><div class="msg">${av("SA")}<p>Shared it in our WhatsApp group too</p></div>${j ? `<div class="msg">${av("TA")}<p>In! See you there 💪</p></div>` : ""}</div>
+ </main><div class="bar"><div class="sum"><small>${free === 1 ? t("spot1") + " " + t("left") : free > 0 ? free + " " + t("spots") + " " + t("left") : "Full"}</small><b>$${m.price}</b></div>${j ? `<button class="cta" disabled>✓ Joined</button>` : `<button class="cta blue" data-join="${m.id}"${free < 1 ? " disabled" : ""}>${t("joinB")}$${m.price}</button>`}</div>`; };
+
+V.events = () => `<main>${backBar(t("tourn"), "home")}
+  <div class="chips">${["liveUp","mine","results"].map((k,i) => `<button class="chip" aria-pressed="${i === 0}">${t(k)}</button>`).join("")}</div>
+  <div class="ev"><div class="in"><div class="row"><span class="tag r blink">${t("liveNow")}</span><span class="sm">12–14 Nov</span></div><div class="t">Core Padel Tournament · Round 2</div><div class="sm">Core Club · Categories B, C, D · $3,000 prizes</div><div class="acts"><button class="y" data-go="live">${t("liveScores")}</button><button data-go="live">${t("brackets")}</button><button data-go="live">${t("sched")}</button></div></div></div>
+  <div class="card" style="display:flex;gap:12px"><div class="date"><small>DEC</small><b>18</b></div><div class="mid"><span class="tag g" style="align-self:flex-start">${t("openReg")}</span><b>Face It Street Padel</b><span>3 courts · Levels A, B, C & Women · Level C: 3 spots left</span><button class="ghost" style="margin-top:6px" data-toast="Registration form opens here (prototype).">${t("register")}</button></div></div>
+  <div class="card" style="display:flex;gap:12px"><div class="date"><small>JAN</small><b>—</b></div><div class="mid"><b>Core Padel · Round 3</b><span>${t("soon")}</span><button class="ghost" style="margin-top:6px" data-toast="We'll remind you on WhatsApp.">${t("remind")}</button></div></div>
+  <div class="card note">${t("orgTxt")}</div>
+ </main>${nav("events")}`;
+
+V.live = () => `<main>${backBar(t("liveT"), "events")}
+  <div><b>CORE PADEL · ROUND 2</b><div class="note">Friday · Knockouts · <span class="tag r blink">LIVE</span></div></div>
+  <div class="chips">${["courts","sched","brackets"].map((k,i) => `<button class="chip" aria-pressed="${i === 0}">${t(k)}</button>`).join("")}</div>
+  ${LIVE.map(scoreCard).join("")}
+  <h2>${t("nextUp")}</h2>
+  <div class="card" style="display:flex;flex-direction:column;gap:10px">${[["5:05 PM","Cat. D QF · Red"],["5:50 PM","Cat. C · Group 3 · Blue"],["7:30 PM","Break · 20 min"]].map(([a,b]) => `<div class="between"><b>${a}</b><span class="note">${b}</span></div>`).join("")}</div>
+  <div class="card note">${t("follow")}</div>
+  <p class="note" style="margin:0;text-align:center">The scores here change by themselves to show how live scoring feels.</p>
+ </main>${nav("events")}`;
+
+V.ranks = () => `<main>${backBar(t("ranks"), "profile")}
+  <span class="note" style="margin-top:-8px">${t("season")}</span>
+  <div class="chips">${["Damascus","Syria","My club","Friends"].map((k,i) => `<button class="chip" aria-pressed="${i === 0}">${k}</button>`).join("")}</div>
+  <div class="podium"><div>${av("KJ")}<b>Karim J</b><div class="blk" style="height:70px">2</div></div><div>${av("AM")}<b>Ahmad M</b><div class="blk" style="height:96px;background:var(--lime);color:#10201A">1</div></div><div>${av("RE")}<b>Remon</b><div class="blk" style="height:54px">3</div></div></div>
+  <div class="card">${[[4,"Sami","▲2","up",1240],[5,"Loay","▼1","down",1185],[6,"Abdallah","–","",1120],[7,"Rida","▲4","up",1060]].map(r => `<div class="rank"><span class="n">${r[0]}</span>${av(r[1].slice(0,2).toUpperCase())}<b>${r[1]}</b><span class="mv ${r[3]}">${r[2]}</span><span class="pts">${r[4].toLocaleString()}</span></div>`).join("")}<div class="rank me"><span class="n">18</span>${av("TA")}<b>${t("you")} · Talal</b><span class="mv up">▲5</span><span class="pts">640</span></div></div>
+  <p class="note" style="margin:0">${t("ptsTxt")}</p>
+ </main>${nav("profile")}`;
+
+V.profile = () => { const pts = [3.11,3.05,3.18,3.22,3.15,3.28,3.31,3.26,3.37,3.42], mx = 3.5, mn = 3.0;
+ const path = pts.map((v,i) => `${(i * 300 / 9).toFixed(0)},${(70 - (v - mn) / (mx - mn) * 60).toFixed(1)}`).join(" ");
+ return `<main>${backBar(t("profile"), "home", `<button class="ib" data-go="ranks" aria-label="${t("ranks")}">${IC.bars}</button>`)}
+  <div class="lvl"><div class="ring"><svg viewBox="0 0 110 110"><circle cx="55" cy="55" r="46" fill="none" stroke="var(--line)" stroke-width="10"/><circle cx="55" cy="55" r="46" fill="none" stroke="var(--blue)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${(2 * Math.PI * 46 * .42).toFixed(1)} 400" transform="rotate(-90 55 55)"/></svg><b>3.42</b></div>
+   <div><h1>Talal</h1><span class="tag b">LEVEL C</span><div class="note" style="margin-top:6px">${t("toB")}</div><div class="note">${t("since")}</div></div></div>
+  <div class="note">${t("rel")}</div>
+  <div class="grid2" style="grid-template-columns:repeat(3,1fr)">${[["24","matches"],["15","wins"],["#18","inDam"]].map(([a,b]) => `<div class="card" style="text-align:center;padding:10px"><b style="font:800 26px var(--disp)">${a}</b><div class="note">${t(b)}</div></div>`).join("")}</div>
+  <div class="card"><div class="between"><b>${t("last10")}</b><span class="tag g">+0.31</span></div><svg class="spark" viewBox="0 0 300 80" preserveAspectRatio="none" aria-label="Level went from 3.11 to 3.42"><polyline points="0,80 ${path} 300,80" fill="var(--blue-soft)" stroke="none"/><polyline points="${path}" fill="none" stroke="var(--blue)" stroke-width="3" stroke-linejoin="round"/><circle cx="300" cy="${(70 - (3.42 - mn) / (mx - mn) * 60).toFixed(1)}" r="5" fill="var(--blue)"/></svg>
+   <div class="res"><span class="wl w">W</span><span style="flex:1">With Anas vs Karam/Omar</span><b>6-4 6-3</b></div><div class="res"><span class="wl l">L</span><span style="flex:1">With Laith vs Saif/Moustafa</span><b>4-6 6-7</b></div></div>
+  <div class="card"><div class="set"><span>${t("lang")}</span><button class="pill" data-lang>${lang === "en" ? "English → عربي" : "عربي → English"}</button></div><div class="set"><span>${t("wa")}</span><button class="tg" data-wa aria-pressed="${S.wa}" aria-label="${t("wa")}"></button></div><div class="set"><span>${t("dark")}</span><button class="tg" data-dark aria-pressed="${document.documentElement.dataset.theme === "dark"}" aria-label="${t("dark")}"></button></div></div>
+  <button class="ghost" data-go="manager">${t("mgr")} →</button>
+  <button class="ghost" data-go="signin" style="color:var(--red)">${t("signout")}</button>
+ </main>${nav("profile")}`; };
+
+V.alerts = () => { const n = !S.alertsRead;
+ const al = (ic, bg, fg, txt, when, nw) => `<div class="al${nw && n ? " new" : ""}"><span class="ic" style="background:${bg};color:${fg}">${ic}</span><div>${txt}<small>${when}</small></div></div>`;
+ return `<main>${backBar(t("alerts"), "home", `<button class="pill" data-read>${t("markAll")}</button>`)}
+  <h2 style="font-size:14px;color:var(--ink-2)">${t("newA")}</h2>
+  <div class="card">${al("RI","var(--blue-soft)","var(--blue)","<b>Rida</b> joined your match. Your game Monday 9:00 PM is full.","5 min ago",1)}${al("$","var(--green-soft)","var(--green)","<b>Qasioun Padel</b> confirmed your ShamCash deposit of $10.","1 hour ago",1)}${al("⏱","var(--red-soft)","var(--red)","<b>Talal / Anas</b> play in 10 minutes on the Blue Court.","2 hours ago",1)}</div>
+  <h2 style="font-size:14px;color:var(--ink-2)">${t("earlier")}</h2>
+  <div class="card">${al("▲","var(--lime)","#10201A","Your level went up to <b>3.42</b> after beating Karam / Omar.","Yesterday")}${al("●","var(--chip)","var(--ink)","The 9:00 PM slot you watched at <b>Core Club</b> is free again.","Yesterday")}</div>
+  <div class="card note">${t("waTxt")}</div>
+ </main>${nav("home")}`; };
+
+V.manager = () => { const hrs = ["2 PM","3","4","5","6","7","8","9","10","11","12 AM"], X = h => ((h - 14) / 11 * 100).toFixed(2) + "%", Wd = d => (d / 11 * 100).toFixed(2) + "%";
+ const bk = (c, s, d, txt) => `<div class="bk ${c}" style="inset-inline-start:${X(s)};width:${Wd(d)}">${txt}</div>`;
+ const deps = S.deps.length ? S.deps.map((d,i) => `<div class="dep-row"><div class="who"><b>${esc(d.n)}</b><small>${esc(d.b)} · ${esc(d.m)} · ${esc(d.a)}</small><small>${d.r ? esc(d.r) : t("noRec")}</small></div>${d.r ? `<button class="sbtn ok" data-dep="${i}" data-ok="1">${t("okBtn")}</button><button class="sbtn" data-dep="${i}">${t("rej")}</button>` : `<button class="sbtn" data-toast="Reminder sent on WhatsApp (prototype).">${t("remindWa")}</button>`}</div>`).join("") : `<p class="note" style="margin:0">${t("allDone")}</p>`;
+ return `<main class="mgr-wrap">
+  <div class="top"><div><div class="hello">${t("mTitle")} · Core Club</div><div class="logo">Padel <i>Live</i></div></div><button class="pill" data-go="home">${t("backApp")}</button></div>
+  <div class="between"><h1 style="font-size:24px">Monday 9 November</h1><span class="note">Open 2 PM – 1 AM</span></div>
+  <div class="row" style="flex-wrap:wrap"><button class="cta blue" style="height:44px" data-toast="New booking form (prototype).">${t("newBk")}</button><button class="ghost" style="width:auto;padding:0 14px;height:44px" data-toast="Pick a court and time to block (prototype).">${t("block")}</button></div>
+  <div class="stats"><div class="card stat"><small>${t("bkToday")}</small><b>11</b><span>+3 vs last Monday</span></div><div class="card stat"><small>${t("filled")}</small><b>82%</b><span>Peak full</span></div><div class="card stat"><small>${t("cash")}</small><b>$265</b><span>at the desk</span></div><div class="card stat"><small>${t("deps")}</small><b>${S.deps.filter(d => d.r).length}</b><span>ShamCash · Syriatel</span></div></div>
+  <div class="legend"><span><i style="background:var(--blue)"></i>${t("lgPaid")}</span><span><i style="background:var(--lime)"></i>${t("lgOpen")}</span><span><i style="background:#F6D9A8"></i>${t("lgDep")}</span><span><i style="background:var(--line)"></i>${t("lgBlk")}</span></div>
+  <div class="tl" dir="ltr"><div class="tl-in"><div class="tl-h"><span></span><div class="hrs">${hrs.map(h => `<span>${h}</span>`).join("")}</div></div>
+   <div class="tl-r"><b>Blue Court</b><div class="tl-track">${bk("paid",16,1.5,"Rami K. · cash")}${bk("paid",19,1.5,"Hashem · paid")}${bk("paid",21,1.5,"Talal · 4/4")}${bk("open",22.5,1.5,"Open match 2/4")}</div></div>
+   <div class="tl-r"><b>Red Court</b><div class="tl-track">${bk("blk",14,2,"Glass repair")}${bk("paid",17,1,"Coach Ali")}${bk("dep",19.5,1.5,"Omar · deposit")}${bk("paid",21,1.5,"Karam · cash")}</div></div></div></div>
+  <div class="card"><h2 style="font-size:17px">${t("depTitle")}</h2><p class="note" style="margin:4px 0 6px">${t("depTxt")}</p>${deps}</div>
+  <div class="card"><div class="between"><h2 style="font-size:17px">${t("prices")}</h2><span class="note">${t("perB")}</span></div>
+   <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;margin-top:8px;font-variant-numeric:tabular-nums"><thead><tr><th style="text-align:start;padding:6px;font-size:12px;color:var(--ink-2)"></th>${[60,90,120].map(m => `<th style="padding:6px;font-size:12px;color:var(--ink-2)">${m} min</th>`).join("")}</tr></thead><tbody>${[["day","day"],["peak","peak"],["late","late"]].map(([k,l]) => `<tr><td style="padding:8px 6px;border-top:1px solid var(--line);font-weight:700">${k === "peak" ? t("peak") : t(l)}</td>${[60,90,120].map(m => `<td style="padding:8px 6px;border-top:1px solid var(--line);text-align:center">${PRICES[k][m] == null ? "–" : "$" + PRICES[k][m]}</td>`).join("")}</tr>`).join("")}</tbody></table></div></div>
+ </main>`; };
+
+/* ---------- render + events ---------- */
+const app = document.getElementById("app");
+function render(){
+  document.documentElement.lang = lang; document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
+  app.classList.toggle("mgr", S.view === "manager");
+  app.innerHTML = (S.view === "signin" ? "" : `<div class="demo"><b>●</b> ${t("demo")}</div>`) + (V[S.view] || V.home)();
+  if (S.view === "signin" && S.step === 1) { const o = document.getElementById("o0"); if (o) o.focus(); }
+}
+function go(v){ if (!V[v]) v = "home"; S.view = v; if (location.hash !== "#" + v) history.replaceState(null, "", "#" + v); render(); window.scrollTo(0, 0); }
+let tt; function toast(msg){ const el = document.getElementById("toast"); el.textContent = msg; el.classList.add("on"); clearTimeout(tt); tt = setTimeout(() => el.classList.remove("on"), 2400); }
+app.addEventListener("click", e => {
+  const b = e.target.closest("button,a"); if (!b) return;
+  const d = b.dataset;
+  if (d.go){ e.preventDefault(); if (d.go === "signin") S.step = 0; go(d.go); return; }
+  if ("lang" in d){ lang = lang === "en" ? "ar" : "en"; try { localStorage.setItem("pl-lang", lang); } catch (x) {} render(); return; }
+  if (d.toast){ toast(d.toast); return; }
+  if (d.match){ S.match = d.match; go("match"); return; }
+  if (d.day){ S.day = +d.day; render(); return; }
+  if (d.court){ S.court = d.court; if (TAKEN[S.court].includes(S.slot)) S.slot = SLOT_TIMES.find(s => !TAKEN[S.court].includes(s)); render(); return; }
+  if (d.dur){ S.dur = +d.dur; if (price() == null) S.slot = "9:00"; render(); return; }
+  if (d.slot){ S.slot = d.slot; render(); return; }
+  if (d.pay){ S.pay = d.pay; render(); return; }
+  if ("split" in d){ S.split = !S.split; render(); return; }
+  if ("tg" in d){ b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") !== "true"); return; }
+  if ("wa" in d){ S.wa = !S.wa; render(); return; }
+  if ("dark" in d){ const r = document.documentElement; r.dataset.theme = r.dataset.theme === "dark" ? "light" : "dark"; render(); return; }
+  if ("confirm" in d){ S.bookings++; go("booked-view"); toast("Booking confirmed (prototype)"); return; }
+  if (d.mf){ S.mfilter = d.mf; render(); return; }
+  if (d.join){ S.joined[d.join] = true; render(); toast(t("joined")); return; }
+  if ("read" in d){ S.alertsRead = true; render(); return; }
+  if (d.dep){ const ok = d.ok; S.deps.splice(+d.dep, 1); render(); toast(ok ? t("confirmed") : t("rejected")); return; }
+  if (b.classList.contains("chip") && b.closest(".chips")){ b.parentElement.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c === b)); }
+});
+app.addEventListener("submit", e => { e.preventDefault(); if (S.view === "signin" && S.step === 0){ S.step = 1; render(); } });
+app.addEventListener("input", e => {
+  const el = e.target; if (!/^o\d$/.test(el.id)) return;
+  el.value = el.value.replace(/\D/g, "").slice(0, 1);
+  const i = +el.id[1];
+  if (el.value && i < 5) document.getElementById("o" + (i + 1)).focus();
+  const all = [0,1,2,3,4,5].map(k => document.getElementById("o" + k).value).join("");
+  if (all.length === 6){ toast("Welcome, Talal"); go("home"); S.step = 0; }
+});
+document.getElementById("app").addEventListener("keydown", e => { if (e.key === "Backspace" && /^o\d$/.test(e.target.id) && !e.target.value && +e.target.id[1] > 0) document.getElementById("o" + (+e.target.id[1] - 1)).focus(); });
+window.addEventListener("hashchange", () => { const v = location.hash.slice(1); if (v && v !== S.view && V[v]) { S.view = v; render(); } });
+const start = location.hash.slice(1);
+S.view = V[start] ? start : "signin";
+render();
+</script>
+</body>
+</html>
