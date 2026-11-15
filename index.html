@@ -373,9 +373,13 @@ async function boot(){
     await within(loadClubs());
     await within(afterAuth(true));
   } catch (e) { S.err = t("loadErr"); S.clubs = []; render(); return; }
-  const h = location.hash.slice(1); if (V[h]) S.view = h;
-  if (RECOVERY && S.user){ S.view = "reset"; history.replaceState(null, "", location.pathname + "#reset"); }
-  S.loaded = true; render();
+  S.loaded = true;
+  if (RECOVERY && S.user){ S.view = "reset"; history.replaceState(null, "", location.pathname + "#reset"); render(); }
+  else {
+    let h = location.hash.slice(1);
+    if (!V[h] || ["club","checkout","done","reset"].includes(h)) h = "home";
+    try { await within(go(h)); } catch (e) { S.view = "home"; render(); }
+  }
   if (!boot.started){ boot.started = true; setInterval(poll, 15000); document.addEventListener("visibilitychange", () => { if (!document.hidden) poll(true); }); }
 }
 async function loadClubs(){
@@ -577,7 +581,8 @@ function render(){
   app.classList.toggle("mgr", S.view === "manager");
   if (S.err && !S.clubs.length){ app.innerHTML = `<main><div class="logo">Padel <i>Live</i></div><div class="card">${esc(S.err)}</div><button class="cta" data-retry>${t("retry")}</button></main>`; return; }
   if (!S.loaded){ app.innerHTML = `<main><div class="logo">Padel <i>Live</i></div><div class="card note">…</div></main>`; return; }
-  app.innerHTML = (V[S.view] || V.home)();
+  try { app.innerHTML = (V[S.view] || V.home)(); }
+  catch (e) { console.error(e); if (S.view !== "home"){ S.view = "home"; history.replaceState(null, "", "#home"); app.innerHTML = V.home(); } }
 }
 async function go(v){
   if (!V[v]) v = "home"; S.view = v;
