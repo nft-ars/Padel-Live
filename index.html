@@ -644,6 +644,56 @@ button,a{-webkit-tap-highlight-color:transparent}
 .pushc{display:flex;flex-wrap:wrap;align-items:center;gap:12px;border:1.5px solid var(--blue)}
 .pushc .pbell{font-size:26px}.pushc .note{display:block}
 .pushc .act{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+/* league rules + referee */
+.lrules{display:flex;flex-direction:column;gap:4px}
+.lr{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid var(--line)}.lr:last-of-type{border-bottom:0}
+.lr .ic{font-size:20px;line-height:1.3}.lr b{display:block;font-size:14.5px}.lr p{margin:2px 0 0;font-size:13.5px;color:var(--ink-2);line-height:1.45}
+.lr ul{margin:6px 0;padding-inline-start:18px;font-weight:700;color:var(--ink)}
+.lgmeta{display:flex;flex-direction:column;gap:2px;font-size:12.5px;font-weight:700;color:var(--ink-2)}
+.lgm.refme{box-shadow:inset 0 0 0 2px var(--blue)}
+.refbox{padding:8px;border-radius:10px;background:color-mix(in srgb,var(--blue) 10%,transparent)}
+.lgsets b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11px}
+
+.glance{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.glance div{display:flex;flex-direction:column;align-items:center;padding:10px 2px;border-radius:12px;background:var(--card);border:1px solid var(--line)}.glance b{font-family:var(--disp);font-style:italic;font-weight:900;font-size:22px;line-height:1}.glance small{font-size:10px;font-weight:800;color:var(--ink-3);text-transform:uppercase;text-align:center}
+
+details.lrules summary{display:flex;justify-content:space-between;align-items:center;gap:8px;font-family:var(--disp);font-style:italic;font-weight:900;font-size:19px;text-transform:uppercase}
+details.lrules summary small{font-family:var(--body,inherit);font-style:normal;font-weight:800;font-size:12px;text-transform:none;color:var(--blue)}
+details.lrules[open] summary small{display:none}
+details.lrules{border:2px solid #E8C96A;background:linear-gradient(160deg,color-mix(in srgb,#E8C96A 10%,var(--card)),var(--card))}
+.glance .hl{background:#E8C96A;border-color:#E8C96A;color:#15120A}.glance .hl small{color:#3A2E10}
+.rulechk{gap:8px;font-size:14px;align-items:flex-start}.rulechk input{margin-top:3px;width:18px;height:18px}
+/* sensor stats */
+.sncta{display:flex;flex-direction:column;gap:8px}
+.sncard{display:flex;flex-direction:column;gap:10px}
+.sngrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.sngrid div{background:var(--chip);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:2px}
+.sngrid small{font-size:11px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.04em}
+.sngrid b{font-family:var(--disp);font-style:italic;font-weight:900;font-size:28px;line-height:1}
+.sngrid b i{font-family:var(--body);font-style:normal;font-weight:700;font-size:12px;color:var(--ink-2)}
+.snh{font-size:13px}
+.snbar{display:grid;grid-template-columns:78px 1fr 34px;align-items:center;gap:8px;font-size:13px}
+.snbar span{color:var(--ink-2)}
+.snbar div{height:9px;border-radius:5px;background:var(--chip);overflow:hidden}
+.snbar i{display:block;height:100%;border-radius:5px;background:var(--green,#1D9E75)}
+.snbar i.hot{background:#E5484D}
+.snbar b{text-align:end}
+.snint{display:flex;align-items:flex-end;gap:3px;height:64px;padding:4px 0;border-bottom:1px solid var(--line)}
+.snint i{flex:1;border-radius:3px 3px 0 0;background:linear-gradient(#E8C96A,#5B8FE0)}
+.snx{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--ink-2)}
+.snx b{color:var(--ink)}
+.pfstats.sn4{grid-template-columns:repeat(4,1fr)}
+.snrow{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 4px;border-bottom:1px solid var(--line)}
+.snrow:last-child{border-bottom:0}
+.snrow.on{background:var(--chip);border-radius:10px}
+.snrow .linkbtn{text-align:start;display:flex;flex-direction:column;align-items:flex-start;gap:2px}
+.snform,.snlive,.snfile{display:flex;flex-direction:column;gap:10px}
+.sninp{flex:1;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:0 12px;min-width:0}
+.snrec{display:flex;align-items:center;gap:8px;font-weight:700}
+.snrec .dot{width:12px;height:12px;border-radius:50%;background:#E5484D;animation:snp 1s infinite}
+@keyframes snp{50%{opacity:.25}}
+.snbuy summary{font-weight:800;font-size:14px;cursor:pointer}
+.snbuy ul{margin:8px 0 0;padding-inline-start:18px;display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--ink-2);line-height:1.45}
+.snbuy b{color:var(--ink)}
 </style>
 </head>
 <body>
@@ -755,7 +805,7 @@ const money = n => n == null ? "–" : "$" + (Math.round(n * 100) / 100).toStrin
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v8";
+const VERSION = "v9";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -981,11 +1031,13 @@ V.me = () => { if (!S.user) return V.auth();
   ${playerCard(S.card)}
   <button class="cta wide pfbtn" data-profile="me">📊 ${t("pfMine")} →</button>
   ${pushCard(false)}
+  ${snMeCard()}
   <h2>${t("myGames")}</h2>
   <div style="display:flex;flex-direction:column;gap:10px">${S.mine.map(gameRow).join("") || `<div class="card note">${t("bookFirst")}</div>`}</div>
   <h2>${t("myResults")}</h2>
   <div style="display:flex;flex-direction:column;gap:8px">${(S.results || []).map(resultRow).join("") || `<div class="card note">${t("noResults")}</div>`}</div>
   ${meExtras()}
+  ${myRefCard()}
   <form id="pf" class="card" style="display:flex;flex-direction:column;gap:10px"><label class="fld"><span>${t("name")}</span><input id="p-name" value="${esc(p.full_name)}"></label><label class="fld"><span>${t("phone")}</span><input id="p-phone" value="${esc(p.phone)}" inputmode="tel" dir="ltr"></label><button class="ghost" type="submit">${t("save")}</button></form>
   <div class="card"><div class="set"><span>${t("dark")}</span><button class="tg" data-dark aria-pressed="${document.documentElement.dataset.theme === "dark"}" aria-label="${t("dark")}"></button></div></div>
   ${S.staff.length ? `<button class="cta wide" data-go="manager">${t("mgr")} · ${esc(S.staff.map(c => c.name).join(", "))} →</button>`
@@ -1195,6 +1247,7 @@ V.season = () => { const rows = S.board || [];
   return `<main>${backBar(t("seasonT"), "me")}
    <div class="seasonhd"><b>${esc(S.boardClub || "")}</b><span>${esc(S.card && S.card.season ? S.card.season.month : "")} · ${t("seasonRule")}</span></div>
    <div class="card" style="padding:6px 10px">${rows.map(r => `<div class="srow${r.me ? " me" : ""}"><span class="srk${r.rk <= 3 ? " top" : ""}">${r.rk === 1 ? "👑" : r.rk}</span><b>${pLink(r.id, r.name)}</b>${lvChip(r.level)}<span class="spts">${r.points} <small>${t("pts")}</small></span></div>`).join("") || `<p class="note">${t("seasonEmpty")}</p>`}</div>
+   ${snBoardHtml()}
   </main>${nav("me")}`; };
 async function loadCard(){ if (!S.user) { S.card = null; return; } try { const r = await sb.rpc("my_card"); if (!r.error) S.card = r.data; } catch (e) {} }
 function celebrate(){
@@ -1403,7 +1456,7 @@ function lgMatch(m, admin, myEntry){ const mine = m.side != null, sets = m.sets 
     act = m.reported_side === m.side ? `<span class="tag pend">${t("lgWait")}</span>` : `<div class="lgconf"><span>${t("lgConfirmQ")} <b>${esc(sets.map(s => flip(s).join("-")).join("  "))}</b></span><div class="row" style="gap:8px"><button class="sbtn ok" data-lgconf="${m.id}|1">${t("lgOk")}</button><button class="sbtn" data-lgconf="${m.id}|0">${t("lgNo")}</button></div></div>`;
   }
   const adm = admin && (m.status === "open" || m.status === "reported") ? `<div class="row lgadm"><small>${t("lgAdmin")}:</small><button class="sbtn" data-lgwo="${m.id}|0">W/O ◀</button><button class="sbtn" data-lgwo="${m.id}|1">W/O ▶</button><button class="sbtn" data-lgwo="${m.id}|">${t("lgVoid")}</button>${m.status === "reported" ? `<button class="sbtn ok" data-lgconf="${m.id}|1">${t("lgOk")}</button>` : ""}</div>` : "";
-  return `<div class="lgm${mine ? " mine" : ""} st-${m.status}"><div class="lgvs"><span class="${wonA ? "w" : ""}">${esc(m.a)}</span><em>${m.status === "confirmed" ? esc(score) : m.status === "walkover" ? "W/O" : m.status === "void" ? "–" : "vs"}</em><span class="${wonB ? "w" : ""}">${esc(m.b)}</span></div>${act}${adm}</div>`; }
+  return `<div class="lgm${mine ? " mine" : ""}${m.ref_me ? " refme" : ""} st-${m.status}"><div class="lgvs"><span class="${wonA ? "w" : ""}">${esc(m.a)}</span><em>${m.status === "confirmed" ? esc(score) : m.status === "walkover" ? "W/O" : m.status === "void" ? "–" : "vs"}</em><span class="${wonB ? "w" : ""}">${esc(m.b)}</span></div>${lgExtra(m, admin)}${act}${adm}</div>`; }
 V.league = () => { const g = S.league; if (!g) return V.events();
   const l = g.league, me = g.me, admin = S.profile && S.profile.is_admin, cats = g.cats || [];
   const myCat = me && me.category; if (!S.lgCat || !l.categories.includes(S.lgCat)) S.lgCat = myCat || l.categories[0];
@@ -1413,18 +1466,20 @@ V.league = () => { const g = S.league; if (!g) return V.events();
   <div class="lghero"><span class="lgc-art" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="evc-kick2"><i></i>${esc(lgStatus(l))}</span>
    <h1>${esc(l.name)}</h1><div class="evc-chips"><span>${esc(dShort(l.starts_on))} – ${esc(dShort(l.ends_on))}</span>${(l.clubs || []).map(c => `<span>${esc(c.name)}</span>`).join("")}<span>${+l.fee ? `${t("lgFee")} ${money(l.fee)}` : t("lgFree")}</span></div>
    ${l.prize ? `<div class="lgprize">🏆 ${esc(l.prize)}</div>` : ""}</div>
+  ${lgGlance(g)}
   ${me ? `<div class="card lgme"><b>${t("lgMine")} · ${t("lgCat")} ${esc(me.category)}</b><span>${esc(S.profile ? S.profile.full_name.split(" ")[0] : "")} + ${esc(me.partner)}</span><span class="note">${me.status === "pending" ? t("lgPendingS") : l.status === "signup" ? t("lgConfS") : ""}</span>${l.status === "signup" ? `<button class="linkbtn" data-lgwd style="align-self:flex-start;color:var(--red)">${t("lgWithdraw")}</button>` : ""}</div>` : ""}
+  ${lgRulesCard(g)}
   ${canJoin ? `<form id="lgJoinF" class="card" style="display:flex;flex-direction:column;gap:10px"><h2 style="font-size:18px">${t("lgJoin")}</h2>
     <b style="font-size:13px">${t("lgCat")}</b><div class="chips">${l.categories.map(c => `<button type="button" class="chip" data-lgcat="${c}" aria-pressed="${S.lgCat === c}">${c}</button>`).join("")}</div><span class="note" style="margin-top:-4px">${t("lgYourCat")}</span>
     <label class="fld"><span>${t("lgPartner")}</span><input id="lg-ph" inputmode="tel" dir="ltr" placeholder="09XX XXX XXX"></label><span class="note" style="margin-top:-6px">${t("lgPartnerPh")}</span>
     ${+l.fee ? `<b style="font-size:13px">${t("lgFee")} · ${money(l.fee)}</b><div class="chips" style="flex-wrap:wrap">${["club","shamcash","syriatel"].map(x => `<button type="button" class="chip" data-lgpay="${x}" aria-pressed="${S.lgPay === x}">${payName(x)}</button>`).join("")}</div>${S.lgPay !== "club" ? `<label class="fld"><span>${t("ref")}</span><input id="lg-ref" inputmode="numeric"></label>` : ""}` : ""}
+    <label class="row rulechk"><input type="checkbox" id="lg-read"> <span>${t("lgReadRules")} · <button type="button" class="linkbtn" data-lgrules>${t("lgReadLink")}</button></span></label>
     <button class="cta blue wide" type="submit">${t("lgSignBtn")}</button></form>` : !S.user && l.status !== "done" ? `<button class="cta blue wide" data-go="auth">${t("signin")} · ${t("lgJoin")}</button>` : ""}
   ${l.categories.length > 1 ? `<div class="seg">${l.categories.map(c => `<button data-lgcat="${c}" aria-pressed="${S.lgCat === c}">${t("lgCat")} ${c}</button>`).join("")}</div>` : ""}
   ${l.status === "signup" || !cur.boxes.length ? `<div class="card"><h2 style="font-size:17px">${t("lgSigned")}</h2>${(g.signed || []).filter(x => x.cat === S.lgCat).map((x, i) => `<div class="srow"><span class="srk">${i + 1}</span><b>${esc(x.name)}</b>${x.status === "pending" ? `<span class="tag pend">${t("pending")}</span>` : ""}</div>`).join("") || `<p class="note">${t("lgNone")}</p>`}</div>`
    : cur.boxes.map(bx => `<div class="card lgbox"><div class="between"><h2 style="font-size:18px">${t("lgBox")} ${bx.box}</h2>${l.round_ends ? `<span class="note">${tf("lgEnds", {d: dShort(l.round_ends)})}</span>` : ""}</div>
      <table class="lgt"><thead><tr><th>#</th><th>${t("lgTeam")}</th><th>${t("lgP")}</th><th>${t("lgW")}</th><th>${t("lgPts")}</th></tr></thead><tbody>${(bx.rows || []).map(r => `<tr class="${r.me ? "me" : ""}"><td>${r.rk}</td><td><b>${esc(r.name)}</b>${r.move === "up" ? ` <span class="mv up" title="${t("lgUp")}">▲</span>` : r.move === "down" ? ` <span class="mv dn" title="${t("lgDown")}">▼</span>` : ""}</td><td>${r.pl}</td><td>${r.w}</td><td><b>${r.pts}</b></td></tr>`).join("")}</tbody></table>
      <div class="lgms">${(bx.matches || []).map(m => lgMatch(m, admin, me)).join("")}</div></div>`).join("")}
-  <details class="card"><summary><b>${t("lgHow")}</b></summary><p class="note" style="margin:8px 0 0">${t("lgRules")}</p>${l.about ? `<p class="note" style="margin:8px 0 0">${esc(l.about)}</p>` : ""}</details>
   ${admin ? `<div class="card lgadmin"><h2 style="font-size:17px">${t("lgAdmin")} · ${t("lgEntries")}</h2>${(S.lgEntries || []).map(e => `<div class="dep-row"><div class="who"><b>${esc(e.category)} · ${esc(e.name)}</b><small>${esc(e.levels || "")}</small><small dir="ltr">${esc(e.phones || "")}</small><small>${esc(payName(e.pay_method))}${e.pay_ref ? ` · Ref ${esc(e.pay_ref)}` : ""}</small></div>${e.status === "pending" ? `<button class="sbtn ok" data-lgent="${e.id}|confirmed">${t("okBtn")}</button><button class="sbtn" data-lgent="${e.id}|rejected">${t("rej")}</button>` : `<span class="tag ${e.status === "confirmed" ? "g" : "b"}">${esc(e.status)}</span>`}</div>`).join("") || `<p class="note">${t("lgNone")}</p>`}
     <div class="row" style="gap:8px;flex-wrap:wrap;margin-top:12px">${l.status !== "done" ? `<button class="cta blue sm" data-lgnext>${tf("lgStart", {r: (l.round || 0) + 1})}</button>` : ""}${l.status === "running" ? `<button class="sbtn" data-lgfinish>${t("lgFinish")}</button>` : ""}<button class="sbtn" data-lgedit>${t("lgEdit")}</button></div></div>` : ""}
  </main>${nav("events")}`; };
@@ -1526,7 +1581,7 @@ function nText2(n){ const d = n.data || {}, nm = esc(d.name || t("someone")), w 
     class_join: tf("nClassJoin", {n: nm, x, w}), class_cancel: tf("nClassCancel", {x, w}), league_partner: tf("nLgPartner", {n: nm, x, c}),
     league_req: tf("nLgReq", {n: nm, x, c}), league_ok: tf("nLgOk", {x}), league_no: tf("nLgNo", {x}),
     league_round: tf("nLgRound", {r: d.round, x, b: d.box, d: esc(d.until || "")}), league_result: tf("nLgResult", {n: nm}),
-    league_disputed: tf("nLgDisp", {n: nm}), league_champ: tf("nLgChamp", {x, c}), booking_new: tf(d.pending ? "nBookingDep" : "nBooking", {n: nm, k: esc(d.court || ""), w}) })[n.kind]; }
+    league_disputed: tf("nLgDisp", {n: nm}), league_champ: tf("nLgChamp", {x, c}), booking_new: tf(d.pending ? "nBookingDep" : "nBooking", {n: nm, k: esc(d.court || ""), w}), league_sched: tf("nLgSched", {n: nm, w, c}), league_ref: tf("nLgRef", {x, w, c: c ? "· " + c : ""}), league_ref_set: tf("nLgRefSet", {n: nm, w}), league_final: t("nLgFinal") })[n.kind]; }
 const nLink = n => n.kind === "booking_new" ? `data-go="manager"` : /^league_/.test(n.kind) ? `data-go="events"` : /^member_/.test(n.kind) ? (n.kind === "member_req" ? `data-go="manager"` : `data-go="me"`) : /^class_/.test(n.kind) || n.kind === "lesson_new" ? `data-go="me"` : "";
 
 function lgGrab(){ const v = id => { const el = document.getElementById(id); return el ? el.value : undefined; }; const f = S.lgForm || (S.lgForm = {});
@@ -1619,9 +1674,10 @@ V.profile = () => { if (!S.user) return V.auth(); const p = S.pf;
   <div class="pfhero" style="--tc:${col}"><div class="pfav">${esc(initials(p.name))}</div><div class="pfid"><h1>${esc(p.name)}</h1>
     <div class="pfmeta">${p.level != null ? `<span class="pfl">${lvl2(p.level)}</span>` : ""}${p.category ? `<span>${esc(tierName(p.category))} · ${esc(p.category)}</span>` : ""}${p.titles ? `<span>🏆 ${p.titles}</span>` : ""}</div>
     <small>${tf("pfSince", {d: esc(p.since)})}</small></div></div>
-  ${!p.played ? `<div class="card note">${t("pfEmpty")}</div>` : `
+  ${!p.played ? `<div class="card note">${t("pfEmpty")}</div>${snProfile()}` : `
   <div class="pfstats"><div><b>${p.played}</b><small>${t("pfPlayed")}</small></div><div><b>${p.wins}</b><small>${t("pfWins")}</small></div><div class="hl"><b>${pct}%</b><small>${t("pfWinPct")}</small></div><div><b>${p.streak ? "🔥" + p.streak : "0"}</b><small>${t("pfStreak")}</small></div><div><b>${p.best_streak}</b><small>${t("pfBest")}</small></div></div>
   <div class="card"><div class="between"><b>${t("pfForm")}</b><span class="note">${t("pfSets")} ${p.sets_w}-${p.sets_l} · ${t("pfGames")} ${p.games_w}-${p.games_l}</span></div><div class="form">${(p.form || []).map(w => `<span class="${w ? "w" : "l"}">${w ? "W" : "L"}</span>`).join("")}</div></div>
+  ${snProfile()}
   <h2>${t("pfChem")}</h2>
   ${p.best_partner ? `<div class="card bestp"><span class="av">${esc(initials(p.best_partner.name))}</span><div style="flex:1;min-width:0"><small>💞 ${t("pfBestPartner")}</small><b>${pLink(p.best_partner.id, p.best_partner.name)}</b><span class="note">${tf("pfTogether", {w: p.best_partner.w, n: p.best_partner.n})}</span></div><span class="big">${Math.round(p.best_partner.w / p.best_partner.n * 100)}%</span></div>` : ""}
   <div class="card">${(p.partners || []).map(x => `<div class="prow2"><b>${pLink(x.id, x.name)}</b>${lvChip(x.level)}<span class="note">${x.w}/${x.n}</span>${bar(x.w, x.n)}</div>`).join("") || `<p class="note">${t("pfNoData")}</p>`}</div>
@@ -1686,6 +1742,81 @@ function pushCard(home){ if (!S.user) return "";
   return `<div class="card pushc"><span class="pbell">🔔</span><div style="flex:1;min-width:0"><b>${t("psT")}</b><span class="note">${!pushOK() && isIOS() && !standalone() ? t("psIOS") : t("psS")}</span></div>
    <div class="act">${S.pushOn ? `<span class="tag g">${t("psIsOn")}</span>${home ? "" : `<button class="linkbtn" data-pushoff>${t("psOff")}</button>`}` : `<button class="cta blue sm" data-pushon>${t("psOn")}</button>${home ? `<button class="linkbtn" data-pushlater>${t("psLater")}</button>` : ""}`}</div></div>`; }
 
+/* ---------- league rules + scheduling + referees ---------- */
+Object.assign(W.en, {lgWeeks:"Weeks", lgRoundsU:"Rounds", lgGuar:"Games guaranteed", lgTotal:"Total matches", lrTap:"Tap to read", lrLength:"How long", lrLengthT:"{s} – {e}: about {w} weeks, {r} rounds of {d} days.", lrGuar:"Guaranteed games", lrGuarT:"Every team plays at least {m} matches per round × {r} rounds = {g} matches. Bigger boxes play more.", lrCatGames:"{g} games guaranteed per team · {t} matches in total", lgReadRules:"I've read the league rules", lgReadLink:"Read the rules", lgMustRead:"Please read the league rules and tick the box first.", lgTeamsU:"Teams", lgBoxesU:"Boxes", lgPerRound:"Matches / round", lgRoundU:"Round", lrTitle:"League rules", lrFormat:"Format", lrFormatT:"Box league. Teams are split into small groups called boxes, about {b} teams each, strongest teams in Box 1.",
+  lrCat:"Category {c}: {n} teams → {k} {box} ({s})", lrCatWait:"Category {c}: waiting for teams", lrBox1:"box", lrBoxN:"boxes",
+  lrRounds:"Rounds", lrRoundsT:"{r} rounds of {d} days each.", lrRoundNow:"Round {c} ends on {e}.", lrMatches:"Matches",
+  lrMatchesT:"In each round you play every other team in your box once: {m} matches. Agree a time with your opponents, book a court at any league club, then set the time in the app.",
+  lrPoints:"Points", lrPointsT:"Win = 3 · lose in 3 sets = 1 · lose in 2 sets = 0. Ties are split by sets difference, then games difference, then wins.",
+  lrMove:"Up and down", lrMoveT:"After each round, the 1st team in every box moves up one box and the last team moves down one box. The others stay.",
+  lrScores:"Scores", lrScoresT:"One team enters the score, the other team confirms it. If a referee is at your match, the referee's score is final.",
+  lrLate:"Deadline", lrLateT:"Matches not played before the round ends: the organizer gives a walkover to the team that tried to play, or marks it not played (no points).",
+  lrWin:"Champions", lrWinT:"After the last round, the team on top of Box 1 in each category wins{p} and gets a 🏆 title on their player card.",
+  lrLevel:"Levels", lrLevelT:"Every league match counts for your level.", lrNew:"Teams that join late start in the last box.",
+  lgWhen:"📅 {w} · {c}", lgNoTime:"📅 Time not set yet", lgSetTime:"Set time", lgDate:"Day", lgClub:"Club", lgSaveTime:"Save time",
+  lgRef:"🧑‍⚖️ Referee: {n}", lgRefBtn:"Referee", lgRefFind:"Search referee by name", lgRefPick:"Assign", lgRefNone:"Remove referee",
+  lgRefScore:"Enter the final score (referee)", myRef:"My referee matches", refOpen:"Open",
+  nLgSched:"{n} set your league match: {w} at {c}.", nLgRef:"You're the referee: {x} · {w} {c}", nLgRefSet:"{n} will referee your league match ({w}).", nLgFinal:"The referee entered your league match result."});
+Object.assign(W.ar, {lgWeeks:"أسابيع", lgRoundsU:"جولات", lgGuar:"مباريات مضمونة", lgTotal:"مجموع المباريات", lrTap:"اضغط للقراءة", lrLength:"المدة", lrLengthT:"{s} – {e}: حوالي {w} أسابيع، {r} جولات كل وحدة {d} يوم.", lrGuar:"المباريات المضمونة", lrGuarT:"كل فريق بيلعب على الأقل {m} مباريات بالجولة × {r} جولات = {g} مباراة. المجموعات الأكبر بتلعب أكتر.", lrCatGames:"{g} مباريات مضمونة لكل فريق · {t} مباراة بالمجموع", lgReadRules:"قرأت قوانين الدوري", lgReadLink:"اقرأ القوانين", lgMustRead:"اقرأ قوانين الدوري وعلّم على المربع أول.", lgTeamsU:"فرق", lgBoxesU:"مجموعات", lgPerRound:"مباريات بالجولة", lgRoundU:"الجولة", lrTitle:"قوانين الدوري", lrFormat:"النظام", lrFormatT:"دوري مجموعات. الفرق بتتقسم لمجموعات صغيرة، تقريباً {b} فرق بكل مجموعة، والأقوى بالمجموعة ١.",
+  lrCat:"الفئة {c}: {n} فرق ← {k} {box} ({s})", lrCatWait:"الفئة {c}: بانتظار الفرق", lrBox1:"مجموعة", lrBoxN:"مجموعات",
+  lrRounds:"الجولات", lrRoundsT:"{r} جولات، كل جولة {d} يوم.", lrRoundNow:"الجولة {c} بتخلص {e}.", lrMatches:"المباريات",
+  lrMatchesT:"بكل جولة بتلعب ضد كل فريق بمجموعتك مرة وحدة: {m} مباريات. اتفقوا على وقت، احجزوا ملعب بأي نادي من أندية الدوري، وحطوا الوقت بالتطبيق.",
+  lrPoints:"النقاط", lrPointsT:"الفوز = ٣ · الخسارة بثلاث مجموعات = ١ · الخسارة بمجموعتين = ٠. عند التعادل: فرق المجموعات، بعدين فرق الأشواط، بعدين عدد الانتصارات.",
+  lrMove:"الصعود والنزول", lrMoveT:"بعد كل جولة، الأول بكل مجموعة بيطلع مجموعة لفوق والأخير بينزل مجموعة لتحت. الباقي بيضلوا.",
+  lrScores:"النتائج", lrScoresT:"فريق بيدخل النتيجة والفريق التاني بيأكدها. إذا في حكم بمباراتكم، نتيجة الحكم نهائية.",
+  lrLate:"الموعد النهائي", lrLateT:"المباريات يلي ما انلعبت قبل نهاية الجولة: المنظم بيعطي الفوز للفريق يلي حاول يلعب، أو بيعتبرها ما انلعبت (بلا نقاط).",
+  lrWin:"الأبطال", lrWinT:"بعد آخر جولة، الفريق الأول بالمجموعة ١ بكل فئة بيربح{p} وبياخد لقب 🏆 على بطاقته.",
+  lrLevel:"المستوى", lrLevelT:"كل مباراة دوري بتنحسب لمستواك.", lrNew:"الفرق يلي بتسجل متأخر بتبلش بآخر مجموعة.",
+  lgWhen:"📅 {w} · {c}", lgNoTime:"📅 الوقت لسا ما تحدد", lgSetTime:"حدد الوقت", lgDate:"اليوم", lgClub:"النادي", lgSaveTime:"حفظ الوقت",
+  lgRef:"🧑‍⚖️ الحكم: {n}", lgRefBtn:"حكم", lgRefFind:"ابحث عن حكم بالاسم", lgRefPick:"تعيين", lgRefNone:"إزالة الحكم",
+  lgRefScore:"أدخل النتيجة النهائية (حكم)", myRef:"مبارياتي كحكم", refOpen:"فتح",
+  nLgSched:"{n} حدد مباراة الدوري: {w} بـ{c}.", nLgRef:"أنت الحكم: {x} · {w} {c}", nLgRefSet:"{n} رح يحكم مباراة الدوري تبعك ({w}).", nLgFinal:"الحكم دخل نتيجة مباراة الدوري تبعك."});
+Object.assign(S, {lgTime:null, lgRefFor:null, lgRefList:[], myRefs:[]});
+function lgCalc(g, cat){ const l = g.league, bs = +l.box_size || 4;
+  const days = Math.max(1, Math.round((new Date(l.ends_on) - new Date(l.starts_on)) / 864e5)), rounds = Math.max(1, Math.floor(days / (+l.round_days || 14)));
+  const n = (g.signed || []).filter(x => x.cat === cat).length, nb = n ? Math.max(1, Math.round(n / bs)) : 0;
+  const sizes = nb ? Array.from({length: nb}, (_, i) => Math.floor(n / nb) + (i < n % nb ? 1 : 0)) : [];
+  const minS = sizes.length ? Math.min(...sizes) : bs;
+  return {days, weeks: Math.round(days / 7), rounds, n, nb, sizes, guaranteed: Math.max(0, minS - 1) * rounds,
+    total: rounds * sizes.reduce((a, x) => a + x * (x - 1) / 2, 0), perRound: Math.max(0, minS - 1)}; }
+function lgGlance(g){ const l = g.league, cat = S.lgCat || l.categories[0], k = lgCalc(g, cat);
+  return `<div class="glance"><div><b>${k.weeks}</b><small>${t("lgWeeks")}</small></div><div><b>${k.rounds}</b><small>${t("lgRoundsU")}</small></div><div class="hl"><b>${k.guaranteed}</b><small>${t("lgGuar")}</small></div><div><b>${k.total || "–"}</b><small>${t("lgTotal")}</small></div></div>`; }
+function lgRulesCard(g){ const l = g.league, bs = +l.box_size || 4, k0 = lgCalc(g, l.categories[0]);
+  const cats = l.categories.map(c => { const k = lgCalc(g, c);
+    if (!k.n) return `<li>${tf("lrCatWait", {c})}</li>`;
+    return `<li>${tf("lrCat", {c, n: k.n, k: k.nb, box: k.nb === 1 ? t("lrBox1") : t("lrBoxN"), s: k.sizes.join(" + ")})} · ${tf("lrCatGames", {g: k.guaranteed, t: k.total})}</li>`; }).join("");
+  const row = (ic, h, txt) => `<div class="lr"><span class="ic">${ic}</span><div><b>${h}</b><p>${txt}</p></div></div>`;
+  return `<details class="card lrules" id="lrules"${g.me ? "" : " open"}><summary><span>📜 ${t("lrTitle")}</span><small>${t("lrTap")}</small></summary>
+   ${row("⏳", t("lrLength"), tf("lrLengthT", {s: dShort(l.starts_on), e: dShort(l.ends_on), w: k0.weeks, r: k0.rounds, d: l.round_days}) + (l.round && l.round_ends ? " " + tf("lrRoundNow", {c: l.round, e: dShort(l.round_ends)}) : ""))}
+   ${row("📋", t("lrFormat"), tf("lrFormatT", {b: bs}) + `<ul>${cats}</ul>` + t("lrNew"))}
+   ${row("🎾", t("lrMatches"), tf("lrMatchesT", {m: bs - 1}))}
+   ${row("✅", t("lrGuar"), tf("lrGuarT", {r: k0.rounds, m: k0.perRound, g: k0.guaranteed}))}
+   ${row("🏅", t("lrPoints"), t("lrPointsT"))}
+   ${row("↕️", t("lrMove"), t("lrMoveT"))}
+   ${row("🧾", t("lrScores"), t("lrScoresT"))}
+   ${row("⏰", t("lrLate"), t("lrLateT"))}
+   ${row("🏆", t("lrWin"), tf("lrWinT", {p: l.prize ? ` ${esc(l.prize)}` : ""}))}
+   ${row("📈", t("lrLevel"), t("lrLevelT"))}
+   ${l.about ? `<p class="note" style="margin:6px 0 0">${esc(l.about)}</p>` : ""}</details>`; }
+function lgTimeForm(m){ const l = S.league.league, clubs = (l.clubs || []);
+  const opts = []; for (let h = 8; h <= 25; h++) for (const mm of ["00","30"]) { const hh = String(h % 24).padStart(2, "0") + ":" + mm; opts.push(`<option value="${h >= 24 ? 1 : 0}|${hh}">${esc(hh)}</option>`); }
+  return `<div class="lgform"><div class="grid2"><label class="fld"><span>${t("lgDate")}</span><input type="date" id="lt-d" value="${esc(nextDays(2)[1] || nextDays(1)[0])}"></label>
+   <label class="fld"><span>${t("time")}</span><select id="lt-t">${opts.join("")}</select></label></div>
+   <label class="fld"><span>${t("lgClub")}</span><select id="lt-c">${clubs.map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join("")}</select></label>
+   <button class="cta blue sm" data-lgtimesave="${m.id}">${t("lgSaveTime")}</button></div>`; }
+function lgRefForm(m){ return `<div class="lgform"><div class="row" style="gap:8px"><input id="lr-q" placeholder="${t("lgRefFind")}" style="flex:1;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:0 10px"><button class="sbtn" data-lgreffind="${m.id}">${t("apFind")}</button></div>
+   ${(S.lgRefList || []).map(p => `<div class="row" style="justify-content:space-between;gap:8px"><span>${esc(p.name)} ${lvChip(p.level)}</span><button class="sbtn ok" data-lgrefset="${m.id}|${p.id}">${t("lgRefPick")}</button></div>`).join("")}
+   ${m.ref ? `<button class="linkbtn" data-lgrefset="${m.id}|" style="color:var(--red);align-self:flex-start">${t("lgRefNone")}</button>` : ""}</div>`; }
+function lgExtra(m, admin){ const live = m.status === "open" || m.status === "reported", mine = m.side != null;
+  let s = `<div class="lgmeta"><span>${m.at ? tf("lgWhen", {w: esc(fmtDay(new Date(m.at)) + " · " + fmtTime(new Date(m.at))), c: esc(m.venue || "")}) : t("lgNoTime")}</span>${m.ref ? `<span>${tf("lgRef", {n: esc(m.ref)})}</span>` : ""}</div>`;
+  if (live && (mine || admin)) s += `<div class="row" style="gap:6px;flex-wrap:wrap">${`<button class="sbtn" data-lgtime="${m.id}">${t("lgSetTime")}</button>`}${admin ? `<button class="sbtn" data-lgref="${m.id}">🧑‍⚖️ ${t("lgRefBtn")}</button>` : ""}</div>`;
+  if (S.lgTime === m.id) s += lgTimeForm(m);
+  if (admin && S.lgRefFor === m.id) s += lgRefForm(m);
+  if (m.ref_me && live) s += `<div class="lgform refbox"><b>${t("lgRefScore")}</b><div class="lgsets"><span></span><b>${esc(m.a)}</b><b>${esc(m.b)}</b>${[0,1,2].map(i => `<span>${i + 1}</span><input id="lu${i}" inputmode="numeric" maxlength="1"><input id="lt${i}" inputmode="numeric" maxlength="1">`).join("")}</div><button class="cta blue sm" data-lgsend="${m.id}|0">${t("lgSend")}</button></div>`;
+  return s; }
+function myRefCard(){ const r = S.myRefs || []; if (!r.length) return "";
+  return `<h2>🧑‍⚖️ ${t("myRef")}</h2>${r.map(x => `<div class="card clsrow"><div class="mid"><b>${esc(x.a)} vs ${esc(x.b)}</b><span class="note">${esc(x.league)} · ${t("lgCat")} ${esc(x.category)} · ${t("lgBox")} ${x.box}</span><span class="note">${x.at ? esc(fmtDay(new Date(x.at)) + " · " + fmtTime(new Date(x.at))) : t("lgNoTime")}${x.club ? " · " + esc(x.club) : ""}</span></div><div class="act">${x.status === "confirmed" ? `<span class="tag g">${t("lgPlayed")}</span>` : ""}<button class="sbtn" data-league="${x.league_id}">${t("refOpen")} →</button></div></div>`).join("")}`; }
+
 /* ---------- render + actions ---------- */
 const app = document.getElementById("app");
 function render(){
@@ -1704,12 +1835,12 @@ async function go(v){
   if (location.hash !== "#" + v) history.replaceState(null, "", "#" + v);
   if (v === "club" && S.club){ if (!S.day) S.day = nextDays(1)[0]; const cs = S.courts.filter(x => x.club_id === S.club.id); if (!cs.some(x => x.id === S.court) && cs[0]) S.court = cs[0].id; await Promise.all([loadBusy(), loadClubExtras()]); }
   if (v === "clubs"){ await loadFindBusy(); }
-  if (v === "profile"){ await loadProfile(S.pfId); }
+  if (v === "profile"){ await Promise.all([loadProfile(S.pfId), snLoad(S.pfId)]); }
   if (v === "events"){ try { const [r, lg] = await within(Promise.all([sb.rpc("t_list"), sb.rpc("league_list")]), 8000); S.tours = r.data || []; S.leagues = lg.data || []; } catch (e) {} }
   if (v === "league"){ if (S.leagueId) await loadLeague(S.leagueId); }
   if (v === "matches" || v === "home"){ const m = await sb.rpc("open_matches"); S.matches = m.data || S.matches; }
-  if (v === "me" && S.user){ const [mine, rs, pf] = await Promise.all([sb.rpc("my_bookings"), sb.rpc("my_results"), sb.from("profiles").select("*").eq("id", S.user.id).maybeSingle()]); S.mine = mine.data || []; S.results = rs.data || []; if (pf.data) S.profile = pf.data; loadNotifN(); const mc = await sb.rpc("my_classes"); S.myClasses = mc.data || []; await Promise.all([loadCard(), loadMems()]); }
-  if (v === "season" && S.boardClubId){ const r = await sb.rpc("season_board", {p_club: S.boardClubId}); S.board = r.data || []; }
+  if (v === "me" && S.user){ const [mine, rs, pf] = await Promise.all([sb.rpc("my_bookings"), sb.rpc("my_results"), sb.from("profiles").select("*").eq("id", S.user.id).maybeSingle()]); S.mine = mine.data || []; S.results = rs.data || []; if (pf.data) S.profile = pf.data; loadNotifN(); const [mc, rf] = await Promise.all([sb.rpc("my_classes"), sb.rpc("league_ref_matches")]); S.myClasses = mc.data || []; S.myRefs = rf.data || []; await Promise.all([loadCard(), loadMems()]); }
+  if (v === "season" && S.boardClubId){ const [r, sn] = await Promise.all([sb.rpc("season_board", {p_club: S.boardClubId}), sb.rpc("sensor_board", {p_club: S.boardClubId, p_days: 30})]); S.board = r.data || []; S.snBoard = sn.error ? null : sn.data; }
   if (v === "inbox" && S.user){ await loadInbox(); }
   if (v === "match"){ if (S.matchId) await loadMatch(S.matchId); }
   if (v === "level"){ S.quiz = S.quiz || {}; }
@@ -1798,6 +1929,16 @@ app.addEventListener("click", async e => {
   if (d.lgcat){ const ph = document.getElementById("lg-ph"); if (ph) S.lgPh = ph.value; S.lgCat = d.lgcat; render(); const p2 = document.getElementById("lg-ph"); if (p2 && S.lgPh) p2.value = S.lgPh; return; }
   if (d.lgpay){ const ph = document.getElementById("lg-ph"); if (ph) S.lgPh = ph.value; S.lgPay = d.lgpay; render(); const p2 = document.getElementById("lg-ph"); if (p2 && S.lgPh) p2.value = S.lgPh; return; }
   if ("lgwd" in d){ const r = await sb.rpc("league_withdraw", {p_league: S.leagueId}); if (r.error){ toast(errMsg(r.error)); return; } await loadLeague(S.leagueId); render(); return; }
+  if ("lgrules" in d){ const r = document.getElementById("lrules"); if (r){ r.open = true; r.scrollIntoView({behavior: "smooth"}); } return; }
+  if (d.lgtime){ S.lgTime = S.lgTime === d.lgtime ? null : d.lgtime; S.lgRefFor = null; render(); return; }
+  if (d.lgtimesave){ const [nx, hm] = document.getElementById("lt-t").value.split("|"), dt = document.getElementById("lt-d").value;
+    if (!dt){ toast(t("lgDate")); return; } const at0 = addMin(at(dt, hm), nx === "1" ? 1440 : 0);
+    const r = await sb.rpc("league_schedule", {p_match: d.lgtimesave, p_at: at0.toISOString(), p_club: document.getElementById("lt-c").value || null});
+    if (r.error){ toast(errMsg(r.error)); return; } toast("✓"); S.lgTime = null; await loadLeague(S.leagueId); render(); return; }
+  if (d.lgref){ S.lgRefFor = S.lgRefFor === d.lgref ? null : d.lgref; S.lgTime = null; S.lgRefList = []; render(); return; }
+  if (d.lgreffind){ const q = document.getElementById("lr-q").value; const r = await sb.rpc("search_players", {p_q: q}); S.lgRefList = r.data || []; render(); const qi = document.getElementById("lr-q"); if (qi) qi.value = q; return; }
+  if (d.lgrefset !== undefined && "lgrefset" in d){ const [mid, uid] = d.lgrefset.split("|"); const r = await sb.rpc("admin_league_referee", {p_match: mid, p_user: uid || null});
+    if (r.error){ toast(errMsg(r.error)); return; } toast("✓"); S.lgRefFor = null; S.lgRefList = []; await loadLeague(S.leagueId); render(); return; }
   if (d.lgscore){ S.lgScore = d.lgscore; render(); const i0 = document.getElementById("lu0"); if (i0) i0.focus(); return; }
   if (d.lgsend){ const [mid, side] = d.lgsend.split("|"), sets = [];
     for (let i = 0; i < 3; i++){ const u = document.getElementById("lu" + i).value.trim(), th = document.getElementById("lt" + i).value.trim(); if (u === "" && th === "") continue; const us = +u || 0, them = +th || 0; sets.push(side === "1" ? [them, us] : [us, them]); }
@@ -1892,6 +2033,7 @@ app.addEventListener("submit", async e => {
   if (f.id === "staffF"){ const r = await sb.rpc("join_club_staff", {p_code: document.getElementById("s-code").value});
     if (r.error){ toast(errMsg(r.error)); return; } await afterAuth(true); S.mClub = r.data; go("manager"); return; }
   if (f.id === "apF"){ S.apQ = document.getElementById("ap-q").value; const r = await sb.rpc("admin_find_players", {p_q: S.apQ}); if (r.error){ toast(errMsg(r.error)); return; } S.apList = r.data || []; S.apEdit = null; render(); const qi = document.getElementById("ap-q"); if (qi) qi.value = S.apQ; return; }
+  if (f.id === "lgJoinF" && !document.getElementById("lg-read").checked){ toast(t("lgMustRead")); const r = document.getElementById("lrules"); if (r){ r.open = true; r.scrollIntoView({behavior: "smooth"}); } return; }
   if (f.id === "lgJoinF"){ const rf = document.getElementById("lg-ref"); const r = await sb.rpc("league_join", {p_league: S.leagueId, p_category: S.lgCat, p_partner_phone: document.getElementById("lg-ph").value, p_pay: S.lgPay, p_ref: S.lgPay === "club" ? null : (rf ? rf.value : "")});
     if (r.error){ toast(errMsg(r.error)); return; } toast("✓"); S.lgPh = ""; await loadLeague(S.leagueId); render(); return; }
   if (f.id === "lgEditF"){ lgGrab(); const x = S.lgForm;
@@ -1933,6 +2075,299 @@ app.addEventListener("change", async e => {
   if (el.id === "rate"){ const r = await sb.rpc("staff_set_rate", {p_club: S.mClub, p_rate: el.value.trim() === "" ? null : Number(el.value)}); if (r.error) toast(errMsg(r.error)); else toast(t("saved")); }
 });
 window.addEventListener("hashchange", () => { const v = location.hash.slice(1); if (v && v !== S.view && V[v]) go(v); });
+/* ---------- motion sensor: read files, live Bluetooth packets, swing analysis ---------- */
+const SN = {
+  R: 0.8,            // metres: wrist-to-racket radius used to turn wrist rotation into racket speed (estimate)
+  TH: 500,           // deg/s: a rotation faster than this is a swing
+  GAP: 0.6,          // s: two swings closer than this are one swing
+  SAT: 1990,         // deg/s: gyro limit of the sensor (2000)
+  RALLY: 8           // s: swings closer than this belong to the same rally
+};
+function snNum(v){ if (v == null) return NaN; const s = String(v).trim().replace(/,(?=\d{1,3}$)/, "."); return s === "" ? NaN : Number(s); }
+function snTime(v){
+  if (v == null) return NaN; const s = String(v).trim(); if (!s) return NaN;
+  if (/^-?\d+(\.\d+)?$/.test(s)){ const n = +s; return n > 1e11 ? n / 1000 : n; }
+  const m = s.match(/(\d{1,2}):(\d{2}):(\d{2})(?:[.:](\d+))?/);
+  if (m){ const frac = m[4] ? +("0." + m[4]) : 0; const dm = s.match(/(\d{4})[-\/](\d{1,2})[-\/](\d{1,2})/);
+    const day = dm ? Date.UTC(+dm[1], +dm[2] - 1, +dm[3]) / 1000 : 0; return day + (+m[1]) * 3600 + (+m[2]) * 60 + (+m[3]) + frac; }
+  const d = Date.parse(s); return isNaN(d) ? NaN : d / 1000;
+}
+function snWallClock(v){ const s = String(v || "").trim(); const dm = s.match(/(\d{4})[-\/](\d{1,2})[-\/](\d{1,2})[ T](\d{1,2}):(\d{2}):(\d{2})/);
+  return dm ? new Date(+dm[1], +dm[2] - 1, +dm[3], +dm[4], +dm[5], +dm[6]) : null; }
+/* Reads WitMotion exports (txt/csv, tab/comma/space/semicolon, English or Chinese headers). Returns {devices:[{name, rate, start, samples}]} */
+function snParse(text){
+  const lines = String(text).replace(/^﻿/, "").split(/\r?\n/).filter(l => l.trim());
+  const isHead = l => /acc|加速度|ax\b|as\s*x|gyro|角速度/i.test(l);
+  const hi = lines.findIndex(isHead); if (hi < 0) throw new Error("noHeader");
+  const head = lines[hi]; const sep = head.includes("\t") ? "\t" : head.includes(";") ? ";" : head.includes(",") ? "," : /\s{2,}/.test(head) ? /\s{2,}/ : /\s+/;
+  const cols = head.split(sep).map(c => c.trim().toLowerCase().replace(/\s+/g, ""));
+  const find = (...res) => cols.findIndex(c => res.some(r => r.test(c)));
+  const ix = {
+    ax: find(/^(acc|加速度)x/, /^ax\b/, /accelerationx/), ay: find(/^(acc|加速度)y/, /^ay\b/, /accelerationy/), az: find(/^(acc|加速度)z/, /^az\b/, /accelerationz/),
+    gx: find(/^(as|gyro|角速度|angularvelocity|w)x/, /^gx\b/), gy: find(/^(as|gyro|角速度|angularvelocity|w)y/, /^gy\b/), gz: find(/^(as|gyro|角速度|angularvelocity|w)z/, /^gz\b/),
+    t: find(/^(chip)?time/, /时间/, /^timestamp/, /^date/), dev: find(/device/, /设备/, /^mac/, /^name/)
+  };
+  if (ix.gx < 0 || ix.gy < 0 || ix.gz < 0) throw new Error("noGyro");
+  const by = new Map();
+  for (let i = hi + 1; i < lines.length; i++){
+    const f = lines[i].split(sep); if (f.length < 4) continue;
+    const g = [snNum(f[ix.gx]), snNum(f[ix.gy]), snNum(f[ix.gz])]; if (g.some(isNaN)) continue;
+    const a = ix.ax >= 0 ? [snNum(f[ix.ax]), snNum(f[ix.ay]), snNum(f[ix.az])] : [0, 0, 1];
+    const dev = ix.dev >= 0 ? String(f[ix.dev] || "").trim() || "Sensor" : "Sensor";
+    if (!by.has(dev)) by.set(dev, {name: dev, raw: [], first: ix.t >= 0 ? f[ix.t] : null});
+    by.get(dev).raw.push([ix.t >= 0 ? snTime(f[ix.t]) : NaN, a[0], a[1], a[2], g[0], g[1], g[2]]);
+  }
+  const devices = [...by.values()].filter(d => d.raw.length > 50).map(d => {
+    const tt = d.raw.map(r => r[0]); let rate = 100;
+    const dts = []; for (let i = 1; i < tt.length && dts.length < 4000; i++){ const x = tt[i] - tt[i - 1]; if (x > 0 && x < 1) dts.push(x); }
+    if (dts.length > 20){ dts.sort((a, b) => a - b); rate = Math.round(1 / dts[dts.length >> 1]); }
+    const timed = !isNaN(tt[0]) && dts.length > 20;
+    const s = {t: new Float64Array(d.raw.length), a: new Float32Array(d.raw.length * 3), g: new Float32Array(d.raw.length * 3)};
+    let last = -Infinity;
+    d.raw.forEach((r, i) => { let tv = timed && !isNaN(r[0]) ? r[0] - tt[0] : i / rate; if (tv <= last) tv = last + 1 / rate;
+      s.t[i] = last = tv; s.a.set([r[1], r[2], r[3]], i * 3); s.g.set([r[4], r[5], r[6]], i * 3); });
+    s.rate = rate; return {name: d.name, rate, start: snWallClock(d.first), samples: s, n: d.raw.length};
+  });
+  if (!devices.length) throw new Error("noRows");
+  return {devices};
+}
+/* WitMotion BLE: 20-byte packets 0x55 0x61 + 9 × int16 LE (acc, gyro, angle) */
+function snPackets(buf, out){
+  let i = 0;
+  while (i + 20 <= buf.length){
+    if (buf[i] !== 0x55 || buf[i + 1] !== 0x61){ i++; continue; }
+    const v = k => { const x = buf[i + 2 + k * 2] | (buf[i + 3 + k * 2] << 8); return x > 32767 ? x - 65536 : x; };
+    out.push([v(0) / 32768 * 16, v(1) / 32768 * 16, v(2) / 32768 * 16, v(3) / 32768 * 2000, v(4) / 32768 * 2000, v(5) / 32768 * 2000]);
+    i += 20;
+  }
+  return buf.slice(i);
+}
+/* Analysis. hand: "R" or "L"; swap: flip forehand/backhand if the sensor was worn the other way round */
+function snAnalyze(s, o){
+  o = o || {}; const n = s.t.length, T = s.t, A = s.a, G = s.g;
+  const w = new Float32Array(n); let sat = 0;
+  for (let i = 0; i < n; i++){ const x = G[i * 3], y = G[i * 3 + 1], z = G[i * 3 + 2]; w[i] = Math.hypot(x, y, z); }
+  const peaks = [];
+  for (let i = 1; i < n - 1; i++){
+    if (w[i] < SN.TH || w[i] < w[i - 1] || w[i] < w[i + 1]) continue;
+    const p = peaks[peaks.length - 1];
+    if (p && T[i] - T[p] < SN.GAP){ if (w[i] > w[p]) peaks[peaks.length - 1] = i; continue; }
+    peaks.push(i);
+  }
+  const back = (i, sec) => { let j = i; while (j > 0 && T[i] - T[j] < sec) j--; return j; };
+  const swings = peaks.map(i => {
+    const clipped = [0, 1, 2].some(k => Math.abs(G[i * 3 + k]) >= SN.SAT); if (clipped) sat++;
+    const kmh = w[i] * Math.PI / 180 * SN.R * 3.6;
+    const j0 = back(i, 0.45), j1 = back(i, 0.12); let ux = 0, c = 0; for (let j = j0; j <= j1; j++){ ux += A[j * 3]; c++; } ux = c ? ux / c : 0;
+    let wd = 0; for (let j = i; j > 0 && w[j] > w[i] / 2; j--) wd = T[i] - T[j];
+    const zs = Math.sign(G[i * 3 + 2]) * (o.hand === "L" ? -1 : 1) * (o.swap ? -1 : 1);
+    return {t: T[i], kmh, clipped, over: ux > 0.35, side: zs < 0 ? "fh" : "bh", wd};
+  });
+  const ground = swings.filter(x => !x.over).map(x => x.kmh).sort((a, b) => a - b), med = ground.length ? ground[ground.length >> 1] : 0;
+  const overs = swings.filter(x => x.over).map(x => x.kmh), otop = overs.length ? Math.max(...overs) : 0;
+  const types = {fh: 0, bh: 0, vo: 0, bj: 0, sm: 0}; let smTop = 0;
+  swings.forEach(x => {
+    if (x.over){ const sm = x.kmh >= Math.max(otop * 0.7, 60); x.type = sm ? "sm" : "bj"; if (sm) smTop = Math.max(smTop, x.kmh); }
+    else x.type = x.kmh < med * 0.6 && x.wd < 0.12 ? "vo" : x.side;
+    types[x.type]++;
+  });
+  let active = 0, rallies = 0, longest = 0, run = 0, rs = null, prev = null;
+  swings.forEach(x => { if (prev == null || x.t - prev > SN.RALLY){ if (rs != null) active += prev - rs + 2; rs = x.t; rallies++; run = 1; } else run++; longest = Math.max(longest, run); prev = x.t; });
+  if (rs != null) active += prev - rs + 2;
+  const dur = n ? T[n - 1] - T[0] : 0, B = 24, bins = new Array(B).fill(0);
+  swings.forEach(x => { bins[Math.min(B - 1, Math.floor((x.t - T[0]) / (dur || 1) * B))] += x.kmh; });
+  const bm = Math.max(1, ...bins); const sp = swings.map(x => x.kmh);
+  const r1 = v => Math.round(v * 10) / 10;
+  return {
+    shots: swings.length, top: sp.length ? r1(Math.max(...sp)) : null, avg: sp.length ? r1(sp.reduce((a, b) => a + b, 0) / sp.length) : null,
+    minutes: Math.round(dur / 60), active: r1(active / 60),
+    stats: {types, sm_top: smTop ? r1(smTop) : null, sat: sat > 0, sat_n: sat, rallies, longest, rate: s.rate || null, hand: o.hand || "R",
+      int: bins.map(v => Math.round(v / bm * 100))}
+  };
+}
+
+/* ---------- motion sensor screens ---------- */
+Object.assign(W.en, {snT:"Sensor match stats", snWhat:"Wear a motion sensor on your playing wrist and get your shots, swing speed and shot types on your profile.",
+  snAllowQ:"Your sensor stats will show on your profile, and other players can see them. You can turn this off or delete a match any time.",
+  snAllow:"Allow sensor stats", snOff:"Turn off sensor stats", snRec:"Record a match", snUp:"Upload a sensor file", snForOther:"Add stats for a player",
+  snPlayer:"Player", snMe:"Me", snFind:"Search a player by name or phone", snNotOk:"hasn't allowed sensor stats yet", snClub:"Club", snWhen:"Match date and time",
+  snHand:"Playing hand", snRight:"Right", snLeft:"Left", snSwap:"Forehand and backhand look swapped", snLive:"Bluetooth (live)", snFile:"File",
+  snNoBt:"Live recording needs Chrome on Android. On iPhone, record with the WitMotion app and upload the file.",
+  snConnect:"Connect sensor", snConnecting:"Connecting…", snConnected:"Connected: {n}", snStart:"Start recording", snStop:"Stop and see stats", snRecTxt:"Recording", snKeep:"Keep this screen open until the match ends.",
+  snLost:"Sensor disconnected. Reconnect to continue: what was recorded is kept.", snNoData:"No data from the sensor yet. Make sure it's switched on and charged.",
+  snPick:"Choose the sensor file (.txt or .csv)", snReading:"Reading file…", snDevs:"This file has {n} sensors. Choose which one this player wore:", snSamples:"{n} min",
+  snBadFile:"This file doesn't look like sensor data. Export it from the WitMotion app (Record → Export) and try again.",
+  snSave:"Save to profile", snSaved:"Saved to the profile", snDelQ:"Delete this sensor match?", snDel:"Delete",
+  snShots:"Shots", snTop:"Fastest swing", snAvg:"Avg swing", snActive:"Active play", snKmh:"km/h", snMin:"min", snTypes:"Shot types", snBeta:"beta",
+  snFh:"Forehand", snBh:"Backhand", snVo:"Volley", snBj:"Bandeja", snSm:"Smash", snInt:"Intensity through the match", snRallies:"Rallies", snLongest:"Longest rally", snSmTop:"Hardest smash",
+  snSat:"Some swings hit the sensor's limit, so the real speed may be higher.", snEst:"Speeds are estimates of racket speed from wrist rotation.",
+  snBests:"Personal bests", snBestTop:"Fastest ever", snBestShots:"Most shots", snSessions:"Matches", snTotal:"Total shots", snTrend:"Fastest swing per match",
+  snPast:"Sensor matches", snEmptyMe:"No sensor matches yet.", snHow:"How to wear it: sensor on the back of your playing wrist, arrow pointing to your fingers, strap tight.",
+  snBuyT:"Which sensor to get and how to use it", snBuy1:"Get the <b>WitMotion WT9011DCL</b> (Bluetooth 5.0). It costs about $25.",
+  snBuy2:"<b>Set it to 100 Hz before recording.</b> It sends only 10 readings a second by default, which is too slow for swings. Recording live in Padel Live switches it automatically. If you record with the WitMotion app, change the rate there first.",
+  snBuy3:"<b>How to wear it:</b> on the back of your playing wrist, arrow pointing to your fingers, strap tight.",
+  snBuy4:"<b>Very hard smashes can max out the sensor.</b> Its rotation limit is ±2000°/s, so those speeds show as \"117+ km/h\", meaning the real speed may be higher.",
+  snBoard:"Hardest swings · last 30 days", snBoardShots:"Most shots in a match", snOpen:"Open sensor stats"});
+Object.assign(W.ar, {snT:"إحصائيات الحساس", snWhat:"لبّس حساس حركة على إيد اللعب وشوف ضرباتك وسرعة ضربتك وأنواع الضربات بملفك.",
+  snAllowQ:"إحصائيات الحساس رح تبين بملفك واللاعبين التانيين بيقدروا يشوفوها. فيك توقفها أو تمسح أي مباراة بأي وقت.",
+  snAllow:"اسمح بإحصائيات الحساس", snOff:"وقّف إحصائيات الحساس", snRec:"سجّل مباراة", snUp:"ارفع ملف الحساس", snForOther:"ضيف إحصائيات للاعب",
+  snPlayer:"اللاعب", snMe:"أنا", snFind:"دوّر على لاعب بالاسم أو الرقم", snNotOk:"لسا ما سمح بإحصائيات الحساس", snClub:"النادي", snWhen:"تاريخ ووقت المباراة",
+  snHand:"إيد اللعب", snRight:"يمين", snLeft:"شمال", snSwap:"الفورهاند والباكهاند طالعين بالعكس", snLive:"بلوتوث (مباشر)", snFile:"ملف",
+  snNoBt:"التسجيل المباشر بدو كروم على أندرويد. عالآيفون سجّل بتطبيق WitMotion وارفع الملف.",
+  snConnect:"وصّل الحساس", snConnecting:"عم يوصل…", snConnected:"موصول: {n}", snStart:"ابدأ التسجيل", snStop:"وقّف وشوف الإحصائيات", snRecTxt:"عم يسجّل", snKeep:"خلي هالشاشة مفتوحة لآخر المباراة.",
+  snLost:"انقطع الحساس. وصّله من جديد لتكمل: يلي تسجّل محفوظ.", snNoData:"ما وصلت بيانات من الحساس. تأكد إنه شغّال ومشحون.",
+  snPick:"اختار ملف الحساس (‎.txt أو ‎.csv)", snReading:"عم يقرأ الملف…", snDevs:"بهالملف في {n} حساسات. اختار يلي لبسه هاللاعب:", snSamples:"{n} دقيقة",
+  snBadFile:"هالملف ما بيشبه بيانات حساس. صدّره من تطبيق WitMotion (Record ← Export) وجرب مرة تانية.",
+  snSave:"احفظ بالملف", snSaved:"انحفظ بملف اللاعب", snDelQ:"بدك تمسح مباراة الحساس هي؟", snDel:"امسح",
+  snShots:"ضربات", snTop:"أسرع ضربة", snAvg:"معدل السرعة", snActive:"لعب فعلي", snKmh:"كم/س", snMin:"د", snTypes:"أنواع الضربات", snBeta:"تجريبي",
+  snFh:"فورهاند", snBh:"باكهاند", snVo:"فولي", snBj:"بانديخا", snSm:"سماش", snInt:"الجهد خلال المباراة", snRallies:"راليات", snLongest:"أطول رالي", snSmTop:"أقوى سماش",
+  snSat:"في ضربات وصلت لحد الحساس، يعني السرعة الحقيقية ممكن تكون أعلى.", snEst:"السرعات تقديرية لسرعة المضرب من دوران المعصم.",
+  snBests:"أفضل أرقامك", snBestTop:"أسرع ضربة بحياتك", snBestShots:"أكتر ضربات", snSessions:"مباريات", snTotal:"مجموع الضربات", snTrend:"أسرع ضربة بكل مباراة",
+  snPast:"مباريات الحساس", snEmptyMe:"ما في مباريات حساس لسا.", snHow:"كيف تلبسه: الحساس على ضهر معصم إيد اللعب، السهم لجهة الأصابع، والشريط مشدود.",
+  snBuyT:"شو الحساس يلي لازم تشتريه وكيف تستعمله", snBuy1:"اشتري <b>WitMotion WT9011DCL</b> (بلوتوث 5.0). سعره تقريباً 25$.",
+  snBuy2:"<b>اضبطه على 100 Hz قبل التسجيل.</b> بشكل افتراضي بيبعت 10 قراءات بالثانية بس، وهاد بطيء كتير للضربات. التسجيل المباشر بـ Padel Live بيضبطه لحاله. إذا عم تسجل بتطبيق WitMotion، غيّر السرعة من هونيك أول.",
+  snBuy3:"<b>كيف تلبسه:</b> على ضهر معصم إيد اللعب، السهم لجهة الأصابع، والشريط مشدود.",
+  snBuy4:"<b>السماشات القوية كتير ممكن توصل لحد الحساس.</b> حد الدوران تبعه ±2000°/ث، فهالسرعات بتطلع متل \"117+ كم/س\"، يعني السرعة الحقيقية ممكن تكون أعلى.",
+  snBoard:"أقوى الضربات · آخر 30 يوم", snBoardShots:"أكتر ضربات بمباراة", snOpen:"افتح إحصائيات الحساس"});
+Object.assign(S, {snData:null, snSel:0, snBoard:null, snMode:null, snFor:null, snQ:"", snList:[], snClub:null, snAt:"", snHand:null, snSwap:false, snFile:null, snDev:0, snRes:null, snBusy:"", snLv:null});
+try { S.snHand = localStorage.getItem("pl-hand") || "R"; } catch (e) { S.snHand = "R"; }
+const snBt = () => !!(navigator.bluetooth && navigator.bluetooth.requestDevice);
+const snGuide = open => `<details class="snbuy"${open ? " open" : ""}><summary>🛒 ${t("snBuyT")}</summary><ul>${["snBuy1","snBuy2","snBuy3","snBuy4"].map(k => `<li>${t(k)}</li>`).join("")}</ul></details>`;
+const snKm = (v, sat) => v == null ? "–" : Math.round(v) + (sat ? "+" : "");
+function snCard(r, head){
+  const st = r.stats || {}, ty = st.types || {}, mx = Math.max(1, ...Object.values(ty));
+  const tile = (k, v, u) => `<div><small>${t(k)}</small><b>${v}${u ? ` <i>${u}</i>` : ""}</b></div>`;
+  const bars = (st.int || []).map(v => `<i style="height:${Math.max(4, v)}%"></i>`).join("");
+  return `<div class="card sncard">${head ? `<div class="between"><b>${head}</b><span class="tag g">⌚</span></div>` : ""}
+   <div class="sngrid">${tile("snShots", r.shots)}${tile("snTop", snKm(r.top, st.sat), t("snKmh"))}${tile("snAvg", snKm(r.avg), t("snKmh"))}${tile("snActive", r.active != null ? Math.round(r.active) : "–", t("snMin"))}</div>
+   <div class="between"><b class="snh">${t("snTypes")}</b><span class="tag b">${t("snBeta")}</span></div>
+   ${[["fh","snFh"],["bh","snBh"],["vo","snVo"],["bj","snBj"],["sm","snSm"]].map(([k, l]) => `<div class="snbar"><span>${t(l)}</span><div><i class="${k === "sm" ? "hot" : ""}" style="width:${Math.round((ty[k] || 0) / mx * 100)}%"></i></div><b>${ty[k] || 0}</b></div>`).join("")}
+   ${bars ? `<b class="snh">${t("snInt")}</b><div class="snint">${bars}</div>` : ""}
+   <div class="snx">${st.rallies != null ? `<span>${t("snRallies")} <b>${st.rallies}</b></span>` : ""}${st.longest ? `<span>${t("snLongest")} <b>${st.longest}</b></span>` : ""}${st.sm_top ? `<span>${t("snSmTop")} <b>${snKm(st.sm_top, st.sat)} ${t("snKmh")}</b></span>` : ""}</div>
+   <p class="note" style="margin:0;font-size:11.5px">${st.sat ? t("snSat") + " " : ""}${t("snEst")}</p></div>`;
+}
+function snMeCard(){ const p = S.profile || {}, staff = S.staff.length || p.is_admin;
+  if (!p.sensor_ok) return `<div class="card sncta"><b>⌚ ${t("snT")}</b><span class="note">${t("snWhat")}</span><span class="note" style="font-size:12px">${t("snAllowQ")}</span>${snGuide(false)}
+    <div class="row" style="gap:8px;flex-wrap:wrap"><button class="cta blue sm" data-snok="1">${t("snAllow")}</button>${staff ? `<button class="sbtn" data-snopen="file" data-snother="1">${t("snForOther")}</button>` : ""}</div></div>`;
+  return `<div class="card sncta"><b>⌚ ${t("snT")}</b>${snGuide(false)}
+   <div class="row" style="gap:8px;flex-wrap:wrap">${snBt() ? `<button class="cta blue sm" data-snopen="live">● ${t("snRec")}</button>` : ""}<button class="sbtn" data-snopen="file">${t("snUp")}</button>${staff ? `<button class="sbtn" data-snopen="file" data-snother="1">${t("snForOther")}</button>` : ""}</div>
+   <button class="linkbtn" data-snok="0" style="align-self:flex-start;color:var(--ink-3);font-size:12px">${t("snOff")}</button></div>`; }
+V.sensor = () => { if (!S.user) return V.auth();
+  const staff = S.staff.length || (S.profile && S.profile.is_admin), who = S.snFor, lv = S.snLv;
+  const clubs = S.clubs, club = S.snClub || (S.staff[0] && S.staff[0].id) || (S.club && S.club.id) || "";
+  const mode = S.snMode || (snBt() ? "live" : "file");
+  const devs = S.snFile ? S.snFile.devices : [];
+  return `<main>${backBar(t("snT"), "me")}
+   <div class="card">${snGuide(!S.snRes && !(lv && lv.rec))}</div>
+   <div class="card snform">
+    ${staff ? `<b class="snh">${t("snPlayer")}</b><div class="chips" style="flex-wrap:wrap"><button class="chip" data-snwho="me" aria-pressed="${!who}">${t("snMe")}</button>${who ? `<button class="chip" aria-pressed="true">${esc(who.name)}</button>` : ""}</div>
+     <form id="snFindF" class="row" style="gap:8px"><input id="sn-q" value="${esc(S.snQ)}" placeholder="${t("snFind")}" class="sninp"><button class="cta blue sm" type="submit">${t("apFind")}</button></form>
+     ${(S.snList || []).map(x => `<div class="prow2"><b>${esc(x.name)}</b>${x.sensor_ok ? `<button class="sbtn" type="button" data-snpick="${x.id}" data-n="${esc(x.name)}">✓</button>` : `<span class="note" style="font-size:12px">${t("snNotOk")}</span>`}</div>`).join("")}` : ""}
+    <div class="grid2"><label class="fld"><span>${t("snClub")}</span><select id="sn-club">${clubs.map(c => `<option value="${c.id}"${c.id === club ? " selected" : ""}>${esc(c.name)}</option>`).join("")}</select></label>
+     <label class="fld"><span>${t("snWhen")}</span><input id="sn-at" type="datetime-local" value="${esc(S.snAt)}"></label></div>
+    <b class="snh">${t("snHand")}</b><div class="chips"><button class="chip" data-snhand="R" aria-pressed="${S.snHand !== "L"}">${t("snRight")}</button><button class="chip" data-snhand="L" aria-pressed="${S.snHand === "L"}">${t("snLeft")}</button></div>
+    <label class="row" style="gap:8px;font-size:13px"><input type="checkbox" id="sn-swap"${S.snSwap ? " checked" : ""}> ${t("snSwap")}</label>
+    <div class="chips"><button class="chip" data-snmode="live" aria-pressed="${mode === "live"}">${t("snLive")}</button><button class="chip" data-snmode="file" aria-pressed="${mode === "file"}">${t("snFile")}</button></div>
+   </div>
+   ${mode === "live" ? (!snBt() ? `<div class="card note">${t("snNoBt")}</div>` : `<div class="card snlive">
+     ${!lv || !lv.dev ? `<button class="cta blue wide" data-snconnect${S.snBusy ? " disabled" : ""}>${S.snBusy === "conn" ? t("snConnecting") : t("snConnect")}</button><span class="note">${t("snHow")}</span>`
+      : `<span class="note">${tf("snConnected", {n: esc(lv.dev.name || "WitMotion")})}${lv.lost ? " · ⚠" : ""}</span>
+        ${lv.lost ? `<div class="note" style="color:var(--red)">${t("snLost")}</div><button class="sbtn" data-snconnect>${t("snConnect")}</button>` : ""}
+        ${lv.rec ? `<div class="snrec"><span class="dot"></span>${t("snRecTxt")} <b id="sn-timer">0:00</b> · <b id="sn-live-n">${lv.count}</b> ${t("snShots").toLowerCase()}</div><button class="cta wide" data-snstop>${t("snStop")}</button><span class="note">${t("snKeep")}</span>`
+          : `<button class="cta blue wide" data-snstart>● ${t("snStart")}</button>`}`}</div>`)
+   : `<div class="card snfile"><label class="fld"><span>${t("snPick")}</span><input id="sn-file" type="file" accept=".txt,.csv,.tsv,text/plain,text/csv"></label>
+      ${S.snBusy === "read" ? `<span class="note">${t("snReading")}</span>` : ""}
+      ${devs.length > 1 ? `<span class="note">${tf("snDevs", {n: devs.length})}</span><div class="chips" style="flex-wrap:wrap">${devs.map((d, i) => `<button class="chip" data-sndev="${i}" aria-pressed="${S.snDev === i}">${esc(d.name)} · ${tf("snSamples", {n: Math.round(d.n / d.rate / 60)})}</button>`).join("")}</div>` : ""}</div>`}
+   ${S.snRes ? `${snCard(S.snRes, esc(who ? who.name : (S.profile || {}).full_name || ""))}<button class="cta gold wide" data-snsave${S.snBusy === "save" ? " disabled" : ""}>${t("snSave")}</button>` : ""}
+  </main>${nav("me")}`; };
+function snProfile(){ const d = S.snData; if (!d) return "";
+  const mine = !S.pfId || (S.user && S.pfId === S.user.id), ss = d.sessions || [];
+  if (!ss.length) return mine ? `<h2>⌚ ${t("snT")}</h2><div class="card note">${t("snEmptyMe")} ${d.ok ? "" : t("snWhat")}</div>` : "";
+  const sel = ss[Math.min(S.snSel, ss.length - 1)], b = d.best || {};
+  const tops = ss.slice().reverse().map(x => +x.top || 0).filter(Boolean);
+  return `<h2>⌚ ${t("snT")}</h2>
+   ${snCard(sel, `${esc(fmtDay(new Date(sel.at)))}${sel.club ? " · " + esc(sel.club) : ""}${sel.minutes ? ` · ${sel.minutes} ${t("min")}` : ""}`)}
+   <div class="pfstats sn4"><div class="hl"><b>${snKm(b.top)}</b><small>${t("snBestTop")}</small></div><div><b>${b.shots || 0}</b><small>${t("snBestShots")}</small></div><div><b>${b.n || 0}</b><small>${t("snSessions")}</small></div><div><b>${b.total || 0}</b><small>${t("snTotal")}</small></div></div>
+   ${tops.length > 1 ? `<div class="card"><div class="between"><b>${t("snTrend")}</b><span class="note">${Math.round(tops[0])} → ${Math.round(tops[tops.length - 1])} ${t("snKmh")}</span></div>${spark(tops)}</div>` : ""}
+   ${ss.length > 1 || mine ? `<div class="card">${ss.map((x, i) => `<div class="snrow${i === S.snSel ? " on" : ""}"><button class="linkbtn" data-snsel="${i}"><b>${esc(fmtDay(new Date(x.at)))}</b> <span class="note">${esc(x.club || "")} · ${x.shots} ${t("snShots").toLowerCase()} · ${snKm(x.top, x.stats && x.stats.sat)} ${t("snKmh")}</span></button>${mine || (S.profile && S.profile.is_admin) ? `<button class="sbtn" data-sndel="${x.id}" aria-label="${t("snDel")}">✕</button>` : ""}</div>`).join("")}</div>` : ""}`;
+}
+function snBoardHtml(){ const b = S.snBoard; if (!b || (!b.swing.length && !b.shots.length)) return "";
+  const list = (rows, u) => rows.map((r, i) => `<div class="srow${r.me ? " me" : ""}"><span class="srk${i < 3 ? " top" : ""}">${i === 0 ? "👑" : i + 1}</span><b>${pLink(r.id, r.name)}</b><span class="spts">${Math.round(r.v)} <small>${u}</small></span></div>`).join("");
+  return `<h2>🔥 ${t("snBoard")}</h2><div class="card" style="padding:6px 10px">${list(b.swing, t("snKmh"))}</div>
+   <h2>⌚ ${t("snBoardShots")}</h2><div class="card" style="padding:6px 10px">${list(b.shots, t("snShots").toLowerCase())}</div>`; }
+async function snLoad(id){ const r = await sb.rpc("sensor_list", {p_user: id || null}); S.snData = r.error ? null : r.data; S.snSel = 0; }
+function snLocalNow(d){ const x = d || new Date(); const p = n => String(n).padStart(2, "0"); return `${x.getFullYear()}-${p(x.getMonth() + 1)}-${p(x.getDate())}T${p(x.getHours())}:${p(x.getMinutes())}`; }
+function snRun(){
+  if (S.snMode === "live" || (!S.snMode && snBt() && !S.snFile)){ const lv = S.snLv; if (!lv || lv.n < 200) { S.snRes = null; return; }
+    S.snRes = snAnalyze({t: Float64Array.from(lv.t), a: Float32Array.from(lv.a), g: Float32Array.from(lv.g), rate: 100}, {hand: S.snHand, swap: S.snSwap}); return; }
+  const d = S.snFile && S.snFile.devices[S.snDev]; S.snRes = d ? snAnalyze(d.samples, {hand: S.snHand, swap: S.snSwap}) : null;
+}
+/* live Bluetooth (WitMotion BLE) */
+const SN_SVC = "0000ffe5-0000-1000-8000-00805f9a34fb", SN_RX = "0000ffe4-0000-1000-8000-00805f9a34fb", SN_TX = "0000ffe9-0000-1000-8000-00805f9a34fb";
+const snSleep = ms => new Promise(r => setTimeout(r, ms));
+async function snConnect(){
+  const lv = S.snLv || (S.snLv = {dev: null, rec: false, count: 0, t: [], a: [], g: [], n: 0, buf: new Uint8Array(0), last: -1, lastSwing: -9, t0: 0, got: 0});
+  S.snBusy = "conn"; render();
+  try {
+    const dev = lv.dev && lv.lost ? lv.dev : await navigator.bluetooth.requestDevice({filters: [{namePrefix: "WT"}, {services: [SN_SVC]}], optionalServices: [SN_SVC]});
+    const srv = await dev.gatt.connect(), svc = await srv.getPrimaryService(SN_SVC), rx = await svc.getCharacteristic(SN_RX);
+    try { const tx = await svc.getCharacteristic(SN_TX);
+      for (const c of [[0xFF,0xAA,0x69,0x88,0xB5],[0xFF,0xAA,0x03,0x09,0x00],[0xFF,0xAA,0x00,0x00,0x00]]){ await tx.writeValue(Uint8Array.from(c)); await snSleep(150); } } catch (e) {}
+    rx.addEventListener("characteristicvaluechanged", ev => { const v = ev.target.value; snData(new Uint8Array(v.buffer, v.byteOffset, v.byteLength)); });
+    await rx.startNotifications();
+    if (!lv.dev) dev.addEventListener("gattserverdisconnected", () => { if (S.snLv){ S.snLv.lost = true; if (S.view === "sensor") render(); } });
+    lv.dev = dev; lv.lost = false;
+  } catch (e) { if (e && e.name !== "NotFoundError") toast(errMsg(e)); }
+  S.snBusy = ""; render();
+}
+function snData(bytes){ const lv = S.snLv; if (!lv) return; lv.got++;
+  const b = new Uint8Array(lv.buf.length + bytes.length); b.set(lv.buf); b.set(bytes, lv.buf.length);
+  const rows = []; lv.buf = snPackets(b, rows); if (!lv.rec || !rows.length) return;
+  const now = (performance.now() - lv.t0) / 1000;
+  rows.forEach((r, k) => { let tv = now - (rows.length - 1 - k) * 0.01; if (tv <= lv.last) tv = lv.last + 0.002; lv.last = tv;
+    lv.t.push(tv); lv.a.push(r[0], r[1], r[2]); lv.g.push(r[3], r[4], r[5]); lv.n++;
+    if (Math.hypot(r[3], r[4], r[5]) > SN.TH && tv - lv.lastSwing > SN.GAP){ lv.lastSwing = tv; lv.count++; } });
+}
+let snTimer = null, snWake = null;
+async function snWakeOn(){ try { if (navigator.wakeLock) snWake = await navigator.wakeLock.request("screen"); } catch (e) {} }
+document.addEventListener("visibilitychange", () => { if (!document.hidden && S.snLv && S.snLv.rec) snWakeOn(); });
+window.addEventListener("beforeunload", e => { if (S.snLv && S.snLv.rec){ e.preventDefault(); e.returnValue = ""; } });
+function snTick(){ const lv = S.snLv; if (!lv || !lv.rec) return; const s = Math.floor((performance.now() - lv.t0) / 1000);
+  const a = document.getElementById("sn-timer"), n = document.getElementById("sn-live-n"); if (a) a.textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`; if (n) n.textContent = lv.count;
+  if (s === 15 && !lv.n) toast(t("snNoData")); }
+app.addEventListener("click", async e => {
+  const b = e.target.closest("button"); if (!b) return; const d = b.dataset;
+  if ("snok" in d){ const on = d.snok === "1"; const r = await sb.rpc("sensor_consent", {p_on: on}); if (r.error){ toast(errMsg(r.error)); return; } if (S.profile) S.profile.sensor_ok = on; toast(t("saved")); render(); return; }
+  if ("snopen" in d){ S.snMode = d.snopen; S.snFor = null; S.snRes = null; S.snFile = null; S.snList = []; S.snQ = ""; if (!S.snAt) S.snAt = snLocalNow(); go("sensor"); if ("snother" in d) setTimeout(() => { const q = document.getElementById("sn-q"); if (q) q.focus(); }, 50); return; }
+  if (d.snmode){ S.snMode = d.snmode; snRun(); render(); return; }
+  if (d.snhand){ S.snHand = d.snhand; try { localStorage.setItem("pl-hand", d.snhand); } catch (x) {} snRun(); render(); return; }
+  if (d.snwho === "me"){ S.snFor = null; render(); return; }
+  if (d.snpick){ S.snFor = {id: d.snpick, name: d.n}; S.snList = []; render(); return; }
+  if (d.sndev != null){ S.snDev = +d.sndev; snRun(); render(); return; }
+  if ("snconnect" in d){ await snConnect(); return; }
+  if ("snstart" in d){ const lv = S.snLv; Object.assign(lv, {rec: true, t: [], a: [], g: [], n: 0, count: 0, last: -1, lastSwing: -9, t0: performance.now()}); S.snRes = null; S.snAt = snLocalNow(); snWakeOn(); clearInterval(snTimer); snTimer = setInterval(snTick, 1000); render(); return; }
+  if ("snstop" in d){ const lv = S.snLv; lv.rec = false; clearInterval(snTimer); try { snWake && snWake.release(); } catch (x) {} snRun(); if (!S.snRes) toast(t("snNoData")); render(); return; }
+  if ("snsave" in d){ const r0 = S.snRes; if (!r0) return; S.snBusy = "save"; render();
+    const at = S.snAt ? new Date(S.snAt) : new Date(), club = (document.getElementById("sn-club") || {}).value || null;
+    const r = await sb.rpc("sensor_save", {p_user: S.snFor ? S.snFor.id : null, p_club: club, p_at: at.toISOString(), p_minutes: r0.minutes, p_shots: r0.shots, p_top: r0.top, p_avg: r0.avg, p_active: r0.active, p_stats: r0.stats, p_source: S.snMode === "live" ? "live" : "file"});
+    S.snBusy = ""; if (r.error){ toast(errMsg(r.error)); render(); return; }
+    toast("✓ " + t("snSaved")); S.snRes = null; S.snLv = S.snLv && S.snLv.dev ? Object.assign(S.snLv, {t: [], a: [], g: [], n: 0, count: 0}) : null;
+    S.pfId = S.snFor ? S.snFor.id : null; S.pf = null; go("profile"); return; }
+  if (d.snsel != null){ S.snSel = +d.snsel; render(); window.scrollTo({top: (document.querySelector(".sncard") || {}).offsetTop - 70 || 0, behavior: "smooth"}); return; }
+  if (d.sndel){ if (!confirm(t("snDelQ"))) return; const r = await sb.rpc("sensor_delete", {p_id: +d.sndel}); if (r.error){ toast(errMsg(r.error)); return; } await snLoad(S.pfId); render(); return; }
+});
+app.addEventListener("change", async e => { const el = e.target;
+  if (el.id === "sn-club"){ S.snClub = el.value; return; }
+  if (el.id === "sn-at"){ S.snAt = el.value; return; }
+  if (el.id === "sn-swap"){ S.snSwap = el.checked; snRun(); render(); return; }
+  if (el.id === "sn-file" && el.files && el.files[0]){ S.snBusy = "read"; S.snRes = null; render();
+    try { const txt = await el.files[0].text(); S.snFile = snParse(txt); S.snDev = 0; const st = S.snFile.devices[0].start; if (st) S.snAt = snLocalNow(st); S.snMode = "file"; snRun(); }
+    catch (x) { S.snFile = null; toast(t("snBadFile")); }
+    S.snBusy = ""; render(); return; }
+});
+app.addEventListener("submit", async e => { if (e.target.id !== "snFindF") return; e.preventDefault(); e.stopImmediatePropagation();
+  S.snQ = document.getElementById("sn-q").value; const r = await sb.rpc("sensor_players", {p_q: S.snQ}); if (r.error){ toast(errMsg(r.error)); return; } S.snList = r.data || []; render(); }, true);
+
 render();
 boot();
 
