@@ -600,6 +600,50 @@ button,a{-webkit-tap-highlight-color:transparent}
 .fst{font-size:13px;font-weight:700}
 .fst.ok{color:#2E9E5B}.fst.off{color:var(--ink-3)}.fst.nx{color:var(--blue);margin-inline-start:6px}
 .card.club.fhit{box-shadow:0 0 0 2px #2E9E5B}
+/* profiles */
+.pfbtn{background:linear-gradient(90deg,#1F3B2E,#2C5A43);color:#F4F1E6}
+.plink{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;text-decoration-color:color-mix(in srgb,currentColor 35%,transparent);text-underline-offset:3px;cursor:pointer}
+.pfhero{--tc:#E8C96A;display:flex;gap:14px;align-items:center;padding:18px;border-radius:18px;color:#F4F1E6;background:radial-gradient(120% 140% at 100% 0%,#2C5A43 0%,#12251C 50%,#09130E 100%);box-shadow:0 0 0 1.5px var(--tc)}
+.pfav{flex:none;width:72px;height:72px;border-radius:50%;display:grid;place-items:center;font-family:var(--disp);font-style:italic;font-weight:900;font-size:30px;color:#15120A;background:radial-gradient(circle at 35% 30%,#FFF3C4,var(--tc) 55%,#6E5418);box-shadow:0 0 0 3px #12251C,0 0 0 5px var(--tc)}
+.pfid{min-width:0;display:flex;flex-direction:column;gap:4px}
+.pfid h1{margin:0;font-family:var(--disp);font-style:italic;font-weight:900;font-size:28px;line-height:1;text-transform:uppercase;overflow:hidden;text-overflow:ellipsis}
+.pfmeta{display:flex;flex-wrap:wrap;gap:6px}.pfmeta span{font-size:12px;font-weight:800;padding:3px 8px;border-radius:6px;border:1px solid rgba(244,241,230,.3)}
+.pfmeta .pfl{background:var(--tc);color:#15120A;border-color:var(--tc)}
+.pfid small{color:rgba(244,241,230,.7);font-weight:700;font-size:12px}
+.pfstats{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.pfstats div{display:flex;flex-direction:column;align-items:center;gap:2px;padding:10px 2px;border-radius:12px;background:var(--card);border:1px solid var(--line)}
+.pfstats b{font-family:var(--disp);font-style:italic;font-weight:900;font-size:22px;line-height:1}
+.pfstats small{font-size:10px;font-weight:800;color:var(--ink-3);text-transform:uppercase;letter-spacing:.04em;text-align:center}
+.pfstats .hl{background:#E8C96A;border-color:#E8C96A;color:#15120A}.pfstats .hl small{color:#3A2E10}
+.form{display:flex;gap:5px;margin-top:10px;flex-wrap:wrap}
+.form span{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-weight:900;font-size:12px;color:#fff}
+.form .w{background:#2E9E5B}.form .l{background:#E5484D}
+.bestp{display:flex;align-items:center;gap:12px;border:1.5px solid #E8C96A;background:linear-gradient(120deg,color-mix(in srgb,#E8C96A 18%,var(--card)),var(--card))}
+.bestp .av{width:48px;height:48px;margin:0;font-size:17px}
+.bestp small{display:block;font-weight:800;font-size:12px;color:var(--ink-3)}
+.bestp b{display:block;font-size:18px}
+.bestp .big{font-family:var(--disp);font-style:italic;font-weight:900;font-size:32px;color:#2E9E5B}
+.prow2{display:grid;grid-template-columns:1fr auto auto 80px;gap:8px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.prow2:last-child{border-bottom:0}.prow2 b{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rivals,.facts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.riv,.facts .card{display:flex;flex-direction:column;gap:3px}
+.riv small,.facts small{font-size:12px;font-weight:800;color:var(--ink-3)}
+.riv b{font-size:17px}.facts b{font-family:var(--disp);font-style:italic;font-weight:900;font-size:24px;line-height:1.05}
+.riv.nem{border-color:#E5484D}.riv.vic{border-color:#2E9E5B}
+.facts .wide{grid-column:1/-1}
+.spark{width:100%;height:80px;margin-top:8px}
+.grow{display:flex;gap:10px;align-items:flex-start;padding:9px 0;border-bottom:1px solid var(--line)}
+.grow:last-child{border-bottom:0}.grow .note{display:block}
+.grow .res{flex:none;width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font-weight:900;color:#fff}
+.grow.w .res{background:#2E9E5B}.grow.l .res{background:#E5484D}
+/* deals */
+.deals{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none}
+.deal{flex:none;display:flex;flex-direction:column;gap:3px;text-align:start;padding:12px 14px;border-radius:14px;border:0;color:#fff;background:linear-gradient(135deg,#E5484D,#E79A3A);box-shadow:0 6px 16px rgba(229,72,77,.3);max-width:240px}
+.deal span{font-size:12.5px;font-weight:700;opacity:.95}
+.dealtag{display:inline-block;margin-top:6px;font-size:12px;font-weight:800;color:#E5484D}
+.pushc{display:flex;flex-wrap:wrap;align-items:center;gap:12px;border:1.5px solid var(--blue)}
+.pushc .pbell{font-size:26px}.pushc .note{display:block}
+.pushc .act{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
 </style>
 </head>
 <body>
@@ -711,7 +755,7 @@ const money = n => n == null ? "–" : "$" + (Math.round(n * 100) / 100).toStrin
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v6";
+const VERSION = "v8";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -754,7 +798,7 @@ async function boot(){
 }
 async function loadClubs(){
   const [c, ct, p, cl] = await Promise.all([
-    sb.from("clubs").select("id,slug,name,city,about,opens,closes,peak_from,late_from,usd_syp_rate,cancel_hours,area,photo,maps_url,phone,weekend_days,book_days").order("name"),
+    sb.from("clubs").select("id,slug,name,city,about,opens,closes,peak_from,late_from,usd_syp_rate,cancel_hours,area,photo,maps_url,phone,weekend_days,book_days,deal_pct,deal_hours").order("name"),
     sb.from("courts").select("*").order("sort"),
     sb.from("prices").select("*"),
     sb.from("closures").select("*")]);
@@ -765,7 +809,7 @@ async function loadClubs(){
 async function afterAuth(silent){
   if (S.user){
     const [p, mine, st] = await Promise.all([sb.from("profiles").select("*").eq("id", S.user.id).maybeSingle(), sb.rpc("my_bookings"), sb.rpc("my_clubs")]);
-    S.profile = p.data || null; S.mine = mine.data || []; S.staff = st.data || []; await Promise.all([loadNotifN(), loadCard(), loadMems()]);
+    S.profile = p.data || null; S.mine = mine.data || []; S.staff = st.data || []; await Promise.all([loadNotifN(), loadCard(), loadMems(), loadPush()]);
   } else { S.profile = null; S.mine = []; S.staff = []; S.notifN = 0; S.card = null; S.mems = []; }
   const m = await sb.rpc("open_matches"); S.matches = m.data || [];
   if (!silent) render();
@@ -809,6 +853,8 @@ V.home = () => { const next = S.mine.find(b => b.status !== "cancelled" && new D
     <span style="opacity:.92;font-size:14px">${esc(next.club_name)} · ${esc(next.court_name)} · ${next.minutes} ${t("min")}${next.code ? ` · ${t("booking")} #${next.booking_no} · <b>${esc(next.code)}</b>` : ""}</span></div>`
    : `<button class="hero" data-go="clubs" style="text-align:start;width:100%"><span class="kick2">${t("none")}</span><span class="big">${t("book")} →</span><span style="opacity:.9;font-size:14px">${t("bookFirst")}</span></button>`}
   <div class="quick"><button data-go="clubs">${IC.cal}${t("book")}</button><button data-go="matches">${IC.ppl}${t("find")}</button><button data-go="events">${IC.cup}${t("events")}</button></div>
+  ${pushCard(true)}
+  ${dealsStrip()}
   <div class="between"><h2>${t("open")}</h2><a href="#matches" data-go="matches" style="font-weight:700;font-size:13px;white-space:nowrap">${t("all")}</a></div>
   <div style="display:flex;flex-direction:column;gap:10px">${S.matches.filter(m => m.open_spots > 0).slice(0,3).map(matchRow).join("") || `<div class="card note">${t("noMatches")}</div>`}</div>
   ${installCard()}
@@ -825,7 +871,7 @@ V.clubs = () => { const areas = [...new Set(S.clubs.map(c => c.area).filter(Bool
   ${list.map(({c, st}) => { const min = Math.min(...S.prices.filter(p => p.club_id === c.id && p.price != null && p.minutes === 60).map(p => +p.price));
    const n = S.courts.filter(x => x.club_id === c.id).length;
    const go = st.slot && st.court ? `${c.id}|${st.court}|${st.slot.iso}` : "";
-   return `<div class="card club${st.rank === 0 ? " fhit" : ""}"><button class="clubtap" data-club="${c.id}"><div class="pic">${clubPic(c)}</div><div class="bd"><div class="between"><h2>${esc(c.name)}</h2>${isFinite(min) ? `<span><b>${t("from")} $${min}</b><span class="note">${t("hr")}</span></span>` : ""}</div><span class="note">${esc([c.area, c.city].filter(Boolean).join(", "))} · ${n} ${n === 1 ? "court" : "courts"} · ${esc(c.opens.slice(0,5))}–${esc(c.closes.slice(0,5))}</span></div></button>
+   return `<div class="card club${st.rank === 0 ? " fhit" : ""}"><button class="clubtap" data-club="${c.id}"><div class="pic">${clubPic(c)}</div><div class="bd"><div class="between"><h2>${esc(c.name)}</h2>${isFinite(min) ? `<span><b>${t("from")} $${min}</b><span class="note">${t("hr")}</span></span>` : ""}</div><span class="note">${esc([c.area, c.city].filter(Boolean).join(", "))} · ${n} ${n === 1 ? "court" : "courts"} · ${esc(c.opens.slice(0,5))}–${esc(c.closes.slice(0,5))}</span>${+c.deal_pct ? `<span class="dealtag">🔥 ${tf("dealTxt", {p: c.deal_pct, h: c.deal_hours})}</span>` : ""}</div></button>
     <div class="fline">${st.html}${go ? `<button class="cta ${st.rank === 0 ? "blue" : "ghost"} sm" data-fgo="${go}">${t("fBookIt")} ${esc(fmtTime(st.slot.d).replace(/:00/, ""))} →</button>` : ""}</div></div>`; }).join("") || `<div class="card note">No clubs yet.</div>`}
   <div class="card note" style="text-align:center">More clubs coming. Club owners can list their courts for free.</div>
  </main>${nav("clubs")}`; };
@@ -839,7 +885,7 @@ function slotsFor(c){
     const s = addMin(start, m), e = addMin(s, S.dur), band = bandAt(c, m);
     const pr = S.prices.find(p => p.club_id === c.id && p.band === band && p.minutes === S.dur);
     const busy = S.busy.some(b => b.court_id === S.court && new Date(b.starts_at) < e && new Date(b.ends_at) > s);
-    out.push({iso:s.toISOString(), d:s, price: pr && pr.price != null ? applyDisc(c, +pr.price) : null, off: busy || s < now || !pr || pr.price == null});
+    out.push({iso:s.toISOString(), d:s, price: pr && pr.price != null ? applyDisc(c, +pr.price, s) : null, deal: dealOn(c, s), off: busy || s < now || !pr || pr.price == null});
   }
   return {closed:false, list:out};
 }
@@ -852,7 +898,7 @@ V.club = () => { const c = S.club; if (!c) return V.clubs();
   <div class="seg">${courts.map(x => `<button data-court="${x.id}" aria-pressed="${S.court === x.id}" class="c-${esc(x.color)}">${esc(x.name)}</button>`).join("")}</div>
   <div class="row" style="flex-wrap:wrap"><b style="font-size:13px;color:var(--ink-2)">${t("length")}</b>${[60,90,120].map(m => `<button class="chip" data-dur="${m}" aria-pressed="${S.dur === m}">${m} ${t("min")}</button>`).join("")}</div>
   ${coachChips()}
-  ${sl.closed ? `<div class="notice">${t("closedDay")}</div>` : `<div class="slots">${sl.list.map(x => `<button class="slot" data-slot="${x.iso}" aria-pressed="${S.slot === x.iso && !x.off}"${x.off ? " disabled" : ""}><b>${esc(fmtTime(x.d).replace(/\s?(am|pm)$/i,""))}</b>${x.off || x.price == null ? "" : `<small>$${x.price}</small>`}</button>`).join("")}</div>`}
+  ${sl.closed ? `<div class="notice">${t("closedDay")}</div>` : `<div class="slots">${sl.list.map(x => `<button class="slot" data-slot="${x.iso}" aria-pressed="${S.slot === x.iso && !x.off}"${x.off ? " disabled" : ""}><b>${esc(fmtTime(x.d).replace(/\s?(am|pm)$/i,""))}</b>${x.off || x.price == null ? "" : `<small>${x.deal ? "🔥" : ""}$${x.price}</small>`}</button>`).join("")}</div>`}
   ${clubExtras(c)}
   <div class="card" style="display:flex;flex-direction:column;gap:10px"><p class="note" style="margin:0">${esc(c.about)}</p>${clubLinks(c)}</div>
  </main><div class="bar"><div class="sum"><small>${esc(fmtDay(at(S.day,"12:00")))}${pick ? ` · ${esc(fmtTime(pick.d))}` : ""} · ${S.dur} ${t("min")}</small><b>${pick ? money(pick.price + coachFee()) : t("pick")}</b>${pick ? (coachSel() ? ` <span class="note">· ${t("lesson")} · ${esc(coachSel().name)}</span>` : ` <span class="note">· ${money(pick.price / 4)} ${t("each")}</span>`) : ""}</div><button class="cta" data-go="checkout"${pick ? "" : " disabled"}>${t("cont")}</button></div>`; };
@@ -872,7 +918,7 @@ V.checkout = () => { const c = S.club; const sl = c && slotsFor(c).list.find(x =
   <h2>${t("how")}</h2>
   <div style="display:flex;flex-direction:column;gap:8px">${opt("club","p1","p1s")}${opt("shamcash","p2","p2s")}${opt("syriatel","p3","p3s")}</div>
   ${S.pay !== "club" ? `<label class="fld"><span>${t("ref")}</span><input id="ref" inputmode="numeric" autocomplete="off" value="${esc(S.ref)}"></label>` : ""}
-  <div class="card lines"><div><span>${t("court")} · ${S.dur} ${t("min")}${discFor(c) ? ` · ${t("discount")} ${discFor(c)}%` : ""}</span><span>${money(sl.price)}</span></div>${coachSel() ? `<div><span>${t("coachFee")} · ${esc(coachSel().name)}</span><span>${money(coachFee())}</span></div>` : `<div><span>${t("each")} (÷4)</span><span>${money(sl.price / 4)}</span></div>`}<div class="tot"><span>${S.split && S.openSpots ? t("yourShare") : t("total")}</span><span>${money(S.split && S.openSpots ? sl.price / 4 : sl.price + coachFee())}</span></div></div>
+  <div class="card lines"><div><span>${t("court")} · ${S.dur} ${t("min")}${discFor(c, sl.d) ? ` · ${t("discount")} ${discFor(c, sl.d)}%` : ""}</span><span>${money(sl.price)}</span></div>${coachSel() ? `<div><span>${t("coachFee")} · ${esc(coachSel().name)}</span><span>${money(coachFee())}</span></div>` : `<div><span>${t("each")} (÷4)</span><span>${money(sl.price / 4)}</span></div>`}<div class="tot"><span>${S.split && S.openSpots ? t("yourShare") : t("total")}</span><span>${money(S.split && S.openSpots ? sl.price / 4 : sl.price + coachFee())}</span></div></div>
   <p class="note" style="margin:0">${t("cancelTxt")}</p>
  </main><div class="bar"><div class="sum"><small>${S.split && S.openSpots ? t("payNow") : t("total")}</small><b>${money(S.split && S.openSpots ? sl.price / 4 : sl.price + coachFee())}</b></div><button class="cta blue" data-confirm${S.busyOp ? " disabled" : ""}>${S.busyOp ? "…" : t("confirm")}</button></div>`; };
 
@@ -933,6 +979,8 @@ V.me = () => { if (!S.user) return V.auth();
  return `<main>${backBar(t("profile"), "home", `<button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button>`)}
   <div class="row" style="gap:14px"><span class="av" style="width:56px;height:56px;font-size:18px;margin:0">${esc(initials(p.full_name))}</span><div><h2>${esc(p.full_name || "")}</h2><span class="note">${esc(S.user.email || "")}</span></div>${bell()}</div>
   ${playerCard(S.card)}
+  <button class="cta wide pfbtn" data-profile="me">📊 ${t("pfMine")} →</button>
+  ${pushCard(false)}
   <h2>${t("myGames")}</h2>
   <div style="display:flex;flex-direction:column;gap:10px">${S.mine.map(gameRow).join("") || `<div class="card note">${t("bookFirst")}</div>`}</div>
   <h2>${t("myResults")}</h2>
@@ -1067,7 +1115,7 @@ V.match = () => { const m = S.match; if (!m) return V.me();
   return `<main>${backBar(t("match"), "me")}
    <div class="card"><div class="between"><b>${esc(fmtDay(d))} · ${esc(fmtTime(d))}</b>${statusTag(m.status)}</div><span class="note">${esc(m.club)} · ${esc(m.court)} · ${m.minutes} ${t("min")}${m.level_min != null ? ` · ${t("lvl")} ${lvl2(m.level_min)}–${lvl2(m.level_max)}` : ""}</span>${m.code ? `<span class="note" style="display:block">${t("booking")} #${m.booking_no} · ${t("code")} <b>${esc(m.code)}</b></span>` : ""}</div>
    <h2>${t("players")}</h2>
-   <div class="card" style="display:flex;flex-direction:column;gap:10px">${m.players.map(p => `<div class="prow">${av(p.name)}<div style="flex:1;min-width:0"><b>${esc(p.name)}${p.me ? ` <span class="note">(${t("you")})</span>` : ""}</b>${p.booker ? `<small class="note" style="display:block">${t("booker")}</small>` : ""}</div>${lvChip(p.level)}${m.split ? paidTag(p.paid) : ""}</div>`).join("")}
+   <div class="card" style="display:flex;flex-direction:column;gap:10px">${m.players.map(p => `<div class="prow">${av(p.name)}<div style="flex:1;min-width:0"><b>${pLink(p.id, p.name)}${p.me ? ` <span class="note">(${t("you")})</span>` : ""}</b>${p.booker ? `<small class="note" style="display:block">${t("booker")}</small>` : ""}</div>${lvChip(p.level)}${m.split ? paidTag(p.paid) : ""}</div>`).join("")}
     ${Array.from({length: m.open_spots}, () => `<div class="prow">${av("", 1)}<span class="note">${t("openSpot")}</span></div>`).join("")}
     ${m.split ? `<p class="note" style="margin:0">${t("splitInfo").replace("{x}", money(share))}</p>` : ""}</div>
    ${res}
@@ -1146,7 +1194,7 @@ function playerCard(c){
 V.season = () => { const rows = S.board || [];
   return `<main>${backBar(t("seasonT"), "me")}
    <div class="seasonhd"><b>${esc(S.boardClub || "")}</b><span>${esc(S.card && S.card.season ? S.card.season.month : "")} · ${t("seasonRule")}</span></div>
-   <div class="card" style="padding:6px 10px">${rows.map(r => `<div class="srow${r.me ? " me" : ""}"><span class="srk${r.rk <= 3 ? " top" : ""}">${r.rk === 1 ? "👑" : r.rk}</span><b>${esc(r.name)}</b>${lvChip(r.level)}<span class="spts">${r.points} <small>${t("pts")}</small></span></div>`).join("") || `<p class="note">${t("seasonEmpty")}</p>`}</div>
+   <div class="card" style="padding:6px 10px">${rows.map(r => `<div class="srow${r.me ? " me" : ""}"><span class="srk${r.rk <= 3 ? " top" : ""}">${r.rk === 1 ? "👑" : r.rk}</span><b>${pLink(r.id, r.name)}</b>${lvChip(r.level)}<span class="spts">${r.points} <small>${t("pts")}</small></span></div>`).join("") || `<p class="note">${t("seasonEmpty")}</p>`}</div>
   </main>${nav("me")}`; };
 async function loadCard(){ if (!S.user) { S.card = null; return; } try { const r = await sb.rpc("my_card"); if (!r.error) S.card = r.data; } catch (e) {} }
 function celebrate(){
@@ -1231,7 +1279,7 @@ Object.assign(W.en, {
   lesson:"Lesson", classes:"Group classes", spotsLeftN:"{n} spots left", classFull:"Full", joinClass:"Join", joinedClass:"You're in", leaveClass:"Leave",
   clsLevel:"Level {a}–{b}", perPlayer:"per player", membership:"Membership", memberOf:"Member", memUntil:"until {d}", memOff:"{p}% off courts",
   memAhead:"Book {n} days ahead", memJoin:"Become a member", memMonths:"{n} month(s)", memAsk:"Request sent. The club will confirm your payment.",
-  memPend:"Waiting for the club", myMems:"My memberships", myClasses:"My classes", discount:"Member discount",
+  memPend:"Waiting for the club", myMems:"My memberships", myClasses:"My classes", discount:"Discount",
   bookAhead:"You can book up to {n} days ahead.",
   mTabDay:"Today", mTabStats:"Stats", mTabMem:"Members", mTabCoach:"Coaching", mTabSet:"Settings",
   stRev:"Revenue", stOcc:"Courts filled", stBk:"Bookings", stPl:"Players", stNew:"new", stMem:"Members", stLes:"Lessons", stCls:"Classes",
@@ -1270,7 +1318,7 @@ Object.assign(W.ar, {
   lesson:"درس", classes:"كلاسات جماعية", spotsLeftN:"{n} أماكن باقية", classFull:"مكتمل", joinClass:"انضم", joinedClass:"أنت مسجل", leaveClass:"انسحاب",
   clsLevel:"المستوى {a}–{b}", perPlayer:"للاعب", membership:"العضوية", memberOf:"عضو", memUntil:"حتى {d}", memOff:"خصم {p}% على الملاعب",
   memAhead:"احجز قبل {n} يوم", memJoin:"صير عضو", memMonths:"{n} شهر", memAsk:"انبعت الطلب. النادي رح يأكد الدفع.",
-  memPend:"بانتظار النادي", myMems:"عضوياتي", myClasses:"كلاساتي", discount:"خصم العضوية",
+  memPend:"بانتظار النادي", myMems:"عضوياتي", myClasses:"كلاساتي", discount:"خصم",
   bookAhead:"فيك تحجز لحد {n} يوم لقدام.",
   mTabDay:"اليوم", mTabStats:"إحصائيات", mTabMem:"الأعضاء", mTabCoach:"التدريب", mTabSet:"الإعدادات",
   stRev:"الدخل", stOcc:"إشغال الملاعب", stBk:"الحجوزات", stPl:"اللاعبين", stNew:"جديد", stMem:"الأعضاء", stLes:"دروس", stCls:"كلاسات",
@@ -1297,8 +1345,8 @@ Object.assign(S, {coaches:[], classes:[], plans:[], mems:[], myClasses:[], coach
 
 /* pricing helpers: weekend band, member discount, booking window */
 const memberOf = id => (S.mems || []).find(m => m.club_id === id && m.status === "active");
-const discFor = c => { const m = c && memberOf(c.id); return m ? +m.discount || 0 : 0; };
-const applyDisc = (c, p) => p == null ? null : Math.round(p * (100 - discFor(c))) / 100;
+const discFor = (c, s) => { const m = c && memberOf(c.id); return Math.max(m ? +m.discount || 0 : 0, dealOn(c, s) ? +c.deal_pct : 0); };
+const applyDisc = (c, p, s) => p == null ? null : Math.round(p * (100 - discFor(c, s))) / 100;
 const bookDays = c => Math.min(30, Math.max(c.book_days || 7, (memberOf(c.id) || {}).book_days || 0));
 const dowOf = day => new Date(day + "T12:00:00+03:00").getUTCDay();
 const bandAt = (c, m) => { const b = bandOf(c, m); return b === "day" && (c.weekend_days || []).includes(dowOf(S.day)) ? "peak" : b; };
@@ -1459,7 +1507,7 @@ function mgrCoaching(club){ const courts = S.courts.filter(x => x.club_id === cl
   <h2>${t("classes")}</h2>${S.mClasses.map(k => classRow(k, true)).join("") || `<div class="card note">${t("noClasses")}</div>`}`; }
 function mgrSettings(club){ const wk = S.wkDraft || club.weekend_days || [];
   const dn = d => new Intl.DateTimeFormat(lang === "ar" ? "ar-SY" : "en-GB", {weekday: "short", timeZone: "UTC"}).format(new Date(Date.UTC(2024, 0, 7 + d)));
-  return `<div class="card" style="display:flex;flex-direction:column;gap:10px"><h2 style="font-size:17px">${t("wkTitle")}</h2><span class="note" style="margin-top:-6px">${t("wkTxt")}</span>
+  return `${dealForm(club)}<div class="card" style="display:flex;flex-direction:column;gap:10px"><h2 style="font-size:17px">${t("wkTitle")}</h2><span class="note" style="margin-top:-6px">${t("wkTxt")}</span>
    <div class="chips" style="flex-wrap:wrap">${[6,0,1,2,3,4,5].map(d => `<button class="chip" data-wk="${d}" aria-pressed="${wk.includes(d)}">${esc(dn(d))}</button>`).join("")}</div>
    <label class="fld"><span>${t("aheadL")}</span><input id="bk-days" inputmode="numeric" value="${club.book_days || 7}"></label><button class="cta blue sm" data-saverules style="align-self:flex-start">${t("saveRules")}</button></div>
   ${mgrPrices(club)}${clubForm(club)}`; }
@@ -1478,8 +1526,8 @@ function nText2(n){ const d = n.data || {}, nm = esc(d.name || t("someone")), w 
     class_join: tf("nClassJoin", {n: nm, x, w}), class_cancel: tf("nClassCancel", {x, w}), league_partner: tf("nLgPartner", {n: nm, x, c}),
     league_req: tf("nLgReq", {n: nm, x, c}), league_ok: tf("nLgOk", {x}), league_no: tf("nLgNo", {x}),
     league_round: tf("nLgRound", {r: d.round, x, b: d.box, d: esc(d.until || "")}), league_result: tf("nLgResult", {n: nm}),
-    league_disputed: tf("nLgDisp", {n: nm}), league_champ: tf("nLgChamp", {x, c}) })[n.kind]; }
-const nLink = n => /^league_/.test(n.kind) ? `data-go="events"` : /^member_/.test(n.kind) ? (n.kind === "member_req" ? `data-go="manager"` : `data-go="me"`) : /^class_/.test(n.kind) || n.kind === "lesson_new" ? `data-go="me"` : "";
+    league_disputed: tf("nLgDisp", {n: nm}), league_champ: tf("nLgChamp", {x, c}), booking_new: tf(d.pending ? "nBookingDep" : "nBooking", {n: nm, k: esc(d.court || ""), w}) })[n.kind]; }
+const nLink = n => n.kind === "booking_new" ? `data-go="manager"` : /^league_/.test(n.kind) ? `data-go="events"` : /^member_/.test(n.kind) ? (n.kind === "member_req" ? `data-go="manager"` : `data-go="me"`) : /^class_/.test(n.kind) || n.kind === "lesson_new" ? `data-go="me"` : "";
 
 function lgGrab(){ const v = id => { const el = document.getElementById(id); return el ? el.value : undefined; }; const f = S.lgForm || (S.lgForm = {});
   [["name","le-name"],["starts_on","le-s"],["ends_on","le-e"],["round_days","le-rd"],["box_size","le-bx"],["fee","le-fee"],["prize","le-prize"],["about","le-about"]].forEach(([k, id]) => { const x = v(id); if (x !== undefined) f[k] = x; }); }
@@ -1503,7 +1551,7 @@ function clubFree(c, day, dur){            // every bookable start on that club 
     let band = bandOf(c, m); if (band === "day" && wk) band = "peak";
     const pr = S.prices.find(p => p.club_id === c.id && p.band === band && p.minutes === dur); if (!pr || pr.price == null) continue;
     const free = courts.filter(ct => !busy.some(b => b.court_id === ct.id && new Date(b.starts_at) < e && new Date(b.ends_at) > s)).map(ct => ct.id);
-    out.push({m, d: s, iso: s.toISOString(), price: applyDisc(c, +pr.price), courts: free});
+    out.push({m, d: s, iso: s.toISOString(), price: applyDisc(c, +pr.price, s), deal: dealOn(c, s), courts: free});
   }
   return {list: out};
 }
@@ -1524,7 +1572,7 @@ function findStatus(c){
   const hit = r.list.find(x => hm(x.d) === S.fTime);
   const lbl = (() => { const any = findTimes().find(([k]) => k === S.fTime); return any ? ftime(any[1]) : S.fTime; })();
   if (hit && hit.courts.length){ const ct = S.courts.find(x => x.id === hit.courts[0]);
-    return {rank: 0, slot: hit, court: hit.courts[0], html: `<span class="fst ok">✓ ${tf("fFree", {t: lbl})} · ${esc(ct ? ct.name : "")}${hit.courts.length > 1 ? ` +${hit.courts.length - 1}` : ""} · <b>${money(hit.price)}</b></span>`}; }
+    return {rank: 0, slot: hit, court: hit.courts[0], html: `<span class="fst ok">✓ ${tf("fFree", {t: lbl})} · ${esc(ct ? ct.name : "")}${hit.courts.length > 1 ? ` +${hit.courts.length - 1}` : ""} · <b>${hit.deal ? "🔥" : ""}${money(hit.price)}</b></span>`}; }
   const startM = after(c, S.fTime);
   const nxt = open.find(x => x.m > startM) || open[0];
   const why = hit ? tf("fFull", {t: lbl}) : tf("fClosed", {t: lbl});
@@ -1538,6 +1586,105 @@ function findBar(){
    <div class="chips ftimes"><button class="chip" data-ftime="" aria-pressed="${!S.fTime}">${t("fAny")}</button>${times.map(([k, d]) => `<button class="chip" data-ftime="${k}" aria-pressed="${S.fTime === k}">${esc(fmtTime(d).replace(/:00/, ""))}</button>`).join("")}</div>
    <div class="row" style="flex-wrap:wrap"><b style="font-size:13px;color:var(--ink-2)">${t("fLen")}</b>${[60,90,120].map(m => `<button class="chip" data-fdur="${m}" aria-pressed="${S.fDur === m}">${m} ${t("min")}</button>`).join("")}</div></div>`;
 }
+
+/* ---------- player profiles ---------- */
+Object.assign(W.en, {pfTitle:"Player profile", pfMine:"My profile & stats", pfPlayed:"Played", pfWins:"Wins", pfWinPct:"Win rate", pfStreak:"Streak", pfBest:"Best run",
+  pfForm:"Last 10", pfChem:"Chemistry", pfBestPartner:"Best partner", pfTogether:"{w} wins in {n} games together", pfPartners:"Partners", pfRivals:"Rivals",
+  pfNemesis:"Nemesis", pfNemTxt:"beat you {l} of {n}", pfVictim:"Favourite opponent", pfVicTxt:"you beat them {w} of {n}", pfStyle:"Play style", pfClutch:"Clutch",
+  pfClutchTxt:"{w}/{n} three-set matches won", pfComeback:"Comebacks", pfComebackTxt:"won {n} after losing the first set", pfBiggest:"Biggest win", pfHome:"Home court",
+  pfTime:"Favourite time", pfEarly:"Early bird", pfDay:"Afternoon player", pfNight:"Night owl", pfLevel:"Level journey", pfRecent:"Recent games", pfWith:"with", pfVs:"vs",
+  pfSets:"Sets", pfGames:"Games", pfSince:"Playing since {d}", pfEmpty:"No confirmed games yet. Play a match and confirm the score to start your stats.",
+  pfFind:"Find a player", pfFindPh:"Type a name", pfLeague:"League", pfNoData:"Play more to unlock"});
+Object.assign(W.ar, {pfTitle:"ملف اللاعب", pfMine:"ملفي وإحصائياتي", pfPlayed:"لعب", pfWins:"فوز", pfWinPct:"نسبة الفوز", pfStreak:"سلسلة", pfBest:"أطول سلسلة",
+  pfForm:"آخر ١٠", pfChem:"الانسجام", pfBestPartner:"أفضل شريك", pfTogether:"{w} فوز من {n} مباريات سوا", pfPartners:"الشركاء", pfRivals:"المنافسين",
+  pfNemesis:"العدو اللدود", pfNemTxt:"غلبك {l} من {n}", pfVictim:"الخصم المفضل", pfVicTxt:"غلبته {w} من {n}", pfStyle:"أسلوب اللعب", pfClutch:"الحسم",
+  pfClutchTxt:"ربح {w}/{n} مباريات بثلاث مجموعات", pfComeback:"العودة", pfComebackTxt:"ربح {n} بعد خسارة المجموعة الأولى", pfBiggest:"أكبر فوز", pfHome:"الملعب المفضل",
+  pfTime:"الوقت المفضل", pfEarly:"بيلعب الصبح", pfDay:"لاعب العصر", pfNight:"بومة الليل", pfLevel:"رحلة المستوى", pfRecent:"آخر المباريات", pfWith:"مع", pfVs:"ضد",
+  pfSets:"المجموعات", pfGames:"الأشواط", pfSince:"بيلعب من {d}", pfEmpty:"ما في مباريات مؤكدة لسا. العب مباراة وأكد النتيجة لتبلش إحصائياتك.",
+  pfFind:"ابحث عن لاعب", pfFindPh:"اكتب اسم", pfLeague:"دوري", pfNoData:"العب أكتر لتفتح"});
+Object.assign(S, {pf:null, pfId:null, pfQ:"", pfList:[]});
+async function loadProfile(id){ const r = await sb.rpc("player_profile", {p_user: id || null}); if (r.error){ toast(errMsg(r.error)); S.pf = null; return; } S.pf = r.data; }
+const pLink = (id, name) => id ? `<button class="plink" data-profile="${id}">${esc(name)}</button>` : esc(name);
+function spark(vals){ if (!vals || vals.length < 2) return "";
+  const w = 300, h = 70, mn = Math.min(...vals) - .05, mx = Math.max(...vals) + .05, x = i => i / (vals.length - 1) * w, y = v => h - (v - mn) / (mx - mn) * h;
+  const pts = vals.map((v, i) => `${x(i).toFixed(1)},${y(+v).toFixed(1)}`).join(" ");
+  return `<svg viewBox="0 0 ${w} ${h + 6}" class="spark" preserveAspectRatio="none"><defs><linearGradient id="spg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8C96A" stop-opacity=".45"/><stop offset="1" stop-color="#E8C96A" stop-opacity="0"/></linearGradient></defs><polygon points="0,${h + 6} ${pts} ${w},${h + 6}" fill="url(#spg)"/><polyline points="${pts}" fill="none" stroke="#E8C96A" stroke-width="2.5" stroke-linejoin="round"/><circle cx="${x(vals.length - 1)}" cy="${y(+vals[vals.length - 1])}" r="4" fill="#E3EE3A"/></svg>`; }
+V.profile = () => { if (!S.user) return V.auth(); const p = S.pf;
+  if (!p) return `<main>${backBar(t("pfTitle"), "me")}<div class="card note">…</div></main>${nav("me")}`;
+  const pct = p.played ? Math.round(p.wins / p.played * 100) : 0, [, col] = TIER[p.category || "D"];
+  const hourName = p.hour == null ? "–" : p.hour < 12 ? t("pfEarly") : p.hour < 20 ? t("pfDay") : t("pfNight");
+  const sets = s => (s || []).map(x => `${x[0]}-${x[1]}`).join(" ");
+  const bar = (w, n) => `<div class="meter"><i style="width:${n ? Math.round(w / n * 100) : 0}%"></i></div>`;
+  return `<main>${backBar(t("pfTitle"), "me")}
+  <div class="pfhero" style="--tc:${col}"><div class="pfav">${esc(initials(p.name))}</div><div class="pfid"><h1>${esc(p.name)}</h1>
+    <div class="pfmeta">${p.level != null ? `<span class="pfl">${lvl2(p.level)}</span>` : ""}${p.category ? `<span>${esc(tierName(p.category))} · ${esc(p.category)}</span>` : ""}${p.titles ? `<span>🏆 ${p.titles}</span>` : ""}</div>
+    <small>${tf("pfSince", {d: esc(p.since)})}</small></div></div>
+  ${!p.played ? `<div class="card note">${t("pfEmpty")}</div>` : `
+  <div class="pfstats"><div><b>${p.played}</b><small>${t("pfPlayed")}</small></div><div><b>${p.wins}</b><small>${t("pfWins")}</small></div><div class="hl"><b>${pct}%</b><small>${t("pfWinPct")}</small></div><div><b>${p.streak ? "🔥" + p.streak : "0"}</b><small>${t("pfStreak")}</small></div><div><b>${p.best_streak}</b><small>${t("pfBest")}</small></div></div>
+  <div class="card"><div class="between"><b>${t("pfForm")}</b><span class="note">${t("pfSets")} ${p.sets_w}-${p.sets_l} · ${t("pfGames")} ${p.games_w}-${p.games_l}</span></div><div class="form">${(p.form || []).map(w => `<span class="${w ? "w" : "l"}">${w ? "W" : "L"}</span>`).join("")}</div></div>
+  <h2>${t("pfChem")}</h2>
+  ${p.best_partner ? `<div class="card bestp"><span class="av">${esc(initials(p.best_partner.name))}</span><div style="flex:1;min-width:0"><small>💞 ${t("pfBestPartner")}</small><b>${pLink(p.best_partner.id, p.best_partner.name)}</b><span class="note">${tf("pfTogether", {w: p.best_partner.w, n: p.best_partner.n})}</span></div><span class="big">${Math.round(p.best_partner.w / p.best_partner.n * 100)}%</span></div>` : ""}
+  <div class="card">${(p.partners || []).map(x => `<div class="prow2"><b>${pLink(x.id, x.name)}</b>${lvChip(x.level)}<span class="note">${x.w}/${x.n}</span>${bar(x.w, x.n)}</div>`).join("") || `<p class="note">${t("pfNoData")}</p>`}</div>
+  ${p.nemesis || p.victim ? `<h2>${t("pfRivals")}</h2><div class="rivals">${p.nemesis ? `<div class="card riv nem"><small>😈 ${t("pfNemesis")}</small><b>${pLink(p.nemesis.id, p.nemesis.name)}</b><span class="note">${tf("pfNemTxt", {l: p.nemesis.l, n: p.nemesis.n})}</span></div>` : ""}${p.victim ? `<div class="card riv vic"><small>🎯 ${t("pfVictim")}</small><b>${pLink(p.victim.id, p.victim.name)}</b><span class="note">${tf("pfVicTxt", {w: p.victim.w, n: p.victim.n})}</span></div>` : ""}</div>` : ""}
+  <h2>${t("pfStyle")}</h2>
+  <div class="facts"><div class="card"><small>⚡ ${t("pfClutch")}</small><b>${p.clutch.n ? Math.round(p.clutch.w / p.clutch.n * 100) + "%" : "–"}</b><span class="note">${tf("pfClutchTxt", {w: p.clutch.w, n: p.clutch.n})}</span></div>
+   <div class="card"><small>🔁 ${t("pfComeback")}</small><b>${p.comebacks}</b><span class="note">${tf("pfComebackTxt", {n: p.comebacks})}</span></div>
+   <div class="card"><small>🕘 ${t("pfTime")}</small><b>${esc(hourName)}</b><span class="note">${p.hour != null ? esc(fmtTime(new Date(Date.UTC(2024,0,1,(p.hour + 21) % 24))).replace(/:00/, "")) : ""}</span></div>
+   <div class="card"><small>🏟️ ${t("pfHome")}</small><b>${esc((p.clubs[0] || {}).club || "–")}</b><span class="note">${(p.clubs[0] || {}).n || 0} ${t("stGames")}</span></div>
+   ${p.biggest ? `<div class="card wide"><small>💥 ${t("pfBiggest")}</small><b>${esc(sets(p.biggest.sets))}</b><span class="note">${t("pfVs")} ${esc(p.biggest.opps || "")}</span></div>` : ""}</div>
+  ${(p.levels || []).length > 1 ? `<div class="card"><div class="between"><b>${t("pfLevel")}</b><span class="note">${lvl2(p.levels[0])} → ${lvl2(p.levels[p.levels.length - 1])}</span></div>${spark(p.levels)}</div>` : ""}
+  <h2>${t("pfRecent")}</h2>
+  <div class="card">${(p.recent || []).map(g => `<div class="grow ${g.won ? "w" : "l"}"><span class="res">${g.won ? "W" : "L"}</span><div style="flex:1;min-width:0"><b>${esc(sets(g.sets))}</b><span class="note">${g.mate ? `${t("pfWith")} ${esc(g.mate)} · ` : ""}${t("pfVs")} ${esc(g.opps || "")}</span><span class="note">${esc(fmtDay(new Date(g.at)))} · ${esc(g.club)}${g.kind === "league" ? ` · ${t("pfLeague")}` : ""}</span></div></div>`).join("")}</div>`}
+  <form id="pfFindF" class="card" style="display:flex;flex-direction:column;gap:8px"><b>${t("pfFind")}</b><div class="row" style="gap:8px"><input id="pf-q" value="${esc(S.pfQ)}" placeholder="${t("pfFindPh")}" style="flex:1;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:0 12px"><button class="cta blue sm" type="submit">${t("apFind")}</button></div>
+   ${(S.pfList || []).map(x => `<div class="prow2"><b>${pLink(x.id, x.name)}</b>${lvChip(x.level)}</div>`).join("")}</form>
+ </main>${nav("me")}`; };
+
+/* ---------- last-minute deals ---------- */
+Object.assign(W.en, {dealTag:"{p}% off", dealNow:"Last-minute deals", dealTxt:"{p}% off courts starting in the next {h} h", dealTitle:"Last-minute deal", dealHelp:"Empty courts starting soon get cheaper automatically. Members get whichever discount is bigger.",
+  dealPct:"Discount", dealHrs:"For slots starting within", dealOff:"Off", dealSave:"Save deal", dealHours:"{h} h"});
+Object.assign(W.ar, {dealTag:"خصم {p}%", dealNow:"عروض اللحظة الأخيرة", dealTxt:"خصم {p}% على الملاعب يلي بتبلش خلال {h} ساعات", dealTitle:"عرض اللحظة الأخيرة", dealHelp:"الملاعب الفاضية يلي قرّب وقتها بيرخص سعرها تلقائياً. الأعضاء بياخدوا الخصم الأكبر.",
+  dealPct:"الخصم", dealHrs:"للأوقات يلي بتبلش خلال", dealOff:"بلا", dealSave:"حفظ العرض", dealHours:"{h} ساعات"});
+const dealOn = (c, s) => c && +c.deal_pct > 0 && s && (s - new Date()) <= (+c.deal_hours || 3) * 3600e3;
+function dealsStrip(){ const cs = S.clubs.filter(c => +c.deal_pct > 0); if (!cs.length) return "";
+  return `<div class="between"><h2>🔥 ${t("dealNow")}</h2></div><div class="deals">${cs.map(c => `<button class="deal" data-dealclub="${c.id}"><b>${esc(c.name)}</b><span>${tf("dealTxt", {p: c.deal_pct, h: c.deal_hours})}</span></button>`).join("")}</div>`; }
+function dealForm(club){ const pc = +club.deal_pct || 0, hr = +club.deal_hours || 3;
+  return `<div class="card" style="display:flex;flex-direction:column;gap:10px"><h2 style="font-size:17px">🔥 ${t("dealTitle")}</h2><span class="note" style="margin-top:-6px">${t("dealHelp")}</span>
+   <b style="font-size:13px">${t("dealPct")}</b><div class="chips" style="flex-wrap:wrap">${[0,10,15,20,25,30,40,50].map(v => `<button class="chip" data-dpct="${v}" aria-pressed="${(S.dPct ?? pc) === v}">${v ? v + "%" : t("dealOff")}</button>`).join("")}</div>
+   <b style="font-size:13px">${t("dealHrs")}</b><div class="chips" style="flex-wrap:wrap">${[1,2,3,4,6,12].map(v => `<button class="chip" data-dhrs="${v}" aria-pressed="${(S.dHrs ?? hr) === v}">${tf("dealHours", {h: v})}</button>`).join("")}</div>
+   <button class="cta blue sm" data-dsave style="align-self:flex-start">${t("dealSave")}</button></div>`; }
+
+/* ---------- phone notifications ---------- */
+Object.assign(W.en, {psT:"Phone notifications", psS:"Get notified when someone joins your match, a score needs confirming, or a new booking comes in at your club.",
+  psOn:"Turn on", psIsOn:"On ✓", psOff:"Turn off", psDenied:"Notifications are blocked for this site. Allow them in your browser settings, then try again.",
+  psIOS:"On iPhone: add Padel Live to your Home Screen first, open it from there, then turn this on.", psUnsup:"This browser can't show notifications.",
+  psNoKey:"Notifications aren't set up on the server yet.", psDone:"Notifications are on.", psLater:"Not now", nBooking:"New booking: {n} · {k} · {w}", nBookingDep:"New booking (deposit to check): {n} · {k} · {w}"});
+Object.assign(W.ar, {psT:"إشعارات الموبايل", psS:"بيوصلك إشعار لما حدا ينضم لمباراتك، أو لازم تأكد نتيجة، أو يجي حجز جديد على ناديك.",
+  psOn:"تفعيل", psIsOn:"مفعّل ✓", psOff:"إيقاف", psDenied:"الإشعارات محظورة لهالموقع. اسمح فيها من إعدادات المتصفح وجرّب مرة تانية.",
+  psIOS:"على الآيفون: أضف بادل لايف للشاشة الرئيسية أول، افتحه من هناك، وبعدين فعّل.", psUnsup:"هالمتصفح ما بيدعم الإشعارات.",
+  psNoKey:"الإشعارات لسا مو مجهزة على السيرفر.", psDone:"الإشعارات مفعّلة.", psLater:"مو هلق", nBooking:"حجز جديد: {n} · {k} · {w}", nBookingDep:"حجز جديد (عربون للتأكيد): {n} · {k} · {w}"});
+Object.assign(S, {pushOn:false});
+const pushOK = () => "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+const b64u = s => { const p = "=".repeat((4 - s.length % 4) % 4), b = atob((s + p).replace(/-/g, "+").replace(/_/g, "/")); return Uint8Array.from(b, c => c.charCodeAt(0)); };
+async function loadPush(){ S.pushOn = false; if (!S.user || !pushOK() || Notification.permission !== "granted") return;
+  try { const reg = await navigator.serviceWorker.getRegistration(); const sub = reg && await reg.pushManager.getSubscription(); if (!sub) return; const r = await sb.rpc("has_push"); S.pushOn = !!r.data; } catch (e) {} }
+async function pushEnable(){
+  if (!pushOK()){ toast(isIOS() && !standalone() ? t("psIOS") : t("psUnsup")); return; }
+  const perm = await Notification.requestPermission(); if (perm !== "granted"){ toast(t("psDenied")); return; }
+  try {
+    const k = await sb.rpc("get_push_key"); if (k.error || !k.data){ toast(t("psNoKey")); return; }
+    const reg = await navigator.serviceWorker.register("sw.js"); await navigator.serviceWorker.ready;
+    let sub = await reg.pushManager.getSubscription();
+    if (!sub) sub = await reg.pushManager.subscribe({userVisibleOnly: true, applicationServerKey: b64u(k.data)});
+    const j = sub.toJSON(); const r = await sb.rpc("save_push", {p_endpoint: j.endpoint, p_p256dh: j.keys.p256dh, p_auth: j.keys.auth, p_lang: lang});
+    if (r.error){ toast(errMsg(r.error)); return; } S.pushOn = true; toast(t("psDone")); render();
+  } catch (e) { toast(errMsg(e)); }
+}
+async function pushDisable(){ try { const reg = await navigator.serviceWorker.getRegistration(); const sub = reg && await reg.pushManager.getSubscription();
+  if (sub){ await sb.rpc("drop_push", {p_endpoint: sub.endpoint}); await sub.unsubscribe(); } } catch (e) {} S.pushOn = false; render(); }
+function pushCard(home){ if (!S.user) return "";
+  if (home){ let later = false; try { later = localStorage.getItem("pl-push-later") === "1"; } catch (e) {} if (S.pushOn || later || !pushOK()) return ""; }
+  return `<div class="card pushc"><span class="pbell">🔔</span><div style="flex:1;min-width:0"><b>${t("psT")}</b><span class="note">${!pushOK() && isIOS() && !standalone() ? t("psIOS") : t("psS")}</span></div>
+   <div class="act">${S.pushOn ? `<span class="tag g">${t("psIsOn")}</span>${home ? "" : `<button class="linkbtn" data-pushoff>${t("psOff")}</button>`}` : `<button class="cta blue sm" data-pushon>${t("psOn")}</button>${home ? `<button class="linkbtn" data-pushlater>${t("psLater")}</button>` : ""}`}</div></div>`; }
 
 /* ---------- render + actions ---------- */
 const app = document.getElementById("app");
@@ -1557,6 +1704,7 @@ async function go(v){
   if (location.hash !== "#" + v) history.replaceState(null, "", "#" + v);
   if (v === "club" && S.club){ if (!S.day) S.day = nextDays(1)[0]; const cs = S.courts.filter(x => x.club_id === S.club.id); if (!cs.some(x => x.id === S.court) && cs[0]) S.court = cs[0].id; await Promise.all([loadBusy(), loadClubExtras()]); }
   if (v === "clubs"){ await loadFindBusy(); }
+  if (v === "profile"){ await loadProfile(S.pfId); }
   if (v === "events"){ try { const [r, lg] = await within(Promise.all([sb.rpc("t_list"), sb.rpc("league_list")]), 8000); S.tours = r.data || []; S.leagues = lg.data || []; } catch (e) {} }
   if (v === "league"){ if (S.leagueId) await loadLeague(S.leagueId); }
   if (v === "matches" || v === "home"){ const m = await sb.rpc("open_matches"); S.matches = m.data || S.matches; }
@@ -1616,6 +1764,15 @@ app.addEventListener("click", async e => {
   if ("retry" in d || "reload" in d){ location.reload(); return; }
   if ("resetapp" in d){ b.disabled = true; resetApp(); return; }
   if ("lang" in d){ lang = lang === "en" ? "ar" : "en"; try { localStorage.setItem("pl-lang", lang); } catch (x) {} render(); return; }
+  if ("pushon" in d){ b.disabled = true; await pushEnable(); b.disabled = false; return; }
+  if ("pushoff" in d){ await pushDisable(); return; }
+  if ("pushlater" in d){ try { localStorage.setItem("pl-push-later", "1"); } catch (x) {} render(); return; }
+  if (d.profile){ S.pfId = d.profile === "me" ? null : d.profile; S.pf = null; go("profile"); return; }
+  if (d.dealclub){ S.club = S.clubs.find(c => c.id === d.dealclub); S.day = nextDays(1)[0]; S.slot = null; S.coach = null; S.dur = 60; go("club"); return; }
+  if (d.dpct !== undefined && "dpct" in d){ S.dPct = +d.dpct; render(); return; }
+  if (d.dhrs){ S.dHrs = +d.dhrs; render(); return; }
+  if ("dsave" in d){ const club = S.clubs.find(c => c.id === S.mClub) || {}; const r = await sb.rpc("staff_set_deal", {p_club: S.mClub, p_pct: S.dPct ?? +club.deal_pct ?? 0, p_hours: S.dHrs ?? +club.deal_hours ?? 3});
+    if (r.error){ toast(errMsg(r.error)); return; } toast(t("saved")); S.dPct = null; S.dHrs = null; await loadClubs(); render(); return; }
   if (d.fday){ S.fDay = d.fday; await loadFindBusy(); render(); return; }
   if (d.ftime !== undefined && "ftime" in d){ S.fTime = d.ftime; render(); return; }
   if (d.fdur){ S.fDur = +d.fdur; render(); return; }
@@ -1752,6 +1909,7 @@ app.addEventListener("submit", async e => {
       p_minutes: +document.getElementById("k-min").value, p_title: document.getElementById("k-title").value, p_spots: +document.getElementById("k-spots").value || 4, p_price: +document.getElementById("k-price").value || 0,
       p_lmin: lmin === "" ? null : +lmin, p_lmax: lmax === "" ? (lmin === "" ? null : 7) : +lmax, p_weeks: +document.getElementById("k-weeks").value || 1});
     if (r.error){ toast(errMsg(r.error)); return; } toast("✓ " + r.data + " × " + t("classes")); await loadMgrTab(); render(); return; }
+  if (f.id === "pfFindF"){ S.pfQ = document.getElementById("pf-q").value; const r = await sb.rpc("search_players", {p_q: S.pfQ}); S.pfList = r.data || []; render(); return; }
   if (f.id === "chatF"){ const inp = document.getElementById("chat-in"), v = inp.value.trim(); if (!v) return; inp.value = "";
     const r = await sb.rpc("send_message", {p_booking: S.match.id, p_body: v}); if (r.error){ toast(errMsg(r.error)); inp.value = v; return; } await chatPoll(); const mb = document.getElementById("msgs"); if (mb) mb.scrollTop = mb.scrollHeight; const ni = document.getElementById("chat-in"); if (ni) ni.focus(); return; }
   if (f.id === "resF"){ const m = S.match, partner = document.getElementById("r-partner").value, me = m.players.find(p => p.me);
