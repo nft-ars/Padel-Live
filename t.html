@@ -1178,11 +1178,19 @@ const KDEF8 = [["QF1",["q",0,0],["q",0,1]],["QF2",["q",1,0],["q",1,1]],["QF3",["
 const KDEF16 = [...Array.from({length: 8}, (_, i) => [`R${i + 1}`, ["q", i, 0], ["q", i, 1]]),
   ["QF1",["w","R1"],["w","R8"]],["QF2",["w","R2"],["w","R7"]],["QF3",["w","R3"],["w","R6"]],["QF4",["w","R4"],["w","R5"]], ...TAIL];
 const kdefOf = c => GROUPS[c] * 2 > 8 ? KDEF16 : KDEF8;
-const klab = k => k === "F" ? "Final" : k.startsWith("SF") ? `Semi ${k[2]}` : k.startsWith("R") ? `R16 · ${k.slice(1)}` : k;
+const klab = k => k.startsWith("PO") ? `Play-off ${k.slice(2)}` : k === "F" ? "Final" : k.startsWith("SF") ? `Semi ${k[2]}` : k.startsWith("R") ? `R16 · ${k.slice(1)}` : k;
 const ORD = n => ["","1st","2nd","3rd"][n];
+const KFIX = CFG.kfixed || null;
+function resolveFixed(c){
+  const out = {};
+  for (const x of KFIX[c]){ const r = res(`${c}-${x.k}`, x.kind), A = {id: x.a, ph: ""}, B = {id: x.b, ph: ""};
+    out[x.k] = { k: x.k, A, B, s: r.s, w: r.w, flag: r.flag, win: r.w === null ? null : (r.w === 0 ? x.a : x.b), when: x.when, sets: x.kind === "sets", tb: x.kind === 6 }; }
+  return out;
+}
 function koWhen(c, k){ const lab = k === "F" ? `${c} FINAL` : k.startsWith("SF") ? `${c} Semi ${k[2]}` : `${c} ${k}`; return T.K[lab]; }
 function parseWhen(w){ const m = /^(\w+) (\d+:\d+ [AP]M) Ct (\d)$/.exec(w); return { day: DAYNUM[m[1]], dname: m[1], time: m[2], t: mins(m[2]), court: +m[3] }; }
 function resolve(c){
+  if (KFIX && KFIX[c]) return resolveFixed(c);
   const out = {}; const done = catDone(c); const sd = seedsOf(c);
   const G = GROUPS[c]; const seedPh = n => n <= G ? `Best group winner #${n}` : n <= 2 * G ? `Best runner-up #${n - G}` : `Best 3rd place #${n - 2 * G}`;
   const KD = kdefOf(c);
@@ -1351,11 +1359,12 @@ function vSchedule(){
 function vStandings(){
   let h = `<div class="filters" role="group" aria-label="Category">${CATS.map(c => `<button class="chip" data-cat="${c}" aria-pressed="${view.cat === c || (view.cat === "all" && c === CATS[0])}">${CATL[c]}</button>`).join("")}</div>`;
   const c = view.cat === "all" ? CATS[0] : view.cat;
-  const done = catDone(c), sd = seedsOf(c), four = GROUPS[c] * 2 >= 8, bestThirds = new Set(four ? [] : sd.thirds.slice(0, 8 - GROUPS[c] * 2).map(r => r.id));
-  h += `<div class="cat-head" style="background:${cvar(c)}">${CATN[c]}<small>${GROUPS[c] * 2 > 8 ? "Top 2 of each group go to the round of 16" : four ? "Top 2 of each group go to the quarterfinals" : "Top 2 of each group + the best 3rd places go to the quarterfinals"}</small></div><div class="grid2">`;
+  const fx = KFIX && KFIX[c], qset = fx ? new Set(fx.flatMap(x => [x.a, x.b])) : null;
+  const done = catDone(c), sd = fx ? {thirds: []} : seedsOf(c), four = fx ? true : GROUPS[c] * 2 >= 8, bestThirds = new Set(four ? [] : sd.thirds.slice(0, 8 - GROUPS[c] * 2).map(r => r.id));
+  h += `<div class="cat-head" style="background:${cvar(c)}">${CATN[c]}<small>${fx && CFG.gnote ? esc(CFG.gnote[c] || "") : GROUPS[c] * 2 > 8 ? "Top 2 of each group go to the round of 16" : four ? "Top 2 of each group go to the quarterfinals" : "Top 2 of each group + the best 3rd places go to the quarterfinals"}</small></div><div class="grid2">`;
   for (let g = 1; g <= GROUPS[c]; g++){ const t = table(c, g);
     h += `<div class="tbl"><h3>Group ${g}<span>${t.played}/${t.total} played</span></h3><div class="tscroll"><table><thead><tr><th>#</th><th class="t">Team</th><th>P</th><th>W</th><th>L</th><th>GF</th><th>GA</th><th>GD</th></tr></thead><tbody>`;
-    t.list.forEach((r, i) => { const q = t.done && (i < 2 || (i === 2 && done && bestThirds.has(r.id)));
+    t.list.forEach((r, i) => { const q = qset ? qset.has(r.id) : t.done && (i < 2 || (i === 2 && done && bestThirds.has(r.id)));
       h += `<tr class="${q ? "q" : ""}${r.id === myTeam ? " me" : ""}"><td class="pts">${i + 1}</td><td class="t">${esc(label(r.id))}${q ? `<span class="pill">Q</span>` : ""}${r.tie && t.started ? `<span class="pill tie">TIE</span>` : ""}${nm(r.id) ? `<span class="id">${esc(r.id)}</span>` : ""}</td><td>${r.P}</td><td class="pts">${r.W}</td><td>${r.L}</td><td>${r.GF}</td><td>${r.GA}</td><td>${r.GD > 0 ? "+" : ""}${r.GD}</td></tr>`; });
     h += `</tbody></table></div></div>`; }
   h += `</div>`;
@@ -1365,7 +1374,7 @@ function vStandings(){
     h += `<tr class="${q ? "q" : ""}${r.id === myTeam ? " me" : ""}"><td class="pts">${i + 1}</td><td class="t">${esc(label(r.id))}${q ? `<span class="pill">Q</span>` : ""}</td><td>${r.g}</td><td>${r.W}</td><td>${r.GD > 0 ? "+" : ""}${r.GD}</td><td>${r.GF}</td></tr>`; });
   h += `</tbody></table></div></div>`;
   h += `<p class="note">The 2 best 3rd-placed teams also go through. Quarterfinals: best winner v 2nd-best 3rd place, best runner-up v 2nd-best runner-up, 2nd-best winner v best 3rd place, 3rd-best winner v 3rd-best runner-up. Teams from the same group never meet in a quarterfinal.</p>`;
-  } else h += `<p class="note">${GROUPS[c] * 2 > 8 ? "Round of 16" : "Quarterfinals"}: ${GROUPS[c] === 8 ? "Group 1 winner v Group 4 runner-up, Group 2 winner v Group 3 runner-up, Group 3 winner v Group 2 runner-up, Group 4 winner v Group 1 runner-up, and the same for Groups 5 to 8 (5 v 8, 6 v 7). Quarterfinals: winner R16·1 v winner R16·8, R16·2 v R16·7, R16·3 v R16·6, R16·4 v R16·5" : "Group 1 winner v Group 4 runner-up, Group 2 winner v Group 3 runner-up, Group 3 winner v Group 2 runner-up, Group 4 winner v Group 1 runner-up"}. Semi-finals: winner of QF1 v winner of QF4, and winner of QF2 v winner of QF3.</p>`;
+  } else if (!fx) h += `<p class="note">${GROUPS[c] * 2 > 8 ? "Round of 16" : "Quarterfinals"}: ${GROUPS[c] === 8 ? "Group 1 winner v Group 4 runner-up, Group 2 winner v Group 3 runner-up, Group 3 winner v Group 2 runner-up, Group 4 winner v Group 1 runner-up, and the same for Groups 5 to 8 (5 v 8, 6 v 7). Quarterfinals: winner R16·1 v winner R16·8, R16·2 v R16·7, R16·3 v R16·6, R16·4 v R16·5" : "Group 1 winner v Group 4 runner-up, Group 2 winner v Group 3 runner-up, Group 3 winner v Group 2 runner-up, Group 4 winner v Group 1 runner-up"}. Semi-finals: winner of QF1 v winner of QF4, and winner of QF2 v winner of QF3.</p>`;
   h += `<p class="note">Ranking: wins, then game difference, then games won, then head-to-head (two teams only), then coin toss. A TIE tag means the tournament director decides. A walkover counts 6-0.</p>`;
   return h;
 }
@@ -1382,7 +1391,7 @@ function bx(o, k, c, x, y){
 function ln(x, y, w, h){ return `<i class="ln" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px"></i>`; }
 function bracket(c, r){
   const big = GROUPS[c] * 2 > 8;
-  const cols = big ? [["R1","R8","R4","R5","R2","R7","R3","R6"], ["QF1","QF4","QF2","QF3"], ["SF1","SF2"], ["F"]] : [["QF1","QF4","QF2","QF3"], ["SF1","SF2"], ["F"]];
+  const cols = (CFG.kcols && CFG.kcols[c]) || (big ? [["R1","R8","R4","R5","R2","R7","R3","R6"], ["QF1","QF4","QF2","QF3"], ["SF1","SF2"], ["F"]] : [["QF1","QF4","QF2","QF3"], ["SF1","SF2"], ["F"]]);
   const half = GAP / 2, cy = y => y + BH / 2;
   const ys = [cols[0].map((_, i) => i * (BH + PG) + Math.floor(i / 2) * PAIRGAP)];
   for (let ci = 1; ci < cols.length; ci++) ys.push(cols[ci].map((_, i) => (cy(ys[ci - 1][2 * i]) + cy(ys[ci - 1][2 * i + 1])) / 2 - BH / 2));
