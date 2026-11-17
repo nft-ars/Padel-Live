@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#2F4A41"><title>Padel Live · Tournament</title><link rel="icon" href="icon-192.png"><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800;1,900&family=Figtree:wght@400;500;600;700&display=swap"><style>body{margin:0;font:14px/1.4 system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}.board.c3 .bhd,.board.c3 .brow{grid-template-columns:40px repeat(3,minmax(0,1fr));gap:4px}.board.c3 .brow.ev{grid-template-columns:40px 1fr}.board.c3 .bn,.board.c3 .bc{font-size:12px}.days{overflow-x:auto;scrollbar-width:none}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800;1,900&family=Figtree:wght@400;500;600;700&display=swap"><style>body{margin:0;font:14px/1.4 system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}.board.c3 .bhd,.board.c3 .brow{grid-template-columns:40px repeat(3,minmax(0,1fr));gap:4px}.board.c3 .brow.ev{grid-template-columns:40px 1fr}.board.c3 .bn,.board.c3 .bc{font-size:12px}.board.c4 .bhd,.board.c4 .brow{grid-template-columns:36px repeat(4,minmax(0,1fr));gap:3px}.board.c4 .brow.ev{grid-template-columns:36px 1fr}.board.c4 .bn,.board.c4 .bc{font-size:11px}.days{overflow-x:auto;scrollbar-width:none}
 .su .su-counts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
 .su-s{font-size:13px;color:var(--ink-2);margin:0;line-height:1.45}
 .su-c{display:flex;flex-direction:column;gap:0;font-size:13px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);border-left:5px solid var(--c);background:var(--surface)}
@@ -2358,6 +2358,7 @@ header.top .brand .emb{background:#fff;border-radius:50%}
 <script>
 var SUPABASE_URL = "https://ebrlwfmkbwlbytslfvdn.supabase.co", SUPABASE_KEY = "sb_publishable_Pf2THTG2L1otqh1PYX4HLw_1360KwwF";
 function startT(CFG, S0, VER0, SLUG, TNAME, sb, EDITV0){
+try { CFG = JSON.parse(JSON.stringify(CFG).replace(/\bPrize\b(?! [Pp]ool)/g, "Prize Pool").replace(/\bprize\b(?! pool)/g, "prize pool").replace(/\bPRIZE\b(?! POOL)/g, "PRIZE POOL")); } catch (e) {}
 const THEME = ["movara","night","trio","ace","lets"].includes(CFG.theme) ? CFG.theme : "core";
 document.getElementById("th-" + THEME).media = "all";
 
@@ -2395,7 +2396,7 @@ function res(id, kind){
 const isLive = id => cur().live.includes(id);
 
 /* ---------- standings ---------- */
-const gk = c => c === "B" ? 9 : 6;
+const gk = c => CFG.gsets && CFG.gsets[c] ? +CFG.gsets[c] : c === "B" ? 9 : 6;
 function teamsOf(c, g){ const s = (g - 1) * SIZE; return Array.from({length: SIZE}, (_, i) => c + (s + i + 1)); }
 function table(c, g){
   const ids = teamsOf(c, g), row = {};
