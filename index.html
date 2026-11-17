@@ -883,6 +883,118 @@ details.lrules{border:2px solid #E8C96A;background:linear-gradient(160deg,color-
 .wtx-r.pending{opacity:.65}.wtx-r.rejected{opacity:.45;text-decoration:line-through}
 .opt.wopt{border-color:color-mix(in srgb,var(--green) 40%,var(--line))}
 .opt.low{opacity:.6}
+.sc-wrap{position:relative}
+.sc-x{position:absolute;top:10px;inset-inline-end:10px;width:34px;height:34px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:22px;line-height:1;display:grid;place-items:center}
+/* tier borders on avatars */
+.av.fr{border:3px solid transparent;color:#1B2A24}
+.av.fr-D{background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,#7a3f18,#E7A26C 45%,#9a5426 70%,#F0B887) border-box}
+.av.fr-C{background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,#7d8a92,#ffffff 40%,#9fb0b9 65%,#E9F0F4) border-box}
+.av.fr-B{background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,#9a7420,#FFE9A0 40%,#C79A2E 65%,#FFF4C8) border-box;box-shadow:0 0 6px rgba(232,201,106,.55)}
+.av.fr-A{background:linear-gradient(#fff,#fff) padding-box,linear-gradient(135deg,#2aa7d8,#E6FCFF 35%,#7FD8FF 60%,#B8F1FF 80%,#2aa7d8) border-box;box-shadow:0 0 8px rgba(143,227,255,.75)}
+@property --fa{syntax:"<angle>";inherits:false;initial-value:0deg}
+.av.fire{position:relative;border:3px solid transparent;background:linear-gradient(#fff,#fff) padding-box,conic-gradient(from var(--fa),#ff2a00,#ffb300,#ff6a00,#ffe066,#ff2a00) border-box;
+  box-shadow:0 0 10px rgba(255,90,0,.75),0 0 20px rgba(255,170,0,.35);animation:fireSpin 1.6s linear infinite,fireGlow 1.2s ease-in-out infinite alternate}
+.av.fire::after{content:"🔥";position:absolute;top:-9px;right:-7px;font-size:13px;filter:drop-shadow(0 0 3px rgba(255,120,0,.9));animation:fireFlick .5s ease-in-out infinite alternate}
+@keyframes fireSpin{to{--fa:360deg}}
+@keyframes fireGlow{to{box-shadow:0 0 14px rgba(255,60,0,.9),0 0 28px rgba(255,190,0,.45)}}
+@keyframes fireFlick{to{transform:translateY(-2px) scale(1.12) rotate(-6deg)}}
+.pfav.fire{position:relative;box-shadow:0 0 0 3px #ff6a00,0 0 18px rgba(255,90,0,.85),0 0 34px rgba(255,180,0,.45);animation:fireGlow 1.2s ease-in-out infinite alternate}
+.pfav.fire::after{content:"🔥";position:absolute;top:-10px;right:-6px;font-size:22px;font-style:normal;animation:fireFlick .5s ease-in-out infinite alternate}
+.pcard.fire{position:relative}
+.pcard.fire::before{content:"";position:absolute;inset:-4px;border-radius:24px;background:conic-gradient(from var(--fa),#ff2a00,#ffb300,#ff6a00,#ffe066,#ff2a00);filter:blur(1px);animation:fireSpin 2.4s linear infinite;z-index:0}
+.pcard.fire>.pc-in{position:relative;z-index:1}
+.pcard.fire::after{content:"";position:absolute;inset:-14px;border-radius:30px;background:radial-gradient(closest-side,rgba(255,110,0,.35),transparent);z-index:-1;animation:fireGlow 1.2s ease-in-out infinite alternate}
+/* weekly challenges */
+.wk{display:flex;flex-direction:column;gap:8px}
+.wk-n{font-family:var(--disp);font-weight:800;font-size:18px;color:var(--blue)}
+.wk.done{border:1.5px solid #E8C96A;background:linear-gradient(160deg,color-mix(in srgb,#E8C96A 14%,var(--card)),var(--card))}
+.ck{display:flex;align-items:center;gap:10px}
+.ck-ic{width:30px;height:30px;flex:none;border-radius:50%;display:grid;place-items:center;background:var(--chip);font-size:15px}
+.ck.ok .ck-ic{background:var(--green);color:#fff;font-weight:800}
+.ck-b{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}.ck-b span{font-size:13.5px;font-weight:600}
+.ck.ok .ck-b span{color:var(--ink-2)}
+.ck-bar{height:6px;border-radius:99px;background:var(--chip);overflow:hidden}.ck-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--blue),#2E9E5B);border-radius:99px}
+.ck small{font-weight:800;color:var(--ink-2);min-width:28px;text-align:end}
+.wk-foot{display:flex;gap:10px;flex-wrap:wrap;font-size:12px;font-weight:700;color:var(--ink-2)}
+.wk.sm .ck-b span{font-size:12.5px}
+@media (prefers-reduced-motion:reduce){.av.fire,.av.fire::after,.pfav.fire,.pcard.fire::before{animation:none}}
+/* leaderboards & club battle */
+.lbcard{display:flex;align-items:center;gap:12px;width:100%;text-align:start;background:linear-gradient(120deg,#2B2410,#6b5216);color:#FFF3C4;border:0}
+.lbcard .note{color:rgba(255,243,196,.8)}
+.lb-prize{background:linear-gradient(110deg,#5E4A1A,#B98A10);color:#FFF3C4;border-radius:14px;padding:12px 14px;font-weight:800}
+.srow .av{width:30px;height:30px;font-size:11px;margin:0}
+.srow b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.spts.rv{font-weight:800}.spts.rv.up{color:var(--green)}.spts.rv.down{color:var(--red)}
+.duo{display:flex;flex-direction:column;gap:6px;border:1.5px solid color-mix(in srgb,#E85D9A 40%,var(--line))}
+.duo-p{display:flex;align-items:center;gap:6px}.duo-p .av{margin:0}.duo-p .av+.av{margin-inline-start:-12px}.duo-p b{margin-inline-start:6px}
+.cb{display:flex;flex-direction:column;gap:10px}
+.cb-r{display:flex;flex-direction:column;gap:5px}.cb-r span{font-size:12.5px;color:var(--ink-2);font-weight:700}
+.cb-bar{height:12px;border-radius:99px;background:var(--chip);overflow:hidden}.cb-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#1F3F70,#2C5FAE)}
+.cb-r.lead .cb-bar i{background:linear-gradient(90deg,#B98A10,#FFE07A)}
+.tag.rvt{background:rgba(232,60,60,.12);color:var(--red);align-self:flex-start}
+/* season */
+.snc{display:flex;flex-direction:column;gap:8px}
+.sn-b{display:flex;flex-wrap:wrap;gap:6px}
+.snb{font-size:12px;font-weight:800;border-radius:99px;padding:5px 10px;background:linear-gradient(110deg,#5E4A1A,#C79A2E);color:#FFF3C4}
+.snb.tA{background:linear-gradient(110deg,#1f6f95,#7FD8FF);color:#05202c}
+.rcbtn{background:linear-gradient(110deg,#1F3F70,#0E2A22);color:#fff}
+.bd .rar{display:block;font-size:9.5px;font-weight:700;opacity:.75;margin-top:1px}
+
+/* ===== game-style player card ===== */
+.gcard-wrap{perspective:900px;padding:8px 0 2px}
+.pcard.gc{--rx:0deg;--ry:0deg;--mx:50%;--cut:22px;transform:rotate(-2deg) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .25s ease-out;border-radius:0;padding:4px;
+  clip-path:polygon(var(--cut) 0,calc(100% - var(--cut)) 0,100% var(--cut),100% calc(100% - 46px),50% 100%,0 calc(100% - 46px),0 var(--cut));
+  background:conic-gradient(from 200deg,#fff8,var(--tc),#0008,var(--tc),#fff8,var(--tc));filter:drop-shadow(0 0 16px color-mix(in srgb,var(--tc) 55%,transparent)) drop-shadow(0 16px 22px rgba(0,0,0,.45));box-shadow:none}
+.pcard.gc .pc-in{border-radius:0;clip-path:polygon(calc(var(--cut) - 2px) 0,calc(100% - var(--cut) + 2px) 0,100% calc(var(--cut) - 2px),100% calc(100% - 45px),50% 100%,0 calc(100% - 45px),0 calc(var(--cut) - 2px));padding-bottom:30px}
+.pcard.gc .pc-in>*:not(.gc-bg):not(.gc-pat):not(.gc-rays):not(.pc-holo):not(.gc-spark):not(.pc-streak){position:relative;z-index:2}
+.gc-bg,.gc-pat,.gc-rays,.gc-spark{position:absolute;inset:0;pointer-events:none}
+.gc-bg{z-index:0}.gc-pat{z-index:0;opacity:.18}.gc-rays{z-index:0;opacity:0}.pcard.gc .pc-holo{z-index:1}.gc-spark{z-index:1}
+/* rating + tier */
+.pcard.gc .pc-ovr b{font-size:54px;letter-spacing:-1px;background:linear-gradient(180deg,#fff,var(--tc) 60%,color-mix(in srgb,var(--tc) 55%,#000));-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 2px 6px rgba(0,0,0,.6)) drop-shadow(0 0 12px color-mix(in srgb,var(--tc) 50%,transparent))}
+.pcard.gc .pc-ovr small{color:var(--tc)}
+.gc-rib{display:inline-block;margin-top:2px;padding:3px 10px;font-size:10.5px!important;letter-spacing:.14em!important;color:#120f08!important;background:linear-gradient(180deg,#fff,var(--tc));clip-path:polygon(8px 0,calc(100% - 8px) 0,100% 50%,calc(100% - 8px) 100%,8px 100%,0 50%);font-weight:900!important}
+.pcard.gc .pc-rank svg{filter:drop-shadow(0 0 10px color-mix(in srgb,var(--tc) 70%,transparent))}
+/* hexagon avatar with glowing ring */
+.gc-avw{position:relative;width:46%;aspect-ratio:1;margin:0 auto}
+.gc-ring{position:absolute;inset:-6%;clip-path:polygon(25% 3%,75% 3%,100% 50%,75% 97%,25% 97%,0 50%);background:conic-gradient(from var(--fa,0deg),var(--tc),#fff,var(--tc),color-mix(in srgb,var(--tc) 40%,#000),var(--tc));animation:fireSpin 6s linear infinite}
+.pcard.gc .pc-av{position:absolute;inset:0;width:auto;border-radius:0;clip-path:polygon(25% 3%,75% 3%,100% 50%,75% 97%,25% 97%,0 50%);font-size:48px;
+  background:radial-gradient(circle at 35% 25%,#fff,var(--tc) 55%,color-mix(in srgb,var(--tc) 45%,#000));box-shadow:none;border:0}
+/* name plate */
+.gc-plate{display:inline-block;max-width:92%;padding:4px 18px;background:linear-gradient(90deg,transparent,color-mix(in srgb,var(--tc) 35%,transparent) 15%,color-mix(in srgb,var(--tc) 35%,transparent) 85%,transparent);transform:skewX(-10deg)}
+.gc-plate b{transform:skewX(10deg);text-shadow:0 2px 8px rgba(0,0,0,.6)}
+/* stat chips */
+.pcard.gc .pc-stats{gap:8px;margin:12px 14px 0}
+.pcard.gc .pc-stats div{border:0;border-radius:10px;padding:6px 0 5px;background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(0,0,0,.25));box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tc) 45%,transparent)}
+.pcard.gc .pc-stats i{font-style:normal;font-size:13px;line-height:1}
+.pcard.gc .pc-stats b{font-size:21px;line-height:1.05;color:#fff;text-shadow:0 0 10px color-mix(in srgb,var(--tc) 70%,transparent)}
+/* moving light that follows the finger */
+.pcard.gc .pc-holo{background:radial-gradient(circle at var(--mx) 30%,rgba(255,255,255,.22),transparent 45%),linear-gradient(115deg,transparent 35%,rgba(255,255,255,.14) 48%,transparent 60%);background-size:100% 100%,250% 100%;animation:pcholo 4s ease-in-out infinite}
+/* --- Bronze --- */
+.pcard.gc.t-D .gc-bg{background:radial-gradient(120% 80% at 50% 0%,#6b3a1c 0%,#2a160b 55%,#120a05 100%)}
+.pcard.gc.t-D .gc-pat{opacity:.22;background-image:radial-gradient(circle at 50% 50%,transparent 9px,rgba(231,162,108,.5) 10px,transparent 11px);background-size:26px 30px}
+/* --- Silver --- */
+.pcard.gc.t-C .gc-bg{background:radial-gradient(120% 80% at 50% 0%,#55626b 0%,#20272c 55%,#0d1114 100%)}
+.pcard.gc.t-C .gc-pat{opacity:.16;background:repeating-linear-gradient(135deg,rgba(255,255,255,.35) 0 1px,transparent 1px 7px)}
+.pcard.gc.t-C .pc-holo{animation-duration:2.6s}
+/* --- Gold --- */
+.pcard.gc.t-B .gc-bg{background:radial-gradient(110% 75% at 50% 32%,#7a5a14 0%,#3a2a07 45%,#140e03 100%)}
+.pcard.gc.t-B .gc-rays{opacity:.35;background:repeating-conic-gradient(from var(--fa,0deg) at 50% 40%,rgba(255,226,140,.55) 0 6deg,transparent 6deg 18deg);animation:fireSpin 24s linear infinite;-webkit-mask:radial-gradient(circle at 50% 40%,#000 0,#000 30%,transparent 62%);mask:radial-gradient(circle at 50% 40%,#000 0,#000 30%,transparent 62%)}
+.pcard.gc.t-B .gc-pat{opacity:.22;background:repeating-linear-gradient(120deg,transparent 0 16px,rgba(255,233,160,.45) 20px,transparent 28px);background-size:200% 200%;animation:foil 7s linear infinite}
+/* --- Diamond --- */
+.pcard.gc.t-A .gc-bg{background:radial-gradient(110% 75% at 50% 30%,#1d3a6b 0%,#14183d 50%,#070818 100%)}
+.pcard.gc.t-A .gc-pat{opacity:.28;background:conic-gradient(from 30deg at 30% 20%,rgba(143,227,255,.0),rgba(143,227,255,.5) 10%,rgba(143,227,255,0) 20%),conic-gradient(from 200deg at 75% 60%,rgba(200,140,255,0),rgba(200,140,255,.45) 12%,rgba(200,140,255,0) 24%),linear-gradient(60deg,transparent 48%,rgba(255,255,255,.25) 50%,transparent 52%),linear-gradient(-50deg,transparent 48%,rgba(255,255,255,.2) 50%,transparent 52%)}
+.pcard.gc.t-A .gc-rays{opacity:.5;mix-blend-mode:screen;background:linear-gradient(120deg,rgba(255,0,150,0),rgba(255,0,150,.28),rgba(0,200,255,.3),rgba(120,255,160,.25),rgba(255,240,0,.22),rgba(255,0,150,0));background-size:300% 300%;animation:holo 5s ease-in-out infinite alternate}
+.pcard.gc.t-A .gc-spark{background-image:radial-gradient(2px 2px at 18% 28%,#fff,transparent),radial-gradient(1.5px 1.5px at 72% 18%,#bff4ff,transparent),radial-gradient(2.5px 2.5px at 38% 78%,#fff,transparent),radial-gradient(1.5px 1.5px at 86% 62%,#e0fbff,transparent),radial-gradient(2px 2px at 9% 66%,#fff,transparent),radial-gradient(2px 2px at 58% 46%,#bff4ff,transparent),radial-gradient(1.5px 1.5px at 30% 12%,#fff,transparent);animation:sparkle 3s ease-in-out infinite}
+@keyframes foil{to{background-position:200% 0}}
+@keyframes holo{to{background-position:100% 100%}}
+@keyframes sparkle{0%,100%{opacity:.35;transform:translateY(0)}50%{opacity:1;transform:translateY(-6px)}}
+/* XP bar: segmented, glowing, tier-coloured */
+.pc-prog .bar{height:14px!important;border-radius:4px!important;transform:skewX(-14deg)!important;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--tc,#E8C96A) 55%,transparent)!important}
+.pc-prog .bar i{border-radius:2px!important;background:repeating-linear-gradient(90deg,transparent 0 10px,rgba(0,0,0,.25) 10px 12px),linear-gradient(90deg,#9C7726,#E8C96A,#FFF3C4)!important}
+/* hex achievement icons */
+.pc-badges .bd i{border-radius:0!important;clip-path:polygon(25% 3%,75% 3%,100% 50%,75% 97%,25% 97%,0 50%);width:54px!important;height:50px!important;background:linear-gradient(160deg,#3a4d40,#121b16)!important;box-shadow:none!important}
+.pc-badges .bd:not(.lock) i{background:radial-gradient(circle at 50% 30%,#4c6a55,#14201a)!important;filter:drop-shadow(0 0 6px rgba(232,201,106,.55))}
+@media (prefers-reduced-motion:reduce){.pcard.gc{transition:none}.gc-ring,.gc-rays,.gc-pat,.gc-spark{animation:none!important}}
 </style>
 </head>
 <body>
@@ -994,7 +1106,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v16";
+const VERSION = "v21";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -1075,8 +1187,8 @@ function matchRow(m){
   const range = m.level_min != null ? `${lvl2(m.level_min)}–${lvl2(m.level_max)}` : t("anyLvl");
   const sheet = S.joinFor === m.id ? `<div class="jsheet"><b>${t("joinHow")} · ${each}</b><div class="chips" style="flex-wrap:wrap">${S.user ? wChip(m.club_id, m.price / 4, S.joinPay, "data-joinpay") : ""}${["club","shamcash","syriatel"].map(k => `<button class="chip" data-joinpay="${k}" aria-pressed="${S.joinPay === k}">${payName(k)}</button>`).join("")}</div>${S.joinPay !== "club" && S.joinPay !== "wallet" ? `<label class="fld"><span>${t("ref")}</span><input id="join-ref" inputmode="numeric" value="${esc(S.joinRef)}"></label>` : ""}<button class="cta blue sm" data-joingo="${m.id}">${t("joinGo")}</button></div>` : "";
   return `<div class="card match"><div class="between"><b>${esc(fmtDay(d))} · ${esc(fmtTime(d))}</b>${m.open_spots > 0 ? `<span class="tag g">${m.open_spots} ${m.open_spots === 1 ? t("spotLeft") : t("spotsLeft")}</span>` : `<span class="tag b">Full</span>`}</div>
-   <span class="note">${esc(m.club_name)} · ${esc(m.court_name)} · ${m.minutes} ${t("min")} · ${t("lvl")} ${range}${m.split ? ` · ${t("splitTag")}` : ""}</span>${m.newbie ? `<span class="tag nb">🌱 ${t("nbTag")}</span>` : ""}
-   <div class="plist">${ppl.map(p => `<span class="pp">${av(p.n)}<small>${esc(String(p.n || "").split(" ")[0])}${p.b && p.b.t ? `<i class="nbg t sm">🏆</i>` : ""}</small>${lvChip(p.l)}</span>`).join("")}${Array.from({length: m.open_spots}, () => `<span class="pp">${av("", 1)}<small>&nbsp;</small></span>`).join("")}</div>
+   <span class="note">${esc(m.club_name)} · ${esc(m.court_name)} · ${m.minutes} ${t("min")} · ${t("lvl")} ${range}${m.split ? ` · ${t("splitTag")}` : ""}</span>${m.newbie ? `<span class="tag nb">🌱 ${t("nbTag")}</span>` : ""}${ppl.some(p => p.i && rivalIds().has(p.i)) ? `<span class="tag rvt">${t("rvTag")}</span>` : ""}
+   <div class="plist">${ppl.map(p => `<span class="pp">${avF(p.n, p.l, p.b)}<small>${esc(String(p.n || "").split(" ")[0])}${p.b && p.b.t ? `<i class="nbg t sm">🏆</i>` : ""}</small>${lvChip(p.l)}</span>`).join("")}${Array.from({length: m.open_spots}, () => `<span class="pp">${av("", 1)}<small>&nbsp;</small></span>`).join("")}</div>
    <div class="between" style="align-items:center"><span class="note">${each} ${t("each")}</span>
    ${m.joined ? `<button class="sbtn" data-match="${m.id}">${t("openMatch")} →</button>` : m.open_spots > 0 ? (ok ? `<button class="cta blue sm" data-join="${m.id}">${t("join")} · ${each}</button>` : `<span class="tag b">${t("notYourLvl")}</span>`) : ""}</div>${sheet}</div>`;
 }
@@ -1201,6 +1313,7 @@ function evCard(x){
 function evCourt(){ return `<svg viewBox="0 0 300 120" preserveAspectRatio="xMidYMax slice" aria-hidden="true"><polygon points="60,40 146,40 140,120 20,120" fill="#2C5FAE" opacity=".55" stroke="#F4E3A1" stroke-opacity=".5"/><polygon points="154,40 240,40 280,120 160,120" fill="#C4452F" opacity=".55" stroke="#F4E3A1" stroke-opacity=".5"/><line x1="40" y1="78" x2="143" y2="78" stroke="#F4E3A1" stroke-opacity=".5"/><line x1="157" y1="78" x2="260" y2="78" stroke="#F4E3A1" stroke-opacity=".5"/><circle cx="110" cy="100" r="4" fill="#E3EE3A"/></svg>`; }
 V.events = () => `<main>${backBar(t("events"), "home")}
   ${(S.leagues || []).length || (S.profile && S.profile.is_admin) ? `<div class="between"><h2>${t("leagues")}</h2>${lgAdminBtn()}</div><div style="display:flex;flex-direction:column;gap:12px">${(S.leagues || []).map(lgCard).join("")}</div><h2>${t("events")}</h2>` : ""}
+  ${eventsBoardCard()}
   ${canMakeTour() ? `<button class="cta wide twnew" data-twnew>🏆 ${t("twT")} →</button>` : ""}
   <div style="display:flex;flex-direction:column;gap:14px">${(S.tours || []).map(evCard).join("")
    || `<div class="ev"><div class="in"><span class="tag l" style="align-self:flex-start">Soon</span><div class="t">${t("evSoon")}</div><div class="sm">${t("evTxt")}</div></div></div>`}</div>
@@ -1369,7 +1482,7 @@ V.match = () => { const m = S.match; if (!m) return V.me();
    <div class="card"><div class="between"><b>${esc(fmtDay(d))} · ${esc(fmtTime(d))}</b>${statusTag(m.status)}</div><span class="note">${esc(m.club)} · ${esc(m.court)} · ${m.minutes} ${t("min")}${m.level_min != null ? ` · ${t("lvl")} ${lvl2(m.level_min)}–${lvl2(m.level_max)}` : ""}</span>${m.code ? `<span class="note" style="display:block">${t("booking")} #${m.booking_no} · ${t("code")} <b>${esc(m.code)}</b></span>` : ""}</div>
    ${passCard(m)}
    <h2>${t("players")}</h2>
-   <div class="card" style="display:flex;flex-direction:column;gap:10px">${m.players.map(p => `<div class="prow">${av(p.name)}<div style="flex:1;min-width:0"><b>${pLink(p.id, p.name)}${nameBadges(p.b)}${p.me ? ` <span class="note">(${t("you")})</span>` : ""}</b>${p.booker ? `<small class="note" style="display:block">${t("booker")}</small>` : ""}</div>${lvChip(p.level)}${m.split ? paidTag(p.paid) : ""}</div>`).join("")}
+   <div class="card" style="display:flex;flex-direction:column;gap:10px">${m.players.map(p => `<div class="prow">${avF(p.name, p.level, p.b)}<div style="flex:1;min-width:0"><b>${pLink(p.id, p.name)}${nameBadges(p.b)}${p.me ? ` <span class="note">(${t("you")})</span>` : ""}</b>${p.booker ? `<small class="note" style="display:block">${t("booker")}</small>` : ""}</div>${lvChip(p.level)}${m.split ? paidTag(p.paid) : ""}</div>`).join("")}
     ${Array.from({length: m.open_spots}, () => `<div class="prow">${av("", 1)}<span class="note">${t("openSpot")}</span></div>`).join("")}
     ${m.split ? `<p class="note" style="margin:0">${t("splitInfo").replace("{x}", money(share))}</p>` : ""}</div>
    ${mxExtras(m)}
@@ -1436,15 +1549,16 @@ function playerCard(c){
   if (!c || !c.level_set) return `<button class="card lvprompt" data-go="level"><b>${t("setLevel")} →</b><span class="note">${t("levelCardHint")}</span></button>`;
   const [tn, col] = TIER[c.category || "D"], st = subTier(c), pr = progressInfo(c), played = c.wins + c.losses;
   const wr = played ? Math.round(c.wins / played * 100) + "%" : "–";
-  return `<div class="pcard" style="--tc:${col}"><div class="pc-in"><span class="pc-holo"></span>
+  return `<div class="gcard-wrap"><div class="pcard gc t-${c.category || "D"}" style="--tc:${col}" data-tilt><div class="pc-in">
+    <span class="gc-bg"></span><span class="gc-pat"></span><span class="gc-rays"></span><span class="pc-holo"></span><span class="gc-spark"></span>
     ${c.streak >= 2 ? `<span class="pc-streak">🔥 ${c.streak} ${t("weeks")}</span>` : ""}
-    <div class="pc-top"><div class="pc-ovr"><b>${(+c.level).toFixed(2)}</b><small>${t("lvlU")}</small></div><div class="pc-rank">${emblem(col, 54)}<span>${esc(tierName(c.category))} ${st}</span></div></div>
-    <div class="pc-av">${esc(initials(c.name))}</div>
-    <div class="pc-name"><b>${esc(c.name || "")}</b><small>${t("catU")} ${esc(c.category || "–")}${c.provisional ? ` · ${t("provisional")}` : ""}</small></div>
-    <div class="pc-stats"><div><b>${wr}</b><span>${t("winRate")}</span></div><div><b>${played}</b><span>${t("matchesU")}</span></div><div><b>${c.season && c.season.rank ? "#" + c.season.rank : "–"}</b><span>${c.season ? esc(c.season.club) : t("seasonU")}</span></div></div>
-   </div></div>
+    <div class="pc-top"><div class="pc-ovr"><b>${(+c.level).toFixed(2)}</b><small>${t("lvlU")}</small></div><div class="pc-rank">${emblem(col, 50)}<span class="gc-rib">${esc(tierName(c.category))} ${st}</span></div></div>
+    <div class="gc-avw"><span class="gc-ring"></span><div class="pc-av">${esc(initials(c.name))}</div></div>
+    <div class="pc-name"><span class="gc-plate"><b>${esc(c.name || "")}</b></span><small>${t("catU")} ${esc(c.category || "–")}${c.provisional ? ` · ${t("provisional")}` : ""}</small></div>
+    <div class="pc-stats"><div><i>⚔️</i><b>${wr}</b><span>${t("winRate")}</span></div><div><i>🎾</i><b>${played}</b><span>${t("matchesU")}</span></div><div><i>👑</i><b>${c.season && c.season.rank ? "#" + c.season.rank : "–"}</b><span>${c.season ? esc(c.season.club) : t("seasonU")}</span></div></div>
+   </div></div></div>
    <div class="pc-prog${pr.danger ? " danger" : ""}"><div class="bar"><i style="width:${pr.pct}%"></i></div><div class="lbl"><span>${esc(tierName(c.category))} ${st} · ${esc(c.category || "")}</span><em>${esc(pr.txt)}</em></div></div>
-   <div class="pc-badges">${[...(S.wi && S.wi.quest && (S.wi.quest.done || S.wi.quest.new) ? [{k: "rookie", got: !!S.wi.quest.done}] : []), ...(c.badges || [])].map(b => `<div class="bd${b.got ? "" : " lock"}"><i>${BADGE_IC[b.k] || "★"}</i>${t("b_" + b.k)}</div>`).join("")}</div>
+   <div class="pc-badges">${[...(S.wi && S.wi.quest && (S.wi.quest.done || S.wi.quest.new) ? [{k: "rookie", got: !!S.wi.quest.done}] : []), ...(c.badges || []), ...achList(S.myAch)].map(b => `<div class="bd${b.got ? "" : " lock"}"><i>${BADGE_IC[b.k] || "★"}</i>${t("b_" + b.k)}${S.rarity && S.rarity[b.k] != null ? `<small class="rar">${tf("rarity", {p: S.rarity[b.k]})}</small>` : ""}</div>`).join("")}</div>
    <div class="row" style="gap:10px"><button class="cta gold wide" data-sharecard>${t("shareCard")} ↗</button>${c.season ? `<button class="ghost" style="width:auto;padding:0 16px" data-season="${c.season.club_id}">${t("seasonBtn")}</button>` : ""}</div>`;
 }
 V.season = () => { const rows = S.board || [];
@@ -1771,7 +1885,7 @@ function mgrCoaching(club){ const courts = S.courts.filter(x => x.club_id === cl
   <h2>${t("classes")}</h2>${S.mClasses.map(k => classRow(k, true)).join("") || `<div class="card note">${t("noClasses")}</div>`}`; }
 function mgrSettings(club){ const wk = S.wkDraft || club.weekend_days || [];
   const dn = d => new Intl.DateTimeFormat(lang === "ar" ? "ar-SY" : "en-GB", {weekday: "short", timeZone: "UTC"}).format(new Date(Date.UTC(2024, 0, 7 + d)));
-  return `${dealForm(club)}${cxSettings(club)}<div class="card" style="display:flex;flex-direction:column;gap:10px"><h2 style="font-size:17px">${t("wkTitle")}</h2><span class="note" style="margin-top:-6px">${t("wkTxt")}</span>
+  return `${dealForm(club)}${prizeSettings(club)}${cxSettings(club)}<div class="card" style="display:flex;flex-direction:column;gap:10px"><h2 style="font-size:17px">${t("wkTitle")}</h2><span class="note" style="margin-top:-6px">${t("wkTxt")}</span>
    <div class="chips" style="flex-wrap:wrap">${[6,0,1,2,3,4,5].map(d => `<button class="chip" data-wk="${d}" aria-pressed="${wk.includes(d)}">${esc(dn(d))}</button>`).join("")}</div>
    <label class="fld"><span>${t("aheadL")}</span><input id="bk-days" inputmode="numeric" value="${club.book_days || 7}"></label><button class="cta blue sm" data-saverules style="align-self:flex-start">${t("saveRules")}</button></div>
   ${mgrPrices(club)}${clubForm(club)}`; }
@@ -2050,13 +2164,16 @@ async function go(v){
   if (v === "profile"){ S.pfSoc = null; await Promise.all([loadProfile(S.pfId), snLoad(S.pfId), loadSoc(S.pfId)]); }
   if (v === "match"){ S.rtEdit = false; S.rt = null; }
   if (v === "wallet" || v === "checkout" || v === "me" || v === "club" || v === "matches" || v === "home") await loadWallet();
+  if (v === "home" || v === "me") await loadWeek();
+  if (v === "me" || v === "matches" || v === "home") await loadMeExtras();
   if (v !== "checkin") ciStop(); else S.ciRes = null;
   if (v === "events"){ try { const [r, lg] = await within(Promise.all([sb.rpc("t_list"), sb.rpc("league_list")]), 8000); S.tours = r.data || []; S.leagues = lg.data || []; } catch (e) {} }
   if (v === "league"){ if (S.leagueId) await loadLeague(S.leagueId); }
   if (v === "matches" || v === "home" || v === "welcome"){ const [m] = await Promise.all([sb.rpc("open_matches"), v === "home" ? loadFeed() : null, v !== "matches" ? loadWI() : null, v === "home" ? loadRatePend() : null, v === "home" && S.user && S.profile && S.profile.home_club ? loadClubPosts() : null]); S.matches = m.data || S.matches; }
   if (v === "feed"){ await loadFeed(); }
   if (v === "me" && S.user){ const [mine, rs, pf] = await Promise.all([sb.rpc("my_bookings"), sb.rpc("my_results"), sb.from("profiles").select("*").eq("id", S.user.id).maybeSingle()]); S.mine = mine.data || []; S.results = rs.data || []; if (pf.data) S.profile = pf.data; loadNotifN(); const [mc, rf] = await Promise.all([sb.rpc("my_classes"), sb.rpc("league_ref_matches")]); S.myClasses = mc.data || []; S.myRefs = rf.data || []; await Promise.all([loadCard(), loadMems()]); }
-  if (v === "season" && S.boardClubId){ const [r, sn] = await Promise.all([sb.rpc("season_board", {p_club: S.boardClubId}), sb.rpc("sensor_board", {p_club: S.boardClubId, p_days: 30})]); S.board = r.data || []; S.snBoard = sn.error ? null : sn.data; }
+  if (v === "season"){ await loadBoards(); }
+  if (false){ const [r, sn] = await Promise.all([sb.rpc("season_board", {p_club: S.boardClubId}), sb.rpc("sensor_board", {p_club: S.boardClubId, p_days: 30})]); S.board = r.data || []; S.snBoard = sn.error ? null : sn.data; }
   if (v === "inbox" && S.user){ await loadInbox(); }
   if (v === "match"){ if (S.matchId) await loadMatch(S.matchId); }
   if (v === "level"){ S.quiz = S.quiz || {}; }
@@ -2213,7 +2330,7 @@ app.addEventListener("click", async e => {
   if (d.cancel && isLate(d.cancel)){ S.sheet = "late"; S.lateId = d.cancel; render(); return; }
   if (d.cancel){ const r = await sb.rpc("cancel_my_booking", {p_booking: d.cancel}); if (r.error) toast(errMsg(r.error)); else toast(t("cancelled")); await afterAuth(true); render(); return; }
   if ("sharecard" in d){ shareCard(); return; }
-  if (d.season){ S.boardClubId = d.season; S.boardClub = S.card && S.card.season ? S.card.season.club : ""; go("season"); return; }
+  if (d.season){ S.boardClubId = d.season; S.lbTab = "week"; go("season"); return; }
   if (d.apedit){ S.apEdit = d.apedit; render(); return; }
   if (d.apsave){ const r = await sb.rpc("admin_set_player", {p_user: d.apsave, p_level: +document.getElementById("ap-l").value, p_cat: document.getElementById("ap-c").value, p_aok: document.getElementById("ap-a").checked, p_title: document.getElementById("ap-t").checked, p_note: document.getElementById("ap-n").value});
     if (r.error){ toast(errMsg(r.error)); return; } toast(t("saved")); S.apEdit = null; const q = await sb.rpc("admin_find_players", {p_q: S.apQ || ""}); S.apList = q.data || []; render(); return; }
@@ -2914,13 +3031,13 @@ function smartCard(){
   if (!S.user) return guestStart();
   const ps = pendingScores()[0];
   if (ps) return `<button class="hero sc-alert" data-match="${ps.id}" style="text-align:start;width:100%"><span class="kick2">⚑ ${t("scScore")}</span><span class="big">${esc(fmtDay(new Date(ps.starts_at)))} · ${esc(ps.club_name)}</span><span style="opacity:.92;font-size:14px">${t("scScoreS")}</span><span class="sc-go">${t("scOpen")} →</span></button>`;
-  const rp = (S.ratePend || [])[0];
-  if (rp) return `<button class="hero sc-rate" data-match="${rp.id}" style="text-align:start;width:100%"><span class="kick2">⭐ ${t("scRate")}</span><span class="big">${esc(fmtDay(new Date(rp.starts_at)))}</span><span style="opacity:.92;font-size:14px">${esc(tf("scRateS", {c: rp.club, n: (rp.players || []).map(p => String(p.name || "").split(" ")[0]).join(", ")}))}</span><span class="sc-go">${t("rtSend")} →</span></button>`;
   const nx = upcoming()[0], today = nx && dayKey(new Date(nx.starts_at)) === dayKey(new Date());
   const nextHero = b => `<button class="hero" data-match="${b.id}" style="text-align:start;width:100%"><div class="between" style="width:100%"><span class="kick2">${today ? "🔥 " + t("scToday") : t("scNextT")}</span>${statusTag(b.status).replace('tag g','tag w').replace('tag pend','tag w')}</div>
     <span class="big">${esc(today ? fmtTime(new Date(b.starts_at)) : fmtDay(new Date(b.starts_at)) + " · " + fmtTime(new Date(b.starts_at)))}</span>
     <span style="opacity:.92;font-size:14px">${esc(b.club_name)} · ${esc(b.court_name)} · ${b.minutes} ${t("min")}${b.code ? ` · #${b.booking_no} · <b>${esc(b.code)}</b>` : ""}</span></button>`;
   if (today) return nextHero(nx);
+  const rp = (S.ratePend || []).filter(x => !ls.get("pl-rtx-" + x.id))[0];
+  if (rp) return `<div class="sc-wrap"><button class="hero sc-rate" data-match="${rp.id}" style="text-align:start;width:100%"><span class="kick2">⭐ ${t("scRate")}</span><span class="big">${esc(fmtDay(new Date(rp.starts_at)))}</span><span style="opacity:.92;font-size:14px">${esc(tf("scRateS", {c: rp.club, n: (rp.players || []).map(p => String(p.name || "").split(" ")[0]).join(", ")}))}</span><span class="sc-go">${t("rtSend")} →</span></button><button class="sc-x" data-rtx="${rp.id}" aria-label="Close">×</button></div>`;
   const qc = questCard(); if (qc) return qc;
   if (nx) return nextHero(nx);
   const tb = tourBanner(); if (tb) return tb;
@@ -2945,20 +3062,22 @@ V.home = () => { const name = S.profile && S.profile.full_name ? S.profile.full_
    <div class="row">${bell()}<button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button>${S.user ? "" : `<button class="pill" data-go="auth">${t("signin")}</button>`}</div></div>
   ${smartCard()}
   ${matchesRow()}
+  ${S.user ? weekCard(true) : ""}
   ${S.user ? feedHome() : ""}
  </main>${nav("home")}`; };
 
 /* Me in three tabs */
 V.me = () => { if (!S.user) return V.auth();
  const p = S.profile || {}, tab = S.meTab || "card", todo = pendingScores().length;
- const head = `<div class="top"><div class="row" style="gap:12px;min-width:0"><span class="av" style="width:48px;height:48px;font-size:16px;margin:0">${esc(initials(p.full_name))}</span><div style="min-width:0"><h2 style="margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(p.full_name || "")}</h2><span class="note">${myLevel() != null ? `${t("lvlU")} ${lvl2(myLevel())} · ${esc(tierName(lvCat(myLevel())))}` : esc(S.user.email || "")}</span></div></div>
+ const head = `<div class="top"><div class="row" style="gap:12px;min-width:0">${avF(p.full_name, myLevel(), S.mySoc && S.mySoc.b, 'style="width:48px;height:48px;font-size:16px;margin:0"')}<div style="min-width:0"><h2 style="margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(p.full_name || "")}</h2><span class="note">${myLevel() != null ? `${t("lvlU")} ${lvl2(myLevel())} · ${esc(tierName(lvCat(myLevel())))}` : esc(S.user.email || "")}</span></div></div>
    <div class="row">${S.staff.length ? `<button class="pill" data-go="manager">${t("meMgr")}</button>` : ""}${bell()}</div></div>
   <div class="seg">${[["card", "meCard"], ["games", "meGames"], ["set", "meSet"]].map(([k, l]) => `<button data-metab="${k}" aria-pressed="${tab === k}">${k === "set" ? "⚙️ " : ""}${t(l)}${k === "games" && todo ? `<i class="dot"></i>` : ""}</button>`).join("")}</div>`;
  let body = "";
- if (tab === "card") body = `${walletCard()}${playerCard(S.card)}<button class="cta wide pfbtn" data-profile="me">📊 ${t("pfMine")} →</button>${snMeCard()}`;
+ if (tab === "card") body = `${walletCard()}${playerCard(S.card)}${weekCard(false)}${seasonCard()}<button class="cta wide rcbtn" data-recap>${tf("rcBtn", {y: new Date().getFullYear()})}</button><button class="cta wide pfbtn" data-profile="me">📊 ${t("pfMine")} →</button>${snMeCard()}`;
  else if (tab === "games"){ const up = upcoming(), past = S.mine.filter(b => !up.includes(b));
    body = `${todo ? `<h2>⚑ ${t("meToDo")}</h2><div class="glist">${pendingScores().map(gameRow).join("")}</div>` : ""}
     <h2>${t("myGames")}</h2><div class="glist">${up.map(gameRow).join("") || `<button class="card note" data-go="clubs" style="text-align:start">${t("bookFirst")}</button>`}</div>
+    ${rivalsHtml()}
     ${myRefCard()}${meExtras()}
     <h2>${t("myResults")}</h2><div class="glist" style="gap:8px">${(S.results || []).slice(0, 5).map(resultRow).join("") || `<div class="card note">${t("noResults")}</div>`}</div>
     ${(S.results || []).length > 5 ? `<details class="card pastg"><summary>${t("moreRes")} · ${S.results.length - 5}</summary><div class="glist" style="gap:8px">${S.results.slice(5).map(resultRow).join("")}</div></details>` : ""}
@@ -3229,13 +3348,14 @@ async function ciDo(key){ const r = await sb.rpc("staff_checkin", {p_key: key});
   S.ciRes = r.data; try { navigator.vibrate && navigator.vibrate(80); } catch (e) {} render(); }
 
 app.addEventListener("click", async e => {
-  const el = e.target.closest("[data-rtstar],[data-rtbal],[data-rtlike],[data-rtsend],[data-rtedit],[data-cinext],[data-cxgo],[data-cxh],[data-vfy],[data-ciopen],[data-rategoto]"); if (!el) return; const d = el.dataset;
+  const el = e.target.closest("[data-rtx],[data-rtstar],[data-rtbal],[data-rtlike],[data-rtsend],[data-rtedit],[data-cinext],[data-cxgo],[data-cxh],[data-vfy],[data-ciopen],[data-rategoto]"); if (!el) return; const d = el.dataset;
   if (d.rtstar){ S.rt.stars = +d.rtstar; render(); return; }
   if (d.rtbal){ S.rt.bal = d.rtbal; render(); return; }
   if (d.rtlike){ const i = S.rt.likes.indexOf(d.rtlike); if (i < 0) S.rt.likes.push(d.rtlike); else S.rt.likes.splice(i, 1); render(); return; }
   if ("rtedit" in d){ S.rtEdit = true; S.rt = null; render(); return; }
   if ("rtsend" in d){ const R = S.rt; const r = await sb.rpc("rate_match", {p_booking: R.id, p_stars: R.stars, p_balance: R.bal, p_likes: R.likes}); if (r.error){ toast(errMsg(r.error)); return; }
     S.match.my_rating = {stars: R.stars, balance: R.bal, likes: R.likes}; S.rtEdit = false; S.ratePend = (S.ratePend || []).filter(x => x.id !== R.id); toast(t("rtDone")); render(); return; }
+  if (d.rtx){ ls.set("pl-rtx-" + d.rtx, "1"); render(); return; }
   if (d.rategoto){ go("match_" + d.rategoto); return; }
   if ("cinext" in d){ S.ciRes = null; render(); setTimeout(ciStart, 50); return; }
   if ("ciopen" in d){ S.sheet = null; S.ciRes = null; go("checkin"); return; }
@@ -3340,6 +3460,137 @@ app.addEventListener("input", e => { if (e.target.id === "mw-amt" && S.mw){ S.mw
 app.addEventListener("submit", async e => { if (e.target.id !== "mwF") return; e.preventDefault(); const ph = document.getElementById("mw-phone").value;
   const r = await sb.rpc("staff_wallet_find", {p_club: S.mClub, p_phone: ph}); if (r.error){ toast(errMsg(r.error)); return; } S.mw = {phone: ph, p: r.data, amt: ""}; render(); });
 
+
+/* ---------- weekly challenges, more achievements, tier borders (🔥 for the top 10) ---------- */
+Object.assign(W.en, {wkT:"This week's challenges", wkS:"New ones every Monday. Finish all 3 for a ⭐.", wkLeft:"{d} days left", wkLast:"Last day", wkDone:"Week complete! ⭐",
+  wkStars:"⭐ {n} weeks done", wkStreak:"🔥 {n}-week streak",
+  ck_new_club:"Play at a club you've never played at", ck_new_people:"Play with 2 people you've never played with", ck_play3:"Play 3 matches", ck_win2:"Win 2 matches",
+  ck_open1:"Join someone's open match", ck_rate3:"Rate 3 matches", ck_early1:"Play a match before 2 PM",
+  b_globetrotter:"Globetrotter", b_social:"Social player", b_centurion:"50 matches", b_early_bird:"Early bird", b_warrior:"Weekly warrior", b_fire:"Top 10 🔥",
+  frFire:"Top 10 player"});
+Object.assign(W.ar, {wkT:"تحديات هالأسبوع", wkS:"تحديات جديدة كل يوم اثنين. خلّص الثلاثة لتاخد ⭐.", wkLeft:"باقي {d} أيام", wkLast:"آخر يوم", wkDone:"خلصت الأسبوع! ⭐",
+  wkStars:"⭐ {n} أسابيع", wkStreak:"🔥 {n} أسابيع ورا بعض",
+  ck_new_club:"العب بنادي ما لعبت فيه قبل", ck_new_people:"العب مع شخصين ما لعبت معهن قبل", ck_play3:"العب ٣ مباريات", ck_win2:"اربح مباراتين",
+  ck_open1:"انضم لمباراة مفتوحة لحدا", ck_rate3:"قيّم ٣ مباريات", ck_early1:"العب مباراة قبل الساعة ٢ الظهر",
+  b_globetrotter:"جوّال", b_social:"اجتماعي", b_centurion:"٥٠ مباراة", b_early_bird:"بكّير", b_warrior:"محارب الأسبوع", b_fire:"أفضل ١٠ 🔥",
+  frFire:"من أفضل ١٠ لاعبين"});
+Object.assign(BADGE_IC, {globetrotter: "🌍", social: "🤝", centurion: "💯", early_bird: "🌅", warrior: "⭐", fire: "🔥"});
+const CK_IC = {new_club: "🏟️", new_people: "🤝", play3: "🎾", win2: "🏅", open1: "🚪", rate3: "⭐", early1: "🌅"};
+
+async function loadWeek(){ if (!S.user) return; try { const [w, a] = await Promise.all([sb.rpc("my_week"), sb.rpc("player_ach", {p_user: S.user.id})]);
+  if (!w.error) S.week = w.data; if (!a.error) S.myAch = a.data;
+  if (S.week && S.week.done && !ls.get("pl-wk-" + S.week.week)){ ls.set("pl-wk-" + S.week.week, "1"); setTimeout(() => toast(t("wkDone")), 600); } } catch (e) {} }
+const achList = a => a ? ["globetrotter", "social", "centurion", "early_bird", "warrior", "fire"].map(k => ({k, got: !!a[k]})) : [];
+
+/* avatar with a border for the player's tier; the top 10 get fire */
+function avF(name, level, b, extra){ return `<span class="av"${extra ? " " + extra : ""}>${esc(initials(name))}</span>`; }
+
+function weekCard(compact){ const w = S.week; if (!w || !w.items) return "";
+  const end = new Date(w.ends), days = Math.max(0, Math.ceil((end - new Date()) / 864e5)), n = w.items.filter(x => x.n >= x.target).length;
+  const items = w.items.map(x => { const ok = x.n >= x.target, pct = Math.round(100 * x.n / x.target);
+    return `<div class="ck${ok ? " ok" : ""}"><span class="ck-ic">${ok ? "✓" : CK_IC[x.k] || "🎯"}</span><div class="ck-b"><span>${t("ck_" + x.k)}</span><div class="ck-bar"><i style="width:${pct}%"></i></div></div><small>${x.n}/${x.target}</small></div>`; }).join("");
+  return `<div class="card wk${w.done ? " done" : ""}${compact ? " sm" : ""}"><div class="between"><b>${w.done ? "⭐ " + t("wkDone") : "🎯 " + t("wkT")}</b><span class="wk-n">${n}/3</span></div>
+    ${compact ? "" : `<span class="note">${t("wkS")}</span>`}${items}
+    <div class="wk-foot"><span>${days <= 1 ? t("wkLast") : tf("wkLeft", {d: days})}</span>${w.stars ? `<span>${tf("wkStars", {n: w.stars})}</span>` : ""}${w.streak > 1 ? `<span>${tf("wkStreak", {n: w.streak})}</span>` : ""}</div></div>`; }
+
+
+/* ---------- leaderboards, club battle, seasons, rarity, rivalries, year recap ---------- */
+Object.assign(W.en, {lbT:"Leaderboards", lbWeek:"This week", lbMonth:"Month", lbClubs:"Club battle", lbMatches:"Most matches", lbWins:"Most wins", lbSwing:"Fastest swing",
+  lbReset:"Resets Monday", lbPrize:"🎁 This week's prize: {p}", lbEmpty:"Nobody yet this week. Play a match and take #1.", lbDuo:"Best duo of the month", lbDuoS:"{w} wins in {n} matches together",
+  lbOpen:"🏆 Leaderboards", lbOpenS:"This week at {c} · resets Monday", cbT:"Club battle · {m}", cbS:"Every match played at a club counts. The club with the most matches wins the month.",
+  cbLast:"Last month's winner: {c} 👑", cbM:"{n} matches", cbP:"{n} players",
+  ssT:"Season {s}", ssLeft:"{d} days left", ssGoal:"Finish the season at Gold or Diamond with 5+ matches to earn the season badge.", ssOk:"You're on track for the {t} badge ✓", ssNeed:"{n} more matches this season", ssNeed1:"1 more match this season",
+  ssBadges:"Season badges", rarity:"{p}% of players", rvT:"⚔️ Rivalries", rvS:"Players you've faced 3+ times", rvYou:"You {w}–{l}", rvTag:"⚔️ Rival",
+  rcBtn:"🎬 My {y} in padel", rcMaking:"Making your recap…", rcSaved:"Recap saved to your phone", prizeT:"Weekly prize (admin)", prizePh:"e.g. Free court hour for #1", prizeSave:"Save prize"});
+Object.assign(W.ar, {lbT:"الترتيب", lbWeek:"هالأسبوع", lbMonth:"الشهر", lbClubs:"معركة النوادي", lbMatches:"أكتر مباريات", lbWins:"أكتر فوز", lbSwing:"أسرع ضربة",
+  lbReset:"بيتصفّر يوم الاثنين", lbPrize:"🎁 جائزة هالأسبوع: {p}", lbEmpty:"لسا ما حدا هالأسبوع. العب مباراة وخود المركز الأول.", lbDuo:"أفضل ثنائي بالشهر", lbDuoS:"{w} فوز من {n} مباريات سوا",
+  lbOpen:"🏆 الترتيب", lbOpenS:"هالأسبوع بـ{c} · بيتصفّر يوم الاثنين", cbT:"معركة النوادي · {m}", cbS:"كل مباراة بتنلعب بالنادي بتنحسب. النادي يلي فيه أكتر مباريات بيربح الشهر.",
+  cbLast:"بطل الشهر الماضي: {c} 👑", cbM:"{n} مباراة", cbP:"{n} لاعب",
+  ssT:"موسم {s}", ssLeft:"باقي {d} يوم", ssGoal:"خلّص الموسم ذهبي أو ماسي مع ٥ مباريات أو أكتر لتاخد شارة الموسم.", ssOk:"ماشي صح لشارة {t} ✓", ssNeed:"باقي {n} مباريات بهالموسم", ssNeed1:"باقي مباراة وحدة بهالموسم",
+  ssBadges:"شارات المواسم", rarity:"{p}% من اللاعبين", rvT:"⚔️ المنافسين", rvS:"لاعبين واجهتهن ٣ مرات أو أكتر", rvYou:"أنت {w}–{l}", rvTag:"⚔️ منافس",
+  rcBtn:"🎬 سنتي {y} بالبادل", rcMaking:"عم نجهز الملخص…", rcSaved:"انحفظ الملخص عموبايلك", prizeT:"جائزة الأسبوع (للإدارة)", prizePh:"مثلاً ساعة ملعب مجانية للأول", prizeSave:"احفظ الجائزة"});
+W.en.seasonBtn = "Leaderboards"; W.ar.seasonBtn = "الترتيب";
+
+const boardClub = () => S.boardClubId || (S.profile && S.profile.home_club) || (S.card && S.card.season && S.card.season.club_id) || (S.clubs[0] || {}).id;
+async function loadBoards(){ const id = boardClub(); S.boardClubId = id; if (!id) return;
+  const [w, cb, sbd] = await Promise.all([sb.rpc("week_board", {p_club: id}), sb.rpc("club_battle"), sb.rpc("season_board", {p_club: id})]);
+  S.wBoard = w.error ? null : w.data; S.battle = cb.error ? null : cb.data; S.board = sbd.error ? [] : sbd.data || []; }
+async function loadMeExtras(){ if (!S.user) return; try { const [ss, ra, rv] = await Promise.all([sb.rpc("my_season"), S.rarity ? null : sb.rpc("ach_rarity"), sb.rpc("my_rivals")]);
+  if (!ss.error) S.season = ss.data; if (ra && !ra.error) S.rarity = ra.data; if (!rv.error) S.rivals = rv.data || []; } catch (e) {} }
+const rivalIds = () => new Set((S.rivals || []).map(r => r.id));
+
+function lbRows(list, unit){ if (!list || !list.length) return `<p class="note" style="margin:6px 4px">${t("lbEmpty")}</p>`;
+  return list.map((r, i) => `<div class="srow${r.me ? " me" : ""}"><span class="srk${i < 3 ? " top" : ""}">${i === 0 ? "👑" : i + 1}</span>${avF(r.name, r.level, r.b)}<b>${pLink(r.id, r.name)}${nameBadges(r.b)}</b><span class="spts">${unit(r)}</span></div>`).join(""); }
+
+V.season = () => { const tab = S.lbTab || "week", wb = S.wBoard, cid = boardClub(), club = S.clubs.find(c => c.id === cid) || {};
+  const tabs = `<div class="seg">${[["week", "lbWeek"], ["month", "lbMonth"], ["clubs", "lbClubs"]].map(([k, l]) => `<button data-lbtab="${k}" aria-pressed="${tab === k}">${t(l)}</button>`).join("")}</div>`;
+  const clubChips = tab !== "clubs" ? `<div class="chips" style="flex-wrap:wrap">${S.clubs.map(c => `<button class="chip" data-lbclub="${c.id}" aria-pressed="${c.id === cid}">${esc(c.name)}</button>`).join("")}</div>` : "";
+  let body = "";
+  if (tab === "week"){ const k = S.lbKind || "matches";
+    body = `${wb && wb.prize ? `<div class="lb-prize">${esc(tf("lbPrize", {p: wb.prize}))}</div>` : ""}
+      <div class="chips">${[["matches", "lbMatches"], ["wins", "lbWins"], ["swing", "lbSwing"]].map(([x, l]) => `<button class="chip" data-lbkind="${x}" aria-pressed="${k === x}">${t(l)}</button>`).join("")}</div>
+      <div class="card" style="padding:6px 10px">${lbRows(wb && wb[k], r => k === "swing" ? `${Math.round(r.kmh)} <small>km/h</small>` : `${r.n}`)}</div>
+      <span class="note" style="text-align:center">⏳ ${t("lbReset")}</span>
+      ${wb && wb.duo ? `<div class="card duo"><small>💞 ${t("lbDuo")}</small><div class="duo-p">${avF(wb.duo.a, null, null)}${avF(wb.duo.b, null, null)}<b>${pLink(wb.duo.ai, wb.duo.a)} & ${pLink(wb.duo.bi, wb.duo.b)}</b></div><span class="note">${tf("lbDuoS", {w: wb.duo.w, n: wb.duo.n})}</span></div>` : ""}`; }
+  else if (tab === "month") body = `<div class="seasonhd"><b>${esc(club.name || "")}</b><span>${t("seasonRule")}</span></div>
+      <div class="card" style="padding:6px 10px">${(S.board || []).map(r => `<div class="srow${r.me ? " me" : ""}"><span class="srk${r.rk <= 3 ? " top" : ""}">${r.rk === 1 ? "👑" : r.rk}</span><b>${pLink(r.id, r.name)}</b>${lvChip(r.level)}<span class="spts">${r.points} <small>${t("pts")}</small></span></div>`).join("") || `<p class="note">${t("seasonEmpty")}</p>`}</div>`;
+  else { const b = S.battle || {clubs: []}, mx = Math.max(1, ...b.clubs.map(c => c.n));
+    body = `<div class="card cb"><b>⚔️ ${esc(tf("cbT", {m: b.month || ""}))}</b><span class="note">${t("cbS")}</span>
+      ${b.clubs.map((c, i) => `<div class="cb-r${i === 0 && c.n ? " lead" : ""}"><div class="between"><b>${i === 0 && c.n ? "👑 " : ""}${esc(c.name)}</b><span>${tf("cbM", {n: c.n})} · ${tf("cbP", {n: c.players})}</span></div><div class="cb-bar"><i style="width:${Math.round(100 * c.n / mx)}%"></i></div></div>`).join("")}
+      ${b.last ? `<span class="note">${esc(tf("cbLast", {c: b.last}))}</span>` : ""}</div>`; }
+  return `<main>${backBar(t("lbT"), "events")}${tabs}${clubChips}${body}</main>${nav("events")}`; };
+
+function seasonCard(){ const s = S.season; if (!s) return "";
+  const days = Math.max(0, Math.ceil((new Date(s.ends + "T00:00:00+03:00") - new Date()) / 864e5)), cat = S.card && S.card.category, gold = cat === "A" || cat === "B";
+  const need = Math.max(0, 5 - (s.played || 0));
+  return `<div class="card snc"><div class="between"><b>🗓️ ${esc(tf("ssT", {s: s.season}))}</b><span class="tag">${tf("ssLeft", {d: days})}</span></div>
+    <span class="note">${gold && !need ? tf("ssOk", {t: tierName(cat)}) : t("ssGoal")}${need ? ` · ${need === 1 ? t("ssNeed1") : tf("ssNeed", {n: need})}` : ""}</span>
+    ${s.badges && s.badges.length ? `<div class="sn-b">${s.badges.map(b => `<span class="snb t${b.tier}">${b.tier === "A" ? "💎" : "🥇"} ${esc(tierName(b.tier))} · ${esc(b.season)}</span>`).join("")}</div>` : ""}</div>`; }
+
+function rivalsHtml(){ const L = S.rivals || []; if (!L.length) return "";
+  return `<h2>${t("rvT")}</h2><span class="note" style="margin-top:-8px">${t("rvS")}</span><div class="card" style="padding:6px 10px">${L.map(r => `<div class="srow"><span class="srk">⚔️</span>${avF(r.name, r.level, r.b)}<b>${pLink(r.id, r.name)}${nameBadges(r.b)}</b><span class="spts rv${r.w > r.l ? " up" : r.w < r.l ? " down" : ""}">${tf("rvYou", {w: r.w, l: r.l})}</span></div>`).join("")}</div>`; }
+
+function eventsBoardCard(){ if (!S.user) return ""; const c = S.clubs.find(x => x.id === boardClub()) || {};
+  return `<button class="card lbcard" data-go="season"><span class="w-ic">🏆</span><span class="tn-b"><b>${t("lbOpen")}</b><span class="note">${esc(tf("lbOpenS", {c: c.name || ""}))}</span></span><span class="tn-go">→</span></button>`; }
+
+function prizeSettings(club){ if (!(S.profile && S.profile.is_admin)) return "";
+  return `<div class="card" style="display:flex;flex-direction:column;gap:10px"><h2 style="font-size:17px">🎁 ${t("prizeT")}</h2><input id="wk-prize" placeholder="${t("prizePh")}" value="${esc(club.week_prize || "")}"><button class="ghost" data-prizesave>${t("prizeSave")}</button></div>`; }
+
+/* year recap image for Instagram stories */
+async function makeRecap(){ toast(t("rcMaking")); const y = new Date().getFullYear(); const r = await sb.rpc("my_recap", {p_year: y}); if (r.error){ toast(errMsg(r.error)); return; } const d = r.data;
+  const W2 = 1080, H2 = 1920, cv = document.createElement("canvas"); cv.width = W2; cv.height = H2; const g = cv.getContext("2d");
+  const cat = d.category || "D", [, col] = TIER[cat];
+  const bg = g.createLinearGradient(0, 0, W2, H2); bg.addColorStop(0, "#0E2A22"); bg.addColorStop(.55, "#0B1712"); bg.addColorStop(1, "#1F3F70"); g.fillStyle = bg; g.fillRect(0, 0, W2, H2);
+  g.globalAlpha = .08; g.strokeStyle = "#E3EE3A"; g.lineWidth = 6; g.strokeRect(120, 300, W2 - 240, 1300); g.beginPath(); g.moveTo(120, 950); g.lineTo(W2 - 120, 950); g.stroke(); g.globalAlpha = 1;
+  g.textAlign = "center"; g.fillStyle = "#E3EE3A"; g.font = "800 44px Barlow, sans-serif"; g.fillText("PADEL LIVE · " + d.year, W2 / 2, 170);
+  g.fillStyle = "#fff"; g.font = "italic 900 120px 'Barlow Condensed', 'Arial Narrow', sans-serif"; g.fillText(String(d.name || "").toUpperCase(), W2 / 2, 300);
+  g.fillStyle = col; g.font = "italic 900 64px 'Barlow Condensed', sans-serif"; g.fillText(`${tierName(cat).toUpperCase()} · ${d.level_to != null ? (+d.level_to).toFixed(2) : ""}`, W2 / 2, 385);
+  const tiles = [[d.matches, t("matchesU")], [d.wins, "WINS"], [d.hours + "h", "ON COURT"], [d.people, "PLAYERS MET"], [d.clubs, "CLUBS"], [d.kmh ? Math.round(d.kmh) + "" : "–", "KM/H TOP SWING"]];
+  tiles.forEach(([v, k], i) => { const x = 140 + (i % 2) * 420, y = 470 + Math.floor(i / 2) * 330; g.fillStyle = "rgba(255,255,255,.07)"; g.beginPath(); g.roundRect ? g.roundRect(x, y, 380, 290, 36) : g.rect(x, y, 380, 290); g.fill();
+    g.fillStyle = "#fff"; g.font = "italic 900 130px 'Barlow Condensed', sans-serif"; g.fillText(String(v), x + 190, y + 165); g.fillStyle = "rgba(255,255,255,.7)"; g.font = "800 32px Barlow, sans-serif"; g.fillText(k, x + 190, y + 230); });
+  let y2 = 1500; g.font = "700 46px Barlow, sans-serif"; g.fillStyle = "#fff";
+  if (d.partner) { g.fillText(`💞 Best partner: ${d.partner.name} (${d.partner.w} wins)`, W2 / 2, y2); y2 += 80; }
+  if (d.fav_club) { g.fillText(`🏟️ Home court: ${d.fav_club}`, W2 / 2, y2); y2 += 80; }
+  if (d.level_from != null && d.level_to != null) { const dl = +d.level_to - +d.level_from; g.fillText(`📈 Level ${(+d.level_from).toFixed(2)} → ${(+d.level_to).toFixed(2)} (${dl >= 0 ? "+" : ""}${dl.toFixed(2)})`, W2 / 2, y2); y2 += 80; }
+  if (d.titles) { g.fillText(`🏆 ${d.titles} tournament title${d.titles > 1 ? "s" : ""}`, W2 / 2, y2); y2 += 80; }
+  g.fillStyle = "rgba(255,255,255,.6)"; g.font = "700 34px Barlow, sans-serif"; g.fillText(location.host, W2 / 2, H2 - 70);
+  const blob = await new Promise(res => cv.toBlob(res, "image/png")); if (!blob) return; const file = new File([blob], `padel-live-${y}.png`, {type: "image/png"});
+  try { if (navigator.canShare && navigator.canShare({files: [file]})){ await navigator.share({files: [file], title: "Padel Live"}); return; } } catch (e) { if (e && e.name === "AbortError") return; }
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = file.name; document.body.appendChild(a); a.click(); a.remove(); toast(t("rcSaved")); }
+
+app.addEventListener("click", async e => { const el = e.target.closest("[data-lbtab],[data-lbclub],[data-lbkind],[data-recap],[data-prizesave]"); if (!el) return; const d = el.dataset;
+  if (d.lbtab){ S.lbTab = d.lbtab; render(); return; }
+  if (d.lbkind){ S.lbKind = d.lbkind; render(); return; }
+  if (d.lbclub){ S.boardClubId = d.lbclub; await loadBoards(); render(); return; }
+  if ("recap" in d){ makeRecap(); return; }
+  if ("prizesave" in d){ const v = document.getElementById("wk-prize").value; const r = await sb.rpc("admin_set_week_prize", {p_club: S.mClub, p_text: v}); if (r.error){ toast(errMsg(r.error)); return; }
+    const c = S.clubs.find(x => x.id === S.mClub); if (c) c.week_prize = v; toast("✓"); return; }
+});
+
+/* the player card tilts with your finger */
+document.addEventListener("pointermove", e => { const c = e.target.closest && e.target.closest("[data-tilt]"); if (!c) return; const r = c.getBoundingClientRect();
+  const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; c.style.setProperty("--rx", (-y * 14).toFixed(1) + "deg"); c.style.setProperty("--ry", (x * 16).toFixed(1) + "deg"); c.style.setProperty("--mx", (x * 100 + 50).toFixed(0) + "%"); });
+document.addEventListener("pointerout", e => { const c = e.target.closest && e.target.closest("[data-tilt]"); if (c && !c.contains(e.relatedTarget)){ c.style.setProperty("--rx", "0deg"); c.style.setProperty("--ry", "0deg"); } });
 render();
 boot();
 
