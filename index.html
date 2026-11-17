@@ -1604,8 +1604,9 @@ function nText2(n){ const d = n.data || {}, nm = esc(d.name || t("someone")), w 
     league_req: tf("nLgReq", {n: nm, x, c}), league_ok: tf("nLgOk", {x}), league_no: tf("nLgNo", {x}),
     league_round: tf("nLgRound", {r: d.round, x, b: d.box, d: esc(d.until || "")}), league_result: tf("nLgResult", {n: nm}),
     league_disputed: tf("nLgDisp", {n: nm}), league_champ: tf("nLgChamp", {x, c}), booking_new: tf(d.pending ? "nBookingDep" : "nBooking", {n: nm, k: esc(d.court || ""), w}), league_sched: tf("nLgSched", {n: nm, w, c}), league_ref: tf("nLgRef", {x, w, c: c ? "· " + c : ""}), league_ref_set: tf("nLgRefSet", {n: nm, w}), league_final: t("nLgFinal"),
-    match_open: tf("nMatchOpen", {n: nm, r: d.round, c, w}), rematch: tf("nRematch", {n: nm, c, w}), club_post: tf("nClubPost", {c, x: esc(d.title || "")}), morning: tf("nMorning", {c, r: d.round, b: d.box}) })[n.kind]; }
-const nLink = n => n.kind === "club_post" && n.data && n.data.club_id ? `data-club="${esc(n.data.club_id)}"` : n.kind === "morning" ? `data-go="manager"` : n.kind === "booking_new" ? `data-go="manager"` : /^league_/.test(n.kind) ? `data-go="events"` : /^member_/.test(n.kind) ? (n.kind === "member_req" ? `data-go="manager"` : `data-go="me"`) : /^class_/.test(n.kind) || n.kind === "lesson_new" ? `data-go="me"` : "";
+    match_open: tf("nMatchOpen", {n: nm, r: d.round, c, w}), rematch: tf("nRematch", {n: nm, c, w}), club_post: tf("nClubPost", {c, x: esc(d.title || "")}), morning: tf("nMorning", {c, r: d.round, b: d.box}),
+    tour_partner: tf("nTPartner", {n: nm, x, c}), tour_req: tf("nTReq", {n: nm, x, c}), tour_ok: tf("nTOk", {x, c}), tour_no: tf("nTNo", {x, c}) })[n.kind]; }
+const nLink = n => /^tour_/.test(n.kind) && n.data && n.data.slug ? `data-turl="t.html?${esc(encodeURIComponent(n.data.slug))}"` : n.kind === "club_post" && n.data && n.data.club_id ? `data-club="${esc(n.data.club_id)}"` : n.kind === "morning" ? `data-go="manager"` : n.kind === "booking_new" ? `data-go="manager"` : /^league_/.test(n.kind) ? `data-go="events"` : /^member_/.test(n.kind) ? (n.kind === "member_req" ? `data-go="manager"` : `data-go="me"`) : /^class_/.test(n.kind) || n.kind === "lesson_new" ? `data-go="me"` : "";
 
 function lgGrab(){ const v = id => { const el = document.getElementById(id); return el ? el.value : undefined; }; const f = S.lgForm || (S.lgForm = {});
   [["name","le-name"],["starts_on","le-s"],["ends_on","le-e"],["round_days","le-rd"],["box_size","le-bx"],["fee","le-fee"],["prize","le-prize"],["about","le-about"]].forEach(([k, id]) => { const x = v(id); if (x !== undefined) f[k] = x; }); }
@@ -2403,6 +2404,7 @@ Object.assign(W.en, {fdT:"What's new", fdAll:"See all", fdEmpty:"Play a match or
   rmT:"Rematch", rmTxt:"Same court, same players. They get a notification and their spots are saved for 24 hours.", rmDay:"Day", rmTime:"Time", rmBook:"Book rematch", rmDone:"Rematch booked. The others have been invited.",
   psT:"Club news", psNew:"Post news to your players", psPh:"Ladies night Friday 7 PM, 20% off…", psPhoto:"Add a photo (optional)", psSend:"Post", psSent:"Posted. Your recent players have been told.", psDelQ:"Delete this post?", psNone:"No posts yet.",
   mTabPost:"Posts", tdT:"Today at a glance", tdBook:"Bookings", tdRev:"Expected", tdFree:"Free court-hours", tdFirst:"First game", tdDep:"Deposits to check", tdMem:"Membership requests", tdDeal:"Start a deal for empty slots", tdDealOn:"Deal running: {p}% off",
+  nTPartner:"{n} signed you up as partner in {x} (Category {c}).", nTReq:"New team for {x} (Category {c}): {n}. Confirm or reject it on the tournament page.", nTOk:"Your team is confirmed in {x} (Category {c}). See you there!", nTNo:"Your team was not accepted in {x} (Category {c}).",
   nMatchOpen:"{n} needs {r} player(s) at {c}, {w}. Tap to join.", nRematch:"{n} booked a rematch at {c} on {w}. Your spot is saved: tap to join.", nClubPost:"{c}: {x}", nMorning:"Good morning! {c} today: {r} bookings, {b} free court-hours."});
 Object.assign(W.ar, {fdT:"شو الجديد", fdAll:"شوف الكل", fdEmpty:"العب مباراة أو تابع نادي، وأخبار جماعتك بالبادل رح تطلع هون.",
   fdBeat:"{a} غلبوا {b}", fdUp:"{n} طلع لـ {c}", fdDown:"{n} نزل لـ {c}", fdLeague:"دوري جديد مفتوح: {n}", fdLeagueS:"بيبلش {d}{p}", fdSmash:"أقوى ضربة هالأسبوع: {n} · {v} كم/س",
@@ -2413,6 +2415,7 @@ Object.assign(W.ar, {fdT:"شو الجديد", fdAll:"شوف الكل", fdEmpty:"
   rmT:"مباراة ثأرية", rmTxt:"نفس الملعب ونفس اللاعبين. بيوصلهم إشعار وأماكنهم محجوزة 24 ساعة.", rmDay:"اليوم", rmTime:"الوقت", rmBook:"احجز المباراة الثأرية", rmDone:"انحجزت. بعتنا دعوة للباقيين.",
   psT:"أخبار النادي", psNew:"انشر خبر للاعبينك", psPh:"ليلة السيدات الجمعة 7 المسا، خصم 20%…", psPhoto:"ضيف صورة (اختياري)", psSend:"انشر", psSent:"انتشر. خبّرنا اللاعبين يلي لعبوا عندك مؤخراً.", psDelQ:"بدك تمسح هالمنشور؟", psNone:"ما في منشورات لسا.",
   mTabPost:"منشورات", tdT:"اليوم بلمحة", tdBook:"حجوزات", tdRev:"متوقع", tdFree:"ساعات ملاعب فاضية", tdFirst:"أول مباراة", tdDep:"عرابين للتأكيد", tdMem:"طلبات عضوية", tdDeal:"ابدأ عرض للأوقات الفاضية", tdDealOn:"في عرض شغّال: خصم {p}%",
+  nTPartner:"{n} سجّلك شريك بـ{x} (فئة {c}).", nTReq:"فريق جديد بـ{x} (فئة {c}): {n}. أكده أو ارفضه من صفحة البطولة.", nTOk:"فريقك تأكد بـ{x} (فئة {c}). منشوفك هونيك!", nTNo:"فريقك ما انقبل بـ{x} (فئة {c}).",
   nMatchOpen:"{n} ناقصه {r} لاعب بـ{c}، {w}. اضغط لتنضم.", nRematch:"{n} حجز مباراة ثأرية بـ{c} يوم {w}. مكانك محجوز: اضغط لتنضم.", nClubPost:"{c}: {x}", nMorning:"صباح الخير! {c} اليوم: {r} حجوزات، {b} ساعات ملاعب فاضية."});
 Object.assign(S, {feed: null, clubPosts: [], mPosts: [], today: null, rmDay: null, rmShift: 0, opSpots: null, opRange: "any", psPhoto: null, psBody: ""});
 function ago(at){ const s = (Date.now() - new Date(at)) / 1000; if (s < 60) return t("ago_now"); if (s < 3600) return tf("ago_m", {n: Math.floor(s / 60)}); if (s < 86400) return tf("ago_h", {n: Math.floor(s / 3600)}); return tf("ago_d", {n: Math.floor(s / 86400)}); }
@@ -2485,6 +2488,7 @@ async function loadToday(){ if (!S.mClub) return; try { const r = await sb.rpc("
 
 app.addEventListener("click", async e => {
   const b = e.target.closest("button"); if (!b) return; const d = b.dataset;
+  if (d.turl){ location.href = d.turl; return; }
   if (d.alert){ const on = d.alert === "1"; const r = await sb.rpc("set_open_alerts", {p_on: on}); if (r.error){ toast(errMsg(r.error)); return; } if (S.profile) S.profile.alert_open = on; toast(t("saved")); render(); return; }
   if (d.opn != null){ S.opSpots = +d.opn; render(); return; }
   if (d.opr){ S.opRange = d.opr; render(); return; }
