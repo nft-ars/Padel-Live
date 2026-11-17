@@ -710,6 +710,126 @@ details.lrules{border:2px solid #E8C96A;background:linear-gradient(160deg,color-
 .psform textarea{width:100%;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:10px 12px;font:inherit;resize:vertical}
 .tdcard .sngrid b{font-size:24px}
 .card.fd.post .between{width:100%}
+.pc-prog .bar{position:relative;bottom:auto;left:auto;transform:none;max-width:none;width:100%;padding:0;border-top:0;display:block;z-index:auto}
+/* welcome path */
+.wel{gap:16px}
+.wel-lang{display:flex;gap:8px;justify-content:center}
+.wel-hero{text-align:center;padding:18px 0 4px;position:relative}
+.wel-hero p{margin:6px 0 0;color:var(--ink-2);font-size:16px}
+.wel-logo{font-size:52px!important;animation:welIn .6s ease both}
+.wel-ball{width:26px;height:26px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#F4FF8A,var(--lime) 55%,#9AA51E);margin:0 auto 8px;animation:welBounce 1.4s cubic-bezier(.3,0,.5,1) infinite alternate;box-shadow:0 8px 14px rgba(0,0,0,.15)}
+@keyframes welBounce{0%{transform:translateY(-14px)}100%{transform:translateY(8px) scaleY(.9)}}
+@keyframes welIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.wel-rows{display:flex;flex-direction:column;gap:10px}
+.wel-row{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px 14px;animation:welIn .5s ease both}
+.wel-row>span{font-size:26px;width:40px;text-align:center}
+.wel-row b{display:block;font-size:16px}.wel-row small{color:var(--ink-2);font-size:13px}
+.wel-cta{display:flex;flex-direction:column;gap:8px;margin-top:4px}
+.tn{display:flex;align-items:center;gap:12px;width:100%;text-align:start;background:linear-gradient(120deg,#10201A,#1F3F70);color:#fff;border:0}
+.tn .note{color:rgba(255,255,255,.75)}
+.tn-moon{font-size:28px}
+.tn-b{flex:1;display:flex;flex-direction:column;gap:4px;min-width:0}
+.tn-b>b{display:flex;align-items:center;gap:8px;font-size:15px}
+.tn-live{width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 0 0 rgba(227,238,58,.7);animation:tnPulse 1.6s infinite}
+@keyframes tnPulse{70%{box-shadow:0 0 0 8px rgba(227,238,58,0)}100%{box-shadow:0 0 0 0 rgba(227,238,58,0)}}
+.tn-n{display:flex;flex-wrap:wrap;gap:6px}
+.tn-n em{font-style:normal;font-size:12px;font-weight:700;background:rgba(255,255,255,.12);border-radius:99px;padding:3px 9px}
+.tn-n em.nb{background:rgba(227,238,58,.2);color:var(--lime)}
+.tn-go{font-size:20px;font-weight:800;color:var(--lime)}
+.tourban{display:flex;align-items:stretch;border-radius:16px;overflow:hidden;background:linear-gradient(110deg,#2B2410,#5E4A1A 60%,#8a6d22);color:#FFF3C4}
+.tourban a{flex:1;display:flex;gap:12px;align-items:center;padding:12px 14px;color:inherit;text-decoration:none}
+.tb-cup{font-size:28px}.tb-b{display:flex;flex-direction:column;gap:2px}.tb-b b{font-family:var(--disp);font-style:italic;font-size:20px;text-transform:uppercase;letter-spacing:.02em}.tb-b span{font-size:12.5px;opacity:.9}
+.tb-x{background:none;border:0;color:inherit;font-size:22px;padding:0 14px;opacity:.7}
+.gstart{display:flex;gap:14px;align-items:center;width:100%;text-align:start;border:1.5px dashed #E8C96A}
+.gs-card{width:54px;height:74px;flex:none;border-radius:10px;background:linear-gradient(160deg,#2B2410,#0C0A06);border:2px solid #E8C96A;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#E8C96A;transform:rotate(-6deg);box-shadow:0 0 14px rgba(232,201,106,.35)}
+.gs-card b{font-family:var(--disp);font-size:30px;font-style:italic;line-height:1}.gs-card small{font-size:8px;letter-spacing:.15em;font-weight:800}
+.quest{display:flex;flex-direction:column;gap:8px;border:1.5px solid color-mix(in srgb,var(--green) 40%,var(--line))}
+.q-n{font-family:var(--disp);font-weight:800;font-size:18px;color:var(--green)}
+.q-bar{height:8px;border-radius:99px;background:var(--chip);overflow:hidden}.q-bar i{display:block;height:100%;background:linear-gradient(90deg,var(--green),var(--lime));border-radius:99px;transition:width .6s}
+.q-steps{display:flex;flex-direction:column;gap:6px;margin-top:2px}
+.q-st{display:flex;align-items:center;gap:10px;background:var(--chip);border:1px solid transparent;border-radius:12px;padding:10px 12px;text-align:start;color:var(--ink);font:inherit;width:100%}
+.q-st:disabled{opacity:1}
+.q-st.ok{background:var(--green-soft)}.q-st.ok .q-l{text-decoration:line-through;color:var(--ink-2)}
+.q-st.cur{border-color:var(--blue);background:var(--blue-soft)}
+.q-ck{width:24px;height:24px;flex:none;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:13px;background:var(--card);border:1.5px solid var(--line)}
+.q-st.ok .q-ck{background:var(--green);color:#fff;border-color:var(--green)}
+.q-l{flex:1;font-weight:600;font-size:14px}.q-l small{color:var(--green);font-weight:700}
+.q-here{font-size:12px;font-weight:800;color:var(--blue);white-space:nowrap}
+.quest.done{align-items:center;text-align:center}.q-big{font-size:46px;animation:welBounce 1s ease-in-out infinite alternate}
+.tag.nb{background:rgba(227,238,58,.25);color:var(--green);align-self:flex-start}
+.nbtog{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center;text-align:start;background:var(--chip);border:1px solid var(--line);border-radius:12px;padding:10px 12px;color:var(--ink);font:inherit;width:100%}
+.nbtog span{font-weight:700}.nbtog small{grid-column:1;color:var(--ink-2);font-size:12px}
+.nbtog i{grid-row:1/3;grid-column:2;width:42px;height:24px;border-radius:99px;background:var(--line);position:relative;transition:.2s}
+.nbtog i::after{content:"";position:absolute;top:3px;inset-inline-start:3px;width:18px;height:18px;border-radius:50%;background:#fff;transition:.2s}
+.nbtog.on i{background:var(--green)}.nbtog.on i::after{inset-inline-start:21px}
+/* reveal */
+.rv{align-items:center;text-align:center;gap:12px;padding-top:26px}
+.rv-kick{font-size:12px;font-weight:800;letter-spacing:.2em;color:var(--ink-3)}
+.rv-stage{position:relative;perspective:1200px;width:min(260px,72vw);aspect-ratio:300/400;margin:6px auto}
+.rv-card{--tc:#E8C96A;position:absolute;inset:0;transform-style:preserve-3d;animation:rvFlip 1.3s .35s cubic-bezier(.3,.1,.2,1) both}
+@keyframes rvFlip{0%{transform:rotateY(0) scale(.85)}60%{transform:rotateY(200deg) scale(1.05)}100%{transform:rotateY(180deg) scale(1)}}
+.rv-back,.rv-front{position:absolute;inset:0;border-radius:20px;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden}
+.rv-back{display:grid;place-items:center;background:repeating-linear-gradient(45deg,#1B3F7A 0 14px,#2C5FAE 14px 28px);border:3px solid #fff}
+.rv-back .logo{color:#fff;font-size:34px}
+.rv-front{transform:rotateY(180deg);background:linear-gradient(160deg,#2B2410 0%,#15120A 55%,#0C0A06 100%);color:#F4F1E6;border:3px solid var(--tc);box-shadow:0 0 40px color-mix(in srgb,var(--tc) 55%,transparent);display:flex;flex-direction:column;justify-content:space-around;padding-bottom:10px}
+.rv-front .pc-av{width:38%;font-size:40px}
+.rv-spark{position:absolute;inset:0;pointer-events:none}
+.rv-spark i{position:absolute;left:50%;top:50%;width:8px;height:8px;border-radius:50%;background:var(--lime);opacity:0;transform:rotate(var(--a)) translateY(0);animation:rvSpark 1s calc(1.2s + var(--d)) ease-out both}
+.rv-spark i:nth-child(3n){background:#E8C96A}.rv-spark i:nth-child(3n+1){background:#fff}
+@keyframes rvSpark{0%{opacity:1;transform:rotate(var(--a)) translateY(0) scale(1)}100%{opacity:0;transform:rotate(var(--a)) translateY(-180px) scale(.4)}}
+.rv-h{margin:6px 0 0;font-size:26px;animation:welIn .5s 1.5s both}
+.rv-p{margin:0;max-width:320px;animation:welIn .5s 1.6s both}
+.rv .cta{animation:welIn .5s 1.75s both}
+/* home club */
+.pcl{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pcl-c{border:0;padding:0;border-radius:16px;overflow:hidden;background:var(--card);box-shadow:0 1px 0 var(--line);text-align:start;color:var(--ink);font:inherit;display:flex;flex-direction:column}
+.pcl-img{aspect-ratio:4/3;background:#1F3F70 center/cover}
+.pcl-n{padding:8px 10px}.pcl-n b{display:block;font-size:15px}.pcl-n small{color:var(--ink-2);font-size:12px}
+.pcl-c:active{transform:scale(.97)}
+/* tips */
+#tips{position:fixed;inset:0;z-index:300}
+.tip-hole{position:fixed;border-radius:14px;box-shadow:0 0 0 9999px rgba(8,16,12,.72);transition:all .3s;animation:tipGlow 1.4s infinite}
+@keyframes tipGlow{50%{outline:3px solid rgba(227,238,58,.8);outline-offset:3px}}
+.tip-box{position:fixed;width:240px;background:#fff;color:#10201A;border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;font-size:14.5px;font-weight:600;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.tip-box small{color:#8A9690;font-weight:700}
+.tip-box button{background:var(--blue);color:#fff;border:0;border-radius:99px;padding:6px 14px;font-weight:700}
+.tip-arrow{position:absolute;bottom:-7px;width:14px;height:14px;background:#fff;transform:rotate(45deg)}
+@media (prefers-reduced-motion:reduce){.rv-card{animation:none;transform:rotateY(180deg)}.rv-spark i,.wel-ball,.q-big,.tn-live,.tip-hole{animation:none}}
+.rv-tier{display:inline-block;background:#15120A;color:var(--tc);padding:0 10px;border-radius:8px;text-shadow:0 0 12px color-mix(in srgb,var(--tc) 60%,transparent)}
+[dir=rtl] .tn-go,[dir=rtl] .q-here{transform:scaleX(-1);display:inline-block}
+/* simpler screens */
+.sc-alert{background:linear-gradient(120deg,#B4521F,#E08A2E)!important}
+.sc-deal{background:linear-gradient(120deg,#8a2a1a,#C4452F)!important}
+.sc-go{font-weight:800;font-size:14px;color:var(--lime);margin-top:2px}
+.sc-idle{background:linear-gradient(120deg,#10201A,#1F3F70)!important}
+.sc-btns{display:flex;gap:8px;margin-top:4px}
+.sc-btns .cta{flex:1;display:flex;align-items:center;justify-content:center;gap:6px}
+.sc-btns svg{width:18px;height:18px}
+.cta.lime{background:var(--lime);color:#10201A}
+.cta.ghostw{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.3)}
+.om-sum{display:flex;gap:6px;flex-wrap:wrap;margin-top:-6px}
+.om-sum em{font-style:normal;font-size:12px;font-weight:700;background:var(--chip);border-radius:99px;padding:4px 10px;color:var(--ink-2)}
+.om-sum em.nb{background:rgba(227,238,58,.3);color:var(--green)}
+.om-row{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:0 -16px;padding:2px 16px 6px;scrollbar-width:none}
+.om-row::-webkit-scrollbar{display:none}
+.om-row>.card{flex:0 0 84%;scroll-snap-align:center}
+.seg{display:flex;background:var(--chip);border-radius:12px;padding:4px;gap:4px}
+.seg button{flex:1;height:38px;border:0;border-radius:9px;background:none;font:inherit;font-weight:800;font-size:14px;color:var(--ink-2);position:relative}
+.seg button[aria-pressed="true"]{background:var(--card);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.seg.sm button{height:32px;font-size:13px}
+.seg .dot{position:absolute;top:7px;inset-inline-end:10px;width:8px;height:8px;border-radius:50%;background:var(--red)}
+.glist{display:flex;flex-direction:column;gap:10px}
+.pastg summary{font-weight:800;cursor:pointer}.pastg[open] summary{margin-bottom:10px}
+.mtabs.m3 button{flex:1;height:42px;font-size:14px}
+.fab{position:fixed;bottom:22px;inset-inline-end:20px;width:58px;height:58px;border-radius:50%;border:0;background:var(--blue);color:#fff;font-size:32px;line-height:1;box-shadow:0 8px 20px rgba(44,95,174,.45);z-index:50}
+.sheet-bg{position:fixed;inset:0;background:rgba(8,16,12,.55);z-index:200;animation:shFade .2s both}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:201;background:var(--card);color:var(--ink);border-radius:22px 22px 0 0;padding:22px 18px calc(18px + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;max-width:560px;margin:0 auto;animation:shUp .28s cubic-bezier(.2,.8,.2,1) both}
+.sheet>b{font-size:19px}.sheet p{margin:0}.sh-ic{font-size:42px}
+@keyframes shUp{from{transform:translateY(100%)}to{transform:none}}@keyframes shFade{from{opacity:0}}
+.fab-it{display:flex;gap:14px;align-items:center;width:100%;text-align:start;background:var(--chip);border:0;border-radius:14px;padding:12px 14px;font:inherit;color:var(--ink)}
+.fab-it>span{font-size:26px}.fab-it b{display:block;font-size:15px}.fab-it small{color:var(--ink-2);font-size:12.5px}
+#addF.flash{animation:flashF 1.4s}@keyframes flashF{30%{box-shadow:0 0 0 3px var(--blue)}}
+.mgr-wrap{padding-bottom:96px}
 </style>
 </head>
 <body>
@@ -821,7 +941,7 @@ const money = n => n == null ? "–" : "$" + (Math.round(n * 100) / 100).toStrin
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v10";
+const VERSION = "v12";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -858,6 +978,7 @@ async function boot(){
   else {
     let h = location.hash.slice(1);
     if (!V[h] || ["club","checkout","done","reset"].includes(h)) h = "home";
+    if (h === "home" && !S.user && !ls.get("pl-seen")) h = "welcome";
     S.step = "page " + h; try { await within(go(h)); } catch (e) { S.lastErr = "page " + (e && e.message); S.view = "home"; render(); }
   }
   if (!boot.started){ boot.started = true; setInterval(poll, 15000); document.addEventListener("visibilitychange", () => { if (!document.hidden) poll(true); }); }
@@ -875,7 +996,8 @@ async function loadClubs(){
 async function afterAuth(silent){
   if (S.user){
     const [p, mine, st] = await Promise.all([sb.from("profiles").select("*").eq("id", S.user.id).maybeSingle(), sb.rpc("my_bookings"), sb.rpc("my_clubs")]);
-    S.profile = p.data || null; S.mine = mine.data || []; S.staff = st.data || []; await Promise.all([loadNotifN(), loadCard(), loadMems(), loadPush()]);
+    S.profile = p.data || null; S.mine = mine.data || []; S.staff = st.data || []; await Promise.all([loadNotifN(), loadCard(), loadMems(), loadPush()]); await onbAfterAuth();
+    const hc = S.profile && S.profile.home_club && S.clubs.find(c => c.id === S.profile.home_club); if (hc && !S.clubPicked){ S.club = hc; S.clubPicked = true; }
   } else { S.profile = null; S.mine = []; S.staff = []; S.notifN = 0; S.card = null; S.mems = []; }
   const m = await sb.rpc("open_matches"); S.matches = m.data || [];
   if (!silent) render();
@@ -900,7 +1022,7 @@ function matchRow(m){
   const range = m.level_min != null ? `${lvl2(m.level_min)}–${lvl2(m.level_max)}` : t("anyLvl");
   const sheet = S.joinFor === m.id ? `<div class="jsheet"><b>${t("joinHow")} · ${each}</b><div class="chips" style="flex-wrap:wrap">${["club","shamcash","syriatel"].map(k => `<button class="chip" data-joinpay="${k}" aria-pressed="${S.joinPay === k}">${payName(k)}</button>`).join("")}</div>${S.joinPay !== "club" ? `<label class="fld"><span>${t("ref")}</span><input id="join-ref" inputmode="numeric" value="${esc(S.joinRef)}"></label>` : ""}<button class="cta blue sm" data-joingo="${m.id}">${t("joinGo")}</button></div>` : "";
   return `<div class="card match"><div class="between"><b>${esc(fmtDay(d))} · ${esc(fmtTime(d))}</b>${m.open_spots > 0 ? `<span class="tag g">${m.open_spots} ${m.open_spots === 1 ? t("spotLeft") : t("spotsLeft")}</span>` : `<span class="tag b">Full</span>`}</div>
-   <span class="note">${esc(m.club_name)} · ${esc(m.court_name)} · ${m.minutes} ${t("min")} · ${t("lvl")} ${range}${m.split ? ` · ${t("splitTag")}` : ""}</span>
+   <span class="note">${esc(m.club_name)} · ${esc(m.court_name)} · ${m.minutes} ${t("min")} · ${t("lvl")} ${range}${m.split ? ` · ${t("splitTag")}` : ""}</span>${m.newbie ? `<span class="tag nb">🌱 ${t("nbTag")}</span>` : ""}
    <div class="plist">${ppl.map(p => `<span class="pp">${av(p.n)}<small>${esc(String(p.n || "").split(" ")[0])}</small>${lvChip(p.l)}</span>`).join("")}${Array.from({length: m.open_spots}, () => `<span class="pp">${av("", 1)}<small>&nbsp;</small></span>`).join("")}</div>
    <div class="between" style="align-items:center"><span class="note">${each} ${t("each")}</span>
    ${m.joined ? `<button class="sbtn" data-match="${m.id}">${t("openMatch")} →</button>` : m.open_spots > 0 ? (ok ? `<button class="cta blue sm" data-join="${m.id}">${t("join")} · ${each}</button>` : `<span class="tag b">${t("notYourLvl")}</span>`) : ""}</div>${sheet}</div>`;
@@ -913,7 +1035,7 @@ V.home = () => { const next = S.mine.find(b => b.status !== "cancelled" && new D
  return `<main>
   <div class="top"><div><div class="hello">${S.user ? `${t("hi")} ${esc(name)}` : t("guest")}</div><div class="logo">Padel <i>Live</i></div></div>
    <div class="row">${bell()}<button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button>${S.user ? "" : `<button class="pill" data-go="auth">${t("signin")}</button>`}</div></div>
-  ${S.user && S.profile && !S.profile.level_set ? `<button class="card lvprompt" data-go="level"><b>${t("setLevel")} →</b><span class="note">${t("levelCardHint")}</span></button>` : ""}
+  ${welcomeHome()}
   ${next ? `<div class="hero"><div class="between" style="width:100%"><span class="kick2">${t("next")}</span>${statusTag(next.status).replace('tag g','tag w').replace('tag pend','tag w')}</div>
     <span class="big">${esc(fmtDay(new Date(next.starts_at)))} · ${esc(fmtTime(new Date(next.starts_at)))}</span>
     <span style="opacity:.92;font-size:14px">${esc(next.club_name)} · ${esc(next.court_name)} · ${next.minutes} ${t("min")}${next.code ? ` · ${t("booking")} #${next.booking_no} · <b>${esc(next.code)}</b>` : ""}</span></div>`
@@ -922,7 +1044,7 @@ V.home = () => { const next = S.mine.find(b => b.status !== "cancelled" && new D
   ${pushCard(true)}
   ${dealsStrip()}
   <div class="between"><h2>${t("open")}</h2><a href="#matches" data-go="matches" style="font-weight:700;font-size:13px;white-space:nowrap">${t("all")}</a></div>
-  <div style="display:flex;flex-direction:column;gap:10px">${S.matches.filter(m => m.open_spots > 0).slice(0,3).map(matchRow).join("") || `<div class="card note">${t("noMatches")}</div>`}</div>
+  <div style="display:flex;flex-direction:column;gap:10px">${forMe(S.matches.filter(m => m.open_spots > 0)).slice(0,3).map(matchRow).join("") || `<div class="card note">${t("noMatches")}</div>`}</div>
   ${feedHome()}
   ${installCard()}
  </main>${nav("home")}`; };
@@ -1107,6 +1229,7 @@ V.manager = () => { if (!S.user || !S.staff.length) return V.me();
    <label class="fld"><span>${t("who")}</span><input id="ad-name" placeholder="${t("walkin")}"></label></div>
    <label class="row" style="font-size:14px"><input type="checkbox" id="ad-block"> ${t("block")}</label>
    <button class="cta blue" type="submit">${t("addBtn")}</button></form>
+  <button class="fab" data-fab aria-label="${t("fabT")}">+</button>
  </main>`; };
 
 function mgrPrices(club){ const pr = (band, mins) => { const x = S.prices.find(p => p.club_id === club.id && p.band === band && p.minutes === mins); return x && x.price != null ? x.price : ""; };
@@ -1125,15 +1248,15 @@ const lvCat = l => l == null ? "" : l >= 4.5 ? "A" : l >= 3.5 ? "B" : l >= 2.5 ?
 const lvChip = l => l == null ? `<span class="lv none">?</span>` : `<span class="lv c${lvCat(l)}">${lvl2(l)}</span>`;
 const myLevel = () => S.profile && S.profile.level_set ? Number(S.profile.level) : null;
 const inRange = (m, l) => m.level_min == null || l == null || (l >= +m.level_min && l <= +m.level_max);
-V.level = () => { if (!S.user) return V.auth();
+V.level = () => {
   const a = S.quiz || {}, done = LV_Q.every(([q]) => a[q] != null);
   const score = Math.max(0.5, Math.min(5.5, 1 + LV_Q.reduce((s, [q, opts]) => s + (a[q] != null ? opts[a[q]][1] : 0), 0)));
-  return `<main>${backBar(t("lvTitle"), "me")}
+  return `<main>${backBar(t("lvTitle"), S.user ? "me" : "home")}
    <p class="note" style="margin:-6px 0 0">${t("lvIntro")}</p>
    ${LV_Q.map(([q, opts]) => `<div class="card" style="display:flex;flex-direction:column;gap:8px"><b>${t(q)}</b>${opts.map(([k], i) => `<button class="opt" data-quiz="${q}|${i}" aria-pressed="${a[q] === i}"><i></i><span><b>${t(k)}</b></span></button>`).join("")}</div>`).join("")}
    <div class="card lvres"><span class="note">${t("lvYour")}</span>${done ? `<b class="lvbig">${lvl2(score)}</b><span class="tag l">${t("lvCat")} ${lvCat(score)}</span>` : `<span class="note">${t("lvAnswer")}</span>`}</div>
    <p class="note" style="margin:0">${t("lvNote")} ${t("provNote")}</p>
-  </main><div class="bar"><div class="sum"><small>${t("lvYour")}</small><b>${done ? lvl2(score) : "–"}</b></div><button class="cta blue" data-setlevel="${done ? score.toFixed(2) : ""}"${done ? "" : " disabled"}>${t("save")}</button></div>`; };
+  </main><div class="bar"><div class="sum"><small>${t("lvYour")}</small><b>${done ? lvl2(score) : "–"}</b></div><button class="cta blue" ${S.user ? "data-setlevel" : "data-guestlv"}="${done ? score.toFixed(2) : ""}"${done ? "" : " disabled"}>${S.user ? t("save") : t("rvReveal")}</button></div>`; };
 
 /* ---------- notifications ---------- */
 function nText(n){ const d = n.data || {}, nm = esc(d.name || t("someone")), w = esc(d.when || "");
@@ -1261,7 +1384,7 @@ function playerCard(c){
     <div class="pc-stats"><div><b>${wr}</b><span>${t("winRate")}</span></div><div><b>${played}</b><span>${t("matchesU")}</span></div><div><b>${c.season && c.season.rank ? "#" + c.season.rank : "–"}</b><span>${c.season ? esc(c.season.club) : t("seasonU")}</span></div></div>
    </div></div>
    <div class="pc-prog${pr.danger ? " danger" : ""}"><div class="bar"><i style="width:${pr.pct}%"></i></div><div class="lbl"><span>${esc(tierName(c.category))} ${st} · ${esc(c.category || "")}</span><em>${esc(pr.txt)}</em></div></div>
-   <div class="pc-badges">${(c.badges || []).map(b => `<div class="bd${b.got ? "" : " lock"}"><i>${BADGE_IC[b.k] || "★"}</i>${t("b_" + b.k)}</div>`).join("")}</div>
+   <div class="pc-badges">${[...(S.wi && S.wi.quest && (S.wi.quest.done || S.wi.quest.new) ? [{k: "rookie", got: !!S.wi.quest.done}] : []), ...(c.badges || [])].map(b => `<div class="bd${b.got ? "" : " lock"}"><i>${BADGE_IC[b.k] || "★"}</i>${t("b_" + b.k)}</div>`).join("")}</div>
    <div class="row" style="gap:10px"><button class="cta gold wide" data-sharecard>${t("shareCard")} ↗</button>${c.season ? `<button class="ghost" style="width:auto;padding:0 16px" data-season="${c.season.club_id}">${t("seasonBtn")}</button>` : ""}</div>`;
 }
 V.season = () => { const rows = S.board || [];
@@ -1523,7 +1646,11 @@ async function loadLeague(id){ const r = await sb.rpc("league_get", {p_league: i
 
 /* ---------- manager: tabs ---------- */
 const clubSwitch = () => S.staff.length > 1 ? `<div class="chips mclubs">${S.staff.map(c => `<button class="chip" data-mclub="${c.id}" aria-pressed="${S.mClub === c.id}">${esc(c.name)}</button>`).join("")}</div>` : "";
-const mgrTabs = () => clubSwitch() + `<div class="mtabs">${[["day","mTabDay"],["post","mTabPost"],["stats","mTabStats"],["mem","mTabMem"],["coach","mTabCoach"],["set","mTabSet"]].map(([k, l]) => `<button data-mtab="${k}" aria-pressed="${(S.mTab || "day") === k}">${t(l)}</button>`).join("")}</div>`;
+const mGroup = () => { const k = S.mTab || "day"; return k === "mem" || k === "coach" ? "people" : k === "stats" || k === "set" ? "club" : "day"; };
+const mgrTabs = () => { const g = mGroup(), sub = g === "people" ? [["mem","mTabMem"],["coach","mTabCoach"]] : g === "club" ? [["stats","mTabStats"],["set","mTabSet"]] : null;
+  return clubSwitch() + `<div class="mtabs m3">${[["day","mTabDay"],["people","mTabPeople"],["club","mTabClub"]].map(([k, l]) => `<button data-mtab="${k}" aria-pressed="${g === k}">${t(l)}</button>`).join("")}</div>`
+   + (sub ? `<div class="seg sm">${sub.map(([k, l]) => `<button data-mtab="${k}" aria-pressed="${S.mTab === k}">${t(l)}</button>`).join("")}</div>` : "")
+   + (S.mTab === "post" ? `<button class="linkbtn" data-mtab="day" style="align-self:flex-start">← ${t("backToday")}</button>` : ""); };
 async function loadMgrTab(){ const id = S.mClub;
   if (S.mTab === "post"){ await loadMgrPosts(); }
   if (S.mTab === "stats"){ const r = await sb.rpc("club_stats", {p_club: id, p_days: S.statsDays}); S.stats = r.data || null; }
@@ -1590,7 +1717,7 @@ function mgrSettings(club){ const wk = S.wkDraft || club.weekend_days || [];
   ${mgrPrices(club)}${clubForm(club)}`; }
 function mgrShell(club){
   const body = S.mTab === "post" ? mgrPosts(club) : S.mTab === "stats" ? mgrStats(club) : S.mTab === "mem" ? mgrMembers(club) : S.mTab === "coach" ? mgrCoaching(club) : mgrSettings(club);
-  return `<main class="mgr-wrap"><div class="top"><div><div class="hello">${t("mgr")}</div><div class="logo">${esc(club.name)}</div></div><button class="pill" data-go="me">${t("back")}</button></div>${mgrTabs()}${body}</main>`; }
+  return `<main class="mgr-wrap"><div class="top"><div><div class="hello">${t("mgr")}</div><div class="logo">${esc(club.name)}</div></div><button class="pill" data-go="me">${t("back")}</button></div>${mgrTabs()}${body}<button class="fab" data-fab aria-label="${t("fabT")}">+</button></main>`; }
 
 /* ---------- Me extras ---------- */
 function meExtras(){ const ms = S.mems || [], cs = S.myClasses || [];
@@ -1605,8 +1732,8 @@ function nText2(n){ const d = n.data || {}, nm = esc(d.name || t("someone")), w 
     league_round: tf("nLgRound", {r: d.round, x, b: d.box, d: esc(d.until || "")}), league_result: tf("nLgResult", {n: nm}),
     league_disputed: tf("nLgDisp", {n: nm}), league_champ: tf("nLgChamp", {x, c}), booking_new: tf(d.pending ? "nBookingDep" : "nBooking", {n: nm, k: esc(d.court || ""), w}), league_sched: tf("nLgSched", {n: nm, w, c}), league_ref: tf("nLgRef", {x, w, c: c ? "· " + c : ""}), league_ref_set: tf("nLgRefSet", {n: nm, w}), league_final: t("nLgFinal"),
     match_open: tf("nMatchOpen", {n: nm, r: d.round, c, w}), rematch: tf("nRematch", {n: nm, c, w}), club_post: tf("nClubPost", {c, x: esc(d.title || "")}), morning: tf("nMorning", {c, r: d.round, b: d.box}),
-    tour_partner: tf("nTPartner", {n: nm, x, c}), tour_req: tf("nTReq", {n: nm, x, c}), tour_ok: tf("nTOk", {x, c}), tour_no: tf("nTNo", {x, c}) })[n.kind]; }
-const nLink = n => /^tour_/.test(n.kind) && n.data && n.data.slug ? `data-turl="t.html?${esc(encodeURIComponent(n.data.slug))}"` : n.kind === "club_post" && n.data && n.data.club_id ? `data-club="${esc(n.data.club_id)}"` : n.kind === "morning" ? `data-go="manager"` : n.kind === "booking_new" ? `data-go="manager"` : /^league_/.test(n.kind) ? `data-go="events"` : /^member_/.test(n.kind) ? (n.kind === "member_req" ? `data-go="manager"` : `data-go="me"`) : /^class_/.test(n.kind) || n.kind === "lesson_new" ? `data-go="me"` : "";
+    tour_partner: tf("nTPartner", {n: nm, x, c}), tour_req: tf("nTReq", {n: nm, x, c}), tour_ok: tf("nTOk", {x, c}), tour_no: tf("nTNo", {x, c}) , invite_joined: tf("nInvJoined", {n: nm})})[n.kind]; }
+const nLink = n => n.kind === "invite_joined" ? `data-go="home"` : /^tour_/.test(n.kind) && n.data && n.data.slug ? `data-turl="t.html?${esc(encodeURIComponent(n.data.slug))}"` : n.kind === "club_post" && n.data && n.data.club_id ? `data-club="${esc(n.data.club_id)}"` : n.kind === "morning" ? `data-go="manager"` : n.kind === "booking_new" ? `data-go="manager"` : /^league_/.test(n.kind) ? `data-go="events"` : /^member_/.test(n.kind) ? (n.kind === "member_req" ? `data-go="manager"` : `data-go="me"`) : /^class_/.test(n.kind) || n.kind === "lesson_new" ? `data-go="me"` : "";
 
 function lgGrab(){ const v = id => { const el = document.getElementById(id); return el ? el.value : undefined; }; const f = S.lgForm || (S.lgForm = {});
   [["name","le-name"],["starts_on","le-s"],["ends_on","le-e"],["round_days","le-rd"],["box_size","le-bx"],["fee","le-fee"],["prize","le-prize"],["about","le-about"]].forEach(([k, id]) => { const x = v(id); if (x !== undefined) f[k] = x; }); }
@@ -1851,7 +1978,7 @@ function render(){
     app.innerHTML = `<main><div class="logo">Padel <i>Live</i></div><div class="card note">… ${secs > 3 ? secs + "s" : ""}</div>
     ${secs >= 6 ? `<button class="cta" data-reload>${t("retry")}</button><button class="ghost" data-resetapp>Reset app (signs you out)</button>` : ""}
     <p class="note" style="font-size:11px;opacity:.7">${VERSION} · ${esc(S.step || "start")}${S.lastErr ? " · " + esc(S.lastErr) : ""}</p></main>`; return; }
-  try { app.innerHTML = (V[S.view] || V.home)(); }
+  try { app.innerHTML = (V[S.view] || V.home)() + sheetHtml(); }
   catch (e) { console.error(e); if (S.view !== "home"){ S.view = "home"; history.replaceState(null, "", "#home"); app.innerHTML = V.home(); } }
 }
 async function go(v){
@@ -1862,7 +1989,7 @@ async function go(v){
   if (v === "profile"){ await Promise.all([loadProfile(S.pfId), snLoad(S.pfId)]); }
   if (v === "events"){ try { const [r, lg] = await within(Promise.all([sb.rpc("t_list"), sb.rpc("league_list")]), 8000); S.tours = r.data || []; S.leagues = lg.data || []; } catch (e) {} }
   if (v === "league"){ if (S.leagueId) await loadLeague(S.leagueId); }
-  if (v === "matches" || v === "home"){ const [m] = await Promise.all([sb.rpc("open_matches"), v === "home" ? loadFeed() : null]); S.matches = m.data || S.matches; }
+  if (v === "matches" || v === "home" || v === "welcome"){ const [m] = await Promise.all([sb.rpc("open_matches"), v === "home" ? loadFeed() : null, v !== "matches" ? loadWI() : null, v === "home" && S.user && S.profile && S.profile.home_club ? loadClubPosts() : null]); S.matches = m.data || S.matches; }
   if (v === "feed"){ await loadFeed(); }
   if (v === "me" && S.user){ const [mine, rs, pf] = await Promise.all([sb.rpc("my_bookings"), sb.rpc("my_results"), sb.from("profiles").select("*").eq("id", S.user.id).maybeSingle()]); S.mine = mine.data || []; S.results = rs.data || []; if (pf.data) S.profile = pf.data; loadNotifN(); const [mc, rf] = await Promise.all([sb.rpc("my_classes"), sb.rpc("league_ref_matches")]); S.myClasses = mc.data || []; S.myRefs = rf.data || []; await Promise.all([loadCard(), loadMems()]); }
   if (v === "season" && S.boardClubId){ const [r, sn] = await Promise.all([sb.rpc("season_board", {p_club: S.boardClubId}), sb.rpc("sensor_board", {p_club: S.boardClubId, p_days: 30})]); S.board = r.data || []; S.snBoard = sn.error ? null : sn.data; }
@@ -1872,6 +1999,9 @@ async function go(v){
   if (v === "manager"){ if (!S.mClub && S.staff[0]) S.mClub = S.staff[0].id; if (!S.mDay) S.mDay = nextDays(1)[0]; await Promise.all([loadManager(), loadMgrTab(), loadToday()]); }
   render(); window.scrollTo(0, 0);
   if ((v === "home" || v === "me") && S.card && S.card.celebrate) setTimeout(celebrate, 400);
+  else if (v === "home" && S.user && S.profile && S.profile.level_set && !ls.get("pl-tips")) setTimeout(showTips, 700);
+  else if (v === "done" || (v === "match" && S.match && S.match.in && new Date(S.match.starts_at) > new Date())) setTimeout(() => maybeAsk("push"), 900);
+  else if (v === "home") setTimeout(() => maybeAsk("install"), 1500);
   if (v === "match"){ const mb = document.getElementById("msgs"); if (mb) mb.scrollTop = mb.scrollHeight; }
 }
 async function loadBusy(){ const r = await sb.rpc("busy_slots", {p_club: S.club.id, p_day: S.day}); S.busy = r.data || []; }
@@ -1975,7 +2105,7 @@ app.addEventListener("click", async e => {
   if ("lgnext" in d){ if (!confirm(t("lgStartQ"))) return; const r = await sb.rpc("admin_league_next_round", {p_league: S.leagueId}); if (r.error){ toast(errMsg(r.error)); return; } toast("✓ " + tf("lgRunning", {r: r.data, d: ""})); await loadLeague(S.leagueId); render(); return; }
   if ("lgfinish" in d){ if (!confirm(t("lgFinishQ"))) return; const r = await sb.rpc("admin_league_finish", {p_league: S.leagueId}); if (r.error){ toast(errMsg(r.error)); return; } toast("🏆"); await loadLeague(S.leagueId); render(); return; }
   if (d.mclub){ S.mClub = d.mclub; S.planEdit = null; S.coachEdit = null; S.wkDraft = null; S.classOpen = null; S.stats = null; await Promise.all([loadManager(), loadMgrTab(), loadToday()]); render(); window.scrollTo(0, 0); return; }
-  if (d.mtab){ S.mTab = d.mtab; S.planEdit = null; S.coachEdit = null; S.wkDraft = null; S.classOpen = null; await loadMgrTab(); render(); window.scrollTo(0, 0); return; }
+  if (d.mtab){ let mk = d.mtab; if (mk === "people") mk = S.mSubP || "mem"; if (mk === "club") mk = S.mSubC || "stats"; if (mk === "mem" || mk === "coach") S.mSubP = mk; if (mk === "stats" || mk === "set") S.mSubC = mk; S.mTab = mk; S.planEdit = null; S.coachEdit = null; S.wkDraft = null; S.classOpen = null; await loadMgrTab(); render(); window.scrollTo(0, 0); return; }
   if (d.sdays){ S.statsDays = +d.sdays; await loadMgrTab(); render(); return; }
   if (d.mset){ const [mid, st] = d.mset.split("|"); const r = await sb.rpc("staff_member_set", {p_id: mid, p_status: st}); if (r.error){ toast(errMsg(r.error)); return; } toast("✓"); await loadMgrTab(); render(); return; }
   if (d.planedit){ S.planEdit = S.planEdit === d.planedit ? null : d.planedit; render(); return; }
@@ -2023,7 +2153,8 @@ app.addEventListener("click", async e => {
     if (r.error){ toast(errMsg(r.error)); return; } toast(t("saved")); S.apEdit = null; const q = await sb.rpc("admin_find_players", {p_q: S.apQ || ""}); S.apList = q.data || []; render(); return; }
   if (d.match){ S.matchId = d.match; S.partner = null; go("match"); return; }
   if (d.quiz){ const [q, i] = d.quiz.split("|"); S.quiz[q] = +i; render(); return; }
-  if ("setlevel" in d && d.setlevel){ const r = await sb.rpc("set_my_level", {p_level: +d.setlevel}); if (r.error){ toast(errMsg(r.error)); return; } toast(t("saved")); await afterAuth(true); go("me"); return; }
+  if ("setlevel" in d && d.setlevel){ const first = !(S.profile && S.profile.level_set); const r = await sb.rpc("set_my_level", {p_level: +d.setlevel}); if (r.error){ toast(errMsg(r.error)); return; } toast(t("saved")); await afterAuth(true); if (first){ S.revealLevel = +d.setlevel; go("reveal"); } else go("me"); return; }
+  if ("guestlv" in d && d.guestlv){ S.revealLevel = +d.guestlv; go("reveal"); return; }
   if (d.partner){ S.partner = d.partner; render(); return; }
   if ("confres" in d){ const r = await sb.rpc("confirm_result", {p_booking: S.match.id, p_ok: d.confres === "1"}); if (r.error) toast(errMsg(r.error)); else toast("✓"); await afterAuth(true); await loadMatch(S.match.id); render(); setTimeout(celebrate, 300); return; }
   if (d.lvr){ S.lvRange = d.lvr; render(); return; }
@@ -2050,7 +2181,7 @@ app.addEventListener("submit", async e => {
     } else r = await sb.auth.signInWithPassword({email, password});
     if (r.error){ if (sbtn){ sbtn.disabled = false; sbtn.textContent = S.authMode === "up" ? t("signup") : t("signin"); } toast(errMsg(r.error)); return; }
     S.user = r.data.user || (r.data.session && r.data.session.user); await afterAuth(true);
-    go(S.slot ? "checkout" : "home"); return; }
+    go(S.slot ? "checkout" : nextOnboard()); return; }
   if (f.id === "resetF"){ const r = await sb.auth.updateUser({password: document.getElementById("r-pass").value});
     if (r.error){ toast(errMsg(r.error)); return; } toast(t("passSaved")); await afterAuth(true); go("home"); return; }
   if (f.id === "pf"){ const r = await sb.from("profiles").update({full_name: document.getElementById("p-name").value.trim(), phone: document.getElementById("p-phone").value.trim()}).eq("id", S.user.id);
@@ -2456,7 +2587,7 @@ function mxExtras(m){
     h += `<div class="card opcard"><b>👥 ${t("opT")}</b><span class="note">${t("opTxt")}</span>
       <div class="chips" style="flex-wrap:wrap">${Array.from({length: max + 1}, (_, n) => `<button class="chip" data-opn="${n}" aria-pressed="${cur === n}">${n ? t("spots" + n) : t("opNone")}</button>`).join("")}</div>
       ${cur > 0 && myLevel() != null ? `<div class="chips" style="flex-wrap:wrap">${[["any", t("anyLvl")], ["0.5", `${t("aroundMe")} ±0.5`], ["1", `${t("aroundMe")} ±1`]].map(([k, l]) => `<button class="chip" data-opr="${k}" aria-pressed="${rng === k}">${esc(l)}</button>`).join("")}</div>` : ""}
-      <button class="cta blue sm" data-opsave="${m.id}" style="align-self:flex-start">${t("opSave")}</button></div>`;
+      <button class="cta blue sm" data-opsave="${m.id}" style="align-self:flex-start">${t("opSave")}</button>${m.open_spots > 0 ? nbToggle(m) : ""}</div>`;
   }
   if (started && m.kind !== "lesson" && m.status !== "cancelled" && m.players.length > 1){
     const days = nextDays(7), day = S.rmDay || days[Math.min(6, days.length - 1)];
@@ -2514,6 +2645,294 @@ app.addEventListener("change", async e => { const el = e.target;
 app.addEventListener("input", e => { if (e.target.id === "ps-body") S.psBody = e.target.value; });
 async function loadMgrPosts(){ if (!S.mClub) return; const r = await sb.rpc("club_posts_list", {p_club: S.mClub}); S.mPosts = r.data || []; }
 async function loadClubPosts(){ if (!S.club) return; try { const r = await sb.rpc("club_posts_list", {p_club: S.club.id}); S.clubPosts = r.error ? [] : r.data || []; } catch (e) { S.clubPosts = []; } }
+
+
+/* ---------- welcome path: first visit, level reveal, home club, Rookie Quest, tonight strip, tips ---------- */
+Object.assign(W.en, {wTag:"Padel in Syria, all in one app.", w1:"Find your level in 60 seconds", w1s:"Get your player card, from Bronze to Diamond.", w2:"Play with people at your level",
+  w2s:"Join open matches or book a court in a few taps.", w3:"Leagues, tournaments, live scores", w3s:"Climb the ranks at Core, Trio, Ace and Let's Padel.",
+  wGo:"Find my level · 60 sec", wLook:"Just look around", wHave:"I have an account · Sign in",
+  tnT:"Tonight in Damascus", tnWeek:"This week", tnOpen:"{n} open matches", tnLvl:"{n} at your level", tnNb:"{n} for newcomers", tnNone:"No open matches tonight yet. Be the first: book a court and open it.",
+  rvKick:"YOUR PLAYER CARD", rvYou:"You're a {t} player", rvSub:"Level {l} · Category {c}. It goes up and down with every confirmed match.",
+  rvKeep:"Create my account to keep it", rvNext:"Continue", rvRedo:"Answer again", rvMe:"You", rvReveal:"Reveal my card",
+  pcT:"Pick your home club", pcS:"Your home page will show its open matches, news and deals first. You can still play anywhere.", pcSkip:"Skip for now", pcHome:"Home club",
+  qT:"Rookie Quest", qS:"Finish all 4 to unlock the Rookie badge 🌱 on your card.", q1s:"Set your level", q2s:"Join an open match or book a court", q3s:"Play and confirm the score", q4s:"Invite your partner",
+  q4n:"{n} joined", qDoneT:"Quest complete!", qDoneS:"The Rookie badge 🌱 is on your card. Welcome to Padel Live.", qSeeCard:"See my card",
+  invTxt:"I'm on Padel Live, the padel app for Syria. Join me so we can play together:", invTxtL:"I'm on Padel Live (level {l}). Join me so we can play together:",
+  tourOpen:"Sign-up open · check if your team fits", b_rookie:"Rookie", nbTag:"Newcomers welcome", nbSet:"🌱 Newcomers welcome", nbHelp:"Shows a 🌱 tag and puts your match first for new players.",
+  tip1:"Open matches live here. Join one at your level.", tip2:"Tournaments and leagues. Sign up with your partner.", tip3:"Your player card, matches and scores.", tipOk:"Got it", tipNext:"Next",
+  nInvJoined:"{n} joined Padel Live with your invite. Book a match together!", startHere:"Start here"});
+Object.assign(W.ar, {wTag:"البادل بسوريا، كله بتطبيق واحد.", w1:"اعرف مستواك بـ٦٠ ثانية", w1s:"خود بطاقة اللاعب تبعك، من برونزي لماسي.", w2:"العب مع ناس بمستواك",
+  w2s:"انضم لمباريات مفتوحة أو احجز ملعب بكم كبسة.", w3:"دوريات، بطولات، نتائج مباشرة", w3s:"اطلع بالترتيب بـCore وTrio وAce وLet's Padel.",
+  wGo:"اعرف مستواي · ٦٠ ثانية", wLook:"بدي اتفرج بس", wHave:"عندي حساب · تسجيل الدخول",
+  tnT:"الليلة بدمشق", tnWeek:"هالأسبوع", tnOpen:"{n} مباريات مفتوحة", tnLvl:"{n} بمستواك", tnNb:"{n} للجداد", tnNone:"ما في مباريات مفتوحة الليلة لسا. كون الأول: احجز ملعب وافتحه.",
+  rvKick:"بطاقة اللاعب تبعك", rvYou:"أنت لاعب {t}", rvSub:"المستوى {l} · الفئة {c}. بيطلع وبينزل مع كل مباراة مؤكدة.",
+  rvKeep:"اعمل حساب لتحتفظ فيها", rvNext:"متابعة", rvRedo:"جاوب من جديد", rvMe:"أنت", rvReveal:"اكشف بطاقتي",
+  pcT:"اختار ناديك", pcS:"الصفحة الرئيسية رح تفرجيك مبارياته المفتوحة وأخباره وعروضه أول شي. فيك تلعب بأي مكان.", pcSkip:"بعدين", pcHome:"ناديي",
+  qT:"مهمة اللاعب الجديد", qS:"خلّص الأربعة لتفتح شارة المبتدئ 🌱 على بطاقتك.", q1s:"حدد مستواك", q2s:"انضم لمباراة مفتوحة أو احجز ملعب", q3s:"العب وأكّد النتيجة", q4s:"ادعي شريكك",
+  q4n:"انضم {n}", qDoneT:"خلصت المهمة!", qDoneS:"شارة المبتدئ 🌱 صارت على بطاقتك. أهلا فيك بـPadel Live.", qSeeCard:"شوف بطاقتي",
+  invTxt:"أنا على Padel Live، تطبيق البادل بسوريا. انضم لعندي لنلعب سوا:", invTxtL:"أنا على Padel Live (مستواي {l}). انضم لعندي لنلعب سوا:",
+  tourOpen:"التسجيل مفتوح · شوف إذا فريقك مناسب", b_rookie:"مبتدئ", nbTag:"أهلا بالجداد", nbSet:"🌱 أهلا بالجداد", nbHelp:"بيحط علامة 🌱 وبيطلّع مباراتك أول شي للاعبين الجداد.",
+  tip1:"المباريات المفتوحة هون. انضم لوحدة بمستواك.", tip2:"البطولات والدوريات. سجّل مع شريكك.", tip3:"بطاقتك ومبارياتك ونتائجك.", tipOk:"تمام", tipNext:"التالي",
+  nInvJoined:"{n} انضم لـPadel Live من دعوتك. احجزوا مباراة سوا!", startHere:"ابدأ من هون"});
+BADGE_IC.rookie = "🌱";
+
+const ls = { get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} }, del: k => { try { localStorage.removeItem(k); } catch (e) {} } };
+(function(){ try { const r = new URLSearchParams(location.search).get("ref"); if (r && /^[0-9a-f-]{36}$/i.test(r)) ls.set("pl-ref", r); } catch (e) {} })();
+
+async function loadWI(){ try { const r = await sb.rpc("welcome_info"); if (!r.error) S.wi = r.data; } catch (e) {} }
+const isRookie = () => !S.user || !!(S.wi && S.wi.quest && (S.wi.quest.new || (S.wi.quest.rated || 0) < 5) && !S.wi.quest.done);
+const nextOnboard = () => S.user && S.profile && !S.profile.home_club && !ls.get("pl-noclub") ? "pickclub" : "home";
+
+/* after sign in / sign up: save the guest's quiz level and the invite */
+async function onbAfterAuth(){
+  if (!S.user || !S.profile) return;
+  const pl = ls.get("pl-plevel");
+  if (pl && !S.profile.level_set){ const r = await sb.rpc("set_my_level", {p_level: +pl}); if (!r.error){ S.profile.level_set = true; S.profile.level = +pl; await loadCard(); } }
+  ls.del("pl-plevel");
+  const ref = ls.get("pl-ref"); if (ref){ try { await sb.rpc("set_invited_by", {p_ref: ref}); } catch (e) {} ls.del("pl-ref"); }
+  ls.set("pl-seen", "1");
+  await loadWI();
+}
+
+/* tonight strip */
+function tonightStrip(){
+  const now = new Date(), today = dayKey(now), open = (S.matches || []).filter(m => m.open_spots > 0 && !m.joined);
+  let list = open.filter(m => dayKey(new Date(m.starts_at)) === today), lbl = t("tnT");
+  if (!list.length){ list = open.filter(m => new Date(m.starts_at) - now < 7 * 864e5); lbl = t("tnWeek"); }
+  if (!list.length) return `<button class="card tn" data-go="clubs"><span class="tn-moon">🌙</span><span class="tn-b"><b>${t("tnT")}</b><span class="note">${t("tnNone")}</span></span></button>`;
+  const L = myLevel() != null ? myLevel() : S.revealLevel != null ? S.revealLevel : null;
+  const atL = L == null ? 0 : list.filter(m => inRange(m, L)).length;
+  const nb = list.filter(m => m.newbie).length;
+  return `<button class="card tn" data-go="matches"><span class="tn-moon">🌙</span><span class="tn-b"><b>${lbl}<i class="tn-live"></i></b>
+    <span class="tn-n"><em>${tf("tnOpen", {n: list.length})}</em>${L != null ? `<em>${tf("tnLvl", {n: atL})}</em>` : ""}${nb ? `<em class="nb">${tf("tnNb", {n: nb})}</em>` : ""}</span></span><span class="tn-go">→</span></button>`;
+}
+const dayKey = d => new Intl.DateTimeFormat("en-CA", {timeZone: TZ}).format(d);
+
+/* tournament banner */
+function tourBanner(){
+  const ts = (S.wi && S.wi.tours || []).filter(x => !ls.get("pl-tx-" + x.slug)); if (!ts.length) return "";
+  const x = ts[0], d = new Date(x.starts_on + "T12:00:00");
+  return `<div class="tourban"><a href="t.html?${encodeURIComponent(x.slug)}"><span class="tb-cup">🏆</span><span class="tb-b"><b>${esc(x.name)}</b><span>${esc(fmtDay(d))} · ${t("tourOpen")} →</span></span></a><button class="tb-x" data-tourx="${esc(x.slug)}" aria-label="Close">×</button></div>`;
+}
+
+/* Rookie Quest */
+function questCard(){
+  const q = S.wi && S.wi.quest;
+  if (!q) return S.profile && !S.profile.level_set ? `<button class="card lvprompt" data-go="level"><b>${t("setLevel")} →</b><span class="note">${t("levelCardHint")}</span></button>` : "";
+  if (q.done){ if (ls.get("pl-qdone")) return "";
+    return `<div class="card quest done"><span class="q-big">🌱</span><b>${t("qDoneT")}</b><span class="note">${t("qDoneS")}</span><div class="row" style="gap:8px"><button class="cta gold sm" data-qdone="me">${t("qSeeCard")}</button><button class="ghost" style="width:auto;padding:0 14px" data-qdone="">${t("okBtn2")}</button></div></div>`; }
+  if (!q.new && q.level && q.match && q.result) return "";
+  const steps = [["level", "q1s", `data-go="level"`], ["match", "q2s", `data-go="matches"`], ["result", "q3s", `data-go="me"`], ["invite", "q4s", `data-invite="1"`]];
+  const n = steps.filter(([k]) => q[k]).length, cur = steps.findIndex(([k]) => !q[k]);
+  return `<div class="card quest"><div class="between"><b>🌱 ${t("qT")}</b><span class="q-n">${n} / 4</span></div>
+    <div class="q-bar"><i style="width:${n * 25}%"></i></div><span class="note">${t("qS")}</span>
+    <div class="q-steps">${steps.map(([k, lbl, act], i) => `<button class="q-st${q[k] ? " ok" : ""}${i === cur ? " cur" : ""}" ${q[k] && k !== "invite" ? "disabled" : act}><span class="q-ck">${q[k] ? "✓" : i + 1}</span><span class="q-l">${t(lbl)}${k === "invite" && q.invited ? ` <small>· ${tf("q4n", {n: q.invited})}</small>` : ""}</span>${i === cur ? `<span class="q-here">${t("startHere")} →</span>` : ""}</button>`).join("")}</div></div>`;
+}
+
+/* guest card on home */
+function guestStart(){ return `<button class="card gstart" data-go="level"><span class="gs-card"><b>?</b><small>LEVEL</small></span><span class="tn-b"><b>${t("w1")} →</b><span class="note">${t("w1s")}</span></span></button>`; }
+
+function welcomeHome(){
+  if (!S.user) return `${guestStart()}${tonightStrip()}${tourBanner()}`;
+  const q = S.wi && S.wi.quest;
+  return `${questCard()}${q && q.new ? tonightStrip() : ""}${tourBanner()}`;
+}
+
+/* welcome screen (first visit, signed out) */
+V.welcome = () => `<main class="wel">
+  <div class="wel-lang">${[["ar", "عربي"], ["en", "English"]].map(([k, l]) => `<button class="chip" data-wlang="${k}" aria-pressed="${lang === k}">${l}</button>`).join("")}</div>
+  <div class="wel-hero"><div class="wel-ball"></div><div class="logo wel-logo">Padel <i>Live</i></div><p>${t("wTag")}</p></div>
+  <div class="wel-rows">${[["🎯", "w1", "w1s"], ["🤝", "w2", "w2s"], ["🏆", "w3", "w3s"]].map(([i, a, b], n) => `<div class="wel-row" style="animation-delay:${.15 + n * .12}s"><span>${i}</span><div><b>${t(a)}</b><small>${t(b)}</small></div></div>`).join("")}</div>
+  ${tonightStrip()}
+  <div class="wel-cta"><button class="cta blue wide" data-wgo="level">${t("wGo")}</button>
+  <button class="ghost" data-wgo="home">${t("wLook")}</button>
+  <button class="linkbtn" data-wgo="auth">${t("wHave")}</button></div>
+ </main>`;
+
+/* card reveal */
+V.reveal = () => { const L = S.revealLevel != null ? S.revealLevel : myLevel(); if (L == null) return V.level();
+  const cat = lvCat(L), [, col] = TIER[cat], nm = S.profile && S.profile.full_name ? S.profile.full_name : "";
+  return `<main class="rv">
+   <span class="rv-kick">${t("rvKick")}</span>
+   <div class="rv-stage"><div class="rv-card" style="--tc:${col}"><div class="rv-back"><div class="logo">Padel <i>Live</i></div></div>
+     <div class="rv-front"><span class="pc-holo"></span><div class="pc-top"><div class="pc-ovr"><b>${lvl2(L)}</b><small>${t("lvlU")}</small></div><div class="pc-rank">${emblem(col, 54)}<span>${esc(tierName(cat))}</span></div></div>
+       <div class="pc-av">${nm ? esc(initials(nm)) : "🎾"}</div><div class="pc-name"><b>${esc(nm || t("rvMe"))}</b><small>${t("catU")} ${cat}</small></div></div></div>
+     <div class="rv-spark">${Array.from({length: 14}, (_, i) => `<i style="--a:${i * 26}deg;--d:${(i % 4) * .06}s"></i>`).join("")}</div></div>
+   <h2 class="rv-h">${tf("rvYou", {t: `<span class="rv-tier" style="--tc:${col}">${esc(tierName(cat))}</span>`})}</h2>
+   <p class="note rv-p">${tf("rvSub", {l: lvl2(L), c: cat})}</p>
+   ${S.user ? `<button class="cta blue wide" data-rvnext>${t("rvNext")}</button>` : `<button class="cta blue wide" data-rvkeep>${t("rvKeep")}</button>`}
+   <button class="linkbtn" data-go="level">${t("rvRedo")}</button>
+  </main>`; };
+
+/* home club */
+V.pickclub = () => { if (!S.user) return V.auth();
+  return `<main>${backBar(t("pcT"), "home")}
+   <p class="note" style="margin:-6px 0 0">${t("pcS")}</p>
+   <div class="pcl">${S.clubs.map(c => `<button class="pcl-c" data-homeclub="${c.id}"><span class="pcl-img"${clubCover(c) ? ` style="background-image:url('${esc(clubCover(c))}')"` : ""}></span><span class="pcl-n"><b>${esc(c.name)}</b><small>${esc(c.area || c.city || "")}</small></span></button>`).join("")}</div>
+   <button class="ghost" data-pcskip>${t("pcSkip")}</button>
+  </main>`; };
+
+/* first-time tips over the tab bar */
+function showTips(){
+  if (ls.get("pl-tips") || document.getElementById("tips") || S.view !== "home") return;
+  const steps = [["matches", "tip1"], ["events", "tip2"], ["me", "tip3"]]; let i = 0;
+  const ov = document.createElement("div"); ov.id = "tips"; document.body.appendChild(ov);
+  const draw = () => { const b = document.querySelector(`nav.tabs button[data-go="${steps[i][0]}"]`); if (!b){ close(); return; }
+    const r = b.getBoundingClientRect(), cx = r.left + r.width / 2;
+    ov.innerHTML = `<div class="tip-hole" style="left:${r.left - 4}px;top:${r.top - 4}px;width:${r.width + 8}px;height:${r.height + 8}px"></div>
+      <div class="tip-box" style="left:${Math.max(12, Math.min(innerWidth - 252, cx - 120))}px;bottom:${innerHeight - r.top + 16}px"><span>${t(steps[i][1])}</span><div class="between"><small>${i + 1} / 3</small><button>${i < 2 ? t("tipNext") : t("tipOk")}</button></div><i class="tip-arrow" style="left:${cx - Math.max(12, Math.min(innerWidth - 252, cx - 120)) - 7}px"></i></div>`; };
+  const close = () => { ls.set("pl-tips", "1"); ov.remove(); };
+  ov.addEventListener("click", () => { i++; if (i >= steps.length) close(); else draw(); });
+  draw();
+}
+
+/* invite */
+async function invite(){
+  const url = location.origin + location.pathname.replace(/[^/]*$/, "") + "?ref=" + S.user.id;
+  const L = myLevel(), msg = (L != null ? tf("invTxtL", {l: lvl2(L)}) : t("invTxt"));
+  try { if (navigator.share){ await navigator.share({title: "Padel Live", text: msg, url}); return; } } catch (e) { if (e && e.name === "AbortError") return; }
+  window.open("https://wa.me/?text=" + encodeURIComponent(msg + " " + url), "_blank");
+}
+
+app.addEventListener("click", async e => {
+  const el = e.target.closest("[data-wlang],[data-wgo],[data-rvkeep],[data-rvnext],[data-homeclub],[data-pcskip],[data-invite],[data-qdone],[data-tourx],[data-nbon]"); if (!el) return;
+  const d = el.dataset;
+  if (d.wlang){ lang = d.wlang; ls.set("pl-lang", lang); render(); return; }
+  if (d.wgo){ ls.set("pl-seen", "1"); if (d.wgo === "auth") S.authMode = "in"; go(d.wgo); return; }
+  if ("rvkeep" in d){ ls.set("pl-plevel", String(S.revealLevel)); ls.set("pl-seen", "1"); S.authMode = "up"; go("auth"); return; }
+  if ("rvnext" in d){ go(nextOnboard()); return; }
+  if (d.homeclub){ const r = await sb.rpc("set_home_club", {p_club: d.homeclub}); if (r.error){ toast(errMsg(r.error)); return; }
+    S.profile.home_club = d.homeclub; S.club = S.clubs.find(c => c.id === d.homeclub) || S.club; await loadClubPosts(); toast("✓"); go("home"); return; }
+  if ("pcskip" in d){ ls.set("pl-noclub", "1"); go("home"); return; }
+  if ("invite" in d){ invite(); return; }
+  if ("qdone" in d){ ls.set("pl-qdone", "1"); if (d.qdone) go(d.qdone); else render(); return; }
+  if (d.tourx){ ls.set("pl-tx-" + d.tourx, "1"); render(); return; }
+  if (d.nbon){ const on = d.nbon === "1", r = await sb.rpc("match_set_newbie", {p_booking: S.match.id, p_on: on}); if (r.error){ toast(errMsg(r.error)); return; }
+    S.nbState = Object.assign(S.nbState || {}, {[S.match.id]: on}); toast("✓"); render(); return; }
+});
+
+/* the booker's 🌱 toggle on the match page */
+function nbToggle(m){
+  const cur = S.nbState && S.match && m.id in S.nbState ? S.nbState[m.id] : !!((S.matches || []).find(x => x.id === m.id) || {}).newbie;
+  return `<button class="nbtog${cur ? " on" : ""}" data-nbon="${cur ? "0" : "1"}" aria-pressed="${cur}"><span>${t("nbSet")}</span><small>${t("nbHelp")}</small><i></i></button>`;
+}
+/* rookies see newcomer matches first */
+const forMe = list => isRookie() ? [...list].sort((a, b) => (b.newbie ? 1 : 0) - (a.newbie ? 1 : 0)) : list;
+
+
+/* ---------- simpler screens: Home smart card, Me tabs, manager groups, moment sheets ---------- */
+Object.assign(W.en, {scScore:"A score is waiting", scScoreS:"Check the result so everyone's level updates.", scOpen:"Open", scToday:"Today", scNextT:"Your next match",
+  scBook:"Book a court", scFind:"Find a match", scIdle:"Ready to play?", scIdleS:"Book a court or join players at your level.",
+  scDeal:"{p}% off at {c}", scDealS:"Courts starting in the next {h} h are cheaper.", scDealGo:"See free courts",
+  omT:"Open matches", omTonight:"Tonight {n}", omLvl:"{n} at your level",
+  meCard:"Card", meGames:"Matches", meSet:"Settings", meToDo:"Needs you", meMgr:"Manager",
+  mTabPeople:"People", mTabClub:"Club", fabT:"Quick actions", fabBook:"New booking", fabBookS:"Walk-in, phone booking or block a court",
+  fabPost:"Post to players", fabPostS:"News, events and offers to your players", fabDeal:"Start a deal", fabDealS:"Discount empty courts starting soon",
+  shPushT:"Know when players join", shPushS:"Get a phone alert when someone joins your match or a score needs confirming.", shInstT:"Add Padel Live to your phone",
+  shInstS:"Open it like a normal app, full screen, from your home screen.", shLater:"Not now", backToday:"Back to Today", pastG:"Past bookings", moreRes:"Older results"});
+Object.assign(W.ar, {scScore:"في نتيجة ناطرة", scScoreS:"شيك على النتيجة لحتى يتحدث مستوى الكل.", scOpen:"فتح", scToday:"اليوم", scNextT:"مباراتك الجاية",
+  scBook:"احجز ملعب", scFind:"لاقي مباراة", scIdle:"جاهز تلعب؟", scIdleS:"احجز ملعب أو انضم للاعبين بمستواك.",
+  scDeal:"خصم {p}% بـ{c}", scDealS:"الملاعب يلي بتبلش خلال {h} ساعات أرخص.", scDealGo:"شوف الملاعب الفاضية",
+  omT:"مباريات مفتوحة", omTonight:"الليلة {n}", omLvl:"{n} بمستواك",
+  meCard:"البطاقة", meGames:"المباريات", meSet:"الإعدادات", meToDo:"ناطرتك", meMgr:"الإدارة",
+  mTabPeople:"الأشخاص", mTabClub:"النادي", fabT:"إجراءات سريعة", fabBook:"حجز جديد", fabBookS:"زبون بالنادي، حجز بالتلفون أو إغلاق ملعب",
+  fabPost:"انشر للاعبين", fabPostS:"أخبار وفعاليات وعروض للاعبين", fabDeal:"ابدأ عرض", fabDealS:"خصم على الملاعب الفاضية يلي قرّب وقتها",
+  shPushT:"اعرف لما حدا ينضم", shPushS:"بيوصلك إشعار عالموبايل لما حدا ينضم لمباراتك أو لازم تأكد نتيجة.", shInstT:"حط Padel Live عموبايلك",
+  shInstS:"بيفتح متل أي تطبيق، شاشة كاملة، من الشاشة الرئيسية.", shLater:"بعدين", backToday:"رجوع لليوم", pastG:"حجوزات سابقة", moreRes:"نتائج أقدم"});
+
+const upcoming = () => S.mine.filter(b => b.status !== "cancelled" && new Date(b.starts_at) > new Date()).sort((a, b) => new Date(a.starts_at) - new Date(b.starts_at));
+const pendingScores = () => S.mine.filter(b => b.status !== "cancelled" && b.result === "pending");
+
+/* the one card at the top of Home */
+function smartCard(){
+  if (!S.user) return guestStart();
+  const ps = pendingScores()[0];
+  if (ps) return `<button class="hero sc-alert" data-match="${ps.id}" style="text-align:start;width:100%"><span class="kick2">⚑ ${t("scScore")}</span><span class="big">${esc(fmtDay(new Date(ps.starts_at)))} · ${esc(ps.club_name)}</span><span style="opacity:.92;font-size:14px">${t("scScoreS")}</span><span class="sc-go">${t("scOpen")} →</span></button>`;
+  const nx = upcoming()[0], today = nx && dayKey(new Date(nx.starts_at)) === dayKey(new Date());
+  const nextHero = b => `<button class="hero" data-match="${b.id}" style="text-align:start;width:100%"><div class="between" style="width:100%"><span class="kick2">${today ? "🔥 " + t("scToday") : t("scNextT")}</span>${statusTag(b.status).replace('tag g','tag w').replace('tag pend','tag w')}</div>
+    <span class="big">${esc(today ? fmtTime(new Date(b.starts_at)) : fmtDay(new Date(b.starts_at)) + " · " + fmtTime(new Date(b.starts_at)))}</span>
+    <span style="opacity:.92;font-size:14px">${esc(b.club_name)} · ${esc(b.court_name)} · ${b.minutes} ${t("min")}${b.code ? ` · #${b.booking_no} · <b>${esc(b.code)}</b>` : ""}</span></button>`;
+  if (today) return nextHero(nx);
+  const qc = questCard(); if (qc) return qc;
+  if (nx) return nextHero(nx);
+  const tb = tourBanner(); if (tb) return tb;
+  const hc = S.profile && S.profile.home_club, dl = S.clubs.filter(c => +c.deal_pct > 0).sort((a, b) => (b.id === hc) - (a.id === hc))[0];
+  if (dl) return `<button class="hero sc-deal" data-dealclub="${dl.id}" style="text-align:start;width:100%"><span class="kick2">🔥 ${t("dealTitle")}</span><span class="big">${esc(tf("scDeal", {p: dl.deal_pct, c: dl.name}))}</span><span style="opacity:.92;font-size:14px">${tf("scDealS", {h: dl.deal_hours})}</span><span class="sc-go">${t("scDealGo")} →</span></button>`;
+  return `<div class="hero sc-idle"><span class="kick2">${t("scIdle")}</span><span style="opacity:.92;font-size:14px">${t("scIdleS")}</span><div class="sc-btns"><button class="cta lime sm" data-go="clubs">${IC.cal} ${t("scBook")}</button><button class="cta ghostw sm" data-go="matches">${IC.ppl} ${t("scFind")}</button></div></div>`;
+}
+
+/* open matches as one swipeable row */
+function matchesRow(){
+  const open = forMe((S.matches || []).filter(m => m.open_spots > 0 && !m.joined)), today = dayKey(new Date());
+  const tn = open.filter(m => dayKey(new Date(m.starts_at)) === today).length, L = myLevel() != null ? myLevel() : S.revealLevel;
+  const atL = L != null ? open.filter(m => inRange(m, L)).length : null;
+  return `<div class="between"><h2>${t("omT")}</h2><a href="#matches" data-go="matches" style="font-weight:700;font-size:13px;white-space:nowrap">${t("all")} →</a></div>
+   ${open.length ? `<div class="om-sum">${tn ? `<em>🌙 ${tf("omTonight", {n: tn})}</em>` : ""}${atL != null ? `<em>🎯 ${tf("omLvl", {n: atL})}</em>` : ""}${open.some(m => m.newbie) ? `<em class="nb">🌱 ${t("nbTag")}</em>` : ""}</div>
+   <div class="om-row">${open.slice(0, 8).map(matchRow).join("")}</div>` : `<button class="card note" data-go="clubs" style="text-align:start;width:100%">${t("tnNone")}</button>`}`;
+}
+
+V.home = () => { const name = S.profile && S.profile.full_name ? S.profile.full_name.split(" ")[0] : "";
+ return `<main>
+  <div class="top"><div><div class="hello">${S.user ? `${t("hi")} ${esc(name)}` : t("guest")}</div><div class="logo">Padel <i>Live</i></div></div>
+   <div class="row">${bell()}<button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button>${S.user ? "" : `<button class="pill" data-go="auth">${t("signin")}</button>`}</div></div>
+  ${smartCard()}
+  ${matchesRow()}
+  ${S.user ? feedHome() : ""}
+ </main>${nav("home")}`; };
+
+/* Me in three tabs */
+V.me = () => { if (!S.user) return V.auth();
+ const p = S.profile || {}, tab = S.meTab || "card", todo = pendingScores().length;
+ const head = `<div class="top"><div class="row" style="gap:12px;min-width:0"><span class="av" style="width:48px;height:48px;font-size:16px;margin:0">${esc(initials(p.full_name))}</span><div style="min-width:0"><h2 style="margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(p.full_name || "")}</h2><span class="note">${myLevel() != null ? `${t("lvlU")} ${lvl2(myLevel())} · ${esc(tierName(lvCat(myLevel())))}` : esc(S.user.email || "")}</span></div></div>
+   <div class="row">${S.staff.length ? `<button class="pill" data-go="manager">${t("meMgr")}</button>` : ""}${bell()}</div></div>
+  <div class="seg">${[["card", "meCard"], ["games", "meGames"], ["set", "meSet"]].map(([k, l]) => `<button data-metab="${k}" aria-pressed="${tab === k}">${k === "set" ? "⚙️ " : ""}${t(l)}${k === "games" && todo ? `<i class="dot"></i>` : ""}</button>`).join("")}</div>`;
+ let body = "";
+ if (tab === "card") body = `${playerCard(S.card)}<button class="cta wide pfbtn" data-profile="me">📊 ${t("pfMine")} →</button>${snMeCard()}`;
+ else if (tab === "games"){ const up = upcoming(), past = S.mine.filter(b => !up.includes(b));
+   body = `${todo ? `<h2>⚑ ${t("meToDo")}</h2><div class="glist">${pendingScores().map(gameRow).join("")}</div>` : ""}
+    <h2>${t("myGames")}</h2><div class="glist">${up.map(gameRow).join("") || `<button class="card note" data-go="clubs" style="text-align:start">${t("bookFirst")}</button>`}</div>
+    ${myRefCard()}${meExtras()}
+    <h2>${t("myResults")}</h2><div class="glist" style="gap:8px">${(S.results || []).slice(0, 5).map(resultRow).join("") || `<div class="card note">${t("noResults")}</div>`}</div>
+    ${(S.results || []).length > 5 ? `<details class="card pastg"><summary>${t("moreRes")} · ${S.results.length - 5}</summary><div class="glist" style="gap:8px">${S.results.slice(5).map(resultRow).join("")}</div></details>` : ""}
+    ${past.filter(b => b.result !== "pending").length ? `<details class="card pastg"><summary>${t("pastG")} · ${past.filter(b => b.result !== "pending").length}</summary><div class="glist">${past.filter(b => b.result !== "pending").map(gameRow).join("")}</div></details>` : ""}`; }
+ else body = `<form id="pf" class="card" style="display:flex;flex-direction:column;gap:10px"><label class="fld"><span>${t("name")}</span><input id="p-name" value="${esc(p.full_name)}"></label><label class="fld"><span>${t("phone")}</span><input id="p-phone" value="${esc(p.phone)}" inputmode="tel" dir="ltr"></label><span class="note">${esc(S.user.email || "")}</span><button class="ghost" type="submit">${t("save")}</button></form>
+  ${pushCard(false)}${alertCard()}
+  <div class="card"><div class="set"><span>${t("dark")}</span><button class="tg" data-dark aria-pressed="${document.documentElement.dataset.theme === "dark"}" aria-label="${t("dark")}"></button></div><div class="set"><span>Language · اللغة</span><button class="pill" data-lang>${lang === "en" ? "عربي" : "English"}</button></div></div>
+  ${S.staff.length ? `<button class="cta wide" data-go="manager">${t("mgr")} · ${esc(S.staff.map(c => c.name).join(", "))} →</button>`
+   : `<form id="staffF" class="card" style="display:flex;flex-direction:column;gap:10px"><b>${t("staffQ")}</b><label class="fld"><span>${t("staffCode")}</span><input id="s-code" autocomplete="off" dir="ltr"></label><button class="ghost" type="submit">${t("staffJoin")}</button></form>`}
+  ${adminCard()}${adminPlayers()}${installCard()}
+  <button class="ghost" data-signout style="color:var(--red)">${t("signout")}</button>
+  <button class="linkbtn" data-delacc style="color:var(--ink-3)">${t("delAcc")}</button>
+  <p class="note" style="text-align:center;font-size:11px;opacity:.6;margin:0">Padel Live ${VERSION}</p>`;
+ return `<main>${head}${body}</main>${nav("me")}`; };
+
+/* bottom sheets: push and install asked at the right moment, manager quick actions */
+function sheetHtml(){
+  if (!S.sheet) return "";
+  let inner = "";
+  if (S.sheet === "push") inner = `<span class="sh-ic">🔔</span><b>${t("shPushT")}</b><p class="note">${t("shPushS")}</p><button class="cta blue wide" data-pushon data-shx>${t("psOn")}</button><button class="ghost" data-shx>${t("shLater")}</button>`;
+  else if (S.sheet === "install") inner = `<img src="icon-192.png" alt="" width="56" height="56" style="border-radius:14px"><b>${t("shInstT")}</b><p class="note">${t("shInstS")}</p><button class="cta blue wide" data-install data-shx>${t("installBtn")}</button><button class="ghost" data-shx>${t("shLater")}</button>`;
+  else if (S.sheet === "fab") inner = `<b style="align-self:flex-start">${t("fabT")}</b>${[["book", "📅", "fabBook", "fabBookS"], ["post", "📣", "fabPost", "fabPostS"], ["deal", "🔥", "fabDeal", "fabDealS"]].map(([k, i, a, b]) => `<button class="fab-it" data-fabgo="${k}"><span>${i}</span><div><b>${t(a)}</b><small>${t(b)}</small></div></button>`).join("")}`;
+  return `<div class="sheet-bg" data-shx></div><div class="sheet" role="dialog">${inner}</div>`;
+}
+function maybeAsk(kind){
+  if (S.sheet) return;
+  if (kind === "push"){ if (!S.user || S.pushOn || !pushOK() || ls.get("pl-ask-push")) return; ls.set("pl-ask-push", "1"); }
+  if (kind === "install"){ if (standalone() || ls.get("pl-ask-inst") || +(ls.get("pl-visits") || 0) < 3) return; ls.set("pl-ask-inst", "1"); }
+  S.sheet = kind; render();
+}
+ls.set("pl-visits", String(+(ls.get("pl-visits") || 0) + 1));
+
+app.addEventListener("click", async e => {
+  const el = e.target.closest("[data-metab],[data-shx],[data-fab],[data-fabgo]"); if (!el) return;
+  const d = el.dataset;
+  if (d.metab){ S.meTab = d.metab; render(); window.scrollTo(0, 0); return; }
+  if ("fab" in d){ S.sheet = "fab"; render(); return; }
+  if (d.fabgo){ S.sheet = null; const k = d.fabgo;
+    if (k === "book"){ S.mTab = "day"; render(); const f = document.getElementById("addF"); if (f){ f.scrollIntoView({behavior: "smooth", block: "center"}); f.classList.add("flash"); } return; }
+    S.mTab = k === "post" ? "post" : "set"; S.mSubC = k === "deal" ? "set" : S.mSubC; await loadMgrTab(); render(); window.scrollTo(0, 0); return; }
+  if ("shx" in d){ setTimeout(() => { S.sheet = null; render(); }, 0); }
+});
 
 render();
 boot();
