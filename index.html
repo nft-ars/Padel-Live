@@ -694,6 +694,22 @@ details.lrules{border:2px solid #E8C96A;background:linear-gradient(160deg,color-
 .snbuy summary{font-weight:800;font-size:14px;cursor:pointer}
 .snbuy ul{margin:8px 0 0;padding-inline-start:18px;display:flex;flex-direction:column;gap:6px;font-size:13px;color:var(--ink-2);line-height:1.45}
 .snbuy b{color:var(--ink)}
+/* daily: feed, alerts, rematch, posts, today */
+.fdlist{display:flex;flex-direction:column;gap:8px}
+.card.fd{display:flex;gap:10px;align-items:flex-start;padding:12px 14px;text-align:start;width:100%}
+.card.fd.me{border-color:var(--gold,#E8C96A)}
+.card.fd.post{flex-direction:column;gap:6px}
+.card.fd.post p{margin:0;white-space:pre-wrap;line-height:1.45}
+.fdi{font-size:20px;line-height:1.2}
+.fdb{display:flex;flex-direction:column;gap:2px;min-width:0;line-height:1.4}
+.fdb .plink{font-weight:800}
+.fdpic{width:100%;max-height:260px;object-fit:cover;border-radius:12px}
+.alcard{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+.alcard>div:first-child{display:flex;flex-direction:column;gap:2px;flex:1;min-width:180px}
+.opcard,.rmcard,.mjcard,.psform,.tdcard{display:flex;flex-direction:column;gap:10px}
+.psform textarea{width:100%;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:10px 12px;font:inherit;resize:vertical}
+.tdcard .sngrid b{font-size:24px}
+.card.fd.post .between{width:100%}
 </style>
 </head>
 <body>
@@ -805,7 +821,7 @@ const money = n => n == null ? "–" : "$" + (Math.round(n * 100) / 100).toStrin
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v9";
+const VERSION = "v10";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -907,6 +923,7 @@ V.home = () => { const next = S.mine.find(b => b.status !== "cancelled" && new D
   ${dealsStrip()}
   <div class="between"><h2>${t("open")}</h2><a href="#matches" data-go="matches" style="font-weight:700;font-size:13px;white-space:nowrap">${t("all")}</a></div>
   <div style="display:flex;flex-direction:column;gap:10px">${S.matches.filter(m => m.open_spots > 0).slice(0,3).map(matchRow).join("") || `<div class="card note">${t("noMatches")}</div>`}</div>
+  ${feedHome()}
   ${installCard()}
  </main>${nav("home")}`; };
 
@@ -950,6 +967,7 @@ V.club = () => { const c = S.club; if (!c) return V.clubs();
   ${coachChips()}
   ${sl.closed ? `<div class="notice">${t("closedDay")}</div>` : `<div class="slots">${sl.list.map(x => `<button class="slot" data-slot="${x.iso}" aria-pressed="${S.slot === x.iso && !x.off}"${x.off ? " disabled" : ""}><b>${esc(fmtTime(x.d).replace(/\s?(am|pm)$/i,""))}</b>${x.off || x.price == null ? "" : `<small>${x.deal ? "🔥" : ""}$${x.price}</small>`}</button>`).join("")}</div>`}
   ${clubExtras(c)}
+  ${clubPostsHtml()}
   <div class="card" style="display:flex;flex-direction:column;gap:10px"><p class="note" style="margin:0">${esc(c.about)}</p>${clubLinks(c)}</div>
  </main><div class="bar"><div class="sum"><small>${esc(fmtDay(at(S.day,"12:00")))}${pick ? ` · ${esc(fmtTime(pick.d))}` : ""} · ${S.dur} ${t("min")}</small><b>${pick ? money(pick.price + coachFee()) : t("pick")}</b>${pick ? (coachSel() ? ` <span class="note">· ${t("lesson")} · ${esc(coachSel().name)}</span>` : ` <span class="note">· ${money(pick.price / 4)} ${t("each")}</span>`) : ""}</div><button class="cta" data-go="checkout"${pick ? "" : " disabled"}>${t("cont")}</button></div>`; };
 
@@ -1031,6 +1049,7 @@ V.me = () => { if (!S.user) return V.auth();
   ${playerCard(S.card)}
   <button class="cta wide pfbtn" data-profile="me">📊 ${t("pfMine")} →</button>
   ${pushCard(false)}
+  ${alertCard()}
   ${snMeCard()}
   <h2>${t("myGames")}</h2>
   <div style="display:flex;flex-direction:column;gap:10px">${S.mine.map(gameRow).join("") || `<div class="card note">${t("bookFirst")}</div>`}</div>
@@ -1072,6 +1091,7 @@ V.manager = () => { if (!S.user || !S.staff.length) return V.me();
  return `<main class="mgr-wrap">
   <div class="top"><div><div class="hello">${t("mgr")}</div><div class="logo">${esc(club.name)}</div></div><button class="pill" data-go="me">${t("back")}</button></div>
   ${mgrTabs()}
+  ${todayCard(club)}
   <div class="chips">${days.map(d => `<button class="chip" data-mday="${d}" aria-pressed="${S.mDay === d}">${esc(fmtDay(at(d,"12:00")))}</button>`).join("")}</div>
   <div class="stats"><div class="card stat"><small>${t("mToday")}</small><b>${live.filter(b => b.status !== "blocked").length}</b></div><div class="card stat"><small>${t("filled")}</small><b>${fill}%</b></div><div class="card stat"><small>${t("cash")}</small><b>${money(cash)}</b></div><div class="card stat"><small>${t("deps")}</small><b>${md.deps.length}</b></div></div>
   <div class="note live-dot">${t("autoUp")}</div>
@@ -1170,10 +1190,11 @@ V.match = () => { const m = S.match; if (!m) return V.me();
    <div class="card" style="display:flex;flex-direction:column;gap:10px">${m.players.map(p => `<div class="prow">${av(p.name)}<div style="flex:1;min-width:0"><b>${pLink(p.id, p.name)}${p.me ? ` <span class="note">(${t("you")})</span>` : ""}</b>${p.booker ? `<small class="note" style="display:block">${t("booker")}</small>` : ""}</div>${lvChip(p.level)}${m.split ? paidTag(p.paid) : ""}</div>`).join("")}
     ${Array.from({length: m.open_spots}, () => `<div class="prow">${av("", 1)}<span class="note">${t("openSpot")}</span></div>`).join("")}
     ${m.split ? `<p class="note" style="margin:0">${t("splitInfo").replace("{x}", money(share))}</p>` : ""}</div>
+   ${mxExtras(m)}
    ${res}
-   <h2>${t("chat")}</h2>
+   ${m.in === false ? "" : `<h2>${t("chat")}</h2>
    <div class="card chat"><div class="msgs" id="msgs">${(S.chat || []).map(x => `<div class="msg${x.mine ? " mine" : ""}">${x.mine ? "" : `<small>${esc(x.name)}</small>`}<span>${esc(x.body)}</span><time>${esc(fmtTime(new Date(x.created_at)))}</time></div>`).join("") || `<p class="note" style="margin:0;text-align:center">${t("chatEmpty")}</p>`}</div>
-    <form id="chatF" class="chatin"><input id="chat-in" maxlength="500" autocomplete="off" placeholder="${t("chatPh")}"><button class="cta blue sm" type="submit">${t("sendBtn")}</button></form></div>
+    <form id="chatF" class="chatin"><input id="chat-in" maxlength="500" autocomplete="off" placeholder="${t("chatPh")}"><button class="cta blue sm" type="submit">${t("sendBtn")}</button></form></div>`}
   </main>`; };
 async function chatPoll(){
   if (S.view !== "match" || !S.match || document.hidden) return;
@@ -1502,8 +1523,9 @@ async function loadLeague(id){ const r = await sb.rpc("league_get", {p_league: i
 
 /* ---------- manager: tabs ---------- */
 const clubSwitch = () => S.staff.length > 1 ? `<div class="chips mclubs">${S.staff.map(c => `<button class="chip" data-mclub="${c.id}" aria-pressed="${S.mClub === c.id}">${esc(c.name)}</button>`).join("")}</div>` : "";
-const mgrTabs = () => clubSwitch() + `<div class="mtabs">${[["day","mTabDay"],["stats","mTabStats"],["mem","mTabMem"],["coach","mTabCoach"],["set","mTabSet"]].map(([k, l]) => `<button data-mtab="${k}" aria-pressed="${(S.mTab || "day") === k}">${t(l)}</button>`).join("")}</div>`;
+const mgrTabs = () => clubSwitch() + `<div class="mtabs">${[["day","mTabDay"],["post","mTabPost"],["stats","mTabStats"],["mem","mTabMem"],["coach","mTabCoach"],["set","mTabSet"]].map(([k, l]) => `<button data-mtab="${k}" aria-pressed="${(S.mTab || "day") === k}">${t(l)}</button>`).join("")}</div>`;
 async function loadMgrTab(){ const id = S.mClub;
+  if (S.mTab === "post"){ await loadMgrPosts(); }
   if (S.mTab === "stats"){ const r = await sb.rpc("club_stats", {p_club: id, p_days: S.statsDays}); S.stats = r.data || null; }
   if (S.mTab === "mem"){ const [m, p] = await Promise.all([sb.rpc("staff_members", {p_club: id}), sb.rpc("club_plans", {p_club: id})]); S.mMembers = m.data || []; S.mPlans = p.data || []; }
   if (S.mTab === "coach"){ const [c, k] = await Promise.all([sb.rpc("club_coaches", {p_club: id}), sb.rpc("club_classes", {p_club: id})]); S.mCoaches = c.data || []; S.mClasses = k.data || []; }
@@ -1567,7 +1589,7 @@ function mgrSettings(club){ const wk = S.wkDraft || club.weekend_days || [];
    <label class="fld"><span>${t("aheadL")}</span><input id="bk-days" inputmode="numeric" value="${club.book_days || 7}"></label><button class="cta blue sm" data-saverules style="align-self:flex-start">${t("saveRules")}</button></div>
   ${mgrPrices(club)}${clubForm(club)}`; }
 function mgrShell(club){
-  const body = S.mTab === "stats" ? mgrStats(club) : S.mTab === "mem" ? mgrMembers(club) : S.mTab === "coach" ? mgrCoaching(club) : mgrSettings(club);
+  const body = S.mTab === "post" ? mgrPosts(club) : S.mTab === "stats" ? mgrStats(club) : S.mTab === "mem" ? mgrMembers(club) : S.mTab === "coach" ? mgrCoaching(club) : mgrSettings(club);
   return `<main class="mgr-wrap"><div class="top"><div><div class="hello">${t("mgr")}</div><div class="logo">${esc(club.name)}</div></div><button class="pill" data-go="me">${t("back")}</button></div>${mgrTabs()}${body}</main>`; }
 
 /* ---------- Me extras ---------- */
@@ -1581,8 +1603,9 @@ function nText2(n){ const d = n.data || {}, nm = esc(d.name || t("someone")), w 
     class_join: tf("nClassJoin", {n: nm, x, w}), class_cancel: tf("nClassCancel", {x, w}), league_partner: tf("nLgPartner", {n: nm, x, c}),
     league_req: tf("nLgReq", {n: nm, x, c}), league_ok: tf("nLgOk", {x}), league_no: tf("nLgNo", {x}),
     league_round: tf("nLgRound", {r: d.round, x, b: d.box, d: esc(d.until || "")}), league_result: tf("nLgResult", {n: nm}),
-    league_disputed: tf("nLgDisp", {n: nm}), league_champ: tf("nLgChamp", {x, c}), booking_new: tf(d.pending ? "nBookingDep" : "nBooking", {n: nm, k: esc(d.court || ""), w}), league_sched: tf("nLgSched", {n: nm, w, c}), league_ref: tf("nLgRef", {x, w, c: c ? "· " + c : ""}), league_ref_set: tf("nLgRefSet", {n: nm, w}), league_final: t("nLgFinal") })[n.kind]; }
-const nLink = n => n.kind === "booking_new" ? `data-go="manager"` : /^league_/.test(n.kind) ? `data-go="events"` : /^member_/.test(n.kind) ? (n.kind === "member_req" ? `data-go="manager"` : `data-go="me"`) : /^class_/.test(n.kind) || n.kind === "lesson_new" ? `data-go="me"` : "";
+    league_disputed: tf("nLgDisp", {n: nm}), league_champ: tf("nLgChamp", {x, c}), booking_new: tf(d.pending ? "nBookingDep" : "nBooking", {n: nm, k: esc(d.court || ""), w}), league_sched: tf("nLgSched", {n: nm, w, c}), league_ref: tf("nLgRef", {x, w, c: c ? "· " + c : ""}), league_ref_set: tf("nLgRefSet", {n: nm, w}), league_final: t("nLgFinal"),
+    match_open: tf("nMatchOpen", {n: nm, r: d.round, c, w}), rematch: tf("nRematch", {n: nm, c, w}), club_post: tf("nClubPost", {c, x: esc(d.title || "")}), morning: tf("nMorning", {c, r: d.round, b: d.box}) })[n.kind]; }
+const nLink = n => n.kind === "club_post" && n.data && n.data.club_id ? `data-club="${esc(n.data.club_id)}"` : n.kind === "morning" ? `data-go="manager"` : n.kind === "booking_new" ? `data-go="manager"` : /^league_/.test(n.kind) ? `data-go="events"` : /^member_/.test(n.kind) ? (n.kind === "member_req" ? `data-go="manager"` : `data-go="me"`) : /^class_/.test(n.kind) || n.kind === "lesson_new" ? `data-go="me"` : "";
 
 function lgGrab(){ const v = id => { const el = document.getElementById(id); return el ? el.value : undefined; }; const f = S.lgForm || (S.lgForm = {});
   [["name","le-name"],["starts_on","le-s"],["ends_on","le-e"],["round_days","le-rd"],["box_size","le-bx"],["fee","le-fee"],["prize","le-prize"],["about","le-about"]].forEach(([k, id]) => { const x = v(id); if (x !== undefined) f[k] = x; }); }
@@ -1833,18 +1856,19 @@ function render(){
 async function go(v){
   if (!V[v]) v = "home"; S.view = v;
   if (location.hash !== "#" + v) history.replaceState(null, "", "#" + v);
-  if (v === "club" && S.club){ if (!S.day) S.day = nextDays(1)[0]; const cs = S.courts.filter(x => x.club_id === S.club.id); if (!cs.some(x => x.id === S.court) && cs[0]) S.court = cs[0].id; await Promise.all([loadBusy(), loadClubExtras()]); }
+  if (v === "club" && S.club){ if (!S.day) S.day = nextDays(1)[0]; const cs = S.courts.filter(x => x.club_id === S.club.id); if (!cs.some(x => x.id === S.court) && cs[0]) S.court = cs[0].id; await Promise.all([loadBusy(), loadClubExtras(), loadClubPosts()]); }
   if (v === "clubs"){ await loadFindBusy(); }
   if (v === "profile"){ await Promise.all([loadProfile(S.pfId), snLoad(S.pfId)]); }
   if (v === "events"){ try { const [r, lg] = await within(Promise.all([sb.rpc("t_list"), sb.rpc("league_list")]), 8000); S.tours = r.data || []; S.leagues = lg.data || []; } catch (e) {} }
   if (v === "league"){ if (S.leagueId) await loadLeague(S.leagueId); }
-  if (v === "matches" || v === "home"){ const m = await sb.rpc("open_matches"); S.matches = m.data || S.matches; }
+  if (v === "matches" || v === "home"){ const [m] = await Promise.all([sb.rpc("open_matches"), v === "home" ? loadFeed() : null]); S.matches = m.data || S.matches; }
+  if (v === "feed"){ await loadFeed(); }
   if (v === "me" && S.user){ const [mine, rs, pf] = await Promise.all([sb.rpc("my_bookings"), sb.rpc("my_results"), sb.from("profiles").select("*").eq("id", S.user.id).maybeSingle()]); S.mine = mine.data || []; S.results = rs.data || []; if (pf.data) S.profile = pf.data; loadNotifN(); const [mc, rf] = await Promise.all([sb.rpc("my_classes"), sb.rpc("league_ref_matches")]); S.myClasses = mc.data || []; S.myRefs = rf.data || []; await Promise.all([loadCard(), loadMems()]); }
   if (v === "season" && S.boardClubId){ const [r, sn] = await Promise.all([sb.rpc("season_board", {p_club: S.boardClubId}), sb.rpc("sensor_board", {p_club: S.boardClubId, p_days: 30})]); S.board = r.data || []; S.snBoard = sn.error ? null : sn.data; }
   if (v === "inbox" && S.user){ await loadInbox(); }
   if (v === "match"){ if (S.matchId) await loadMatch(S.matchId); }
   if (v === "level"){ S.quiz = S.quiz || {}; }
-  if (v === "manager"){ if (!S.mClub && S.staff[0]) S.mClub = S.staff[0].id; if (!S.mDay) S.mDay = nextDays(1)[0]; await Promise.all([loadManager(), loadMgrTab()]); }
+  if (v === "manager"){ if (!S.mClub && S.staff[0]) S.mClub = S.staff[0].id; if (!S.mDay) S.mDay = nextDays(1)[0]; await Promise.all([loadManager(), loadMgrTab(), loadToday()]); }
   render(); window.scrollTo(0, 0);
   if ((v === "home" || v === "me") && S.card && S.card.celebrate) setTimeout(celebrate, 400);
   if (v === "match"){ const mb = document.getElementById("msgs"); if (mb) mb.scrollTop = mb.scrollHeight; }
@@ -1949,7 +1973,7 @@ app.addEventListener("click", async e => {
   if (d.lgent){ const [eid, st] = d.lgent.split("|"); const r = await sb.rpc("admin_league_entry_set", {p_entry: eid, p_status: st}); if (r.error){ toast(errMsg(r.error)); return; } await loadLeague(S.leagueId); render(); return; }
   if ("lgnext" in d){ if (!confirm(t("lgStartQ"))) return; const r = await sb.rpc("admin_league_next_round", {p_league: S.leagueId}); if (r.error){ toast(errMsg(r.error)); return; } toast("✓ " + tf("lgRunning", {r: r.data, d: ""})); await loadLeague(S.leagueId); render(); return; }
   if ("lgfinish" in d){ if (!confirm(t("lgFinishQ"))) return; const r = await sb.rpc("admin_league_finish", {p_league: S.leagueId}); if (r.error){ toast(errMsg(r.error)); return; } toast("🏆"); await loadLeague(S.leagueId); render(); return; }
-  if (d.mclub){ S.mClub = d.mclub; S.planEdit = null; S.coachEdit = null; S.wkDraft = null; S.classOpen = null; S.stats = null; await Promise.all([loadManager(), loadMgrTab()]); render(); window.scrollTo(0, 0); return; }
+  if (d.mclub){ S.mClub = d.mclub; S.planEdit = null; S.coachEdit = null; S.wkDraft = null; S.classOpen = null; S.stats = null; await Promise.all([loadManager(), loadMgrTab(), loadToday()]); render(); window.scrollTo(0, 0); return; }
   if (d.mtab){ S.mTab = d.mtab; S.planEdit = null; S.coachEdit = null; S.wkDraft = null; S.classOpen = null; await loadMgrTab(); render(); window.scrollTo(0, 0); return; }
   if (d.sdays){ S.statsDays = +d.sdays; await loadMgrTab(); render(); return; }
   if (d.mset){ const [mid, st] = d.mset.split("|"); const r = await sb.rpc("staff_member_set", {p_id: mid, p_status: st}); if (r.error){ toast(errMsg(r.error)); return; } toast("✓"); await loadMgrTab(); render(); return; }
@@ -2367,6 +2391,125 @@ app.addEventListener("change", async e => { const el = e.target;
 });
 app.addEventListener("submit", async e => { if (e.target.id !== "snFindF") return; e.preventDefault(); e.stopImmediatePropagation();
   S.snQ = document.getElementById("sn-q").value; const r = await sb.rpc("sensor_players", {p_q: S.snQ}); if (r.error){ toast(errMsg(r.error)); return; } S.snList = r.data || []; render(); }, true);
+
+
+/* ---------- daily features: feed, open-match alerts, rematch, club posts, morning summary ---------- */
+Object.assign(W.en, {fdT:"What's new", fdAll:"See all", fdEmpty:"Play a match or follow a club, and news from your padel crowd shows up here.",
+  fdBeat:"{a} beat {b}", fdUp:"{n} moved up to {c}", fdDown:"{n} moved to {c}", fdLeague:"New league open: {n}", fdLeagueS:"Starts {d}{p}", fdSmash:"Hardest swing this week: {n} · {v} km/h",
+  fdOpenClub:"Open club", ago_m:"{n}m ago", ago_h:"{n}h ago", ago_d:"{n}d ago", ago_now:"just now",
+  alT:"Open match alerts", alTxt:"Get a notification when someone needs a player at your level.", alOn:"On", alOff:"Off",
+  opT:"Need players?", opTxt:"Open spots and players at that level get a notification.", opSave:"Save", opNone:"No open spots", opSaved:"Saved. Players at that level are being notified.",
+  mjT:"This match needs {n}", mjJoin:"Join this match", mjSplit:"This match splits the court fee. Join from the Matches list to choose how you pay.", mjInv:"You're invited to this rematch. Your spot is saved.",
+  rmT:"Rematch", rmTxt:"Same court, same players. They get a notification and their spots are saved for 24 hours.", rmDay:"Day", rmTime:"Time", rmBook:"Book rematch", rmDone:"Rematch booked. The others have been invited.",
+  psT:"Club news", psNew:"Post news to your players", psPh:"Ladies night Friday 7 PM, 20% off…", psPhoto:"Add a photo (optional)", psSend:"Post", psSent:"Posted. Your recent players have been told.", psDelQ:"Delete this post?", psNone:"No posts yet.",
+  mTabPost:"Posts", tdT:"Today at a glance", tdBook:"Bookings", tdRev:"Expected", tdFree:"Free court-hours", tdFirst:"First game", tdDep:"Deposits to check", tdMem:"Membership requests", tdDeal:"Start a deal for empty slots", tdDealOn:"Deal running: {p}% off",
+  nMatchOpen:"{n} needs {r} player(s) at {c}, {w}. Tap to join.", nRematch:"{n} booked a rematch at {c} on {w}. Your spot is saved: tap to join.", nClubPost:"{c}: {x}", nMorning:"Good morning! {c} today: {r} bookings, {b} free court-hours."});
+Object.assign(W.ar, {fdT:"شو الجديد", fdAll:"شوف الكل", fdEmpty:"العب مباراة أو تابع نادي، وأخبار جماعتك بالبادل رح تطلع هون.",
+  fdBeat:"{a} غلبوا {b}", fdUp:"{n} طلع لـ {c}", fdDown:"{n} نزل لـ {c}", fdLeague:"دوري جديد مفتوح: {n}", fdLeagueS:"بيبلش {d}{p}", fdSmash:"أقوى ضربة هالأسبوع: {n} · {v} كم/س",
+  fdOpenClub:"افتح النادي", ago_m:"من {n} د", ago_h:"من {n} س", ago_d:"من {n} يوم", ago_now:"هلّق",
+  alT:"تنبيهات المباريات المفتوحة", alTxt:"بيوصلك إشعار لما حدا يحتاج لاعب بمستواك.", alOn:"شغّال", alOff:"موقّف",
+  opT:"ناقصك لاعبين؟", opTxt:"افتح أماكن واللاعبين بهالمستوى بيوصلهم إشعار.", opSave:"احفظ", opNone:"ما في أماكن", opSaved:"انحفظ. عم نبعت إشعار للاعبين بهالمستوى.",
+  mjT:"هالمباراة ناقصها {n}", mjJoin:"انضم لهالمباراة", mjSplit:"بهالمباراة الحساب مقسوم. انضم من قائمة المباريات لتختار طريقة الدفع.", mjInv:"أنت معزوم على هالمباراة الثأرية. مكانك محجوز.",
+  rmT:"مباراة ثأرية", rmTxt:"نفس الملعب ونفس اللاعبين. بيوصلهم إشعار وأماكنهم محجوزة 24 ساعة.", rmDay:"اليوم", rmTime:"الوقت", rmBook:"احجز المباراة الثأرية", rmDone:"انحجزت. بعتنا دعوة للباقيين.",
+  psT:"أخبار النادي", psNew:"انشر خبر للاعبينك", psPh:"ليلة السيدات الجمعة 7 المسا، خصم 20%…", psPhoto:"ضيف صورة (اختياري)", psSend:"انشر", psSent:"انتشر. خبّرنا اللاعبين يلي لعبوا عندك مؤخراً.", psDelQ:"بدك تمسح هالمنشور؟", psNone:"ما في منشورات لسا.",
+  mTabPost:"منشورات", tdT:"اليوم بلمحة", tdBook:"حجوزات", tdRev:"متوقع", tdFree:"ساعات ملاعب فاضية", tdFirst:"أول مباراة", tdDep:"عرابين للتأكيد", tdMem:"طلبات عضوية", tdDeal:"ابدأ عرض للأوقات الفاضية", tdDealOn:"في عرض شغّال: خصم {p}%",
+  nMatchOpen:"{n} ناقصه {r} لاعب بـ{c}، {w}. اضغط لتنضم.", nRematch:"{n} حجز مباراة ثأرية بـ{c} يوم {w}. مكانك محجوز: اضغط لتنضم.", nClubPost:"{c}: {x}", nMorning:"صباح الخير! {c} اليوم: {r} حجوزات، {b} ساعات ملاعب فاضية."});
+Object.assign(S, {feed: null, clubPosts: [], mPosts: [], today: null, rmDay: null, rmShift: 0, opSpots: null, opRange: "any", psPhoto: null, psBody: ""});
+function ago(at){ const s = (Date.now() - new Date(at)) / 1000; if (s < 60) return t("ago_now"); if (s < 3600) return tf("ago_m", {n: Math.floor(s / 60)}); if (s < 86400) return tf("ago_h", {n: Math.floor(s / 3600)}); return tf("ago_d", {n: Math.floor(s / 86400)}); }
+const names = arr => (arr || []).map(p => pLink(p.id, (p.n || "").split(" ")[0])).join(" / ");
+function feedItem(x){
+  const when = `<small class="note">${esc(ago(x.at))}</small>`;
+  if (x.k === "result"){ const win = x.w === 0 ? x.a : x.bt, lose = x.w === 0 ? x.bt : x.a; const sets = (x.sets || []).map(s => x.w === 0 ? `${s[0]}-${s[1]}` : `${s[1]}-${s[0]}`).join(" ");
+    return `<div class="card fd${x.me ? " me" : ""}"><span class="fdi">🎾</span><div class="fdb"><span>${tf("fdBeat", {a: names(win), b: names(lose)})} <b>${esc(sets)}</b></span><span class="note">${esc(x.club || "")} · ${esc(ago(x.at))}</span></div></div>`; }
+  if (x.k === "level") return `<div class="card fd${x.me ? " me" : ""}"><span class="fdi">${x.up ? "⬆️" : "⬇️"}</span><div class="fdb"><span>${tf(x.up ? "fdUp" : "fdDown", {n: pLink(x.id, x.n), c: `<b>${esc(tierName(x.to))} (${esc(x.to)})</b>`})}</span>${when}</div></div>`;
+  if (x.k === "post") return `<div class="card fd post"><div class="between"><button class="linkbtn" data-club="${x.club_id}"><b>📣 ${esc(x.club)}</b></button>${when}</div><p>${esc(x.body)}</p>${x.photo ? `<img class="fdpic" src="${esc(x.photo)}" alt="" loading="lazy">` : ""}</div>`;
+  if (x.k === "league") return `<button class="card fd" data-go="events"><span class="fdi">🏆</span><div class="fdb"><span>${tf("fdLeague", {n: `<b>${esc(x.name)}</b>`})}</span><span class="note">${tf("fdLeagueS", {d: esc(fmtDay(new Date(x.starts + "T12:00:00+03:00"))), p: x.prize ? " · " + esc(x.prize) : ""})}</span></div></button>`;
+  if (x.k === "smash") return `<div class="card fd${x.me ? " me" : ""}"><span class="fdi">🔥</span><div class="fdb"><span>${tf("fdSmash", {n: pLink(x.id, x.n), v: Math.round(x.v)})}</span>${when}</div></div>`;
+  return "";
+}
+function feedHome(){ if (!S.user || !S.feed) return "";
+  const list = S.feed.slice(0, 5);
+  return `<div class="between"><h2>${t("fdT")}</h2>${S.feed.length > 5 ? `<a href="#feed" data-go="feed" style="font-weight:700;font-size:13px;white-space:nowrap">${t("fdAll")}</a>` : ""}</div>
+   <div class="fdlist">${list.map(feedItem).join("") || `<div class="card note">${t("fdEmpty")}</div>`}</div>`; }
+V.feed = () => `<main>${backBar(t("fdT"), "home")}<div class="fdlist">${(S.feed || []).map(feedItem).join("") || `<div class="card note">${t("fdEmpty")}</div>`}</div></main>${nav("home")}`;
+async function loadFeed(){ if (!S.user) { S.feed = null; return; } try { const r = await sb.rpc("feed"); S.feed = r.error ? [] : r.data || []; } catch (e) { S.feed = []; } }
+
+/* open-match alerts setting (Me) */
+function alertCard(){ const on = !S.profile || S.profile.alert_open !== false;
+  return `<div class="card alcard"><div><b>🔔 ${t("alT")}</b><span class="note">${t("alTxt")}</span></div><div class="chips"><button class="chip" data-alert="1" aria-pressed="${on}">${t("alOn")}</button><button class="chip" data-alert="0" aria-pressed="${!on}">${t("alOff")}</button></div></div>`; }
+
+/* match page extras: open spots (booker), join (visitor), rematch (players) */
+function hhmmOf(d){ return new Intl.DateTimeFormat("en-GB", {timeZone: TZ, hour: "2-digit", minute: "2-digit", hour12: false}).format(d); }
+function mxExtras(m){
+  const d = new Date(m.starts_at), started = d <= new Date(), joined = m.players.length - 1, iBooked = m.players.some(p => p.me && p.booker);
+  let h = "";
+  if (!m.in){
+    if (m.open_spots > 0 && !started) h += `<div class="card mjcard"><b>${tf("mjT", {n: m.open_spots})}</b>${m.invited ? `<span class="note">${t("mjInv")}</span>` : ""}
+      ${m.split ? `<span class="note">${t("mjSplit")}</span><button class="sbtn" data-go="matches">${t("open")} →</button>` : `<button class="cta blue wide" data-mjoin="${m.id}">${t("mjJoin")}</button>`}</div>`;
+    return h;
+  }
+  if (iBooked && !started && m.kind !== "lesson" && m.status !== "cancelled"){
+    const max = 3 - joined, cur = S.opSpots != null ? S.opSpots : m.open_spots, rng = S.opRange;
+    h += `<div class="card opcard"><b>👥 ${t("opT")}</b><span class="note">${t("opTxt")}</span>
+      <div class="chips" style="flex-wrap:wrap">${Array.from({length: max + 1}, (_, n) => `<button class="chip" data-opn="${n}" aria-pressed="${cur === n}">${n ? t("spots" + n) : t("opNone")}</button>`).join("")}</div>
+      ${cur > 0 && myLevel() != null ? `<div class="chips" style="flex-wrap:wrap">${[["any", t("anyLvl")], ["0.5", `${t("aroundMe")} ±0.5`], ["1", `${t("aroundMe")} ±1`]].map(([k, l]) => `<button class="chip" data-opr="${k}" aria-pressed="${rng === k}">${esc(l)}</button>`).join("")}</div>` : ""}
+      <button class="cta blue sm" data-opsave="${m.id}" style="align-self:flex-start">${t("opSave")}</button></div>`;
+  }
+  if (started && m.kind !== "lesson" && m.status !== "cancelled" && m.players.length > 1){
+    const days = nextDays(7), day = S.rmDay || days[Math.min(6, days.length - 1)];
+    const base = hhmmOf(d), shifts = [-60, -30, 0, 30, 60];
+    const tm = s => { const x = addMin(at(day, base), s); return x; };
+    h += `<div class="card rmcard"><b>🔁 ${t("rmT")}</b><span class="note">${t("rmTxt")}</span>
+      <b class="snh">${t("rmDay")}</b><div class="chips" style="flex-wrap:wrap">${days.map(x => `<button class="chip" data-rmday="${x}" aria-pressed="${day === x}">${esc(fmtDay(at(x, "12:00")))}</button>`).join("")}</div>
+      <b class="snh">${t("rmTime")}</b><div class="chips" style="flex-wrap:wrap">${shifts.map(s => `<button class="chip" data-rmshift="${s}" aria-pressed="${S.rmShift === s}">${esc(fmtTime(tm(s)))}</button>`).join("")}</div>
+      <button class="cta gold wide" data-rmbook="${m.id}"${S.busyOp ? " disabled" : ""}>${S.busyOp ? "…" : `${t("rmBook")} · ${esc(fmtDay(at(day, "12:00")))} ${esc(fmtTime(tm(S.rmShift)))}`}</button></div>`;
+  }
+  return h;
+}
+
+/* club page posts */
+function clubPostsHtml(){ const ps = (S.clubPosts || []).slice(0, 3); if (!ps.length) return "";
+  return `<h2>📣 ${t("psT")}</h2>${ps.map(p => `<div class="card fd post"><div class="between"><span class="note">${esc(ago(p.at))}</span></div><p>${esc(p.body)}</p>${p.photo ? `<img class="fdpic" src="${esc(p.photo)}" alt="" loading="lazy">` : ""}</div>`).join("")}`; }
+
+/* manager: today card + posts tab */
+function todayCard(club){ const d = S.today; if (!d || d.club_id !== club.id || S.mDay !== nextDays(1)[0]) return "";
+  return `<div class="card tdcard"><div class="between"><b>☀️ ${t("tdT")}</b><span class="note">${t("tdFree")}: <b>${d.free}</b></span></div>
+    ${+d.mem ? `<button class="sbtn" data-mtab="mem">★ ${t("tdMem")}: ${d.mem} →</button>` : ""}
+    ${+d.deal ? `<span class="dealtag">🔥 ${tf("tdDealOn", {p: d.deal})}</span>` : +d.free >= 2 ? `<button class="cta blue sm" data-mtab="set" style="align-self:flex-start">🔥 ${t("tdDeal")}</button>` : ""}</div>`; }
+function mgrPosts(club){
+  return `<div class="card psform"><b>📣 ${t("psNew")}</b><textarea id="ps-body" maxlength="600" rows="4" placeholder="${t("psPh")}">${esc(S.psBody)}</textarea>
+    <label class="fld"><span>${t("psPhoto")}</span><input id="ps-photo" type="file" accept="image/*"></label>${S.psPhoto ? `<img class="fdpic" src="${S.psPhoto}" alt="">` : ""}
+    <button class="cta blue" data-psend="${club.id}"${S.busyOp ? " disabled" : ""}>${S.busyOp ? "…" : t("psSend")}</button></div>
+   ${(S.mPosts || []).map(p => `<div class="card fd post"><div class="between"><span class="note">${esc(fmtDay(new Date(p.at)))} · ${esc(ago(p.at))}</span><button class="sbtn" data-psdel="${p.id}" aria-label="${t("snDel")}">✕</button></div><p>${esc(p.body)}</p>${p.photo ? `<img class="fdpic" src="${esc(p.photo)}" alt="">` : ""}</div>`).join("") || `<div class="card note">${t("psNone")}</div>`}`; }
+async function loadToday(){ if (!S.mClub) return; try { const r = await sb.rpc("club_today", {p_club: S.mClub}); S.today = r.error ? null : r.data; } catch (e) { S.today = null; } }
+
+app.addEventListener("click", async e => {
+  const b = e.target.closest("button"); if (!b) return; const d = b.dataset;
+  if (d.alert){ const on = d.alert === "1"; const r = await sb.rpc("set_open_alerts", {p_on: on}); if (r.error){ toast(errMsg(r.error)); return; } if (S.profile) S.profile.alert_open = on; toast(t("saved")); render(); return; }
+  if (d.opn != null){ S.opSpots = +d.opn; render(); return; }
+  if (d.opr){ S.opRange = d.opr; render(); return; }
+  if (d.opsave){ const n = S.opSpots != null ? S.opSpots : S.match.open_spots, lv = myLevel(), rg = S.opRange;
+    const lmin = n && rg !== "any" && lv != null ? Math.max(0.5, +(lv - +rg).toFixed(2)) : null, lmax = n && rg !== "any" && lv != null ? Math.min(7, +(lv + +rg).toFixed(2)) : null;
+    const r = await sb.rpc("match_set_open", {p_booking: d.opsave, p_spots: n, p_lmin: lmin, p_lmax: lmax}); if (r.error){ toast(errMsg(r.error)); return; }
+    toast(n ? "✓ " + t("opSaved") : t("saved")); S.opSpots = null; await loadMatch(d.opsave); render(); return; }
+  if (d.mjoin){ if (!S.user){ go("auth"); return; } const r = await sb.rpc("join_match", {p_booking: d.mjoin}); if (r.error){ toast(errMsg(r.error)); return; } toast("✓ " + t("joined")); await loadMatch(d.mjoin); render(); return; }
+  if (d.rmday){ S.rmDay = d.rmday; render(); return; }
+  if (d.rmshift != null){ S.rmShift = +d.rmshift; render(); return; }
+  if (d.rmbook){ const m = S.match; const days = nextDays(7), day = S.rmDay || days[days.length - 1];
+    const start = addMin(at(day, hhmmOf(new Date(m.starts_at))), S.rmShift || 0);
+    S.busyOp = true; render(); const r = await sb.rpc("rematch", {p_booking: d.rmbook, p_start: start.toISOString()}); S.busyOp = false;
+    if (r.error){ toast(errMsg(r.error)); render(); return; } toast("✓ " + t("rmDone")); S.rmDay = null; S.rmShift = 0; S.matchId = r.data; await afterAuth(true); go("match"); return; }
+  if (d.psend){ const body = (document.getElementById("ps-body") || {}).value || ""; S.psBody = body; S.busyOp = true; render();
+    const r = await sb.rpc("staff_post", {p_club: d.psend, p_body: body, p_photo: S.psPhoto}); S.busyOp = false;
+    if (r.error){ toast(errMsg(r.error)); render(); return; } toast("✓ " + t("psSent")); S.psBody = ""; S.psPhoto = null; await loadMgrPosts(); render(); return; }
+  if (d.psdel){ if (!confirm(t("psDelQ"))) return; const r = await sb.rpc("staff_post_delete", {p_id: +d.psdel}); if (r.error){ toast(errMsg(r.error)); return; } await loadMgrPosts(); render(); return; }
+});
+app.addEventListener("change", async e => { const el = e.target;
+  if (el.id === "ps-photo" && el.files && el.files[0]){ S.psBody = (document.getElementById("ps-body") || {}).value || S.psBody; try { S.psPhoto = await shrinkPhoto(el.files[0]); render(); } catch (x) { toast("Could not read that photo."); } }
+});
+app.addEventListener("input", e => { if (e.target.id === "ps-body") S.psBody = e.target.value; });
+async function loadMgrPosts(){ if (!S.mClub) return; const r = await sb.rpc("club_posts_list", {p_club: S.mClub}); S.mPosts = r.data || []; }
+async function loadClubPosts(){ if (!S.club) return; try { const r = await sb.rpc("club_posts_list", {p_club: S.club.id}); S.clubPosts = r.error ? [] : r.data || []; } catch (e) { S.clubPosts = []; } }
 
 render();
 boot();
