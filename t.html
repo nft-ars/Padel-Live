@@ -20,7 +20,62 @@
 .su-btns{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
 .su-badt{color:#C0392B}
 .su-note{font-style:italic;font-size:13px}
-.su-inv{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:2px 0}.su-inv .su-ok{word-break:break-all}.su-step{font-weight:800;font-size:14px;margin:0;color:var(--accent,var(--ink))}.ghostl{background:none;border:0;text-decoration:underline;align-self:flex-start;padding:4px 0}</style><style>/* ===== referee + TV + organizer tools (uses each theme's colours) ===== */
+.su-inv{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:2px 0}.su-inv .su-ok{word-break:break-all}.su-step{font-weight:800;font-size:14px;margin:0;color:var(--accent,var(--ink))}.ghostl{background:none;border:0;text-decoration:underline;align-self:flex-start;padding:4px 0}.tv-courts.many .tv-cin{padding:1.6vh 1.6vw;gap:.6vh}.tv-courts.many .tv-ch h3{font-size:3.4vh}.tv-courts.many .tv-tagline{min-height:3vh}.tv-courts.many .tv-tagline .tag{font-size:1.7vh}.tv-courts.many .tv-row{padding:.7vh 0}.tv-courts.many .tv-tm{font-size:4.2vh}.tv-courts.many .tv-s,.tv-courts.many .tv-g,.tv-courts.many .tv-p{height:7vh;font-size:5vh;min-width:8vh;border-radius:1.4vh}.tv-courts.many .tv-s{font-size:3.6vh;min-width:6vh}.tv-courts.many .tv-p{min-width:10vh}.tv-courts.many .tv-rows{gap:0}.tv-courts.many .tv-sets{font-size:1.9vh}.tv-courts.many .is-live .tv-next{display:none}
+/* ===== TV club skin ===== */
+.tv.sk{--glow:var(--tv-b);background:var(--tv-deep)}
+.tv.sk .tv-bg{background:linear-gradient(180deg,color-mix(in srgb,var(--tv-deep) 40%,transparent) 0%,color-mix(in srgb,var(--tv-deep) 72%,transparent) 38%,color-mix(in srgb,var(--tv-deep) 93%,transparent) 70%,var(--tv-deep) 100%),radial-gradient(90% 70% at 85% 0%,color-mix(in srgb,var(--tv-a) 55%,transparent),transparent 70%)}
+.tv.sk .tv-bg i{opacity:.35}
+.tv.sk::after{opacity:.6}
+.tv-stripes{position:absolute!important;z-index:0!important;top:-4vh;right:-6vw;width:58vw;height:30vh;pointer-events:none;background:repeating-linear-gradient(115deg,var(--tv-a) 0 1.6vw,transparent 1.6vw 2.6vw,var(--tv-b) 2.6vw 3vw,transparent 3vw 5.2vw);opacity:.22;-webkit-mask-image:linear-gradient(200deg,#000 10%,transparent 70%);mask-image:linear-gradient(200deg,#000 10%,transparent 70%)}
+.tv-wm{position:absolute!important;z-index:0!important;right:-6vh;bottom:4vh;width:62vh;height:62vh;opacity:.05;pointer-events:none;filter:grayscale(1) brightness(2)}
+.tv-wm img{width:100%;height:100%;object-fit:contain}
+.tv.sk .tv-top{padding:.8vh 1.4vw;border-radius:2.6vh;background:linear-gradient(100deg,color-mix(in srgb,var(--tv-a) 70%,transparent) 0%,color-mix(in srgb,var(--tv-a) 22%,transparent) 55%,rgba(0,0,0,.25));border:.2vh solid color-mix(in srgb,var(--tv-b) 40%,transparent);box-shadow:0 1.4vh 4vh rgba(0,0,0,.35),inset 0 .2vh 0 rgba(255,255,255,.12);backdrop-filter:blur(1.2vh)}
+.tv.sk .tv-top img{background:#fff;box-shadow:0 0 0 .45vh var(--tv-b),0 0 0 .9vh color-mix(in srgb,var(--tv-a) 80%,transparent),0 0 4vh color-mix(in srgb,var(--tv-b) 45%,transparent)}
+.tv.sk .tv-title em{color:var(--tv-b)}
+.tv.sk .tv-clock{min-width:auto;padding:.4vh 1.4vw;border-radius:1.6vh;background:rgba(0,0,0,.35);border:.2vh solid color-mix(in srgb,var(--tv-b) 35%,transparent);font-size:5.6vh}
+.tv.sk .tv-h{display:flex;align-items:center;gap:1vw;font-style:normal}
+.tv.sk .tv-h span{display:inline-block;padding:.2vh 1.2vw .4vh;background:var(--tv-b);color:var(--tv-deep);text-shadow:none;transform:skewX(-12deg);border-radius:.6vh;box-shadow:.8vh .8vh 0 var(--tv-a)}
+.tv.sk .tv-h::after{content:"";flex:1;height:.4vh;border-radius:99px;background:linear-gradient(90deg,color-mix(in srgb,var(--tv-b) 70%,transparent),transparent)}
+.tv.sk .tv-cin,.tv.sk .tv-card,.tv.sk .tv-grp,.tv.sk .tv-r,.tv.sk .tv-sp{background:linear-gradient(160deg,color-mix(in srgb,var(--tv-a) 30%,rgba(10,14,24,.78)),rgba(6,9,16,.82) 75%);backdrop-filter:blur(1vh);box-shadow:inset 0 .2vh 0 rgba(255,255,255,.1),0 1.2vh 3vh rgba(0,0,0,.35)}
+.tv.sk .tv-court{background:color-mix(in srgb,var(--tv-a) 45%,rgba(255,255,255,.06))}
+.tv.sk .tv-court.is-live{background:conic-gradient(from var(--spin),var(--tv-b),transparent 25%,var(--tv-a) 50%,transparent 75%,var(--tv-b))}
+.tv.sk .tv-p{background:var(--tv-b);color:var(--tv-deep)}
+.tv.sk .tv-g{background:color-mix(in srgb,var(--tv-a) 55%,rgba(255,255,255,.1))}
+.tv.sk .tv-bar i{background:linear-gradient(90deg,var(--tv-a),var(--tv-b))}
+.tv.sk .tv-tick{background:linear-gradient(90deg,var(--tv-a),color-mix(in srgb,var(--tv-a) 75%,#000));color:#fff;position:relative}
+.tv.sk .tk{border-right-color:rgba(255,255,255,.18)}
+.tv.sk .tk b{color:var(--tv-b)}
+.tv.sk .tk.note{background:var(--tv-b);color:var(--tv-deep)}
+.tv-tick-lb{position:relative;z-index:2;flex-shrink:0;height:100%;display:flex;align-items:center;gap:.8vw;padding:0 2vw 0 3vw;background:var(--tv-b,var(--glow));color:var(--tv-deep,#10201A);clip-path:polygon(0 0,100% 0,calc(100% - 2.4vh) 100%,0 100%);box-shadow:1vh 0 2vh rgba(0,0,0,.4)}
+.tv-tick-lb img{height:4.6vh;width:4.6vh;border-radius:50%;background:#fff;object-fit:cover}
+.tv-tick-lb b{font:900 3vh var(--display);letter-spacing:.14em;text-transform:uppercase;font-style:italic}
+.tv.sk .tv-main.enter>*{animation-delay:.42s}
+.tv.sk .tv-main.enter>*:nth-child(2){animation-delay:.52s}
+.tv-sting{position:absolute!important;inset:0;z-index:8!important;pointer-events:none;overflow:hidden}
+.tv-sting i{position:absolute;top:-20vh;bottom:-20vh;left:0;transform:translateX(-170vw) skewX(-18deg)}
+.tv-sting i.s3{width:160vw;background:var(--tv-deep)}
+.tv-sting i.s2{width:34vw;background:var(--tv-a);box-shadow:0 0 6vh rgba(0,0,0,.4)}
+.tv-sting i.s1{width:10vw;background:var(--tv-b);box-shadow:0 0 6vh color-mix(in srgb,var(--tv-b) 60%,transparent)}
+.tv-sting span{position:absolute;z-index:3;left:50%;top:50%;width:26vh;height:26vh;margin:-13vh 0 0 -13vh;opacity:0;border-radius:50%;box-shadow:0 0 0 1vh var(--tv-b),0 0 0 2vh var(--tv-a),0 0 10vh color-mix(in srgb,var(--tv-b) 60%,transparent)}
+.tv-sting span:empty{display:none}
+.tv-sting span img{width:100%;height:100%;border-radius:50%;background:#fff;object-fit:cover}
+.tv-sting.go i.s3{animation:sw3 1.25s cubic-bezier(.75,0,.25,1) both}
+.tv-sting.go i.s2{animation:sw2 1.25s cubic-bezier(.75,0,.25,1) both}
+.tv-sting.go i.s1{animation:sw1 1.25s cubic-bezier(.75,0,.25,1) both}
+.tv-sting.go span{animation:swl 1.25s ease both}
+@keyframes sw3{0%{transform:translateX(-175vw) skewX(-18deg)}42%,58%{transform:translateX(-30vw) skewX(-18deg)}100%{transform:translateX(120vw) skewX(-18deg)}}
+@keyframes sw2{0%{transform:translateX(-60vw) skewX(-18deg)}42%,58%{transform:translateX(60vw) skewX(-18deg)}100%{transform:translateX(170vw) skewX(-18deg)}}
+@keyframes sw1{0%{transform:translateX(-40vw) skewX(-18deg)}42%,58%{transform:translateX(92vw) skewX(-18deg)}100%{transform:translateX(190vw) skewX(-18deg)}}
+@keyframes swl{0%,22%{opacity:0;transform:scale(.6) rotate(-20deg)}42%,62%{opacity:1;transform:scale(1) rotate(0)}85%,100%{opacity:0;transform:scale(1.15)}}
+
+.tv-scene{position:absolute!important;z-index:0!important;top:0;left:0;right:0;height:78vh;pointer-events:none;-webkit-mask-image:linear-gradient(180deg,#000 0%,#000 48%,rgba(0,0,0,.35) 78%,transparent 100%);mask-image:linear-gradient(180deg,#000 0%,#000 55%,rgba(0,0,0,.4) 80%,transparent 100%)}
+.tv-scene .scene,.tv-scene .scene.lscene{display:block;width:100%!important;height:100%!important;object-fit:cover;object-position:center 72%}
+.tv-scene::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.18) 30%,color-mix(in srgb,var(--tv-deep) 55%,transparent) 75%,var(--tv-deep) 100%)}
+.tv.sk .tv-stripes{opacity:.12}
+.tv.sk .tv-top{background:linear-gradient(100deg,color-mix(in srgb,var(--tv-a) 78%,transparent) 0%,color-mix(in srgb,var(--tv-deep) 55%,transparent) 60%,color-mix(in srgb,var(--tv-deep) 65%,transparent))}
+.tv.sk .tv-h{text-shadow:0 .4vh 2vh rgba(0,0,0,.8);align-self:flex-start;padding:.6vh 2vw .6vh .4vw;border-radius:1.4vh;background:linear-gradient(90deg,color-mix(in srgb,var(--tv-deep) 85%,transparent),color-mix(in srgb,var(--tv-deep) 60%,transparent));backdrop-filter:blur(.8vh)}.tv.sk .tv-h::after{display:none}
+.tv.sk .tv-cin,.tv.sk .tv-card,.tv.sk .tv-grp,.tv.sk .tv-r,.tv.sk .tv-sp{background:linear-gradient(160deg,color-mix(in srgb,var(--tv-a) 32%,rgba(8,12,22,.72)),rgba(5,8,14,.8) 75%)}
+</style><style>/* ===== referee + TV + organizer tools (uses each theme's colours) ===== */
 .mini-live{margin-top:6px;font:800 13px/1.2 var(--display);letter-spacing:.04em;color:var(--warn)}
 .org-tools{display:flex;flex-direction:column;gap:12px}
 .org-row{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap;justify-content:space-between}
@@ -2360,6 +2415,7 @@ var SUPABASE_URL = "https://ebrlwfmkbwlbytslfvdn.supabase.co", SUPABASE_KEY = "s
 function startT(CFG, S0, VER0, SLUG, TNAME, sb, EDITV0){
 try { CFG = JSON.parse(JSON.stringify(CFG).replace(/\bPrize\b(?! [Pp]ool)/g, "Prize Pool").replace(/\bprize\b(?! pool)/g, "prize pool").replace(/\bPRIZE\b(?! POOL)/g, "PRIZE POOL")); } catch (e) {}
 const THEME = ["movara","night","trio","ace","lets"].includes(CFG.theme) ? CFG.theme : "core";
+if (!CFG.club_logo && THEME === "core" && /core/i.test(String(CFG.venue || CFG.club || CFG.subtitle || CFG.tagline || TNAME || ""))) CFG.club_logo = "core-logo.png";
 document.getElementById("th-" + THEME).media = "all";
 
 "use strict";
@@ -3059,27 +3115,37 @@ function tvEvents(all){
   TVS.prev = JSON.parse(JSON.stringify(pts));
   if (out.length) tvBurst(out[0][0], out[0][1]);
 }
+const TVSKIN = {
+  trio:   { a: "#2457E0", b: "#C6DB2F", deep: "#030A24", cover: "trio-cover.jpg" },
+  ace:    { a: "#3B4254", b: "#E4E95C", deep: "#06070B", cover: "ace-cover.jpg" },
+  lets:   { a: "#1E44E0", b: "#C9F23E", deep: "#02130B", cover: "lets-cover.jpg" },
+  core:   { a: "#2F6B55", b: "#D9B85C", deep: "#020F0A", cover: "core-cover.jpg" },
+  night:  { a: "#2E3577", b: "#35D0BA", deep: "#060821" },
+  movara: { a: "#2E3577", b: "#35D0BA", deep: "#060821" } };
 function renderTV(){
   document.body.classList.add("tvmode");
   const app = document.getElementById("app");
   if (!document.getElementById("tv-root")){
-    app.innerHTML = `<div class="tv" id="tv-root"><div class="tv-bg"><i></i><i></i><i></i></div>
+    const SK = TVSKIN[THEME] || TVSKIN.core, lg = CFG.club_logo ? `<img src="${CFG.club_logo}" alt="">` : "";
+    app.innerHTML = `<div class="tv sk" id="tv-root" style="--tv-a:${SK.a};--tv-b:${SK.b};--tv-deep:${SK.deep};${SK.cover ? `--tv-cover:url('${SK.cover}');` : ""}"><div class="tv-bg"><i></i><i></i><i></i></div><div class="tv-scene">${THEME === "trio" ? TSCENE : THEME === "ace" ? ASCENE : THEME === "lets" ? LSCENE : SCENE}</div><div class="tv-stripes"></div>${lg ? `<div class="tv-wm">${lg}</div>` : ""}
+      <div class="tv-sting" id="tv-sting"><i class="s3"></i><i class="s2"></i><i class="s1"></i><span>${lg}</span></div>
       <header class="tv-top">${CFG.club_logo ? `<img src="${CFG.club_logo}" alt="">` : ""}<div class="tv-title">${CFG.title_html || esc(TNAME)}<span>${esc(CFG.tagline || CFG.subtitle || "")}</span></div><div class="tv-live-badge"><span class="tv-dot"></span>Live</div><div class="tv-clock" id="tv-clock"></div></header>
       <section class="tv-main" id="tv-main"></section>
       <div class="tv-bar"><i id="tv-prog"></i></div>
-      <footer class="tv-tick"><div class="tv-tick-in" id="tv-tick"></div></footer>
+      <footer class="tv-tick"><div class="tv-tick-lb">${lg}<b>Live</b></div><div class="tv-tick-in" id="tv-tick"></div></footer>
       <div id="tv-burst" class="tv-burst"></div></div>`;
     TVS.prev = JSON.parse(JSON.stringify(cur().pts || {}));
   }
   const all = allMatches(), panels = tvPanels(); if (TVS.i >= panels.length) TVS.i = 0;
   const p = panels[TVS.i];
-  const html = p.id === "courts" ? `<h2 class="tv-h"><span>On</span> court</h2><div class="tv-courts">${COURTS.map(c => tvCourt(all, c)).join("")}</div>`
+  const html = p.id === "courts" ? `<h2 class="tv-h"><span>On</span> court</h2><div class="tv-courts${COURTS.length > 2 ? " many" : ""}">${COURTS.map(c => tvCourt(all, c)).join("")}</div>`
     : p.id === "next" ? tvNext(all) : p.id === "results" ? tvResults(all) : p.id === "sponsors" ? tvSponsors() : tvGroups(p.id.slice(4));
   const main = document.getElementById("tv-main"), fresh = TVS.last !== p.id;
   const before = {}; main.querySelectorAll("[data-k]").forEach(e => before[e.dataset.k] = e.textContent);
   if (fresh || main.dataset.h !== html){
     main.innerHTML = html; main.dataset.h = html;
-    if (fresh){ main.classList.remove("enter"); void main.offsetWidth; main.classList.add("enter"); }
+    if (fresh){ main.classList.remove("enter"); void main.offsetWidth; main.classList.add("enter");
+      if (TVS.last){ const st = document.getElementById("tv-sting"); if (st){ st.classList.remove("go"); void st.offsetWidth; st.classList.add("go"); } } }
     else main.querySelectorAll("[data-k]").forEach(e => { if (before[e.dataset.k] != null && before[e.dataset.k] !== e.textContent) e.classList.add("pop"); });
   }
   if (fresh){ const pr = document.getElementById("tv-prog"); pr.style.animation = "none"; void pr.offsetWidth; pr.style.animation = `tvprog ${p.dur}ms linear forwards`;

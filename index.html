@@ -941,7 +941,7 @@ details.lrules{border:2px solid #E8C96A;background:linear-gradient(160deg,color-
 .bd .rar{display:block;font-size:9.5px;font-weight:700;opacity:.75;margin-top:1px}
 
 /* ===== game-style player card ===== */
-.gcard-wrap{perspective:900px;padding:8px 0 2px}
+.gcard-wrap{--rx:0deg;--ry:0deg;--px:0;--py:0;--mx:50%;perspective:1000px;padding:8px 0 18px;position:relative}
 .pcard.gc{--rx:0deg;--ry:0deg;--mx:50%;--cut:22px;transform:rotate(-2deg) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .25s ease-out;border-radius:0;padding:4px;
   clip-path:polygon(var(--cut) 0,calc(100% - var(--cut)) 0,100% var(--cut),100% calc(100% - 46px),50% 100%,0 calc(100% - 46px),0 var(--cut));
   background:conic-gradient(from 200deg,#fff8,var(--tc),#0008,var(--tc),#fff8,var(--tc));filter:drop-shadow(0 0 16px color-mix(in srgb,var(--tc) 55%,transparent)) drop-shadow(0 16px 22px rgba(0,0,0,.45));box-shadow:none}
@@ -1065,6 +1065,56 @@ details.lrules{border:2px solid #E8C96A;background:linear-gradient(160deg,color-
 .tj{display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center}
 
 .tj-lv{display:flex;flex-direction:column;gap:4px;padding:12px 14px;border-radius:14px;background:color-mix(in srgb,var(--ok,#2E9E5B) 14%,transparent);margin:4px 0 10px}.tj-lv b{color:var(--ok,#2E9E5B);font-size:15px}.tj-lv span{font-size:13px;color:var(--mute,#667)}
+
+/* ===== 3D player card ===== */
+.g3d-f{transform-style:preserve-3d;animation:g3dfloat 6s ease-in-out infinite}
+.gcard-wrap.held .g3d-f,.gcard-wrap.gyro .g3d-f{animation-play-state:paused}
+@keyframes g3dfloat{0%,100%{transform:translateY(0) rotateY(-7deg) rotateX(3deg)}50%{transform:translateY(-6px) rotateY(7deg) rotateX(-2deg)}}
+.g3d{position:relative;transform-style:preserve-3d;transform:rotate(-2deg) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .18s ease-out;--cut:22px}
+.gcard-wrap.gyro .g3d{transition:transform .08s linear}
+.g3d .pcard.gc{transform:translateZ(1px);transition:none}
+.g3d-e{position:absolute;inset:0;pointer-events:none;transform:translateZ(calc(var(--z) * -1.25px));
+  clip-path:polygon(var(--cut) 0,calc(100% - var(--cut)) 0,100% var(--cut),100% calc(100% - 46px),50% 100%,0 calc(100% - 46px),0 var(--cut));
+  background:linear-gradient(90deg,color-mix(in srgb,var(--tc) 70%,#fff 10%),color-mix(in srgb,var(--tc) 35%,#000) 50%,color-mix(in srgb,var(--tc) 70%,#fff 10%))}
+.g3d-e[style*="--z:6"]{filter:drop-shadow(0 0 10px color-mix(in srgb,var(--tc) 40%,transparent))}
+.g3d .gc-avw{translate:calc(var(--px) * -7px) calc(var(--py) * -6px)}
+.g3d .pc-ovr,.g3d .pc-rank{translate:calc(var(--px) * 5px) calc(var(--py) * 4px)}
+.g3d .pc-name{translate:calc(var(--px) * -3px) calc(var(--py) * -2px)}
+.g3d .pc-holo{background-position:calc(50% + var(--px) * 60%) 0,calc(50% + var(--px) * 90%) 0!important}
+.g3d-sh{position:absolute;left:18%;right:18%;bottom:0;height:26px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,color-mix(in srgb,var(--tc) 45%,rgba(0,0,0,.55)),transparent);filter:blur(4px);
+  translate:calc(var(--px) * -14px) 0;animation:g3dsh 6s ease-in-out infinite}
+.gcard-wrap.held .g3d-sh,.gcard-wrap.gyro .g3d-sh{animation-play-state:paused}
+@keyframes g3dsh{0%,100%{transform:scaleX(1);opacity:.9}50%{transform:scaleX(.86);opacity:.6}}
+@media (prefers-reduced-motion:reduce){.g3d-f,.g3d-sh{animation:none}}
+
+/* ===== club cards: 3D pop-out ===== */
+.cpop{position:relative;margin:40px 4px 18px;border-radius:24px;padding:96px 0 12px;color:#fff;
+  background:linear-gradient(155deg,var(--a) 0%,color-mix(in srgb,var(--a) 45%,var(--d)) 55%,var(--d) 100%);
+  box-shadow:0 22px 30px -16px color-mix(in srgb,var(--a) 70%,#000),inset 0 1px 0 rgba(255,255,255,.22)}
+.cpop.fhit{box-shadow:0 0 0 3px var(--b),0 22px 30px -16px color-mix(in srgb,var(--a) 70%,#000)}
+.cpop .cp-win{position:absolute;left:10px;right:10px;top:-30px;height:120px;padding:0;border:0;border-radius:18px;overflow:hidden;cursor:pointer;
+  background:var(--d);box-shadow:0 0 0 3px var(--b),0 16px 22px -6px rgba(0,0,0,.55);
+  transform:perspective(700px) rotateX(9deg) translateY(4px) scale(.97);transform-origin:bottom;transition:transform .7s cubic-bezier(.2,.9,.25,1.2)}
+.cpop.up .cp-win{transform:perspective(700px) rotateX(0deg) translateY(-6px) scale(1)}
+.cpop .cp-win>img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 70%}
+.cp-fb{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 40%,var(--a),var(--d))}
+.cp-fb img{width:84px;height:84px;border-radius:50%;background:#fff;object-fit:cover;box-shadow:0 0 0 3px var(--b)}
+.cp-fb b{font:900 italic 40px var(--disp);color:var(--b)}
+.cp-deal{position:absolute;left:10px;top:10px;font:800 12px var(--body);padding:5px 9px;border-radius:99px;background:#E5484D;color:#fff}
+.cpop .cp-bd{display:flex;flex-direction:column;gap:3px;width:100%;text-align:start;background:none;border:0;color:inherit;padding:0 16px;position:relative;cursor:pointer}
+.cp-lg{position:absolute;right:-8px;top:-150px;width:58px;height:58px;border-radius:50%;background:#fff;object-fit:cover;box-shadow:0 0 0 3px var(--b),0 8px 16px rgba(0,0,0,.4);z-index:3;transition:transform .7s cubic-bezier(.2,.9,.25,1.2);transform:translateY(4px) scale(.94)}.cpop.up .cp-lg{transform:translateY(-6px) scale(1)}
+.cp-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.cp-h b{font:900 italic 22px/1.05 var(--disp);text-transform:uppercase;letter-spacing:.01em}
+.cp-h small{font:800 14px var(--body);color:var(--b);white-space:nowrap}.cp-h small i{font-style:normal;opacity:.75;font-weight:600}
+.cp-m{font:600 12px var(--body);opacity:.82}.cp-dl{color:var(--b);opacity:1}
+.cp-t{display:flex;flex-wrap:wrap;gap:6px;padding:10px 16px 0}
+.cp-t button{font:800 13px var(--body);padding:8px 13px;border-radius:99px;border:0;background:rgba(255,255,255,.14);color:#fff;cursor:pointer}
+.cp-t button.on{background:var(--b);color:var(--d)}
+.cp-t button.mo{background:transparent;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.35)}
+.cp-t .fst{color:#fff;opacity:.85;font-size:13px}.cp-t .fst.off{opacity:.7}
+.cp-why{padding:6px 16px 0;font-size:12px}.cp-why .fst{color:#fff;opacity:.8}
+@media (prefers-reduced-motion:reduce){.cpop .cp-win{transition:none}}
 </style>
 </head>
 <body>
@@ -1176,7 +1226,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v32";
+const VERSION = "v37";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -1294,10 +1344,15 @@ V.clubs = () => { const areas = [...new Set(S.clubs.map(c => c.area).filter(Bool
   ${areas.length > 1 ? `<div class="chips">${[["", t("areaAll")]].concat(areas.map(a => [a, a])).map(([k, l]) => `<button class="chip" data-area="${esc(k)}" aria-pressed="${S.area === k}">${esc(l)}</button>`).join("")}</div>` : ""}
   ${S.fTime && !anyFree && list.length ? `<div class="notice">${tf("fNoneAll", {t: esc(fmtTime(findTimes().find(([k]) => k === S.fTime)?.[1] || new Date()).replace(/:00/, ""))})}</div>` : ""}
   ${list.map(({c, st}) => { const min = Math.min(...S.prices.filter(p => p.club_id === c.id && p.price != null && p.minutes === 60).map(p => +p.price));
-   const n = S.courts.filter(x => x.club_id === c.id).length;
-   const go = st.slot && st.court ? `${c.id}|${st.court}|${st.slot.iso}` : "";
-   return `<div class="card club${st.rank === 0 ? " fhit" : ""}"><button class="clubtap" data-club="${c.id}"><div class="pic">${clubPic(c)}</div><div class="bd"><div class="between"><h2>${esc(c.name)}</h2>${isFinite(min) ? `<span><b>${t("from")} $${min}</b><span class="note">${t("hr")}</span></span>` : ""}</div><span class="note">${esc([c.area, c.city].filter(Boolean).join(", "))} · ${n} ${n === 1 ? "court" : "courts"} · ${esc(c.opens.slice(0,5))}–${esc(c.closes.slice(0,5))}</span>${+c.deal_pct ? `<span class="dealtag">🔥 ${tf("dealTxt", {p: c.deal_pct, h: c.deal_hours})}</span>` : ""}</div></button>
-    <div class="fline">${st.html}${go ? `<button class="cta ${st.rank === 0 ? "blue" : "ghost"} sm" data-fgo="${go}">${t("fBookIt")} ${esc(fmtTime(st.slot.d).replace(/:00/, ""))} →</button>` : ""}</div></div>`; }).join("") || `<div class="card note">No clubs yet.</div>`}
+   const n = S.courts.filter(x => x.club_id === c.id).length, k = clubSkin(c), ph = clubCover(c);
+   const r = clubFree(c, S.fDay, S.fDur), open = (r.list || []).filter(x => x.courts.length), from = S.fTime ? after(c, S.fTime) : -1;
+   const pool = S.fTime ? open.filter(x => x.m >= from).concat(open.filter(x => x.m < from)) : open, chips = pool.slice(0, 3), more = pool.length - chips.length;
+   return `<div class="cpop${st.rank === 0 ? " fhit" : ""}" style="--a:${k.a};--b:${k.b};--d:${k.d}">
+    <button class="cp-win" data-club="${c.id}" aria-label="${esc(c.name)}">${ph ? `<img src="${esc(ph)}" alt="" loading="lazy">` : `<span class="cp-fb">${k.logo ? `<img src="${esc(k.logo)}" alt="" onerror="this.remove()">` : `<b>${esc(initials(c.name))}</b>`}</span>`}${+c.deal_pct ? `<span class="cp-deal">🔥 -${+c.deal_pct}%</span>` : ""}</button>
+    <button class="cp-bd" data-club="${c.id}">${ph && k.logo ? `<img class="cp-lg" src="${esc(k.logo)}" alt="" onerror="this.remove()">` : ""}<span class="cp-h"><b>${esc(c.name)}</b>${isFinite(min) ? `<small>$${min}<i>/${t("hr").replace(/^\/\s*/, "")}</i></small>` : ""}</span>
+     <span class="cp-m">${esc([c.area, c.city].filter(Boolean).join(", "))} · ${n} ${n === 1 ? "court" : "courts"} · ${esc(c.opens.slice(0,5))}–${esc(c.closes.slice(0,5))}</span>${+c.deal_pct ? `<span class="cp-m cp-dl">🔥 ${tf("dealTxt", {p: c.deal_pct, h: c.deal_hours})}</span>` : ""}</button>
+    <div class="cp-t">${chips.length ? chips.map((x, i) => `<button class="${(S.fTime ? hm(x.d) === S.fTime : i === 0) ? "on" : ""}" data-fgo="${c.id}|${x.courts[0]}|${x.iso}">${esc(fmtTime(x.d).replace(/:00/, ""))}${x.deal ? " 🔥" : ""}</button>`).join("") + (more > 0 ? `<button class="mo" data-club="${c.id}">+${more}</button>` : "") : st.html}</div>
+    ${S.fTime && chips.length && st.rank !== 0 ? `<div class="cp-why">${st.html}</div>` : ""}</div>`; }).join("") || `<div class="card note">No clubs yet.</div>`}
   <div class="card note" style="text-align:center">More clubs coming. Club owners can list their courts for free.</div>
  </main>${nav("clubs")}`; };
 
@@ -1602,6 +1657,12 @@ function shrinkPhoto(file){ return new Promise((ok, no) => { const fr = new File
   const s = Math.min(1, 900 / Math.max(im.width, im.height)), c = document.createElement("canvas"); c.width = Math.round(im.width * s); c.height = Math.round(im.height * s);
   c.getContext("2d").drawImage(im, 0, 0, c.width, c.height); ok(c.toDataURL("image/jpeg", 0.72)); }; im.src = fr.result; }; fr.readAsDataURL(file); }); }
 const clubCover = c => /let.?s.?\s*padel/i.test(c.name || "") ? "lets-cover.jpg" : /ace\s*padel/i.test(c.name || "") ? "ace-cover.jpg" : /trio/i.test(c.name || "") ? "trio-cover.jpg" : /core/i.test(c.name || "") ? "core-cover.jpg" : (c.photo || "");
+function clubSkin(c){ const n = c.name || "";
+  if (/trio/i.test(n)) return {a: "#2457E0", b: "#C6DB2F", d: "#061033", logo: "trio-logo.png"};
+  if (/ace\s*padel/i.test(n)) return {a: "#3B4254", b: "#E4E95C", d: "#0A0B10", logo: "ace-logo.png"};
+  if (/let.?s.?\s*padel/i.test(n)) return {a: "#1E44E0", b: "#C9F23E", d: "#03140C", logo: "lets-logo.png"};
+  if (/core/i.test(n)) return {a: "#2F6B55", b: "#D9B85C", d: "#06140F", logo: "core-logo.png"};
+  return {a: "#2F4A41", b: "#C6F03A", d: "#0B1A14", logo: c.logo_url || ""}; }
 function clubPic(c){ const ph = clubCover(c); return ph ? `<img src="${esc(ph)}" alt="" loading="lazy">` : courtsArt(); }
 function clubLinks(c){ const l = [];
   if (c.maps_url) l.push(`<a class="ghost sm" href="${esc(c.maps_url)}" target="_blank" rel="noopener">${t("map")}</a>`);
@@ -1644,14 +1705,14 @@ function playerCard(c){
   if (!c || !c.level_set) return `<button class="card lvprompt" data-go="level"><b>${t("setLevel")} →</b><span class="note">${t("levelCardHint")}</span></button>`;
   const pl = c.placement > 0, [tn, col0] = TIER[c.category || "D"], col = pl ? "#B47CFF" : col0, st = subTier(c), pr = progressInfo(c), played = c.wins + c.losses;
   const wr = played ? Math.round(c.wins / played * 100) + "%" : "–";
-  return `<div class="gcard-wrap"><div class="pcard gc t-${pl ? "P" : c.category || "D"}" style="--tc:${col}" data-tilt><div class="pc-in">
+  return `<div class="gcard-wrap" style="--tc:${col}" data-tilt><span class="g3d-sh"></span><div class="g3d-f"><div class="g3d">${[1, 2, 3, 4, 5, 6].map(z => `<i class="g3d-e" style="--z:${z}"></i>`).join("")}<div class="pcard gc t-${pl ? "P" : c.category || "D"}" style="--tc:${col}"><div class="pc-in">
     <span class="gc-bg"></span><span class="gc-pat"></span><span class="gc-rays"></span><span class="pc-holo"></span><span class="gc-spark"></span>${pl ? `<span class="gc-scan"></span><span class="gc-qs">${"?".repeat(14).split("").map((q, i) => `<i style="--i:${i}">?</i>`).join("")}</span>` : ""}
     ${c.streak >= 2 ? `<span class="pc-streak">🔥 ${c.streak} ${t("weeks")}</span>` : ""}
     <div class="pc-top"><div class="pc-ovr"><b>${pl ? "?" : (+c.level).toFixed(2)}</b><small>${t("lvlU")}</small></div><div class="pc-rank">${emblem(col, 50)}<span class="gc-rib">${pl ? tf("plTag", {n: pr.done}) : pr.series ? tf("serTag", {w: pr.w, l: pr.l}) : `${esc(tierName(c.category))} ${st}`}</span></div></div>
     <div class="gc-avw"><span class="gc-ring"></span><div class="pc-av">${esc(initials(c.name))}</div></div>
     <div class="pc-name"><span class="gc-plate"><b>${esc(c.name || "")}</b></span><small>${pl ? t("plSub") : `${t("catU")} ${esc(c.category || "–")}${c.shield ? " · 🛡️" : ""}`}</small></div>
     <div class="pc-stats"><div><i>⚔️</i><b>${wr}</b><span>${t("winRate")}</span></div><div><i>🎾</i><b>${played}</b><span>${t("matchesU")}</span></div><div><i>👑</i><b>${c.season && c.season.rank ? "#" + c.season.rank : "–"}</b><span>${c.season ? esc(c.season.club) : t("seasonU")}</span></div></div>
-   </div></div></div>
+   </div></div></div></div></div>
    <div class="pc-prog${pr.danger ? " danger" : ""}${pl ? " plc" : ""}${pr.series ? " plc ser" : ""}">${pr.series ? `<div class="pips">${[0, 1, 2].map(i => `<i class="${i < pr.w ? "on" : i < pr.w + pr.l ? "x" : ""}"></i>`).join("")}</div>` : pl ? `<div class="pips">${[0, 1, 2, 3, 4].map(i => `<i class="${i < pr.done ? "on" : ""}"></i>`).join("")}</div>` : `<div class="bar"><i style="width:${pr.pct}%"></i>${(pr.marks || []).map(m => `<b style="left:${m}%"></b>`).join("")}</div>`}<div class="lbl"><span>${pl ? tf("plTag", {n: pr.done}) : pr.series ? `${t("serT")} → ${esc(tierName(pr.to))}` : `${esc(tierName(c.category))} ${st} · ${esc(c.category || "")}`}</span><em>${esc(pr.txt)}</em></div></div>
    <div class="pc-badges">${[...(S.wi && S.wi.quest && (S.wi.quest.done || S.wi.quest.new) ? [{k: "rookie", got: !!S.wi.quest.done}] : []), ...(c.badges || []), ...achList(S.myAch)].map(b => `<div class="bd${b.got ? "" : " lock"}"><i>${BADGE_IC[b.k] || "★"}</i>${t("b_" + b.k)}${S.rarity && S.rarity[b.k] != null ? `<small class="rar">${tf("rarity", {p: S.rarity[b.k]})}</small>` : ""}</div>`).join("")}</div>
    <div class="row" style="gap:10px"><button class="cta gold wide" data-sharecard>${t("shareCard")} ↗</button>${c.season ? `<button class="ghost" style="width:auto;padding:0 16px" data-season="${c.season.club_id}">${t("seasonBtn")}</button>` : ""}</div>`;
@@ -3267,7 +3328,7 @@ Object.assign(W.ar, {twBtn:"+ بطولة", twT:"بطولة جديدة", twS1:"١
   twGrp:"{g} مباراة مجموعات", twKos:"{k} مباراة إقصائية", twDayL:"{d}: {a} – {b}", twQual:"أول ٢ من كل مجموعة{x} بيتأهلوا لـ{r}.", twBest:"+ أفضل {n} بالمركز الثالث", twR16:"دور الـ١٦", twQF:"ربع النهائي"});
 Object.assign(W.en, {lgPrize:"Prize pool", lgPrizeL:"Prize pool"}); Object.assign(W.ar, {lgPrize:"مجموع الجوائز", lgPrizeL:"مجموع الجوائز"});
 
-const TW_THEME = c => /trio/i.test(c.name) ? ["trio", "trio-logo.png"] : /ace/i.test(c.name) ? ["ace", "ace-logo.png"] : /let.?s/i.test(c.name) ? ["lets", "lets-logo.png"] : ["night", ""];
+const TW_THEME = c => /trio/i.test(c.name) ? ["trio", "trio-logo.png"] : /ace/i.test(c.name) ? ["ace", "ace-logo.png"] : /let.?s/i.test(c.name) ? ["lets", "lets-logo.png"] : /core/i.test(c.name) ? ["core", "core-logo.png"] : ["night", ""];
 const twClubs = () => S.clubs;
 const canMakeTour = () => !!(S.user && S.profile && S.profile.is_admin);
 function twInit(){
@@ -3709,10 +3770,21 @@ app.addEventListener("click", async e => { const el = e.target.closest("[data-lb
     const c = S.clubs.find(x => x.id === S.mClub); if (c) c.week_prize = v; toast("✓"); return; }
 });
 
-/* the player card tilts with your finger */
+/* the player card is a 3D object: it follows your finger, or the phone's tilt (gyroscope) */
+const tiltSet = (c, x, y) => { x = Math.max(-1, Math.min(1, x)); y = Math.max(-1, Math.min(1, y));
+  c.style.setProperty("--rx", (-y * 16).toFixed(1) + "deg"); c.style.setProperty("--ry", (x * 20).toFixed(1) + "deg");
+  c.style.setProperty("--mx", (x * 50 + 50).toFixed(0) + "%"); c.style.setProperty("--px", x.toFixed(3)); c.style.setProperty("--py", y.toFixed(3)); };
+let tiltHand = 0;
 document.addEventListener("pointermove", e => { const c = e.target.closest && e.target.closest("[data-tilt]"); if (!c) return; const r = c.getBoundingClientRect();
-  const x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; c.style.setProperty("--rx", (-y * 14).toFixed(1) + "deg"); c.style.setProperty("--ry", (x * 16).toFixed(1) + "deg"); c.style.setProperty("--mx", (x * 100 + 50).toFixed(0) + "%"); });
-document.addEventListener("pointerout", e => { const c = e.target.closest && e.target.closest("[data-tilt]"); if (c && !c.contains(e.relatedTarget)){ c.style.setProperty("--rx", "0deg"); c.style.setProperty("--ry", "0deg"); } });
+  tiltHand = Date.now(); c.classList.add("held"); tiltSet(c, ((e.clientX - r.left) / r.width - .5) * 2, ((e.clientY - r.top) / r.height - .5) * 2); });
+document.addEventListener("pointerout", e => { const c = e.target.closest && e.target.closest("[data-tilt]"); if (c && !c.contains(e.relatedTarget)){ c.classList.remove("held"); tiltSet(c, 0, 0); } });
+let gyroBase = null, gyroRaf = 0, gyroAsked = false;
+window.addEventListener("deviceorientation", e => { if (e.beta == null || Date.now() - tiltHand < 1500) return; if (gyroRaf) return;
+  gyroRaf = requestAnimationFrame(() => { gyroRaf = 0; const c = document.querySelector("[data-tilt]"); if (!c) { gyroBase = null; return; }
+    if (!gyroBase) gyroBase = {b: e.beta, g: e.gamma}; gyroBase.b += (e.beta - gyroBase.b) * .02; gyroBase.g += (e.gamma - gyroBase.g) * .02;
+    c.classList.add("gyro"); tiltSet(c, (e.gamma - gyroBase.g) / 22, (e.beta - gyroBase.b) / 22); }); });
+document.addEventListener("click", e => { if (gyroAsked || !(e.target.closest && e.target.closest("[data-tilt]"))) return; gyroAsked = true;
+  try { if (window.DeviceOrientationEvent && typeof DeviceOrientationEvent.requestPermission === "function") DeviceOrientationEvent.requestPermission().catch(() => {}); } catch (x) {} });
 app.addEventListener("click", async e => { const el = e.target.closest("[data-evedit],[data-evdel],[data-evdelgo]"); if (!el) return; const d = el.dataset;
   if ("evedit" in d){ S.evEdit = !S.evEdit; render(); return; }
   if (d.evdel){ e.preventDefault(); const p = d.evdel.split("|"); S.evDelArg = [p[0], p[1], p.slice(2).join("|")]; S.sheet = "evdel"; render(); return; }
@@ -3747,6 +3819,11 @@ app.addEventListener("click", async e => { const el = e.target.closest("[data-tj
     const r = await sb.rpc("t_invite_accept", {p_token: ls.get("pl-tjoin"), p_note: null}); if (r.error){ toast(errMsg(r.error)); return; }
     ls.del("pl-tjoin"); toast(t("tjDone")); setTimeout(() => { location.href = "t.html?" + encodeURIComponent(r.data); }, 900); } });
 app.addEventListener("click", e => { if (e.target.closest("[data-wseen]")) ls.set("pl-seen", "1"); });
+/* club cards: the picture lifts as the card scrolls into view */
+let cpIO = null;
+function cpWatch(){ if (!("IntersectionObserver" in window)) return; if (!cpIO) cpIO = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle("up", e.intersectionRatio > .55)), {threshold: [0, .55, 1]});
+  document.querySelectorAll(".cpop:not([data-w])").forEach(el => { el.dataset.w = "1"; cpIO.observe(el); }); }
+new MutationObserver(() => { if (document.querySelector(".cpop:not([data-w])")) cpWatch(); }).observe(document.getElementById("app") || document.body, {childList: true, subtree: true});
 render();
 boot();
 
