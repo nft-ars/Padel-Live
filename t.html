@@ -2958,8 +2958,14 @@ function refApply(mid, st){
   else { delete s.scores[mid]; if (!s.live.includes(mid)) s.live.push(mid); }
   render(); refSend(mid, st);
 }
+/* keep the referee's screen awake while a PIN is entered */
+let refLock = null, refLockOn = false;
+async function refWake(on){ refLockOn = on;
+  try { if (on && !refLock && navigator.wakeLock && document.visibilityState === "visible"){ refLock = await navigator.wakeLock.request("screen"); refLock.addEventListener("release", () => { refLock = null; }); }
+        else if (!on && refLock){ await refLock.release(); refLock = null; } } catch (e) { refLock = null; } }
+document.addEventListener("visibilitychange", () => { if (refLockOn && document.visibilityState === "visible") refWake(true); });
 function renderRef(){
-  const app = document.getElementById("app"); document.body.classList.add("refmode");
+  const app = document.getElementById("app"); document.body.classList.add("refmode"); refWake(!!REF.pin);
   const head = `<header class="rf-top"><div><b>Referee</b><span>${esc(TNAME)}</span></div>${REF.pin ? `<button class="rf-link" data-rf="out">Log out</button>` : ""}</header>`;
   if (!REF.pin){
     app.innerHTML = head + `<main class="rf"><form id="rfPin" class="rf-card"><h2>Enter the referee PIN</h2><p>The organizer gives you a 6-digit PIN for this tournament.</p>
