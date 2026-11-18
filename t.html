@@ -2885,7 +2885,7 @@ async function refSend(mid, st){
     try {
       const r = await sb.rpc("t_ref_update", { p_slug: SLUG, p_pin: REF.pin, p_mid: job.mid, p_pts: job.st, p_final: finalOf(job.st) });
       if (r.error) throw r.error;
-      VERSION = r.data; REF.msg = "";
+      VERSION = r.data; REF.msg = ""; if (finalOf(job.st)) setTimeout(() => syncResults(REF.pin), 500);
     } catch (e) {
       const m = (e && e.message) || "";
       if (/PIN/.test(m)){ REF.msg = "The referee PIN changed. Enter the new one."; lsSet(PINKEY, ""); REF.pin = ""; REF.pending = null; break; }
@@ -3218,7 +3218,13 @@ loadSU();
 render();
 setInterval(() => { if (!document.hidden) pull(); }, MODE ? 3000 : 8000);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) pull(); });
-(async () => { try { const r = await sb.rpc("t_can_edit", {p_slug: SLUG}); if (r.data === true){ canEdit = true; render(); } } catch (e) {} })();
+(async () => { try { const r = await sb.rpc("t_can_edit", {p_slug: SLUG}); if (r.data === true){ canEdit = true; render(); syncResults(); setInterval(() => syncResults(), 20000); } } catch (e) {} })();
+/* finished matches go to Padel Live: levels, wins, challenges (only teams that signed up in the app) */
+let lastSync = "";
+async function syncResults(pin){ if (!canEdit && !pin) return;
+  try { const rows = allMatches().filter(m => m.A && m.B && m.A.id && m.B.id && m.s && m.w !== null && m.w !== undefined && !m.flag).map(m => ({mid: m.id, t1: m.A.id, t2: m.B.id, s: m.s, w: m.w}));
+    const key = JSON.stringify(rows); if (!rows.length || key === lastSync) return;
+    const r = await sb.rpc("t_sync_results", {p_slug: SLUG, p_rows: rows, p_pin: pin || null}); if (!r.error) lastSync = key; } catch (e) {} }
 
 }
 function tFail(msg){ document.getElementById("app").innerHTML = '<div style="padding:40px 20px;font:500 16px system-ui;color:#333"><p><b>' + msg + '</b></p><p><a href="./">Open Padel Live</a></p><button onclick="location.reload()" style="padding:10px 16px;font:600 15px system-ui">Try again</button></div>'; }

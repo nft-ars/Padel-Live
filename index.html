@@ -995,6 +995,8 @@ details.lrules{border:2px solid #E8C96A;background:linear-gradient(160deg,color-
 .pc-badges .bd i{border-radius:0!important;clip-path:polygon(25% 3%,75% 3%,100% 50%,75% 97%,25% 97%,0 50%);width:54px!important;height:50px!important;background:linear-gradient(160deg,#3a4d40,#121b16)!important;box-shadow:none!important}
 .pc-badges .bd:not(.lock) i{background:radial-gradient(circle at 50% 30%,#4c6a55,#14201a)!important;filter:drop-shadow(0 0 6px rgba(232,201,106,.55))}
 @media (prefers-reduced-motion:reduce){.pcard.gc{transition:none}.gc-ring,.gc-rays,.gc-pat,.gc-spark{animation:none!important}}
+.pcard.gc .pc-name small{display:block;margin-top:4px}
+.pcard.gc .pc-name b{font-size:28px}
 </style>
 </head>
 <body>
@@ -1035,7 +1037,7 @@ const W = {
   inbox:"Notifications", noNotes:"Nothing new yet.", someone:"Someone",
   nJoined:"{n} joined your match on {w}.", nLeft:"{n} left your match on {w}.", nDepOk:"Your deposit was confirmed. See you on court!", nClubCancel:"The club cancelled the booking on {w}.", nShareOk:"The club confirmed your payment.", nShareNo:"The club couldn't find your transfer. Check the reference or pay at the desk.", nResult:"{n} reported the score. Please confirm it.", nResultOk:"Result confirmed. Your level was updated.", nResultNo:"{n} says the score isn't right. Report it again.", nChat:"{n} wrote in your match chat.",
   match:"Match", players:"Players", booker:"Booked the court", openSpot:"Open spot", splitInfo:"Split payment: each player pays {x}.", atClub:"At the club", paidS:"Paid", checking:"Checking", payAtDesk:"Pays at desk", code:"Code",
-  result:"Result", waitConfirm:"Waiting for confirmation", confirmRes:"Confirm score", notRight:"Not right", reportRes:"Report the score", disputed:"The other team said the score wasn't right. Enter it again.", pickPartner:"Who was your partner?", set:"Set", you:"You", sendRes:"Send score", resNote:"A player from the other team confirms it, then everyone's level updates.", resLater:"You can report the score once the match starts.", resNeed4:"Results count when all 4 players are on Padel Live.", won:"Won", lost:"Lost", vs:"vs", disputedS:"Disputed",
+  result:"Result", waitConfirm:"Waiting for confirmation", confirmRes:"Confirm score", notRight:"Not right", reportRes:"Report the score", disputed:"The other team said the score wasn't right. Enter it again.", pickPartner:"Who was your partner?", set:"Set", you:"You", sendRes:"Send score", resNote:"A player from the other team confirms it, then everyone's level updates.", resLater:"You can enter the score once the booking time has finished.", resCheckin:"Scores open after the desk scans your check-in pass. Ask the club to check you in.", resNeed4:"Results count when all 4 players are on Padel Live.", won:"Won", lost:"Lost", vs:"vs", disputedS:"Disputed",
   chat:"Match chat", chatEmpty:"Say hi to the other players.", chatPh:"Write a message…", sendBtn:"Send", details:"Details", openMatch:"Open",
   anyLvl:"Any level", splitTag:"split payment", notYourLvl:"Not your level", joinHow:"How will you pay your share?", joinGo:"Join and pay", lvRange:"Who can join?", aroundMe:"Around my level", setLvFirst:"Set your level to choose a level range.", payWho:"Who pays the court?", payAll:"I pay the whole court", payShare:"Split 4 ways", yourShare:"Your share (1/4)", payNow:"You pay now",
   map:"Map", call:"Call", clubPage:"Club page", photo:"Club photo", area:"Area", about:"About the club", mapLink:"Google Maps link", clubPhone:"Club phone / WhatsApp", share1:"share",
@@ -1066,7 +1068,7 @@ evDone:"Results", evSoonT:"Coming up", evSee:"See the results", evFollow:"Follow
   inbox:"الإشعارات", noNotes:"ما في شي جديد.", someone:"لاعب",
   nJoined:"{n} انضم لمباراتك يوم {w}.", nLeft:"{n} طلع من مباراتك يوم {w}.", nDepOk:"تم تأكيد العربون. منشوفك بالملعب!", nClubCancel:"النادي ألغى الحجز يوم {w}.", nShareOk:"النادي أكد دفعتك.", nShareNo:"النادي ما لقى تحويلك. تأكد من الرقم أو ادفع بالنادي.", nResult:"{n} سجّل النتيجة. أكّدها لو سمحت.", nResultOk:"تم تأكيد النتيجة وتحديث مستواك.", nResultNo:"{n} بيقول النتيجة مو صحيحة. سجّلها من جديد.", nChat:"{n} كتب بمحادثة المباراة.",
   match:"المباراة", players:"اللاعبين", booker:"حجز الملعب", openSpot:"مكان فاضي", splitInfo:"دفع مقسوم: كل لاعب بيدفع {x}.", atClub:"بالنادي", paidS:"مدفوع", checking:"قيد التحقق", payAtDesk:"بيدفع بالنادي", code:"الرمز",
-  result:"النتيجة", waitConfirm:"بانتظار التأكيد", confirmRes:"تأكيد النتيجة", notRight:"مو صحيحة", reportRes:"سجّل النتيجة", disputed:"الفريق التاني قال النتيجة مو صحيحة. سجّلها من جديد.", pickPartner:"مين كان شريكك؟", set:"شوط", you:"أنت", sendRes:"إرسال النتيجة", resNote:"لاعب من الفريق التاني بيأكدها، وبعدها بيتحدث مستوى الكل.", resLater:"فيك تسجل النتيجة بعد ما تبلش المباراة.", resNeed4:"النتائج بتنحسب لما يكون الـ ٤ لاعبين على Padel Live.", won:"ربح", lost:"خسارة", vs:"ضد", disputedS:"معترض عليها",
+  result:"النتيجة", waitConfirm:"بانتظار التأكيد", confirmRes:"تأكيد النتيجة", notRight:"مو صحيحة", reportRes:"سجّل النتيجة", disputed:"الفريق التاني قال النتيجة مو صحيحة. سجّلها من جديد.", pickPartner:"مين كان شريكك؟", set:"شوط", you:"أنت", sendRes:"إرسال النتيجة", resNote:"لاعب من الفريق التاني بيأكدها، وبعدها بيتحدث مستوى الكل.", resLater:"فيك تسجل النتيجة بعد ما يخلص وقت الحجز.", resCheckin:"النتيجة بتنفتح بعد ما الاستقبال يمسح بطاقة دخولك. اطلب من النادي يسجل وصولك.", resNeed4:"النتائج بتنحسب لما يكون الـ ٤ لاعبين على Padel Live.", won:"ربح", lost:"خسارة", vs:"ضد", disputedS:"معترض عليها",
   chat:"محادثة المباراة", chatEmpty:"سلّم عاللاعبين.", chatPh:"اكتب رسالة…", sendBtn:"إرسال", details:"التفاصيل", openMatch:"فتح",
   anyLvl:"أي مستوى", splitTag:"دفع مقسوم", notYourLvl:"مو مستواك", joinHow:"كيف بدك تدفع حصتك؟", joinGo:"انضم وادفع", lvRange:"مين فيه ينضم؟", aroundMe:"قريب من مستواي", setLvFirst:"حدد مستواك لتختار مستوى المباراة.", payWho:"مين بيدفع الملعب؟", payAll:"أنا بدفع كل الملعب", payShare:"تقسيم على ٤", yourShare:"حصتك (١/٤)", payNow:"بتدفع هلق",
   map:"الخريطة", call:"اتصال", clubPage:"صفحة النادي", photo:"صورة النادي", area:"المنطقة", about:"عن النادي", mapLink:"رابط خرائط جوجل", clubPhone:"هاتف / واتساب النادي", share1:"حصة",
@@ -1106,7 +1108,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v21";
+const VERSION = "v23";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -1453,7 +1455,7 @@ async function loadMatch(id){
 }
 function setsStr(sets){ return (sets || []).map(s => `${s[0]}-${s[1]}`).join("  "); }
 V.match = () => { const m = S.match; if (!m) return V.me();
-  const d = new Date(m.starts_at), me = m.players.find(p => p.me) || {}, started = d <= new Date(), full = m.players.length === 4;
+  const d = new Date(m.starts_at), me = m.players.find(p => p.me) || {}, ended = new Date(d.getTime() + m.minutes * 6e4) <= new Date(), started = ended && !!m.checked_in, full = m.players.length === 4;
   const nameOf = id => (m.players.find(p => p.id === id) || {}).name || "?";
   const share = m.split ? m.price / 4 : null;
   let res = "";
@@ -1476,7 +1478,8 @@ V.match = () => { const m = S.match; if (!m) return V.me();
        <div class="sr"><span>${t("you")} + ${esc(nameOf(partner))}</span>${[0,1,2].map(i => `<input inputmode="numeric" maxlength="2" id="sa${i}" aria-label="${t("set")} ${i + 1}">`).join("")}</div>
        <div class="sr"><span>${esc(opp.map(p => p.name).join(" + "))}</span>${[0,1,2].map(i => `<input inputmode="numeric" maxlength="2" id="sb${i}" aria-label="${t("set")} ${i + 1}">`).join("")}</div></div>
       <input type="hidden" id="r-partner" value="${partner}"><button class="cta blue" type="submit">${t("sendRes")}</button><span class="note">${t("resNote")}</span></form>`;
-  } else if (!r && !started) res = `<div class="card note">${t("resLater")}</div>`;
+  } else if (!r && !ended) res = `<div class="card note">${t("resLater")}</div>`;
+  else if (!r && !started) res = `<div class="card note">🎟️ ${t("resCheckin")}</div>`;
   else if (!r && !full) res = `<div class="card note">${t("resNeed4")}</div>`;
   return `<main>${backBar(t("match"), "me")}
    <div class="card"><div class="between"><b>${esc(fmtDay(d))} · ${esc(fmtTime(d))}</b>${statusTag(m.status)}</div><span class="note">${esc(m.club)} · ${esc(m.court)} · ${m.minutes} ${t("min")}${m.level_min != null ? ` · ${t("lvl")} ${lvl2(m.level_min)}–${lvl2(m.level_max)}` : ""}</span>${m.code ? `<span class="note" style="display:block">${t("booking")} #${m.booking_no} · ${t("code")} <b>${esc(m.code)}</b></span>` : ""}</div>
@@ -3073,7 +3076,7 @@ V.me = () => { if (!S.user) return V.auth();
    <div class="row">${S.staff.length ? `<button class="pill" data-go="manager">${t("meMgr")}</button>` : ""}${bell()}</div></div>
   <div class="seg">${[["card", "meCard"], ["games", "meGames"], ["set", "meSet"]].map(([k, l]) => `<button data-metab="${k}" aria-pressed="${tab === k}">${k === "set" ? "⚙️ " : ""}${t(l)}${k === "games" && todo ? `<i class="dot"></i>` : ""}</button>`).join("")}</div>`;
  let body = "";
- if (tab === "card") body = `${walletCard()}${playerCard(S.card)}${weekCard(false)}${seasonCard()}<button class="cta wide rcbtn" data-recap>${tf("rcBtn", {y: new Date().getFullYear()})}</button><button class="cta wide pfbtn" data-profile="me">📊 ${t("pfMine")} →</button>${snMeCard()}`;
+ if (tab === "card") body = `${walletCard()}${playerCard(S.card)}${weekCard(false)}${seasonCard()}<button class="cta wide pfbtn" data-profile="me">📊 ${t("pfMine")} →</button>${snMeCard()}`;
  else if (tab === "games"){ const up = upcoming(), past = S.mine.filter(b => !up.includes(b));
    body = `${todo ? `<h2>⚑ ${t("meToDo")}</h2><div class="glist">${pendingScores().map(gameRow).join("")}</div>` : ""}
     <h2>${t("myGames")}</h2><div class="glist">${up.map(gameRow).join("") || `<button class="card note" data-go="clubs" style="text-align:start">${t("bookFirst")}</button>`}</div>
