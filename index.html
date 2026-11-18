@@ -1006,6 +1006,65 @@ details.lrules{border:2px solid #E8C96A;background:linear-gradient(160deg,color-
 .hist-r b{font-size:14.5px}.hist-r small{grid-column:1;color:var(--ink-2);font-size:12px}.hist-r span{grid-row:1/3;grid-column:2;font-size:20px;color:var(--ink-3)}
 .evdel{align-self:flex-end;margin-top:-6px;background:rgba(229,72,77,.12);color:var(--red);border:0;border-radius:99px;padding:6px 14px;font:inherit;font-weight:800;font-size:13px}
 .hist-r .evdel{margin:0}
+/* placement card */
+.pcard.gc.t-P .gc-bg{background:radial-gradient(110% 75% at 50% 35%,#2a3036 0%,#15191c 55%,#08090a 100%)}
+.pcard.gc.t-P .gc-pat{opacity:.12;background-image:radial-gradient(circle,rgba(255,255,255,.6) 1px,transparent 1.5px);background-size:14px 14px}
+.pcard.gc.t-P .pc-ovr b{background:none;color:#cfd6dc;-webkit-text-fill-color:#cfd6dc;animation:plPulse 2s ease-in-out infinite}
+.pcard.gc.t-P .pc-av{background:radial-gradient(circle at 35% 25%,#d8dde1,#6d7880 60%,#2b3136);color:#1b1f22}
+.pcard.gc.t-P .gc-ring{background:conic-gradient(from var(--fa,0deg),#9AA4AD,#fff,#9AA4AD,#3a4248,#9AA4AD)}
+@keyframes plPulse{50%{opacity:.45;transform:scale(.94)}}
+.pc-prog.plc .pips{display:flex;gap:6px}
+.pc-prog.plc .pips i{flex:1;height:14px;border-radius:3px;transform:skewX(-14deg);background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.pc-prog.plc .pips i.on{background:linear-gradient(90deg,#9C7726,#E8C96A);box-shadow:0 0 10px rgba(232,201,106,.55)}
+.pc-prog .bar{position:relative}
+.pc-prog .bar>b{position:absolute;top:-2px;bottom:-2px;width:2px;background:rgba(255,255,255,.55);border-radius:1px}
+.pc-prog.danger .bar i{background:linear-gradient(90deg,#8a1f1f,#E5484D)!important;animation:plPulse 1.4s ease-in-out infinite}
+.pc-prog.danger .lbl em{color:#ff8a8a}
+/* tier reveal after placement, shield */
+.celeb.reveal .cl-emb{animation:revealSpin 1.6s cubic-bezier(.2,.8,.2,1) both}
+@keyframes revealSpin{0%{transform:rotateY(0) scale(.4);filter:brightness(0)}55%{transform:rotateY(540deg) scale(1.15);filter:brightness(1.6)}100%{transform:rotateY(720deg) scale(1);filter:none}}
+.celeb.shieldc .cl-emb{position:relative}
+.celeb.shieldc .cl-emb::after{content:"🛡️";position:absolute;right:-6px;bottom:4px;font-size:64px;animation:plPulse 1.6s ease-in-out infinite}
+.pc-prog.ser .pips i.on{background:linear-gradient(90deg,#1f7a46,#3ccf7a);box-shadow:0 0 10px rgba(60,207,122,.6)}
+.pc-prog.ser .pips i.x{background:linear-gradient(90deg,#8a1f1f,#E5484D)}
+.pc-prog.ser .lbl em{color:#9be7b9}
+.pc-prog.plc .pips i:not(.on):not(.x){background:color-mix(in srgb,var(--ink) 10%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--ink) 22%,transparent)}
+/* placement card: purple mystery look, clearly not Silver */
+.pcard.gc.t-P{background:conic-gradient(from 200deg,#e9d6ff,#B47CFF,#2a0f4a,#7a3cff,#e9d6ff,#B47CFF)}
+.pcard.gc.t-P .gc-bg{background:radial-gradient(110% 75% at 50% 35%,#3b1670 0%,#1c0a38 55%,#0b0418 100%)}
+.pcard.gc.t-P .gc-pat{opacity:.2;background:repeating-linear-gradient(0deg,rgba(180,124,255,.35) 0 1px,transparent 1px 4px)}
+.pcard.gc.t-P .pc-ovr b{color:#e6d4ff;-webkit-text-fill-color:#e6d4ff;text-shadow:0 0 18px rgba(180,124,255,.9)}
+.pcard.gc.t-P .pc-ovr small{color:#cba8ff}
+.pcard.gc.t-P .gc-ring{background:conic-gradient(from var(--fa,0deg),#B47CFF,#fff,#7a3cff,#2a0f4a,#B47CFF);animation-duration:3s}
+.pcard.gc.t-P .pc-av{background:radial-gradient(circle at 35% 25%,#5b2aa8,#24104a 65%,#120626);color:#e6d4ff;text-shadow:0 0 14px rgba(180,124,255,.9)}
+.pcard.gc.t-P .gc-rib{background:linear-gradient(180deg,#fff,#B47CFF)}
+.pcard.gc.t-P .pc-stats div{box-shadow:inset 0 0 0 1px rgba(180,124,255,.45)}
+.pcard.gc.t-P .pc-rank svg{filter:hue-rotate(0deg) drop-shadow(0 0 10px rgba(180,124,255,.8))}
+.gc-scan{position:absolute;left:0;right:0;height:22%;top:-22%;z-index:1;pointer-events:none;background:linear-gradient(180deg,transparent,rgba(180,124,255,.28),transparent);animation:scan 2.8s linear infinite}
+@keyframes scan{to{top:100%}}
+.gc-qs{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.gc-qs i{position:absolute;font-style:normal;font-weight:900;color:rgba(180,124,255,.18);font-size:calc(14px + (var(--i) * 7 % 26) * 1px);left:calc((var(--i) * 37 % 100) * 1%);top:calc((var(--i) * 53 % 100) * 1%);animation:qfloat calc(3s + var(--i) * .2s) ease-in-out infinite alternate}
+@keyframes qfloat{to{transform:translateY(-10px) rotate(12deg);opacity:.5}}
+.pc-prog.plc:not(.ser) .pips i.on{background:linear-gradient(90deg,#7a3cff,#B47CFF);box-shadow:0 0 10px rgba(180,124,255,.7)}
+@media (prefers-reduced-motion:reduce){.gc-scan,.gc-qs i{animation:none}}
+/* Iron tier (Category E) */
+.lv.cE{background:#5E6670}
+.pcard.gc.t-E .gc-bg{background:radial-gradient(110% 75% at 50% 30%,#4a4f55 0%,#24272b 55%,#101113 100%)}
+.pcard.gc.t-E .gc-pat{opacity:.35;background-image:radial-gradient(circle at 50% 50%,#9aa1a9 0 2px,#3a3e43 2.5px,transparent 3.5px),linear-gradient(115deg,transparent 40%,rgba(160,82,45,.25) 55%,transparent 70%);background-size:34px 34px,100% 100%;background-position:8px 8px,0 0}
+.pcard.gc.t-E .pc-holo{opacity:.6}
+/* tournament first: welcome hero + invite */
+.wt{display:flex;flex-direction:column;gap:8px;padding:18px;border-radius:22px;background:linear-gradient(150deg,#2B2410,#5E4A1A 55%,#8a6d22);color:#FFF3C4;box-shadow:0 14px 30px rgba(94,74,26,.35);animation:welIn .5s ease both}
+.wt-kick{font-size:12px;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#E3EE3A}
+.wt h1{margin:0;font-family:var(--disp);font-style:italic;font-size:38px;line-height:1;text-transform:uppercase}
+.wt-chips{display:flex;flex-wrap:wrap;gap:6px}.wt-chips span{font-size:12.5px;font-weight:800;border:1px solid rgba(255,243,196,.4);border-radius:99px;padding:4px 10px}
+.wt-prize{font-size:20px;color:#fff}.wt small{opacity:.85;font-weight:700}
+.wt .cta{text-align:center;text-decoration:none;display:block;line-height:52px;margin-top:4px}
+.tj-hero{display:flex;flex-direction:column;gap:6px;padding:20px;border-radius:22px;background:linear-gradient(150deg,#2B2410,#5E4A1A 55%,#8a6d22);color:#FFF3C4}
+.tj-hero h1{margin:0;font-family:var(--disp);font-style:italic;font-size:36px;text-transform:uppercase;line-height:1}.tj-hero p{margin:0;font-weight:700}.tj-hero small{opacity:.85}
+.tj-steps{display:flex;flex-direction:column;gap:8px}
+.tj{display:flex;flex-direction:column;gap:12px;align-items:center;text-align:center}
+
+.tj-lv{display:flex;flex-direction:column;gap:4px;padding:12px 14px;border-radius:14px;background:color-mix(in srgb,var(--ok,#2E9E5B) 14%,transparent);margin:4px 0 10px}.tj-lv b{color:var(--ok,#2E9E5B);font-size:15px}.tj-lv span{font-size:13px;color:var(--mute,#667)}
 </style>
 </head>
 <body>
@@ -1033,15 +1092,15 @@ const W = {
   profile:"My profile", save:"Save", saved:"Saved", lang:"Language", dark:"Dark mode", mgr:"Club manager", staffQ:"Do you manage a club?", staffCode:"Staff code", staffJoin:"Unlock manager",
   evSoon:"Tournaments are coming to the app soon.", evTxt:"Live scores, draws and brackets, like the Core Padel Tournament.",
   mToday:"Bookings", deps:"Deposits to confirm", noDeps:"No deposits waiting.", okBtn:"Confirm", rej:"Reject", add:"Add booking or block", who:"Name", block:"Block the court (repair, coaching…)", addBtn:"Add", prices:"Court prices (USD)", band_day:"Daytime", band_peak:"Peak", band_late:"Late", rate:"Pound rate (1 USD = ? SYP)", noBk:"No bookings this day.", bookingsN:"bookings", cash:"Expected at desk", filled:"Courts filled", walkin:"Walk-in", back:"Back to app", loadErr:"Can't reach the server. Check your connection and try again.", retry:"Try again",
-  forgot:"Forgot password?", needEmail:"Type your email above first.", resetSent:"Check your email for a link to set a new password.", newPassT:"Set a new password", newPass:"New password (6+ characters)", setPass:"Save new password", passSaved:"Password changed. You're signed in.",
+  forgot:"Forgot password?", phoneOrEmail:"Phone number (or email)", wrongLogin:"Wrong phone number or password.", forgotPhone:"Message the Padel Live admin on WhatsApp and they will set a new password for you.", tjLv:"Starting level: Category {c} ({l})", tjLvUp:"Starting level: {l} (top of Category C)", tjLvUpN:"You can still play Category {c}. The admin checks players from B and A tournaments and moves them up.", tjLvNote:"You can fine-tune it later with the 60-second quiz in your Me tab.", tjQuiz:"Take the level quiz instead", apPass:"New password for this player", apPassBtn:"Set password", apPassOk:"Password changed. Send it to the player on WhatsApp.", passPh:"6+ characters", needEmail:"Type your email above first.", resetSent:"Check your email for a link to set a new password.", newPassT:"Set a new password", newPass:"New password (6+ characters)", setPass:"Save new password", passSaved:"Password changed. You're signed in.",
   delAcc:"Delete my account", delQ:"Delete your account? Your upcoming bookings will be cancelled. This can't be undone.", delDone:"Your account was deleted.",
   install:"Add Padel Live to your phone", installS:"Get the icon on your home screen. It opens full screen like a normal app.", installBtn:"Add to home screen", iosHow:"In Safari, tap the Share button, then Add to Home Screen.", andHow:"Tap ⋮ in Chrome, then Add to Home screen (or Install app).",
-  evLive:"Live scores", lvTitle:"Your level", tierD:"Bronze", tierC:"Silver", tierB:"Gold", tierA:"Diamond", lvlU:"LEVEL", catU:"Category", provisional:"Provisional", winRate:"Win rate", matchesU:"Matches", seasonU:"Season", weeks:"weeks", topCat:"Top category", needsN:"Play {n} more rated matches to unlock {c}", needsShort:"{n} more matches to unlock", danger:"Danger zone · stay above {x}", to:"to", shareCard:"Share card", seasonBtn:"Season", seasonT:"Season leaderboard", seasonRule:"Win 3 pts · played 1 pt", pts:"pts", seasonEmpty:"No confirmed matches this month yet.", rankUnlocked:"RANK UNLOCKED", youReached:"You reached", backTo:"BACK TO", climbBack:"Win your next matches to climb back.", winU:"WIN!", levelUp:"Your level went up.", matchDone:"MATCH CONFIRMED", nextTime:"Get it back next time.", orgSet:"SET BY THE ORGANIZER", okBtn2:"Nice", cardSaved:"Card saved to your downloads.", b_first_win:"First win", b_comeback:"Comeback", b_night_owl:"Night owl", b_iron_man:"Iron man", b_regular:"Regular", b_champion:"Champion", apTitle:"Players (admin)", apSearch:"Name or phone", apFind:"Find", apAok:"Allowed in category A", apTitleChk:"Won a tournament (adds a title)", apNote:"Why", apNotePh:"Won Category C, Nov 2026", edit:"Edit", provNote:"New players stay provisional (max Category C) for their first 10 rated matches.",lvIntro:"Answer 5 quick questions. Your level then goes up or down with every confirmed match result.", lvYour:"Your level", lvCat:"Category", lvAnswer:"Answer all 5 questions", lvNote:"Levels go from 0.5 to 7. Category D is about 1.5–2.5, C 2.5–3.5, B 3.5–4.5, A 4.5 and up.",
+  evLive:"Live scores", lvTitle:"Your level", tierE:"Iron", nTJoined:"{n} joined your team for {x} (Category {c}). Waiting for the organizer.", nTResult:"{x}: {n}", nTStart:"{x}: {n} starts at {w} · {c}", nTRecap:"Your {x} results are in ({r}). See your new level and card.", tjT:"You\u2019re invited", tjS:"{n} wants you as their partner", tjCat:"Category {c}", tjStep1:"Create your account", tjStep2:"Find your level (60 sec)", tjStep3:"Accept and join the team", tjGo:"Accept and join", tjDone:"You\u2019re in! The organizer will confirm your team.", tjUsed:"This invite was already used.", tjClosed:"Sign-up for this tournament is closed.", tjBad:"This invite link is not valid.", wtOpen:"Sign-up open", wtSign:"Sign up your team", wtSee:"See the tournament", wtTeams:"{n} teams signed up", twAlso:"or just look around", tierD:"Bronze", tierC:"Silver", tierB:"Gold", tierA:"Diamond", plTag:"Placement {n}/5", serT:"Promotion series", serTag:"Promotion {w}–{l}", serTxt:"Win 2 of 3 against {t}-level players to reach {t}", serWeak:"Nice win, but it doesn\u2019t count for the series: the other team was below {t} level.", serFailT:"Series lost", serFail:"Keep winning and the next series starts by itself.", q6:"Which category do you usually play in?", q6x:"I don\u2019t know", q7:"Do you have a Playtomic level?", q7s:"Optional. It helps us start you at the right level.", q7ph:"e.g. 3.2", lvCapped:"Everyone starts at Silver or below (3.49 max). Gold and Diamond are won on court.", clT:"Level claims to check", clS:"These players said they are stronger than where they started (3.49 max). If you know them, set their real level.", clNow:"Now", clSaid:"They said", clEst:"estimate", clSet:"Set level", clOk:"Leave it", plLeft:"Play {n} more rated matches to reveal your tier", plSub:"Placement matches", plDone:"Placement complete", plRevealed:"Your tier is revealed. From now on it moves with every match.", shieldOn:"Shield active", shieldTxt:"🛡️ Shield: win your next match to stay {t}", shieldHeld:"Shield held", stillT:"Still {t}", shieldSaved:"You stayed in your tier. The shield recharges next time.", divUp:"Division up", topDiv:"Top division", lvlU:"LEVEL", catU:"Category", provisional:"Provisional", winRate:"Win rate", matchesU:"Matches", seasonU:"Season", weeks:"weeks", topCat:"Top category", needsN:"Play {n} more rated matches to unlock {c}", needsShort:"{n} more matches to unlock", danger:"Danger zone · stay above {x}", to:"to", shareCard:"Share card", seasonBtn:"Season", seasonT:"Season leaderboard", seasonRule:"Win 3 pts · played 1 pt", pts:"pts", seasonEmpty:"No confirmed matches this month yet.", rankUnlocked:"RANK UNLOCKED", youReached:"You reached", backTo:"BACK TO", climbBack:"Win your next matches to climb back.", winU:"WIN!", levelUp:"Your level went up.", matchDone:"MATCH CONFIRMED", nextTime:"Get it back next time.", orgSet:"SET BY THE ORGANIZER", okBtn2:"Nice", cardSaved:"Card saved to your downloads.", b_first_win:"First win", b_comeback:"Comeback", b_night_owl:"Night owl", b_iron_man:"Iron man", b_regular:"Regular", b_champion:"Champion", apTitle:"Players (admin)", apSearch:"Name or phone", apFind:"Find", apAok:"Allowed in category A", apTitleChk:"Won a tournament (adds a title)", apNote:"Why", apNotePh:"Won Category C, Nov 2026", edit:"Edit", provNote:"Your first 5 rated matches are placement. Gold and Diamond are earned with a promotion series.",lvIntro:"Answer 5 quick questions. Your level then goes up or down with every confirmed match result.", lvYour:"Your level", lvCat:"Category", lvAnswer:"Answer all 5 questions", lvNote:"Levels go from 0.5 to 7. Category E (Iron) is below 1.5, D (Bronze) 1.5–2.5, C (Silver) 2.5–3.5, B (Gold) 3.5–4.5, A (Diamond) 4.5 and up.",
   q1:"How long have you played padel?", q1a:"I'm just starting", q1b:"Less than a year", q1c:"1 to 3 years", q1d:"More than 3 years",
   q2:"Other racket sports?", q2a:"None", q2b:"A little", q2c:"Tennis or squash regularly",
   q3:"Your game", q3a:"I'm learning to keep the ball in play", q3b:"I can rally at a steady pace", q3c:"I rally well and volley at the net", q3d:"I attack with bandeja, víbora and smash",
   q4:"The walls", q4a:"I avoid playing off the walls", q4b:"I sometimes return off the back wall", q4c:"I use back and side walls with control",
-  q5:"Tournaments", q5a:"Never played one", q5b:"Friendly or club tournaments", q5c:"Category B or higher",
+  q5:"Tournaments", q5a:"Never played one", q5b:"Played friendly or club tournaments", q5c:"Reached a final or won in Category C or D", q5d:"Reached a final or won in Category B or A",
   setLevel:"Set my level", redoLevel:"Retake the level quiz", yourLevel:"Your level", ratedN:"rated matches", levelCardHint:"Set your level so you can join matches at the right level.", myResults:"My results", noResults:"Play a match with 3 other Padel Live players, then report the score here.",
   inbox:"Notifications", noNotes:"Nothing new yet.", someone:"Someone",
   nJoined:"{n} joined your match on {w}.", nLeft:"{n} left your match on {w}.", nDepOk:"Your deposit was confirmed. See you on court!", nClubCancel:"The club cancelled the booking on {w}.", nShareOk:"The club confirmed your payment.", nShareNo:"The club couldn't find your transfer. Check the reference or pay at the desk.", nResult:"{n} reported the score. Please confirm it.", nResultOk:"Result confirmed. Your level was updated.", nResultNo:"{n} says the score isn't right. Report it again.", nChat:"{n} wrote in your match chat.",
@@ -1064,15 +1123,15 @@ evDone:"Results", evSoonT:"Coming up", evSee:"See the results", evFollow:"Follow
   profile:"ملفي", save:"حفظ", saved:"تم الحفظ", lang:"اللغة", dark:"الوضع الليلي", mgr:"لوحة النادي", staffQ:"تدير نادياً؟", staffCode:"رمز الموظفين", staffJoin:"فتح لوحة النادي",
   evSoon:"البطولات قادمة إلى التطبيق قريباً.", evTxt:"نتائج مباشرة وقرعة وأدوار، مثل بطولة كور بادل.",
   mToday:"الحجوزات", deps:"عربونات للتأكيد", noDeps:"لا توجد عربونات بانتظارك.", okBtn:"تأكيد", rej:"رفض", add:"إضافة حجز أو إغلاق", who:"الاسم", block:"إغلاق الملعب (صيانة، تدريب…)", addBtn:"إضافة", prices:"أسعار الملاعب (دولار)", band_day:"نهاري", band_peak:"ذروة", band_late:"متأخر", rate:"سعر الصرف (١ دولار = ؟ ليرة)", noBk:"لا حجوزات هذا اليوم.", bookingsN:"حجوزات", cash:"المتوقع في الاستقبال", filled:"نسبة الإشغال", walkin:"حضوري", back:"العودة للتطبيق", loadErr:"تعذر الاتصال بالخادم. تحقق من الاتصال وحاول مجدداً.", retry:"حاول مجدداً",
-  forgot:"نسيت كلمة السر؟", needEmail:"اكتب بريدك الإلكتروني أولاً.", resetSent:"تفقد بريدك، أرسلنا رابطاً لتعيين كلمة سر جديدة.", newPassT:"تعيين كلمة سر جديدة", newPass:"كلمة السر الجديدة (٦ أحرف أو أكثر)", setPass:"حفظ كلمة السر", passSaved:"تم تغيير كلمة السر وتسجيل دخولك.",
+  forgot:"نسيت كلمة السر؟", phoneOrEmail:"رقم الموبايل (أو الإيميل)", wrongLogin:"رقم الموبايل أو كلمة السر غلط.", forgotPhone:"راسل أدمن Padel Live على واتساب ليعطيك كلمة سر جديدة.", tjLv:"مستواك المبدئي: فئة {c} ({l})", tjLvUp:"مستواك المبدئي: {l} (أعلى فئة C)", tjLvUpN:"فيك تلعب بفئة {c} عادي. الأدمن بيراجع لاعبين بطولات B و A وبيرفعهم.", tjLvNote:"فيك تضبطه بعدين بالاختبار (٦٠ ثانية) من صفحة حسابي.", tjQuiz:"اعمل اختبار المستوى بدلاً من هيك", apPass:"كلمة سر جديدة لهاللاعب", apPassBtn:"غيّر كلمة السر", apPassOk:"تغيّرت كلمة السر. ابعتها للاعب على واتساب.", passPh:"٦ أحرف أو أكثر", needEmail:"اكتب بريدك الإلكتروني أولاً.", resetSent:"تفقد بريدك، أرسلنا رابطاً لتعيين كلمة سر جديدة.", newPassT:"تعيين كلمة سر جديدة", newPass:"كلمة السر الجديدة (٦ أحرف أو أكثر)", setPass:"حفظ كلمة السر", passSaved:"تم تغيير كلمة السر وتسجيل دخولك.",
   delAcc:"حذف حسابي", delQ:"حذف حسابك؟ سيتم إلغاء حجوزاتك القادمة ولا يمكن التراجع.", delDone:"تم حذف حسابك.",
   install:"أضف بادل لايف إلى هاتفك", installS:"ضع الأيقونة على الشاشة الرئيسية ليفتح كتطبيق عادي.", installBtn:"إضافة إلى الشاشة الرئيسية", iosHow:"في سفاري اضغط زر المشاركة ثم «إضافة إلى الشاشة الرئيسية».", andHow:"في كروم اضغط ⋮ ثم «إضافة إلى الشاشة الرئيسية» أو «تثبيت التطبيق».",
-  evLive:"نتائج مباشرة", lvTitle:"مستواك", tierD:"برونزي", tierC:"فضي", tierB:"ذهبي", tierA:"ماسي", lvlU:"المستوى", catU:"الفئة", provisional:"مؤقت", winRate:"نسبة الفوز", matchesU:"مباريات", seasonU:"الموسم", weeks:"أسابيع", topCat:"أعلى فئة", needsN:"العب {n} مباريات محسوبة كمان لتفتح {c}", needsShort:"{n} مباريات كمان للفتح", danger:"منطقة الخطر · خليك فوق {x}", to:"لـ", shareCard:"شارك البطاقة", seasonBtn:"الموسم", seasonT:"ترتيب الموسم", seasonRule:"الفوز ٣ نقاط · المشاركة نقطة", pts:"نقطة", seasonEmpty:"ما في مباريات مؤكدة هالشهر لسا.", rankUnlocked:"فئة جديدة", youReached:"وصلت لـ", backTo:"رجعت لـ", climbBack:"اربح مبارياتك الجاية لترجع تطلع.", winU:"فوز!", levelUp:"مستواك طلع.", matchDone:"تم تأكيد المباراة", nextTime:"المرة الجاية بترجعها.", orgSet:"حدده المنظم", okBtn2:"تمام", cardSaved:"انحفظت البطاقة بالتنزيلات.", b_first_win:"أول فوز", b_comeback:"العودة", b_night_owl:"بومة الليل", b_iron_man:"الرجل الحديدي", b_regular:"منتظم", b_champion:"بطل", apTitle:"اللاعبين (أدمن)", apSearch:"الاسم أو الرقم", apFind:"بحث", apAok:"مسموح بالفئة A", apTitleChk:"ربح بطولة (يضيف لقب)", apNote:"السبب", apNotePh:"ربح الفئة C، تشرين الثاني ٢٠٢٦", edit:"تعديل", provNote:"اللاعبين الجدد بيضلوا مؤقتين (أعلى شي فئة C) بأول ١٠ مباريات محسوبة.",lvIntro:"جاوب على ٥ أسئلة سريعة. بعدها مستواك بيطلع أو بينزل مع كل نتيجة مباراة مؤكدة.", lvYour:"مستواك", lvCat:"الفئة", lvAnswer:"جاوب على الأسئلة الخمسة", lvNote:"المستويات من ٠٫٥ إلى ٧. الفئة D تقريباً ١٫٥–٢٫٥، C ٢٫٥–٣٫٥، B ٣٫٥–٤٫٥، A من ٤٫٥ وفوق.",
+  evLive:"نتائج مباشرة", lvTitle:"مستواك", tierE:"حديدي", nTJoined:"{n} انضم لفريقك بـ{x} (فئة {c}). ناطرين تأكيد المنظم.", nTResult:"{x}: {n}", nTStart:"{x}: {n} بتبلش الساعة {w} · {c}", nTRecap:"طلعت نتائجك بـ{x} ({r}). شوف مستواك وبطاقتك الجديدة.", tjT:"معك دعوة", tjS:"{n} بده ياك شريكه", tjCat:"فئة {c}", tjStep1:"اعمل حساب", tjStep2:"اعرف مستواك (٦٠ ثانية)", tjStep3:"اقبل وانضم للفريق", tjGo:"اقبل وانضم", tjDone:"صرت معهن! المنظم رح يأكد فريقكن.", tjUsed:"هالدعوة انستعملت.", tjClosed:"التسجيل بهالبطولة سكّر.", tjBad:"رابط الدعوة مو صالح.", wtOpen:"التسجيل مفتوح", wtSign:"سجّل فريقك", wtSee:"شوف البطولة", wtTeams:"{n} فرق مسجلين", twAlso:"أو اتفرج بس", tierD:"برونزي", tierC:"فضي", tierB:"ذهبي", tierA:"ماسي", plTag:"تحديد المستوى {n}/5", serT:"سلسلة الترقية", serTag:"ترقية {w}–{l}", serTxt:"اربح ٢ من ٣ ضد لاعبين بمستوى {t} لتوصل {t}", serWeak:"فوز حلو، بس ما انحسب للسلسلة: الفريق التاني كان أقل من مستوى {t}.", serFailT:"خسرت السلسلة", serFail:"كفّي ربح والسلسلة الجاية بتبلش لحالها.", q6:"بأي فئة بتلعب عادةً؟", q6x:"ما بعرف", q7:"عندك مستوى على Playtomic؟", q7s:"اختياري. بيساعدنا نبدأك بالمستوى الصح.", q7ph:"مثلاً 3.2", lvCapped:"الكل بيبدأ فضي أو أقل (أعلى شي 3.49). الذهبي والماسي بينربحوا بالملعب.", clT:"مستويات لازم تتأكد", clS:"هالاعبين قالوا إنهن أقوى من مستوى البداية (أعلى شي 3.49). إذا بتعرفهن، حط مستواهن الحقيقي.", clNow:"هلأ", clSaid:"قالوا", clEst:"تقدير", clSet:"حط المستوى", clOk:"خليه", plLeft:"العب {n} مباريات مسجّلة لينكشف تصنيفك", plSub:"مباريات تحديد المستوى", plDone:"خلص تحديد المستوى", plRevealed:"انكشف تصنيفك. من هلأ بيتحرك مع كل مباراة.", shieldOn:"الدرع شغّال", shieldTxt:"🛡️ الدرع: اربح مباراتك الجاية لتبقى {t}", shieldHeld:"الدرع حماك", stillT:"لسا {t}", shieldSaved:"بقيت بتصنيفك. الدرع بيرجع يشحن المرة الجاية.", divUp:"ترقية درجة", topDiv:"أعلى درجة", lvlU:"المستوى", catU:"الفئة", provisional:"مؤقت", winRate:"نسبة الفوز", matchesU:"مباريات", seasonU:"الموسم", weeks:"أسابيع", topCat:"أعلى فئة", needsN:"العب {n} مباريات محسوبة كمان لتفتح {c}", needsShort:"{n} مباريات كمان للفتح", danger:"منطقة الخطر · خليك فوق {x}", to:"لـ", shareCard:"شارك البطاقة", seasonBtn:"الموسم", seasonT:"ترتيب الموسم", seasonRule:"الفوز ٣ نقاط · المشاركة نقطة", pts:"نقطة", seasonEmpty:"ما في مباريات مؤكدة هالشهر لسا.", rankUnlocked:"فئة جديدة", youReached:"وصلت لـ", backTo:"رجعت لـ", climbBack:"اربح مبارياتك الجاية لترجع تطلع.", winU:"فوز!", levelUp:"مستواك طلع.", matchDone:"تم تأكيد المباراة", nextTime:"المرة الجاية بترجعها.", orgSet:"حدده المنظم", okBtn2:"تمام", cardSaved:"انحفظت البطاقة بالتنزيلات.", b_first_win:"أول فوز", b_comeback:"العودة", b_night_owl:"بومة الليل", b_iron_man:"الرجل الحديدي", b_regular:"منتظم", b_champion:"بطل", apTitle:"اللاعبين (أدمن)", apSearch:"الاسم أو الرقم", apFind:"بحث", apAok:"مسموح بالفئة A", apTitleChk:"ربح بطولة (يضيف لقب)", apNote:"السبب", apNotePh:"ربح الفئة C، تشرين الثاني ٢٠٢٦", edit:"تعديل", provNote:"أول ٥ مباريات محسوبة لتحديد المستوى. الذهبي والماسي بينربحوا بسلسلة ترقية.",lvIntro:"جاوب على ٥ أسئلة سريعة. بعدها مستواك بيطلع أو بينزل مع كل نتيجة مباراة مؤكدة.", lvYour:"مستواك", lvCat:"الفئة", lvAnswer:"جاوب على الأسئلة الخمسة", lvNote:"المستويات من ٠٫٥ إلى ٧. الفئة E (حديدي) تحت ١٫٥، D (برونزي) ١٫٥–٢٫٥، C (فضي) ٢٫٥–٣٫٥، B (ذهبي) ٣٫٥–٤٫٥، A (ماسي) من ٤٫٥ وفوق.",
   q1:"من قديش عم تلعب بادل؟", q1a:"لسا عم ابدأ", q1b:"أقل من سنة", q1c:"من سنة لـ ٣ سنين", q1d:"أكتر من ٣ سنين",
   q2:"رياضات مضرب تانية؟", q2a:"لا", q2b:"شوي", q2c:"تنس أو سكواش بشكل منتظم",
   q3:"لعبك", q3a:"عم اتعلم خلي الطابة بالملعب", q3b:"بقدر كمّل تبادل بسرعة ثابتة", q3c:"بتبادل منيح وبلعب فولي عالشبكة", q3d:"بهاجم بالبانديخا والفيبورا والسماش",
   q4:"الجدران", q4a:"بتجنب اللعب عالجدران", q4b:"أحياناً برجّع من الجدار الخلفي", q4c:"بستخدم الجدار الخلفي والجانبي بتحكم",
-  q5:"البطولات", q5a:"ما لعبت ولا بطولة", q5b:"بطولات ودية أو بالنادي", q5c:"فئة B أو أعلى",
+  q5:"البطولات", q5a:"ما لعبت ولا بطولة", q5b:"بطولات ودية أو بالنادي", q5c:"وصلت للنهائي أو ربحت بفئة C أو D", q5d:"وصلت للنهائي أو ربحت بفئة B أو A",
   setLevel:"حدد مستواي", redoLevel:"أعد اختبار المستوى", yourLevel:"مستواك", ratedN:"مباريات محسوبة", levelCardHint:"حدد مستواك لتنضم لمباريات بمستواك.", myResults:"نتائجي", noResults:"العب مباراة مع ٣ لاعبين على Padel Live، وبعدها سجّل النتيجة هون.",
   inbox:"الإشعارات", noNotes:"ما في شي جديد.", someone:"لاعب",
   nJoined:"{n} انضم لمباراتك يوم {w}.", nLeft:"{n} طلع من مباراتك يوم {w}.", nDepOk:"تم تأكيد العربون. منشوفك بالملعب!", nClubCancel:"النادي ألغى الحجز يوم {w}.", nShareOk:"النادي أكد دفعتك.", nShareNo:"النادي ما لقى تحويلك. تأكد من الرقم أو ادفع بالنادي.", nResult:"{n} سجّل النتيجة. أكّدها لو سمحت.", nResultOk:"تم تأكيد النتيجة وتحديث مستواك.", nResultNo:"{n} بيقول النتيجة مو صحيحة. سجّلها من جديد.", nChat:"{n} كتب بمحادثة المباراة.",
@@ -1117,7 +1176,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v26";
+const VERSION = "v32";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -1155,6 +1214,7 @@ async function boot(){
     let h = location.hash.slice(1);
     if (!V[h] || ["club","checkout","done","reset"].includes(h)) h = "home";
     if (h === "home" && !S.user && !ls.get("pl-seen")) h = "welcome";
+    if (ls.get("pl-tjoin") && ["home", "welcome"].includes(h)) h = "tjoin";
     S.step = "page " + h; try { await within(go(h)); } catch (e) { S.lastErr = "page " + (e && e.message); S.view = "home"; render(); }
   }
   if (!boot.started){ boot.started = true; setInterval(poll, 15000); document.addEventListener("visibilitychange", () => { if (!document.hidden) poll(true); }); }
@@ -1346,9 +1406,9 @@ V.auth = (why) => { const up = S.authMode === "up";
  return `<main>${backBar(up ? t("signup") : t("signin"), "home", `<button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button>`)}
   ${why ? `<div class="card note">${esc(why)}</div>` : ""}
   <form id="authf" class="card" style="display:flex;flex-direction:column;gap:12px">
-   ${up ? `<label class="fld"><span>${t("name")}</span><input id="a-name" autocomplete="name" required></label><label class="fld"><span>${t("phone")}</span><input id="a-phone" inputmode="tel" autocomplete="tel" placeholder="+963 9XX XXX XXX" dir="ltr"></label>` : ""}
-   <label class="fld"><span>${t("email")}</span><input id="a-email" type="email" autocomplete="email" required dir="ltr"></label>
-   <label class="fld"><span>${t("pass")}</span><input id="a-pass" type="password" minlength="6" autocomplete="${up ? "new-password" : "current-password"}" required dir="ltr"></label>
+   ${up ? `<label class="fld"><span>${t("name")}</span><input id="a-name" autocomplete="name" required></label><label class="fld"><span>${t("phone")}</span><input id="a-phone" inputmode="tel" autocomplete="tel" placeholder="09XX XXX XXX" required dir="ltr"></label>`
+   : `<label class="fld"><span>${t("phoneOrEmail")}</span><input id="a-email" autocomplete="username" placeholder="09XX XXX XXX" required dir="ltr"></label>`}
+   <label class="fld"><span>${t("pass")}</span><input id="a-pass" type="password" minlength="6" placeholder="${t("passPh")}" autocomplete="${up ? "new-password" : "current-password"}" required dir="ltr"></label>
    <button class="cta blue wide" type="submit"${S.busyOp ? " disabled" : ""}>${S.busyOp ? "…" : up ? t("signup") : t("signin")}</button>
    ${up ? "" : `<button class="linkbtn" type="button" data-forgot>${t("forgot")}</button>`}
    <button class="ghost" type="button" data-mode>${up ? t("haveAcc") : t("newAcc")}</button>
@@ -1435,19 +1495,27 @@ const LV_Q = [
   ["q2", [["q2a", 0], ["q2b", 0.25], ["q2c", 0.5]]],
   ["q3", [["q3a", 0], ["q3b", 0.5], ["q3c", 1.0], ["q3d", 1.5]]],
   ["q4", [["q4a", 0], ["q4b", 0.4], ["q4c", 0.8]]],
-  ["q5", [["q5a", 0], ["q5b", 0.4], ["q5c", 0.8]]]];
+  ["q5", [["q5a", 0], ["q5b", 0.3], ["q5c", 0.6], ["q5d", 1.0]]]];
+const CAT_MID = {E: 1.0, D: 2.0, C: 3.0, B: 4.0, A: 5.0}, START_CAP = 3.49;
+/* combines the skill answers with the category the player says they play and their Playtomic level */
+function quizResult(a){ const base = Math.max(0.5, Math.min(5.5, 1 + LV_Q.reduce((s, [q, opts]) => s + (a[q] != null ? opts[a[q]][1] : 0), 0)));
+  const cat = ["E", "D", "C", "B", "A", null][a.q6 != null ? a.q6 : 5], pt = a.pt != null && a.pt !== "" && +a.pt >= 0.5 && +a.pt <= 7 ? +a.pt : null;
+  let raw = cat ? 0.6 * base + 0.4 * CAT_MID[cat] : base; if (pt != null) raw = 0.4 * raw + 0.6 * pt;
+  raw = Math.round(Math.max(0.5, Math.min(7, raw)) * 100) / 100;
+  return {raw, start: Math.min(START_CAP, raw), claim: {cat, pt, raw}}; }
 const lvl2 = l => l == null ? "–" : Number(l).toFixed(2);
-const lvCat = l => l == null ? "" : l >= 4.5 ? "A" : l >= 3.5 ? "B" : l >= 2.5 ? "C" : "D";
+const lvCat = l => l == null ? "" : l >= 4.5 ? "A" : l >= 3.5 ? "B" : l >= 2.5 ? "C" : l >= 1.5 ? "D" : "E";
 const lvChip = l => l == null ? `<span class="lv none">?</span>` : `<span class="lv c${lvCat(l)}">${lvl2(l)}</span>`;
 const myLevel = () => S.profile && S.profile.level_set ? Number(S.profile.level) : null;
 const inRange = (m, l) => m.level_min == null || l == null || (l >= +m.level_min && l <= +m.level_max);
 V.level = () => {
-  const a = S.quiz || {}, done = LV_Q.every(([q]) => a[q] != null);
-  const score = Math.max(0.5, Math.min(5.5, 1 + LV_Q.reduce((s, [q, opts]) => s + (a[q] != null ? opts[a[q]][1] : 0), 0)));
+  const a = S.quiz || {}, done = LV_Q.every(([q]) => a[q] != null) && a.q6 != null, R = quizResult(a), score = R.start; S.quizClaim = R.claim;
   return `<main>${backBar(t("lvTitle"), S.user ? "me" : "home")}
    <p class="note" style="margin:-6px 0 0">${t("lvIntro")}</p>
    ${LV_Q.map(([q, opts]) => `<div class="card" style="display:flex;flex-direction:column;gap:8px"><b>${t(q)}</b>${opts.map(([k], i) => `<button class="opt" data-quiz="${q}|${i}" aria-pressed="${a[q] === i}"><i></i><span><b>${t(k)}</b></span></button>`).join("")}</div>`).join("")}
-   <div class="card lvres"><span class="note">${t("lvYour")}</span>${done ? `<b class="lvbig">${lvl2(score)}</b><span class="tag l">${t("lvCat")} ${lvCat(score)}</span>` : `<span class="note">${t("lvAnswer")}</span>`}</div>
+   <div class="card" style="display:flex;flex-direction:column;gap:8px"><b>${t("q6")}</b><div class="chips" style="flex-wrap:wrap">${["E", "D", "C", "B", "A"].map((c, i) => `<button class="chip" data-quiz="q6|${i}" aria-pressed="${a.q6 === i}">${t("catU")} ${c}</button>`).join("")}<button class="chip" data-quiz="q6|5" aria-pressed="${a.q6 === 5}">${t("q6x")}</button></div></div>
+   <div class="card" style="display:flex;flex-direction:column;gap:8px"><b>${t("q7")}</b><span class="note" style="margin-top:-4px">${t("q7s")}</span><input id="q-pt" inputmode="decimal" placeholder="${t("q7ph")}" value="${a.pt != null ? esc(a.pt) : ""}" style="height:46px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:0 14px;font:inherit;font-size:16px"></div>
+   <div class="card lvres"><span class="note">${t("lvYour")}</span>${done ? `<b class="lvbig">${lvl2(score)}</b><span class="tag l">${t("lvCat")} ${lvCat(score)}</span>${R.raw > START_CAP ? `<span class="note">${t("lvCapped")}</span>` : ""}` : `<span class="note">${t("lvAnswer")}</span>`}</div>
    <p class="note" style="margin:0">${t("lvNote")} ${t("provNote")}</p>
   </main><div class="bar"><div class="sum"><small>${t("lvYour")}</small><b>${done ? lvl2(score) : "–"}</b></div><button class="cta blue" ${S.user ? "data-setlevel" : "data-guestlv"}="${done ? score.toFixed(2) : ""}"${done ? "" : " disabled"}>${S.user ? t("save") : t("rvReveal")}</button></div>`; };
 
@@ -1555,32 +1623,36 @@ function adminCard(){ if (!S.profile || !S.profile.is_admin) return "";
    <button class="ghost" type="submit">${t("addClub")}</button>${S.newClub ? `<div class="notice">${t("clubAdded")} <b dir="ltr">${esc(S.newClub.staff_code)}</b></div>` : ""}</form>`; }
 
 /* ---------- game layer: ranks, player card, celebrations, seasons ---------- */
-const TIER = {D: ["Bronze", "#D08B56"], C: ["Silver", "#CBD5DC"], B: ["Gold", "#E8C96A"], A: ["Diamond", "#8FE3FF"]};
+const TIER = {E: ["Iron", "#8E96A0"], D: ["Bronze", "#D08B56"], C: ["Silver", "#CBD5DC"], B: ["Gold", "#E8C96A"], A: ["Diamond", "#8FE3FF"]};
 const tierName = c => t("tier" + (c || "D"));
-function subTier(c){ if (!c || !c.category) return ""; const n = c.next || {}, lo = +n.lo, hi = +n.hi, l = +c.level;
-  const f = Math.max(0, Math.min(0.999, (l - lo) / (hi - lo || 1))); return ["I", "II", "III"][Math.floor(f * 3)]; }
+const DIV_EDGES = {E: [0.5, 0.83, 1.17, 1.5], D: [1.5, 1.83, 2.17, 2.5], C: [2.5, 2.83, 3.17, 3.5], B: [3.5, 3.83, 4.17, 4.5], A: [4.5, 5.0, 5.5, 7]};
+const divIdx = (level, cat) => { const e = DIV_EDGES[cat || "D"], l = +level; return l >= e[2] ? 2 : l >= e[1] ? 1 : 0; };   // 0 = III, 2 = I
+const divName = i => ["III", "II", "I"][i];
+function subTier(c){ if (!c || !c.category) return ""; return divName(divIdx(c.level, c.category)); }
 const emblem = (col, size) => `<svg viewBox="0 0 100 100" width="${size}" height="${size}" aria-hidden="true"><path d="M50 4 L90 20 L90 52 C90 76 70 90 50 97 C30 90 10 76 10 52 L10 20 Z" fill="${col}" stroke="rgba(0,0,0,.45)" stroke-width="3"/><path d="M50 14 L80 26 L80 52 C80 70 66 81 50 87 C34 81 20 70 20 52 L20 26 Z" fill="#14110A"/><circle cx="50" cy="50" r="18" fill="none" stroke="${col}" stroke-width="5"/><path d="M36 42 Q50 50 64 42 M36 58 Q50 50 64 58" stroke="${col}" stroke-width="3" fill="none"/><path d="M30 76 L50 70 L70 76" stroke="#E3EE3A" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`;
 const BADGE_IC = {first_win: "🏅", comeback: "🔁", night_owl: "🌙", iron_man: "🔥", regular: "🎾", champion: "🏆"};
-function progressInfo(c){ const n = c.next || {}, l = +c.level;
-  if (!n.up_cat) return {pct: 100, txt: t("topCat")};
-  const pct = Math.max(3, Math.min(100, (l - n.lo) / (n.up_at - n.lo) * 100));
-  if (n.needs && l >= n.up_at) return {pct: 100, txt: t("needsN").replace("{n}", n.needs).replace("{c}", tierName(n.up_cat))};
-  if (n.down_at != null && l < n.lo) return {pct, txt: t("danger").replace("{x}", (+n.down_at).toFixed(2)), danger: true};
-  return {pct, txt: `+${Math.max(0.01, n.up_at - l).toFixed(2)} ${t("to")} ${tierName(n.up_cat)}${n.needs ? ` · ${t("needsShort").replace("{n}", n.needs)}` : ""}`};
+function progressInfo(c){ const l = +c.level, cat = c.category || "D", e = DIV_EDGES[cat], dv = divIdx(l, cat), order = ["E", "D", "C", "B", "A"];
+  if (c.placement > 0){ const done = 5 - c.placement; return {placement: true, done, pct: done / 5 * 100, txt: tf("plLeft", {n: c.placement})}; }
+  if (c.shield) return {pct: 4, txt: tf("shieldTxt", {t: tierName(cat)}), danger: true, shield: true};
+  if (c.series) return {series: true, w: +c.series.w || 0, l: +c.series.l || 0, to: c.series.to, txt: tf("serTxt", {t: tierName(c.series.to)})};
+  const lo = e[0], hi = e[3], pct = Math.max(3, Math.min(100, (l - lo) / (hi - lo) * 100));
+  if (cat === "A" && dv === 2) return {pct, txt: `${t("topDiv")} · ${tierName("A")} I`};
+  const nxt = e[dv + 1], toTier = dv === 2, label = toTier ? tierName(order[order.indexOf(cat) + 1]) : `${tierName(cat)} ${divName(dv + 1)}`;
+  return {pct, txt: `+${Math.max(0.01, nxt - l).toFixed(2)} ${t("to")} ${label}`, marks: [e[1], e[2]].map(x => (x - lo) / (hi - lo) * 100)};
 }
 function playerCard(c){
   if (!c || !c.level_set) return `<button class="card lvprompt" data-go="level"><b>${t("setLevel")} →</b><span class="note">${t("levelCardHint")}</span></button>`;
-  const [tn, col] = TIER[c.category || "D"], st = subTier(c), pr = progressInfo(c), played = c.wins + c.losses;
+  const pl = c.placement > 0, [tn, col0] = TIER[c.category || "D"], col = pl ? "#B47CFF" : col0, st = subTier(c), pr = progressInfo(c), played = c.wins + c.losses;
   const wr = played ? Math.round(c.wins / played * 100) + "%" : "–";
-  return `<div class="gcard-wrap"><div class="pcard gc t-${c.category || "D"}" style="--tc:${col}" data-tilt><div class="pc-in">
-    <span class="gc-bg"></span><span class="gc-pat"></span><span class="gc-rays"></span><span class="pc-holo"></span><span class="gc-spark"></span>
+  return `<div class="gcard-wrap"><div class="pcard gc t-${pl ? "P" : c.category || "D"}" style="--tc:${col}" data-tilt><div class="pc-in">
+    <span class="gc-bg"></span><span class="gc-pat"></span><span class="gc-rays"></span><span class="pc-holo"></span><span class="gc-spark"></span>${pl ? `<span class="gc-scan"></span><span class="gc-qs">${"?".repeat(14).split("").map((q, i) => `<i style="--i:${i}">?</i>`).join("")}</span>` : ""}
     ${c.streak >= 2 ? `<span class="pc-streak">🔥 ${c.streak} ${t("weeks")}</span>` : ""}
-    <div class="pc-top"><div class="pc-ovr"><b>${(+c.level).toFixed(2)}</b><small>${t("lvlU")}</small></div><div class="pc-rank">${emblem(col, 50)}<span class="gc-rib">${esc(tierName(c.category))} ${st}</span></div></div>
+    <div class="pc-top"><div class="pc-ovr"><b>${pl ? "?" : (+c.level).toFixed(2)}</b><small>${t("lvlU")}</small></div><div class="pc-rank">${emblem(col, 50)}<span class="gc-rib">${pl ? tf("plTag", {n: pr.done}) : pr.series ? tf("serTag", {w: pr.w, l: pr.l}) : `${esc(tierName(c.category))} ${st}`}</span></div></div>
     <div class="gc-avw"><span class="gc-ring"></span><div class="pc-av">${esc(initials(c.name))}</div></div>
-    <div class="pc-name"><span class="gc-plate"><b>${esc(c.name || "")}</b></span><small>${t("catU")} ${esc(c.category || "–")}${c.provisional ? ` · ${t("provisional")}` : ""}</small></div>
+    <div class="pc-name"><span class="gc-plate"><b>${esc(c.name || "")}</b></span><small>${pl ? t("plSub") : `${t("catU")} ${esc(c.category || "–")}${c.shield ? " · 🛡️" : ""}`}</small></div>
     <div class="pc-stats"><div><i>⚔️</i><b>${wr}</b><span>${t("winRate")}</span></div><div><i>🎾</i><b>${played}</b><span>${t("matchesU")}</span></div><div><i>👑</i><b>${c.season && c.season.rank ? "#" + c.season.rank : "–"}</b><span>${c.season ? esc(c.season.club) : t("seasonU")}</span></div></div>
    </div></div></div>
-   <div class="pc-prog${pr.danger ? " danger" : ""}"><div class="bar"><i style="width:${pr.pct}%"></i></div><div class="lbl"><span>${esc(tierName(c.category))} ${st} · ${esc(c.category || "")}</span><em>${esc(pr.txt)}</em></div></div>
+   <div class="pc-prog${pr.danger ? " danger" : ""}${pl ? " plc" : ""}${pr.series ? " plc ser" : ""}">${pr.series ? `<div class="pips">${[0, 1, 2].map(i => `<i class="${i < pr.w ? "on" : i < pr.w + pr.l ? "x" : ""}"></i>`).join("")}</div>` : pl ? `<div class="pips">${[0, 1, 2, 3, 4].map(i => `<i class="${i < pr.done ? "on" : ""}"></i>`).join("")}</div>` : `<div class="bar"><i style="width:${pr.pct}%"></i>${(pr.marks || []).map(m => `<b style="left:${m}%"></b>`).join("")}</div>`}<div class="lbl"><span>${pl ? tf("plTag", {n: pr.done}) : pr.series ? `${t("serT")} → ${esc(tierName(pr.to))}` : `${esc(tierName(c.category))} ${st} · ${esc(c.category || "")}`}</span><em>${esc(pr.txt)}</em></div></div>
    <div class="pc-badges">${[...(S.wi && S.wi.quest && (S.wi.quest.done || S.wi.quest.new) ? [{k: "rookie", got: !!S.wi.quest.done}] : []), ...(c.badges || []), ...achList(S.myAch)].map(b => `<div class="bd${b.got ? "" : " lock"}"><i>${BADGE_IC[b.k] || "★"}</i>${t("b_" + b.k)}${S.rarity && S.rarity[b.k] != null ? `<small class="rar">${tf("rarity", {p: S.rarity[b.k]})}</small>` : ""}</div>`).join("")}</div>
    <div class="row" style="gap:10px"><button class="cta gold wide" data-sharecard>${t("shareCard")} ↗</button>${c.season ? `<button class="ghost" style="width:auto;padding:0 16px" data-season="${c.season.club_id}">${t("seasonBtn")}</button>` : ""}</div>`;
 }
@@ -1596,23 +1668,33 @@ function celebrate(){
   try { if (sessionStorage.getItem("pl-celeb") === String(c.id)) return; sessionStorage.setItem("pl-celeb", String(c.id)); } catch (e) {}
   const up = c.cat_after && c.cat_before && _rank(c.cat_after) > _rank(c.cat_before), down = c.cat_after && c.cat_before && _rank(c.cat_after) < _rank(c.cat_before);
   const d = c.after != null && c.before != null ? +c.after - +c.before : 0, [, col] = TIER[c.cat_after || "D"];
-  let kick, big, sub, conf = false;
-  if (c.note){ kick = t("orgSet"); big = `${tierName(c.cat_after)} · ${c.cat_after}`; sub = c.note; conf = up; }
+  let kick, big, sub, conf = false, reveal = false;
+  const dB = divIdx(c.before, c.cat_before || c.cat_after), dA = divIdx(c.after, c.cat_after);
+  if (c.rated != null && c.rated < 5 && !c.note){ kick = tf("plTag", {n: c.rated}); big = c.won ? t("winU") : t("matchDone"); sub = tf("plLeft", {n: 5 - c.rated}); conf = !!c.won; }
+  else if (c.rated === 5 && !c.note){ kick = t("plDone"); big = `${tierName(c.cat_after)} ${divName(dA)}`; sub = t("plRevealed"); conf = true; reveal = true; }
+  else if (c.shield === "series_on"){ const to = (S.card && S.card.series && S.card.series.to) || ""; kick = "⚔️ " + t("serT"); big = tierName(to); sub = tf("serTxt", {t: tierName(to)}); conf = true; }
+  else if (c.shield === "series_w" || c.shield === "series_l"){ const sr = (S.card && S.card.series) || {}; kick = "⚔️ " + t("serT") + ` ${sr.w || 0}–${sr.l || 0}`; big = c.shield === "series_w" ? t("winU") : t("matchDone"); sub = tf("serTxt", {t: tierName(sr.to)}); conf = c.shield === "series_w"; }
+  else if (c.shield === "series_weak"){ const sr = (S.card && S.card.series) || {}; kick = "⚔️ " + t("serT"); big = t("winU"); sub = tf("serWeak", {t: tierName(sr.to)}); }
+  else if (c.shield === "series_fail"){ kick = t("serFailT"); big = tf("stillT", {t: tierName(c.cat_after)}); sub = t("serFail"); }
+  else if (c.shield === "on"){ kick = "🛡️ " + t("shieldOn"); big = tierName(c.cat_after); sub = tf("shieldTxt", {t: tierName(c.cat_after)}); }
+  else if (c.shield === "saved"){ kick = "🛡️ " + t("shieldHeld"); big = tf("stillT", {t: tierName(c.cat_after)}); sub = t("shieldSaved"); conf = true; }
+  else if (c.note){ kick = t("orgSet"); big = `${tierName(c.cat_after)} · ${c.cat_after}`; sub = c.note; conf = up; }
   else if (up){ kick = t("rankUnlocked"); big = tierName(c.cat_after); sub = `${t("youReached")} ${t("catU")} ${c.cat_after}`; conf = true; }
   else if (down){ kick = t("backTo"); big = tierName(c.cat_after); sub = t("climbBack"); }
+  else if (c.cat_after === c.cat_before && dA > dB){ kick = t("divUp"); big = `${tierName(c.cat_after)} ${divName(dA)}`; sub = `${tierName(c.cat_before)} ${divName(dB)} → ${tierName(c.cat_after)} ${divName(dA)}`; conf = true; }
   else if (c.won){ kick = t("winU"); big = `+${Math.abs(d).toFixed(2)}`; sub = t("levelUp"); conf = true; }
   else { kick = t("matchDone"); big = `${d >= 0 ? "+" : "−"}${Math.abs(d).toFixed(2)}`; sub = t("nextTime"); }
-  const el = document.createElement("div"); el.id = "celeb"; el.className = "celeb" + (conf ? " party" : "");
+  const el = document.createElement("div"); el.id = "celeb"; el.className = "celeb" + (conf ? " party" : "") + (reveal ? " reveal" : "") + (c.shield === "on" ? " shieldc" : "");
   el.innerHTML = `<div class="cl-rays"></div><div class="cl-conf"></div><div class="cl-in"><span class="cl-kick">${esc(kick)}</span>
     <div class="cl-emb">${emblem(col, 170)}</div><h1>${esc(big)}</h1>
-    <div class="cl-delta"><span>${(+c.before).toFixed(2)}</span>→<span><em>${(+c.after).toFixed(2)}</em></span></div><p>${esc(sub)}</p>
+    <div class="cl-delta"${c.rated != null && c.rated < 5 ? ' style="display:none"' : ""}><span>${(+c.before).toFixed(2)}</span>→<span><em>${(+c.after).toFixed(2)}</em></span></div><p>${esc(sub)}</p>
     <div class="row" style="gap:10px;width:100%"><button class="cta gold wide" data-celebshare>${t("shareCard")}</button><button class="ghost" data-celebok style="color:#F4F1E6;border-color:rgba(244,241,230,.35);background:transparent">${t("okBtn2")}</button></div></div>`;
   document.body.appendChild(el);
   if (conf){ const cf = el.querySelector(".cl-conf"), cols = ["#E8C96A", "#E3EE3A", "#FFF3C4", "#E5484D", "#5B8FE0"];
     for (let i = 0; i < 60; i++){ const x = document.createElement("i"); x.style.left = Math.random() * 100 + "%"; x.style.background = cols[i % 5]; x.style.animationDuration = (2.4 + Math.random() * 2.6) + "s"; x.style.animationDelay = (-Math.random() * 4) + "s"; cf.appendChild(x); } }
   try { navigator.vibrate && navigator.vibrate(conf ? [60, 40, 120] : 40); } catch (e) {}
 }
-const _rank = c => ({D: 0, C: 1, B: 2, A: 3})[c] ?? -1;
+const _rank = c => ({E: 0, D: 1, C: 2, B: 3, A: 4})[c] ?? -1;
 async function closeCeleb(){ const el = document.getElementById("celeb"); if (el) el.remove(); try { await sb.rpc("mark_seen"); } catch (e) {} if (S.card) S.card.celebrate = null; }
 document.addEventListener("click", async e => {
   if (e.target.closest("[data-celebok]")){ closeCeleb(); return; }
@@ -1646,11 +1728,15 @@ async function shareCard(){
   const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "padel-live-card.png"; document.body.appendChild(a); a.click(); a.remove(); toast(t("cardSaved"));
 }
 function adminPlayers(){ if (!S.profile || !S.profile.is_admin) return "";
-  return `<form id="apF" class="card" style="display:flex;flex-direction:column;gap:10px"><b>${t("apTitle")}</b><div class="row" style="gap:8px"><input id="ap-q" placeholder="${t("apSearch")}" style="flex:1;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:0 12px"><button class="cta blue sm" type="submit">${t("apFind")}</button></div>
+  const cl = S.claims || [];
+  return `${cl.length ? `<div class="card" style="display:flex;flex-direction:column;gap:8px"><b>⚑ ${t("clT")} · ${cl.length}</b><span class="note" style="margin-top:-4px">${t("clS")}</span>${cl.map(p => `<div class="aprow"><div class="row" style="justify-content:space-between;gap:8px"><b>${esc(p.name)}</b><span class="note" dir="ltr">${esc(p.phone || "")}</span></div>
+     <span class="note">${t("clNow")} ${(+p.level).toFixed(2)} · ${p.rated} ${t("ratedN")} — ${t("clSaid")}: ${p.claim.cat ? t("catU") + " " + esc(p.claim.cat) : "–"}${p.claim.src === "invite" ? " (invite)" : ""}${p.claim.pt ? ` · Playtomic ${esc(p.claim.pt)}` : ""} · ${t("clEst")} ${(+p.claim.raw).toFixed(2)}</span>
+     <div class="row" style="gap:8px"><button class="sbtn" type="button" data-clset="${p.id}">${t("clSet")}</button><button class="sbtn" type="button" data-cldone="${p.id}">${t("clOk")}</button></div></div>`).join("")}</div>` : ""}<form id="apF" class="card" style="display:flex;flex-direction:column;gap:10px"><b>${t("apTitle")}</b><div class="row" style="gap:8px"><input id="ap-q" placeholder="${t("apSearch")}" style="flex:1;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:0 12px"><button class="cta blue sm" type="submit">${t("apFind")}</button></div>
    ${(S.apList || []).map(p => `<div class="aprow"><div class="row" style="justify-content:space-between;gap:8px"><b>${esc(p.name)}</b><span class="note" dir="ltr">${esc(p.phone || "")}</span></div>
-     ${S.apEdit === p.id ? `<div class="grid2"><label class="fld"><span>${t("lvl")}</span><input id="ap-l" inputmode="decimal" value="${(+p.level).toFixed(2)}"></label><label class="fld"><span>${t("catU")}</span><select id="ap-c">${["D","C","B","A"].map(x => `<option${p.category === x ? " selected" : ""}>${x}</option>`).join("")}</select></label></div>
+     ${S.apEdit === p.id ? `<div class="grid2"><label class="fld"><span>${t("lvl")}</span><input id="ap-l" inputmode="decimal" value="${(+p.level).toFixed(2)}"></label><label class="fld"><span>${t("catU")}</span><select id="ap-c">${["E","D","C","B","A"].map(x => `<option${p.category === x ? " selected" : ""}>${x}</option>`).join("")}</select></label></div>
        <label class="row" style="font-size:14px;gap:8px"><input type="checkbox" id="ap-a"${p.a_ok ? " checked" : ""}> ${t("apAok")}</label><label class="row" style="font-size:14px;gap:8px"><input type="checkbox" id="ap-t"> ${t("apTitleChk")}</label>
-       <label class="fld"><span>${t("apNote")}</span><input id="ap-n" placeholder="${t("apNotePh")}"></label><button class="cta blue sm" type="button" data-apsave="${p.id}">${t("save")}</button>`
+       <label class="fld"><span>${t("apNote")}</span><input id="ap-n" placeholder="${t("apNotePh")}"></label><button class="cta blue sm" type="button" data-apsave="${p.id}">${t("save")}</button>
+       <div class="row" style="gap:8px;align-items:flex-end"><label class="fld" style="flex:1"><span>${t("apPass")}</span><input id="ap-pw" dir="ltr" placeholder="${t("passPh")}"></label><button class="sbtn" type="button" data-appw="${p.id}">${t("apPassBtn")}</button></div>`
      : `<div class="row" style="justify-content:space-between"><span class="note">${(+p.level).toFixed(2)} · ${t("catU")} ${esc(p.category || "–")} · ${p.rated} ${t("ratedN")}${p.titles ? ` · 🏆 ${p.titles}` : ""}</span><button class="sbtn" type="button" data-apedit="${p.id}">${t("edit")}</button></div>`}</div>`).join("")}</form>`; }
 
 /* ---------- v6: leagues, coaches & classes, memberships, club dashboard ---------- */
@@ -1833,7 +1919,7 @@ V.leagueEdit = () => { if (!S.profile || !S.profile.is_admin) return V.events();
    <div class="grid2"><label class="fld"><span>${t("lgStartD")}</span><input id="le-s" type="date" value="${esc(f.starts_on || today)}"></label><label class="fld"><span>${t("lgEndD")}</span><input id="le-e" type="date" value="${esc(f.ends_on || "")}"></label>
    <label class="fld"><span>${t("lgRoundDays")}</span><input id="le-rd" inputmode="numeric" value="${f.round_days || 14}"></label><label class="fld"><span>${t("lgBoxSize")}</span><input id="le-bx" inputmode="numeric" value="${f.box_size || 4}"></label>
    <label class="fld"><span>${t("lgFeeL")}</span><input id="le-fee" inputmode="decimal" value="${f.fee != null ? +f.fee : 0}"></label></div>
-   <b style="font-size:13px">${t("lgCats")}</b><div class="chips">${["D","C","B","A"].map(c => `<button type="button" class="chip" data-lecat="${c}" aria-pressed="${(f.categories || []).includes(c)}">${c}</button>`).join("")}</div>
+   <b style="font-size:13px">${t("lgCats")}</b><div class="chips">${["E","D","C","B","A"].map(c => `<button type="button" class="chip" data-lecat="${c}" aria-pressed="${(f.categories || []).includes(c)}">${c}</button>`).join("")}</div>
    <label class="fld"><span>${t("lgPrizeL")}</span><input id="le-prize" value="${esc(f.prize || "")}" placeholder="$500 + trophies"></label>
    <label class="fld"><span>${t("lgAbout")}</span><textarea id="le-about" rows="3">${esc(f.about || "")}</textarea></label>
    <button class="cta blue wide" type="submit">${t("lgSave")}</button></form>
@@ -1929,7 +2015,7 @@ function nText2(n){ const d = n.data || {}, nm = esc(d.name || t("someone")), w 
     league_round: tf("nLgRound", {r: d.round, x, b: d.box, d: esc(d.until || "")}), league_result: tf("nLgResult", {n: nm}),
     league_disputed: tf("nLgDisp", {n: nm}), league_champ: tf("nLgChamp", {x, c}), booking_new: tf(d.pending ? "nBookingDep" : "nBooking", {n: nm, k: esc(d.court || ""), w}), league_sched: tf("nLgSched", {n: nm, w, c}), league_ref: tf("nLgRef", {x, w, c: c ? "· " + c : ""}), league_ref_set: tf("nLgRefSet", {n: nm, w}), league_final: t("nLgFinal"),
     match_open: tf("nMatchOpen", {n: nm, r: d.round, c, w}), rematch: tf("nRematch", {n: nm, c, w}), club_post: tf("nClubPost", {c, x: esc(d.title || "")}), morning: tf("nMorning", {c, r: d.round, b: d.box}),
-    tour_partner: tf("nTPartner", {n: nm, x, c}), tour_req: tf("nTReq", {n: nm, x, c}), tour_ok: tf("nTOk", {x, c}), tour_no: tf("nTNo", {x, c}) , invite_joined: tf("nInvJoined", {n: nm}), late_cancel: tf("nLateCancel", {n: esc(d.n || ""), b: d.b, w: esc(d.w || "")}), level_ok: tf("nLevelOk", {c: esc(d.c || "")}), wallet_refund: tf("nWRefund", {x: money(+d.x), c: esc(d.c || "")}), wallet_topup: tf("nWTopup", {x: money(+d.x), c: esc(d.c || "")}), wallet_no: tf("nWNo", {x: money(+d.x), c: esc(d.c || "")}), wallet_req: tf("nWReq", {n: nm, x: money(+d.x)}), result_auto: t("nResAuto"), deposit_expired: tf("nDepExp", {b: d.b}), join_expired: tf("nJoinExp", {b: d.b}), reminder: tf("nRemind", {w: esc(d.w || ""), c: esc(d.c || ""), x: esc(d.x || "")})})[n.kind]; }
+    tour_partner: tf("nTPartner", {n: nm, x, c}), tour_req: tf("nTReq", {n: nm, x, c}), tour_ok: tf("nTOk", {x, c}), tour_no: tf("nTNo", {x, c}) , invite_joined: tf("nInvJoined", {n: nm}), late_cancel: tf("nLateCancel", {n: esc(d.n || ""), b: d.b, w: esc(d.w || "")}), level_ok: tf("nLevelOk", {c: esc(d.c || "")}), wallet_refund: tf("nWRefund", {x: money(+d.x), c: esc(d.c || "")}), wallet_topup: tf("nWTopup", {x: money(+d.x), c: esc(d.c || "")}), wallet_no: tf("nWNo", {x: money(+d.x), c: esc(d.c || "")}), wallet_req: tf("nWReq", {n: nm, x: money(+d.x)}), result_auto: t("nResAuto"), deposit_expired: tf("nDepExp", {b: d.b}), join_expired: tf("nJoinExp", {b: d.b}), reminder: tf("nRemind", {w: esc(d.w || ""), c: esc(d.c || ""), x: esc(d.x || "")}), tour_joined: tf("nTJoined", {n: nm, x: esc(d.title || ""), c: esc(d.cat || "")}), tour_result: tf("nTResult", {n: esc(d.name || ""), x: esc(d.title || "")}), tour_start: tf("nTStart", {n: esc(d.name || ""), w: esc(d.when || ""), c: esc(d.club || ""), x: esc(d.title || "")}), tour_recap: tf("nTRecap", {x: esc(d.title || ""), r: esc(d.x || "")})})[n.kind]; }
 const nLink = n => n.kind === "invite_joined" ? `data-go="home"` : n.kind === "wallet_req" ? `data-go="manager"` : /^wallet_/.test(n.kind) ? `data-go="wallet"` : n.kind === "late_cancel" ? `data-go="manager"` : n.kind === "level_ok" ? `data-go="me"` : /^tour_/.test(n.kind) && n.data && n.data.slug ? `data-turl="t.html?${esc(encodeURIComponent(n.data.slug))}"` : n.kind === "club_post" && n.data && n.data.club_id ? `data-club="${esc(n.data.club_id)}"` : n.kind === "morning" ? `data-go="manager"` : n.kind === "booking_new" ? `data-go="manager"` : /^league_/.test(n.kind) ? `data-go="events"` : /^member_/.test(n.kind) ? (n.kind === "member_req" ? `data-go="manager"` : `data-go="me"`) : /^class_/.test(n.kind) || n.kind === "lesson_new" ? `data-go="me"` : "";
 
 function lgGrab(){ const v = id => { const el = document.getElementById(id); return el ? el.value : undefined; }; const f = S.lgForm || (S.lgForm = {});
@@ -2189,9 +2275,11 @@ async function go(v){
   if (v === "wallet" || v === "checkout" || v === "me" || v === "club" || v === "matches" || v === "home") await loadWallet();
   if (v === "home" || v === "me") await loadWeek();
   if (v === "me" || v === "matches" || v === "home") await loadMeExtras();
+  if (v === "me") await loadClaims();
   if (v !== "checkin") ciStop(); else S.ciRes = null;
   if (v === "events"){ try { const [r, lg] = await within(Promise.all([sb.rpc("t_list"), sb.rpc("league_list")]), 8000); S.tours = r.data || []; S.leagues = lg.data || []; } catch (e) {} }
   if (v === "league"){ if (S.leagueId) await loadLeague(S.leagueId); }
+  if (v === "tjoin") await loadTJ();
   if (v === "matches" || v === "home" || v === "welcome"){ const [m] = await Promise.all([sb.rpc("open_matches"), v === "home" ? loadFeed() : null, v !== "matches" ? loadWI() : null, v === "home" ? loadRatePend() : null, v === "home" && S.user && S.profile && S.profile.home_club ? loadClubPosts() : null]); S.matches = m.data || S.matches; }
   if (v === "feed"){ await loadFeed(); }
   if (v === "me" && S.user){ const [mine, rs, pf] = await Promise.all([sb.rpc("my_bookings"), sb.rpc("my_results"), sb.from("profiles").select("*").eq("id", S.user.id).maybeSingle()]); S.mine = mine.data || []; S.results = rs.data || []; if (pf.data) S.profile = pf.data; loadNotifN(); const [mc, rf] = await Promise.all([sb.rpc("my_classes"), sb.rpc("league_ref_matches")]); S.myClasses = mc.data || []; S.myRefs = rf.data || []; await Promise.all([loadCard(), loadMems()]); }
@@ -2331,7 +2419,7 @@ app.addEventListener("click", async e => {
   if ("mode" in d){ S.authMode = S.authMode === "up" ? "in" : "up"; render(); return; }
   if ("dark" in d){ const r = document.documentElement; r.dataset.theme = r.dataset.theme === "dark" ? "light" : "dark"; render(); return; }
   if ("install" in d){ if (installEvt){ installEvt.prompt(); try { await installEvt.userChoice; } catch (x) {} installEvt = null; render(); } else toast(isIOS() ? t("iosHow") : t("andHow")); return; }
-  if ("forgot" in d){ const em = (document.getElementById("a-email") || {}).value || ""; if (!em.trim()){ toast(t("needEmail")); document.getElementById("a-email").focus(); return; }
+  if ("forgot" in d){ const em = (document.getElementById("a-email") || {}).value || ""; if (!em.includes("@")){ toast(t("forgotPhone")); return; }
     b.disabled = true; const r = await sb.auth.resetPasswordForEmail(em.trim(), {redirectTo: location.origin + location.pathname}); b.disabled = false;
     toast(r.error ? errMsg(r.error) : t("resetSent")); return; }
   if ("delacc" in d){ if (!confirm(t("delQ"))) return; const r = await sb.rpc("delete_my_account"); if (r.error){ toast(errMsg(r.error)); return; }
@@ -2355,11 +2443,12 @@ app.addEventListener("click", async e => {
   if ("sharecard" in d){ shareCard(); return; }
   if (d.season){ S.boardClubId = d.season; S.lbTab = "week"; go("season"); return; }
   if (d.apedit){ S.apEdit = d.apedit; render(); return; }
+  if (d.appw){ const r = await sb.rpc("admin_set_password", {p_user: d.appw, p_pass: document.getElementById("ap-pw").value}); if (r.error){ toast(errMsg(r.error)); return; } document.getElementById("ap-pw").value = ""; toast(t("apPassOk")); return; }
   if (d.apsave){ const r = await sb.rpc("admin_set_player", {p_user: d.apsave, p_level: +document.getElementById("ap-l").value, p_cat: document.getElementById("ap-c").value, p_aok: document.getElementById("ap-a").checked, p_title: document.getElementById("ap-t").checked, p_note: document.getElementById("ap-n").value});
     if (r.error){ toast(errMsg(r.error)); return; } toast(t("saved")); S.apEdit = null; const q = await sb.rpc("admin_find_players", {p_q: S.apQ || ""}); S.apList = q.data || []; render(); return; }
   if (d.match){ S.matchId = d.match; S.partner = null; go("match"); return; }
   if (d.quiz){ const [q, i] = d.quiz.split("|"); S.quiz[q] = +i; render(); return; }
-  if ("setlevel" in d && d.setlevel){ const first = !(S.profile && S.profile.level_set); const r = await sb.rpc("set_my_level", {p_level: +d.setlevel}); if (r.error){ toast(errMsg(r.error)); return; } toast(t("saved")); await afterAuth(true); if (first){ S.revealLevel = +d.setlevel; go("reveal"); } else go("me"); return; }
+  if ("setlevel" in d && d.setlevel){ const first = !(S.profile && S.profile.level_set); const r = await sb.rpc("set_my_level", {p_level: +d.setlevel, p_claim: S.quizClaim || null}); if (r.error){ toast(errMsg(r.error)); return; } toast(t("saved")); await afterAuth(true); if (first){ S.revealLevel = +d.setlevel; go("reveal"); } else go(ls.get("pl-tjoin") ? "tjoin" : "me"); return; }
   if ("guestlv" in d && d.guestlv){ S.revealLevel = +d.guestlv; go("reveal"); return; }
   if (d.partner){ S.partner = d.partner; render(); return; }
   if ("confres" in d){ const r = await sb.rpc("confirm_result", {p_booking: S.match.id, p_ok: d.confres === "1"}); if (r.error) toast(errMsg(r.error)); else toast("✓"); await afterAuth(true); await loadMatch(S.match.id); render(); setTimeout(celebrate, 300); return; }
@@ -2377,14 +2466,16 @@ app.addEventListener("click", async e => {
 app.addEventListener("submit", async e => {
   e.preventDefault(); const f = e.target;
   if (f.id === "authf"){
-    const email = document.getElementById("a-email").value.trim(), password = document.getElementById("a-pass").value;
+    let email = ((document.getElementById("a-email") || {}).value || "").trim(); const password = document.getElementById("a-pass").value;
     const sbtn = f.querySelector('button[type="submit"]'); if (sbtn){ sbtn.disabled = true; sbtn.textContent = "…"; }
     let r;
     if (S.authMode === "up"){
       const full_name = (f.querySelector("#a-name") || {}).value, phone = (f.querySelector("#a-phone") || {}).value;
-      r = await sb.auth.signUp({email, password, options:{data:{full_name: (full_name || "").trim(), phone: (phone || "").trim()}}});
-      if (!r.error && !r.data.session){ S.authMode = "in"; render(); toast("Check your email to confirm your account, then sign in."); return; }
-    } else r = await sb.auth.signInWithPassword({email, password});
+      const ps = await sb.rpc("phone_signup", {p_name: (full_name || "").trim(), p_phone: (phone || "").trim(), p_pass: password});
+      r = ps.error ? ps : await sb.auth.signInWithPassword({email: ps.data, password});
+    } else {
+      if (!email.includes("@")){ const pl = await sb.rpc("phone_login", {p_phone: email, p_pass: password}); if (pl.error) r = pl; else if (!pl.data) r = {error: {message: t("wrongLogin")}}; else email = pl.data; }
+      if (!r) r = await sb.auth.signInWithPassword({email, password}); }
     if (r.error){ if (sbtn){ sbtn.disabled = false; sbtn.textContent = S.authMode === "up" ? t("signup") : t("signin"); } toast(errMsg(r.error)); return; }
     S.user = r.data.user || (r.data.session && r.data.session.user); await afterAuth(true);
     go(S.slot ? "checkout" : nextOnboard()); return; }
@@ -2887,13 +2978,13 @@ const ls = { get: k => { try { return localStorage.getItem(k); } catch (e) { ret
 
 async function loadWI(){ try { const r = await sb.rpc("welcome_info"); if (!r.error) S.wi = r.data; } catch (e) {} }
 const isRookie = () => !S.user || !!(S.wi && S.wi.quest && (S.wi.quest.new || (S.wi.quest.rated || 0) < 5) && !S.wi.quest.done);
-const nextOnboard = () => S.user && S.profile && !S.profile.home_club && !ls.get("pl-noclub") ? "pickclub" : "home";
+const nextOnboard = () => ls.get("pl-tjoin") ? "tjoin" : S.user && S.profile && !S.profile.home_club && !ls.get("pl-noclub") ? "pickclub" : "home";
 
 /* after sign in / sign up: save the guest's quiz level and the invite */
 async function onbAfterAuth(){
   if (!S.user || !S.profile) return;
   const pl = ls.get("pl-plevel");
-  if (pl && !S.profile.level_set){ const r = await sb.rpc("set_my_level", {p_level: +pl}); if (!r.error){ S.profile.level_set = true; S.profile.level = +pl; await loadCard(); } }
+  if (pl && !S.profile.level_set){ let cl = null; try { cl = JSON.parse(ls.get("pl-pclaim") || "null"); } catch (e) {} const r = await sb.rpc("set_my_level", {p_level: +pl, p_claim: cl}); if (!r.error){ S.profile.level_set = true; S.profile.level = +pl; await loadCard(); } }
   ls.del("pl-plevel");
   const ref = ls.get("pl-ref"); if (ref){ try { await sb.rpc("set_invited_by", {p_ref: ref}); } catch (e) {} ls.del("pl-ref"); }
   ls.set("pl-seen", "1");
@@ -2918,7 +3009,7 @@ const dayKey = d => new Intl.DateTimeFormat("en-CA", {timeZone: TZ}).format(d);
 function tourBanner(){
   const ts = (S.wi && S.wi.tours || []).filter(x => !ls.get("pl-tx-" + x.slug)); if (!ts.length) return "";
   const x = ts[0], d = new Date(x.starts_on + "T12:00:00");
-  return `<div class="tourban"><a href="t.html?${encodeURIComponent(x.slug)}"><span class="tb-cup">🏆</span><span class="tb-b"><b>${esc(x.name)}</b><span>${esc(fmtDay(d))} · ${t("tourOpen")} →</span></span></a><button class="tb-x" data-tourx="${esc(x.slug)}" aria-label="Close">×</button></div>`;
+  return `<div class="tourban"><a href="t.html?${encodeURIComponent(x.slug)}#signup"><span class="tb-cup">🏆</span><span class="tb-b"><b>${esc(x.name)}</b><span>${esc(fmtDay(d))} · ${t("tourOpen")} →</span></span></a><button class="tb-x" data-tourx="${esc(x.slug)}" aria-label="Close">×</button></div>`;
 }
 
 /* Rookie Quest */
@@ -2945,7 +3036,14 @@ function welcomeHome(){
 }
 
 /* welcome screen (first visit, signed out) */
+function welTour(){ const x = (S.wi && S.wi.tours || [])[0]; if (!x) return "";
+  const d1 = new Date(x.starts_on + "T12:00:00+03:00"), d2 = x.ends_on ? new Date(x.ends_on + "T12:00:00+03:00") : null;
+  return `<div class="wt"><span class="wt-kick">🏆 ${t("wtOpen")}</span><h1>${esc(x.name)}</h1>
+    <div class="wt-chips"><span>${esc(fmtDay(d1))}${d2 && x.ends_on !== x.starts_on ? " – " + esc(fmtDay(d2)) : ""}</span>${x.club ? `<span>${esc(x.club)}</span>` : ""}${(x.cats || []).length ? `<span>${esc(x.cats.join(" · "))}</span>` : ""}</div>
+    ${x.prize ? `<b class="wt-prize">${esc(x.prize)}</b>` : ""}${x.teams ? `<small>${tf("wtTeams", {n: x.teams})}</small>` : ""}
+    <a class="cta lime wide" href="t.html?${encodeURIComponent(x.slug)}#signup" data-wseen>${t("wtSign")} →</a></div>`; }
 V.welcome = () => `<main class="wel">
+  ${welTour()}
   <div class="wel-lang">${[["ar", "عربي"], ["en", "English"]].map(([k, l]) => `<button class="chip" data-wlang="${k}" aria-pressed="${lang === k}">${l}</button>`).join("")}</div>
   <div class="wel-hero"><div class="wel-ball"></div><div class="logo wel-logo">Padel <i>Live</i></div><p>${t("wTag")}</p></div>
   <div class="wel-rows">${[["🎯", "w1", "w1s"], ["🤝", "w2", "w2s"], ["🏆", "w3", "w3s"]].map(([i, a, b], n) => `<div class="wel-row" style="animation-delay:${.15 + n * .12}s"><span>${i}</span><div><b>${t(a)}</b><small>${t(b)}</small></div></div>`).join("")}</div>
@@ -3005,7 +3103,7 @@ app.addEventListener("click", async e => {
   const d = el.dataset;
   if (d.wlang){ lang = d.wlang; ls.set("pl-lang", lang); render(); return; }
   if (d.wgo){ ls.set("pl-seen", "1"); if (d.wgo === "auth") S.authMode = "in"; go(d.wgo); return; }
-  if ("rvkeep" in d){ ls.set("pl-plevel", String(S.revealLevel)); ls.set("pl-seen", "1"); S.authMode = "up"; go("auth"); return; }
+  if ("rvkeep" in d){ ls.set("pl-plevel", String(S.revealLevel)); try { ls.set("pl-pclaim", JSON.stringify(S.quizClaim || null)); } catch (e) {} ls.set("pl-seen", "1"); S.authMode = "up"; go("auth"); return; }
   if ("rvnext" in d){ go(nextOnboard()); return; }
   if (d.homeclub){ const r = await sb.rpc("set_home_club", {p_club: d.homeclub}); if (r.error){ toast(errMsg(r.error)); return; }
     S.profile.home_club = d.homeclub; S.club = S.clubs.find(c => c.id === d.homeclub) || S.club; await loadClubPosts(); toast("✓"); go("home"); return; }
@@ -3051,7 +3149,7 @@ const pendingScores = () => S.mine.filter(b => b.status !== "cancelled" && b.res
 
 /* the one card at the top of Home */
 function smartCard(){
-  if (!S.user) return guestStart();
+  if (!S.user) return welTour() + guestStart();
   const ps = pendingScores()[0];
   if (ps) return `<button class="hero sc-alert" data-match="${ps.id}" style="text-align:start;width:100%"><span class="kick2">⚑ ${t("scScore")}</span><span class="big">${esc(fmtDay(new Date(ps.starts_at)))} · ${esc(ps.club_name)}</span><span style="opacity:.92;font-size:14px">${t("scScoreS")}</span><span class="sc-go">${t("scOpen")} →</span></button>`;
   const nx = upcoming()[0], today = nx && dayKey(new Date(nx.starts_at)) === dayKey(new Date());
@@ -3092,7 +3190,7 @@ V.home = () => { const name = S.profile && S.profile.full_name ? S.profile.full_
 /* Me in three tabs */
 V.me = () => { if (!S.user) return V.auth();
  const p = S.profile || {}, tab = S.meTab || "card", todo = pendingScores().length;
- const head = `<div class="top"><div class="row" style="gap:12px;min-width:0">${avF(p.full_name, myLevel(), S.mySoc && S.mySoc.b, 'style="width:48px;height:48px;font-size:16px;margin:0"')}<div style="min-width:0"><h2 style="margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(p.full_name || "")}</h2><span class="note">${myLevel() != null ? `${t("lvlU")} ${lvl2(myLevel())} · ${esc(tierName((S.card && S.card.category) || lvCat(myLevel())))}` : esc(S.user.email || "")}</span></div></div>
+ const head = `<div class="top"><div class="row" style="gap:12px;min-width:0">${avF(p.full_name, myLevel(), S.mySoc && S.mySoc.b, 'style="width:48px;height:48px;font-size:16px;margin:0"')}<div style="min-width:0"><h2 style="margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(p.full_name || "")}</h2><span class="note">${S.card && S.card.placement > 0 ? esc(tf("plTag", {n: 5 - S.card.placement})) : myLevel() != null ? `${t("lvlU")} ${lvl2(myLevel())} · ${esc(tierName((S.card && S.card.category) || lvCat(myLevel())))} ${S.card ? subTier(S.card) : ""}` : esc(S.user.email || "")}</span></div></div>
    <div class="row">${S.staff.length ? `<button class="pill" data-go="manager">${t("meMgr")}</button>` : ""}${bell()}</div></div>
   <div class="seg">${[["card", "meCard"], ["games", "meGames"], ["set", "meSet"]].map(([k, l]) => `<button data-metab="${k}" aria-pressed="${tab === k}">${k === "set" ? "⚙️ " : ""}${t(l)}${k === "games" && todo ? `<i class="dot"></i>` : ""}</button>`).join("")}</div>`;
  let body = "";
@@ -3175,8 +3273,8 @@ const canMakeTour = () => !!(S.user && S.profile && S.profile.is_admin);
 function twInit(){
   const cs = twClubs(), c = cs[0]; const d = new Date(Date.now() + 14 * 864e5);
   const courts = c ? S.courts.filter(x => x.club_id === c.id) : [];
-  S.tw = {club: c && c.id, name: "", kick: "", start: dayKey(d), days: 4, cats: {A: 12, B: 12, C: 12, D: 12}, courts: Math.max(1, Math.min(4, courts.length || 2)),
-    cn: courts.map(x => x.name), ds: ["16:00", "15:00", "14:00", "12:00", "12:00"], last: "22:30", finals: true, gm: 45, qm: 50, sm: 75, gs: {A: 6, B: 9, C: 6, D: 6}, prize: "", fee: "", signup: true, replace: false};
+  S.tw = {club: c && c.id, name: "", kick: "", start: dayKey(d), days: 4, cats: {A: 12, B: 12, C: 12, D: 12, E: 0}, courts: Math.max(1, Math.min(4, courts.length || 2)),
+    cn: courts.map(x => x.name), ds: ["16:00", "15:00", "14:00", "12:00", "12:00"], last: "22:30", finals: true, gm: 45, qm: 50, sm: 75, gs: {A: 6, B: 9, C: 6, D: 6, E: 6}, prize: "", fee: "", signup: true, replace: false};
 }
 const twMin = s => { const [h, m] = String(s || "0:0").split(":").map(Number); return h * 60 + (m || 0); };
 const twClock = m => { m = ((m % 1440) + 1440) % 1440; const h = Math.floor(m / 60), mi = m % 60; return `${h % 12 || 12}:${String(mi).padStart(2, "0")} ${h < 12 ? "AM" : "PM"}`; };
@@ -3185,7 +3283,7 @@ const twSlug = tw => { const c = S.clubs.find(x => x.id === tw.club) || {}; retu
 /* builds the tournament page config: groups, order of play and knockout times */
 function twBuild(tw){
   const club = S.clubs.find(c => c.id === tw.club) || {}, [theme, logo] = TW_THEME(club);
-  const cats = ["A", "B", "C", "D"].filter(c => tw.cats[c] > 0), C = +tw.courts, D = +tw.days, SIZE = 4;
+  const cats = ["A", "B", "C", "D", "E"].filter(c => tw.cats[c] > 0), C = +tw.courts, D = +tw.days, SIZE = 4;
   const RR = [[[1, 2], [3, 4]], [[1, 3], [2, 4]], [[1, 4], [2, 3]]];
   const d0 = new Date(tw.start + "T12:00:00+03:00"), dayD = i => new Date(d0.getTime() + (i - 1) * 864e5);
   const fmtD = (d, o) => new Intl.DateTimeFormat("en-GB", Object.assign({timeZone: TZ}, o)).format(d);
@@ -3223,7 +3321,7 @@ function twBuild(tw){
     title_html: title, subtitle: `${range} · ${club.name || ""}`,
     facts: [range, club.name || "", cats.join(" · "), `${teams} teams`, `${C} court${C > 1 ? "s" : ""}`, ...(tw.prize ? [`Prize Pool $${(+tw.prize).toLocaleString("en-US")}`] : [])], highlight_last: !!tw.prize,
     cats, catn: Object.fromEntries(cats.map(c => [c, `Category ${c}`])), catl: Object.fromEntries(cats.map(c => [c, `Cat ${c}`])),
-    catv: Object.fromEntries(cats.map(c => [c, c === "A" ? "--gold" : `--cat${c}`])), groups: Object.fromEntries(cats.map(c => [c, gr(c)])), size: SIZE,
+    catv: Object.fromEntries(cats.map(c => [c, c === "A" ? "--gold" : c === "E" ? "--catE" : `--cat${c}`])), groups: Object.fromEntries(cats.map(c => [c, gr(c)])), size: SIZE,
     gsets: Object.fromEntries(cats.map(c => [c, +tw.gs[c]])), days, dshort, format: Object.fromEntries(cats.map(c => [c, setTxt(tw.gs[c])])),
     courts: Array.from({length: C}, (_, i) => i + 1), cn, T: {G, K, E}, info_html: info, signup: tw.signup ? "true" : "false", ...(tw.fee ? {fee: +tw.fee} : {})};
   return {cfg, teams, g: G.length, k: Object.keys(K).length, fits: fits && day <= D, span, days, end: dayD(D), club};
@@ -3246,7 +3344,7 @@ V.tnew = () => { if (!canMakeTour()) return V.events(); if (!S.tw) twInit(); con
     ${fld(t("twName"), "name", tw.name, `placeholder="${t("twNamePh")}"`)}${fld(t("twKick"), "kick", tw.kick, `placeholder="${t("twKickPh")}"`)}
     <div class="grid2">${fld(t("twStart"), "start", tw.start, `type="date"`)}<div class="fld"><span>${t("twDays")}</span>${chips("days", [1, 2, 3, 4, 5].map(x => [x, x]), tw.days)}</div></div></section>
    <section class="card twsec"><b>${t("twS3")}</b><span class="note">${t("twS3s")}</span>
-    ${["A", "B", "C", "D"].map(c => `<div class="twcat"><span class="lv c${c}">${c}</span>${chips("cat" + c, [[0, t("twOff")], [12, 12], [16, 16], [32, 32]], tw.cats[c])}</div>`).join("")}</section>
+    ${["A", "B", "C", "D", "E"].map(c => `<div class="twcat"><span class="lv c${c}">${c}</span>${chips("cat" + c, [[0, t("twOff")], [12, 12], [16, 16], [32, 32]], tw.cats[c])}</div>`).join("")}</section>
    <section class="card twsec"><b>${t("twS4")}</b>
     <div class="fld"><span>${t("twCourts")}</span>${chips("courts", [1, 2, 3, 4].map(x => [x, x]), tw.courts)}</div>
     <div class="grid2">${Array.from({length: +tw.courts}, (_, i) => fld(tf("twCn", {n: i + 1}), "cn" + i, tw.cn[i] || `Court ${i + 1}`)).join("")}</div>
@@ -3254,7 +3352,7 @@ V.tnew = () => { if (!canMakeTour()) return V.events(); if (!S.tw) twInit(); con
     ${+tw.days > 1 ? `<label class="row" style="font-size:14px;gap:8px"><input type="checkbox" data-twk="finals"${tw.finals ? " checked" : ""}> ${t("twFinals")}</label>` : ""}</section>
    <section class="card twsec"><b>${t("twS5")}</b>
     <div class="fld"><span>${t("twG")}</span>${chips("gm", [35, 40, 45, 50, 60].map(x => [x, tf("twMin", {m: x})]), tw.gm)}</div>
-    ${["A", "B", "C", "D"].filter(c => tw.cats[c] > 0).map(c => `<div class="twcat"><span class="lv c${c}">${c}</span>${chips("gs" + c, [[6, t("twSet6")], [9, t("twSet9")]], tw.gs[c])}</div>`).join("")}
+    ${["A", "B", "C", "D", "E"].filter(c => tw.cats[c] > 0).map(c => `<div class="twcat"><span class="lv c${c}">${c}</span>${chips("gs" + c, [[6, t("twSet6")], [9, t("twSet9")]], tw.gs[c])}</div>`).join("")}
     <div class="fld"><span>${t("twKo")}</span>${chips("qm", [40, 45, 50, 60].map(x => [x, tf("twMin", {m: x})]), tw.qm)}</div>
     <div class="fld"><span>${t("twSf")}</span>${chips("sm", [60, 75, 90].map(x => [x, tf("twMin", {m: x})]), tw.sm)}</div></section>
    <section class="card twsec"><b>${t("twS6")}</b>
@@ -3487,13 +3585,13 @@ app.addEventListener("submit", async e => { if (e.target.id !== "mwF") return; e
 
 /* ---------- weekly challenges, more achievements, tier borders (🔥 for the top 10) ---------- */
 Object.assign(W.en, {wkT:"This week's challenges", wkS:"New ones every Monday. Finish all 3 for a ⭐.", wkLeft:"{d} days left", wkLast:"Last day", wkDone:"Week complete! ⭐",
-  wkStars:"⭐ {n} weeks done", wkStreak:"🔥 {n}-week streak",
+  wkStars:"⭐ {n} weeks done", wkStars1:"⭐ 1 week done", wkStreak:"🔥 {n}-week streak",
   ck_new_club:"Play at a club you've never played at", ck_new_people:"Play with 2 people you've never played with", ck_play3:"Play 3 matches", ck_win2:"Win 2 matches",
   ck_open1:"Join someone's open match", ck_rate3:"Rate 3 matches", ck_early1:"Play a match before 2 PM",
   b_globetrotter:"Globetrotter", b_social:"Social player", b_centurion:"50 matches", b_early_bird:"Early bird", b_warrior:"Weekly warrior", b_fire:"Top 10 🔥",
   frFire:"Top 10 player"});
 Object.assign(W.ar, {wkT:"تحديات هالأسبوع", wkS:"تحديات جديدة كل يوم اثنين. خلّص الثلاثة لتاخد ⭐.", wkLeft:"باقي {d} أيام", wkLast:"آخر يوم", wkDone:"خلصت الأسبوع! ⭐",
-  wkStars:"⭐ {n} أسابيع", wkStreak:"🔥 {n} أسابيع ورا بعض",
+  wkStars:"⭐ {n} أسابيع", wkStars1:"⭐ أسبوع واحد", wkStreak:"🔥 {n} أسابيع ورا بعض",
   ck_new_club:"العب بنادي ما لعبت فيه قبل", ck_new_people:"العب مع شخصين ما لعبت معهن قبل", ck_play3:"العب ٣ مباريات", ck_win2:"اربح مباراتين",
   ck_open1:"انضم لمباراة مفتوحة لحدا", ck_rate3:"قيّم ٣ مباريات", ck_early1:"العب مباراة قبل الساعة ٢ الظهر",
   b_globetrotter:"جوّال", b_social:"اجتماعي", b_centurion:"٥٠ مباراة", b_early_bird:"بكّير", b_warrior:"محارب الأسبوع", b_fire:"أفضل ١٠ 🔥",
@@ -3515,7 +3613,7 @@ function weekCard(compact){ const w = S.week; if (!w || !w.items) return "";
     return `<div class="ck${ok ? " ok" : ""}"><span class="ck-ic">${ok ? "✓" : CK_IC[x.k] || "🎯"}</span><div class="ck-b"><span>${t("ck_" + x.k)}</span><div class="ck-bar"><i style="width:${pct}%"></i></div></div><small>${x.n}/${x.target}</small></div>`; }).join("");
   return `<div class="card wk${w.done ? " done" : ""}${compact ? " sm" : ""}"><div class="between"><b>${w.done ? "⭐ " + t("wkDone") : "🎯 " + t("wkT")}</b><span class="wk-n">${n}/3</span></div>
     ${compact ? "" : `<span class="note">${t("wkS")}</span>`}${items}
-    <div class="wk-foot"><span>${days <= 1 ? t("wkLast") : tf("wkLeft", {d: days})}</span>${w.stars ? `<span>${tf("wkStars", {n: w.stars})}</span>` : ""}${w.streak > 1 ? `<span>${tf("wkStreak", {n: w.streak})}</span>` : ""}</div></div>`; }
+    <div class="wk-foot"><span>${days <= 1 ? t("wkLast") : tf("wkLeft", {d: days})}</span>${w.stars ? `<span>${w.stars === 1 ? t("wkStars1") : tf("wkStars", {n: w.stars})}</span>` : ""}${w.streak > 1 ? `<span>${tf("wkStreak", {n: w.streak})}</span>` : ""}</div></div>`; }
 
 
 /* ---------- leaderboards, club battle, seasons, rarity, rivalries, year recap ---------- */
@@ -3621,6 +3719,34 @@ app.addEventListener("click", async e => { const el = e.target.closest("[data-ev
   if ("evdelgo" in d){ const [k, id] = S.evDelArg; S.sheet = null; const r = k === "tour" ? await sb.rpc("admin_tournament_delete", {p_slug: id}) : await sb.rpc("admin_league_delete", {p_league: id});
     if (r.error){ toast(errMsg(r.error)); render(); return; } toast(t("evDeleted")); if (k === "tour") S.tours = (S.tours || []).filter(x => x.slug !== id); else S.leagues = (S.leagues || []).filter(x => x.id !== id); render(); return; }
 });
+app.addEventListener("input", e => { if (e.target.id === "q-pt"){ S.quiz = S.quiz || {}; S.quiz.pt = e.target.value.replace(",", ".").replace(/[^\d.]/g, "");
+  const R = quizResult(S.quiz), done = LV_Q.every(([q]) => S.quiz[q] != null) && S.quiz.q6 != null; S.quizClaim = R.claim;
+  if (done){ const b = document.querySelector(".lvres .lvbig"), sm = document.querySelector(".bar .sum b"), btn = document.querySelector("[data-setlevel],[data-guestlv]"); const v = R.start.toFixed(2);
+    if (b) b.textContent = v; if (sm) sm.textContent = v; if (btn){ if (btn.hasAttribute("data-setlevel")) btn.setAttribute("data-setlevel", v); else btn.setAttribute("data-guestlv", v); } } } });
+async function loadClaims(){ if (!(S.profile && S.profile.is_admin)) return; try { const r = await sb.rpc("admin_level_claims"); S.claims = r.error ? [] : r.data; } catch (e) { S.claims = []; } }
+app.addEventListener("click", async e => { const el = e.target.closest("[data-clset],[data-cldone]"); if (!el) return; const d = el.dataset;
+  if (d.cldone){ const r = await sb.rpc("admin_claim_done", {p_user: d.cldone}); if (r.error){ toast(errMsg(r.error)); return; } S.claims = (S.claims || []).filter(x => x.id !== d.cldone); render(); return; }
+  if (d.clset){ const p = (S.claims || []).find(x => x.id === d.clset); if (!p) return; S.apList = [{id: p.id, name: p.name, phone: p.phone, level: p.claim.raw, category: lvCat(+p.claim.raw), rated: p.rated, titles: 0, a_ok: false}]; S.apEdit = p.id; render();
+    const f = document.getElementById("apF"); if (f) f.scrollIntoView({behavior: "smooth", block: "center"}); return; } });
+/* partner invite: ?tjoin=TOKEN */
+(function(){ try { const k = new URLSearchParams(location.search).get("tjoin"); if (k && /^[a-z0-9]{6,20}$/i.test(k)) ls.set("pl-tjoin", k); } catch (e) {} })();
+async function loadTJ(){ const k = ls.get("pl-tjoin"); if (!k) return; try { const r = await sb.rpc("t_invite_info", {p_token: k}); S.tj = r.error ? {bad: true} : (r.data || {bad: true}); } catch (e) { S.tj = {bad: true}; } }
+V.tjoin = () => { const j = S.tj; if (!j) return `<main><p class="note">…</p></main>`;
+  const quit = `<button class="linkbtn" data-tjquit>${t("wLook")}</button>`;
+  if (j.bad || j.used || !j.open) return `<main class="wel"><div class="card tj"><b>${j.bad ? t("tjBad") : j.used ? t("tjUsed") : t("tjClosed")}</b>${j.slug ? `<a class="cta wide" href="t.html?${encodeURIComponent(j.slug)}">${t("wtSee")}</a>` : ""}</div>${quit}</main>`;
+  const s1 = !!S.user, s2 = !!(S.profile && S.profile.level_set), q = s1 && !s2, ql = TJ_LV[j.cat] || 2.5;
+  return `<main class="wel"><div class="tj-hero"><span class="kick2">🏆 ${t("tjT")}</span><h1>${esc(j.title)}</h1><p>${esc(tf("tjS", {n: j.captain}))} · ${esc(tf("tjCat", {c: j.cat}))}</p><small>${esc(j.club || "")} · ${esc(fmtDay(new Date(j.starts_on + "T12:00:00+03:00")))}</small></div>
+   <div class="tj-steps">${[[s1, "tjStep1", `data-tjauth`], [s2 || q, "tjStep2", `data-go="level"`], [false, "tjStep3", `data-tjgo`]].map(([ok, l, act], i) => `<button class="q-st${ok ? " ok" : ""}${!ok && (i === 0 || (i === 1 && s1) || (i === 2 && s1 && s2)) ? " cur" : ""}" ${ok ? "disabled" : act}${!ok && i > 0 && !(i === 1 ? s1 : s1 && s2) ? " disabled" : ""}><span class="q-ck">${ok ? "✓" : i + 1}</span><span class="q-l">${t(l)}</span></button>`).join("")}</div>
+   ${q ? `<div class="tj-lv">${/[AB]/.test(j.cat) ? `<b>✓ ${esc(tf("tjLvUp", {l: ql.toFixed(2)}))}</b><span>${esc(tf("tjLvUpN", {c: j.cat}))}</span>` : `<b>✓ ${esc(tf("tjLv", {c: j.cat, l: ql.toFixed(2)}))}</b><span>${t("tjLvNote")}</span>`}</div>` : ""}
+   ${s1 ? `<button class="cta blue wide" data-tjgo>${t("tjGo")}</button>` : ""}${q ? `<button class="linkbtn" data-go="level">${t("tjQuiz")}</button>` : ""}${quit}</main>`; };
+const TJ_LV = {E: 1.0, D: 1.5, C: 2.5, B: 3.49, A: 3.49};
+app.addEventListener("click", async e => { const el = e.target.closest("[data-tjauth],[data-tjgo],[data-tjquit]"); if (!el) return; const d = el.dataset;
+  if ("tjauth" in d){ S.authMode = "up"; ls.set("pl-seen", "1"); go("auth"); return; }
+  if ("tjquit" in d){ ls.del("pl-tjoin"); ls.set("pl-seen", "1"); go("home"); return; }
+  if ("tjgo" in d){ if (!(S.profile && S.profile.level_set) && S.tj){ const lv = TJ_LV[S.tj.cat] || 2.5; const sl = await sb.rpc("set_my_level", {p_level: lv, p_claim: {src: "invite", cat: S.tj.cat, raw: lv}}); if (sl.error){ toast(errMsg(sl.error)); return; } await afterAuth(true); }
+    const r = await sb.rpc("t_invite_accept", {p_token: ls.get("pl-tjoin"), p_note: null}); if (r.error){ toast(errMsg(r.error)); return; }
+    ls.del("pl-tjoin"); toast(t("tjDone")); setTimeout(() => { location.href = "t.html?" + encodeURIComponent(r.data); }, 900); } });
+app.addEventListener("click", e => { if (e.target.closest("[data-wseen]")) ls.set("pl-seen", "1"); });
 render();
 boot();
 
