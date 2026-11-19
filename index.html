@@ -1470,6 +1470,9 @@ main.vlg input,main.vlg select{background:#0B1220;color:#fff;border-color:rgba(9
 .om-row{align-items:flex-start}
 
 .lv.mixb{background:linear-gradient(180deg,#FFC2DE,#E0679F);color:#fff;border-radius:8px;padding:3px 10px;font:italic 900 12px var(--disp);clip-path:none}
+
+.bksoon{display:flex;flex-direction:column;gap:10px;border:1.5px dashed var(--line,rgba(255,255,255,.2))}
+.cp-t .mo.soon{width:auto;padding:0 12px;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -1581,7 +1584,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v61";
+const VERSION = "v64";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -1626,7 +1629,7 @@ async function boot(){
 }
 async function loadClubs(){
   const [c, ct, p, cl] = await Promise.all([
-    sb.from("clubs").select("id,slug,name,city,about,opens,closes,peak_from,late_from,usd_syp_rate,cancel_hours,area,photo,maps_url,phone,weekend_days,book_days,deal_pct,deal_hours").order("name"),
+    sb.from("clubs").select("id,slug,name,city,about,opens,closes,peak_from,late_from,usd_syp_rate,cancel_hours,area,photo,maps_url,phone,weekend_days,book_days,deal_pct,deal_hours,booking_on").order("name"),
     sb.from("courts").select("*").order("sort"),
     sb.from("prices").select("*"),
     sb.from("closures").select("*")]);
@@ -1734,7 +1737,7 @@ V.clubs = () => { const areas = [...new Set(S.clubs.map(c => c.area).filter(Bool
     <button class="cp-win" data-club="${c.id}" aria-label="${esc(c.name)}">${ph ? `<img src="${esc(ph)}" alt="" loading="lazy">` : `<span class="cp-fb">${k.logo ? `<img src="${esc(k.logo)}" alt="" onerror="this.remove()">` : `<b>${esc(initials(c.name))}</b>`}</span>`}${+c.deal_pct ? `<span class="cp-deal">🔥 -${+c.deal_pct}%</span>` : ""}</button>
     <button class="cp-bd" data-club="${c.id}">${ph && k.logo ? `<img class="cp-lg" src="${esc(k.logo)}" alt="" onerror="this.remove()">` : ""}<span class="cp-h"><b>${esc(c.name)}</b>${isFinite(min) ? `<small>$${min}<i>/${t("hr").replace(/^\/\s*/, "")}</i></small>` : ""}</span>
      <span class="cp-m">${esc([c.area, c.city].filter(Boolean).join(", "))} · ${n} ${n === 1 ? "court" : "courts"} · ${esc(c.opens.slice(0,5))}–${esc(c.closes.slice(0,5))}</span>${+c.deal_pct ? `<span class="cp-m cp-dl">🔥 ${tf("dealTxt", {p: c.deal_pct, h: c.deal_hours})}</span>` : ""}</button>
-    <div class="cp-t">${chips.length ? chips.map((x, i) => `<button class="${(S.fTime ? hm(x.d) === S.fTime : i === 0) ? "on" : ""}" data-fgo="${c.id}|${x.courts[0]}|${x.iso}">${esc(fmtTime(x.d).replace(/:00/, ""))}${x.deal ? " 🔥" : ""}</button>`).join("") + (more > 0 ? `<button class="mo" data-club="${c.id}">+${more}</button>` : "") : st.html}</div>
+    <div class="cp-t">${!bookOpen(c) ? `<button class="mo soon" data-club="${c.id}">📞 ${t("bkSoonTag")}</button>` : chips.length ? chips.map((x, i) => `<button class="${(S.fTime ? hm(x.d) === S.fTime : i === 0) ? "on" : ""}" data-fgo="${c.id}|${x.courts[0]}|${x.iso}">${esc(fmtTime(x.d).replace(/:00/, ""))}${x.deal ? " 🔥" : ""}</button>`).join("") + (more > 0 ? `<button class="mo" data-club="${c.id}">+${more}</button>` : "") : st.html}</div>
     ${S.fTime && chips.length && st.rank !== 0 ? `<div class="cp-why">${st.html}</div>` : ""}</div>`; }).join("") || `<div class="card note">No clubs yet.</div>`}
   <div class="card note" style="text-align:center">More clubs coming. Club owners can list their courts for free.</div>
  </main>${nav("clubs")}`; };
@@ -1752,20 +1755,23 @@ function slotsFor(c){
   }
   return {closed:false, list:out};
 }
+function clubCtrls(c, courts, days){ return `<div class="days">${days.map(d => { const dd = at(d, "12:00"); return `<button class="day" data-day="${d}" aria-pressed="${S.day === d}"><small>${esc(new Intl.DateTimeFormat(lang === "ar" ? "ar-SY" : "en-GB",{timeZone:TZ,weekday:"short"}).format(dd))}</small><b>${esc(new Intl.DateTimeFormat(lang === "ar" ? "ar-SY" : "en-GB",{timeZone:TZ,day:"numeric"}).format(dd))}</b></button>`; }).join("")}</div>
+  <div class="seg">${courts.map(x => `<button data-court="${x.id}" aria-pressed="${S.court === x.id}" class="c-${esc(x.color)}">${esc(x.name)}</button>`).join("")}</div>
+  <div class="row" style="flex-wrap:wrap"><b style="font-size:13px;color:var(--ink-2)">${t("length")}</b>${[60,90,120].map(m => `<button class="chip" data-dur="${m}" aria-pressed="${S.dur === m}">${m} ${t("min")}</button>`).join("")}</div>
+  ${coachChips()}`; }
+const bookOpen = c => !!(c && (c.booking_on || (S.profile && S.profile.is_admin) || (S.staff || []).some(x => x.id === c.id)));
 V.club = () => { const c = S.club; if (!c) return V.clubs();
  const courts = S.courts.filter(x => x.club_id === c.id), days = nextDays(bookDays(c)), sl = slotsFor(c), pick = sl.list.find(x => x.iso === S.slot && !x.off);
  return `<main>${backBar(c.name, "clubs")}
   ${clubCover(c) ? `<div class="cpic">${clubPic(c)}</div>` : ""}
   <span class="note" style="margin-top:-8px">${esc([c.area, c.city].filter(Boolean).join(", "))} · ${esc(c.opens.slice(0,5))}–${esc(c.closes.slice(0,5))} · ${courts.length} ${courts.length === 1 ? "court" : "courts"}</span>
-  <div class="days">${days.map(d => { const dd = at(d, "12:00"); return `<button class="day" data-day="${d}" aria-pressed="${S.day === d}"><small>${esc(new Intl.DateTimeFormat(lang === "ar" ? "ar-SY" : "en-GB",{timeZone:TZ,weekday:"short"}).format(dd))}</small><b>${esc(new Intl.DateTimeFormat(lang === "ar" ? "ar-SY" : "en-GB",{timeZone:TZ,day:"numeric"}).format(dd))}</b></button>`; }).join("")}</div>
-  <div class="seg">${courts.map(x => `<button data-court="${x.id}" aria-pressed="${S.court === x.id}" class="c-${esc(x.color)}">${esc(x.name)}</button>`).join("")}</div>
-  <div class="row" style="flex-wrap:wrap"><b style="font-size:13px;color:var(--ink-2)">${t("length")}</b>${[60,90,120].map(m => `<button class="chip" data-dur="${m}" aria-pressed="${S.dur === m}">${m} ${t("min")}</button>`).join("")}</div>
-  ${coachChips()}
-  ${sl.closed ? `<div class="notice">${t("closedDay")}</div>` : `<div class="slots">${sl.list.map(x => `<button class="slot" data-slot="${x.iso}" aria-pressed="${S.slot === x.iso && !x.off}"${x.off ? " disabled" : ""}><b>${esc(fmtTime(x.d).replace(/\s?(am|pm)$/i,""))}</b>${x.off || x.price == null ? "" : `<small>${x.deal ? "🔥" : ""}$${x.price}</small>`}</button>`).join("")}</div>`}
+  ${bookOpen(c) ? clubCtrls(c, courts, days) : ""}
+${!bookOpen(c) ? `<div class="card bksoon"><b>🗓️ ${t("bkSoonT")}</b><span class="note">${t("bkSoonS")}</span><div class="row" style="gap:8px;flex-wrap:wrap">${c.phone ? `<a class="cta blue" href="tel:${esc(c.phone)}">${t("bkCall")}</a><a class="ghost" href="${esc(waLink(c.phone, "Hi, I'd like to book a court. I found you on Padel Live."))}" target="_blank" rel="noopener">${t("bkWa")}</a>` : ""}</div></div>`
+  : (!c.booking_on ? `<div class="notice">${t("bkOffAdm")}</div>` : "") + (sl.closed ? `<div class="notice">${t("closedDay")}</div>` : `<div class="slots">${sl.list.map(x => `<button class="slot" data-slot="${x.iso}" aria-pressed="${S.slot === x.iso && !x.off}"${x.off ? " disabled" : ""}><b>${esc(fmtTime(x.d).replace(/\s?(am|pm)$/i,""))}</b>${x.off || x.price == null ? "" : `<small>${x.deal ? "🔥" : ""}$${x.price}</small>`}</button>`).join("")}</div>`)}
   ${clubExtras(c)}
   ${clubPostsHtml()}
   <div class="card" style="display:flex;flex-direction:column;gap:10px"><p class="note" style="margin:0">${esc(c.about)}</p>${clubLinks(c)}</div>
- </main><div class="bar"><div class="sum"><small>${esc(fmtDay(at(S.day,"12:00")))}${pick ? ` · ${esc(fmtTime(pick.d))}` : ""} · ${S.dur} ${t("min")}</small><b>${pick ? money(pick.price + coachFee()) : t("pick")}</b>${pick ? (coachSel() ? ` <span class="note">· ${t("lesson")} · ${esc(coachSel().name)}</span>` : ` <span class="note">· ${money(pick.price / 4)} ${t("each")}</span>`) : ""}</div><button class="cta" data-go="checkout"${pick ? "" : " disabled"}>${t("cont")}</button></div>`; };
+ </main>${!bookOpen(c) ? nav("clubs") : `<div class="bar"><div class="sum"><small>${esc(fmtDay(at(S.day,"12:00")))}${pick ? ` · ${esc(fmtTime(pick.d))}` : ""} · ${S.dur} ${t("min")}</small><b>${pick ? money(pick.price + coachFee()) : t("pick")}</b>${pick ? (coachSel() ? ` <span class="note">· ${t("lesson")} · ${esc(coachSel().name)}</span>` : ` <span class="note">· ${money(pick.price / 4)} ${t("each")}</span>`) : ""}</div><button class="cta" data-go="checkout"${pick ? "" : " disabled"}>${t("cont")}</button></div>`}`; };
 
 /* ---------- public / private lobby ---------- */
 function pvBlock(){ if (coachSel()) return ""; const v = S.vis || "public";
@@ -1850,7 +1856,7 @@ V.matches = () => { const f = mfGet(), list = S.matches.filter(m => mfPass(m, f)
   <div class="mfbar"><div class="mfrow">${ch("when", "today", t("mfToday"))}${ch("when", "tonight", t("mfTonight"))}${ch("when", "tomorrow", t("mfTom"))}${ch("when", "week", t("mfWeek"))}</div>
    <div class="mfrow">${myLevel() != null ? ch("lvl", "x", (f.lvl ? "✓ " : "") + t("mfLvl")) : ""}${ch("side", "L", t("mfSideL"))}${ch("side", "R", t("mfSideR"))}${ch("spots", "one", t("mfOne"))}${ch("spots", "two", t("mfTwo"))}</div>
    <div class="mfcount"><span>${f.side === "L" ? tf("mfNL", {n: list.length}) : f.side === "R" ? tf("mfNR", {n: list.length}) : list.length === 1 ? t("mfN1") : tf("mfN", {n: list.length})}</span>${on ? `<button data-mfclear>${t("mfClear")}</button>` : ""}</div></div>
-  <div style="display:flex;flex-direction:column;gap:10px">${list.map(matchRow).join("") || `<div class="card note">${S.matches.length ? t("mfNone") : t("noMatches")}</div>`}</div>
+  <div style="display:flex;flex-direction:column;gap:10px">${list.map(matchRow).join("") || `<div class="card note">${S.matches.length ? t("mfNone") : S.clubs.some(c => c.booking_on) ? t("noMatches") : t("omSoon")}</div>`}</div>
  </main>${nav("matches")}`; };
 
 function evCard(x){
@@ -1911,7 +1917,6 @@ V.me = () => { if (!S.user) return V.auth();
   <button class="cta wide pfbtn" data-profile="me">📊 ${t("pfMine")} →</button>
   ${pushCard(false)}
   ${alertCard()}
-  ${snMeCard()}
   <h2>${t("myGames")}</h2>
   <div style="display:flex;flex-direction:column;gap:10px">${S.mine.map(gameRow).join("") || `<div class="card note">${t("bookFirst")}</div>`}</div>
   <h2>${t("myResults")}</h2>
@@ -2114,7 +2119,8 @@ function clubForm(club){ return `<form id="clubF" class="card" style="display:fl
    <label class="fld"><span>${t("clubPhone")}</span><input id="cf-phone" value="${esc(club.phone || "")}" inputmode="tel" dir="ltr"></label>
    <button class="cta blue" type="submit">${t("save")}</button></form>`; }
 function adminCard(){ if (!S.profile || !S.profile.is_admin) return "";
-  return `<form id="newClubF" class="card" style="display:flex;flex-direction:column;gap:10px"><b>${t("addClub")}</b>
+  return `<div class="card" style="display:flex;flex-direction:column;gap:10px"><b>${t("bkSwT")}</b><span class="note">${t("bkSwS")}</span>${S.clubs.map(c => `<div class="between"><span>${esc(c.name)}</span><div class="chips"><button class="chip" data-bkon="${c.id}|1" aria-pressed="${!!c.booking_on}">${t("bkOn")}</button><button class="chip" data-bkon="${c.id}|0" aria-pressed="${!c.booking_on}">${t("bkOff")}</button></div></div>`).join("")}</div>
+  <form id="newClubF" class="card" style="display:flex;flex-direction:column;gap:10px"><b>${t("addClub")}</b>
    <label class="fld"><span>${t("clubName")}</span><input id="nc-name" required></label>
    <div class="grid2"><label class="fld"><span>${t("city")}</span><input id="nc-city" value="Damascus"></label><label class="fld"><span>${t("area")}</span><input id="nc-area"></label></div>
    <label class="fld"><span>${t("courtsList")}</span><input id="nc-courts" placeholder="Court 1, Court 2, Court 3"></label>
@@ -3066,6 +3072,7 @@ app.addEventListener("click", async e => {
   if (d.spots){ S.openSpots = +d.spots; render(); return; }
   if (d.vis){ S.vis = d.vis; if (d.vis !== "public") S.split = S.split; render(); return; }
   if (d.vhrs){ S.vHours = +d.vhrs; render(); return; }
+  if (d.bkon){ const [id, on] = d.bkon.split("|"); const r = await sb.rpc("admin_club_booking", {p_club: id, p_on: on === "1"}); if (r.error){ toast(errMsg(r.error)); return; } const c = S.clubs.find(x => x.id === id); if (c) c.booking_on = on === "1"; toast("✓"); render(); return; }
   if (d.myside){ S.mySide = d.myside; render(); return; }
   if (d.freeside){ S.freeSide = d.freeside; render(); return; }
   if (d.invp){ const s = new Set(S.invSel || []); s.has(d.invp) ? s.delete(d.invp) : s.add(d.invp); S.invSel = [...s]; render(); return; }
@@ -3489,7 +3496,7 @@ Object.assign(W.en, {fdT:"What's new", fdAll:"See all", fdEmpty:"Play a match or
   fdOpenClub:"Open club", ago_m:"{n}m ago", ago_h:"{n}h ago", ago_d:"{n}d ago", ago_now:"just now",
   alT:"Open match alerts", alTxt:"Get a notification when someone needs a player at your level.", alOn:"On", alOff:"Off",
   opT:"Need players?", opTxt:"Open spots and players at that level get a notification.", opSave:"Save", opNone:"No open spots", opSaved:"Saved. Players at that level are being notified.",
-  mjT:"This match needs {n}", mjJoin:"Join this match", mjSplit:"This match splits the court fee. Join from the Matches list to choose how you pay.", mjInv:"You're invited to this match. Your spot is saved.", sdL:"LEFT", sdR:"RIGHT", sdAny:"ANY", sdTA:"TEAM A", sdTB:"TEAM B", sdJoinL:"Join as Left", sdJoinR:"Join as Right", sdJoin:"Join", sdSpots:"{n} spots", sdSpot:"1 spot", sdFriend:"Friend",
+  mjT:"This match needs {n}", mjJoin:"Join this match", mjSplit:"This match splits the court fee. Join from the Matches list to choose how you pay.", mjInv:"You're invited to this match. Your spot is saved.", bkSoonT:"Online booking coming soon", bkSoonS:"This club doesn't take bookings in Padel Live yet. Call or message the club to book a court.", bkSoonTag:"Booking soon", bkCall:"📞 Call the club", bkWa:"💬 WhatsApp", bkOffAdm:"Online booking is off for players at this club. You can still book as admin or staff.", omSoon:"Open matches start when online booking opens at the clubs. Tournaments and leagues are already on: check Events.", bkSwT:"Online booking", bkSwS:"Turn on a club when it's ready to take bookings in the app.", bkOn:"On", bkOff:"Off", sdL:"LEFT", sdR:"RIGHT", sdAny:"ANY", sdTA:"TEAM A", sdTB:"TEAM B", sdJoinL:"Join as Left", sdJoinR:"Join as Right", sdJoin:"Join", sdSpots:"{n} spots", sdSpot:"1 spot", sdFriend:"Friend",
   sdWhere:"Where do you play?", sdWhereN:"So players looking for the other side find your match.", sdLeft:"Left", sdLeftS:"Backhand side", sdRight:"Right", sdRightS:"Forehand side", sdEither:"Either", sdEitherS:"No preference",
   sdFree:"Which spot is free?", sdFreeL:"A left player", sdFreeR:"A right player", mfSideL:"Left player spots", mfSideR:"Right player spots", mfNL:"{n} matches need a Left player", mfNR:"{n} matches need a Right player",
   sdSwapT:"Positions", sdSwapN:"Tap a player, then tap another spot to swap them.", sdSwapped:"Positions updated.", pvT:"Public or private?", pvPub:"Public", pvPubS:"Anyone at your level", pvPriv:"Private", pvPrivS:"Only people you invite", pvFr:"Friends first", pvFrS:"Private, then public",
@@ -3509,7 +3516,7 @@ Object.assign(W.ar, {fdT:"شو الجديد", fdAll:"شوف الكل", fdEmpty:"
   fdOpenClub:"افتح النادي", ago_m:"من {n} د", ago_h:"من {n} س", ago_d:"من {n} يوم", ago_now:"هلّق",
   alT:"تنبيهات المباريات المفتوحة", alTxt:"بيوصلك إشعار لما حدا يحتاج لاعب بمستواك.", alOn:"شغّال", alOff:"موقّف",
   opT:"ناقصك لاعبين؟", opTxt:"افتح أماكن واللاعبين بهالمستوى بيوصلهم إشعار.", opSave:"احفظ", opNone:"ما في أماكن", opSaved:"انحفظ. عم نبعت إشعار للاعبين بهالمستوى.",
-  mjT:"هالمباراة ناقصها {n}", mjJoin:"انضم لهالمباراة", mjSplit:"بهالمباراة الحساب مقسوم. انضم من قائمة المباريات لتختار طريقة الدفع.", mjInv:"أنت معزوم على هالمباراة. مكانك محجوز.", sdL:"يسار", sdR:"يمين", sdAny:"أي جهة", sdTA:"الفريق A", sdTB:"الفريق B", sdJoinL:"انضم يسار", sdJoinR:"انضم يمين", sdJoin:"انضم", sdSpots:"{n} أماكن", sdSpot:"مكان واحد", sdFriend:"صديق",
+  mjT:"هالمباراة ناقصها {n}", mjJoin:"انضم لهالمباراة", mjSplit:"بهالمباراة الحساب مقسوم. انضم من قائمة المباريات لتختار طريقة الدفع.", mjInv:"أنت معزوم على هالمباراة. مكانك محجوز.", bkSoonT:"الحجز أونلاين قريباً", bkSoonS:"هالنادي لسا ما بياخد حجوزات على Padel Live. اتصل أو راسل النادي لتحجز ملعب.", bkSoonTag:"الحجز قريباً", bkCall:"📞 اتصل بالنادي", bkWa:"💬 واتساب", bkOffAdm:"الحجز أونلاين مسكّر للاعبين بهالنادي. فيك تحجز كأدمن أو موظف.", omSoon:"المباريات المفتوحة بتبلش لما يفتح الحجز أونلاين بالنوادي. البطولات والدوريات شغالة: شوف الفعاليات.", bkSwT:"الحجز أونلاين", bkSwS:"شغّل النادي لما يكون جاهز ياخد حجوزات بالتطبيق.", bkOn:"شغال", bkOff:"مسكّر", sdL:"يسار", sdR:"يمين", sdAny:"أي جهة", sdTA:"الفريق A", sdTB:"الفريق B", sdJoinL:"انضم يسار", sdJoinR:"انضم يمين", sdJoin:"انضم", sdSpots:"{n} أماكن", sdSpot:"مكان واحد", sdFriend:"صديق",
   sdWhere:"وين بتلعب؟", sdWhereN:"مشان يلي بيدوروا عالجهة التانية يلاقوا مباراتك.", sdLeft:"يسار", sdLeftS:"جهة الباكهاند", sdRight:"يمين", sdRightS:"جهة الفورهاند", sdEither:"ما بتفرق", sdEitherS:"أي جهة",
   sdFree:"أي مكان فاضي؟", sdFreeL:"لاعب يسار", sdFreeR:"لاعب يمين", mfSideL:"أماكن لاعب يسار", mfSideR:"أماكن لاعب يمين", mfNL:"{n} مباريات بدها لاعب يسار", mfNR:"{n} مباريات بدها لاعب يمين",
   sdSwapT:"المراكز", sdSwapN:"اكبس على لاعب، بعدين على مكان تاني لتبدلهم.", sdSwapped:"تحدثت المراكز.", pvT:"عامة ولا خاصة؟", pvPub:"عامة", pvPubS:"أي حدا بمستواك", pvPriv:"خاصة", pvPrivS:"بس يلي بتعزمهم", pvFr:"الأصحاب أول", pvFrS:"خاصة، بعدين عامة",
@@ -3901,7 +3908,7 @@ V.me = () => { if (!S.user) return V.auth();
    <div class="row">${S.staff.length ? `<button class="pill" data-go="manager">${t("meMgr")}</button>` : ""}${bell()}</div></div>
   <div class="seg">${[["card", "meCard"], ["games", "meGames"], ["set", "meSet"]].map(([k, l]) => `<button data-metab="${k}" aria-pressed="${tab === k}">${k === "set" ? "⚙️ " : ""}${t(l)}${k === "games" && todo ? `<i class="dot"></i>` : ""}</button>`).join("")}</div>`;
  let body = "";
- if (tab === "card") body = `${walletCard()}${playerCard(S.card)}${weekCard(false)}${seasonCard()}<button class="cta wide pfbtn" data-profile="me">📊 ${t("pfMine")} →</button>${snMeCard()}`;
+ if (tab === "card") body = `${walletCard()}${playerCard(S.card)}${seasonCard()}<button class="cta wide pfbtn" data-profile="me">📊 ${t("pfMine")} →</button>`;
  else if (tab === "games"){ const up = upcoming(), past = S.mine.filter(b => !up.includes(b));
    body = `${todo ? `<h2>⚑ ${t("meToDo")}</h2><div class="glist">${pendingScores().map(gameRow).join("")}</div>` : ""}
     <h2>${t("myGames")}</h2><div class="glist">${leagueRows()}${up.map(gameRow).join("") || ((S.myLgMatches || []).some(m => m.status === "open") ? "" : `<button class="card note" data-go="clubs" style="text-align:start">${t("bookFirst")}</button>`)}</div>
