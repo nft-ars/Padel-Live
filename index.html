@@ -1584,7 +1584,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v65";
+const VERSION = "v66";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -3966,7 +3966,7 @@ app.addEventListener("click", async e => {
 /* ---------- new tournament wizard (admin, or staff for their club) ---------- */
 Object.assign(W.en, {twBtn:"+ Tournament", twT:"New tournament", twS1:"1 · Club & theme", twS1s:"The tournament page takes this club's look, logo and courts.",
   twS2:"2 · Name & dates", twName:"Tournament name", twNamePh:"Winter Cup", twKick:"Small title above the name", twKickPh:"Winter Cup", twStart:"First day", twDays:"Days",
-  twMix:"Mixed", twS3:"3 · Categories & teams", twS3s:"Teams per category. Groups of 4: everyone plays 3 group matches.", twOff:"Off",
+  twMix:"Mixed", twS3:"3 · Categories & teams", twS3s:"Teams per category. 6 teams = 2 groups of 3 (2 group matches each, then semifinals). 12+ teams = groups of 4 (3 group matches each).", twOff:"Off",
   twS4:"4 · Courts & times", twCourts:"Courts", twCn:"Court {n} name", twDayStart:"{d} starts at", twLast:"Last match starts by", twFinals:"Semis and finals on the last day",
   twS5:"5 · Match format", twG:"Group matches", twKo:"Quarterfinals", twSf:"Semis & finals", twMin:"{m} min", twSet6:"1 set to 6", twSet9:"1 set to 9",
   twS6:"6 · Prize pool & sign-up", twPrize:"Prize pool ($)", twFee:"Entry fee per team ($)", twFeeNo:"Leave empty if free", twSign:"Teams sign up themselves in the app", twSlug:"Page link",
@@ -3975,7 +3975,7 @@ Object.assign(W.en, {twBtn:"+ Tournament", twT:"New tournament", twS1:"1 · Club
   twGrp:"{g} group matches", twKos:"{k} knockout matches", twDayL:"{d}: {a} – {b}", twQual:"Top 2 of each group{x} go to the {r}.", twBest:"+ the {n} best 3rd places", twR16:"round of 16", twQF:"quarterfinals"});
 Object.assign(W.ar, {twBtn:"+ بطولة", twT:"بطولة جديدة", twS1:"١ · النادي والشكل", twS1s:"صفحة البطولة بتاخد شكل هالنادي ولوغو وملاعبه.",
   twS2:"٢ · الاسم والتاريخ", twName:"اسم البطولة", twNamePh:"كأس الشتاء", twKick:"عنوان صغير فوق الاسم", twKickPh:"Winter Cup", twStart:"أول يوم", twDays:"عدد الأيام",
-  twMix:"مختلط", twS3:"٣ · الفئات والفرق", twS3s:"عدد الفرق بكل فئة. مجموعات من ٤: كل فريق بيلعب ٣ مباريات.", twOff:"بدون",
+  twMix:"مختلط", twS3:"٣ · الفئات والفرق", twS3s:"عدد الفرق بكل فئة. ٦ فرق = مجموعتين من ٣ (مباراتين لكل فريق، بعدين نصف النهائي). ١٢ فريق أو أكتر = مجموعات من ٤ (٣ مباريات لكل فريق).", twOff:"بدون",
   twS4:"٤ · الملاعب والأوقات", twCourts:"الملاعب", twCn:"اسم الملعب {n}", twDayStart:"{d} بيبلش الساعة", twLast:"آخر مباراة بتبلش قبل", twFinals:"نصف النهائي والنهائي بآخر يوم",
   twS5:"٥ · نظام المباريات", twG:"مباريات المجموعات", twKo:"ربع النهائي", twSf:"نصف النهائي والنهائي", twMin:"{m} دقيقة", twSet6:"مجموعة لـ٦", twSet9:"مجموعة لـ٩",
   twS6:"٦ · مجموع الجوائز والتسجيل", twPrize:"مجموع الجوائز ($)", twFee:"رسم الفريق ($)", twFeeNo:"اتركه فاضي إذا مجاني", twSign:"الفرق بتسجل لحالها بالتطبيق", twSlug:"رابط الصفحة",
@@ -4001,7 +4001,7 @@ const twSlug = tw => { const c = S.clubs.find(x => x.id === tw.club) || {}; retu
 function twBuild(tw){
   const club = S.clubs.find(c => c.id === tw.club) || {}, [theme, logo] = TW_THEME(club);
   const cats = ["A", "B", "C", "D", "E", "X"].filter(c => tw.cats[c] > 0), C = +tw.courts, D = +tw.days, SIZE = 4;
-  const RR = [[[1, 2], [3, 4]], [[1, 3], [2, 4]], [[1, 4], [2, 3]]];
+  const RR = [[[1, 2], [3, 4]], [[1, 3], [2, 4]], [[1, 4], [2, 3]]], RR3 = [[[1, 2]], [[1, 3]], [[2, 3]]];
   const d0 = new Date(tw.start + "T12:00:00+03:00"), dayD = i => new Date(d0.getTime() + (i - 1) * 864e5);
   const fmtD = (d, o) => new Intl.DateTimeFormat("en-GB", Object.assign({timeZone: TZ}, o)).format(d);
   const days = {}, dshort = {}; for (let i = 1; i <= D; i++){ days[i] = fmtD(dayD(i), {weekday: "long", day: "numeric", month: "short"}).replace(",", ""); dshort[i] = fmtD(dayD(i), {weekday: "short"}); }
@@ -4011,15 +4011,15 @@ function twBuild(tw){
   const wave = (items, dur, put) => { for (let i = 0; i < items.length; i += C){ if (day > D){ fits = false; return; } if (t > L) nextDay(); if (day > D) return;
       const ws = items.slice(i, i + C); span[day] = span[day] || [t, t]; ws.forEach((x, j) => put(x, j + 1, day, t)); t += dur; span[day][1] = t; } };
   const order = r => r % 2 ? cats : [...cats].reverse();
-  const gr = c => tw.cats[c] / SIZE;
+  const gsz = c => +tw.cats[c] === 6 ? 3 : SIZE, gr = c => tw.cats[c] / gsz(c);
   for (let r = 0; r < 3; r++){
-    const ms = []; order(r).forEach(c => { for (let g = 1; g <= gr(c); g++) RR[r].forEach(([a, b]) => ms.push({c, g, a, b})); });
-    wave(ms, +tw.gm, (m, court, d, tt) => { n++; G.push({id: "g" + n, cat: m.c, grp: m.g, rnd: r + 1, day: d, time: twClock(tt), court, t1: m.c + ((m.g - 1) * SIZE + m.a), t2: m.c + ((m.g - 1) * SIZE + m.b)}); });
+    const ms = []; order(r).forEach(c => { for (let g = 1; g <= gr(c); g++) (gsz(c) === 3 ? RR3 : RR)[r].forEach(([a, b]) => ms.push({c, g, a, b})); });
+    wave(ms, +tw.gm, (m, court, d, tt) => { n++; G.push({id: "g" + n, cat: m.c, grp: m.g, rnd: r + 1, day: d, time: twClock(tt), court, t1: m.c + ((m.g - 1) * gsz(m.c) + m.a), t2: m.c + ((m.g - 1) * gsz(m.c) + m.b)}); });
   }
   const kput = (lab, court, d, tt) => { K[lab] = `${dshort[d]} ${twClock(tt)} Ct ${court}`; };
   const big = cats.filter(c => gr(c) === 8);
   if (big.length) wave([].concat(...[...big].reverse().map(c => Array.from({length: 8}, (_, i) => `${c} R${i + 1}`))), +tw.qm, kput);
-  wave([].concat(...[...cats].reverse().map(c => [1, 2, 3, 4].map(i => `${c} QF${i}`))), +tw.qm, kput);
+  wave([].concat(...[...cats].reverse().filter(c => gr(c) > 2).map(c => [1, 2, 3, 4].map(i => `${c} QF${i}`))), +tw.qm, kput);
   if (tw.finals && D > 1 && day < D && day <= D){ nextDay(); }
   wave([].concat(...[...cats].reverse().map(c => [`${c} Semi 1`, `${c} Semi 2`])), +tw.sm, kput);
   if (day <= D){ E[day].push([twClock(t), "break", "☕ Break before the finals (15 min)"]); t += 15; }
@@ -4030,15 +4030,15 @@ function twBuild(tw){
   const words = String(tw.name || "Cup").trim().toUpperCase().split(/\s+/);
   const title = words.length > 1 ? `${esc(words.slice(0, -1).join(" "))} <em>${esc(words[words.length - 1])}</em>` : `<em>${esc(words[0])}</em>`;
   const range = D > 1 ? `${fmtD(dayD(1), {day: "numeric"})}–${fmtD(dayD(D), {day: "numeric", month: "short"})}` : fmtD(dayD(1), {day: "numeric", month: "short"});
-  const qual = c => gr(c) === 8 ? "Top 2 of each group go to the round of 16." : gr(c) === 4 ? "Top 2 of each group go to the quarterfinals." : "Top 2 of each group and the 2 best 3rd places go to the quarterfinals.";
+  const qual = c => gr(c) === 2 ? "Top 2 of each group go to the semifinals." : gr(c) === 8 ? "Top 2 of each group go to the round of 16." : gr(c) === 4 ? "Top 2 of each group go to the quarterfinals." : "Top 2 of each group and the 2 best 3rd places go to the quarterfinals.";
   const setTxt = v => v === 9 ? "1 set to 9" : "1 set to 6";
-  const fmtL = cats.map(c => `${c === "X" ? "Mixed (1 man + 1 woman)" : c}: ${tw.cats[c]} teams, ${gr(c)} groups of 4, group matches ${setTxt(tw.gs[c])}. ${qual(c)}`).join("<br>");
+  const fmtL = cats.map(c => `${c === "X" ? "Mixed (1 man + 1 woman)" : c}: ${tw.cats[c]} teams, ${gr(c)} groups of ${gsz(c)}, group matches ${setTxt(tw.gs[c])}. ${qual(c)}`).join("<br>");
   const info = `<section class="sec info"><h2>Tournament</h2><dl><dt>Dates</dt><dd>${esc(days[1])}${D > 1 ? " – " + esc(days[D]) : ""}</dd><dt>Format</dt><dd>${fmtL}<br>Knockouts: quarterfinals 1 set to 9; semifinals and finals best of 3 sets with a super tiebreak.</dd>${tw.prize ? `<dt>Prize Pool</dt><dd>$${(+tw.prize).toLocaleString("en-US")}</dd>` : ""}${tw.fee ? `<dt>Entry</dt><dd>$${esc(tw.fee)} per team</dd>` : ""}<dt>Venue</dt><dd>${esc(club.name || "")} · ${C} court${C > 1 ? "s" : ""}</dd></dl></section>`;
   const cfg = {theme, club_logo: logo, kicker: tw.kick || "Tournament", tagline: `${cats.length} categor${cats.length > 1 ? "ies" : "y"} · ${teams} teams · ${C} court${C > 1 ? "s" : ""} · ${club.name || ""}`,
     title_html: title, subtitle: `${range} · ${club.name || ""}`,
     facts: [range, club.name || "", cats.map(c => c === "X" ? "Mixed" : c).join(" · "), `${teams} teams`, `${C} court${C > 1 ? "s" : ""}`, ...(tw.prize ? [`Prize Pool $${(+tw.prize).toLocaleString("en-US")}`] : [])], highlight_last: !!tw.prize,
     cats, catn: Object.fromEntries(cats.map(c => [c, c === "X" ? "Mixed" : `Category ${c}`])), catl: Object.fromEntries(cats.map(c => [c, c === "X" ? "Mixed" : `Cat ${c}`])),
-    catv: Object.fromEntries(cats.map(c => [c, c === "A" ? "--gold" : `--cat${c}`])), groups: Object.fromEntries(cats.map(c => [c, gr(c)])), size: SIZE,
+    catv: Object.fromEntries(cats.map(c => [c, c === "A" ? "--gold" : `--cat${c}`])), groups: Object.fromEntries(cats.map(c => [c, gr(c)])), size: SIZE, sizes: Object.fromEntries(cats.map(c => [c, gsz(c)])),
     gsets: Object.fromEntries(cats.map(c => [c, +tw.gs[c]])), days, dshort, format: Object.fromEntries(cats.map(c => [c, setTxt(tw.gs[c])])),
     courts: Array.from({length: C}, (_, i) => i + 1), cn, T: {G, K, E}, info_html: info, signup: tw.signup ? "true" : "false", ...(tw.fee ? {fee: +tw.fee} : {})};
   return {cfg, teams, g: G.length, k: Object.keys(K).length, fits: fits && day <= D, span, days, end: dayD(D), club};
@@ -4061,7 +4061,7 @@ V.tnew = () => { if (!canMakeTour()) return V.events(); if (!S.tw) twInit(); con
     ${fld(t("twName"), "name", tw.name, `placeholder="${t("twNamePh")}"`)}${fld(t("twKick"), "kick", tw.kick, `placeholder="${t("twKickPh")}"`)}
     <div class="grid2">${fld(t("twStart"), "start", tw.start, `type="date"`)}<div class="fld"><span>${t("twDays")}</span>${chips("days", [1, 2, 3, 4, 5].map(x => [x, x]), tw.days)}</div></div></section>
    <section class="card twsec"><b>${t("twS3")}</b><span class="note">${t("twS3s")}</span>
-    ${["A", "B", "C", "D", "E", "X"].map(c => `<div class="twcat">${c === "X" ? `<span class="lv mixb">${t("twMix")}</span>` : `<span class="lv c${c}">${c}</span>`}${chips("cat" + c, [[0, t("twOff")], [12, 12], [16, 16], [32, 32]], tw.cats[c])}</div>`).join("")}</section>
+    ${["A", "B", "C", "D", "E", "X"].map(c => `<div class="twcat">${c === "X" ? `<span class="lv mixb">${t("twMix")}</span>` : `<span class="lv c${c}">${c}</span>`}${chips("cat" + c, [[0, t("twOff")], [6, 6], [12, 12], [16, 16], [32, 32]], tw.cats[c])}</div>`).join("")}</section>
    <section class="card twsec"><b>${t("twS4")}</b>
     <div class="fld"><span>${t("twCourts")}</span>${chips("courts", [1, 2, 3, 4].map(x => [x, x]), tw.courts)}</div>
     <div class="grid2">${Array.from({length: +tw.courts}, (_, i) => fld(tf("twCn", {n: i + 1}), "cn" + i, tw.cn[i] || `Court ${i + 1}`)).join("")}</div>

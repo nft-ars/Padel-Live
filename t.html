@@ -83,6 +83,7 @@
 .tv-ls .ls-i em{font:700 1.9vh var(--body);font-style:normal;opacity:.7;text-transform:uppercase;letter-spacing:.08em}
 .tv-ls .ls-i b{font:800 2.9vh var(--display);text-transform:uppercase}
 .tv-ls .ls-i strong{font:800 3vh var(--display);color:var(--glow);padding:.2vh .7vw;border-radius:.8vh;background:rgba(255,255,255,.08)}
+html:root{--catX:#D9669E;--catX-soft:rgba(217,102,158,.16)}
 </style><style>/* ===== referee + TV + organizer tools (uses each theme's colours) ===== */
 .mini-live{margin-top:6px;font:800 13px/1.2 var(--display);letter-spacing:.04em;color:var(--warn)}
 .org-tools{display:flex;flex-direction:column;gap:12px}
@@ -2417,7 +2418,6 @@ td.t .id{font:600 11px var(--body);letter-spacing:.5px;text-shadow:none}
 :root{--hi:#C6E02A;--hi-2:#D7EE3A;--night:#0A1838;--night-2:#10234F}
 header.top .brand .emb{background:#fff;border-radius:50%}
 @media (min-width:760px){.scene{height:clamp(420px,47vw,620px)}}
-:root{--catX:#D9669E;--catX-soft:rgba(217,102,158,.16)}
 </style></head><body><div id="app"><p style="padding:40px 20px;font:600 16px system-ui;color:#555">Loading tournament…</p></div>
 <script>
 var SUPABASE_URL = "https://ebrlwfmkbwlbytslfvdn.supabase.co", SUPABASE_KEY = "sb_publishable_Pf2THTG2L1otqh1PYX4HLw_1360KwwF";
@@ -2462,7 +2462,8 @@ const isLive = id => cur().live.includes(id);
 
 /* ---------- standings ---------- */
 const gk = c => CFG.gsets && CFG.gsets[c] ? +CFG.gsets[c] : c === "B" ? 9 : 6;
-function teamsOf(c, g){ const s = (g - 1) * SIZE; return Array.from({length: SIZE}, (_, i) => c + (s + i + 1)); }
+const SZ = c => +((CFG.sizes && CFG.sizes[c]) || SIZE);
+function teamsOf(c, g){ const z = SZ(c), s = (g - 1) * z; return Array.from({length: z}, (_, i) => c + (s + i + 1)); }
 function table(c, g){
   const ids = teamsOf(c, g), row = {};
   ids.forEach((id, i) => row[id] = {id, draw:i, P:0, W:0, L:0, GF:0, GA:0});
@@ -2493,7 +2494,9 @@ const _pairCache = {};
 function seedsOf(c){
   const tabs = Array.from({length: GROUPS[c]}, (_, i) => table(c, i + 1));
   const at = p => rankRows(tabs.map((t, i) => ({...t.list[p], g: i + 1})));
-  const winners = at(0), runners = at(1), thirds = SIZE > 2 ? at(2) : [];
+  const winners = at(0), runners = at(1), thirds = SZ(c) > 2 && GROUPS[c] !== 2 ? at(2) : [];
+  if (GROUPS[c] === 2){ const W2 = g => ({id: tabs[g - 1].list[0].id, g}), R2 = g => ({id: tabs[g - 1].list[1].id, g});
+    return { seeds: [], winners, runners, thirds, size: 4, qf: [[W2(1), R2(2), "Group 1 winner", "Group 2 runner-up"], [W2(2), R2(1), "Group 2 winner", "Group 1 runner-up"]] }; }
   let seeds = [...winners, ...runners];
   const size = seeds.length > 8 ? 16 : 8;
   if (seeds.length < size) seeds = seeds.concat(thirds.slice(0, size - seeds.length));
@@ -2516,7 +2519,7 @@ function seedsOf(c){
   /* fixed bracket by group: 1st group v 4th group, 2nd v 3rd (winner v runner-up); D repeats it for groups 5–8 */
   const W = g => ({id: tabs[g - 1].list[0].id, g}), R = g => ({id: tabs[g - 1].list[1].id, g});
   const FIX = GROUPS[c] === 8 ? [[1,4],[2,3],[5,8],[6,7],[3,2],[4,1],[7,6],[8,5]] : [[1,4],[2,3],[3,2],[4,1]];
-  const qf = GROUPS[c] === 8 || GROUPS[c] === 4 ? FIX.map(([a, b]) => [W(a), R(b), `Group ${a} winner`, `Group ${b} runner-up`]) : pairs.map(([a, b]) => [seeds[a], seeds[b], a + 1, b + 1]);
+  const qf = GROUPS[c] === 2 ? [[W(1), R(2), "Group 1 winner", "Group 2 runner-up"], [W(2), R(1), "Group 2 winner", "Group 1 runner-up"]] : GROUPS[c] === 8 || GROUPS[c] === 4 ? FIX.map(([a, b]) => [W(a), R(b), `Group ${a} winner`, `Group ${b} runner-up`]) : pairs.map(([a, b]) => [seeds[a], seeds[b], a + 1, b + 1]);
   return { seeds, winners, runners, thirds, qf, size };
 }
 
@@ -2525,7 +2528,8 @@ const TAIL = [["SF1",["w","QF1"],["w","QF4"]],["SF2",["w","QF2"],["w","QF3"]],["
 const KDEF8 = [["QF1",["q",0,0],["q",0,1]],["QF2",["q",1,0],["q",1,1]],["QF3",["q",2,0],["q",2,1]],["QF4",["q",3,0],["q",3,1]], ...TAIL];
 const KDEF16 = [...Array.from({length: 8}, (_, i) => [`R${i + 1}`, ["q", i, 0], ["q", i, 1]]),
   ["QF1",["w","R1"],["w","R8"]],["QF2",["w","R2"],["w","R7"]],["QF3",["w","R3"],["w","R6"]],["QF4",["w","R4"],["w","R5"]], ...TAIL];
-const kdefOf = c => GROUPS[c] * 2 > 8 ? KDEF16 : KDEF8;
+const KDEF4 = [["SF1",["q",0,0],["q",0,1]],["SF2",["q",1,0],["q",1,1]],["F",["w","SF1"],["w","SF2"]]];
+const kdefOf = c => GROUPS[c] === 2 ? KDEF4 : GROUPS[c] * 2 > 8 ? KDEF16 : KDEF8;
 const klab = k => k.startsWith("PO") ? `Play-off ${k.slice(2)}` : k === "F" ? "Final" : k.startsWith("SF") ? `Semi ${k[2]}` : k.startsWith("R") ? `R16 · ${k.slice(1)}` : k;
 const ORD = n => ["","1st","2nd","3rd"][n];
 const KFIX = CFG.kfixed || null;
@@ -2646,7 +2650,7 @@ function myCard(){
   return `<section class="mycard"><div class="now-head"><h2>${esc(label(myTeam))}</h2><button class="linkbtn" data-clearteam="1">Change team</button></div>${body}</section>`;
 }
 function teamPicker(){
-  const opts = CATS.flatMap(c => Array.from({length: GROUPS[c] * SIZE}, (_, i) => c + (i + 1)));
+  const opts = CATS.flatMap(c => Array.from({length: GROUPS[c] * SZ(c)}, (_, i) => c + (i + 1)));
   return `<select class="search" id="myteam" aria-label="My team"><option value="">My team…</option>${opts.map(id => `<option value="${id}"${id === myTeam ? " selected" : ""}>${esc(id)} · ${esc(nm(id) || "Team " + id)}</option>`).join("")}</select>`;
 }
 function filters(){
@@ -2711,8 +2715,8 @@ function vStandings(){
   let h = `<div class="filters" role="group" aria-label="Category">${CATS.map(c => `<button class="chip" data-cat="${c}" aria-pressed="${view.cat === c || (view.cat === "all" && c === CATS[0])}">${CATL[c]}</button>`).join("")}</div>`;
   const c = view.cat === "all" ? CATS[0] : view.cat;
   const fx = KFIX && KFIX[c], qset = fx ? new Set(fx.flatMap(x => [x.a, x.b])) : null;
-  const done = catDone(c), sd = fx ? {thirds: []} : seedsOf(c), four = fx ? true : GROUPS[c] * 2 >= 8, bestThirds = new Set(four ? [] : sd.thirds.slice(0, 8 - GROUPS[c] * 2).map(r => r.id));
-  h += `<div class="cat-head" style="background:${cvar(c)}">${CATN[c]}<small>${fx && CFG.gnote ? esc(CFG.gnote[c] || "") : GROUPS[c] * 2 > 8 ? "Top 2 of each group go to the round of 16" : four ? "Top 2 of each group go to the quarterfinals" : "Top 2 of each group + the best 3rd places go to the quarterfinals"}</small></div><div class="grid2">`;
+  const done = catDone(c), sd = fx ? {thirds: []} : seedsOf(c), four = fx ? true : GROUPS[c] * 2 >= 8 || GROUPS[c] === 2, bestThirds = new Set(four ? [] : sd.thirds.slice(0, 8 - GROUPS[c] * 2).map(r => r.id));
+  h += `<div class="cat-head" style="background:${cvar(c)}">${CATN[c]}<small>${fx && CFG.gnote ? esc(CFG.gnote[c] || "") : GROUPS[c] === 2 ? "Top 2 of each group go to the semifinals" : GROUPS[c] * 2 > 8 ? "Top 2 of each group go to the round of 16" : four ? "Top 2 of each group go to the quarterfinals" : "Top 2 of each group + the best 3rd places go to the quarterfinals"}</small></div><div class="grid2">`;
   for (let g = 1; g <= GROUPS[c]; g++){ const t = table(c, g);
     h += `<div class="tbl"><h3>Group ${g}<span>${t.played}/${t.total} played</span></h3><div class="tscroll"><table><thead><tr><th>#</th><th class="t">Team</th><th>P</th><th>W</th><th>L</th><th>GF</th><th>GA</th><th>GD</th></tr></thead><tbody>`;
     t.list.forEach((r, i) => { const q = qset ? qset.has(r.id) : t.done && (i < 2 || (i === 2 && done && bestThirds.has(r.id)));
@@ -2725,7 +2729,8 @@ function vStandings(){
     h += `<tr class="${q ? "q" : ""}${r.id === myTeam ? " me" : ""}"><td class="pts">${i + 1}</td><td class="t">${esc(label(r.id))}${q ? `<span class="pill">Q</span>` : ""}</td><td>${r.g}</td><td>${r.W}</td><td>${r.GD > 0 ? "+" : ""}${r.GD}</td><td>${r.GF}</td></tr>`; });
   h += `</tbody></table></div></div>`;
   h += `<p class="note">The 2 best 3rd-placed teams also go through. Quarterfinals: best winner v 2nd-best 3rd place, best runner-up v 2nd-best runner-up, 2nd-best winner v best 3rd place, 3rd-best winner v 3rd-best runner-up. Teams from the same group never meet in a quarterfinal.</p>`;
-  } else if (!fx) h += `<p class="note">${GROUPS[c] * 2 > 8 ? "Round of 16" : "Quarterfinals"}: ${GROUPS[c] === 8 ? "Group 1 winner v Group 4 runner-up, Group 2 winner v Group 3 runner-up, Group 3 winner v Group 2 runner-up, Group 4 winner v Group 1 runner-up, and the same for Groups 5 to 8 (5 v 8, 6 v 7). Quarterfinals: winner R16·1 v winner R16·8, R16·2 v R16·7, R16·3 v R16·6, R16·4 v R16·5" : "Group 1 winner v Group 4 runner-up, Group 2 winner v Group 3 runner-up, Group 3 winner v Group 2 runner-up, Group 4 winner v Group 1 runner-up"}. Semi-finals: winner of QF1 v winner of QF4, and winner of QF2 v winner of QF3.</p>`;
+  } else if (!fx && GROUPS[c] === 2) h += `<p class="note">Semifinals: Group 1 winner v Group 2 runner-up, and Group 2 winner v Group 1 runner-up.</p>`;
+  else if (!fx) h += `<p class="note">${GROUPS[c] * 2 > 8 ? "Round of 16" : "Quarterfinals"}: ${GROUPS[c] === 8 ? "Group 1 winner v Group 4 runner-up, Group 2 winner v Group 3 runner-up, Group 3 winner v Group 2 runner-up, Group 4 winner v Group 1 runner-up, and the same for Groups 5 to 8 (5 v 8, 6 v 7). Quarterfinals: winner R16·1 v winner R16·8, R16·2 v R16·7, R16·3 v R16·6, R16·4 v R16·5" : "Group 1 winner v Group 4 runner-up, Group 2 winner v Group 3 runner-up, Group 3 winner v Group 2 runner-up, Group 4 winner v Group 1 runner-up"}. Semi-finals: winner of QF1 v winner of QF4, and winner of QF2 v winner of QF3.</p>`;
   h += `<p class="note">Ranking: wins, then game difference, then games won, then head-to-head (two teams only), then coin toss. A TIE tag means the tournament director decides. A walkover counts 6-0.</p>`;
   return h;
 }
@@ -2742,7 +2747,7 @@ function bx(o, k, c, x, y){
 function ln(x, y, w, h){ return `<i class="ln" style="left:${x}px;top:${y}px;width:${w}px;height:${h}px"></i>`; }
 function bracket(c, r){
   const big = GROUPS[c] * 2 > 8;
-  const cols = (CFG.kcols && CFG.kcols[c]) || (big ? [["R1","R8","R4","R5","R2","R7","R3","R6"], ["QF1","QF4","QF2","QF3"], ["SF1","SF2"], ["F"]] : [["QF1","QF4","QF2","QF3"], ["SF1","SF2"], ["F"]]);
+  const cols = (CFG.kcols && CFG.kcols[c]) || (GROUPS[c] === 2 ? [["SF1","SF2"], ["F"]] : big ? [["R1","R8","R4","R5","R2","R7","R3","R6"], ["QF1","QF4","QF2","QF3"], ["SF1","SF2"], ["F"]] : [["QF1","QF4","QF2","QF3"], ["SF1","SF2"], ["F"]]);
   const half = GAP / 2, cy = y => y + BH / 2;
   const ys = [cols[0].map((_, i) => i * (BH + PG) + Math.floor(i / 2) * PAIRGAP)];
   for (let ci = 1; ci < cols.length; ci++) ys.push(cols[ci].map((_, i) => (cy(ys[ci - 1][2 * i]) + cy(ys[ci - 1][2 * i + 1])) / 2 - BH / 2));
@@ -2771,8 +2776,8 @@ function vKnockouts(){
 }
 function vTeams(){
   let h = editMode ? `<p class="note">Type each team's player names, then press Save &amp; publish.</p>` : "";
-  for (const c of CATS){ const n = GROUPS[c] * SIZE;
-    h += `<section class="sec"><div class="cat-head" style="background:${cvar(c)}">${CATN[c]}<small>${n} teams · ${GROUPS[c]} groups of ${SIZE}</small></div><div class="teams">`;
+  for (const c of CATS){ const n = GROUPS[c] * SZ(c);
+    h += `<section class="sec"><div class="cat-head" style="background:${cvar(c)}">${CATN[c]}<small>${n} teams · ${GROUPS[c]} groups of ${SZ(c)}</small></div><div class="teams">`;
     for (let i = 1; i <= n; i++){ const id = c + i;
       h += `<div class="team${id === myTeam ? " me" : ""}"><span class="badge" style="background:${cvar(c)}">${id}</span>${editMode ? `<input id="nm-${id}" data-n="${id}" value="${esc(nm(id))}" placeholder="Player 1 / Player 2" aria-label="Names for ${id}">` : `<span class="tm${nm(id) ? "" : " ph"}">${esc(nm(id) || "Names after the draw")}</span>`}</div>`; }
     h += `</div></section>`; }
