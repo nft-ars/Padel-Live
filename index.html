@@ -1584,7 +1584,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v64";
+const VERSION = "v65";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -1628,11 +1628,14 @@ async function boot(){
   if (!boot.started){ boot.started = true; setInterval(poll, 15000); document.addEventListener("visibilitychange", () => { if (!document.hidden) poll(true); }); }
 }
 async function loadClubs(){
-  const [c, ct, p, cl] = await Promise.all([
+  let [c, ct, p, cl] = await Promise.all([
     sb.from("clubs").select("id,slug,name,city,about,opens,closes,peak_from,late_from,usd_syp_rate,cancel_hours,area,photo,maps_url,phone,weekend_days,book_days,deal_pct,deal_hours,booking_on").order("name"),
     sb.from("courts").select("*").order("sort"),
     sb.from("prices").select("*"),
     sb.from("closures").select("*")]);
+  if (c.error){ // a database step not run yet: load clubs without the newest fields
+    c = await sb.from("clubs").select("id,slug,name,city,about,opens,closes,peak_from,late_from,usd_syp_rate,cancel_hours,area,photo,maps_url,phone,weekend_days,book_days,deal_pct,deal_hours").order("name");
+    if (!c.error && c.data) c.data.forEach(x => { x.booking_on = true; }); }
   if (c.error) { S.err = t("loadErr"); return; }
   S.err = null; S.clubs = c.data || []; S.courts = ct.data || []; S.prices = p.data || []; S.closures = cl.data || [];
   if (!S.club && S.clubs.length) S.club = S.clubs[0];
