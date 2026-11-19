@@ -2417,6 +2417,7 @@ td.t .id{font:600 11px var(--body);letter-spacing:.5px;text-shadow:none}
 :root{--hi:#C6E02A;--hi-2:#D7EE3A;--night:#0A1838;--night-2:#10234F}
 header.top .brand .emb{background:#fff;border-radius:50%}
 @media (min-width:760px){.scene{height:clamp(420px,47vw,620px)}}
+:root{--catX:#D9669E;--catX-soft:rgba(217,102,158,.16)}
 </style></head><body><div id="app"><p style="padding:40px 20px;font:600 16px system-ui;color:#555">Loading tournament…</p></div>
 <script>
 var SUPABASE_URL = "https://ebrlwfmkbwlbytslfvdn.supabase.co", SUPABASE_KEY = "sb_publishable_Pf2THTG2L1otqh1PYX4HLw_1360KwwF";
@@ -3239,7 +3240,7 @@ async function pull(force){
 
 /* ---------- team sign-up (players) + entries (organizer) ---------- */
 const SU = { auth: "up", aName: "", aPhone: "", aPass: "", autoLv: false, info: null, open: location.hash === "#signup", cat: "", phone: "", note: "", check: null, busy: false, msg: "", orgCat: "" };
-const CATR = { E: "under 1.5", D: "1.5–2.5", C: "2.5–3.5", B: "3.5–4.5", A: "4.5+" };
+const CATR = { E: "under 1.5", D: "1.5–2.5", C: "2.5–3.5", B: "3.5–4.5", A: "4.5+", X: "1 man + 1 woman" };
 const START_LV = { E: 1.0, D: 1.5, C: 2.5, B: 3.49, A: 3.49 };
 async function loadSU(){ try { const r = await sb.rpc("t_signup_info", {p_slug: SLUG}); if (!r.error) SU.info = r.data;
     } catch (e) {} if (!editMode) render(); }
@@ -3272,7 +3273,7 @@ function signupBox(){ const I = SU.info; if (!I || editMode) return "";
       const ck = SU.check;
       h += `<div class="su-form">
         ${!SU.info.level || SU.autoLv ? `<p class="su-step">${SU.autoLv || !SU.info.level ? "Step 2 of 2 · " : ""}Pick the category you play</p><p class="su-s">This sets your starting level. Your first 5 matches fine-tune it. B and A players start at 3.49 and the admin checks them.</p>` : ""}
-        <span class="lbl">Category</span><div class="su-cats">${CATS.map(k => `<button class="chip" data-sucat="${k}" aria-pressed="${SU.cat === k}">${esc(CATN[k] || k)}${CATR[k] ? ` <small>${CATR[k]}</small>` : ""}</button>`).join("")}</div>
+        <span class="lbl">Category</span><div class="su-cats">${CATS.map(k => `<button class="chip" data-sucat="${k}" aria-pressed="${SU.cat === k}">${esc(CATN[k] || k)}${CATR[k] ? ` <small>${CATR[k]}</small>` : ""}</button>`).join("")}</div>${SU.cat === "X" ? `<p class="su-s">Mixed: one man and one woman, any level. The organizer checks every mixed team.</p>` : ""}
         <label class="lbl">Partner's WhatsApp number<input id="su-phone" inputmode="tel" dir="ltr" placeholder="09XX XXX XXX" value="${esc(SU.phone)}"></label>
         <div class="su-inv"><span class="su-s">Partner has no Padel Live account yet?</span><button class="btn small" data-suinv${SU.cat ? "" : " disabled"}>🔗 Send an invite link</button>${SU.inv ? `<span class="su-s su-ok">Link: <b dir="ltr">${esc(SU.inv)}</b></span>` : ""}</div>
         <p class="su-s">Your partner needs a Padel Live account with a level. ${I.level != null ? `Your level: <b>${(+I.level).toFixed(2)}</b>.` : ``}</p>
