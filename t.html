@@ -75,6 +75,14 @@
 .tv.sk .tv-top{background:linear-gradient(100deg,color-mix(in srgb,var(--tv-a) 78%,transparent) 0%,color-mix(in srgb,var(--tv-deep) 55%,transparent) 60%,color-mix(in srgb,var(--tv-deep) 65%,transparent))}
 .tv.sk .tv-h{text-shadow:0 .4vh 2vh rgba(0,0,0,.8);align-self:flex-start;padding:.6vh 2vw .6vh .4vw;border-radius:1.4vh;background:linear-gradient(90deg,color-mix(in srgb,var(--tv-deep) 85%,transparent),color-mix(in srgb,var(--tv-deep) 60%,transparent));backdrop-filter:blur(.8vh)}.tv.sk .tv-h::after{display:none}
 .tv.sk .tv-cin,.tv.sk .tv-card,.tv.sk .tv-grp,.tv.sk .tv-r,.tv.sk .tv-sp{background:linear-gradient(160deg,color-mix(in srgb,var(--tv-a) 32%,rgba(8,12,22,.72)),rgba(5,8,14,.8) 75%)}
+.tv-ls{display:none;align-items:center;gap:1.2vw;height:6.4vh;margin:0 0 .6vh;padding:0 1.2vw;border-radius:1.6vh;overflow:hidden;white-space:nowrap;background:rgba(0,0,0,.55);border:.2vh solid color-mix(in srgb,var(--glow) 45%,transparent);backdrop-filter:blur(1vh)}
+.tv-ls.on{display:flex}
+.tv-ls .ls-tag{display:flex;align-items:center;gap:.5vw;padding:.5vh .9vw;border-radius:99px;background:#E5484D;font:800 2.2vh var(--display);letter-spacing:.14em;text-transform:uppercase;flex-shrink:0}
+.tv-ls .ls-tag .tv-dot{background:#fff;box-shadow:none}
+.tv-ls .ls-i{display:flex;align-items:center;gap:.7vw;padding-left:1.2vw;border-left:.3vh solid var(--cat);flex-shrink:0}
+.tv-ls .ls-i em{font:700 1.9vh var(--body);font-style:normal;opacity:.7;text-transform:uppercase;letter-spacing:.08em}
+.tv-ls .ls-i b{font:800 2.9vh var(--display);text-transform:uppercase}
+.tv-ls .ls-i strong{font:800 3vh var(--display);color:var(--glow);padding:.2vh .7vw;border-radius:.8vh;background:rgba(255,255,255,.08)}
 </style><style>/* ===== referee + TV + organizer tools (uses each theme's colours) ===== */
 .mini-live{margin-top:6px;font:800 13px/1.2 var(--display);letter-spacing:.04em;color:var(--warn)}
 .org-tools{display:flex;flex-direction:column;gap:12px}
@@ -2941,7 +2949,7 @@ async function refSend(mid, st){
     try {
       const r = await sb.rpc("t_ref_update", { p_slug: SLUG, p_pin: REF.pin, p_mid: job.mid, p_pts: job.st, p_final: finalOf(job.st) });
       if (r.error) throw r.error;
-      VERSION = r.data; REF.msg = ""; if (finalOf(job.st)) setTimeout(() => syncResults(REF.pin), 500);
+      VERSION = r.data; REF.msg = ""; if (window.__rtBump) window.__rtBump(VERSION); if (finalOf(job.st)) setTimeout(() => syncResults(REF.pin), 500);
     } catch (e) {
       const m = (e && e.message) || "";
       if (/PIN/.test(m)){ REF.msg = "The referee PIN changed. Enter the new one."; lsSet(PINKEY, ""); REF.pin = ""; REF.pending = null; break; }
@@ -3137,7 +3145,7 @@ function renderTV(){
       <div class="tv-sting" id="tv-sting"><i class="s3"></i><i class="s2"></i><i class="s1"></i><span>${lg}</span></div>
       <header class="tv-top">${CFG.club_logo ? `<img src="${CFG.club_logo}" alt="">` : ""}<div class="tv-title">${CFG.title_html || esc(TNAME)}<span>${esc(CFG.tagline || CFG.subtitle || "")}</span></div><div class="tv-live-badge"><span class="tv-dot"></span>Live</div><div class="tv-clock" id="tv-clock"></div></header>
       <section class="tv-main" id="tv-main"></section>
-      <div class="tv-bar"><i id="tv-prog"></i></div>
+      <div class="tv-ls" id="tv-ls"></div><div class="tv-bar"><i id="tv-prog"></i></div>
       <footer class="tv-tick"><div class="tv-tick-lb">${lg}<b>Live</b></div><div class="tv-tick-in" id="tv-tick"></div></footer>
       <div id="tv-burst" class="tv-burst"></div></div>`;
     TVS.prev = JSON.parse(JSON.stringify(cur().pts || {}));
@@ -3157,6 +3165,13 @@ function renderTV(){
   if (fresh){ const pr = document.getElementById("tv-prog"); pr.style.animation = "none"; void pr.offsetWidth; pr.style.animation = `tvprog ${p.dur}ms linear forwards`;
     clearTimeout(TVS.timer); TVS.timer = setTimeout(() => { TVS.i++; renderTV(); }, p.dur); }
   TVS.last = p.id;
+  const lsEl = document.getElementById("tv-ls");
+  if (lsEl){ const lv = p.id === "courts" ? [] : all.filter(m => isLive(m.id) && !isDoneM(m) && m.A.id && m.B.id);
+    const lh = lv.map(m => `<span class="ls-i" style="--cat:${cvar(m.cat)}"><em>${cname(m.court)}</em><b>${esc(sideName(m.A))}</b><strong data-k="ls-${m.id}">${esc(liveTxt(m.id) || "0-0")}</strong><b>${esc(sideName(m.B))}</b></span>`).join("");
+    const html2 = lv.length ? `<span class="ls-tag"><i class="tv-dot"></i>Live</span>${lh}` : "";
+    if (lsEl.dataset.h !== html2){ const before = {}; lsEl.querySelectorAll("[data-k]").forEach(e => before[e.dataset.k] = e.textContent); lsEl.innerHTML = html2; lsEl.dataset.h = html2;
+      lsEl.querySelectorAll("[data-k]").forEach(e => { if (before[e.dataset.k] != null && before[e.dataset.k] !== e.textContent) e.classList.add("pop"); }); }
+    lsEl.classList.toggle("on", !!lv.length); }
   const tk = tvTicker(all);
   if (tk !== TVS.ticker){ TVS.ticker = tk; const el = document.getElementById("tv-tick"); el.innerHTML = `<div class="tk-run">${tk}</div><div class="tk-run" aria-hidden="true">${tk}</div>`; el.style.setProperty("--tkdur", Math.max(30, tk.length / 18) + "s"); }
   document.getElementById("tv-clock").textContent = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
@@ -3229,6 +3244,8 @@ const START_LV = { E: 1.0, D: 1.5, C: 2.5, B: 3.49, A: 3.49 };
 async function loadSU(){ try { const r = await sb.rpc("t_signup_info", {p_slug: SLUG}); if (!r.error) SU.info = r.data;
     } catch (e) {} if (!editMode) render(); }
 let suTimer = null;
+function suWho(ck){ const nw = (on, v) => on ? ` <small>(counts as ${(+v).toFixed(2)} until placement is done)</small>` : "";
+  return `<p class="su-s">You ${(+ck.me).toFixed(2)}${nw(ck.me_new, ck.me)} + ${esc(ck.partner)} ${(+ck.plevel).toFixed(2)}${nw(ck.p_new, ck.plevel)}</p>`; }
 function suCheck(){ clearTimeout(suTimer); SU.check = null;
   if (!SU.cat || SU.phone.replace(/\D/g, "").length < 9) return;
   suTimer = setTimeout(async () => { const r = await sb.rpc("t_check", {p_slug: SLUG, p_cat: SU.cat, p_partner_phone: SU.phone}); SU.check = r.error ? {ok: false, reason: r.error.message} : r.data; render(); }, 400); }
@@ -3259,9 +3276,9 @@ function signupBox(){ const I = SU.info; if (!I || editMode) return "";
         <label class="lbl">Partner's WhatsApp number<input id="su-phone" inputmode="tel" dir="ltr" placeholder="09XX XXX XXX" value="${esc(SU.phone)}"></label>
         <div class="su-inv"><span class="su-s">Partner has no Padel Live account yet?</span><button class="btn small" data-suinv${SU.cat ? "" : " disabled"}>🔗 Send an invite link</button>${SU.inv ? `<span class="su-s su-ok">Link: <b dir="ltr">${esc(SU.inv)}</b></span>` : ""}</div>
         <p class="su-s">Your partner needs a Padel Live account with a level. ${I.level != null ? `Your level: <b>${(+I.level).toFixed(2)}</b>.` : ``}</p>
-        ${ck ? (!ck.ok ? `<p class="su-bad">${esc(ck.reason)}</p>` : ck.fits ? `<p class="su-ok">✓ ${esc(ck.partner)} (${(+ck.plevel).toFixed(2)}) · team average ${(+ck.avg).toFixed(2)} · fits ${esc(CATN[SU.cat] || SU.cat)}</p>`
-           : `<p class="su-bad">${esc(ck.reason)}</p><label class="lbl">Ask the organizer for an exception<textarea id="su-note" rows="2" maxlength="300" placeholder="Why you'd like to play in this category">${esc(SU.note)}</textarea></label>`) : ""}
-        <p class="su-s su-rule">Rule: the team average must be inside the category, and the stronger player can be at most 0.5 above the category's top. Playing up is always allowed.</p>
+        ${ck ? (!ck.ok ? `<p class="su-bad">${esc(ck.reason)}</p>` : ck.fits ? `<p class="su-ok">✓ ${esc(ck.partner)} (${(+ck.plevel).toFixed(2)}) · team level ${(+ck.avg).toFixed(2)} · fits ${esc(CATN[SU.cat] || SU.cat)}</p>${suWho(ck)}`
+           : `<p class="su-bad">${esc(ck.reason)}</p>${suWho(ck)}<label class="lbl">Ask the organizer for an exception<textarea id="su-note" rows="2" maxlength="300" placeholder="Why you'd like to play in this category">${esc(SU.note)}</textarea></label>`) : ""}
+        <p class="su-s su-rule">Rule: the team level (average of both players) must be inside the category, and the stronger player can be at most one category above it. Playing up is always allowed. New players count at the level they told us until their first 5 matches are played.</p>
         <div class="su-act"><button class="btn primary" data-susend${SU.busy || !ck || !ck.ok ? " disabled" : ""}>${SU.busy ? "…" : ck && ck.ok && !ck.fits ? "Send request" : "Sign up"}</button><button class="btn" data-suclose>Cancel</button></div>
         ${SU.msg ? `<p class="su-bad">${esc(SU.msg)}</p>` : ""}</div>`;
     }
@@ -3318,6 +3335,12 @@ document.addEventListener("input", e => { const el = e.target;
 loadSU().then(() => { if (location.hash === "#signup"){ const e = document.querySelector(".su"); if (e) e.scrollIntoView({block: "start"}); } });
 render();
 setInterval(() => { if (!document.hidden) pull(); }, MODE ? 3000 : 8000);
+/* instant updates: every score change is pushed to the TV and phones the moment it happens (the timer above stays as a backup) */
+let RT = null;
+try { if (sb.channel){ RT = sb.channel("tour-" + SLUG, {config: {broadcast: {self: false}}})
+  .on("broadcast", {event: "bump"}, m => { const v = m && m.payload && m.payload.v; if (v == null || v !== VERSION) pull(); })
+  .subscribe(); } } catch (e) { RT = null; }
+window.__rtBump = v => { try { if (RT) RT.send({type: "broadcast", event: "bump", payload: {v}}); } catch (e) {} };
 document.addEventListener("visibilitychange", () => { if (!document.hidden) pull(); });
 (async () => { try { const r = await sb.rpc("t_can_edit", {p_slug: SLUG}); if (r.data === true){ canEdit = true; render(); syncResults(); setInterval(() => syncResults(), 20000); } } catch (e) {} })();
 /* finished matches go to Padel Live: levels, wins, challenges (only teams that signed up in the app) */

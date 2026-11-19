@@ -1377,6 +1377,97 @@ main.vlg input,main.vlg select{background:#0B1220;color:#fff;border-color:rgba(9
 .vrv-b{margin-top:16px;padding:13px 34px;border-radius:14px;border:0;font:900 italic 16px var(--disp);color:#111;background:linear-gradient(180deg,#fff,var(--vc));opacity:0;animation:vrIn .5s 2.9s forwards}
 .vrv-b{cursor:pointer}.gcard-wrap.vet{padding:40px 26px 30px}.vrv .gcard-wrap.vet{padding:0}
 .vrv-flash,.vrv-burst,.vrv-card{pointer-events:none}
+
+/* open-match filters + private lobbies */
+.mfbar{position:sticky;top:0;z-index:5;display:flex;flex-direction:column;gap:8px;padding:10px 0 8px;background:var(--bg,#0E1512)}
+.mfrow{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}.mfrow::-webkit-scrollbar{display:none}
+.mfrow .chip{flex:none;white-space:nowrap}
+.mfcount{display:flex;justify-content:space-between;align-items:center;font:700 12.5px Inter;opacity:.8}
+.mfcount button{background:none;border:0;color:var(--blue,#5B8FE0);font:800 12.5px Inter}
+.chip.on2{background:#E3EE3A;color:#111;border-color:#E3EE3A}
+.wj{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.wj button{display:flex;flex-direction:column;align-items:center;gap:4px;padding:12px 6px;border-radius:14px;border:1.5px solid rgba(255,255,255,.14);background:rgba(255,255,255,.03);color:inherit;font:800 13px Inter}
+.wj button span{font-size:22px}.wj button small{font:600 10.5px/1.25 Inter;opacity:.7;text-align:center}
+.wj button.sel{border-color:#E3EE3A;background:rgba(227,238,58,.10);box-shadow:0 0 0 3px rgba(227,238,58,.15)}
+.invl{display:flex;flex-direction:column;gap:6px}
+.invr{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:12px;background:rgba(255,255,255,.04)}
+.invr .nm{flex:1;font:700 14px Inter}.invr .nm small{display:block;font:500 11.5px Inter;opacity:.6}
+.ck{width:24px;height:24px;border-radius:8px;border:2px solid rgba(255,255,255,.3);display:grid;place-items:center;font:900 14px Inter}
+.ck.on{background:#E3EE3A;border-color:#E3EE3A;color:#111}
+.invbtns{display:flex;gap:8px}.invbtns button{flex:1;padding:10px;border-radius:12px;border:1.5px dashed rgba(255,255,255,.25);background:none;color:inherit;font:800 12.5px Inter}
+.lobby{display:flex;flex-direction:column;gap:12px}
+.lobh{display:flex;align-items:center;gap:10px}.lobh .lk{font-size:26px}.lobh b{font:italic 900 20px var(--disp)}.lobh small{display:block;font:600 12px Inter;opacity:.7}
+.lslots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.lslot{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;border-radius:14px;background:rgba(255,255,255,.04);text-align:center}
+.lslot small{font:700 11.5px Inter}.lslot i{font:600 10px Inter;font-style:normal;opacity:.7}
+.lslot.wait{border:1.5px dashed rgba(227,238,58,.5)}.lslot.empty{border:1.5px dashed rgba(255,255,255,.2);opacity:.85}
+.lslot .ok{color:#7CF29B}.lslot .pd{color:#E3EE3A}
+.timer{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:rgba(227,238,58,.08);border:1px solid rgba(227,238,58,.3);font:700 12.5px Inter}
+.timer b{font:italic 900 18px var(--disp);color:#E3EE3A}
+.lbtns{display:flex;gap:8px}.lbtns button{flex:1}
+.ptag{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:99px;background:rgba(255,255,255,.08);font:800 11px Inter}
+.av0{width:40px;height:40px;border-radius:50%;border:2px solid #5B8FE0;display:grid;place-items:center;font:800 13px Inter;color:#5B8FE0}
+.lslot{padding:12px 4px 10px;height:auto}
+.lslots{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.invr{border:0;color:inherit;text-align:start;width:100%;font:inherit;cursor:pointer}
+.lslot{border:0;color:inherit;font:inherit}
+.lslot .av,.lslot .avf{transform:scale(.9)}
+
+/* open matches: themed cards with the court and sides */
+.mx{position:relative;margin:58px 4px 22px;border-radius:24px;padding:150px 0 14px;color:#fff;
+  background:linear-gradient(155deg,var(--a) 0%,color-mix(in srgb,var(--a) 45%,var(--d)) 55%,var(--d) 100%);
+  box-shadow:0 22px 30px -16px color-mix(in srgb,var(--a) 70%,#000),inset 0 1px 0 rgba(255,255,255,.22)}
+.mx .lg{position:absolute;right:-6px;top:-52px;width:56px;height:56px;border-radius:50%;background:#fff;object-fit:cover;box-shadow:0 0 0 3px var(--b),0 8px 16px rgba(0,0,0,.45);z-index:5}
+/* the slick court window, sticking out of the card */
+.mx .win{position:absolute;left:10px;right:10px;top:-40px;height:178px;border-radius:20px;overflow:visible;perspective:800px}
+.mx .court{position:absolute;inset:0;border-radius:20px;transform:rotateX(14deg) scale(.97);transform-origin:50% 100%;
+  background:
+   radial-gradient(120% 80% at 50% 0%,rgba(255,255,255,.16),transparent 55%),
+   repeating-linear-gradient(90deg,rgba(255,255,255,.025) 0 2px,transparent 2px 9px),
+   radial-gradient(110% 120% at 50% 50%,color-mix(in srgb,var(--a) 70%,#0a0f0d) 0%,color-mix(in srgb,var(--a) 35%,#050807) 100%);
+  box-shadow:0 0 0 2px color-mix(in srgb,var(--b) 70%,transparent),0 0 0 7px rgba(255,255,255,.06),0 0 0 8px color-mix(in srgb,var(--b) 25%,transparent),0 20px 26px -8px rgba(0,0,0,.6),inset 0 0 40px rgba(0,0,0,.45);overflow:hidden}
+.mx .court::before{content:"";position:absolute;inset:8px;border-radius:13px;border:1.5px solid color-mix(in srgb,var(--b) 85%,#fff);
+  box-shadow:0 0 10px color-mix(in srgb,var(--b) 70%,transparent),inset 0 0 10px color-mix(in srgb,var(--b) 35%,transparent);
+  background:
+   linear-gradient(90deg,transparent calc(22% - .75px),color-mix(in srgb,var(--b) 85%,#fff) calc(22% - .75px) calc(22% + .75px),transparent calc(22% + .75px) calc(78% - .75px),color-mix(in srgb,var(--b) 85%,#fff) calc(78% - .75px) calc(78% + .75px),transparent calc(78% + .75px)),
+   linear-gradient(0deg,transparent calc(50% - .75px),color-mix(in srgb,var(--b) 85%,#fff) calc(50% - .75px) calc(50% + .75px),transparent calc(50% + .75px)) 22% 0/56% 100% no-repeat}
+.mx .net{position:absolute;left:50%;top:2px;bottom:2px;width:4px;margin-left:-2px;border-radius:3px;background:linear-gradient(180deg,#fff,color-mix(in srgb,var(--b) 60%,#fff),#fff);box-shadow:0 0 12px var(--b),0 0 3px #fff;z-index:1}
+.mx .glass{position:absolute;inset:0;border-radius:20px;background:linear-gradient(115deg,rgba(255,255,255,.18) 0%,rgba(255,255,255,0) 28%,rgba(255,255,255,0) 72%,rgba(255,255,255,.08) 100%);pointer-events:none;z-index:3}
+.mx .tm{position:absolute;top:14px;font:900 8.5px Inter;letter-spacing:.22em;color:color-mix(in srgb,var(--b) 70%,#fff);opacity:.85;z-index:2}.mx .tm.a{left:18px}.mx .tm.b{right:18px}
+.mx .ps{position:absolute;display:flex;flex-direction:column;align-items:center;gap:1px;transform:translate(-50%,-50%);z-index:4}
+.mx .ps .pk{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:900 13px Inter;color:#fff;
+  background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.35),rgba(0,0,0,.35) 70%),color-mix(in srgb,var(--a) 60%,#000);
+  box-shadow:0 0 0 2px #fff,0 0 0 4px color-mix(in srgb,var(--b) 60%,transparent),0 6px 10px rgba(0,0,0,.5)}
+.mx .ps .lv{transform:scale(.74);margin:-4px 0 -3px}
+.mx .ps .sd{font:900 8px Inter;letter-spacing:.16em;padding:1px 6px;border-radius:5px;background:rgba(0,0,0,.55);color:#fff}
+.mx .ps.need .pk{background:rgba(0,0,0,.3);box-shadow:0 0 0 2px var(--b);border:0;color:var(--b);font-size:22px;animation:mxP 1.5s ease-in-out infinite}
+.mx .ps.need .sd{background:var(--b);color:var(--d)}
+.mx .ps.need small{font:800 9.5px Inter;color:var(--b);text-shadow:0 1px 3px rgba(0,0,0,.8)}
+@keyframes mxP{50%{box-shadow:0 0 0 2px var(--b),0 0 0 7px color-mix(in srgb,var(--b) 25%,transparent),0 0 22px var(--b)}}
+.mx .bd{padding:0 16px;display:flex;flex-direction:column;gap:3px}
+.mx .h{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.mx .h b{font:900 italic 22px/1.05 var(--disp);text-transform:uppercase}
+.mx .h small{font:800 13px Inter;color:var(--b);white-space:nowrap}
+.mx .m{font:600 12px Inter;opacity:.85}
+.mx .ft{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 16px 0}
+.mx .sp{font:800 12px Inter;padding:5px 10px;border-radius:99px;background:rgba(255,255,255,.14)}
+.mx .jb{display:flex;gap:6px}.mx .jb button{border:0;border-radius:99px;padding:9px 14px;font:900 12.5px Inter;background:var(--b);color:var(--d);box-shadow:0 6px 14px -6px var(--b)}
+.mx.flip{color:#0F1D05;background:linear-gradient(155deg,var(--fl1) 0%,var(--fl2) 55%,var(--fl3) 100%);box-shadow:0 22px 30px -16px color-mix(in srgb,var(--fl3) 80%,#000),inset 0 1px 0 rgba(255,255,255,.4)}
+.mx.flip .h small{color:var(--a)}.mx.flip .sp{background:rgba(15,29,5,.12)}.mx.flip .jb button{background:var(--a);color:#fff}
+.mx.flip .lg{box-shadow:0 0 0 3px var(--a),0 8px 16px rgba(0,0,0,.3)}
+.mx.flip .court{box-shadow:0 0 0 2px var(--a),0 0 0 7px rgba(255,255,255,.25),0 20px 26px -8px rgba(0,0,0,.45),inset 0 0 40px rgba(0,0,0,.45)}
+.chip.sideL,.chip.sideR{font-weight:800}
+.mx .ps{border:0;background:none;padding:0;color:inherit;font:inherit;cursor:pointer}
+.mx .ps small{font:800 9.5px Inter;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+.mx .ps.sel .pk{box-shadow:0 0 0 3px #fff,0 0 0 6px var(--b),0 0 22px var(--b);transform:scale(1.08)}
+.mx .jb .sp,.mx .ft .sp{white-space:nowrap}
+.mx .jb button{cursor:pointer}
+.mx.mxpage{margin-top:58px}
+.mx .jsheet{margin-top:10px;color:inherit}
+.sidepick{display:flex;gap:8px}.sidepick button{flex:1;padding:12px 6px;border-radius:14px;border:1.5px solid var(--line,rgba(255,255,255,.15));background:transparent;color:inherit;font:800 13px Inter;cursor:pointer}
+.sidepick button.sel{border-color:#E3EE3A;background:rgba(227,238,58,.1);box-shadow:0 0 0 3px rgba(227,238,58,.15)}.sidepick small{display:block;font:600 11px Inter;opacity:.65;margin-top:3px}
+.om-row>.mx{flex:0 0 88%;scroll-snap-align:center;margin:58px 0 22px}.om-row{padding-top:0}
+.om-row{align-items:flex-start}
 </style>
 </head>
 <body>
@@ -1407,7 +1498,7 @@ const W = {
   forgot:"Forgot password?", vetK:"{n} MATCHES PLAYED", vetT:"VETERAN", vetS:"You unlocked the {t} Veteran frame.", vetS2:"It stays on your card forever.", vetBtn:"Wear it ✨", vetTag:"{n} MATCHES", lgTeamsIn:"Teams signed up", lgStartsIn:"Days to start", lgStarts:"Starts", lgToday:"Today", nLgNudge:"{x}: your league match has no time yet. Propose one before {d}.", nLgPropNudge:"{x}: the other team is waiting for your answer ({w}). Accept or suggest another time.", chKick:"League champions", chTitle:"Champions!", chSub:"{t} won {x}", chPrize:"Your prize", chCollect:"Collect your prize at {c}. Show this screen at the desk.", chShare:"Share", chClose:"Let's go", vlKick:"Season live · Round {r}/{n}", vlKickSign:"Sign-up open", vlKickDone:"Season finished", vlSub:"PADEL LIVE LEAGUE", vlTeams:"{n} teams", vlPrize:"1st place prize", vlClimb:"The Climb", vlRoundOf:"Round {r} of {n}", vlDaysLeft:"{d} days left", vlSummitPrize:"Summit prize", vlLegend:"You · ▲ climbing next round · ▼ dropping", vlNext:"Your next match", vlSummit:"Summit", vlBase:"Base", vlPrizeHere:"the prize is decided here", vlMoves:"1st ▲ · last ▼", vlPast:"Round {r} · final results", vlNoTime:"No time yet. Propose one to the other team.", vlMine:"My league", vlNextS:"Next", vlStartsSoon:"You are in. Round 1 starts soon.", vlPrizeSpot:"You are in the prize spot.", vlVs:"vs", vlWon:"Won", vlLost:"Lost", lgPropose:"📅 Propose a time", lgChange:"Change the time", lgChangeProp:"Change my proposal", lgSendProp:"Send to the other team", lgPropNote:"The other team gets a notification. When they accept, the court is booked for you (90 min, pay at the club).", lgAdminNote:"As admin this sets the time directly and books the court.", lgPropSent:"Sent. You'll be notified when they accept.", lgPropMine:"You proposed {w} at {c}", lgPropWait:"Waiting for the other team to accept.", lgPropThem:"{n} propose {w} at {c}", lgPropOthers:"Proposed: {w} at {c} (waiting for {n}'s opponents)", lgAccept:"Accept and book", lgOther:"Suggest another time", lgAccepted:"Done! The court is booked.", lgBooked:"court booked", nLgProp:"{n} proposes your league match: {w} at {c}. Open it to accept.", nLgBooked:"League match confirmed: {w} · {c} {k}. The court is booked.", sndT:"Announcer voice", musT:"Background music", tooHigh:"Above your level for now", apVer:"Verified · known player (can join stronger games from day one)", phoneOrEmail:"Phone number (or email)", wrongLogin:"Wrong phone number or password.", forgotPhone:"Message the Padel Live admin on WhatsApp and they will set a new password for you.", tjLv:"Starting level: Category {c} ({l})", tjLvUp:"Starting level: {l} (top of Category C)", tjLvUpN:"You can still play Category {c}. The admin checks players from B and A tournaments and moves them up.", tjLvNote:"You can fine-tune it later with the 60-second quiz in your Me tab.", tjQuiz:"Take the level quiz instead", apPass:"New password for this player", apPassBtn:"Set password", apPassOk:"Password changed. Send it to the player on WhatsApp.", passPh:"6+ characters", needEmail:"Type your email above first.", resetSent:"Check your email for a link to set a new password.", newPassT:"Set a new password", newPass:"New password (6+ characters)", setPass:"Save new password", passSaved:"Password changed. You're signed in.",
   delAcc:"Delete my account", delQ:"Delete your account? Your upcoming bookings will be cancelled. This can't be undone.", delDone:"Your account was deleted.",
   install:"Add Padel Live to your phone", installS:"Get the icon on your home screen. It opens full screen like a normal app.", installBtn:"Add to home screen", iosHow:"In Safari, tap the Share button, then Add to Home Screen.", andHow:"Tap ⋮ in Chrome, then Add to Home screen (or Install app).",
-  evLive:"Live scores", lvTitle:"Your level", tierE:"Iron", nTJoined:"{n} joined your team for {x} (Category {c}). Waiting for the organizer.", nTResult:"{x}: {n}", nTStart:"{x}: {n} starts at {w} · {c}", nTRecap:"Your {x} results are in ({r}). See your new level and card.", tjT:"You\u2019re invited", tjS:"{n} wants you as their partner", tjCat:"Category {c}", tjStep1:"Create your account", tjStep2:"Find your level (60 sec)", tjStep3:"Accept and join the team", tjGo:"Accept and join", tjDone:"You\u2019re in! The organizer will confirm your team.", tjUsed:"This invite was already used.", tjClosed:"Sign-up for this tournament is closed.", tjBad:"This invite link is not valid.", wtOpen:"Sign-up open", wtSign:"Sign up your team", wtSee:"See the tournament", wtTeams:"{n} teams signed up", twAlso:"or just look around", tierD:"Bronze", tierC:"Silver", tierB:"Gold", tierA:"Diamond", plTag:"Placement {n}/5", serT:"Promotion series", serTag:"Promotion {w}–{l}", serTxt:"Win 2 of 3 against {t}-level players to reach {t}", serWeak:"Nice win, but it doesn\u2019t count for the series: the other team was below {t} level.", serFailT:"Series lost", serFail:"Keep winning and the next series starts by itself.", q6:"Which category do you usually play in?", q6x:"I don\u2019t know", q7:"Do you have a Playtomic level?", q7s:"Optional. It helps us start you at the right level.", q7ph:"e.g. 3.2", lvCapped:"Everyone starts at Silver or below (3.49 max). Gold and Diamond are won on court.", clT:"Level claims to check", clS:"These players said they are stronger than where they started (3.49 max). If you know them, set their real level.", clNow:"Now", clSaid:"They said", clEst:"estimate", clSet:"Set level", clOk:"Leave it", plLeft:"Play {n} more rated matches to reveal your tier", plSub:"Placement matches", plDone:"Placement complete", plRevealed:"Your tier is revealed. From now on it moves with every match.", shieldOn:"Shield active", shieldTxt:"🛡️ Shield: win your next match to stay {t}", shieldHeld:"Shield held", stillT:"Still {t}", shieldSaved:"You stayed in your tier. The shield recharges next time.", divUp:"Division up", topDiv:"Top division", lvlU:"LEVEL", catU:"Category", provisional:"Provisional", winRate:"Win rate", matchesU:"Matches", seasonU:"Season", weeks:"weeks", topCat:"Top category", needsN:"Play {n} more rated matches to unlock {c}", needsShort:"{n} more matches to unlock", danger:"Danger zone · stay above {x}", to:"to", shareCard:"Share card", seasonBtn:"Season", seasonT:"Season leaderboard", seasonRule:"Win 3 pts · played 1 pt", pts:"pts", seasonEmpty:"No confirmed matches this month yet.", rankUnlocked:"RANK UNLOCKED", youReached:"You reached", backTo:"BACK TO", climbBack:"Win your next matches to climb back.", winU:"WIN!", levelUp:"Your level went up.", matchDone:"MATCH CONFIRMED", nextTime:"Get it back next time.", orgSet:"SET BY THE ORGANIZER", okBtn2:"Nice", cardSaved:"Card saved to your downloads.", b_first_win:"First win", b_comeback:"Comeback", b_night_owl:"Night owl", b_iron_man:"Iron man", b_regular:"Regular", b_champion:"Champion", apTitle:"Players (admin)", apSearch:"Name or phone", apFind:"Find", apAok:"Allowed in category A", apTitleChk:"Won a tournament (adds a title)", apNote:"Why", apNotePh:"Won Category C, Nov 2026", edit:"Edit", provNote:"Your first 5 rated matches are placement. Gold and Diamond are earned with a promotion series.",lvIntro:"Answer 5 quick questions. Your level then goes up or down with every confirmed match result.", lvYour:"Your level", lvCat:"Category", lvAnswer:"Answer all 5 questions", lvNote:"Levels go from 0.5 to 7. Category E (Iron) is below 1.5, D (Bronze) 1.5–2.5, C (Silver) 2.5–3.5, B (Gold) 3.5–4.5, A (Diamond) 4.5 and up.",
+  evLive:"Live scores", lvTitle:"Your level", tierE:"Iron", nTJoined:"{n} joined your team for {x} (Category {c}). Waiting for the organizer.", nTResult:"{x}: {n}", nTStart:"{x}: {n} starts at {w} · {c}", nTRecap:"Your {x} results are in ({r}). See your new level and card.", tjT:"You\u2019re invited", tjS:"{n} wants you as their partner", tjCat:"Category {c}", tjStep1:"Create your account", tjStep2:"Find your level (60 sec)", tjStep3:"Accept and join the team", tjGo:"Accept and join", tjDone:"You\u2019re in! The organizer will confirm your team.", tjUsed:"This invite was already used.", tjClosed:"Sign-up for this tournament is closed.", tjBad:"This invite link is not valid.", wtOpen:"Sign-up open", wtSign:"Sign up your team", wtSee:"See the tournament", wtTeams:"{n} teams signed up", twAlso:"or just look around", tierD:"Bronze", tierC:"Silver", tierB:"Gold", tierA:"Diamond", plTag:"Placement {n}/5", serT:"Promotion series", serTag:"Promotion {w}–{l}", serTxt:"Win 2 of 3 against {t}-level players to reach {t}", serWeak:"Nice win, but it doesn\u2019t count for the series: the other team was below {t} level.", serFailT:"Series lost", serFail:"Keep winning and the next series starts by itself.", q6:"Which category do you usually play in?", q6x:"I don\u2019t know", q7:"Do you have a Playtomic level?", q7s:"Optional. It helps us start you at the right level.", q7ph:"e.g. 3.2", lvCapped:"Everyone starts at Silver or below (3.49 max). Gold and Diamond are won on court.", clT:"Levels to check", clFast:"⚡ Rising fast: started at {s}, now {n} after {r} matches", clS:"These players said they are stronger than where they started (3.49 max). If you know them, set their real level.", clNow:"Now", clSaid:"They said", clEst:"estimate", clSet:"Set level", clOk:"Leave it", plLeft:"Play {n} more rated matches to reveal your tier", plSub:"Placement matches", plDone:"Placement complete", plRevealed:"Your tier is revealed. From now on it moves with every match.", shieldOn:"Shield active", shieldTxt:"🛡️ Shield: win your next match to stay {t}", shieldHeld:"Shield held", stillT:"Still {t}", shieldSaved:"You stayed in your tier. The shield recharges next time.", divUp:"Division up", topDiv:"Top division", lvlU:"LEVEL", catU:"Category", provisional:"Provisional", winRate:"Win rate", matchesU:"Matches", seasonU:"Season", weeks:"weeks", topCat:"Top category", needsN:"Play {n} more rated matches to unlock {c}", needsShort:"{n} more matches to unlock", danger:"Danger zone · stay above {x}", to:"to", shareCard:"Share card", seasonBtn:"Season", seasonT:"Season leaderboard", seasonRule:"Win 3 pts · played 1 pt", pts:"pts", seasonEmpty:"No confirmed matches this month yet.", rankUnlocked:"RANK UNLOCKED", youReached:"You reached", backTo:"BACK TO", climbBack:"Win your next matches to climb back.", winU:"WIN!", levelUp:"Your level went up.", matchDone:"MATCH CONFIRMED", nextTime:"Get it back next time.", orgSet:"SET BY THE ORGANIZER", okBtn2:"Nice", cardSaved:"Card saved to your downloads.", b_first_win:"First win", b_comeback:"Comeback", b_night_owl:"Night owl", b_iron_man:"Iron man", b_regular:"Regular", b_champion:"Champion", apTitle:"Players (admin)", apSearch:"Name or phone", apFind:"Find", apAok:"Allowed in category A", apTitleChk:"Won a tournament (adds a title)", apNote:"Why", apNotePh:"Won Category C, Nov 2026", edit:"Edit", provNote:"Your first 5 rated matches are placement. Gold and Diamond are earned with a promotion series.",lvIntro:"Answer 5 quick questions. Your level then goes up or down with every confirmed match result.", lvYour:"Your level", lvCat:"Category", lvAnswer:"Answer all 5 questions", lvNote:"Levels go from 0.5 to 7. Category E (Iron) is below 1.5, D (Bronze) 1.5–2.5, C (Silver) 2.5–3.5, B (Gold) 3.5–4.5, A (Diamond) 4.5 and up.",
   q1:"How long have you played padel?", q1a:"I'm just starting", q1b:"Less than a year", q1c:"1 to 3 years", q1d:"More than 3 years",
   q2:"Other racket sports?", q2a:"None", q2b:"A little", q2c:"Tennis or squash regularly",
   q3:"Your game", q3a:"I'm learning to keep the ball in play", q3b:"I can rally at a steady pace", q3c:"I rally well and volley at the net", q3d:"I attack with bandeja, víbora and smash",
@@ -1438,7 +1529,7 @@ evDone:"Results", evSoonT:"Coming up", evSee:"See the results", evFollow:"Follow
   forgot:"نسيت كلمة السر؟", vetK:"{n} مباراة", vetT:"محارب قديم", vetS:"فتحت إطار المحارب {t}.", vetS2:"سيبقى على بطاقتك للأبد.", vetBtn:"البسه ✨", vetTag:"{n} مباراة", lgTeamsIn:"فرق مسجلة", lgStartsIn:"يوم للبداية", lgStarts:"البداية", lgToday:"اليوم", nLgNudge:"{x}: مباراة الدوري تبعك لسا بلا وقت. اقترح وقت قبل {d}.", nLgPropNudge:"{x}: الفريق التاني ناطر ردك ({w}). وافق أو اقترح وقت تاني.", chKick:"أبطال الدوري", chTitle:"أبطال!", chSub:"{t} ربحوا {x}", chPrize:"جائزتكن", chCollect:"استلموا جائزتكن من {c}. ورجوا هالشاشة عالاستقبال.", chShare:"شارك", chClose:"يلا", vlKick:"الموسم شغال · الجولة {r}/{n}", vlKickSign:"التسجيل مفتوح", vlKickDone:"انتهى الموسم", vlSub:"دوري PADEL LIVE", vlTeams:"{n} فريق", vlPrize:"جائزة المركز الأول", vlClimb:"الصعود", vlRoundOf:"الجولة {r} من {n}", vlDaysLeft:"باقي {d} يوم", vlSummitPrize:"جائزة القمة", vlLegend:"إنت · ▲ طالع الجولة الجاية · ▼ نازل", vlNext:"مباراتك الجاية", vlSummit:"القمة", vlBase:"القاعدة", vlPrizeHere:"هون بتنحسم الجائزة", vlMoves:"الأول ▲ · الأخير ▼", vlPast:"الجولة {r} · النتائج النهائية", vlNoTime:"ما في وقت لسا. اقترح وقت للفريق التاني.", vlMine:"دوريي", vlNextS:"الجاية", vlStartsSoon:"إنت مسجل. الجولة الأولى قريباً.", vlPrizeSpot:"إنت بمركز الجائزة.", vlVs:"ضد", vlWon:"ربحت", vlLost:"خسرت", lgPropose:"📅 اقترح وقت", lgChange:"غيّر الوقت", lgChangeProp:"غيّر اقتراحي", lgSendProp:"ابعتو للفريق التاني", lgPropNote:"الفريق التاني بيوصلو إشعار. لما يوافقوا بينحجز الملعب إلكن (٩٠ دقيقة، الدفع بالنادي).", lgAdminNote:"كأدمن، هاد بيحدد الوقت مباشرة وبيحجز الملعب.", lgPropSent:"انبعت. رح يوصلك إشعار لما يوافقوا.", lgPropMine:"اقترحت {w} بـ{c}", lgPropWait:"ناطرين موافقة الفريق التاني.", lgPropThem:"{n} عم يقترحوا {w} بـ{c}", lgPropOthers:"مقترح: {w} بـ{c}", lgAccept:"وافق واحجز", lgOther:"اقترح وقت تاني", lgAccepted:"تم! انحجز الملعب.", lgBooked:"الملعب محجوز", nLgProp:"{n} عم يقترح موعد مباراة الدوري: {w} بـ{c}. افتحها لتوافق.", nLgBooked:"تأكدت مباراة الدوري: {w} · {c} {k}. الملعب محجوز.", sndT:"صوت المعلّق", musT:"موسيقى بالخلفية", tooHigh:"أعلى من مستواك حالياً", apVer:"موثّق · لاعب معروف (بيقدر يلعب مع الأقوى من أول يوم)", phoneOrEmail:"رقم الموبايل (أو الإيميل)", wrongLogin:"رقم الموبايل أو كلمة السر غلط.", forgotPhone:"راسل أدمن Padel Live على واتساب ليعطيك كلمة سر جديدة.", tjLv:"مستواك المبدئي: فئة {c} ({l})", tjLvUp:"مستواك المبدئي: {l} (أعلى فئة C)", tjLvUpN:"فيك تلعب بفئة {c} عادي. الأدمن بيراجع لاعبين بطولات B و A وبيرفعهم.", tjLvNote:"فيك تضبطه بعدين بالاختبار (٦٠ ثانية) من صفحة حسابي.", tjQuiz:"اعمل اختبار المستوى بدلاً من هيك", apPass:"كلمة سر جديدة لهاللاعب", apPassBtn:"غيّر كلمة السر", apPassOk:"تغيّرت كلمة السر. ابعتها للاعب على واتساب.", passPh:"٦ أحرف أو أكثر", needEmail:"اكتب بريدك الإلكتروني أولاً.", resetSent:"تفقد بريدك، أرسلنا رابطاً لتعيين كلمة سر جديدة.", newPassT:"تعيين كلمة سر جديدة", newPass:"كلمة السر الجديدة (٦ أحرف أو أكثر)", setPass:"حفظ كلمة السر", passSaved:"تم تغيير كلمة السر وتسجيل دخولك.",
   delAcc:"حذف حسابي", delQ:"حذف حسابك؟ سيتم إلغاء حجوزاتك القادمة ولا يمكن التراجع.", delDone:"تم حذف حسابك.",
   install:"أضف بادل لايف إلى هاتفك", installS:"ضع الأيقونة على الشاشة الرئيسية ليفتح كتطبيق عادي.", installBtn:"إضافة إلى الشاشة الرئيسية", iosHow:"في سفاري اضغط زر المشاركة ثم «إضافة إلى الشاشة الرئيسية».", andHow:"في كروم اضغط ⋮ ثم «إضافة إلى الشاشة الرئيسية» أو «تثبيت التطبيق».",
-  evLive:"نتائج مباشرة", lvTitle:"مستواك", tierE:"حديدي", nTJoined:"{n} انضم لفريقك بـ{x} (فئة {c}). ناطرين تأكيد المنظم.", nTResult:"{x}: {n}", nTStart:"{x}: {n} بتبلش الساعة {w} · {c}", nTRecap:"طلعت نتائجك بـ{x} ({r}). شوف مستواك وبطاقتك الجديدة.", tjT:"معك دعوة", tjS:"{n} بده ياك شريكه", tjCat:"فئة {c}", tjStep1:"اعمل حساب", tjStep2:"اعرف مستواك (٦٠ ثانية)", tjStep3:"اقبل وانضم للفريق", tjGo:"اقبل وانضم", tjDone:"صرت معهن! المنظم رح يأكد فريقكن.", tjUsed:"هالدعوة انستعملت.", tjClosed:"التسجيل بهالبطولة سكّر.", tjBad:"رابط الدعوة مو صالح.", wtOpen:"التسجيل مفتوح", wtSign:"سجّل فريقك", wtSee:"شوف البطولة", wtTeams:"{n} فرق مسجلين", twAlso:"أو اتفرج بس", tierD:"برونزي", tierC:"فضي", tierB:"ذهبي", tierA:"ماسي", plTag:"تحديد المستوى {n}/5", serT:"سلسلة الترقية", serTag:"ترقية {w}–{l}", serTxt:"اربح ٢ من ٣ ضد لاعبين بمستوى {t} لتوصل {t}", serWeak:"فوز حلو، بس ما انحسب للسلسلة: الفريق التاني كان أقل من مستوى {t}.", serFailT:"خسرت السلسلة", serFail:"كفّي ربح والسلسلة الجاية بتبلش لحالها.", q6:"بأي فئة بتلعب عادةً؟", q6x:"ما بعرف", q7:"عندك مستوى على Playtomic؟", q7s:"اختياري. بيساعدنا نبدأك بالمستوى الصح.", q7ph:"مثلاً 3.2", lvCapped:"الكل بيبدأ فضي أو أقل (أعلى شي 3.49). الذهبي والماسي بينربحوا بالملعب.", clT:"مستويات لازم تتأكد", clS:"هالاعبين قالوا إنهن أقوى من مستوى البداية (أعلى شي 3.49). إذا بتعرفهن، حط مستواهن الحقيقي.", clNow:"هلأ", clSaid:"قالوا", clEst:"تقدير", clSet:"حط المستوى", clOk:"خليه", plLeft:"العب {n} مباريات مسجّلة لينكشف تصنيفك", plSub:"مباريات تحديد المستوى", plDone:"خلص تحديد المستوى", plRevealed:"انكشف تصنيفك. من هلأ بيتحرك مع كل مباراة.", shieldOn:"الدرع شغّال", shieldTxt:"🛡️ الدرع: اربح مباراتك الجاية لتبقى {t}", shieldHeld:"الدرع حماك", stillT:"لسا {t}", shieldSaved:"بقيت بتصنيفك. الدرع بيرجع يشحن المرة الجاية.", divUp:"ترقية درجة", topDiv:"أعلى درجة", lvlU:"المستوى", catU:"الفئة", provisional:"مؤقت", winRate:"نسبة الفوز", matchesU:"مباريات", seasonU:"الموسم", weeks:"أسابيع", topCat:"أعلى فئة", needsN:"العب {n} مباريات محسوبة كمان لتفتح {c}", needsShort:"{n} مباريات كمان للفتح", danger:"منطقة الخطر · خليك فوق {x}", to:"لـ", shareCard:"شارك البطاقة", seasonBtn:"الموسم", seasonT:"ترتيب الموسم", seasonRule:"الفوز ٣ نقاط · المشاركة نقطة", pts:"نقطة", seasonEmpty:"ما في مباريات مؤكدة هالشهر لسا.", rankUnlocked:"فئة جديدة", youReached:"وصلت لـ", backTo:"رجعت لـ", climbBack:"اربح مبارياتك الجاية لترجع تطلع.", winU:"فوز!", levelUp:"مستواك طلع.", matchDone:"تم تأكيد المباراة", nextTime:"المرة الجاية بترجعها.", orgSet:"حدده المنظم", okBtn2:"تمام", cardSaved:"انحفظت البطاقة بالتنزيلات.", b_first_win:"أول فوز", b_comeback:"العودة", b_night_owl:"بومة الليل", b_iron_man:"الرجل الحديدي", b_regular:"منتظم", b_champion:"بطل", apTitle:"اللاعبين (أدمن)", apSearch:"الاسم أو الرقم", apFind:"بحث", apAok:"مسموح بالفئة A", apTitleChk:"ربح بطولة (يضيف لقب)", apNote:"السبب", apNotePh:"ربح الفئة C، تشرين الثاني ٢٠٢٦", edit:"تعديل", provNote:"أول ٥ مباريات محسوبة لتحديد المستوى. الذهبي والماسي بينربحوا بسلسلة ترقية.",lvIntro:"جاوب على ٥ أسئلة سريعة. بعدها مستواك بيطلع أو بينزل مع كل نتيجة مباراة مؤكدة.", lvYour:"مستواك", lvCat:"الفئة", lvAnswer:"جاوب على الأسئلة الخمسة", lvNote:"المستويات من ٠٫٥ إلى ٧. الفئة E (حديدي) تحت ١٫٥، D (برونزي) ١٫٥–٢٫٥، C (فضي) ٢٫٥–٣٫٥، B (ذهبي) ٣٫٥–٤٫٥، A (ماسي) من ٤٫٥ وفوق.",
+  evLive:"نتائج مباشرة", lvTitle:"مستواك", tierE:"حديدي", nTJoined:"{n} انضم لفريقك بـ{x} (فئة {c}). ناطرين تأكيد المنظم.", nTResult:"{x}: {n}", nTStart:"{x}: {n} بتبلش الساعة {w} · {c}", nTRecap:"طلعت نتائجك بـ{x} ({r}). شوف مستواك وبطاقتك الجديدة.", tjT:"معك دعوة", tjS:"{n} بده ياك شريكه", tjCat:"فئة {c}", tjStep1:"اعمل حساب", tjStep2:"اعرف مستواك (٦٠ ثانية)", tjStep3:"اقبل وانضم للفريق", tjGo:"اقبل وانضم", tjDone:"صرت معهن! المنظم رح يأكد فريقكن.", tjUsed:"هالدعوة انستعملت.", tjClosed:"التسجيل بهالبطولة سكّر.", tjBad:"رابط الدعوة مو صالح.", wtOpen:"التسجيل مفتوح", wtSign:"سجّل فريقك", wtSee:"شوف البطولة", wtTeams:"{n} فرق مسجلين", twAlso:"أو اتفرج بس", tierD:"برونزي", tierC:"فضي", tierB:"ذهبي", tierA:"ماسي", plTag:"تحديد المستوى {n}/5", serT:"سلسلة الترقية", serTag:"ترقية {w}–{l}", serTxt:"اربح ٢ من ٣ ضد لاعبين بمستوى {t} لتوصل {t}", serWeak:"فوز حلو، بس ما انحسب للسلسلة: الفريق التاني كان أقل من مستوى {t}.", serFailT:"خسرت السلسلة", serFail:"كفّي ربح والسلسلة الجاية بتبلش لحالها.", q6:"بأي فئة بتلعب عادةً؟", q6x:"ما بعرف", q7:"عندك مستوى على Playtomic؟", q7s:"اختياري. بيساعدنا نبدأك بالمستوى الصح.", q7ph:"مثلاً 3.2", lvCapped:"الكل بيبدأ فضي أو أقل (أعلى شي 3.49). الذهبي والماسي بينربحوا بالملعب.", clT:"مستويات لازم تتأكد", clFast:"⚡ عم يطلع بسرعة: بلش {s}، هلق {n} بعد {r} مباريات", clS:"هالاعبين قالوا إنهن أقوى من مستوى البداية (أعلى شي 3.49). إذا بتعرفهن، حط مستواهن الحقيقي.", clNow:"هلأ", clSaid:"قالوا", clEst:"تقدير", clSet:"حط المستوى", clOk:"خليه", plLeft:"العب {n} مباريات مسجّلة لينكشف تصنيفك", plSub:"مباريات تحديد المستوى", plDone:"خلص تحديد المستوى", plRevealed:"انكشف تصنيفك. من هلأ بيتحرك مع كل مباراة.", shieldOn:"الدرع شغّال", shieldTxt:"🛡️ الدرع: اربح مباراتك الجاية لتبقى {t}", shieldHeld:"الدرع حماك", stillT:"لسا {t}", shieldSaved:"بقيت بتصنيفك. الدرع بيرجع يشحن المرة الجاية.", divUp:"ترقية درجة", topDiv:"أعلى درجة", lvlU:"المستوى", catU:"الفئة", provisional:"مؤقت", winRate:"نسبة الفوز", matchesU:"مباريات", seasonU:"الموسم", weeks:"أسابيع", topCat:"أعلى فئة", needsN:"العب {n} مباريات محسوبة كمان لتفتح {c}", needsShort:"{n} مباريات كمان للفتح", danger:"منطقة الخطر · خليك فوق {x}", to:"لـ", shareCard:"شارك البطاقة", seasonBtn:"الموسم", seasonT:"ترتيب الموسم", seasonRule:"الفوز ٣ نقاط · المشاركة نقطة", pts:"نقطة", seasonEmpty:"ما في مباريات مؤكدة هالشهر لسا.", rankUnlocked:"فئة جديدة", youReached:"وصلت لـ", backTo:"رجعت لـ", climbBack:"اربح مبارياتك الجاية لترجع تطلع.", winU:"فوز!", levelUp:"مستواك طلع.", matchDone:"تم تأكيد المباراة", nextTime:"المرة الجاية بترجعها.", orgSet:"حدده المنظم", okBtn2:"تمام", cardSaved:"انحفظت البطاقة بالتنزيلات.", b_first_win:"أول فوز", b_comeback:"العودة", b_night_owl:"بومة الليل", b_iron_man:"الرجل الحديدي", b_regular:"منتظم", b_champion:"بطل", apTitle:"اللاعبين (أدمن)", apSearch:"الاسم أو الرقم", apFind:"بحث", apAok:"مسموح بالفئة A", apTitleChk:"ربح بطولة (يضيف لقب)", apNote:"السبب", apNotePh:"ربح الفئة C، تشرين الثاني ٢٠٢٦", edit:"تعديل", provNote:"أول ٥ مباريات محسوبة لتحديد المستوى. الذهبي والماسي بينربحوا بسلسلة ترقية.",lvIntro:"جاوب على ٥ أسئلة سريعة. بعدها مستواك بيطلع أو بينزل مع كل نتيجة مباراة مؤكدة.", lvYour:"مستواك", lvCat:"الفئة", lvAnswer:"جاوب على الأسئلة الخمسة", lvNote:"المستويات من ٠٫٥ إلى ٧. الفئة E (حديدي) تحت ١٫٥، D (برونزي) ١٫٥–٢٫٥، C (فضي) ٢٫٥–٣٫٥، B (ذهبي) ٣٫٥–٤٫٥، A (ماسي) من ٤٫٥ وفوق.",
   q1:"من قديش عم تلعب بادل؟", q1a:"لسا عم ابدأ", q1b:"أقل من سنة", q1c:"من سنة لـ ٣ سنين", q1d:"أكتر من ٣ سنين",
   q2:"رياضات مضرب تانية؟", q2a:"لا", q2b:"شوي", q2c:"تنس أو سكواش بشكل منتظم",
   q3:"لعبك", q3a:"عم اتعلم خلي الطابة بالملعب", q3b:"بقدر كمّل تبادل بسرعة ثابتة", q3c:"بتبادل منيح وبلعب فولي عالشبكة", q3d:"بهاجم بالبانديخا والفيبورا والسماش",
@@ -1488,7 +1579,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v55";
+const VERSION = "v59";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -1565,15 +1656,43 @@ function gameRow(b){
    <div class="mid"><b>${esc(b.club_name)} · ${esc(b.court_name)}${b.kind === "lesson" ? ` · 🎾 ${esc(b.coach || t("lesson"))}` : ""}</b><span>${b.minutes} ${t("min")} · ${money(b.price)}${b.code ? ` · #${b.booking_no} · <b>${esc(b.code)}</b>` : ""}${b.open_spots ? ` · ${b.open_spots} ${t("openN")}` : ""}</span></div>
    <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end">${statusTag(b.status)}${b.status !== "cancelled" ? `<button class="sbtn" data-match="${b.id}">${b.result === "pending" ? "⚑ " : ""}${t("details")}</button>` : ""}${b.status !== "cancelled" && new Date(b.starts_at) > new Date() ? (b.mine ? `<button class="sbtn" data-cancel="${b.id}">${t("cancel")}</button>` : `<button class="sbtn" data-leave="${b.id}">${t("leave")}</button>`) : ""}</div></div>`;
 }
+/* ---------- the court: who plays where (Team A / Team B, left / right) ---------- */
+const SEATS = ["AL", "AR", "BL", "BR"], SEAT_XY = {AL: [27, 30], AR: [27, 74], BL: [73, 74], BR: [73, 30]};
+function seatMap(seats, ppl){ // ppl: [{id, n, l, b, host}]
+  const host = ppl.find(p => p.host) || ppl[0], byId = new Map(ppl.map(p => [String(p.id), p])), out = {};
+  if (!seats){ const order = ppl.slice(); SEATS.forEach(k => { const p = order.shift(); out[k] = p ? {p, any: true} : null; }); return out; }
+  const anyl = new Set(seats.any || []);
+  SEATS.forEach(k => { const v = seats[k];
+    out[k] = v == null ? null : v === "h" ? {p: host, any: anyl.has(k)} : v === "f" ? {p: {n: t("sdFriend"), friend: true}, any: anyl.has(k)} : {p: byId.get(String(v)) || {n: "?"}, any: anyl.has(k)}; });
+  return out; }
+const seatFree = (m, side) => { if (!m.seats) return (m.open_spots || 0) > 0; return SEATS.some(k => m.seats[k] == null && (!side || k[1] === side)); };
+function courtHtml(map, o){ o = o || {};
+  const ps = SEATS.map(k => { const [x, y] = SEAT_XY[k], s = map[k], sd = k[1] === "L" ? t("sdL") : t("sdR"), sel = o.sel === k ? " sel" : "";
+    const attr = o.swap ? ` data-seat="${k}"` : o.join && !s ? ` data-join="${o.join}" data-jpos="${k}"` : "";
+    if (!s) return `<button type="button" class="ps need${sel}" style="left:${x}%;top:${y}%"${attr}><span class="pk">＋</span><span class="sd">${sd}</span></button>`;
+    const p = s.p, ini = p.friend ? "👤" : initials(p.n || "?");
+    return `<button type="button" class="ps${sel}" style="left:${x}%;top:${y}%"${attr}><span class="pk">${ini}</span>${p.friend ? `<small>${esc(p.n)}</small>` : lvChip(p.l, p.b)}<span class="sd">${s.any ? t("sdAny") : sd}</span></button>`; }).join("");
+  return `<div class="court"><span class="net"></span><span class="tm a">${t("sdTA")}</span><span class="tm b">${t("sdTB")}</span>${ps}<span class="glass"></span></div>`; }
+function skinVars(name){ const k = clubSkin({name: name || ""});
+  return {k, style: `--a:${k.a};--b:${k.b};--d:${k.d}${k.flip ? `;--fl1:${k.flip.l1};--fl2:${k.flip.l2};--fl3:${k.flip.l3}` : ""}`}; }
 function matchRow(m){
-  const d = new Date(m.starts_at), ppl = m.players || [], myL = myLevel(), hi = tooHigh(m), ok = inRange(m, myL) && !hi, each = money(m.price / 4);
+  const d = new Date(m.starts_at), ppl = m.players || [], myL = myLevel(), hi = !m.inv && tooHigh(m), ok = m.inv || (inRange(m, myL) && !hi), each = money(m.price / 4);
   const range = m.level_min != null ? `${lvl2(m.level_min)}–${lvl2(m.level_max)}` : t("anyLvl");
   const sheet = S.joinFor === m.id ? `<div class="jsheet"><b>${t("joinHow")} · ${each}</b><div class="chips" style="flex-wrap:wrap">${S.user ? wChip(m.club_id, m.price / 4, S.joinPay, "data-joinpay") : ""}${["club","shamcash","syriatel"].map(k => `<button class="chip" data-joinpay="${k}" aria-pressed="${S.joinPay === k}">${payName(k)}</button>`).join("")}</div>${S.joinPay !== "club" && S.joinPay !== "wallet" ? `<label class="fld"><span>${t("ref")}</span><input id="join-ref" inputmode="numeric" value="${esc(S.joinRef)}"></label>` : ""}<button class="cta blue sm" data-joingo="${m.id}">${t("joinGo")}</button></div>` : "";
-  return `<div class="card match"><div class="between"><b>${esc(fmtDay(d))} · ${esc(fmtTime(d))}</b>${m.open_spots > 0 ? `<span class="tag g">${m.open_spots} ${m.open_spots === 1 ? t("spotLeft") : t("spotsLeft")}</span>` : `<span class="tag b">Full</span>`}</div>
-   <span class="note">${esc(m.club_name)} · ${esc(m.court_name)} · ${m.minutes} ${t("min")} · ${t("lvl")} ${range}${m.split ? ` · ${t("splitTag")}` : ""}</span>${ppl.some(p => p.i && rivalIds().has(p.i)) ? `<span class="tag rvt">${t("rvTag")}</span>` : ""}
-   <div class="plist">${ppl.map(p => `<span class="pp">${avF(p.n, p.l, p.b)}<small>${esc(String(p.n || "").split(" ")[0])}${p.b && p.b.t ? `<i class="nbg t sm">🏆</i>` : ""}</small>${lvChip(p.l, p.b)}</span>`).join("")}${Array.from({length: m.open_spots}, () => `<span class="pp">${av("", 1)}<small>&nbsp;</small></span>`).join("")}</div>
-   <div class="between" style="align-items:center"><span class="note">${each} ${t("each")}</span>
-   ${m.joined ? `<button class="sbtn" data-match="${m.id}">${t("openMatch")} →</button>` : m.open_spots > 0 ? (ok ? `<button class="cta blue sm" data-join="${m.id}">${t("join")} · ${each}</button>` : `<span class="tag b">${hi ? t("tooHigh") : t("notYourLvl")}</span>`) : ""}</div>${sheet}</div>`;
+  const sv = skinVars(m.club_name), map = seatMap(m.seats, ppl.map((p, i) => ({id: p.i, n: p.n, l: p.l, b: p.b, host: i === 0})));
+  const canJoin = !m.joined && m.open_spots > 0 && ok, freeL = seatFree(m, "L"), freeR = seatFree(m, "R");
+  const pick = side => { const k = ["B" + side, "A" + side].find(x => !map[x]); return k; };
+  const jb = (side, label) => `<button data-join="${m.id}" data-jpos="${m.seats ? pick(side) || "" : ""}">${label}</button>`;
+  const spotsTxt = m.open_spots > 0 ? `${m.open_spots === 1 ? t("sdSpot") : tf("sdSpots", {n: m.open_spots})}${m.seats && freeL !== freeR ? " · " + (freeL ? t("sdLeft") : t("sdRight")) : ""}` : "Full";
+  const btns = m.joined ? `<button data-match="${m.id}">${t("openMatch")} →</button>`
+    : !(m.open_spots > 0) ? "" : !ok ? `<span class="sp">${hi ? t("tooHigh") : t("notYourLvl")}</span>`
+    : !m.seats ? jb("", `${t("join")} · ${each}`) : (freeL && freeR ? jb("L", t("sdLeft")) + jb("R", t("sdRight")) : freeL ? jb("L", t("sdJoinL")) : jb("R", t("sdJoinR")));
+  return `<div class="mx${sv.k.flip ? " flip" : ""}" style="${sv.style}">
+   <div class="win">${courtHtml(map, {join: canJoin ? m.id : null})}</div>${sv.k.logo ? `<img class="lg" src="${esc(sv.k.logo)}" alt="" onerror="this.remove()">` : ""}
+   <div class="bd"><div class="h"><b>${esc(fmtDay(d))} · ${esc(fmtTime(d))}</b><small>${each} ${t("each")}</small></div>
+    <span class="m">${esc(m.club_name)} · ${esc(m.court_name)} · ${m.minutes} ${t("min")} · ${t("lvl")} ${range}${m.split ? ` · ${t("splitTag")}` : ""}</span>
+    ${m.vis && m.vis !== "public" && m.inv ? `<span class="tag g" style="align-self:flex-start">${t("lobPrivTag")}</span>` : ""}${ppl.some(p => p.i && rivalIds().has(p.i)) ? `<span class="tag rvt" style="align-self:flex-start">${t("rvTag")}</span>` : ""}</div>
+   <div class="ft"><span class="sp">${spotsTxt}</span><div class="jb">${btns}</div></div>${sheet ? `<div style="padding:0 12px">${sheet}</div>` : ""}</div>`;
 }
 
 /* ---------- views ---------- */
@@ -1646,6 +1765,31 @@ V.club = () => { const c = S.club; if (!c) return V.clubs();
   <div class="card" style="display:flex;flex-direction:column;gap:10px"><p class="note" style="margin:0">${esc(c.about)}</p>${clubLinks(c)}</div>
  </main><div class="bar"><div class="sum"><small>${esc(fmtDay(at(S.day,"12:00")))}${pick ? ` · ${esc(fmtTime(pick.d))}` : ""} · ${S.dur} ${t("min")}</small><b>${pick ? money(pick.price + coachFee()) : t("pick")}</b>${pick ? (coachSel() ? ` <span class="note">· ${t("lesson")} · ${esc(coachSel().name)}</span>` : ` <span class="note">· ${money(pick.price / 4)} ${t("each")}</span>`) : ""}</div><button class="cta" data-go="checkout"${pick ? "" : " disabled"}>${t("cont")}</button></div>`; };
 
+/* ---------- public / private lobby ---------- */
+function pvBlock(){ if (coachSel()) return ""; const v = S.vis || "public";
+  if (v !== "public" && S.partners == null){ S.partners = []; sb.rpc("my_partners").then(r => { S.partners = r.error ? [] : r.data || []; if (S.page === "checkout") render(); }).catch(() => {}); }
+  const opt = (k, ic, l, s) => `<button type="button" class="${v === k ? "sel" : ""}" data-vis="${k}"><span>${ic}</span>${t(l)}<small>${t(s)}</small></button>`;
+  let h = `<b>${t("pvT")}</b><div class="wj">${opt("public", "🌍", "pvPub", "pvPubS")}${opt("private", "🔒", "pvPriv", "pvPrivS")}${opt("friends", "⏳", "pvFr", "pvFrS")}</div>`;
+  if (v === "public") return h;
+  const sel = S.invSel || [], ph = S.invPh || [];
+  h += `<span class="note" style="margin-top:-2px">${t(v === "private" ? "pvPrivN" : "pvFrN")}</span>`;
+  if (v === "friends") h += `<span class="note" style="margin:0">${t("pvOpenIn")}</span><div class="chips">${[3, 6, 12, 24].map(n => `<button type="button" class="chip" data-vhrs="${n}" aria-pressed="${(S.vHours || 6) === n}">${tf("pvH", {n})}</button>`).join("")}</div>`;
+  h += `<div class="invl">${(S.partners || []).length ? S.partners.map(p => `<button type="button" class="invr" data-invp="${p.id}"><span class="ck${sel.includes(p.id) ? " on" : ""}">${sel.includes(p.id) ? "✓" : ""}</span><span class="nm">${esc(p.name)}<small>${tf("pvTimes", {n: p.n})}</small></span>${lvChip(p.level, p.b)}</button>`).join("") : `<span class="note">${t("pvNoPart")}</span>`}
+    ${ph.map((x, i) => `<div class="invr"><span class="ck on">✓</span><span class="nm" dir="ltr">${esc(x)}</span><button type="button" class="linkbtn" data-invrm="${i}">✕</button></div>`).join("")}</div>
+    <div class="row" style="gap:8px"><input id="inv-ph" inputmode="tel" dir="ltr" placeholder="09XX XXX XXX" style="flex:1"><button type="button" class="sbtn" data-invadd>${t("pvAdd")}</button></div>
+    <span class="note">${t("pvLinkLater")}</span>`;
+  return h; }
+function lobbyCard(m){ const L = S.lobby; if (!L || !L.vis || L.vis === "public") return "";
+  const d = new Date(m.starts_at); if (d <= new Date()) return "";
+  const ppl = m.players || [], inv = L.invited || [], free = Math.max(0, (m.open_spots || 0) - inv.length);
+  const slot = (p, st, cls) => `<div class="lslot${cls ? " " + cls : ""}">${avF(p.name, p.level, p.b)}<small>${esc(p.me ? t("you") : String(p.name || "").split(" ")[0])}</small>${lvChip(p.level, p.b)}<i class="${cls === "wait" ? "pd" : "ok"}">${st}</i></div>`;
+  const left = L.until ? Math.max(0, new Date(L.until) - new Date()) : 0, hh = Math.floor(left / 36e5), mm = Math.floor(left % 36e5 / 6e4);
+  return `<div class="card lobby"><div class="lobh"><span class="lk">${L.vis === "private" ? "🔒" : "⏳"}</span><div><b>${t(L.vis === "private" ? "lobT" : "lobFrT")}</b><small>${L.vis === "private" ? t("lobS") : tf("lobFrS", {t: `${hh}h ${mm}m`})}</small></div></div>
+    <div class="lslots">${ppl.map(p => slot(p, p.booker ? t("lobHost") : t("lobJoined"))).join("")}${inv.map(p => slot(p, t("lobInvd"), "wait")).join("")}${Array.from({length: free}, () => `<button type="button" class="lslot empty"${L.host ? " data-lbmore" : ""}><span class="av0">＋</span><small>${t("lobInv")}</small><i>${tf("lobLeft", {n: m.open_spots})}</i></button>`).join("")}</div>
+    ${L.host ? `${S.lbMore ? `<div class="invl">${(S.partners || []).filter(p => !ppl.some(x => x.id === p.id) && !inv.some(x => x.id === p.id)).map(p => `<button type="button" class="invr" data-lbinv="${p.id}"><span class="ck">＋</span><span class="nm">${esc(p.name)}<small>${tf("pvTimes", {n: p.n})}</small></span>${lvChip(p.level, p.b)}</button>`).join("")}</div>
+      <div class="row" style="gap:8px"><input id="lb-ph" inputmode="tel" dir="ltr" placeholder="09XX XXX XXX" style="flex:1"><button type="button" class="sbtn" data-lbph="${m.id}">${t("pvAdd")}</button></div>` : ""}
+      <div class="invbtns"><button type="button" data-lbmore>${t("lobMore")}</button><button type="button" data-lbshare="${m.id}">${t("lobShare")}</button></div>
+      ${m.open_spots > 0 ? `<button class="cta blue wide" data-lbopen="${m.id}">${t("lobOpen")}</button><span class="note">${t("lobOpenS")}</span>` : ""}` : ""}</div>`; }
 V.checkout = () => { const c = S.club; const sl = c && slotsFor(c).list.find(x => x.iso === S.slot && !x.off);
  if (!sl) { S.view = "club"; return V.club(); }
  if (!S.user) return V.auth(t("needSign"));
@@ -1656,8 +1800,12 @@ V.checkout = () => { const c = S.club; const sl = c && slotsFor(c).list.find(x =
   ${coachSel() ? `<div class="card"><b>🎾 ${t("lesson")} · ${esc(coachSel().name)}</b><div class="note">$${+coachSel().price_hour}${t("perHr")}</div></div>` : ""}
   <div class="card" style="display:${coachSel() ? "none" : "flex"};flex-direction:column;gap:10px"><b>${t("openSpots")}</b><span class="note" style="margin-top:-6px">${t("openSpotsS")}</span>
    <div class="chips" style="flex-wrap:wrap">${[0,1,2,3].map(n => `<button class="chip" data-spots="${n}" aria-pressed="${S.openSpots === n}">${t("spots" + n)}</button>`).join("")}</div>
-   ${S.openSpots ? `<b>${t("lvRange")}</b>${myLevel() == null ? `<span class="note">${t("setLvFirst")}</span>` : `<div class="chips" style="flex-wrap:wrap">${[["any", t("anyLvl")], ["0.5", `${t("aroundMe")} ±0.5`], ["1", `${t("aroundMe")} ±1`]].map(([k, l]) => `<button class="chip" data-lvr="${k}" aria-pressed="${S.lvRange === k}">${esc(l)}</button>`).join("")}</div>${S.lvRange !== "any" ? `<span class="note">${t("lvl")} ${lvl2(Math.max(0.5, myLevel() - +S.lvRange))}–${lvl2(Math.min(7, myLevel() + +S.lvRange))}</span>` : ""}`}
-   <b>${t("payWho")}</b><div class="chips"><button class="chip" data-split="0" aria-pressed="${!S.split}">${t("payAll")}</button><button class="chip" data-split="1" aria-pressed="${S.split}">${t("payShare")}</button></div>` : ""}</div>
+   ${S.openSpots && !coachSel() ? `<b>${t("sdWhere")}</b><span class="note" style="margin-top:-6px">${t("sdWhereN")}</span><div class="sidepick">${[["L", "⬅️", "sdLeft", "sdLeftS"], ["R", "➡️", "sdRight", "sdRightS"], ["E", "🔄", "sdEither", "sdEitherS"]].map(([k, ic, l, s]) => `<button type="button" class="${(S.mySide || (S.profile && S.profile.side) || "E") === k ? "sel" : ""}" data-myside="${k}">${ic} ${t(l)}<small>${t(s)}</small></button>`).join("")}</div>
+   ${S.openSpots === 1 ? `<b>${t("sdFree")}</b><div class="sidepick">${[["L", "sdFreeL"], ["R", "sdFreeR"]].map(([k, l]) => `<button type="button" class="${(S.freeSide || "L") === k ? "sel" : ""}" data-freeside="${k}">${t(l)}</button>`).join("")}</div>` : ""}` : ""}
+   ${S.openSpots ? pvBlock() : ""}
+   ${S.openSpots && (S.vis || "public") === "public" ? `<b>${t("lvRange")}</b>${myLevel() == null ? `<span class="note">${t("setLvFirst")}</span>` : `<div class="chips" style="flex-wrap:wrap">${[["any", t("anyLvl")], ["0.5", `${t("aroundMe")} ±0.5`], ["1", `${t("aroundMe")} ±1`]].map(([k, l]) => `<button class="chip" data-lvr="${k}" aria-pressed="${S.lvRange === k}">${esc(l)}</button>`).join("")}</div>${S.lvRange !== "any" ? `<span class="note">${t("lvl")} ${lvl2(Math.max(0.5, myLevel() - +S.lvRange))}–${lvl2(Math.min(7, myLevel() + +S.lvRange))}</span>` : ""}`}
+   ` : ""}
+   ${S.openSpots ? `<b>${t("payWho")}</b><div class="chips"><button class="chip" data-split="0" aria-pressed="${!S.split}">${t("payAll")}</button><button class="chip" data-split="1" aria-pressed="${S.split}">${t("payShare")}</button></div>` : ""}</div>
   <h2>${t("how")}</h2>
   <div style="display:flex;flex-direction:column;gap:8px">${walletOpt(c, S.split && S.openSpots ? sl.price / 4 : sl.price + coachFee(), S.pay)}${opt("club","p1","p1s")}${opt("shamcash","p2","p2s")}${opt("syriatel","p3","p3s")}</div>
   ${S.pay !== "club" && S.pay !== "wallet" ? `<label class="fld"><span>${t("ref")}</span><input id="ref" inputmode="numeric" autocomplete="off" value="${esc(S.ref)}"></label>` : ""}
@@ -1678,9 +1826,30 @@ V.done = () => { const b = S.last; if (!b) return V.home();
   <button class="cta wide" data-go="home">${t("done")}</button>
  </main>`; };
 
-V.matches = () => `<main>${backBar(t("open"), "home")}
-  <div style="display:flex;flex-direction:column;gap:10px">${S.matches.map(matchRow).join("") || `<div class="card note">${t("noMatches")}</div>`}</div>
- </main>${nav("matches")}`;
+/* open matches filters (remembered on this phone) */
+function mfGet(){ if (!S.mf){ let x = null; try { x = JSON.parse(ls.get("pl-mf") || "null"); } catch (e) {} S.mf = Object.assign({when: "all", lvl: true, club: "all", spots: "all", side: "all"}, x || {}); S.mf.club = "all"; } return S.mf; }
+function mfPass(m, f){ const d = new Date(m.starts_at), dk = x => new Intl.DateTimeFormat("en-CA", {timeZone: TZ}).format(x), now = new Date();
+  if (m.joined || m.inv) return true;
+  if (f.when === "today" && dk(d) !== dk(now)) return false;
+  if (f.when === "tonight" && (dk(d) !== dk(now) || +hhmmOf(d).slice(0, 2) < 17)) return false;
+  if (f.when === "tomorrow" && dk(d) !== dk(new Date(now.getTime() + 864e5))) return false;
+  if (f.when === "week" && d - now > 7 * 864e5) return false;
+  if (f.lvl && myLevel() != null && !(inRange(m, myLevel()) && !tooHigh(m))) return false;
+  if (f.club === "mine"){ const mine = new Set((S.mine || []).map(b => b.club_id).concat(S.profile && S.profile.home_club ? [S.profile.home_club] : [])); if (!mine.has(m.club_id)) return false; }
+  else if (f.club !== "all" && m.club_id !== f.club) return false;
+  if (f.side === "L" || f.side === "R"){ if (!(m.open_spots > 0) || !seatFree(m, f.side)) return false; }
+  if (f.spots === "one" && m.open_spots !== 1) return false;
+  if (f.spots === "two" && m.open_spots < 2) return false;
+  return true; }
+V.matches = () => { const f = mfGet(), list = S.matches.filter(m => mfPass(m, f)), on = f.when !== "all" || f.side !== "all" || f.spots !== "all" || !f.lvl;
+  const ch = (k, v, l) => `<button class="chip${k === "lvl" && f.lvl ? " on2" : ""}" data-mf="${k}|${v}" aria-pressed="${k === "lvl" ? f.lvl : f[k] === v}">${l}</button>`;
+  const clubs = [...new Map(S.matches.map(m => [m.club_id, m.club_name])).entries()];
+  return `<main>${backBar(t("open"), "home")}
+  <div class="mfbar"><div class="mfrow">${ch("when", "today", t("mfToday"))}${ch("when", "tonight", t("mfTonight"))}${ch("when", "tomorrow", t("mfTom"))}${ch("when", "week", t("mfWeek"))}</div>
+   <div class="mfrow">${myLevel() != null ? ch("lvl", "x", (f.lvl ? "✓ " : "") + t("mfLvl")) : ""}${ch("side", "L", t("mfSideL"))}${ch("side", "R", t("mfSideR"))}${ch("spots", "one", t("mfOne"))}${ch("spots", "two", t("mfTwo"))}</div>
+   <div class="mfcount"><span>${f.side === "L" ? tf("mfNL", {n: list.length}) : f.side === "R" ? tf("mfNR", {n: list.length}) : list.length === 1 ? t("mfN1") : tf("mfN", {n: list.length})}</span>${on ? `<button data-mfclear>${t("mfClear")}</button>` : ""}</div></div>
+  <div style="display:flex;flex-direction:column;gap:10px">${list.map(matchRow).join("") || `<div class="card note">${S.matches.length ? t("mfNone") : t("noMatches")}</div>`}</div>
+ </main>${nav("matches")}`; };
 
 function evCard(x){
   const end = x.ends_on ? new Date(x.ends_on + "T23:59:00+03:00") : null, st = x.starts_on ? new Date(x.starts_on + "T12:00:00+03:00") : null;
@@ -1858,7 +2027,8 @@ const paidTag = p => p === "paid" ? `<span class="tag g">${t("paidS")}</span>` :
 async function loadMatch(id){
   const [d, m] = await Promise.all([sb.rpc("match_detail", {p_booking: id}), sb.rpc("match_messages", {p_booking: id, p_after: 0})]);
   if (d.error){ toast(errMsg(d.error)); S.match = null; return; }
-  S.match = d.data; S.chat = m.data || []; S.chatLast = S.chat.length ? S.chat[S.chat.length - 1].id : 0;
+  S.match = d.data; S.chat = m.data || []; S.lobby = null; S.lbMore = false;
+  if (d.data && d.data.vis && d.data.vis !== "public"){ try { const l = await sb.rpc("lobby_info", {p_booking: id}); S.lobby = l.error ? null : l.data; } catch (e) {} if (S.lobby && S.lobby.host && S.partners == null){ try { const r = await sb.rpc("my_partners"); S.partners = r.error ? [] : r.data || []; } catch (e) { S.partners = []; } } } S.chatLast = S.chat.length ? S.chat[S.chat.length - 1].id : 0;
   sb.rpc("read_notifications", {p_booking: id}).then(() => loadNotifN());
 }
 function setsStr(sets){ return (sets || []).map(s => `${s[0]}-${s[1]}`).join("  "); }
@@ -2063,7 +2233,7 @@ async function shareCard(){
 function adminPlayers(){ if (!S.profile || !S.profile.is_admin) return "";
   const cl = S.claims || [];
   return `${cl.length ? `<div class="card" style="display:flex;flex-direction:column;gap:8px"><b>⚑ ${t("clT")} · ${cl.length}</b><span class="note" style="margin-top:-4px">${t("clS")}</span>${cl.map(p => `<div class="aprow"><div class="row" style="justify-content:space-between;gap:8px"><b>${esc(p.name)}</b><span class="note" dir="ltr">${esc(p.phone || "")}</span></div>
-     <span class="note">${t("clNow")} ${(+p.level).toFixed(2)} · ${p.rated} ${t("ratedN")} — ${t("clSaid")}: ${p.claim.cat ? t("catU") + " " + esc(p.claim.cat) : "–"}${p.claim.src === "invite" ? " (invite)" : ""}${p.claim.pt ? ` · Playtomic ${esc(p.claim.pt)}` : ""} · ${t("clEst")} ${(+p.claim.raw).toFixed(2)}</span>
+     <span class="note">${t("clNow")} ${(+p.level).toFixed(2)} · ${p.rated} ${t("ratedN")} — ${p.claim ? `${t("clSaid")}: ${p.claim.cat ? t("catU") + " " + esc(p.claim.cat) : "–"}${p.claim.src === "invite" ? " (invite)" : ""}${p.claim.pt ? ` · Playtomic ${esc(p.claim.pt)}` : ""} · ${t("clEst")} ${(+p.claim.raw).toFixed(2)}` : ""}</span>${p.start != null && +p.level >= +p.start + 0.5 ? `<span class="note" style="color:#E8A23A">${tf("clFast", {s: lvl2(p.start), n: lvl2(p.level), r: p.rated})}</span>` : ""}
      <div class="row" style="gap:8px"><button class="sbtn" type="button" data-clset="${p.id}">${t("clSet")}</button><button class="sbtn" type="button" data-cldone="${p.id}">${t("clOk")}</button></div></div>`).join("")}</div>` : ""}<form id="apF" class="card" style="display:flex;flex-direction:column;gap:10px"><b>${t("apTitle")}</b><div class="row" style="gap:8px"><input id="ap-q" placeholder="${t("apSearch")}" style="flex:1;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:0 12px"><button class="cta blue sm" type="submit">${t("apFind")}</button></div>
    ${(S.apList || []).map(p => `<div class="aprow"><div class="row" style="justify-content:space-between;gap:8px"><b>${esc(p.name)}</b><span class="note" dir="ltr">${esc(p.phone || "")}</span></div>
      ${S.apEdit === p.id ? `<div class="grid2"><label class="fld"><span>${t("lvl")}</span><input id="ap-l" inputmode="decimal" value="${(+p.level).toFixed(2)}"></label><label class="fld"><span>${t("catU")}</span><select id="ap-c">${["E","D","C","B","A"].map(x => `<option${p.category === x ? " selected" : ""}>${x}</option>`).join("")}</select></label></div>
@@ -2087,7 +2257,7 @@ Object.assign(W.en, {
   lgName:"League name", lgClubs:"Clubs", lgStartD:"Starts", lgEndD:"Ends", lgRoundDays:"Days per round", lgBoxSize:"Teams per box",
   lgFeeL:"Entry fee per team ($)", lgCats:"Categories", lgAbout:"About", lgPrizeL:"Prize", lgSave:"Save league",
   lgStartQ:"Start the next round now? Unplayed matches of this round will count as not played.", lgFinishQ:"Finish the season and crown the champions?",
-  lgYourCat:"You can't enter below your own category.", lgUp:"Moves up", lgDown:"Moves down",
+  lgYourCat:"Team level = the average of you and your partner. It must be inside the category, and the stronger player can be at most one category above it. Playing up is always allowed.", lcFits:"✓ {p} ({pl}) · team level {a} · fits Category {c}", lcNew:"counts as {x} until placement is done", lcLow:"Your team can enter {c} or higher.", lgUp:"Moves up", lgDown:"Moves down",
   coaches:"Lessons & classes", coachNone:"No coach", withCoach:"With a coach", perHr:"/h + court", bookLesson:"Book a lesson", coachFee:"Coach",
   lesson:"Lesson", classes:"Group classes", spotsLeftN:"{n} spots left", classFull:"Full", joinClass:"Join", joinedClass:"You're in", leaveClass:"Leave",
   clsLevel:"Level {a}–{b}", perPlayer:"per player", membership:"Membership", memberOf:"Member", memUntil:"until {d}", memOff:"{p}% off courts",
@@ -2126,7 +2296,7 @@ Object.assign(W.ar, {
   lgName:"اسم الدوري", lgClubs:"الأندية", lgStartD:"البداية", lgEndD:"النهاية", lgRoundDays:"أيام كل جولة", lgBoxSize:"فرق بكل مجموعة",
   lgFeeL:"رسم الفريق ($)", lgCats:"الفئات", lgAbout:"معلومات", lgPrizeL:"الجائزة", lgSave:"حفظ الدوري",
   lgStartQ:"بدك تبلش الجولة الجاية هلق؟ المباريات يلي ما انلعبت بتنحسب ما انلعبت.", lgFinishQ:"إنهاء الموسم وتتويج الأبطال؟",
-  lgYourCat:"ما فيك تسجل بفئة أقل من فئتك.", lgUp:"بيطلع", lgDown:"بينزل",
+  lgYourCat:"مستوى الفريق = معدل مستواك ومستوى شريكك. لازم يكون ضمن الفئة، واللاعب الأقوى ممكن يكون أعلى من الفئة بفئة وحدة بس. اللعب بفئة أعلى دايماً مسموح.", lcFits:"✓ {p} ({pl}) · مستوى الفريق {a} · مناسب لفئة {c}", lcNew:"بينحسب {x} لحتى يخلص التصنيف", lcLow:"فريقكم فيه يسجل بفئة {c} أو أعلى.", lgUp:"بيطلع", lgDown:"بينزل",
   coaches:"دروس وكلاسات", coachNone:"بلا مدرب", withCoach:"مع مدرب", perHr:"/ساعة + الملعب", bookLesson:"احجز درس", coachFee:"المدرب",
   lesson:"درس", classes:"كلاسات جماعية", spotsLeftN:"{n} أماكن باقية", classFull:"مكتمل", joinClass:"انضم", joinedClass:"أنت مسجل", leaveClass:"انسحاب",
   clsLevel:"المستوى {a}–{b}", perPlayer:"للاعب", membership:"العضوية", memberOf:"عضو", memUntil:"حتى {d}", memOff:"خصم {p}% على الملاعب",
@@ -2233,6 +2403,7 @@ V.league = () => { const g = S.league; if (!g) return V.events();
   ${canJoin ? `<form id="lgJoinF" class="card" style="display:flex;flex-direction:column;gap:10px"><h2 style="font-size:18px">${t("lgJoin")}</h2>
     <b style="font-size:13px">${t("lgCat")}</b><div class="chips">${l.categories.map(c => `<button type="button" class="chip" data-lgcat="${c}" aria-pressed="${S.lgCat === c}">${c}</button>`).join("")}</div><span class="note" style="margin-top:-4px">${t("lgYourCat")}</span>
     <label class="fld"><span>${t("lgPartner")}</span><input id="lg-ph" inputmode="tel" dir="ltr" placeholder="09XX XXX XXX"></label><span class="note" style="margin-top:-6px">${t("lgPartnerPh")}</span>
+    <div id="lg-fit">${lgFitHtml()}</div>
     ${+l.fee ? `<b style="font-size:13px">${t("lgFee")} · ${money(l.fee)}</b><div class="chips" style="flex-wrap:wrap">${["club","shamcash","syriatel"].map(x => `<button type="button" class="chip" data-lgpay="${x}" aria-pressed="${S.lgPay === x}">${payName(x)}</button>`).join("")}</div>${S.lgPay !== "club" ? `<label class="fld"><span>${t("ref")}</span><input id="lg-ref" inputmode="numeric"></label>` : ""}` : ""}
     <label class="row rulechk"><input type="checkbox" id="lg-read"> <span>${t("lgReadRules")} · <button type="button" class="linkbtn" data-lgrules>${t("lgReadLink")}</button></span></label>
     <button class="cta blue wide" type="submit">${t("lgSignBtn")}</button></form>` : !S.user && l.status !== "done" ? `<button class="cta blue wide" data-go="auth">${t("signin")} · ${t("lgJoin")}</button>` : ""}
@@ -2347,7 +2518,7 @@ function nText2(n){ const d = n.data || {}, nm = esc(d.name || t("someone")), w 
     class_join: tf("nClassJoin", {n: nm, x, w}), class_cancel: tf("nClassCancel", {x, w}), league_partner: tf("nLgPartner", {n: nm, x, c}),
     league_req: tf("nLgReq", {n: nm, x, c}), league_ok: tf("nLgOk", {x}), league_no: tf("nLgNo", {x}),
     league_round: tf("nLgRound", {r: d.round, x, b: d.box, d: esc(d.until || "")}), league_result: tf("nLgResult", {n: nm}),
-    league_disputed: tf("nLgDisp", {n: nm}), league_champ: tf("nLgChamp", {x, c}), booking_new: tf(d.pending ? "nBookingDep" : "nBooking", {n: nm, k: esc(d.court || ""), w}), league_sched: tf("nLgSched", {n: nm, w, c}), league_prop: tf("nLgProp", {n: nm, w, c}), league_nudge: tf("nLgNudge", {x, d: esc(d.until || "")}), league_prop_nudge: tf("nLgPropNudge", {x, w}), league_booked: tf("nLgBooked", {w, c, k: d.court ? "· " + esc(d.court) : ""}), league_ref: tf("nLgRef", {x, w, c: c ? "· " + c : ""}), league_ref_set: tf("nLgRefSet", {n: nm, w}), league_final: t("nLgFinal"),
+    league_disputed: tf("nLgDisp", {n: nm}), lobby_invite: tf("nLobby", {n: nm, w, c}), league_tmatch: tf("nLgTM", {x: esc(d.x || "")}) + (d.booked ? t("nLgTMc") : ""), league_champ: tf("nLgChamp", {x, c}), booking_new: tf(d.pending ? "nBookingDep" : "nBooking", {n: nm, k: esc(d.court || ""), w}), league_sched: tf("nLgSched", {n: nm, w, c}), league_prop: tf("nLgProp", {n: nm, w, c}), league_nudge: tf("nLgNudge", {x, d: esc(d.until || "")}), league_prop_nudge: tf("nLgPropNudge", {x, w}), league_booked: tf("nLgBooked", {w, c, k: d.court ? "· " + esc(d.court) : ""}), league_ref: tf("nLgRef", {x, w, c: c ? "· " + c : ""}), league_ref_set: tf("nLgRefSet", {n: nm, w}), league_final: t("nLgFinal"),
     match_open: tf("nMatchOpen", {n: nm, r: d.round, c, w}), rematch: tf("nRematch", {n: nm, c, w}), club_post: tf("nClubPost", {c, x: esc(d.title || "")}), morning: tf("nMorning", {c, r: d.round, b: d.box}),
     tour_partner: tf("nTPartner", {n: nm, x, c}), tour_req: tf("nTReq", {n: nm, x, c}), tour_ok: tf("nTOk", {x, c}), tour_no: tf("nTNo", {x, c}) , invite_joined: tf("nInvJoined", {n: nm}), late_cancel: tf("nLateCancel", {n: esc(d.n || ""), b: d.b, w: esc(d.w || "")}), level_ok: tf("nLevelOk", {c: esc(d.c || "")}), wallet_refund: tf("nWRefund", {x: money(+d.x), c: esc(d.c || "")}), wallet_topup: tf("nWTopup", {x: money(+d.x), c: esc(d.c || "")}), wallet_no: tf("nWNo", {x: money(+d.x), c: esc(d.c || "")}), wallet_req: tf("nWReq", {n: nm, x: money(+d.x)}), result_auto: t("nResAuto"), deposit_expired: tf("nDepExp", {b: d.b}), join_expired: tf("nJoinExp", {b: d.b}), reminder: tf("nRemind", {w: esc(d.w || ""), c: esc(d.c || ""), x: esc(d.x || "")}), tour_joined: tf("nTJoined", {n: nm, x: esc(d.title || ""), c: esc(d.cat || "")}), tour_result: tf("nTResult", {n: esc(d.name || ""), x: esc(d.title || "")}), tour_start: tf("nTStart", {n: esc(d.name || ""), w: esc(d.when || ""), c: esc(d.club || ""), x: esc(d.title || "")}), tour_recap: tf("nTRecap", {x: esc(d.title || ""), r: esc(d.x || "")})})[n.kind]; }
 const nLink = n => n.kind === "invite_joined" ? `data-go="home"` : n.kind === "wallet_req" ? `data-go="manager"` : /^wallet_/.test(n.kind) ? `data-go="wallet"` : n.kind === "late_cancel" ? `data-go="manager"` : n.kind === "level_ok" ? `data-go="me"` : /^tour_/.test(n.kind) && n.data && n.data.slug ? `data-turl="t.html?${esc(encodeURIComponent(n.data.slug))}"` : n.kind === "club_post" && n.data && n.data.club_id ? `data-club="${esc(n.data.club_id)}"` : n.kind === "morning" ? `data-go="manager"` : n.kind === "booking_new" ? `data-go="manager"` : /^league_/.test(n.kind) ? ((S.myLeagues || []).find(x => x.name === (n.data || {}).league) ? `data-league="${(S.myLeagues || []).find(x => x.name === (n.data || {}).league).id}"` : `data-go="events"`) : /^member_/.test(n.kind) ? (n.kind === "member_req" ? `data-go="manager"` : `data-go="me"`) : /^class_/.test(n.kind) || n.kind === "lesson_new" ? `data-go="me"` : "";
@@ -2525,7 +2696,7 @@ Object.assign(W.en, {lgWeeks:"Weeks", lgRoundsU:"Rounds", lgGuar:"Games guarante
   lgWhen:"📅 {w} · {c}", lgNoTime:"📅 Time not set yet", lgSetTime:"Set time", lgDate:"Day", lgClub:"Club", lgSaveTime:"Save time",
   lgRef:"🧑‍⚖️ Referee: {n}", lgRefBtn:"Referee", lgRefFind:"Search referee by name", lgRefPick:"Assign", lgRefNone:"Remove referee",
   lgRefScore:"Enter the final score (referee)", myRef:"My referee matches", refOpen:"Open",
-  nLgSched:"{n} set your league match: {w} at {c}.", nLgRef:"You're the referee: {x} · {w} {c}", nLgRefSet:"{n} will referee your league match ({w}).", nLgFinal:"The referee entered your league match result."});
+  nLgSched:"{n} set your league match: {w} at {c}.", nLgRef:"You're the referee: {x} · {w} {c}", nLgRefSet:"{n} will referee your league match ({w}).", nLgFinal:"The referee entered your league match result.", nLgTM:"{x}: you met your league opponents, so that match counts as your league match. It's marked done.", nLgTMc:" Your court booked for the league match is still booked: cancel it if you don't need it."});
 Object.assign(W.ar, {lgWeeks:"أسابيع", lgRoundsU:"جولات", lgGuar:"مباريات مضمونة", lgTotal:"مجموع المباريات", lrTap:"اضغط للقراءة", lrLength:"المدة", lrLengthT:"{s} – {e}: حوالي {w} أسابيع، {r} جولات كل وحدة {d} يوم.", lrGuar:"المباريات المضمونة", lrGuarT:"كل فريق بيلعب على الأقل {m} مباريات بالجولة × {r} جولات = {g} مباراة. المجموعات الأكبر بتلعب أكتر.", lrCatGames:"{g} مباريات مضمونة لكل فريق · {t} مباراة بالمجموع", lgReadRules:"قرأت قوانين الدوري", lgReadLink:"اقرأ القوانين", lgMustRead:"اقرأ قوانين الدوري وعلّم على المربع أول.", lgTeamsU:"فرق", lgBoxesU:"مجموعات", lgPerRound:"مباريات بالجولة", lgRoundU:"الجولة", lrTitle:"قوانين الدوري", lrFormat:"النظام", lrFormatT:"دوري مجموعات. الفرق بتتقسم لمجموعات صغيرة، تقريباً {b} فرق بكل مجموعة، والأقوى بالمجموعة ١.",
   lrCat:"الفئة {c}: {n} فرق ← {k} {box} ({s})", lrCatWait:"الفئة {c}: بانتظار الفرق", lrBox1:"مجموعة", lrBoxN:"مجموعات",
   lrRounds:"الجولات", lrRoundsT:"{r} جولات، كل جولة {d} يوم.", lrRoundNow:"الجولة {c} بتخلص {e}.", lrMatches:"المباريات",
@@ -2539,7 +2710,7 @@ Object.assign(W.ar, {lgWeeks:"أسابيع", lgRoundsU:"جولات", lgGuar:"م�
   lgWhen:"📅 {w} · {c}", lgNoTime:"📅 الوقت لسا ما تحدد", lgSetTime:"حدد الوقت", lgDate:"اليوم", lgClub:"النادي", lgSaveTime:"حفظ الوقت",
   lgRef:"🧑‍⚖️ الحكم: {n}", lgRefBtn:"حكم", lgRefFind:"ابحث عن حكم بالاسم", lgRefPick:"تعيين", lgRefNone:"إزالة الحكم",
   lgRefScore:"أدخل النتيجة النهائية (حكم)", myRef:"مبارياتي كحكم", refOpen:"فتح",
-  nLgSched:"{n} حدد مباراة الدوري: {w} بـ{c}.", nLgRef:"أنت الحكم: {x} · {w} {c}", nLgRefSet:"{n} رح يحكم مباراة الدوري تبعك ({w}).", nLgFinal:"الحكم دخل نتيجة مباراة الدوري تبعك."});
+  nLgSched:"{n} حدد مباراة الدوري: {w} بـ{c}.", nLgRef:"أنت الحكم: {x} · {w} {c}", nLgRefSet:"{n} رح يحكم مباراة الدوري تبعك ({w}).", nLgFinal:"الحكم دخل نتيجة مباراة الدوري تبعك.", nLgTM:"{x}: لعبتوا ضد خصمكم بالدوري، فالمباراة انحسبت كمباراة الدوري وصارت منتهية.", nLgTMc:" الملعب المحجوز لمباراة الدوري لسا محجوز: ألغيه إذا ما بدك ياه."});
 Object.assign(S, {lgTime:null, lgRefFor:null, lgRefList:[], myRefs:[]});
 function lgCalc(g, cat){ const l = g.league, bs = +l.box_size || 4;
   const days = Math.max(1, Math.round((new Date(l.ends_on) - new Date(l.starts_on)) / 864e5)), rounds = Math.max(1, Math.floor(days / (+l.round_days || 14)));
@@ -2554,6 +2725,16 @@ function lgGlance(g){ const l = g.league; if (l.status !== "signup") return "";
   return `<div class="glance g3"><div class="hl"><b>${cap ? `${n}<i>/${cap}</i>` : n}</b><small>${t("lgTeamsIn")}</small></div>
    <div><b>${days == null ? "–" : days <= 0 ? t("lgToday") : days}</b><small>${days != null && days > 0 ? t("lgStartsIn") : t("lgStarts")}</small></div>
    <div><b>${l.rounds || k.rounds}<i>×${l.round_days}d</i></b><small>${t("lgRoundsU")}</small></div></div>`; }
+function lgFitHtml(){ const k = S.lgFit; if (!k) return "";
+  if (!k.ok) return `<p class="note" style="color:var(--red);margin:0">${esc(k.reason)}</p>`;
+  const nw = (on, v) => on ? ` <small>(${tf("lcNew", {x: lvl2(v)})})</small>` : "";
+  const who = `${t("you")} ${lvl2(k.me)}${nw(k.me_new, k.me)} + ${esc(k.partner)} ${lvl2(k.plevel)}${nw(k.p_new, k.plevel)}`;
+  return k.fits ? `<p class="note" style="color:var(--green,#2E9E5B);margin:0">${tf("lcFits", {p: esc(k.partner), pl: lvl2(k.plevel), a: lvl2(k.avg), c: esc(S.lgCat)})}</p><p class="note" style="margin:2px 0 0">${who}</p>`
+    : `<p class="note" style="color:var(--red);margin:0">${esc(k.reason)}</p><p class="note" style="margin:2px 0 0">${who}</p>`; }
+async function lgFitCheck(){ clearTimeout(S.lgFitT); const ph = document.getElementById("lg-ph"); const v = ph ? ph.value : S.lgPh || "";
+  if (!S.lgCat || String(v).replace(/\D/g, "").length < 9){ S.lgFit = null; const el = document.getElementById("lg-fit"); if (el) el.innerHTML = ""; return; }
+  S.lgFitT = setTimeout(async () => { try { const r = await sb.rpc("league_check", {p_league: S.leagueId, p_cat: S.lgCat, p_partner_phone: v}); S.lgFit = r.error ? {ok: false, reason: r.error.message} : r.data; } catch (e) { S.lgFit = null; }
+    const el = document.getElementById("lg-fit"); if (el) el.innerHTML = lgFitHtml(); }, 350); }
 function lgRulesCard(g){ const l = g.league, bs = +l.box_size || 4, k0 = lgCalc(g, l.categories[0]);
   const cats = l.categories.map(c => { const k = lgCalc(g, c);
     if (!k.n) return `<li>${tf("lrCatWait", {c})}</li>`;
@@ -2833,7 +3014,7 @@ app.addEventListener("click", async e => {
   if ("lgnew" in d){ S.lgForm = {categories: ["C","B"], clubs: S.clubs.map(c => c.id), round_days: 14, box_size: 4, fee: 0}; go("leagueEdit"); return; }
   if ("lgedit" in d){ const l = S.league.league; S.lgForm = Object.assign({}, l, {clubs: l.club_ids || []}); go("leagueEdit"); return; }
   if (d.leclub || d.lecat){ lgGrab(); const k = d.leclub ? "clubs" : "categories", v = d.leclub || d.lecat, a = S.lgForm[k] || []; S.lgForm[k] = a.includes(v) ? a.filter(x => x !== v) : a.concat(v); render(); return; }
-  if (d.lgcat){ const ph = document.getElementById("lg-ph"); if (ph) S.lgPh = ph.value; S.lgCat = d.lgcat; render(); const p2 = document.getElementById("lg-ph"); if (p2 && S.lgPh) p2.value = S.lgPh; return; }
+  if (d.lgcat){ const ph = document.getElementById("lg-ph"); if (ph) S.lgPh = ph.value; S.lgCat = d.lgcat; S.lgFit = null; render(); const p2 = document.getElementById("lg-ph"); if (p2 && S.lgPh) p2.value = S.lgPh; lgFitCheck(); return; }
   if (d.lgpay){ const ph = document.getElementById("lg-ph"); if (ph) S.lgPh = ph.value; S.lgPay = d.lgpay; render(); const p2 = document.getElementById("lg-ph"); if (p2 && S.lgPh) p2.value = S.lgPh; return; }
   if ("lgwd" in d){ const r = await sb.rpc("league_withdraw", {p_league: S.leagueId}); if (r.error){ toast(errMsg(r.error)); return; } await loadLeague(S.leagueId); render(); return; }
   if ("lgrules" in d){ const r = document.getElementById("lrules"); if (r){ r.open = true; r.scrollIntoView({behavior: "smooth"}); } return; }
@@ -2878,7 +3059,16 @@ app.addEventListener("click", async e => {
   if (d.dur){ S.dur = +d.dur; render(); return; }
   if (d.slot){ S.slot = d.slot; render(); return; }
   if (d.pay){ S.pay = d.pay; render(); return; }
+  if (d.mf){ const [k, v] = d.mf.split("|"), f = mfGet(); if (k === "lvl") f.lvl = !f.lvl; else f[k] = f[k] === v ? "all" : v; ls.set("pl-mf", JSON.stringify(f)); render(); return; }
+  if ("mfclear" in d){ S.mf = {when: "all", lvl: true, club: "all", spots: "all", side: "all"}; ls.set("pl-mf", JSON.stringify(S.mf)); render(); return; }
   if (d.spots){ S.openSpots = +d.spots; render(); return; }
+  if (d.vis){ S.vis = d.vis; if (d.vis !== "public") S.split = S.split; render(); return; }
+  if (d.vhrs){ S.vHours = +d.vhrs; render(); return; }
+  if (d.myside){ S.mySide = d.myside; render(); return; }
+  if (d.freeside){ S.freeSide = d.freeside; render(); return; }
+  if (d.invp){ const s = new Set(S.invSel || []); s.has(d.invp) ? s.delete(d.invp) : s.add(d.invp); S.invSel = [...s]; render(); return; }
+  if ("invadd" in d){ const el = document.getElementById("inv-ph"), v = el ? el.value.trim() : ""; if (v.replace(/\D/g, "").length < 9){ toast(t("lgPartnerPh")); return; } S.invPh = [...(S.invPh || []), v]; render(); return; }
+  if (d.invrm != null && d.invrm !== ""){ S.invPh = (S.invPh || []).filter((_, i) => i !== +d.invrm); render(); return; }
   if (d.mlvl){ S.level = d.mlvl; render(); return; }
   if ("mode" in d){ S.authMode = S.authMode === "up" ? "in" : "up"; render(); return; }
   if ("music" in d){ const on = !musicOn(); ls.set("pl-music", on ? "1" : "0"); if (on) musicStart(); else musicStop(); render(); return; }
@@ -2896,13 +3086,15 @@ app.addEventListener("click", async e => {
   if ("confirm" in d){
     const refEl = document.getElementById("ref"); if (refEl) S.ref = refEl.value;
     S.busyOp = true; render();
-    const r = await sb.rpc("create_booking", {p_coach: coachSel() ? S.coach : null, p_court: S.court, p_start: S.slot, p_minutes: S.dur, p_pay: S.pay, p_ref: S.pay === "club" || S.pay === "wallet" ? null : S.ref, p_open: S.openSpots, p_level: null, p_split: !!(S.split && S.openSpots), p_lmin: S.openSpots && S.lvRange !== "any" && myLevel() != null ? Math.max(0.5, myLevel() - +S.lvRange) : null, p_lmax: S.openSpots && S.lvRange !== "any" && myLevel() != null ? Math.min(7, myLevel() + +S.lvRange) : null});
+    const r = await sb.rpc("create_booking", {p_coach: coachSel() ? S.coach : null, p_court: S.court, p_start: S.slot, p_minutes: S.dur, p_pay: S.pay, p_ref: S.pay === "club" || S.pay === "wallet" ? null : S.ref, p_open: S.openSpots, p_level: null, p_vis: S.openSpots ? (S.vis || "public") : "public", p_invite: S.openSpots && (S.vis || "public") !== "public" ? (S.invSel || []) : null, p_phones: S.openSpots && (S.vis || "public") !== "public" ? (S.invPh || []) : null, p_hours: S.vis === "friends" ? (S.vHours || 6) : null, p_split: !!(S.split && S.openSpots), p_lmin: S.openSpots && (S.vis || "public") === "public" && S.lvRange !== "any" && myLevel() != null ? Math.max(0.5, myLevel() - +S.lvRange) : null, p_lmax: S.openSpots && (S.vis || "public") === "public" && S.lvRange !== "any" && myLevel() != null ? Math.min(7, myLevel() + +S.lvRange) : null});
     S.busyOp = false;
     if (r.error){ toast(errMsg(r.error)); await loadBusy(); render(); return; }
-    S.last = Array.isArray(r.data) ? r.data[0] : r.data; S.slot = null; S.ref = ""; S.openSpots = 0; S.coach = null;
+    S.last = Array.isArray(r.data) ? r.data[0] : r.data;
+    if (S.openSpots && S.last && S.last.id && !coachSel()){ try { await sb.rpc("set_seats", {p_booking: S.last.id, p_side: S.mySide || (S.profile && S.profile.side) || "E", p_free: S.openSpots === 1 ? (S.freeSide || "L") : null}); } catch (e) {} }
+    S.slot = null; S.ref = ""; S.openSpots = 0; S.coach = null;
     const mine = await sb.rpc("my_bookings"); S.mine = mine.data || [];
     go("done"); return; }
-  if (d.join){ if (!S.user){ go("auth"); toast(t("needSign")); return; } const jm = S.matches.find(x => x.id === d.join); if (jm && jm.split){ S.joinFor = S.joinFor === d.join ? null : d.join; S.joinPay = "club"; render(); return; } const r = await sb.rpc("join_match", {p_booking: d.join}); if (r.error) toast(errMsg(r.error)); else toast("✓ " + t("joined")); await afterAuth(true); render(); return; }
+  if (d.join){ if (!S.user){ go("auth"); toast(t("needSign")); return; } S.joinPos = d.jpos || null; const jm = S.matches.find(x => x.id === d.join); if (jm && jm.split){ S.joinFor = S.joinFor === d.join ? null : d.join; S.joinPay = "club"; render(); return; } const r = await sb.rpc("join_seat", {p_booking: d.join, p_pos: S.joinPos}); if (r.error) toast(errMsg(r.error)); else toast("✓ " + t("joined")); await afterAuth(true); render(); return; }
   if (d.leave){ const r = await sb.rpc("leave_match", {p_booking: d.leave}); if (r.error) toast(errMsg(r.error)); await afterAuth(true); render(); return; }
   if (d.cancel && isLate(d.cancel)){ S.sheet = "late"; S.lateId = d.cancel; render(); return; }
   if (d.cancel){ const r = await sb.rpc("cancel_my_booking", {p_booking: d.cancel}); if (r.error) toast(errMsg(r.error)); else toast(t("cancelled")); await afterAuth(true); render(); return; }
@@ -2923,7 +3115,7 @@ app.addEventListener("click", async e => {
   if ("split" in d && d.split !== undefined && b.closest(".card")){ S.split = d.split === "1"; render(); return; }
   if (d.joinpay){ const rf = document.getElementById("join-ref"); if (rf) S.joinRef = rf.value; S.joinPay = d.joinpay; render(); return; }
   if (d.joingo){ const rf = document.getElementById("join-ref"); if (rf) S.joinRef = rf.value;
-    const r = await sb.rpc("join_match", {p_booking: d.joingo, p_pay: S.joinPay, p_ref: S.joinPay === "club" || S.joinPay === "wallet" ? null : S.joinRef});
+    const r = await sb.rpc("join_seat", {p_booking: d.joingo, p_pos: S.joinPos || null, p_pay: S.joinPay, p_ref: S.joinPay === "club" || S.joinPay === "wallet" ? null : S.joinRef});
     if (r.error){ toast(errMsg(r.error)); return; } toast("✓ " + t("joined")); S.joinFor = null; S.joinRef = ""; await afterAuth(true); S.matchId = d.joingo; go("match"); return; }
   if (d.area !== undefined && "area" in d){ S.area = d.area; render(); return; }
   if (d.share){ const [bk, pl, to] = d.share.split("|"); const r = await sb.rpc("staff_set_share", {p_booking: bk, p_player: pl, p_paid: to}); if (r.error) toast(errMsg(r.error)); else toast("✓"); await loadManager(); render(); return; }
@@ -3295,7 +3487,16 @@ Object.assign(W.en, {fdT:"What's new", fdAll:"See all", fdEmpty:"Play a match or
   fdOpenClub:"Open club", ago_m:"{n}m ago", ago_h:"{n}h ago", ago_d:"{n}d ago", ago_now:"just now",
   alT:"Open match alerts", alTxt:"Get a notification when someone needs a player at your level.", alOn:"On", alOff:"Off",
   opT:"Need players?", opTxt:"Open spots and players at that level get a notification.", opSave:"Save", opNone:"No open spots", opSaved:"Saved. Players at that level are being notified.",
-  mjT:"This match needs {n}", mjJoin:"Join this match", mjSplit:"This match splits the court fee. Join from the Matches list to choose how you pay.", mjInv:"You're invited to this rematch. Your spot is saved.",
+  mjT:"This match needs {n}", mjJoin:"Join this match", mjSplit:"This match splits the court fee. Join from the Matches list to choose how you pay.", mjInv:"You're invited to this match. Your spot is saved.", sdL:"LEFT", sdR:"RIGHT", sdAny:"ANY", sdTA:"TEAM A", sdTB:"TEAM B", sdJoinL:"Join as Left", sdJoinR:"Join as Right", sdJoin:"Join", sdSpots:"{n} spots", sdSpot:"1 spot", sdFriend:"Friend",
+  sdWhere:"Where do you play?", sdWhereN:"So players looking for the other side find your match.", sdLeft:"Left", sdLeftS:"Backhand side", sdRight:"Right", sdRightS:"Forehand side", sdEither:"Either", sdEitherS:"No preference",
+  sdFree:"Which spot is free?", sdFreeL:"A left player", sdFreeR:"A right player", mfSideL:"Left player spots", mfSideR:"Right player spots", mfNL:"{n} matches need a Left player", mfNR:"{n} matches need a Right player",
+  sdSwapT:"Positions", sdSwapN:"Tap a player, then tap another spot to swap them.", sdSwapped:"Positions updated.", pvT:"Public or private?", pvPub:"Public", pvPubS:"Anyone at your level", pvPriv:"Private", pvPrivS:"Only people you invite", pvFr:"Friends first", pvFrS:"Private, then public",
+  pvPrivN:"Hidden from Open Matches and alerts. Pick who gets your spots:", pvFrN:"Your friends get the spots first. Then the empty spots open to everyone at your level.", pvOpenIn:"Opens to everyone after", pvH:"{n} h",
+  pvByPh:"＋ By phone number", pvAdd:"Add", pvLinkLater:"After booking you can also share a WhatsApp link.", pvTimes:"Played together {n}×", pvNoPart:"No recent partners yet. Add them by phone number.",
+  lobT:"Private lobby", lobS:"Only invited players can see and join this match", lobFrT:"Friends first", lobFrS:"Spots open to everyone in {t}", lobHost:"Host", lobJoined:"✓ Joined", lobInvd:"Invited…", lobInv:"Invite", lobLeft:"{n} left",
+  lobMore:"＋ Invite more", lobShare:"🔗 Share link", lobOpen:"🌍 Open to everyone", lobOpenS:"Friends cancelled? Open the empty spots to all players at your level in one tap.", lobOpened:"Your match is now open to everyone.",
+  lobSent:"Invited {n}.", lobShareTxt:"Join my padel match on Padel Live: {w} at {c}", lobYou:"You're invited to a private match", lobPrivTag:"🔒 Private · you're invited",
+  mfToday:"Today", mfTonight:"Tonight", mfTom:"Tomorrow", mfWeek:"This week", mfLvl:"My level", mfAllC:"All clubs", mfMine:"⭐ My clubs", mfOne:"🔥 1 spot left", mfTwo:"2+ spots", mfN:"{n} matches", mfN1:"1 match", mfClear:"Clear filters", mfNone:"Nothing matches these filters. Try another day or club.", nLobby:"{n} invited you to a private match: {w} at {c}.",
   rmT:"Rematch", rmTxt:"Same court, same players. They get a notification and their spots are saved for 24 hours.", rmDay:"Day", rmTime:"Time", rmBook:"Book rematch", rmDone:"Rematch booked. The others have been invited.",
   psT:"Club news", psNew:"Post news to your players", psPh:"Ladies night Friday 7 PM, 20% off…", psPhoto:"Add a photo (optional)", psSend:"Post", psSent:"Posted. Your recent players have been told.", psDelQ:"Delete this post?", psNone:"No posts yet.",
   mTabPost:"Posts", tdT:"Today at a glance", tdBook:"Bookings", tdRev:"Expected", tdFree:"Free court-hours", tdFirst:"First game", tdDep:"Deposits to check", tdMem:"Membership requests", tdDeal:"Start a deal for empty slots", tdDealOn:"Deal running: {p}% off",
@@ -3306,7 +3507,16 @@ Object.assign(W.ar, {fdT:"شو الجديد", fdAll:"شوف الكل", fdEmpty:"
   fdOpenClub:"افتح النادي", ago_m:"من {n} د", ago_h:"من {n} س", ago_d:"من {n} يوم", ago_now:"هلّق",
   alT:"تنبيهات المباريات المفتوحة", alTxt:"بيوصلك إشعار لما حدا يحتاج لاعب بمستواك.", alOn:"شغّال", alOff:"موقّف",
   opT:"ناقصك لاعبين؟", opTxt:"افتح أماكن واللاعبين بهالمستوى بيوصلهم إشعار.", opSave:"احفظ", opNone:"ما في أماكن", opSaved:"انحفظ. عم نبعت إشعار للاعبين بهالمستوى.",
-  mjT:"هالمباراة ناقصها {n}", mjJoin:"انضم لهالمباراة", mjSplit:"بهالمباراة الحساب مقسوم. انضم من قائمة المباريات لتختار طريقة الدفع.", mjInv:"أنت معزوم على هالمباراة الثأرية. مكانك محجوز.",
+  mjT:"هالمباراة ناقصها {n}", mjJoin:"انضم لهالمباراة", mjSplit:"بهالمباراة الحساب مقسوم. انضم من قائمة المباريات لتختار طريقة الدفع.", mjInv:"أنت معزوم على هالمباراة. مكانك محجوز.", sdL:"يسار", sdR:"يمين", sdAny:"أي جهة", sdTA:"الفريق A", sdTB:"الفريق B", sdJoinL:"انضم يسار", sdJoinR:"انضم يمين", sdJoin:"انضم", sdSpots:"{n} أماكن", sdSpot:"مكان واحد", sdFriend:"صديق",
+  sdWhere:"وين بتلعب؟", sdWhereN:"مشان يلي بيدوروا عالجهة التانية يلاقوا مباراتك.", sdLeft:"يسار", sdLeftS:"جهة الباكهاند", sdRight:"يمين", sdRightS:"جهة الفورهاند", sdEither:"ما بتفرق", sdEitherS:"أي جهة",
+  sdFree:"أي مكان فاضي؟", sdFreeL:"لاعب يسار", sdFreeR:"لاعب يمين", mfSideL:"أماكن لاعب يسار", mfSideR:"أماكن لاعب يمين", mfNL:"{n} مباريات بدها لاعب يسار", mfNR:"{n} مباريات بدها لاعب يمين",
+  sdSwapT:"المراكز", sdSwapN:"اكبس على لاعب، بعدين على مكان تاني لتبدلهم.", sdSwapped:"تحدثت المراكز.", pvT:"عامة ولا خاصة؟", pvPub:"عامة", pvPubS:"أي حدا بمستواك", pvPriv:"خاصة", pvPrivS:"بس يلي بتعزمهم", pvFr:"الأصحاب أول", pvFrS:"خاصة، بعدين عامة",
+  pvPrivN:"ما بتطلع بالمباريات المفتوحة ولا بالتنبيهات. اختار مين ياخد الأماكن:", pvFrN:"أصحابك بياخدوا الأماكن أول. بعدين الأماكن الفاضية بتنفتح لكل يلي بمستواك.", pvOpenIn:"بتنفتح للكل بعد", pvH:"{n} ساعة",
+  pvByPh:"＋ برقم الموبايل", pvAdd:"ضيف", pvLinkLater:"بعد الحجز فيك كمان تبعت رابط واتساب.", pvTimes:"لعبتوا سوا {n} مرات", pvNoPart:"ما في شركاء مؤخراً. ضيفهم برقم الموبايل.",
+  lobT:"مباراة خاصة", lobS:"بس المعزومين بيشوفوا المباراة وبينضموا", lobFrT:"الأصحاب أول", lobFrS:"الأماكن بتنفتح للكل بعد {t}", lobHost:"المضيف", lobJoined:"✓ انضم", lobInvd:"معزوم…", lobInv:"اعزم", lobLeft:"باقي {n}",
+  lobMore:"＋ اعزم كمان", lobShare:"🔗 شارك الرابط", lobOpen:"🌍 افتحها للكل", lobOpenS:"أصحابك اعتذروا؟ افتح الأماكن الفاضية لكل اللاعبين بمستواك بكبسة.", lobOpened:"مباراتك صارت مفتوحة للكل.",
+  lobSent:"عزمت {n}.", lobShareTxt:"تعال العب معي بادل على Padel Live: {w} بـ{c}", lobYou:"أنت معزوم على مباراة خاصة", lobPrivTag:"🔒 خاصة · أنت معزوم",
+  mfToday:"اليوم", mfTonight:"الليلة", mfTom:"بكرا", mfWeek:"هالأسبوع", mfLvl:"مستواي", mfAllC:"كل النوادي", mfMine:"⭐ نواديي", mfOne:"🔥 باقي مكان واحد", mfTwo:"مكانين أو أكتر", mfN:"{n} مباريات", mfN1:"مباراة وحدة", mfClear:"امسح الفلاتر", mfNone:"ما في مباريات بهالفلاتر. جرب يوم أو نادي تاني.", nLobby:"{n} عزمك على مباراة خاصة: {w} بـ{c}.",
   rmT:"مباراة ثأرية", rmTxt:"نفس الملعب ونفس اللاعبين. بيوصلهم إشعار وأماكنهم محجوزة 24 ساعة.", rmDay:"اليوم", rmTime:"الوقت", rmBook:"احجز المباراة الثأرية", rmDone:"انحجزت. بعتنا دعوة للباقيين.",
   psT:"أخبار النادي", psNew:"انشر خبر للاعبينك", psPh:"ليلة السيدات الجمعة 7 المسا، خصم 20%…", psPhoto:"ضيف صورة (اختياري)", psSend:"انشر", psSent:"انتشر. خبّرنا اللاعبين يلي لعبوا عندك مؤخراً.", psDelQ:"بدك تمسح هالمنشور؟", psNone:"ما في منشورات لسا.",
   mTabPost:"منشورات", tdT:"اليوم بلمحة", tdBook:"حجوزات", tdRev:"متوقع", tdFree:"ساعات ملاعب فاضية", tdFirst:"أول مباراة", tdDep:"عرابين للتأكيد", tdMem:"طلبات عضوية", tdDeal:"ابدأ عرض للأوقات الفاضية", tdDealOn:"في عرض شغّال: خصم {p}%",
@@ -3342,11 +3552,16 @@ function mxExtras(m){
   const d = new Date(m.starts_at), started = d <= new Date(), joined = m.players.length - 1, iBooked = m.players.some(p => p.me && p.booker);
   let h = "";
   if (!m.in){
-    if (m.open_spots > 0 && !started) h += `<div class="card mjcard"><b>${tf("mjT", {n: m.open_spots})}</b>${m.invited ? `<span class="note">${t("mjInv")}</span>` : ""}
+    if (m.open_spots > 0 && !started) h += `<div class="card mjcard"><b>${m.invited && m.vis && m.vis !== "public" ? "🔒 " + t("lobYou") : tf("mjT", {n: m.open_spots})}</b>${m.invited ? `<span class="note">${t("mjInv")}</span>` : ""}
       ${m.split ? `<span class="note">${t("mjSplit")}</span><button class="sbtn" data-go="matches">${t("open")} →</button>` : `<button class="cta blue wide" data-mjoin="${m.id}">${t("mjJoin")}</button>`}</div>`;
     return h;
   }
-  if (iBooked && !started && m.kind !== "lesson" && m.status !== "cancelled"){
+  if (m.seats && m.kind !== "lesson"){ const host = (m.players || []).find(p => p.booker), canSwap = !!(host && host.me) && !started && m.status !== "cancelled";
+    const map = seatMap(m.seats, (m.players || []).map(p => ({id: p.id, n: p.name, l: p.level, b: p.b, host: !!p.booker}))), sv = skinVars(m.club);
+    h += `<div class="mx mxpage${sv.k.flip ? " flip" : ""}" style="${sv.style}"><div class="win">${courtHtml(map, {swap: canSwap, sel: S.seatSel, join: !m.in && !started && m.open_spots > 0 ? m.id : null})}</div>${sv.k.logo ? `<img class="lg" src="${esc(sv.k.logo)}" alt="" onerror="this.remove()">` : ""}
+     <div class="bd"><div class="h"><b>${t("sdSwapT")}</b></div>${canSwap ? `<span class="m">${t("sdSwapN")}</span>` : ""}</div></div>`; }
+  h += m.in ? lobbyCard(m) : "";
+  if (iBooked && !started && m.kind !== "lesson" && m.status !== "cancelled" && (!S.lobby || S.lobby.vis === "public")){
     const max = 3 - joined, cur = S.opSpots != null ? S.opSpots : m.open_spots, rng = S.opRange;
     h += `<div class="card opcard"><b>👥 ${t("opT")}</b><span class="note">${t("opTxt")}</span>
       <div class="chips" style="flex-wrap:wrap">${Array.from({length: max + 1}, (_, n) => `<button class="chip" data-opn="${n}" aria-pressed="${cur === n}">${n ? t("spots" + n) : t("opNone")}</button>`).join("")}</div>
@@ -3391,6 +3606,22 @@ app.addEventListener("click", async e => {
     const lmin = n && rg !== "any" && lv != null ? Math.max(0.5, +(lv - +rg).toFixed(2)) : null, lmax = n && rg !== "any" && lv != null ? Math.min(7, +(lv + +rg).toFixed(2)) : null;
     const r = await sb.rpc("match_set_open", {p_booking: d.opsave, p_spots: n, p_lmin: lmin, p_lmax: lmax}); if (r.error){ toast(errMsg(r.error)); return; }
     toast(n ? "✓ " + t("opSaved") : t("saved")); S.opSpots = null; await loadMatch(d.opsave); render(); return; }
+  if (d.seat){ const mid = S.match && S.match.id; if (!mid) return;
+    if (!S.seatSel){ S.seatSel = d.seat; render(); return; }
+    if (S.seatSel === d.seat){ S.seatSel = null; render(); return; }
+    const r = await sb.rpc("match_seat_move", {p_booking: mid, p_a: S.seatSel, p_b: d.seat}); S.seatSel = null;
+    if (r.error){ toast(errMsg(r.error)); render(); return; } toast(t("sdSwapped")); await loadMatch(mid); render(); return; }
+  if ("lbmore" in d){ S.lbMore = !S.lbMore; if (S.partners == null){ try { const r = await sb.rpc("my_partners"); S.partners = r.error ? [] : r.data || []; } catch (e) { S.partners = []; } } render(); return; }
+  if (d.lbinv || d.lbph){ const mid = S.match && S.match.id; if (!mid) return; let ids = [], phs = [];
+    if (d.lbinv) ids = [d.lbinv]; else { const el = document.getElementById("lb-ph"), v = el ? el.value.trim() : ""; if (v.replace(/\D/g, "").length < 9){ toast(t("lgPartnerPh")); return; } phs = [v]; }
+    const r = await sb.rpc("lobby_invite", {p_booking: mid, p_ids: ids, p_phones: phs}); if (r.error){ toast(errMsg(r.error)); return; }
+    toast(tf("lobSent", {n: r.data || 0})); await loadMatch(mid); render(); return; }
+  if (d.lbshare){ const r = await sb.rpc("lobby_link", {p_booking: d.lbshare}); if (r.error){ toast(errMsg(r.error)); return; }
+    const m = S.match, dd = new Date(m.starts_at), url = location.origin + location.pathname + "#lobby=" + r.data;
+    const txt = tf("lobShareTxt", {w: fmtDay(dd) + " " + fmtTime(dd), c: m.club}) + " " + url;
+    try { if (navigator.share){ await navigator.share({title: "Padel Live", text: txt}); return; } } catch (e) { if (e && e.name === "AbortError") return; }
+    location.href = "https://wa.me/?text=" + encodeURIComponent(txt); return; }
+  if (d.lbopen){ const r = await sb.rpc("lobby_open", {p_booking: d.lbopen}); if (r.error){ toast(errMsg(r.error)); return; } toast(t("lobOpened")); await loadMatch(d.lbopen); render(); return; }
   if (d.mjoin){ if (!S.user){ go("auth"); return; } const r = await sb.rpc("join_match", {p_booking: d.mjoin}); if (r.error){ toast(errMsg(r.error)); return; } toast("✓ " + t("joined")); await loadMatch(d.mjoin); render(); return; }
   if (d.rmday){ S.rmDay = d.rmday; render(); return; }
   if (d.rmshift != null){ S.rmShift = +d.rmshift; render(); return; }
@@ -3406,7 +3637,7 @@ app.addEventListener("click", async e => {
 app.addEventListener("change", async e => { const el = e.target;
   if (el.id === "ps-photo" && el.files && el.files[0]){ S.psBody = (document.getElementById("ps-body") || {}).value || S.psBody; try { S.psPhoto = await shrinkPhoto(el.files[0]); render(); } catch (x) { toast("Could not read that photo."); } }
 });
-app.addEventListener("input", e => { if (e.target.id === "ps-body") S.psBody = e.target.value; });
+app.addEventListener("input", e => { if (e.target.id === "ps-body") S.psBody = e.target.value; if (e.target.id === "lg-ph"){ S.lgPh = e.target.value; lgFitCheck(); } });
 async function loadMgrPosts(){ if (!S.mClub) return; const r = await sb.rpc("club_posts_list", {p_club: S.mClub}); S.mPosts = r.data || []; }
 async function loadClubPosts(){ if (!S.club) return; try { const r = await sb.rpc("club_posts_list", {p_club: S.club.id}); S.clubPosts = r.error ? [] : r.data || []; } catch (e) { S.clubPosts = []; } }
 
@@ -3441,12 +3672,16 @@ Object.assign(W.ar, {wTag:"البادل بسوريا، كله بتطبيق وا�
 BADGE_IC.rookie = "🌱";
 
 const ls = { get: k => { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: (k, v) => { try { localStorage.setItem(k, v); } catch (e) {} }, del: k => { try { localStorage.removeItem(k); } catch (e) {} } };
+(function(){ try { const m = /#lobby=([0-9a-f]{12})/.exec(location.hash); if (m){ ls.set("pl-lobby", m[1]); history.replaceState(null, "", location.pathname + location.search); } } catch (e) {} })();
 (function(){ try { const r = new URLSearchParams(location.search).get("ref"); if (r && /^[0-9a-f-]{36}$/i.test(r)) ls.set("pl-ref", r); } catch (e) {} })();
 
 async function loadWI(){ try { const r = await sb.rpc("welcome_info"); if (!r.error) S.wi = r.data; } catch (e) {} }
 const isRookie = () => !S.user || !!(S.wi && S.wi.quest && (S.wi.quest.new || (S.wi.quest.rated || 0) < 5) && !S.wi.quest.done);
 const nextOnboard = () => ls.get("pl-tjoin") ? "tjoin" : S.user && S.profile && !S.profile.home_club && !ls.get("pl-noclub") ? "pickclub" : "home";
 
+/* someone opened a private-match invite link */
+async function lobbyFromLink(){ const tok = ls.get("pl-lobby"); if (!tok || !S.user) return; ls.del("pl-lobby");
+  try { const r = await sb.rpc("lobby_accept", {p_token: tok}); if (r.error){ toast(errMsg(r.error)); return; } S.matchId = r.data; go("match"); } catch (e) {} }
 /* after sign in / sign up: save the guest's quiz level and the invite */
 async function onbAfterAuth(){
   if (!S.user || !S.profile) return;
@@ -3454,6 +3689,7 @@ async function onbAfterAuth(){
   if (pl && !S.profile.level_set){ let cl = null; try { cl = JSON.parse(ls.get("pl-pclaim") || "null"); } catch (e) {} const r = await sb.rpc("set_my_level", {p_level: +pl, p_claim: cl}); if (!r.error){ S.profile.level_set = true; S.profile.level = +pl; await loadCard(); } }
   ls.del("pl-plevel");
   const ref = ls.get("pl-ref"); if (ref){ try { await sb.rpc("set_invited_by", {p_ref: ref}); } catch (e) {} ls.del("pl-ref"); }
+  await lobbyFromLink();
   ls.set("pl-seen", "1");
   await Promise.all([loadWI(), loadRatePend(), sb.rpc("player_social", {p_user: S.user.id}).then(r => { if (!r.error) S.mySoc = r.data; }).catch(() => {})]);
 }
