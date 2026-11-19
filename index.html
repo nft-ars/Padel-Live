@@ -1457,7 +1457,7 @@ const V = {};
 V.home = () => { const next = S.mine.find(b => b.status !== "cancelled" && new Date(b.starts_at) > new Date());
  const name = S.profile && S.profile.full_name ? S.profile.full_name.split(" ")[0] : "";
  return `<main>
-  <div class="top"><div><div class="hello">${S.user ? `${t("hi")} ${esc(name)}` : t("guest")}</div><div class="logo"><img class="lgmark" src="volt3d.png" alt="">Padel <i>Live</i></div></div>
+  <div class="top"><div><div class="hello">${S.user ? `${t("hi")} ${esc(name)}` : t("guest")}</div><div class="logo"><img class="lgmark" src="volt3d.png" alt="" onerror="this.remove()">Padel <i>Live</i></div></div>
    <div class="row">${bell()}<button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button>${S.user ? "" : `<button class="pill" data-go="auth">${t("signin")}</button>`}</div></div>
   ${welcomeHome()}
   ${next ? `<div class="hero"><div class="between" style="width:100%"><span class="kick2">${t("next")}</span>${statusTag(next.status).replace('tag g','tag w').replace('tag pend','tag w')}</div>
@@ -2449,7 +2449,7 @@ function lgRefForm(m){ return `<div class="lgform"><div class="row" style="gap:8
 
 /* ===== League in the Padel Live "Volt Arena" theme ===== */
 function vlgHero(l){ const st = l.status === "running" ? tf("vlKick", {r: l.round, n: l.rounds || l.round}) : l.status === "signup" ? t("vlKickSign") : t("vlKickDone");
-  return `<div class="vhero"><div class="vbolt"></div><img class="vvolt" src="volt3d.png" alt="" aria-hidden="true">
+  return `<div class="vhero"><div class="vbolt"></div><img class="vvolt" src="volt3d.png" alt="" aria-hidden="true" onerror="this.remove()">
    <div class="vin"><span class="vkick"><i></i>${esc(st)}</span><h1>${vlgTitle(l.name)}</h1><div class="vsub">${t("vlSub")}</div>
    <div class="evc-chips"><span>${esc(dShort(l.starts_on))} – ${esc(dShort(l.ends_on))}</span><span>${t("lgCat")} ${esc(l.categories.join(" · "))} · ${tf("vlTeams", {n: (S.league && S.league.teams) || 0})}</span><span>${+l.fee ? `${t("lgFee")} ${money(l.fee)}` : t("lgFree")}</span></div>
    ${l.prize ? `<div class="vprize"><small>🏆 ${t("vlPrize")}</small><b>${esc(l.prize)}</b></div>` : ""}</div></div>`; }
@@ -2477,7 +2477,7 @@ function vlgTabs(l){ const n = Math.max(l.rounds || 1, l.round || 1), vr = l.vie
 function myLeagueCard(){ const L = S.myLeagues || []; if (!L.length) return ""; const x = L[0], when = d => fmtDay(new Date(d)) + " · " + fmtTime(new Date(d));
   const pos = x.pos ? `<div class="vpos">${t("lgBox")} ${x.box}<b>${ordinal(x.pos)}</b>${x.pts} ${t("lgPts").toLowerCase()}</div>` : "";
   const prizeSpot = x.box === 1 && x.pos === 1 && x.prize;
-  return `<div class="vmylg"><button class="vtop" data-league="${x.id}"><img src="volt3d.png" alt="" aria-hidden="true">${pos}<div class="vt"><small>${t("vlMine")}${x.status === "running" ? " · " + tf("vlRoundOf", {r: x.round, n: x.rounds}) : ""}</small><b>${esc(x.name)}</b></div></button>
+  return `<div class="vmylg"><button class="vtop" data-league="${x.id}"><img src="volt3d.png" alt="" aria-hidden="true" onerror="this.remove()">${pos}<div class="vt"><small>${t("vlMine")}${x.status === "running" ? " · " + tf("vlRoundOf", {r: x.round, n: x.rounds}) : ""}</small><b>${esc(x.name)}</b></div></button>
    <div class="vbd">${x.ask ? `<div class="vprop"><span>📩 ${tf("lgPropThem", {n: esc(x.ask.team || ""), w: esc(when(x.ask.at)), c: esc(x.ask.club || "")})}</span><button class="vbtn" data-lgacc="${x.ask.id}" data-lghome="${x.id}">${t("lgAccept")}</button></div>` : ""}
    ${x.next ? `<div class="vm">${t("vlNextS")}: ${esc(x.next.vs)} · ${x.next.at ? esc(when(x.next.at)) + (x.next.court ? ` · <span class="ok">✓ ${esc(x.next.court)}</span>` : "") : `<b>${t("lgNoTime")}</b>`}</div>` : x.status === "signup" ? `<div class="vm">${t("vlStartsSoon")}</div>` : ""}
    ${prizeSpot ? `<div class="vm" style="opacity:.8">🎁 ${t("vlPrizeSpot")}</div>` : ""}</div></div>`; }
@@ -2521,9 +2521,9 @@ const app = document.getElementById("app");
 function render(){
   document.documentElement.lang = lang; document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
   app.classList.toggle("mgr", S.view === "manager");
-  if (S.err && !S.clubs.length){ app.innerHTML = `<main><div class="logo"><img class="lgmark" src="volt3d.png" alt="">Padel <i>Live</i></div><div class="card">${esc(S.err)}</div><button class="cta" data-retry>${t("retry")}</button><button class="ghost" data-resetapp>Reset app (signs you out)</button><p class="note" style="font-size:11px;opacity:.7">${VERSION} · ${esc(S.step || "")}${S.lastErr ? " · " + esc(S.lastErr) : ""}</p></main>`; return; }
+  if (S.err && !S.clubs.length){ app.innerHTML = `<main><div class="logo"><img class="lgmark" src="volt3d.png" alt="" onerror="this.remove()">Padel <i>Live</i></div><div class="card">${esc(S.err)}</div><button class="cta" data-retry>${t("retry")}</button><button class="ghost" data-resetapp>Reset app (signs you out)</button><p class="note" style="font-size:11px;opacity:.7">${VERSION} · ${esc(S.step || "")}${S.lastErr ? " · " + esc(S.lastErr) : ""}</p></main>`; return; }
   if (!S.loaded){ const secs = Math.round((Date.now() - T0) / 1000);
-    app.innerHTML = `<main><div class="logo"><img class="lgmark" src="volt3d.png" alt="">Padel <i>Live</i></div><div class="card note">… ${secs > 3 ? secs + "s" : ""}</div>
+    app.innerHTML = `<main><div class="logo"><img class="lgmark" src="volt3d.png" alt="" onerror="this.remove()">Padel <i>Live</i></div><div class="card note">… ${secs > 3 ? secs + "s" : ""}</div>
     ${secs >= 6 ? `<button class="cta" data-reload>${t("retry")}</button><button class="ghost" data-resetapp>Reset app (signs you out)</button>` : ""}
     <p class="note" style="font-size:11px;opacity:.7">${VERSION} · ${esc(S.step || "start")}${S.lastErr ? " · " + esc(S.lastErr) : ""}</p></main>`; return; }
   try { app.innerHTML = (V[S.view] || V.home)() + sheetHtml(); }
@@ -3385,7 +3385,7 @@ V.reveal = () => { const L = S.revealLevel != null ? S.revealLevel : myLevel(); 
   const cat = lvCat(L), [, col] = TIER[cat], nm = S.profile && S.profile.full_name ? S.profile.full_name : "";
   return `<main class="rv">
    <span class="rv-kick">${t("rvKick")}</span>
-   <div class="rv-stage"><div class="rv-card" style="--tc:${col}"><div class="rv-back"><div class="logo"><img class="lgmark" src="volt3d.png" alt="">Padel <i>Live</i></div></div>
+   <div class="rv-stage"><div class="rv-card" style="--tc:${col}"><div class="rv-back"><div class="logo"><img class="lgmark" src="volt3d.png" alt="" onerror="this.remove()">Padel <i>Live</i></div></div>
      <div class="rv-front"><span class="pc-holo"></span><div class="pc-top"><div class="pc-ovr"><b>${lvl2(L)}</b><small>${t("lvlU")}</small></div><div class="pc-rank">${emblem(col, 54)}<span>${esc(tierName(cat))}</span></div></div>
        <div class="pc-av">${nm ? esc(initials(nm)) : "🎾"}</div><div class="pc-name"><b>${esc(nm || t("rvMe"))}</b><small>${t("catU")} ${cat}</small></div></div></div>
      <div class="rv-spark">${Array.from({length: 14}, (_, i) => `<i style="--a:${i * 26}deg;--d:${(i % 4) * .06}s"></i>`).join("")}</div></div>
@@ -3506,7 +3506,7 @@ function matchesRow(){
 
 V.home = () => { const name = S.profile && S.profile.full_name ? S.profile.full_name.split(" ")[0] : "";
  return `<main>
-  <div class="top"><div><div class="hello">${S.user ? `${t("hi")} ${esc(name)}` : t("guest")}</div><div class="logo"><img class="lgmark" src="volt3d.png" alt="">Padel <i>Live</i></div></div>
+  <div class="top"><div><div class="hello">${S.user ? `${t("hi")} ${esc(name)}` : t("guest")}</div><div class="logo"><img class="lgmark" src="volt3d.png" alt="" onerror="this.remove()">Padel <i>Live</i></div></div>
    <div class="row">${bell()}<button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button>${S.user ? "" : `<button class="pill" data-go="auth">${t("signin")}</button>`}</div></div>
   ${smartCard()}
   ${S.user ? myLeagueCard() : ""}
