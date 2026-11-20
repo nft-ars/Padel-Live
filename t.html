@@ -102,7 +102,31 @@
 .desk-r>div:first-child{display:flex;flex-direction:column;gap:2px;min-width:0}
 .desk-b{display:flex;gap:6px;flex:none}.desk-b .chip.on{background:#2E9E5B;color:#fff;border-color:#2E9E5B}
 html:root{--catX:#D9669E;--catX-soft:rgba(217,102,158,.16)}
-</style><style>/* ===== move matches */
+</style><style>.phf{display:flex;align-items:stretch;gap:0;border:1px solid var(--line,rgba(127,127,127,.35));border-radius:12px;overflow:hidden;background:var(--card,transparent)}
+.phf .phcc{position:relative;display:flex;align-items:center;padding:0 10px 0 12px;border-inline-end:1px solid var(--line,rgba(127,127,127,.35));white-space:nowrap;font-weight:700;font-size:15px;cursor:pointer;margin:0}
+.phf .phcc:after{content:"▾";font-size:11px;opacity:.6;margin-inline-start:6px}
+.phf .phcc select{position:absolute;inset:0;opacity:0;width:100%;cursor:pointer;font-size:16px}
+.phf input{flex:1;min-width:0;border:0!important;border-radius:0!important;background:transparent!important;box-shadow:none!important;margin:0!important}
+.phf:focus-within{outline:2px solid var(--blue,#2C5FAE);outline-offset:-1px}
+/* ===== partner invite */
+.su-pm{display:grid;gap:8px}
+.su-pmo{display:flex;gap:12px;align-items:flex-start;text-align:start;width:100%;padding:12px 14px;border-radius:14px;border:1.5px solid var(--line,rgba(127,127,127,.35));background:transparent;color:inherit;font:inherit;cursor:pointer}
+.su-pmo b{display:block;font-size:15px}.su-pmo small{display:block;font-size:12.5px;opacity:.75;margin-top:2px;line-height:1.3}
+.su-pmo[aria-pressed=true]{border-color:#25D366;background:rgba(37,211,102,.08);box-shadow:0 0 0 3px rgba(37,211,102,.12)}
+.su-pmi{font-size:22px;line-height:1}
+.btn.su-wa{background:#25D366!important;border-color:#25D366!important;color:#06351b!important;font-weight:800;text-decoration:none;text-align:center}
+.btn.su-wa.big{width:100%;height:52px;font-size:16px}.btn.su-wa[disabled]{background:rgba(127,127,127,.25)!important;border-color:transparent!important;color:inherit!important}
+.su-rule summary{cursor:pointer;font-size:13px;font-weight:700;opacity:.8}
+.su-wait{display:flex;flex-direction:column;gap:12px;padding:14px;border-radius:16px;border:1.5px solid #25D366;background:rgba(37,211,102,.06)}
+.su-wait-h{display:flex;gap:12px;align-items:center}.su-wait-h b{display:block;font-size:17px}.su-hg{font-size:28px;animation:suhg 2s ease-in-out infinite}
+@keyframes suhg{50%{transform:rotate(180deg)}}
+.su-tl{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.su-tl li{display:grid;grid-template-columns:26px 1fr;gap:2px 10px;align-items:center;font-size:14px;opacity:.55}
+.su-tl li i{grid-row:span 2;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-style:normal;font-size:12px;font-weight:800;border:1.5px solid currentColor}
+.su-tl li.ok{opacity:1}.su-tl li.ok i{background:#25D366;border-color:#25D366;color:#06351b}
+.su-tl li.cur{opacity:1;font-weight:700}.su-tl li.cur i{border-color:#25D366;color:#25D366}
+.su-tl li small{grid-column:2;font-weight:400;font-size:12px;opacity:.75}
+/* ===== move matches */
 .mvbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:10px 0 12px;padding:10px 12px;border-radius:14px;border:1px dashed var(--line,rgba(255,255,255,.25));font-size:13px}
 .mvbar>span{opacity:.75}.mvbar.on{position:sticky;top:64px;z-index:20;border-style:solid;border-color:var(--gold,#D9B85C);background:var(--surface,#0b1a14);box-shadow:0 8px 24px rgba(0,0,0,.35)}
 .mvhint{flex:1 1 100%}.mvhint .ok{color:#3ecf8e}.mvhint .bad{color:#ff6b6b}.mvbtns{display:flex;gap:8px;margin-inline-start:auto}
@@ -115,6 +139,48 @@ html:root{--catX:#D9669E;--catX-soft:rgba(217,102,158,.16)}
 .mvover{outline:3px solid #3ecf8e!important;outline-offset:-1px}
 .mvghost{position:fixed;z-index:9999;pointer-events:none;opacity:.92;transform:rotate(-2deg) scale(1.04);box-shadow:0 18px 40px rgba(0,0,0,.5)}
 .brow.mvnew{opacity:.9}
+/* ===== live draw */
+.sec.draw,.draw-set{--line:rgba(217,184,92,.3);--gold:#D9B85C}.sec.draw{background:radial-gradient(120% 60% at 50% 0%,#14392c 0%,#04130d 65%);color:#EEF3EC;border-radius:24px;padding:16px 14px 18px;border:1px solid rgba(217,184,92,.35);box-shadow:0 20px 50px rgba(0,0,0,.35)}
+.sec.draw .su-s{color:#A9B8AE}.sec.draw h2{color:#EEF3EC}.sec.draw .btn{color:#EEF3EC;border-color:rgba(217,184,92,.45);background:rgba(255,255,255,.04)}.sec.draw .btn.primary{background:#D9B85C;color:#111}
+.dr-head h2 em{color:var(--gold,#D9B85C)}.dr-pill{display:flex;align-items:center;gap:8px;width:100%;justify-content:center;margin:10px 0;padding:11px 14px;border-radius:999px;border:1px solid var(--gold,#D9B85C);background:rgba(217,184,92,.12);color:inherit;font:700 14px var(--body,inherit);cursor:pointer}
+.dr-pill.live{background:#c9343a;border-color:#c9343a;color:#fff}.dr-pill i,.dr-live i{width:9px;height:9px;border-radius:50%;background:#ff5a5f;animation:drpulse 1.3s infinite}.dr-pill.live i{background:#fff}
+@keyframes drpulse{0%{box-shadow:0 0 0 0 rgba(255,90,95,.7)}100%{box-shadow:0 0 0 10px rgba(255,90,95,0)}}
+.dr-cd{border:1px solid var(--line,rgba(217,184,92,.3));border-radius:22px;padding:18px;text-align:center;background:linear-gradient(160deg,rgba(47,107,85,.25),rgba(0,0,0,.25))}
+.dr-when{font:800 italic 16px var(--display,inherit);letter-spacing:2px;color:var(--gold,#D9B85C);text-transform:uppercase}
+.dr-digits{display:flex;justify-content:center;gap:8px;margin:12px 0}.dr-digits div{width:66px;padding:10px 0;border-radius:14px;background:rgba(0,0,0,.35);border:1px solid var(--line,rgba(217,184,92,.3))}
+.dr-digits b{display:block;font:800 32px/1 var(--display,inherit);color:var(--gold,#D9B85C)}.dr-digits span{font-size:10px;letter-spacing:2px;text-transform:uppercase;opacity:.7}
+.dr-rules{display:grid;gap:8px;margin-top:12px;text-align:start}.dr-rules div{display:flex;gap:10px;font-size:13px;opacity:.92;background:rgba(255,255,255,.04);border-radius:12px;padding:9px 11px}.dr-rules i{font-style:normal;font-size:17px}
+.dr-live{display:flex;align-items:center;justify-content:center;gap:8px;font:800 12px var(--body,inherit);letter-spacing:2px;color:#ff6b6f;margin:6px 0 10px}
+.dr-catbar{display:flex;gap:6px;margin-bottom:10px}.dr-catbar span{flex:1;text-align:center;font:800 italic 14px var(--display,inherit);letter-spacing:1px;padding:8px 0;border-radius:12px;background:rgba(255,255,255,.05);opacity:.6;border:1px solid transparent}
+.dr-catbar span.on{opacity:1;border-color:var(--c);box-shadow:0 0 16px rgba(217,184,92,.25)}.dr-catbar span.fin{opacity:1;color:var(--c)}.dr-catbar span.fin:after{content:" ✓"}
+.dr-phase{text-align:center;font:800 italic 14px var(--display,inherit);letter-spacing:2.5px;text-transform:uppercase;color:var(--gold,#D9B85C);margin-bottom:8px}
+.dr-arena{display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px;align-items:center;margin-bottom:14px}
+.dr-bowl{position:relative;width:150px;height:150px;border-radius:50%;overflow:hidden;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.2),rgba(255,255,255,.04) 45%,rgba(217,184,92,.08) 70%,rgba(0,0,0,.25));border:2px solid rgba(217,184,92,.5);box-shadow:inset 0 -12px 30px rgba(0,0,0,.45),0 0 30px rgba(217,184,92,.12)}
+.dr-ball{position:absolute;width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0 8%,var(--c) 42%,#1b1b1b 120%);box-shadow:0 3px 6px rgba(0,0,0,.4)}
+.dr-bowl.shake .dr-ball{animation:drjig .3s infinite alternate}@keyframes drjig{to{transform:translate(calc(var(--jx)*3),calc(var(--jy)*3))}}
+.dr-reveal{min-height:150px;display:grid;place-items:center;text-align:center}
+.dr-big{width:92px;height:92px;border-radius:50%;margin:0 auto 10px;display:grid;place-items:center;font:800 italic 30px var(--display,inherit);color:#111;background:radial-gradient(circle at 35% 30%,#fff 0 7%,var(--c) 44%,#1b1b1b 125%);box-shadow:0 0 40px rgba(217,184,92,.45);animation:drpop .45s cubic-bezier(.2,1.6,.4,1)}
+@keyframes drpop{from{transform:scale(.2) translateY(40px);opacity:0}}
+.dr-nm{font:800 italic 22px/1.05 var(--display,inherit);animation:drfade .4s .2s both}.dr-pl{font-size:12px;opacity:.75;margin-top:4px;animation:drfade .4s .3s both}
+.dr-to{margin-top:8px;font:800 italic 14px var(--display,inherit);letter-spacing:2px;text-transform:uppercase;color:var(--gold,#D9B85C);animation:drfade .4s .55s both}
+@keyframes drfade{from{opacity:0;transform:translateY(6px)}}.dr-idle{opacity:.75;font-size:14px}.dr-idle.big{text-align:center;padding:40px 0;font-size:16px}
+.dr-groups{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+.dr-grp{min-width:0;border:1px solid var(--line,rgba(217,184,92,.3));border-radius:16px;padding:8px;background:rgba(0,0,0,.18)}
+.dr-grp h3{margin:0 0 4px;font:800 italic 15px var(--display,inherit);letter-spacing:1.5px;text-transform:uppercase;color:var(--c)}
+.dr-slot{min-height:46px;border-radius:11px;margin-top:6px;border:1px dashed rgba(127,127,127,.35);display:flex;align-items:center;gap:8px;padding:6px 9px;font-size:13px;opacity:.7}
+.dr-slot.fill{opacity:1;border:1px solid rgba(127,127,127,.25);background:rgba(255,255,255,.06)}.dr-slot.lead{border-color:var(--gold,#D9B85C);background:linear-gradient(90deg,rgba(217,184,92,.22),rgba(217,184,92,.05))}
+.dr-slot.land{animation:drland .55s cubic-bezier(.2,1.4,.4,1)}@keyframes drland{from{transform:scale(1.12);box-shadow:0 0 30px var(--gold,#D9B85C)}}
+.dr-dot{width:14px;height:14px;border-radius:50%;flex:0 0 auto;background:radial-gradient(circle at 35% 30%,#fff 0 10%,var(--c) 45%,#222)}
+.dr-slot .t{flex:1;min-width:0}.dr-slot .t b{display:block;font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.dr-slot .t span{display:block;font-size:10.5px;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dr-slot .lv{font:800 11px var(--body,inherit);color:#111;background:var(--gold,#D9B85C);border-radius:6px;padding:2px 5px}
+.dr-fly{position:fixed;z-index:60;pointer-events:none;width:32px;height:32px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff 0 8%,var(--c,#D9B85C) 42%,#222);box-shadow:0 0 20px var(--gold,#D9B85C);transition:transform .7s cubic-bezier(.5,0,.3,1),opacity .25s .55s}
+.dr-cat{margin:14px 0}.dr-ct{font:800 italic 18px var(--display,inherit);letter-spacing:1px;text-transform:uppercase;color:var(--c);margin:0 0 6px}
+.dr-end{display:flex;gap:8px;justify-content:center;margin:16px 0}
+.draw-set .dr-f{display:flex;flex-direction:column;gap:4px;margin:10px 0;font-size:13px}.draw-set input[type=datetime-local]{font:inherit;padding:10px;border-radius:12px;border:1px solid var(--line,rgba(127,127,127,.4));background:transparent;color:inherit}
+.dr-pick{margin:12px 0;padding:10px;border-radius:14px;border:1px solid var(--line,rgba(127,127,127,.3))}.dr-pick-h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px;margin-bottom:6px}.dr-pick-h span{font-size:12px;opacity:.75}
+.dr-team{display:flex;align-items:center;gap:10px;width:100%;text-align:start;padding:9px 10px;margin-top:6px;border-radius:12px;border:1px solid var(--line,rgba(127,127,127,.3));background:transparent;color:inherit;font:inherit;cursor:pointer}
+.dr-team b{flex:1;font-size:14px}.dr-team small{opacity:.7}.dr-team.on{border-color:var(--gold,#D9B85C);background:rgba(217,184,92,.14)}.dr-team[disabled]{opacity:.4}
+.dr-btns{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;margin:12px 0 6px}.dr-msg{font-weight:700;margin:8px 0}
 /* ===== referee + TV + organizer tools (uses each theme's colours) ===== */
 .mini-live{margin-top:6px;font:800 13px/1.2 var(--display);letter-spacing:.04em;color:var(--warn)}
 .org-tools{display:flex;flex-direction:column;gap:12px}
@@ -2470,12 +2536,12 @@ norm(S);
 let draft = null, canEdit = false, artifactNS = null, editMode = false, busy = false, status = "";
 let view = { tab: "schedule", cat: "all", q: "", mine: false, layout: "courts", day: 0 };
 let myTeam = ""; try { myTeam = localStorage.getItem("cpn-team-" + SLUG) || ""; } catch (e) {}
-const TABS = ["schedule","standings","knockouts","teams","info"];
+const TABS = ["schedule","standings","knockouts","teams","info","draw"];
 try { const h = location.hash.replace("#",""); if (TABS.includes(h)) view.tab = h; } catch (e) {}
 
 const cur = () => draft || S;
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const nm = id => (cur().names[id] || "").trim();
+const nm = id => (drawPend() && !canEdit ? "" : (cur().names[id] || "")).trim(); /* names stay hidden until the live draw */
 const label = id => nm(id) || ("Team " + id);
 const cvar = (c, soft) => `var(${CATV[c]}${soft ? "-soft" : ""})`;
 function mins(t){ const m = /(\d+):(\d+)\s*(AM|PM)/.exec(t); let h = +m[1] % 12 + (m[3] === "PM" ? 12 : 0); if (m[3] === "AM" && h < 6) h += 24; return h * 60 + +m[2]; }
@@ -2733,7 +2799,7 @@ function board(all, day){
 function vSchedule(){
   const all = allMatches();
   if (!view.day) view.day = todayGuess(all);
-  let h = myCard() + nowStrip() + ((THEME === "night" || THEME === "trio" || THEME === "ace" || THEME === "lets") && SPONSORS.length && !editMode ? sponsorWall() : "") + filters();
+  let h = myCard() + ( /* "On court" strip removed from the page */(THEME === "night" || THEME === "trio" || THEME === "ace" || THEME === "lets") && SPONSORS.length && !editMode ? sponsorWall() : "") + filters();
   const useBoard = !editMode;
   h += `<div class="sched-bar"><div class="days" role="tablist" aria-label="Day">${Object.keys(DAYS).map(Number).map(d => `<button role="tab" class="dayb" data-day="${d}" aria-selected="${useBoard ? view.day === d : false}"${useBoard ? "" : " disabled"}><b>${DSHORT[d]}</b><span>${DAYS[d].split(" ").slice(1).join(" ")}</span></button>`).join("")}</div></div>`;
   h += mvBar();
@@ -2871,7 +2937,7 @@ function info2(){
   <p class="i-tb">Tiebreaks to 7: at 8–8 in a set to 9, at 6–6 in a set to 6.</p></section>
   <section class="sec info2"><h2>${Object.keys(DAYS).length === 1 ? "The day" : Object.keys(DAYS).length + " days"}</h2><div class="i-days">${days}</div></section>
   <section class="sec info2"><h2>On the day</h2><div class="i-rules">
-    ${rule("desk", "Check in", "At the desk 30 minutes before your first match. Show your check-in pass (QR) from this page" + (fee ? " and pay your entry" : "") + ".")}
+    ${rule("desk", fee ? "Pay at the desk" : "Arrive early", "Come 30 minutes before your first match." + (fee ? " Show your entry pass (QR) from this page at the desk and pay your entry." : ""))}
     ${rule("clock", "Not before", "Times are “not before”. If a court runs late, the Schedule shows the delay.")}
     ${rule("fire", "Warm-up", "3 minutes in groups, 5 in knockouts, inside your slot.")}
     ${rule("late", "10-minute rule", "Not on court 10 minutes after your call: walkover.")}
@@ -2887,7 +2953,7 @@ function adminBar(){
       <label for="notice">Announcement for everyone<input id="notice" data-f="notice" value="${esc(cur().notice)}" placeholder="e.g. Category D quarter-final draw is out" maxlength="200"></label>
       ${COURTS.map(c => `<label for="delay-${c}">${CN[c]} running late (min)<input id="delay-${c}" data-d="${c}" inputmode="numeric" value="${+d[c] || ""}" placeholder="0"></label>`).join("")}</div>` : "";
   return `<div class="admin${editMode ? " editing" : ""}"><div class="adm-top"><strong>Organizer</strong><span class="msg">${esc(status || (editMode ? (n ? `${n} unsaved change${n > 1 ? "s" : ""}. Players see them after you publish.` : "Type scores, set match status, delays or an announcement. Only you see these controls.") : "Only you can enter scores. Players see this page read-only."))}</span>
-    ${editMode ? `<button class="btn" id="cancel" ${busy ? "disabled" : ""}>Cancel</button><button class="btn primary" id="save" ${busy || !n ? "disabled" : ""}>${busy ? "Publishing…" : "Save &amp; publish"}</button>` : `<button class="btn" data-ciopen>${CI.open ? "Close desk" : "🎟️ Check-in desk"}</button><button class="btn primary" id="edit">Enter scores</button>`}</div>${extra}</div>`;
+    ${editMode ? `<button class="btn" id="cancel" ${busy ? "disabled" : ""}>Cancel</button><button class="btn primary" id="save" ${busy || !n ? "disabled" : ""}>${busy ? "Publishing…" : "Save &amp; publish"}</button>` : `<button class="btn" data-ciopen>${CI.open ? "Close payments" : "💵 Payments desk"}</button><button class="btn primary" id="edit">Enter scores</button>`}</div>${extra}</div>`;
 }
 function changes(){
   let n = 0; const a = draft, b = S;
@@ -2909,13 +2975,24 @@ function render(){
   if (MODE === "ref") return renderRef();
   if (MODE === "tv") return renderTV();
   const app = document.getElementById("app"); const f = document.activeElement && document.activeElement.id; const sel = f && document.activeElement.selectionStart;
-  const views = {schedule: vSchedule, standings: vStandings, knockouts: vKnockouts, teams: vTeams, info: vInfo};
+  const views = {schedule: vSchedule, standings: vStandings, knockouts: vKnockouts, teams: vTeams, info: vInfo, draw: vDraw};
+  const vt = view.tab === "draw" && !drawOn() && !canEdit ? "schedule" : view.tab;
   app.innerHTML = `${THEME === "night" || THEME === "trio" || THEME === "ace" || THEME === "lets" ? `<header class="top"><div class="wrap gut"><div class="hrow"><span class="kick"><i class="dot"></i>${esc(CFG.kicker || "Live")}</span><div class="upd">Last update<b>${esc(updatedText())}</b></div></div><div class="brand">${CFG.club_logo ? `<img class="emb" src="${CFG.club_logo}" alt="">` : ""}<div><h1>${CFG.title_html || esc(TNAME)}</h1><p>${esc(THEME === "night" && /\d+ categor/i.test(CFG.tagline || "") ? "Tournament · " + CATS.map(c => c === "X" ? "Mixed" : c).join(" · ") : (CFG.tagline || ""))}</p></div></div></div><div class="scene-wrap">${THEME === "trio" ? TSCENE : THEME === "ace" ? ASCENE : THEME === "lets" ? LSCENE : SCENE}</div><div class="wrap gut hero-bar"><div class="chips">${heroFacts().map(([x, g]) => `<span${g ? ` class="g"` : ""}>${esc(x)}</span>`).join("")}</div>${LOGO ? `<div class="presented"><span>${esc(CFG.sponsor_label || "Presented by")}</span><img src="${LOGO}" alt="${esc(CFG.sponsor_alt || "")}"></div>` : ""}</div></header>` : THEME === "movara" ? `<header class="top"><div class="hero-fx" aria-hidden="true"><i class="ln1"></i><i class="ln2"></i><i class="ball"></i></div><div class="wrap gut"><div class="hrow"><span class="kick"><i class="dot"></i>${esc(CFG.kicker || "Live")}</span><div class="upd">Last update<b>${esc(updatedText())}</b></div></div><div class="brand"><h1>${CFG.title_html || esc(TNAME)}</h1><p>${(CFG.facts || []).map(x => `<span>${esc(x)}</span>`).join("")}</p></div>${LOGO ? `<div class="sponsor"><span>${esc(CFG.sponsor_label || "")}</span><img src="${LOGO}" alt="${esc(CFG.sponsor_alt || "")}"></div>` : ""}</div></header>` : `<header class="top"><div class="wrap gut"><img src="${CFG.club_logo || ""}" alt=""><div class="brand"><h1>${esc(TNAME)}</h1><p>${esc(CFG.subtitle || "Live results")}</p></div><div class="upd">Last update<b>${esc(updatedText())}</b></div></div></header>`}
-  <nav class="tabs" aria-label="Sections"><div class="wrap gut" role="tablist">${[["schedule","Schedule"],["standings","Groups"],["knockouts","Knockouts"],["teams","Teams"],["info","Info"]].map(([k, l]) => `<button role="tab" data-tab="${k}" aria-selected="${view.tab === k}">${l}</button>`).join("")}</div></nav>
-  <main><div class="wrap gut">${adminBar()}${deskBox()}${banner()}${passBox()}${signupBox()}${views[view.tab]()}</div></main>${saveBar()}`;
+  <nav class="tabs" aria-label="Sections"><div class="wrap gut" role="tablist">${[["schedule","Schedule"],["standings","Groups"],["knockouts","Knockouts"],["teams","Teams"],["info","Info"]].concat(drawOn() || canEdit ? [["draw", drawState() === "live" || drawState() === "running" ? "Draw 🔴" : "Draw"]] : []).map(([k, l]) => `<button role="tab" data-tab="${k}" aria-selected="${view.tab === k}">${l}</button>`).join("")}</div></nav>
+  <main><div class="wrap gut">${adminBar()}${deskBox()}${banner()}${drawPill()}${vt === "draw" ? "" : passBox() + signupBox()}${views[vt]()}</div></main>${saveBar()}`;
   document.body.classList.toggle("editing", editMode);
   if (f){ const el = document.getElementById(f); if (el){ el.focus(); try { if (sel != null) el.setSelectionRange(sel, sel); } catch (e) {} } }
 }
+
+/* WhatsApp numbers from any country: a country-code picker next to the number */
+var CCS = [["963","🇸🇾","Syria"],["961","🇱🇧","Lebanon"],["962","🇯🇴","Jordan"],["964","🇮🇶","Iraq"],["90","🇹🇷","Türkiye"],["971","🇦🇪","UAE"],["966","🇸🇦","Saudi Arabia"],["974","🇶🇦","Qatar"],["965","🇰🇼","Kuwait"],["973","🇧🇭","Bahrain"],["968","🇴🇲","Oman"],["20","🇪🇬","Egypt"],["49","🇩🇪","Germany"],["46","🇸🇪","Sweden"],["31","🇳🇱","Netherlands"],["44","🇬🇧","UK"],["33","🇫🇷","France"],["34","🇪🇸","Spain"],["39","🇮🇹","Italy"],["43","🇦🇹","Austria"],["32","🇧🇪","Belgium"],["45","🇩🇰","Denmark"],["47","🇳🇴","Norway"],["41","🇨🇭","Switzerland"],["30","🇬🇷","Greece"],["357","🇨🇾","Cyprus"],["380","🇺🇦","Ukraine"],["7","🇷🇺","Russia"],["1","🇺🇸","USA / Canada"],["61","🇦🇺","Australia"]];
+function phFull(cc, n){ const d = String(n || "").trim().replace(/[٠-٩]/g, x => "٠١٢٣٤٥٦٧٨٩".indexOf(x)).replace(/[^\d+]/g, "");
+  if (d.startsWith("+")) return d; if (d.startsWith("00")) return "+" + d.slice(2); if (cc === "963" && /^9639\d{8}$/.test(d)) return "+" + d; return "+" + cc + d.replace(/^0+/, ""); }
+function phField(id, cc, val){ const c = CCS.find(x => x[0] === cc) || CCS[0];
+  return `<div class="phf"><label class="phcc"><span id="${id}-ccl">${c[1]} +${c[0]}</span><select id="${id}-cc" aria-label="Country code">${CCS.map(([k, f, n]) => `<option value="${k}"${k === c[0] ? " selected" : ""}>${f} ${n} (+${k})</option>`).join("")}</select></label><input id="${id}" inputmode="tel" autocomplete="tel-national" dir="ltr" placeholder="${c[0] === "963" ? "9XX XXX XXX" : "Phone number"}" value="${val || ""}"></div>`; }
+document.addEventListener("change", e => { const s = e.target; if (!s || !s.id || !/-cc$/.test(s.id)) return; const c = CCS.find(x => x[0] === s.value); if (!c) return;
+  const l = document.getElementById(s.id + "l"); if (l) l.textContent = c[1] + " +" + c[0];
+  const i = document.getElementById(s.id.slice(0, -3)); if (i) i.placeholder = c[0] === "963" ? "9XX XXX XXX" : "Phone number"; });
 
 /* ---------- move matches (organizer): tap a match, then tap another match to swap or an empty slot to move; or drag it ---------- */
 var MVS = { on: false, sel: null, dirty: false, snap: null, msg: "", busy: false, drag: null };
@@ -2989,9 +3066,130 @@ document.addEventListener("pointerup", e => { const g = MVS.drag; if (!g) return
   if (tgt) mvDo(g.id, tgt); else render(); });
 /* everyone's page picks up a moved schedule */
 async function pullSched(){ if (MVS.on) return; try { const r = await sb.rpc("t_sched", {p_slug: SLUG, p_sv: +CFG.sv || 0}); if (r.error || !r.data) return;
-  T.G.splice(0, T.G.length, ...r.data.G); Object.keys(T.K).forEach(k => delete T.K[k]); Object.assign(T.K, r.data.K); CFG.sv = r.data.sv; render(); } catch (e) {} }
+  T.G.splice(0, T.G.length, ...r.data.G); Object.keys(T.K).forEach(k => delete T.K[k]); Object.assign(T.K, r.data.K); CFG.sv = r.data.sv;
+  if ("D" in r.data){ const had = CFG.draw && CFG.draw.res; CFG.draw = r.data.D || undefined; if (!had && CFG.draw && CFG.draw.res) { try { await pull(true); } catch (e) {} } }
+  if (!(view.tab === "draw" && drawState() === "live")) render(); } catch (e) {} }
 setInterval(() => { if (!document.hidden) pullSched(); }, 30000);
 document.addEventListener("visibilitychange", () => { if (!document.hidden) pullSched(); });
+
+/* ---------- live draw: organizer sets a time + one leader per group; at that time the draw runs once on the server and every page plays it ---------- */
+var DR = { busy: false, msg: "", at: "", lead: null, run: false, key: "", phase: "" };
+function drawOn(){ return !!(CFG.draw && CFG.draw.at); }
+function drawPend(){ return drawOn() && !CFG.draw.res; }
+function drawOrder(){ return [...new Set(T.G.map(g => g.cat).concat(CATS))].filter(c => CATS.includes(c)); }
+const DRC = c => ({A: "#7DF2FF", B: "#FFD21F", C: "#DCE6F5", D: "#FF8A2B", E: "#A48CFF", X: "#F06DB5"})[c] || "#D9B85C";
+function drawTL(){ const r = CFG.draw.res || [], tl = []; let t = 0; const order = [...new Set(r.map(x => x.c))];
+  for (const c of order){ tl.push({k: "cat", c, t0: t, d: 2600}); t += 2600;
+    const L = r.filter(x => x.c === c && x.ph === "L"), P = r.filter(x => x.c === c && x.ph === "P");
+    if (L.length){ tl.push({k: "lhead", c, t0: t, d: 1400}); t += 1400; L.forEach(x => { tl.push({k: "ball", x, c, t0: t, d: 3200}); t += 3200; }); }
+    if (P.length){ tl.push({k: "pot", c, t0: t, d: 2200}); t += 2200; P.forEach(x => { tl.push({k: "ball", x, c, t0: t, d: 2800}); t += 2800; }); }
+    tl.push({k: "cdone", c, t0: t, d: 2600}); t += 2600; }
+  return {tl, total: t, order}; }
+function drawStart(){ const d = CFG.draw; return Math.max(new Date(d.at).getTime(), d.ran ? new Date(d.ran).getTime() - 1500 : 0); }
+function drawState(){ if (!drawOn()) return "none"; const at = new Date(CFG.draw.at).getTime();
+  if (!CFG.draw.res) return Date.now() < at ? "wait" : "running";
+  const {total} = drawTL(); return Date.now() - drawStart() < total ? "live" : "done"; }
+function drawSlots(c, landed){ const ng = +(GROUPS[c] || 0), sz = SZ(c); let h = `<div class="dr-groups">`;
+  for (let g = 1; g <= ng; g++){ h += `<div class="dr-grp" style="--c:${DRC(c)}"><h3>Group ${g}</h3>`;
+    for (let p = 1; p <= sz; p++){ const s = c + ((g - 1) * sz + p), x = landed[s];
+      h += x ? `<div class="dr-slot fill${x.ph === "L" ? " lead" : ""}${x.fresh ? " land" : ""}" id="drs-${s}"><i class="dr-dot"></i><span class="t"><b>${esc(x.tm)}</b><span>${esc(x.pl || "")}</span></span>${x.ph === "L" && x.lv ? `<span class="lv">${(+x.lv).toFixed(1)}</span>` : ""}</div>`
+             : `<div class="dr-slot" id="drs-${s}">${p === 1 ? "👑 Group leader" : "—"}</div>`; }
+    h += `</div>`; }
+  return h + `</div>`; }
+function drawFrame(){
+  const {tl, total, order} = drawTL(), e = Date.now() - drawStart();
+  if (e >= total){ /* finished: every category's groups */
+    const landed = {}; (CFG.draw.res || []).forEach(x => { landed[x.s] = x; });
+    return `<div class="dr-head"><h2>The <em>draw</em> is done</h2><p class="su-s">Every team is in its group. Groups and Schedule show the real names.</p></div>
+      ${order.map(c => `<div class="dr-cat" style="--c:${DRC(c)}"><h3 class="dr-ct">${esc(CATN[c] || c)}</h3>${drawSlots(c, landed)}</div>`).join("")}
+      <div class="dr-end"><button class="btn primary" data-tab="standings">See the groups</button><button class="btn" data-tab="schedule">See the schedule</button></div>`; }
+  let i = 0; for (let j = 0; j < tl.length; j++) if (tl[j].t0 <= e) i = j;
+  const st = tl[i], c = st.c, ci = order.indexOf(c), landed = {};
+  tl.forEach((s, j) => { if (s.k === "ball" && s.c === c && (j < i || (j === i && e - s.t0 >= s.d * 0.62))) landed[s.x.s] = Object.assign({fresh: j === i}, s.x); });
+  const potLeft = tl.filter((s, j) => s.k === "ball" && s.c === c && s.x.ph === "P" && (j > i || (j === i && e - s.t0 < s.d * 0.25))).length;
+  const showPot = st.k === "pot" || (st.k === "ball" && st.x.ph === "P");
+  const phase = st.k === "cat" ? `${CATN[c] || c} · up next` : st.k === "lhead" || (st.k === "ball" && st.x.ph === "L") ? `${CATN[c] || c} · group leaders` : st.k === "cdone" ? `${CATN[c] || c} · done ✓` : `${CATN[c] || c} · the pot · ${potLeft} left`;
+  let rv = "";
+  if (st.k === "ball" && e - st.t0 < st.d * 0.62){ const x = st.x;
+    rv = `<div class="dr-rv"><div class="dr-big" style="--c:${DRC(c)}">${x.ph === "L" ? "👑" : (c === "X" ? "MX" : c)}</div><div class="dr-nm">${esc(x.tm)}</div><div class="dr-pl">${x.ph === "L" && x.lv ? `Level ${(+x.lv).toFixed(1)} · ` : ""}${esc(x.pl || "")}</div><div class="dr-to">${x.ph === "L" ? "Leads group " + x.g : "→ Group " + x.g}</div></div>`; }
+  else if (st.k === "cat") rv = `<div class="dr-rv"><div class="dr-big" style="--c:${DRC(c)}">${c === "X" ? "MX" : c}</div><div class="dr-nm">${esc(CATN[c] || c)}</div><div class="dr-pl">${GROUPS[c]} groups of ${SZ(c)}</div></div>`;
+  else if (st.k === "lhead") rv = `<div class="dr-idle">First, the group leaders 👑</div>`;
+  else if (st.k === "pot") rv = `<div class="dr-idle">Mixing the pot…</div>`;
+  else if (st.k === "cdone") rv = `<div class="dr-idle">${esc(CATN[c] || c)} is drawn.${order[ci + 1] ? " Next: " + esc(CATN[order[ci + 1]] || order[ci + 1]) + "…" : ""}</div>`;
+  else rv = `<div class="dr-idle">…</div>`;
+  let balls = ""; for (let b = 0; b < (showPot ? potLeft : 0); b++){ const a = (b * 137.5) % 360, r = 18 + (b * 23) % 38; balls += `<i class="dr-ball" style="--c:${DRC(c)};left:${60 + Math.cos(a) * r}px;top:${75 + Math.abs(Math.sin(a)) * r * .9}px;--jx:${(b % 3) - 1}px;--jy:${(b % 2) * 2 - 1}px"></i>`; }
+  return `<div class="dr-live"><i></i>LIVE DRAW</div>
+    <div class="dr-catbar">${order.map((k, j) => `<span style="--c:${DRC(k)}" class="${j === ci ? "on" : j < ci ? "fin" : ""}">${esc(CATN[k] || k)}</span>`).join("")}</div>
+    <div class="dr-phase">${esc(phase)}</div>
+    <div class="dr-arena"><div class="dr-bowl${showPot ? " shake" : ""}">${balls}</div><div class="dr-reveal">${rv}</div></div>
+    ${drawSlots(c, landed)}`; }
+function drawFly(fromRect, toId){ const to = document.getElementById(toId); if (!fromRect || !to) return; const b = to.getBoundingClientRect();
+  const f = document.createElement("div"); f.className = "dr-fly"; f.style.left = (fromRect.left + fromRect.width / 2 - 16) + "px"; f.style.top = (fromRect.top + fromRect.height / 2 - 16) + "px";
+  f.style.setProperty("--c", getComputedStyle(to).getPropertyValue("--c") || "#D9B85C"); document.body.appendChild(f);
+  requestAnimationFrame(() => { f.style.transform = `translate(${b.left + 22 - fromRect.left - fromRect.width / 2}px,${b.top + b.height / 2 - fromRect.top - fromRect.height / 2}px) scale(.5)`; f.style.opacity = "0"; });
+  setTimeout(() => f.remove(), 800); }
+function drawCountdown(at){ const s = Math.max(0, Math.floor((at - Date.now()) / 1000)), p = n => String(n).padStart(2, "0");
+  const dt = new Date(at), when = dt.toLocaleDateString("en-GB", {weekday: "short", day: "numeric", month: "short"}) + " · " + dt.toLocaleTimeString("en-US", {hour: "numeric", minute: "2-digit"});
+  return `<section class="sec draw"><div class="dr-head"><h2>The <em>live draw</em></h2><p class="su-s">Watch your team land in its group. Everyone sees it at the same moment.</p></div>
+    <div class="dr-cd"><div class="dr-when">${esc(when)}</div><div class="dr-digits" id="drCd">${[[Math.floor(s / 86400), "Days"], [Math.floor(s % 86400 / 3600), "Hrs"], [Math.floor(s % 3600 / 60), "Min"], [s % 60, "Sec"]].map(([v, l]) => `<div><b>${p(v)}</b><span>${l}</span></div>`).join("")}</div>
+    <div class="dr-rules"><div><i>👑</i><span><b>One group leader per group.</b> The strongest teams lead the groups, so they can't meet before the knockouts.</span></div>
+      <div><i>🎱</i><span><b>Everyone else is drawn at random</b> from the pot into the next open group.</span></div>
+      <div><i>📅</i><span><b>Order: ${drawOrder().map(c => esc(CATN[c] || c)).join(", then ")}.</b> When it's done, Groups and Schedule show the real names.</span></div></div></div></section>`; }
+async function drawRun(){ if (DR.run) return; DR.run = true;
+  try { const r = await sb.rpc("t_draw_run", {p_slug: SLUG}); if (!r.error && r.data){ CFG.draw = r.data; if (r.data.res){ try { await pull(true); } catch (e) {} } } } catch (e) {}
+  DR.run = false; if (CFG.draw && !CFG.draw.res) setTimeout(() => { if (drawState() === "running") drawRun(); }, 3000); render(); }
+function drawSetup(){
+  const d = CFG.draw, ents = ((SU.info && SU.info.entries) || []).filter(e => e.status === "confirmed"), order = drawOrder();
+  if (!DR.lead) DR.lead = JSON.parse(JSON.stringify((d && d.leaders) || {}));
+  if (!DR.at){ const at = d && d.at ? new Date(d.at) : new Date(Date.now() + 86400000); at.setSeconds(0, 0); const o = at.getTimezoneOffset(); DR.at = new Date(at.getTime() - o * 60000).toISOString().slice(0, 16); }
+  let h = `<section class="sec draw-set"><h2>Organizer · Set up the draw <small>${d && d.at ? "Scheduled" : "Not scheduled yet"}</small></h2>
+    <p class="su-s">Pick when it starts and tap 👑 on one leader for each group. Any group without a pick gets the team with the highest average level.</p>
+    <label class="dr-f"><span>Draw starts</span><input type="datetime-local" id="drAt" value="${esc(DR.at)}"></label>`;
+  for (const c of order){ const ng = +(GROUPS[c] || 0), list = ents.filter(e => e.cat === c), L = DR.lead[c] || [];
+    h += `<div class="dr-pick"><div class="dr-pick-h"><b>${esc(CATN[c] || c)}</b><span>${L.length} of ${ng} leaders picked · ${list.length} teams confirmed</span></div>
+      ${list.length ? list.slice().sort((a, b) => (+b.avg || 0) - (+a.avg || 0)).map(e => { const on = L.includes(e.id);
+        return `<button class="dr-team${on ? " on" : ""}" data-drlead="${c}|${e.id}"${!on && L.length >= ng ? " disabled" : ""}><span>${on ? "👑" : "○"}</span><b>${esc(e.team)}</b><small>${e.avg ? (+e.avg).toFixed(2) : "–"}</small></button>`; }).join("") : `<p class="su-s">No confirmed teams yet.</p>`}</div>`; }
+  h += `${DR.msg ? `<p class="dr-msg">${esc(DR.msg)}</p>` : ""}<div class="dr-btns">${d && d.at ? `<button class="btn" data-drcancel${DR.busy ? " disabled" : ""}>Cancel draw</button>` : ""}<button class="btn" data-drsoon${DR.busy ? " disabled" : ""}>Start in 2 minutes</button><button class="btn primary" data-drsave${DR.busy ? " disabled" : ""}>${d && d.at ? "Update draw" : "Schedule draw"}</button></div>
+    <p class="su-s">Before the draw, Groups and Schedule show "Team D1, D2…" instead of names. After it, the real names appear by themselves.</p></section>`;
+  return h; }
+async function drawSave(when){ DR.busy = true; DR.msg = ""; render();
+  const at = when === "cancel" ? null : when === "soon" ? new Date(Date.now() + 120000).toISOString() : new Date(DR.at).toISOString();
+  const r = await sb.rpc("t_draw_set", {p_slug: SLUG, p_at: at, p_leaders: DR.lead || {}, p_order: drawOrder()});
+  DR.busy = false;
+  if (r.error){ DR.msg = "✗ " + r.error.message; render(); return; }
+  CFG.draw = r.data || null; if (r.data){ const o = new Date(r.data.at); DR.at = new Date(o.getTime() - o.getTimezoneOffset() * 60000).toISOString().slice(0, 16); }
+  DR.msg = at ? "✓ Draw scheduled. Everyone with the page open will watch it live." : "Draw cancelled."; render(); }
+function vDraw(){
+  const d = CFG.draw, s = drawState(); let h = "";
+  if (canEdit && !(d && d.res)) h += drawSetup();
+  if (s === "none") return h || `<section class="sec draw"><div class="dr-head"><h2>The <em>live draw</em></h2><p class="su-s">The draw date is coming soon.</p></div></section>`;
+  if (s === "wait") return drawCountdown(new Date(d.at).getTime()) + h;
+  if (s === "running"){ drawRun(); return `<section class="sec draw"><div class="dr-live"><i></i>LIVE DRAW</div><div class="dr-idle big">Shuffling the pot…</div></section>` + h; }
+  DR.key = ""; return `<section class="sec draw" id="drawStage">${drawFrame()}</section>` + h; }
+function drawPill(){ const s = drawState(); if (view.tab === "draw" || s === "none" || s === "done") return "";
+  if (s === "wait"){ const at = new Date(CFG.draw.at); return `<button class="dr-pill" data-tab="draw">🎱 Live draw · ${esc(at.toLocaleDateString("en-GB", {weekday: "short", day: "numeric", month: "short"}))} ${esc(at.toLocaleTimeString("en-US", {hour: "numeric", minute: "2-digit"}))}</button>`; }
+  return `<button class="dr-pill live" data-tab="draw"><i></i>The draw is live · Watch now</button>`; }
+document.addEventListener("click", e => { const el = e.target.closest("[data-drlead],[data-drsave],[data-drsoon],[data-drcancel]"); if (!el) return; const d = el.dataset;
+  if (d.drlead){ const [c, id] = d.drlead.split("|"), L = (DR.lead[c] = DR.lead[c] || []), i = L.indexOf(id); if (i >= 0) L.splice(i, 1); else if (L.length < +(GROUPS[c] || 0)) L.push(id); render(); return; }
+  if ("drsave" in d){ const v = (document.getElementById("drAt") || {}).value; if (v) DR.at = v; drawSave("at"); return; }
+  if ("drsoon" in d){ drawSave("soon"); return; }
+  if ("drcancel" in d){ drawSave("cancel"); } });
+document.addEventListener("change", e => { if (e.target && e.target.id === "drAt") DR.at = e.target.value; });
+/* the clock: countdown, start, and each ball */
+var drLast = "";
+setInterval(() => { if (!drawOn()) return; const s = drawState();
+  if (s !== drLast){ const was = drLast; drLast = s; if (was) render(); if (s === "running") drawRun(); return; }
+  if (s === "wait"){ const el = document.getElementById("drCd"); if (el){ const at = new Date(CFG.draw.at).getTime(), x = Math.max(0, Math.floor((at - Date.now()) / 1000)), p = n => String(n).padStart(2, "0");
+      el.querySelectorAll("b").forEach((b, i) => { b.textContent = p([Math.floor(x / 86400), Math.floor(x % 86400 / 3600), Math.floor(x % 3600 / 60), x % 60][i]); }); } return; }
+  if (s !== "live") return; const st = document.getElementById("drawStage"); if (!st) return;
+  const {tl} = drawTL(), e = Date.now() - drawStart(); let i = 0; for (let j = 0; j < tl.length; j++) if (tl[j].t0 <= e) i = j;
+  const cur0 = tl[i], ph = cur0.k === "ball" ? (e - cur0.t0 < cur0.d * 0.62 ? "r" : "l") : (cur0.k === "pot" ? "p" : "x");
+  const potKey = cur0.k === "ball" && cur0.x.ph === "P" && e - cur0.t0 < cur0.d * 0.25 ? "a" : "b";
+  const key = i + ph + potKey; if (key === DR.key) return;
+  const big = st.querySelector(".dr-big"), fr = big ? big.getBoundingClientRect() : null, landing = DR.key && DR.key.startsWith(i + "r") && ph === "l";
+  DR.key = key; st.innerHTML = drawFrame();
+  if (landing && cur0.k === "ball") drawFly(fr, "drs-" + cur0.x.s);
+}, 200);
 
 /* ---------- events ---------- */
 function setTeam(id){ myTeam = id; view.mine = false; try { if (id) localStorage.setItem("cpn-team-" + SLUG, id); else localStorage.removeItem("cpn-team-" + SLUG); } catch (e) {} render(); }
@@ -3416,11 +3614,24 @@ async function pull(force){
 }
 
 /* ---------- team sign-up (players) + entries (organizer) ---------- */
-const SU = { auth: "up", aName: "", aPhone: "", aPass: "", autoLv: false, info: null, open: location.hash === "#signup", cat: "", phone: "", note: "", check: null, busy: false, msg: "", orgCat: "" };
+const SU = { pmode: "inv", myInv: null, copied: false, auth: "up", aName: "", aPhone: "", aCC: "963", aPass: "", autoLv: false, info: null, open: location.hash === "#signup", cat: "", phone: "", note: "", check: null, busy: false, msg: "", orgCat: "" };
 const CATR = { E: "under 1.5", D: "1.5–2.5", C: "2.5–3.5", B: "3.5–4.5", A: "4.5+", X: "1 man + 1 woman" };
 const START_LV = { E: 1.0, D: 1.5, C: 2.5, B: 3.49, A: 3.49 };
 async function loadSU(){ try { const r = await sb.rpc("t_signup_info", {p_slug: SLUG}); if (!r.error) SU.info = r.data;
+    const I = SU.info, mine = I && I.mine && (I.mine.status === "pending" || I.mine.status === "confirmed");
+    if (I && I.signed && I.open && !mine){ const m = await sb.rpc("t_my_invite", {p_slug: SLUG}); SU.myInv = m.error ? null : m.data; } else SU.myInv = null;
     } catch (e) {} if (!editMode) render(); }
+/* while you wait for your partner, check every 20 seconds if they joined */
+setInterval(() => { if (SU.myInv && !document.hidden) loadSU(); }, 20000);
+document.addEventListener("visibilitychange", () => { if (SU.myInv && !document.hidden) loadSU(); });
+const suInvUrl = tok => location.origin + location.pathname.replace(/[^/]*$/, "") + "?tjoin=" + tok;
+const suInvMsg = (tok, cat) => `🎾 Be my partner at ${TNAME}!\n${CATN[cat] || cat}\nTap to join my team (takes 1 minute):\n${suInvUrl(tok)}`;
+const suWa = (tok, cat) => "https://wa.me/?text=" + encodeURIComponent(suInvMsg(tok, cat));
+function suWaiting(){ const v = SU.myInv;
+  return `<div class="su-wait"><div class="su-wait-h"><span class="su-hg">⏳</span><div><b>Waiting for your partner</b><span class="su-s">${esc(CATN[v.cat] || v.cat)} · invite sent on WhatsApp</span></div></div>
+    <ol class="su-tl"><li class="ok"><i>✓</i>You sent the invite</li><li class="cur"><i>2</i>Your partner taps the link and joins<small>Takes them about a minute. Your team is signed up automatically and you get a notification.</small></li><li><i>3</i>The organizer confirms your team</li></ol>
+    <div class="su-act"><a class="btn primary su-wa" href="${suWa(v.token, v.cat)}" target="_blank" rel="noopener">Send again on WhatsApp</a><button class="btn" data-sucopy>${SU.copied ? "✓ Copied" : "Copy link"}</button></div>
+    <button class="btn small ghostl" data-sucancel>Change partner or category</button></div>`; }
 let suTimer = null;
 function suWho(ck){ const nw = (on, v) => on ? ` <small>(counts as ${(+v).toFixed(2)} until placement is done)</small>` : "";
   return `<p class="su-s">You ${(+ck.me).toFixed(2)}${nw(ck.me_new, ck.me)} + ${esc(ck.partner)} ${(+ck.plevel).toFixed(2)}${nw(ck.p_new, ck.plevel)}</p>`; }
@@ -3443,26 +3654,27 @@ async function loadPass(){ try { const r = await sb.rpc("t_my_pass", {p_slug: SL
 async function loadDesk(){ try { const r = await sb.rpc("t_desk", {p_slug: SLUG}); CI.desk = r.error ? null : r.data; } catch (e) {} }
 const feeTxt = f => f ? `$${(+f).toLocaleString("en-US")}` : "";
 function passBox(){ const p = CI.pass; if (!p || p.status !== "confirmed" || editMode) return "";
-  return `<section class="sec pass"><h2>Your check-in pass <small>Show it at the desk when you arrive</small></h2>
+  return `<section class="sec pass"><h2>Your entry pass <small>${p.paid ? "Paid, see you on court" : "Show it at the desk when you pay"}</small></h2>
     <div class="pass-card"><div class="pass-q">${qrSvg("PLT:" + p.id)}</div>
-    <div class="pass-i"><b>${esc(p.team)}</b><span class="su-s">${esc(CATN[p.cat] || p.cat)}${p.slot ? ` · Team ${esc(p.slot)}` : ""}</span>
+    <div class="pass-i"><b>${esc(p.team)}</b><span class="su-s">${esc(CATN[p.cat] || p.cat)}${p.slot && !drawPend() ? ` · Team ${esc(p.slot)}` : ""}</span>
     <span class="pass-code">Code <b dir="ltr">${esc(p.code || "")}</b></span>
-    <span class="tag ${p.paid ? "ok" : "due"}">${p.paid ? "✓ Paid" : `Pay at the desk${p.fee ? " · " + feeTxt(p.fee) : ""}`}</span>${p.in ? `<span class="tag ok">✓ Checked in</span>` : ""}</div></div></section>`; }
+    <span class="tag ${p.paid ? "ok" : "due"}">${p.paid ? "✓ Paid" : `Pay at the desk${p.fee ? " · " + feeTxt(p.fee) : ""}`}</span></div></div></section>`; }
 function ciAttach(){ const v = document.getElementById("ciVid"); if (!v || CI.res) return; if (ciStream){ if (v.srcObject !== ciStream){ v.srcObject = ciStream; v.play().catch(() => {}); } } else ciStart(); }
 function deskBox(){ if (!CI.open || !CI.desk) return ""; setTimeout(ciAttach, 0);
   const L = CI.desk, paid = L.filter(x => x.paid).length, inn = L.filter(x => x.in).length, r = CI.res, q = CI.q.trim().toLowerCase();
-  const list = L.filter(x => (CI.f === "all" || (CI.f === "unpaid" && !x.paid) || (CI.f === "out" && !x.in)) && (!q || [x.team, x.p1, x.p2, x.code, x.slot].join(" ").toLowerCase().includes(q)));
-  return `<section class="sec desk"><h2>Check-in desk <small>Paid ${paid}/${L.length} · Checked in ${inn}/${L.length}</small></h2>
-    ${r ? `<div class="ci-res ${r.already ? "again" : "ok"}"><span class="ci-big">${r.already ? "↺" : "✓"}</span><b>${r.already ? "Already checked in" : "Checked in"}</b>
+  const list = L.filter(x => (CI.f === "all" || (CI.f === "unpaid" && !x.paid) || (CI.f === "paid" && x.paid)) && (!q || [x.team, x.p1, x.p2, x.code, x.slot].join(" ").toLowerCase().includes(q)));
+  const fee = +CFG.fee || 0;
+  return `<section class="sec desk"><h2>Payments desk <small>Paid ${paid} of ${L.length} teams${fee ? ` · Collected $${(paid * fee).toLocaleString("en-US")} of ${feeTxt(L.length * fee)}` : ""}</small></h2>
+    ${r ? `<div class="ci-res ${r.paid ? "ok" : "again"}"><span class="ci-big">${r.paid ? "✓" : "💵"}</span><b>${r.paid ? "Paid" : "Not paid yet"}</b>
       <span class="ci-who">${esc(r.team)}</span><span class="su-s">${esc(CATN[r.cat] || r.cat)}${r.slot ? ` · Team ${esc(r.slot)}` : ""} · ${esc(r.p1 || "")} + ${esc(r.p2 || "")}</span>
-      ${r.paid ? `<span class="tag ok">✓ Already paid</span>` : `<span class="ci-due">Not paid yet${r.fee ? `: <b>${feeTxt(r.fee)}</b>` : ""}</span><button class="btn primary" data-cipaid="${r.id}">💵 Mark as paid (cash)</button>`}
+      ${r.paid ? "" : `${r.fee ? `<span class="ci-due">To pay: <b>${feeTxt(r.fee)}</b></span>` : ""}<button class="btn primary" data-cipaid="${r.id}">💵 Mark as paid (cash)</button>`}
       <button class="btn" data-cinext>Scan next team</button></div>`
     : `<div class="ci-cam">${"BarcodeDetector" in window ? `<video id="ciVid" playsinline muted></video><i class="ci-frame"></i>` : `<p class="su-s">This browser can't scan. Type the team's 4-digit code instead.</p>`}</div>
-      <div class="ci-code"><input id="ci-code" inputmode="numeric" maxlength="4" placeholder="4-digit code" dir="ltr"><button class="btn primary" data-cigo>Check in</button></div>`}
-    <div class="su-cats"><button class="chip" data-cif="all" aria-pressed="${CI.f === "all"}">All ${L.length}</button><button class="chip" data-cif="unpaid" aria-pressed="${CI.f === "unpaid"}">Not paid ${L.length - paid}</button><button class="chip" data-cif="out" aria-pressed="${CI.f === "out"}">Not here ${L.length - inn}</button></div>
+      <div class="ci-code"><input id="ci-code" inputmode="numeric" maxlength="4" placeholder="4-digit code" dir="ltr"><button class="btn primary" data-cigo>Find</button></div>`}
+    <div class="su-cats"><button class="chip" data-cif="all" aria-pressed="${CI.f === "all"}">All ${L.length}</button><button class="chip" data-cif="paid" aria-pressed="${CI.f === "paid"}">Paid ${paid}</button><button class="chip" data-cif="unpaid" aria-pressed="${CI.f === "unpaid"}">Not paid ${L.length - paid}</button></div>
     <input id="ci-q" class="ci-q" placeholder="Search a team, player or code" value="${esc(CI.q)}">
     <div class="desk-l">${list.map(x => `<div class="desk-r"><div><b>${esc(x.team)}</b><span class="su-s">${esc(CATN[x.cat] || x.cat)}${x.slot ? ` · ${esc(x.slot)}` : ""} · code ${esc(x.code || "")}</span><span class="su-s">${esc(x.p1)} + ${esc(x.p2)}</span></div>
-      <div class="desk-b"><button class="chip${x.paid ? " on" : ""}" data-dpaid="${x.id}|${x.paid ? 0 : 1}">${x.paid ? "✓ Paid" : "💵 Paid?"}</button><button class="chip${x.in ? " on" : ""}" data-din="${x.id}|${x.in ? 0 : 1}">${x.in ? "✓ Here" : "Here?"}</button></div></div>`).join("") || `<p class="su-s">No teams.</p>`}</div></section>`; }
+      <div class="desk-b"><button class="chip${x.paid ? " on" : ""}" data-dpaid="${x.id}|${x.paid ? 0 : 1}">${x.paid ? "✓ Paid" : "💵 Not paid"}</button></div></div>`).join("") || `<p class="su-s">No teams.</p>`}</div></section>`; }
 var ciStream = null, ciTimer = null;
 function ciStop(){ if (ciTimer){ clearInterval(ciTimer); ciTimer = null; } if (ciStream){ ciStream.getTracks().forEach(x => x.stop()); ciStream = null; } }
 var ciBusy = false;
@@ -3493,25 +3705,31 @@ function signupBox(){ const I = SU.info; if (!I || editMode) return "";
     else if (!I.signed){ const up = SU.auth === "up";
       h += `<div class="su-form"><p class="su-step">Step 1 of 2 · ${up ? "Create your Padel Live account" : "Sign in"}</p>
         ${up ? `<label class="lbl">Full name<input id="su-aname" autocomplete="name" value="${esc(SU.aName)}" placeholder="First and last name"></label>` : ""}
-        <label class="lbl">${up ? "Your WhatsApp number" : "Phone number (or email)"}<input id="su-aphone" inputmode="${up ? "tel" : "text"}" autocomplete="${up ? "tel" : "username"}" dir="ltr" placeholder="09XX XXX XXX" value="${esc(SU.aPhone)}"></label>
+        ${up ? `<div class="lbl">Your WhatsApp number${phField("su-aphone", SU.aCC, esc(SU.aPhone))}</div>` : `<label class="lbl">WhatsApp number or email<input id="su-aphone" inputmode="text" autocomplete="username" dir="ltr" placeholder="Your number or email" value="${esc(SU.aPhone)}"></label>`}
         <label class="lbl">Password<input id="su-apass" type="password" autocomplete="${up ? "new-password" : "current-password"}" dir="ltr" placeholder="6+ characters"></label>
         <div class="su-act"><button class="btn primary" data-suauth${SU.busy ? " disabled" : ""}>${SU.busy ? "…" : up ? "Create account and continue" : "Sign in and continue"}</button><button class="btn" data-suclose>Cancel</button></div>
         <button class="btn small ghostl" data-sumode>${up ? "I already have an account" : "New here? Create an account"}</button>
         ${SU.msg ? `<p class="su-bad">${esc(SU.msg)}</p>` : ""}</div>`; }
-    else if (mine) h += `<div class="su-mine"><span class="tag">${mine.status === "confirmed" ? "✓ Confirmed" : "Waiting for the organizer"}</span><b>${esc(mine.team)}</b><span class="su-s">${esc(CATN[mine.cat] || mine.cat)}${mine.slot ? ` · Team ${esc(mine.slot)}` : ""}</span>${I.open ? `<button class="btn small" data-suwd>Withdraw</button>` : ""}</div>`;
+    else if (mine) h += `<div class="su-mine"><span class="tag">${mine.status === "confirmed" ? "✓ Confirmed" : "Waiting for the organizer"}</span><b>${esc(mine.team)}</b><span class="su-s">${esc(CATN[mine.cat] || mine.cat)}${mine.slot && !drawPend() ? ` · Team ${esc(mine.slot)}` : ""}</span>${I.open ? `<button class="btn small" data-suwd>Withdraw</button>` : ""}</div>`;
+    else if (I.open && SU.myInv) h += suWaiting();
     else if (I.open && !SU.open) h += `<button class="btn primary" data-suopen>Sign up your team</button>${I.mine && I.mine.status === "rejected" ? `<p class="su-s">Your last request was not accepted. You can sign up again.</p>` : ""}`;
     else if (I.open){
       const ck = SU.check;
+      const inv = SU.pmode !== "acc";
       h += `<div class="su-form">
-        ${!SU.info.level || SU.autoLv ? `<p class="su-step">${SU.autoLv || !SU.info.level ? "Step 2 of 2 · " : ""}Pick the category you play</p><p class="su-s">This sets your starting level. Your first 5 matches fine-tune it. B and A players start at 3.49 and the admin checks them.</p>` : ""}
-        <span class="lbl">Category</span><div class="su-cats">${CATS.map(k => `<button class="chip" data-sucat="${k}" aria-pressed="${SU.cat === k}">${esc(CATN[k] || k)}${CATR[k] ? ` <small>${CATR[k]}</small>` : ""}</button>`).join("")}</div>${SU.cat === "X" ? `<p class="su-s">Mixed: one man and one woman, any level. The organizer checks every mixed team.</p>` : ""}
-        <label class="lbl">Partner's WhatsApp number<input id="su-phone" inputmode="tel" dir="ltr" placeholder="09XX XXX XXX" value="${esc(SU.phone)}"></label>
-        <div class="su-inv"><span class="su-s">Partner has no Padel Live account yet?</span><button class="btn small" data-suinv${SU.cat ? "" : " disabled"}>🔗 Send an invite link</button>${SU.inv ? `<span class="su-s su-ok">Link: <b dir="ltr">${esc(SU.inv)}</b></span>` : ""}</div>
-        <p class="su-s">Your partner needs a Padel Live account with a level. ${I.level != null ? `Your level: <b>${(+I.level).toFixed(2)}</b>.` : ``}</p>
+        <p class="su-step">Step 2 of 2 · Your team</p>
+        <span class="lbl">Your category</span><div class="su-cats">${CATS.map(k => `<button class="chip" data-sucat="${k}" aria-pressed="${SU.cat === k}">${esc(CATN[k] || k)}${CATR[k] ? ` <small>${CATR[k]}</small>` : ""}</button>`).join("")}</div>${SU.cat === "X" ? `<p class="su-s">Mixed: one man and one woman, any level. The organizer checks every mixed team.</p>` : ""}
+        ${!SU.info.level || SU.autoLv ? `<p class="su-s">Your first matches fine-tune your level. B and A players are checked by the admin.</p>` : ""}
+        <span class="lbl">Who's your partner?</span>
+        <div class="su-pm"><button class="su-pmo" data-supm="inv" aria-pressed="${inv}"><span class="su-pmi">📲</span><span><b>Invite them on WhatsApp</b><small>They tap your link, make an account in a minute, and your team is in.</small></span></button>
+          <button class="su-pmo" data-supm="acc" aria-pressed="${!inv}"><span class="su-pmi">👤</span><span><b>They're already on Padel Live</b><small>Type their WhatsApp number.</small></span></button></div>
+        ${inv ? `<button class="btn primary su-wa big" data-suinv${SU.cat && !SU.busy ? "" : " disabled"}>${SU.busy ? "…" : SU.cat ? "Send invite on WhatsApp" : "Pick your category first"}</button>`
+          : `<label class="lbl">Partner's WhatsApp number<input id="su-phone" inputmode="tel" dir="ltr" placeholder="+963 9XX XXX XXX" value="${esc(SU.phone)}"></label>
         ${ck ? (!ck.ok ? `<p class="su-bad">${esc(ck.reason)}</p>` : ck.fits ? `<p class="su-ok">✓ ${esc(ck.partner)} (${(+ck.plevel).toFixed(2)}) · team level ${(+ck.avg).toFixed(2)} · fits ${esc(CATN[SU.cat] || SU.cat)}</p>${suWho(ck)}`
            : `<p class="su-bad">${esc(ck.reason)}</p>${suWho(ck)}<label class="lbl">Ask the organizer for an exception<textarea id="su-note" rows="2" maxlength="300" placeholder="Why you'd like to play in this category">${esc(SU.note)}</textarea></label>`) : ""}
-        <p class="su-s su-rule">Rule: the team level (average of both players) must be inside the category, and the stronger player can be at most one category above it. Playing up is always allowed. New players count at the level they told us until their first 5 matches are played.</p>
-        <div class="su-act"><button class="btn primary" data-susend${SU.busy || !ck || !ck.ok ? " disabled" : ""}>${SU.busy ? "…" : ck && ck.ok && !ck.fits ? "Send request" : "Sign up"}</button><button class="btn" data-suclose>Cancel</button></div>
+        <div class="su-act"><button class="btn primary" data-susend${SU.busy || !ck || !ck.ok ? " disabled" : ""}>${SU.busy ? "…" : ck && ck.ok && !ck.fits ? "Send request" : "Sign up"}</button></div>`}
+        <details class="su-rule"><summary>How team levels work</summary><p class="su-s">The team level (average of both players) must be inside the category, and the stronger player can be at most one category above it. Playing up is always allowed. New players count at the level they told us until their first 5 matches are played.</p></details>
+        <button class="btn small ghostl" data-suclose>Cancel</button>
         ${SU.msg ? `<p class="su-bad">${esc(SU.msg)}</p>` : ""}</div>`;
     }
     h += `</section>`;
@@ -3536,16 +3754,19 @@ document.addEventListener("click", async e => {
   if ("sumode" in d){ SU.auth = SU.auth === "up" ? "in" : "up"; SU.msg = ""; render(); return; }
   if ("suauth" in d){ const pass = (document.getElementById("su-apass") || {}).value || ""; SU.busy = true; SU.msg = ""; render();
     let em = SU.aPhone.trim(), r = null;
-    if (SU.auth === "up"){ const ps = await sb.rpc("phone_signup", {p_name: SU.aName.trim(), p_phone: em, p_pass: pass}); if (ps.error) r = ps; else em = ps.data; }
+    if (SU.auth === "up"){ const ps = await sb.rpc("phone_signup", {p_name: SU.aName.trim(), p_phone: phFull(SU.aCC, em), p_pass: pass}); if (ps.error) r = ps; else em = ps.data; }
     else if (!em.includes("@")){ const pl = await sb.rpc("phone_login", {p_phone: em, p_pass: pass}); if (pl.error) r = pl; else if (!pl.data) r = {error: {message: "Wrong phone number or password."}}; else em = pl.data; }
     if (!r) r = await sb.auth.signInWithPassword({email: em, password: pass});
     SU.busy = false; if (r.error){ SU.msg = r.error.message; render(); return; }
     SU.open = true; await loadSU(); return; }
-  if ("suinv" in d){ const r = await sb.rpc("t_invite_create", {p_slug: SLUG, p_cat: SU.cat, p_note: SU.note || null}); if (r.error){ SU.msg = r.error.message; render(); return; }
-    const url = location.origin + location.pathname.replace(/[^/]*$/, "") + "?tjoin=" + r.data, msg = "Be my partner in " + TNAME + " (" + (CATN[SU.cat] || SU.cat) + ") on Padel Live: ";
-    SU.inv = url; render();
-    try { if (navigator.share){ await navigator.share({title: TNAME, text: msg, url}); return; } } catch (er) { if (er && er.name === "AbortError") return; }
-    window.open("https://wa.me/?text=" + encodeURIComponent(msg + url), "_blank"); return; }
+  if ("suinv" in d){ SU.busy = true; SU.msg = ""; render();
+    const r = await sb.rpc("t_invite_create", {p_slug: SLUG, p_cat: SU.cat, p_note: SU.note || null}); SU.busy = false;
+    if (r.error){ SU.msg = r.error.message; render(); return; }
+    SU.myInv = {token: r.data, cat: SU.cat}; SU.open = false; SU.copied = false; render();
+    location.href = suWa(r.data, SU.cat); return; }
+  if (d.supm){ SU.pmode = d.supm; SU.msg = ""; render(); return; }
+  if ("sucopy" in d && SU.myInv){ const u = suInvUrl(SU.myInv.token); try { await navigator.clipboard.writeText(suInvMsg(SU.myInv.token, SU.myInv.cat)); } catch (er) { prompt("Copy this link", u); } SU.copied = true; render(); setTimeout(() => { SU.copied = false; render(); }, 2500); return; }
+  if ("sucancel" in d){ if (!confirm("Cancel this invite? The link you sent will stop working.")) return; await sb.rpc("t_invite_cancel", {p_slug: SLUG}); SU.myInv = null; SU.open = true; SU.pmode = "inv"; render(); return; }
   if ("suclose" in d){ SU.open = false; SU.check = null; SU.msg = ""; render(); return; }
   if (d.sucat){ SU.cat = d.sucat; SU.msg = "";
     if (SU.info && (!SU.info.level || SU.autoLv)){ const lv = START_LV[d.sucat] || 2.5; const r = await sb.rpc("set_my_level", {p_level: lv, p_claim: {src: "event", cat: d.sucat, raw: lv}});
@@ -3562,7 +3783,7 @@ document.addEventListener("click", async e => {
 });
 document.addEventListener("input", e => { const el = e.target;
   if (el.id === "su-phone"){ SU.phone = el.value; suCheck(); return; }
-  if (el.id === "su-aname"){ SU.aName = el.value; return; } if (el.id === "su-aphone"){ SU.aPhone = el.value; return; }
+  if (el.id === "su-aname"){ SU.aName = el.value; return; } if (el.id === "su-aphone"){ SU.aPhone = el.value; return; } if (el.id === "su-aphone-cc"){ SU.aCC = el.value; return; }
   if (el.id === "su-note"){ SU.note = el.value; return; } });
 loadSU().then(async () => { await loadPass(); render(); if (location.hash === "#signup"){ const e = document.querySelector(".su"); if (e) e.scrollIntoView({block: "start"}); } });
 render();
