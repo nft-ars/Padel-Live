@@ -1590,7 +1590,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v69";
+const VERSION = "v71";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -3974,7 +3974,7 @@ Object.assign(W.en, {twBtn:"+ Tournament", twT:"New tournament", twS1:"1 · Club
   twS2:"2 · Name & dates", twName:"Tournament name", twNamePh:"Winter Cup", twKick:"Small title above the name", twKickPh:"Winter Cup", twStart:"First day", twDays:"Days",
   twMix:"Mixed", twS3:"3 · Categories & teams", twS3s:"Pick the number of teams in each category, then how many teams go in each group.", twGz:"Teams per group", twGzS:"{g} groups · {m} group matches each · then {r}", twSF:"semifinals", twOrd:"Order of play", twOrdS:"Who starts first. Tap a category to move it up. Knockouts follow the same order.", twUp:"Move up",
   twG1:"Finish all group matches on day 1 (knockouts start day 2)", twG1ok:"✓ Group stage ends day 1 at {e}", twG1no:"✗ Group stage doesn't fit on day 1. Start earlier, finish later, add a court or use shorter matches.", twOff:"Off",
-  twS4:"4 · Courts & times", twCourts:"Courts", twCn:"Court {n} name", twDayStart:"{d} starts at", twLast:"Last match starts by", twFinals:"Semis and finals on the last day",
+  twS4:"4 · Courts & times", twCourts:"Courts", twCn:"Court {n} name", twDayStart:"{d} starts at", twLast:"Day ends at (last match done by)", twFinals:"Semis and finals on the last day",
   twS5:"5 · Match format", twG:"Group matches", twKo:"Quarterfinals", twSf:"Semis & finals", twMin:"{m} min", twSet6:"1 set to 6", twSet9:"1 set to 9",
   twS6:"6 · Prize pool & sign-up", twPrize:"Prize pool ($)", twFee:"Entry fee per team ($)", twFeeNo:"Leave empty if free", twSign:"Teams sign up themselves in the app", twSlug:"Page link",
   twSum:"Preview", twFits:"✓ Fits in {d} days", twNoFit:"✗ Doesn't fit. Add a day or a court, start earlier, or have fewer teams.",
@@ -3984,7 +3984,7 @@ Object.assign(W.ar, {twBtn:"+ بطولة", twT:"بطولة جديدة", twS1:"١
   twS2:"٢ · الاسم والتاريخ", twName:"اسم البطولة", twNamePh:"كأس الشتاء", twKick:"عنوان صغير فوق الاسم", twKickPh:"Winter Cup", twStart:"أول يوم", twDays:"عدد الأيام",
   twMix:"مختلط", twS3:"٣ · الفئات والفرق", twS3s:"اختار عدد الفرق بكل فئة، وبعدين كم فريق بكل مجموعة.", twGz:"فرق بكل مجموعة", twGzS:"{g} مجموعات · {m} مباريات لكل فريق · بعدين {r}", twSF:"نصف النهائي", twOrd:"ترتيب اللعب", twOrdS:"مين بيبلش أول. اكبس على فئة لتطلعها لفوق. الأدوار الإقصائية بنفس الترتيب.", twUp:"لفوق",
   twG1:"خلّص كل مباريات المجموعات بأول يوم (الإقصائيات من تاني يوم)", twG1ok:"✓ المجموعات بتخلص أول يوم الساعة {e}", twG1no:"✗ المجموعات ما بتزبط بأول يوم. ابدأ أبكر، خلّص أطول، زيد ملعب أو قصّر المباريات.", twOff:"بدون",
-  twS4:"٤ · الملاعب والأوقات", twCourts:"الملاعب", twCn:"اسم الملعب {n}", twDayStart:"{d} بيبلش الساعة", twLast:"آخر مباراة بتبلش قبل", twFinals:"نصف النهائي والنهائي بآخر يوم",
+  twS4:"٤ · الملاعب والأوقات", twCourts:"الملاعب", twCn:"اسم الملعب {n}", twDayStart:"{d} بيبلش الساعة", twLast:"اليوم بيخلص الساعة (آخر مباراة بتخلص)", twFinals:"نصف النهائي والنهائي بآخر يوم",
   twS5:"٥ · نظام المباريات", twG:"مباريات المجموعات", twKo:"ربع النهائي", twSf:"نصف النهائي والنهائي", twMin:"{m} دقيقة", twSet6:"مجموعة لـ٦", twSet9:"مجموعة لـ٩",
   twS6:"٦ · مجموع الجوائز والتسجيل", twPrize:"مجموع الجوائز ($)", twFee:"رسم الفريق ($)", twFeeNo:"اتركه فاضي إذا مجاني", twSign:"الفرق بتسجل لحالها بالتطبيق", twSlug:"رابط الصفحة",
   twSum:"معاينة", twFits:"✓ بتزبط بـ{d} أيام", twNoFit:"✗ ما بتزبط. زيد يوم أو ملعب، ابدأ أبكر، أو قلل الفرق.",
@@ -4008,7 +4008,7 @@ function twInit(){
   const cs = twClubs(), c = cs[0]; const d = new Date(Date.now() + 14 * 864e5);
   const courts = c ? S.courts.filter(x => x.club_id === c.id) : [];
   S.tw = {club: c && c.id, name: "", kick: "", start: dayKey(d), days: 4, cats: {A: 12, B: 12, C: 12, D: 12, E: 0, X: 0}, gz: {}, ord: [], g1: true, courts: Math.max(1, Math.min(4, courts.length || 2)),
-    cn: courts.map(x => x.name), ds: ["16:00", "15:00", "14:00", "12:00", "12:00"], last: "22:30", finals: true, gm: 45, qm: 50, sm: 75, gs: {A: 6, B: 9, C: 6, D: 6, E: 6, X: 6}, prize: "", fee: "", signup: true, replace: false};
+    cn: courts.map(x => x.name), ds: ["16:00", "15:00", "14:00", "12:00", "12:00"], last: "23:30", finals: true, gm: 45, qm: 50, sm: 75, gs: {A: 6, B: 9, C: 6, D: 6, E: 6, X: 6}, prize: "", fee: "", signup: true, replace: false};
 }
 const twMin = s => { const [h, m] = String(s || "0:0").split(":").map(Number); return h * 60 + (m || 0); };
 const twClock = m => { m = ((m % 1440) + 1440) % 1440; const h = Math.floor(m / 60), mi = m % 60; return `${h % 12 || 12}:${String(mi).padStart(2, "0")} ${h < 12 ? "AM" : "PM"}`; };
@@ -4022,23 +4022,25 @@ function twBuild(tw){
   const fmtD = (d, o) => new Intl.DateTimeFormat("en-GB", Object.assign({timeZone: TZ}, o)).format(d);
   const days = {}, dshort = {}; for (let i = 1; i <= D; i++){ days[i] = fmtD(dayD(i), {weekday: "long", day: "numeric", month: "short"}).replace(",", ""); dshort[i] = fmtD(dayD(i), {weekday: "short"}); }
   const G = [], K = {}, E = {}, span = {}; for (let i = 1; i <= D; i++) E[i] = [];
-  let day = 1, t = twMin(tw.ds[0]), n = 0, fits = true; const L = twMin(tw.last);
+  let day = 1, t = twMin(tw.ds[0]), n = 0, fits = true;
+  /* the day ends at "last" (after midnight counts as the same night): a match only starts if it finishes by then */
+  const Lend = () => { const l = twMin(tw.last), s0 = twMin(tw.ds[day - 1] || tw.ds[0]); return l <= s0 ? l + 1440 : l; };
   const nextDay = () => { if (day > D) return; E[day].push([twClock(t), "end", day < D ? `🌙 Day ${day} ends · see you tomorrow` : "🌙 End of the day"]); day++; if (day <= D) t = twMin(tw.ds[day - 1] || tw.ds[0]); else fits = false; };
-  const wave = (items, dur, put) => { for (let i = 0; i < items.length; i += C){ if (day > D){ fits = false; return; } if (t > L) nextDay(); if (day > D) return;
+  const wave = (items, dur, put) => { for (let i = 0; i < items.length; i += C){ if (day > D){ fits = false; return; } if (t + dur > Lend()) nextDay(); if (day > D) return;
       const ws = items.slice(i, i + C); span[day] = span[day] || [t, t]; ws.forEach((x, j) => put(x, j + 1, day, t)); t += dur; span[day][1] = t; } };
   const ord = twOrd(tw);
   const gsz = c => twGz(tw, c), gr = c => tw.cats[c] / gsz(c);
-  /* group matches in the order of play (first category starts), round by round; each court slot takes the next match
-     whose two teams didn't just play, so teams get a rest, and free courts are filled by the next category */
+  /* group matches strictly in the order of play: all of the first category, then the next; round by round.
+     A court is only given to the next category when the current one has no match left that can be played in that slot */
   const Q = []; ord.forEach(c => { twRR(gsz(c)).forEach((ms, r) => { for (let g = 1; g <= gr(c); g++) ms.forEach(([a, b]) => Q.push({c, g, r, t1: c + ((g - 1) * gsz(c) + a), t2: c + ((g - 1) * gsz(c) + b)})); }); });
   let prev = new Set(), gDay = 1, gEnd = null;
   while (Q.length){
     if (day > D){ fits = false; break; }
-    if (t > L){ nextDay(); prev = new Set(); if (day > D){ fits = false; break; } }
-    const pick = rest => { const busy = new Set(rest ? prev : []), take = [];
+    if (t + +tw.gm > Lend()){ nextDay(); prev = new Set(); if (day > D){ fits = false; break; } }
+    const pick = () => { const busy = new Set(), take = [];
       for (let i = 0; i < Q.length && take.length < C; i++){ const m = Q[i]; if (busy.has(m.t1) || busy.has(m.t2)){ busy.add(m.t1); busy.add(m.t2); continue; } take.push(i); busy.add(m.t1); busy.add(m.t2); }
       return take; };
-    let take = pick(true); if (!take.length) take = pick(false);
+    const take = pick();
     const ws = take.map(i => Q[i]); for (let i = take.length - 1; i >= 0; i--) Q.splice(take[i], 1);
     span[day] = span[day] || [t, t];
     ws.forEach((m, j) => { n++; G.push({id: "g" + n, cat: m.c, grp: m.g, rnd: m.r + 1, day, time: twClock(t), court: j + 1, t1: m.t1, t2: m.t2}); });
