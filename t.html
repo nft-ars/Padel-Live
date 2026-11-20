@@ -2801,7 +2801,64 @@ function vTeams(){
     h += `</div></section>`; }
   return h;
 }
-function vInfo(){ return (CFG.info_html || "") + orgTools() + `<section class="sec info"><h2>Organizer</h2><dl><dt>Club staff</dt><dd>${canEdit ? "You can edit scores: use the Organizer bar at the top." : `Sign in to <a href="./#auth">Padel Live</a> with your staff account, then come back to this page to enter scores.`}</dd></dl></section>`; }
+/* Info tab in the Core Padel Round 2 style, built from this tournament's own settings */
+function heroFacts(){ const F = (CFG.facts || []).map(String), last = F.length - 1;
+  if (THEME !== "night" || !/\d+ teams/i.test(F.join(" "))) return F.map((x, i) => [x, i === last && CFG.highlight_last]);
+  const pr = F.find(x => /prize/i.test(x));
+  return [[F[0], false], ...(F[1] && !/teams|courts|·/.test(F[1]) ? [[F[1], false]] : []), ...(pr ? [[pr.replace(/Prize Pool (\$[\d,]+)/i, "$1 prizes").toUpperCase(), true]] : [])]; }
+function info2(){
+  const I = {
+    clock:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+    fire:'<svg viewBox="0 0 24 24"><path d="M12 3c1 4 5 5 5 10a5 5 0 0 1-10 0c0-3 2-4 2-7 2 1 3 2 3 4"/></svg>',
+    late:'<svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4M9 2h6"/></svg>',
+    pen:'<svg viewBox="0 0 24 24"><path d="M4 20h4l11-11-4-4L4 16z"/></svg>',
+    desk:'<svg viewBox="0 0 24 24"><path d="M3 10h18M5 10v9M19 10v9M8 6h8l2 4H6z"/></svg>',
+    bolt:'<svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>'};
+  const G = c => +GROUPS[c] || 0, nT = c => G(c) * SZ(c);
+  const nextOf = c => G(c) === 2 ? "Semifinals" : G(c) === 8 ? "Round of 16" : "Quarterfinals";
+  const letter = c => c === "X" ? "MX" : c;
+  const cat = c => `<div class="i-cat lit" style="--c:${cvar(c)}"><b${c === "X" ? ' style="font-size:30px;min-width:48px"' : ""}>${letter(c)}</b><div><strong>${nT(c)} teams</strong><span>${G(c)} groups of ${SZ(c)}</span><em>Top 2${G(c) === 3 ? " + best 3rds" : ""} → ${nextOf(c)}</em></div></div>`;
+  const step = (tt, f, sub) => `<li class="lit"><b>${tt}</b><span>${f}</span>${sub ? `<small>${sub}</small>` : ""}</li>`;
+  const day = (d, dt, tm, items) => `<div class="i-day lit"><div class="i-dh"><b>${esc(d)}</b><span>${esc(dt)}</span><em>${esc(tm)}</em></div><ul>${items.map(x => `<li>${x}</li>`).join("")}</ul></div>`;
+  const rule = (ic, tt, d) => `<div class="i-rule lit"><i>${I[ic]}</i><div><strong>${tt}</strong><p>${d}</p></div></div>`;
+  const nm = c => c === "X" ? "Mixed" : "Category " + c, sameFmt = new Set(CATS.map(c => FORMAT[c])).size === 1;
+  const fmts = sameFmt ? `All: ${esc(FORMAT[CATS[0]] || "")}` : CATS.map(c => `${esc(CATL[c] || c)}: ${esc(FORMAT[c] || "")}`).join(" · ");
+  const r16 = CATS.filter(c => G(c) === 8), qf = CATS.filter(c => G(c) > 2), sfOnly = CATS.filter(c => G(c) === 2);
+  let road = step("Groups", "Everyone plays the other teams in their group", fmts);
+  if (r16.length) road += step("Round of 16", `${r16.map(nm).join(", ")}`, "1 set to 6");
+  if (qf.length) road += step("Quarterfinals", qf.length === CATS.length ? "Group winners v runners-up" : qf.map(nm).join(", "), "1 set to 9");
+  road += step("Semifinals", sfOnly.length ? `${sfOnly.map(nm).join(", ")} go straight here from the groups` : "QF1 winner v QF4 winner · QF2 v QF3", "Best of 3 sets · super tiebreak to 10");
+  road += step("Final", "The last night under the lights", "Best of 3 sets · super tiebreak to 10");
+  // the days, from the order of play
+  const toMin = s => { const m = /(\d+):(\d+) ([AP]M)/.exec(s || ""); if (!m) return 9999; let h = +m[1] % 12; if (m[3] === "PM") h += 12; if (h < 6) h += 24; return h * 60 + +m[2]; };
+  const days = Object.keys(DAYS).map(Number).sort((a, b) => a - b).map(d => {
+    const g = (T.G || []).filter(m => m.day === d), ks = Object.entries(T.K || {}).filter(([, w]) => w.startsWith((DSHORT[d] || "") + " "));
+    const first = [...g.map(m => m.time), ...ks.map(([, w]) => w.split(" ").slice(1, 3).join(" "))].sort((a, b) => toMin(a) - toMin(b))[0];
+    const items = [];
+    const gc = [...new Set(g.map(m => m.cat))]; if (gc.length) items.push(`${gc.map(nm).join(", ")}: group matches`);
+    const ko = {}; ks.forEach(([lab]) => { const [c, ...rest] = lab.split(" "), r = rest.join(" "), k = /FINAL/i.test(r) ? "final" : /Semi/.test(r) ? "semifinals" : /QF/.test(r) ? "quarterfinals" : "round of 16"; (ko[k] = ko[k] || new Set()).add(c); });
+    ["round of 16", "quarterfinals", "semifinals", "final"].forEach(k => { if (ko[k]) items.push(`${[...ko[k]].map(nm).join(", ")}: ${k === "final" ? "finals" : k}`); });
+    ((T.E || {})[d] || []).filter(e => e[1] === "award").forEach(e => items.push(`Awards about ${esc(e[0])}`));
+    const parts = String(DAYS[d] || "").split(" ");
+    return day(DSHORT[d] || parts[0] || "", parts.slice(1).join(" "), first ? "From " + first.replace(":00", "") : "", items.length ? items : ["Matches all day"]); }).join("");
+  const prize = (CFG.facts || []).map(String).find(x => /prize/i.test(x)), prizeAmt = prize ? (prize.match(/\$[\d,]+/) || [""])[0] : "";
+  const fee = CFG.fee ? +CFG.fee : 0;
+  return `<section class="sec info2"><h2>The tournament</h2><div class="i-cats">${CATS.map(cat).join("")}</div></section>
+  <section class="sec info2"><h2>Road to the final</h2><ol class="i-road">${road}</ol></section>
+  <section class="sec info2"><h2>Golden point</h2>
+  <div class="i-gold lit"><div class="i-score"><span>40</span><i>:</i><span>40</span></div><div><strong>One deuce, then sudden death</strong><p>The first time it's 40–40 you play advantage. On the next deuce, the next point wins the game.</p></div></div>
+  <p class="i-tb">Tiebreaks to 7: at 8–8 in a set to 9, at 6–6 in a set to 6.</p></section>
+  <section class="sec info2"><h2>${Object.keys(DAYS).length === 1 ? "The day" : Object.keys(DAYS).length + " days"}</h2><div class="i-days">${days}</div></section>
+  <section class="sec info2"><h2>On the day</h2><div class="i-rules">
+    ${rule("desk", "Check in", "At the desk 30 minutes before your first match. Show your check-in pass (QR) from this page" + (fee ? " and pay your entry" : "") + ".")}
+    ${rule("clock", "Not before", "Times are “not before”. If a court runs late, the Schedule shows the delay.")}
+    ${rule("fire", "Warm-up", "3 minutes in groups, 5 in knockouts, inside your slot.")}
+    ${rule("late", "10-minute rule", "Not on court 10 minutes after your call: walkover.")}
+    ${rule("pen", "Scores", "The referee enters every point. Scores show here live, as they happen.")}
+    ${rule("bolt", "Live on your phone", "Follow every court, your next match and the draw right here.")}</div></section>
+  ${fee || prizeAmt ? `<section class="sec info2"><h2>Entry &amp; prizes</h2><div class="i-ticket lit">${fee ? `<div><small>Entry</small><b>$${fee}</b><span>per team · pay at the desk</span></div>` : `<div><small>Entry</small><b>Desk</b><span>pay when you check in</span></div>`}<i></i><div><small>Prize pool</small><b>${esc(prizeAmt || "—")}</b><span>across ${CATS.map(c => esc(CATL[c] || c)).join(", ")}</span></div></div></section>` : ""}`;
+}
+function vInfo(){ return (THEME !== "night" || CFG.info2 === false || !CATS.length || !T.G || !T.G.length ? (CFG.info_html || "") : info2()) + orgTools() + `<section class="sec info"><h2>Organizer</h2><dl><dt>Club staff</dt><dd>${canEdit ? "You can edit scores: use the Organizer bar at the top." : `Sign in to <a href="./#auth">Padel Live</a> with your staff account, then come back to this page to enter scores.`}</dd></dl></section>`; }
 function adminBar(){
   if (!canEdit) return "";
   const n = draft ? changes() : 0, d = cur().delay || {};
@@ -2832,7 +2889,7 @@ function render(){
   if (MODE === "tv") return renderTV();
   const app = document.getElementById("app"); const f = document.activeElement && document.activeElement.id; const sel = f && document.activeElement.selectionStart;
   const views = {schedule: vSchedule, standings: vStandings, knockouts: vKnockouts, teams: vTeams, info: vInfo};
-  app.innerHTML = `${THEME === "night" || THEME === "trio" || THEME === "ace" || THEME === "lets" ? `<header class="top"><div class="wrap gut"><div class="hrow"><span class="kick"><i class="dot"></i>${esc(CFG.kicker || "Live")}</span><div class="upd">Last update<b>${esc(updatedText())}</b></div></div><div class="brand">${CFG.club_logo ? `<img class="emb" src="${CFG.club_logo}" alt="">` : ""}<div><h1>${CFG.title_html || esc(TNAME)}</h1><p>${esc(CFG.tagline || "")}</p></div></div></div><div class="scene-wrap">${THEME === "trio" ? TSCENE : THEME === "ace" ? ASCENE : THEME === "lets" ? LSCENE : SCENE}</div><div class="wrap gut hero-bar"><div class="chips">${(CFG.facts || []).map((x, i) => `<span${i === (CFG.facts.length - 1) && CFG.highlight_last ? ` class="g"` : ""}>${esc(x)}</span>`).join("")}</div>${LOGO ? `<div class="presented"><span>${esc(CFG.sponsor_label || "Presented by")}</span><img src="${LOGO}" alt="${esc(CFG.sponsor_alt || "")}"></div>` : ""}</div></header>` : THEME === "movara" ? `<header class="top"><div class="hero-fx" aria-hidden="true"><i class="ln1"></i><i class="ln2"></i><i class="ball"></i></div><div class="wrap gut"><div class="hrow"><span class="kick"><i class="dot"></i>${esc(CFG.kicker || "Live")}</span><div class="upd">Last update<b>${esc(updatedText())}</b></div></div><div class="brand"><h1>${CFG.title_html || esc(TNAME)}</h1><p>${(CFG.facts || []).map(x => `<span>${esc(x)}</span>`).join("")}</p></div>${LOGO ? `<div class="sponsor"><span>${esc(CFG.sponsor_label || "")}</span><img src="${LOGO}" alt="${esc(CFG.sponsor_alt || "")}"></div>` : ""}</div></header>` : `<header class="top"><div class="wrap gut"><img src="${CFG.club_logo || ""}" alt=""><div class="brand"><h1>${esc(TNAME)}</h1><p>${esc(CFG.subtitle || "Live results")}</p></div><div class="upd">Last update<b>${esc(updatedText())}</b></div></div></header>`}
+  app.innerHTML = `${THEME === "night" || THEME === "trio" || THEME === "ace" || THEME === "lets" ? `<header class="top"><div class="wrap gut"><div class="hrow"><span class="kick"><i class="dot"></i>${esc(CFG.kicker || "Live")}</span><div class="upd">Last update<b>${esc(updatedText())}</b></div></div><div class="brand">${CFG.club_logo ? `<img class="emb" src="${CFG.club_logo}" alt="">` : ""}<div><h1>${CFG.title_html || esc(TNAME)}</h1><p>${esc(THEME === "night" && /\d+ categor/i.test(CFG.tagline || "") ? "Tournament · " + CATS.map(c => c === "X" ? "Mixed" : c).join(" · ") : (CFG.tagline || ""))}</p></div></div></div><div class="scene-wrap">${THEME === "trio" ? TSCENE : THEME === "ace" ? ASCENE : THEME === "lets" ? LSCENE : SCENE}</div><div class="wrap gut hero-bar"><div class="chips">${heroFacts().map(([x, g]) => `<span${g ? ` class="g"` : ""}>${esc(x)}</span>`).join("")}</div>${LOGO ? `<div class="presented"><span>${esc(CFG.sponsor_label || "Presented by")}</span><img src="${LOGO}" alt="${esc(CFG.sponsor_alt || "")}"></div>` : ""}</div></header>` : THEME === "movara" ? `<header class="top"><div class="hero-fx" aria-hidden="true"><i class="ln1"></i><i class="ln2"></i><i class="ball"></i></div><div class="wrap gut"><div class="hrow"><span class="kick"><i class="dot"></i>${esc(CFG.kicker || "Live")}</span><div class="upd">Last update<b>${esc(updatedText())}</b></div></div><div class="brand"><h1>${CFG.title_html || esc(TNAME)}</h1><p>${(CFG.facts || []).map(x => `<span>${esc(x)}</span>`).join("")}</p></div>${LOGO ? `<div class="sponsor"><span>${esc(CFG.sponsor_label || "")}</span><img src="${LOGO}" alt="${esc(CFG.sponsor_alt || "")}"></div>` : ""}</div></header>` : `<header class="top"><div class="wrap gut"><img src="${CFG.club_logo || ""}" alt=""><div class="brand"><h1>${esc(TNAME)}</h1><p>${esc(CFG.subtitle || "Live results")}</p></div><div class="upd">Last update<b>${esc(updatedText())}</b></div></div></header>`}
   <nav class="tabs" aria-label="Sections"><div class="wrap gut" role="tablist">${[["schedule","Schedule"],["standings","Groups"],["knockouts","Knockouts"],["teams","Teams"],["info","Info"]].map(([k, l]) => `<button role="tab" data-tab="${k}" aria-selected="${view.tab === k}">${l}</button>`).join("")}</div></nav>
   <main><div class="wrap gut">${adminBar()}${deskBox()}${banner()}${passBox()}${signupBox()}${views[view.tab]()}</div></main>${saveBar()}`;
   document.body.classList.toggle("editing", editMode);
