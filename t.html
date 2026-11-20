@@ -102,7 +102,20 @@
 .desk-r>div:first-child{display:flex;flex-direction:column;gap:2px;min-width:0}
 .desk-b{display:flex;gap:6px;flex:none}.desk-b .chip.on{background:#2E9E5B;color:#fff;border-color:#2E9E5B}
 html:root{--catX:#D9669E;--catX-soft:rgba(217,102,158,.16)}
-</style><style>/* ===== referee + TV + organizer tools (uses each theme's colours) ===== */
+</style><style>/* ===== move matches */
+.mvbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin:10px 0 12px;padding:10px 12px;border-radius:14px;border:1px dashed var(--line,rgba(255,255,255,.25));font-size:13px}
+.mvbar>span{opacity:.75}.mvbar.on{position:sticky;top:64px;z-index:20;border-style:solid;border-color:var(--gold,#D9B85C);background:var(--surface,#0b1a14);box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.mvhint{flex:1 1 100%}.mvhint .ok{color:#3ecf8e}.mvhint .bad{color:#ff6b6b}.mvbtns{display:flex;gap:8px;margin-inline-start:auto}
+.btn[disabled]{opacity:.45}
+.tile.mvable{cursor:grab;outline:1px dashed rgba(217,184,92,.35);outline-offset:-3px}
+.tile.mvsel{outline:3px solid var(--gold,#D9B85C)!important;outline-offset:-1px;transform:scale(1.03);box-shadow:0 0 0 6px rgba(217,184,92,.18),0 10px 26px rgba(0,0,0,.4);touch-action:none;z-index:2;position:relative}
+.tile.mvlocked{opacity:.55;outline:none;cursor:not-allowed}.tile.mvfrom{opacity:.3}
+.tile.mvslot{display:grid;place-items:center;border:2px dashed rgba(217,184,92,.45)!important;background:rgba(217,184,92,.06)!important;cursor:pointer;min-height:64px}
+.tile.mvslot span{font-size:12px;font-weight:700;color:var(--gold,#D9B85C);opacity:.85}
+.mvover{outline:3px solid #3ecf8e!important;outline-offset:-1px}
+.mvghost{position:fixed;z-index:9999;pointer-events:none;opacity:.92;transform:rotate(-2deg) scale(1.04);box-shadow:0 18px 40px rgba(0,0,0,.5)}
+.brow.mvnew{opacity:.9}
+/* ===== referee + TV + organizer tools (uses each theme's colours) ===== */
 .mini-live{margin-top:6px;font:800 13px/1.2 var(--display);letter-spacing:.04em;color:var(--warn)}
 .org-tools{display:flex;flex-direction:column;gap:12px}
 .org-row{display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap;justify-content:space-between}
@@ -2698,7 +2711,11 @@ function board(all, day){
   const dm = all.filter(m => m.day === day), d = cur().delay || {};
   const rows = new Map();
   for (const m of dm){ if (!rows.has(m.t)) rows.set(m.t, { t: m.t, time: m.time, m: {} }); rows.get(m.t).m[m.court] = m; }
-  for (const [time, kind, text] of EVENTS[day]) rows.set(mins(time) + 0.5, { t: mins(time), time, ev: kind, text });
+  const ts0 = [...new Set(dm.map(m => m.t))].sort((a, b) => a - b), gap0 = ts0.length > 1 ? Math.min(...ts0.slice(1).map((x, i) => x - ts0[i])) : 40;
+  for (let [time, kind, text] of EVENTS[day]){ /* "day ends" always sits after the last match, even after a match was moved later */
+    if (kind === "end" && MVS.on) continue;
+    if (kind === "end" && ts0.length && ts0[ts0.length - 1] >= mins(time)) time = fmt(ts0[ts0.length - 1] + gap0);
+    rows.set(mins(time) + 0.5, { t: mins(time), time, ev: kind, text }); }
   const keys = [...rows.keys()].sort((a, b) => a - b);
   const lastOn = c => Math.max(...dm.filter(m => m.court === c).map(m => m.t), -1);
   let h = `<div class="board${COURTS.length > 2 ? " c" + COURTS.length : ""}" role="table" aria-label="Order of play, ${DAYS[day]}"><div class="bhd" role="row"><span></span>${COURTS.map(c => `<span class="bc" role="columnheader">${cname(c)}${+d[c] > 0 ? `<em>+${+d[c]} min</em>` : ""}</span>`).join("")}</div>`;
@@ -2706,8 +2723,11 @@ function board(all, day){
     if (r.ev){ h += `<div class="brow ev ${r.ev}" role="row">${tm8(r.time)}<span class="evt">${esc(r.text)}</span></div>`; continue; }
     const anyLive = COURTS.some(c => r.m[c] && isLive(r.m[c].id));
     h += `<div class="brow${anyLive ? " isnow" : ""}" role="row">${tm8(r.time)}`;
-    for (const c of COURTS) h += r.m[c] ? tile(r.m[c]) : `<div class="tile empty" aria-hidden="true"></div>`;
+    for (const c of COURTS) h += r.m[c] ? (MVS.on ? mvTile(r.m[c]) : tile(r.m[c])) : MVS.on ? `<div class="tile empty mvslot" data-mvc="${day}|${r.time}|${c}"><span>Move here</span></div>` : `<div class="tile empty" aria-hidden="true"></div>`;
     h += `</div>`; }
+  if (MVS.on && dm.length){ /* one extra slot after the last match, to push a match to the end of the day */
+    const nt = fmt(ts0[ts0.length - 1] + gap0);
+    h += `<div class="brow mvnew" role="row">${tm8(nt)}${COURTS.map(c => `<div class="tile empty mvslot" data-mvc="${day}|${nt}|${c}"><span>Move here</span></div>`).join("")}</div>`; }
   return h + `</div>`;
 }
 function vSchedule(){
@@ -2716,6 +2736,7 @@ function vSchedule(){
   let h = myCard() + nowStrip() + ((THEME === "night" || THEME === "trio" || THEME === "ace" || THEME === "lets") && SPONSORS.length && !editMode ? sponsorWall() : "") + filters();
   const useBoard = !editMode;
   h += `<div class="sched-bar"><div class="days" role="tablist" aria-label="Day">${Object.keys(DAYS).map(Number).map(d => `<button role="tab" class="dayb" data-day="${d}" aria-selected="${useBoard ? view.day === d : false}"${useBoard ? "" : " disabled"}><b>${DSHORT[d]}</b><span>${DAYS[d].split(" ").slice(1).join(" ")}</span></button>`).join("")}</div></div>`;
+  h += mvBar();
   if (useBoard){
     h += board(all, view.day);
     if (view.mine || view.cat !== "all" || view.q.trim()) h += `<p class="note">Matches outside your filter are faded.</p>`;
@@ -2895,6 +2916,82 @@ function render(){
   document.body.classList.toggle("editing", editMode);
   if (f){ const el = document.getElementById(f); if (el){ el.focus(); try { if (sel != null) el.setSelectionRange(sel, sel); } catch (e) {} } }
 }
+
+/* ---------- move matches (organizer): tap a match, then tap another match to swap or an empty slot to move; or drag it ---------- */
+var MVS = { on: false, sel: null, dirty: false, snap: null, msg: "", busy: false, drag: null };
+const kLab = id => { const i = id.indexOf("-"), c = id.slice(0, i), k = id.slice(i + 1); return k === "F" ? `${c} FINAL` : /^SF\d$/.test(k) ? `${c} Semi ${k[2]}` : `${c} ${k}`; };
+function mvGet(id){ const g = T.G.find(x => x.id === id); if (g) return {day: g.day, time: g.time, court: g.court};
+  const w = T.K[kLab(id)]; if (!w) return null; const p = parseWhen(w); return {day: p.day, time: p.time, court: p.court}; }
+function mvSet(id, s){ const g = T.G.find(x => x.id === id); if (g){ g.day = s.day; g.time = s.time; g.court = s.court; return; }
+  T.K[kLab(id)] = `${DSHORT[s.day]} ${s.time} Ct ${s.court}`; }
+const mvLocked = m => (m.w !== null && m.w !== undefined && m.A.id && m.B.id) || isLive(m.id);
+function mvClash(){ const seen = {};
+  for (const m of allMatches()){ const k = m.day + "|" + m.t;
+    for (const x of [m.A.id, m.B.id]) if (x){ const kk = k + "|" + x; if (seen[kk]) return `${label(x)} would play two matches at ${m.time}.`; seen[kk] = 1; } }
+  return ""; }
+function mvDo(a, b){ /* b: a match id (swap) or a slot {day,time,court} (move) */
+  const sa = mvGet(a); if (!sa) return;
+  if (typeof b === "string"){ if (b === a) return; const sb2 = mvGet(b); mvSet(a, sb2); mvSet(b, sa); }
+  else mvSet(a, b);
+  const bad = mvClash();
+  if (bad){ if (typeof b === "string") { mvSet(b, mvGet(a)); } mvSet(a, sa); MVS.msg = "✗ " + bad; }
+  else { MVS.dirty = true; MVS.msg = "✓ Moved. Keep going, then tap Save."; }
+  MVS.sel = null; render(); }
+function mvTile(m){ const lock = mvLocked(m);
+  return tile(m).replace('<div class="tile', `<div data-mv="${m.id}"${lock ? ' data-mvlock="1"' : ""} class="tile mvable${lock ? " mvlocked" : ""}${MVS.sel === m.id ? " mvsel" : ""}`); }
+function mvBar(){
+  if (!canEdit || editMode || /^#(ref|tv)$/.test(location.hash)) return "";
+  if (!MVS.on) return `<div class="mvbar"><button class="btn small" data-mvon>↔ Move matches</button><span>A team can't make their time? Swap or move their match.</span></div>`;
+  const selM = MVS.sel && allMatches().find(m => m.id === MVS.sel);
+  return `<div class="mvbar on"><div class="mvhint">${MVS.msg ? `<b class="${MVS.msg[0] === "✓" ? "ok" : "bad"}">${esc(MVS.msg)}</b>` : selM ? `<b>${esc(shortTag(selM.tag))} picked.</b> Tap another match to swap, or an empty slot to move it. You can also drag it. Other days: tap the day first.` : `<b>Tap the match you want to move.</b> Played and live matches stay put.`}</div>
+    <div class="mvbtns"><button class="btn small" data-mvx>Cancel</button><button class="btn small primary" data-mvsave${MVS.dirty && !MVS.busy ? "" : " disabled"}>${MVS.busy ? "Saving…" : "Save & tell the teams"}</button></div></div>`; }
+async function mvSave(){
+  MVS.busy = true; render();
+  const r = await sb.rpc("t_move", {p_slug: SLUG, p_g: T.G, p_k: T.K});
+  MVS.busy = false;
+  if (r.error){ MVS.msg = "✗ " + (r.error.message || "Couldn't save. Try again."); render(); return; }
+  CFG.sv = r.data; MVS.on = false; MVS.sel = null; MVS.dirty = false; MVS.snap = null; MVS.msg = "";
+  status = "Schedule saved. Teams with a new time get an alert, and everyone's page updates within a minute."; render(); }
+function mvCancel(){ if (MVS.snap){ const o = JSON.parse(MVS.snap); T.G.splice(0, T.G.length, ...o.G); Object.keys(T.K).forEach(k => delete T.K[k]); Object.assign(T.K, o.K); }
+  MVS.on = false; MVS.sel = null; MVS.dirty = false; MVS.snap = null; MVS.msg = ""; render(); }
+function mvTarget(el){ const t = el && el.closest && el.closest("[data-mv],[data-mvc]"); if (!t) return null;
+  if (t.dataset.mv) return t.dataset.mvlock ? null : t.dataset.mv; const [d, tm, c] = t.dataset.mvc.split("|"); return {day: +d, time: tm, court: +c}; }
+document.addEventListener("click", e => {
+  const el = e.target.closest("[data-mvon],[data-mvx],[data-mvsave],[data-mv],[data-mvc]"); if (!el) return;
+  if (MVS.drag && MVS.drag.moved){ MVS.drag = null; return; }
+  const d = el.dataset;
+  if ("mvon" in d){ MVS.on = true; MVS.snap = JSON.stringify({G: T.G, K: T.K}); MVS.msg = ""; render(); return; }
+  if ("mvx" in d){ mvCancel(); return; }
+  if ("mvsave" in d){ mvSave(); return; }
+  if (!MVS.on) return;
+  if (d.mv){ if (d.mvlock){ MVS.msg = "✗ That match has started or finished, so it stays where it is."; MVS.sel = null; render(); return; }
+    if (!MVS.sel || MVS.sel === d.mv){ MVS.sel = MVS.sel === d.mv ? null : d.mv; MVS.msg = ""; render(); return; }
+    mvDo(MVS.sel, d.mv); return; }
+  if (d.mvc){ if (!MVS.sel){ MVS.msg = "✗ Tap a match first, then the empty slot."; render(); return; } mvDo(MVS.sel, mvTarget(el)); }
+});
+/* drag: the picked match (phones), or any match with a mouse */
+document.addEventListener("pointerdown", e => { if (!MVS.on) return; const t = e.target.closest("[data-mv]"); if (!t || t.dataset.mvlock) return;
+  if (e.pointerType !== "mouse" && t.dataset.mv !== MVS.sel) return;
+  MVS.drag = {id: t.dataset.mv, x: e.clientX, y: e.clientY, moved: false, ghost: null, src: t}; });
+document.addEventListener("pointermove", e => { const g = MVS.drag; if (!g) return;
+  if (!g.moved && Math.hypot(e.clientX - g.x, e.clientY - g.y) < 8) return;
+  if (!g.moved){ g.moved = true; const r = g.src.getBoundingClientRect(); g.ghost = g.src.cloneNode(true); g.ghost.classList.add("mvghost"); g.ghost.style.width = r.width + "px"; document.body.appendChild(g.ghost); g.src.classList.add("mvfrom"); }
+  e.preventDefault(); g.ghost.style.left = (e.clientX - 40) + "px"; g.ghost.style.top = (e.clientY - 30) + "px";
+  document.querySelectorAll(".mvover").forEach(x => x.classList.remove("mvover"));
+  g.ghost.style.display = "none"; const under = document.elementFromPoint(e.clientX, e.clientY); g.ghost.style.display = "";
+  const tg = under && under.closest("[data-mv],[data-mvc]"); if (tg && tg !== g.src) tg.classList.add("mvover");
+  if (e.clientY < 70) window.scrollBy(0, -12); else if (e.clientY > innerHeight - 70) window.scrollBy(0, 12); }, {passive: false});
+document.addEventListener("pointerup", e => { const g = MVS.drag; if (!g) return;
+  if (!g.moved){ MVS.drag = null; return; }
+  if (g.ghost) g.ghost.remove(); g.src.classList.remove("mvfrom");
+  g.ghost = null; const under = document.elementFromPoint(e.clientX, e.clientY), tgt = mvTarget(under);
+  setTimeout(() => { MVS.drag = null; }, 50);
+  if (tgt) mvDo(g.id, tgt); else render(); });
+/* everyone's page picks up a moved schedule */
+async function pullSched(){ if (MVS.on) return; try { const r = await sb.rpc("t_sched", {p_slug: SLUG, p_sv: +CFG.sv || 0}); if (r.error || !r.data) return;
+  T.G.splice(0, T.G.length, ...r.data.G); Object.keys(T.K).forEach(k => delete T.K[k]); Object.assign(T.K, r.data.K); CFG.sv = r.data.sv; render(); } catch (e) {} }
+setInterval(() => { if (!document.hidden) pullSched(); }, 30000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) pullSched(); });
 
 /* ---------- events ---------- */
 function setTeam(id){ myTeam = id; view.mine = false; try { if (id) localStorage.setItem("cpn-team-" + SLUG, id); else localStorage.removeItem("cpn-team-" + SLUG); } catch (e) {} render(); }

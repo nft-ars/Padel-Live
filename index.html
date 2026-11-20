@@ -1590,7 +1590,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v71";
+const VERSION = "v72";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -3972,7 +3972,7 @@ app.addEventListener("click", async e => {
 /* ---------- new tournament wizard (admin, or staff for their club) ---------- */
 Object.assign(W.en, {twBtn:"+ Tournament", twT:"New tournament", twS1:"1 · Club & theme", twS1s:"The tournament page takes this club's look, logo and courts.",
   twS2:"2 · Name & dates", twName:"Tournament name", twNamePh:"Winter Cup", twKick:"Small title above the name", twKickPh:"Winter Cup", twStart:"First day", twDays:"Days",
-  twMix:"Mixed", twS3:"3 · Categories & teams", twS3s:"Pick the number of teams in each category, then how many teams go in each group.", twGz:"Teams per group", twGzS:"{g} groups · {m} group matches each · then {r}", twSF:"semifinals", twOrd:"Order of play", twOrdS:"Who starts first. Tap a category to move it up. Knockouts follow the same order.", twUp:"Move up",
+  twMix:"Mixed", twS3:"3 · Categories & teams", twS3s:"Pick the number of teams in each category, then how many teams go in each group.", twGz:"Teams per group", twGzS:"{g} groups · {m} group matches each · then {r}", twSF:"semifinals", twOrd:"Order of play", twOrdS:"Who starts first. Tap a category to move it up. Knockouts follow the same order.", twUp:"Move up", twRest:"Rest between group matches", twRest0:"No rest", twRest2:"Play 2, rest 1", twRest1:"Rest after every match",
   twG1:"Finish all group matches on day 1 (knockouts start day 2)", twG1ok:"✓ Group stage ends day 1 at {e}", twG1no:"✗ Group stage doesn't fit on day 1. Start earlier, finish later, add a court or use shorter matches.", twOff:"Off",
   twS4:"4 · Courts & times", twCourts:"Courts", twCn:"Court {n} name", twDayStart:"{d} starts at", twLast:"Day ends at (last match done by)", twFinals:"Semis and finals on the last day",
   twS5:"5 · Match format", twG:"Group matches", twKo:"Quarterfinals", twSf:"Semis & finals", twMin:"{m} min", twSet6:"1 set to 6", twSet9:"1 set to 9",
@@ -3982,7 +3982,7 @@ Object.assign(W.en, {twBtn:"+ Tournament", twT:"New tournament", twS1:"1 · Club
   twGrp:"{g} group matches", twKos:"{k} knockout matches", twDayL:"{d}: {a} – {b}", twQual:"Top 2 of each group{x} go to the {r}.", twBest:"+ the {n} best 3rd places", twR16:"round of 16", twQF:"quarterfinals"});
 Object.assign(W.ar, {twBtn:"+ بطولة", twT:"بطولة جديدة", twS1:"١ · النادي والشكل", twS1s:"صفحة البطولة بتاخد شكل هالنادي ولوغو وملاعبه.",
   twS2:"٢ · الاسم والتاريخ", twName:"اسم البطولة", twNamePh:"كأس الشتاء", twKick:"عنوان صغير فوق الاسم", twKickPh:"Winter Cup", twStart:"أول يوم", twDays:"عدد الأيام",
-  twMix:"مختلط", twS3:"٣ · الفئات والفرق", twS3s:"اختار عدد الفرق بكل فئة، وبعدين كم فريق بكل مجموعة.", twGz:"فرق بكل مجموعة", twGzS:"{g} مجموعات · {m} مباريات لكل فريق · بعدين {r}", twSF:"نصف النهائي", twOrd:"ترتيب اللعب", twOrdS:"مين بيبلش أول. اكبس على فئة لتطلعها لفوق. الأدوار الإقصائية بنفس الترتيب.", twUp:"لفوق",
+  twMix:"مختلط", twS3:"٣ · الفئات والفرق", twS3s:"اختار عدد الفرق بكل فئة، وبعدين كم فريق بكل مجموعة.", twGz:"فرق بكل مجموعة", twGzS:"{g} مجموعات · {m} مباريات لكل فريق · بعدين {r}", twSF:"نصف النهائي", twOrd:"ترتيب اللعب", twOrdS:"مين بيبلش أول. اكبس على فئة لتطلعها لفوق. الأدوار الإقصائية بنفس الترتيب.", twUp:"لفوق", twRest:"الراحة بين مباريات المجموعات", twRest0:"بلا راحة", twRest2:"مباراتين وراحة", twRest1:"راحة بعد كل مباراة",
   twG1:"خلّص كل مباريات المجموعات بأول يوم (الإقصائيات من تاني يوم)", twG1ok:"✓ المجموعات بتخلص أول يوم الساعة {e}", twG1no:"✗ المجموعات ما بتزبط بأول يوم. ابدأ أبكر، خلّص أطول، زيد ملعب أو قصّر المباريات.", twOff:"بدون",
   twS4:"٤ · الملاعب والأوقات", twCourts:"الملاعب", twCn:"اسم الملعب {n}", twDayStart:"{d} بيبلش الساعة", twLast:"اليوم بيخلص الساعة (آخر مباراة بتخلص)", twFinals:"نصف النهائي والنهائي بآخر يوم",
   twS5:"٥ · نظام المباريات", twG:"مباريات المجموعات", twKo:"ربع النهائي", twSf:"نصف النهائي والنهائي", twMin:"{m} دقيقة", twSet6:"مجموعة لـ٦", twSet9:"مجموعة لـ٩",
@@ -4007,9 +4007,13 @@ const canMakeTour = () => !!(S.user && S.profile && S.profile.is_admin);
 function twInit(){
   const cs = twClubs(), c = cs[0]; const d = new Date(Date.now() + 14 * 864e5);
   const courts = c ? S.courts.filter(x => x.club_id === c.id) : [];
-  S.tw = {club: c && c.id, name: "", kick: "", start: dayKey(d), days: 4, cats: {A: 12, B: 12, C: 12, D: 12, E: 0, X: 0}, gz: {}, ord: [], g1: true, courts: Math.max(1, Math.min(4, courts.length || 2)),
-    cn: courts.map(x => x.name), ds: ["16:00", "15:00", "14:00", "12:00", "12:00"], last: "23:30", finals: true, gm: 45, qm: 50, sm: 75, gs: {A: 6, B: 9, C: 6, D: 6, E: 6, X: 6}, prize: "", fee: "", signup: true, replace: false};
+  /* house rules: 3 days, 4 PM – 1 AM, D → Mixed → B, groups of 3, all group matches on day 1, 35-min group matches (1 set to 6) */
+  S.tw = {club: c && c.id, name: "", kick: "", start: dayKey(d), days: 3, cats: {A: 0, B: 12, C: 0, D: 12, E: 0, X: 6}, gz: {B: 3, D: 3}, ord: ["D", "X", "B"], g1: true, courts: Math.max(1, Math.min(4, courts.length || 2)),
+    cn: courts.map(x => x.name), ds: ["16:00", "16:00", "16:00", "16:00", "16:00"], last: "01:00", finals: true, gm: 35, qm: 45, sm: 75, gs: {A: 6, B: 6, C: 6, D: 6, E: 6, X: 6}, rest: 0, prize: "", fee: "", signup: true, replace: false};
+  /* then the settings used for the last tournament made on this phone */
+  try { const m = JSON.parse(ls.get("pl-tw-last") || "null"); if (m) TW_KEEP.forEach(k => { if (m[k] != null) S.tw[k] = m[k]; }); } catch (e) {}
 }
+const TW_KEEP = ["days", "cats", "gz", "ord", "g1", "rest", "ds", "last", "finals", "gm", "qm", "sm", "gs", "signup"];
 const twMin = s => { const [h, m] = String(s || "0:0").split(":").map(Number); return h * 60 + (m || 0); };
 const twClock = m => { m = ((m % 1440) + 1440) % 1440; const h = Math.floor(m / 60), mi = m % 60; return `${h % 12 || 12}:${String(mi).padStart(2, "0")} ${h < 12 ? "AM" : "PM"}`; };
 const twSlug = tw => { const c = S.clubs.find(x => x.id === tw.club) || {}; return ((String(c.name || "").split(/\s+/)[0] + "-" + (tw.name || "cup") + "-" + (tw.start || "").slice(0, 4)).toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40)) || "cup"; };
@@ -4033,18 +4037,22 @@ function twBuild(tw){
   /* group matches strictly in the order of play: all of the first category, then the next; round by round.
      A court is only given to the next category when the current one has no match left that can be played in that slot */
   const Q = []; ord.forEach(c => { twRR(gsz(c)).forEach((ms, r) => { for (let g = 1; g <= gr(c); g++) ms.forEach(([a, b]) => Q.push({c, g, r, t1: c + ((g - 1) * gsz(c) + a), t2: c + ((g - 1) * gsz(c) + b)})); }); });
-  let prev = new Set(), gDay = 1, gEnd = null;
+  /* rest rule: 0 = back-to-back is fine, 2 = at most 2 matches in a row then rest one, 1 = rest after every match */
+  const maxRun = +tw.rest || 0; let run = {}, gDay = 1, gEnd = null;
   while (Q.length){
     if (day > D){ fits = false; break; }
-    if (t + +tw.gm > Lend()){ nextDay(); prev = new Set(); if (day > D){ fits = false; break; } }
-    const pick = () => { const busy = new Set(), take = [];
-      for (let i = 0; i < Q.length && take.length < C; i++){ const m = Q[i]; if (busy.has(m.t1) || busy.has(m.t2)){ busy.add(m.t1); busy.add(m.t2); continue; } take.push(i); busy.add(m.t1); busy.add(m.t2); }
+    if (t + +tw.gm > Lend()){ nextDay(); run = {}; if (day > D){ fits = false; break; } }
+    const pick = () => { const busy = new Set(maxRun ? Object.keys(run).filter(k => run[k] >= maxRun) : []), take = [];
+      let held = false; /* a match of this category had to wait, so the next category doesn't start yet */
+      for (let i = 0; i < Q.length && take.length < C; i++){ const m = Q[i]; if (held && m.c !== Q[0].c) break;
+        if (busy.has(m.t1) || busy.has(m.t2)){ busy.add(m.t1); busy.add(m.t2); if (m.c === Q[0].c) held = true; continue; } take.push(i); busy.add(m.t1); busy.add(m.t2); }
       return take; };
     const take = pick();
+    if (!take.length){ run = {}; t += +tw.gm; continue; } /* everyone left needs a rest: one empty slot */
     const ws = take.map(i => Q[i]); for (let i = take.length - 1; i >= 0; i--) Q.splice(take[i], 1);
     span[day] = span[day] || [t, t];
     ws.forEach((m, j) => { n++; G.push({id: "g" + n, cat: m.c, grp: m.g, rnd: m.r + 1, day, time: twClock(t), court: j + 1, t1: m.t1, t2: m.t2}); });
-    prev = new Set(ws.flatMap(m => [m.t1, m.t2])); t += +tw.gm; span[day][1] = t; gDay = day; gEnd = t;
+    const nr = {}; ws.forEach(m => [m.t1, m.t2].forEach(x => { nr[x] = (run[x] || 0) + 1; })); run = nr; t += +tw.gm; span[day][1] = t; gDay = day; gEnd = t;
   }
   const g1 = !!tw.g1 && D > 1;
   if (g1 && gDay === 1 && day < D) nextDay();
@@ -4096,7 +4104,8 @@ V.tnew = () => { if (!canMakeTour()) return V.events(); if (!S.tw) twInit(); con
    <section class="card twsec"><b>${t("twS3")}</b><span class="note">${t("twS3s")}</span>
     ${["A", "B", "C", "D", "E", "X"].map(c => `<div class="twcat">${c === "X" ? `<span class="lv mixb">${t("twMix")}</span>` : `<span class="lv c${c}">${c}</span>`}${chips("cat" + c, [[0, t("twOff")], [6, 6], [8, 8], [12, 12], [16, 16], [24, 24], [32, 32]], tw.cats[c])}</div>${tw.cats[c] > 0 ? `<div class="twgz"><span>${t("twGz")}</span>${chips("gz" + c, (TW_GZ[tw.cats[c]] || [4]).map(z => [z, z]), twGz(tw, c))}<small>${tf("twGzS", {g: tw.cats[c] / twGz(tw, c), m: twGz(tw, c) - 1, r: tw.cats[c] / twGz(tw, c) === 2 ? t("twSF") : tw.cats[c] / twGz(tw, c) === 8 ? t("twR16") : t("twQF")})}</small></div>` : ""}`).join("")}
     ${b.ord.length > 1 ? `<div class="tword"><span>${t("twOrd")}</span><small>${t("twOrdS")}</small><div class="tword-l">${b.ord.map((c, i) => `<button class="chip" data-twc="up|${c}"${i ? "" : " disabled"} aria-label="${t("twUp")}"><i>${i + 1}</i>${c === "X" ? t("twMix") : c}${i ? " ↑" : ""}</button>`).join("")}</div></div>` : ""}
-    ${+tw.days > 1 ? `<label class="row" style="font-size:14px;gap:8px"><input type="checkbox" data-twk="g1"${tw.g1 ? " checked" : ""}> ${t("twG1")}</label>` : ""}</section>
+    ${+tw.days > 1 ? `<label class="row" style="font-size:14px;gap:8px"><input type="checkbox" data-twk="g1"${tw.g1 ? " checked" : ""}> ${t("twG1")}</label>` : ""}
+    <div class="fld"><span>${t("twRest")}</span>${chips("rest", [[0, t("twRest0")], [2, t("twRest2")], [1, t("twRest1")]], tw.rest || 0)}</div></section>
    <section class="card twsec"><b>${t("twS4")}</b>
     <div class="fld"><span>${t("twCourts")}</span>${chips("courts", [1, 2, 3, 4].map(x => [x, x]), tw.courts)}</div>
     <div class="grid2">${Array.from({length: +tw.courts}, (_, i) => fld(tf("twCn", {n: i + 1}), "cn" + i, tw.cn[i] || `Court ${i + 1}`)).join("")}</div>
@@ -4112,7 +4121,7 @@ V.tnew = () => { if (!canMakeTour()) return V.events(); if (!S.tw) twInit(); con
     <label class="row" style="font-size:14px;gap:8px"><input type="checkbox" data-twk="signup"${tw.signup ? " checked" : ""}> ${t("twSign")}</label>
 </section>
    ${twSum(tw, b)}
-  </main><div class="bar"><div class="sum"><small>${esc(b.club.name || "")}</small><b>${b.teams} teams</b></div><button class="cta blue" data-twgo${b.fits && b.teams ? "" : " disabled"}>${t("twCreate")}</button></div>`; };
+  </main><div class="bar"><div class="sum"><small>${esc(b.club.name || "")}</small><b>${b.teams} teams</b></div><button class="cta blue" data-twgo${b.fits && b.teams && !(b.g1 && b.gDay > 1) ? "" : " disabled"}>${t("twCreate")}</button></div>`; };
 
 app.addEventListener("change", e => { const el = e.target;
   if (el.dataset && el.dataset.tw && S.tw){ const k = el.dataset.tw;
@@ -4126,7 +4135,7 @@ app.addEventListener("click", async e => {
   if (d.twc){ const [k, v] = d.twc.split("|");
     if (k === "up"){ const o = twOrd(S.tw), i = o.indexOf(v); if (i > 0){ o.splice(i, 1); o.splice(i - 1, 0, v); } S.tw.ord = o; render(); return; }
     if (/^cat[A-EX]$/.test(k)) S.tw.cats[k[3]] = +v; else if (/^gz[A-EX]$/.test(k)){ S.tw.gz = S.tw.gz || {}; S.tw.gz[k[2]] = +v; } else if (/^gs[A-EX]$/.test(k)) S.tw.gs[k[2]] = +v; else S.tw[k] = +v; render(); return; }
-  if ("twgo" in d){ document.querySelectorAll("[data-tw]").forEach(x => { const k = x.dataset.tw; if (/^cn\d/.test(k)) S.tw.cn[+k.slice(2)] = x.value; else if (/^ds\d/.test(k)) S.tw.ds[+k.slice(2)] = x.value; else S.tw[k] = k === "prize" || k === "fee" ? x.value.replace(/[^\d]/g, "") : x.value; });
+  if ("twgo" in d){ document.querySelectorAll("[data-tw]").forEach(x => { const k = x.dataset.tw; if (/^cn\d/.test(k)) S.tw.cn[+k.slice(2)] = x.value; else if (/^ds\d/.test(k)) S.tw.ds[+k.slice(2)] = x.value; else S.tw[k] = k === "prize" || k === "fee" ? x.value.replace(/[^\d]/g, "") : x.value; }); try { ls.set("pl-tw-last", JSON.stringify(Object.fromEntries(TW_KEEP.map(k => [k, S.tw[k]])))); } catch (e) {}
     const tw = S.tw, b = twBuild(tw), slug = twSlug(tw); if (!tw.name.trim()){ toast(t("twNeedName")); const n = document.querySelector('[data-tw="name"]'); if (n) n.focus(); return; } if (!b.fits){ render(); toast(t("twNoFit")); return; } el.disabled = true;
     const end = new Date(new Date(tw.start + "T12:00:00+03:00").getTime() + (tw.days - 1) * 864e5);
     const r = await sb.rpc("t_create", {p_slug: slug, p_name: tw.name.trim(), p_club: tw.club, p_starts: tw.start, p_ends: dayKey(end), p_config: b.cfg, p_replace: !!tw.replace});
