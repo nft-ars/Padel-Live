@@ -1584,7 +1584,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v66";
+const VERSION = "v67";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -3984,7 +3984,7 @@ Object.assign(W.ar, {twBtn:"+ بطولة", twT:"بطولة جديدة", twS1:"١
   twGrp:"{g} مباراة مجموعات", twKos:"{k} مباراة إقصائية", twDayL:"{d}: {a} – {b}", twQual:"أول ٢ من كل مجموعة{x} بيتأهلوا لـ{r}.", twBest:"+ أفضل {n} بالمركز الثالث", twR16:"دور الـ١٦", twQF:"ربع النهائي"});
 Object.assign(W.en, {lgPrize:"Prize pool", lgPrizeL:"Prize pool"}); Object.assign(W.ar, {lgPrize:"مجموع الجوائز", lgPrizeL:"مجموع الجوائز"});
 
-const TW_THEME = c => /trio/i.test(c.name) ? ["trio", "trio-logo.png"] : /ace/i.test(c.name) ? ["ace", "ace-logo.png"] : /let.?s/i.test(c.name) ? ["lets", "lets-logo.png"] : /core/i.test(c.name) ? ["core", "core-logo.png"] : ["night", ""];
+const TW_THEME = c => /trio/i.test(c.name) ? ["trio", "trio-logo.png"] : /ace/i.test(c.name) ? ["ace", "ace-logo.png"] : /let.?s/i.test(c.name) ? ["lets", "lets-logo.png"] : /core/i.test(c.name) ? ["night", "core-logo.png"] : ["night", ""];
 const twClubs = () => S.clubs;
 const canMakeTour = () => !!(S.user && S.profile && S.profile.is_admin);
 function twInit(){

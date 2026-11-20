@@ -2441,8 +2441,8 @@ header.top .brand .emb{background:#fff;border-radius:50%}
 var SUPABASE_URL = "https://ebrlwfmkbwlbytslfvdn.supabase.co", SUPABASE_KEY = "sb_publishable_Pf2THTG2L1otqh1PYX4HLw_1360KwwF";
 function startT(CFG, S0, VER0, SLUG, TNAME, sb, EDITV0){
 try { CFG = JSON.parse(JSON.stringify(CFG).replace(/\bPrize\b(?! [Pp]ool)/g, "Prize Pool").replace(/\bprize\b(?! pool)/g, "prize pool").replace(/\bPRIZE\b(?! POOL)/g, "PRIZE POOL")); } catch (e) {}
-const THEME = ["movara","night","trio","ace","lets"].includes(CFG.theme) ? CFG.theme : "core";
-if (!CFG.club_logo && THEME === "core" && /core/i.test(String(CFG.venue || CFG.club || CFG.subtitle || CFG.tagline || TNAME || ""))) CFG.club_logo = "core-logo.png";
+const THEME = ["movara","night","trio","ace","lets"].includes(CFG.theme) ? CFG.theme : "night"; // Core uses the Core Night look
+if (!CFG.club_logo && (THEME === "core" || THEME === "night") && /core/i.test(String(CFG.venue || CFG.club || CFG.subtitle || CFG.tagline || TNAME || ""))) CFG.club_logo = "core-logo.png";
 document.getElementById("th-" + THEME).media = "all";
 
 "use strict";
@@ -3158,7 +3158,7 @@ const TVSKIN = {
   ace:    { a: "#3B4254", b: "#E4E95C", deep: "#06070B", cover: "ace-cover.jpg" },
   lets:   { a: "#1E44E0", b: "#C9F23E", deep: "#02130B", cover: "lets-cover.jpg" },
   core:   { a: "#2F6B55", b: "#D9B85C", deep: "#020F0A", cover: "core-cover.jpg" },
-  night:  { a: "#2E3577", b: "#35D0BA", deep: "#060821" },
+  night:  { a: "#2F6B55", b: "#D9B85C", deep: "#020F0A", cover: "core-cover.jpg" },
   movara: { a: "#2E3577", b: "#35D0BA", deep: "#060821" } };
 function renderTV(){
   document.body.classList.add("tvmode");
