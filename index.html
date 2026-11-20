@@ -1475,6 +1475,10 @@ main.vlg input,main.vlg select{background:#0B1220;color:#fff;border-color:rgba(9
 .cp-t .mo.soon{width:auto;padding:0 12px;white-space:nowrap}
 .twgz{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:-2px 0 6px 44px;padding:8px 10px;border-radius:12px;background:var(--card-2,rgba(127,127,127,.08))}
 .twgz>span{font-size:12px;font-weight:700;color:var(--ink-2)}.twgz .chips{flex:0 0 auto}.twgz small{flex:1 0 100%;font-size:11.5px;color:var(--ink-3)}
+.tword{display:flex;flex-direction:column;gap:6px;padding:10px;border-radius:12px;background:var(--card-2,rgba(127,127,127,.08))}
+.tword>span{font-size:13px;font-weight:800}.tword small{font-size:11.5px;color:var(--ink-3)}
+.tword-l{display:flex;flex-wrap:wrap;gap:6px}.tword-l .chip i{font-style:normal;display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--ink,#111);color:var(--bg,#fff);font-size:11px;font-weight:800;margin-inline-end:6px}
+.tword-l .chip[disabled]{opacity:1;border-color:var(--blue,#3b82f6)}
 </style>
 </head>
 <body>
@@ -1586,7 +1590,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v68";
+const VERSION = "v69";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -3968,7 +3972,8 @@ app.addEventListener("click", async e => {
 /* ---------- new tournament wizard (admin, or staff for their club) ---------- */
 Object.assign(W.en, {twBtn:"+ Tournament", twT:"New tournament", twS1:"1 · Club & theme", twS1s:"The tournament page takes this club's look, logo and courts.",
   twS2:"2 · Name & dates", twName:"Tournament name", twNamePh:"Winter Cup", twKick:"Small title above the name", twKickPh:"Winter Cup", twStart:"First day", twDays:"Days",
-  twMix:"Mixed", twS3:"3 · Categories & teams", twS3s:"Pick the number of teams in each category, then how many teams go in each group.", twGz:"Teams per group", twGzS:"{g} groups · {m} group matches each · then {r}", twSF:"semifinals", twOff:"Off",
+  twMix:"Mixed", twS3:"3 · Categories & teams", twS3s:"Pick the number of teams in each category, then how many teams go in each group.", twGz:"Teams per group", twGzS:"{g} groups · {m} group matches each · then {r}", twSF:"semifinals", twOrd:"Order of play", twOrdS:"Who starts first. Tap a category to move it up. Knockouts follow the same order.", twUp:"Move up",
+  twG1:"Finish all group matches on day 1 (knockouts start day 2)", twG1ok:"✓ Group stage ends day 1 at {e}", twG1no:"✗ Group stage doesn't fit on day 1. Start earlier, finish later, add a court or use shorter matches.", twOff:"Off",
   twS4:"4 · Courts & times", twCourts:"Courts", twCn:"Court {n} name", twDayStart:"{d} starts at", twLast:"Last match starts by", twFinals:"Semis and finals on the last day",
   twS5:"5 · Match format", twG:"Group matches", twKo:"Quarterfinals", twSf:"Semis & finals", twMin:"{m} min", twSet6:"1 set to 6", twSet9:"1 set to 9",
   twS6:"6 · Prize pool & sign-up", twPrize:"Prize pool ($)", twFee:"Entry fee per team ($)", twFeeNo:"Leave empty if free", twSign:"Teams sign up themselves in the app", twSlug:"Page link",
@@ -3977,7 +3982,8 @@ Object.assign(W.en, {twBtn:"+ Tournament", twT:"New tournament", twS1:"1 · Club
   twGrp:"{g} group matches", twKos:"{k} knockout matches", twDayL:"{d}: {a} – {b}", twQual:"Top 2 of each group{x} go to the {r}.", twBest:"+ the {n} best 3rd places", twR16:"round of 16", twQF:"quarterfinals"});
 Object.assign(W.ar, {twBtn:"+ بطولة", twT:"بطولة جديدة", twS1:"١ · النادي والشكل", twS1s:"صفحة البطولة بتاخد شكل هالنادي ولوغو وملاعبه.",
   twS2:"٢ · الاسم والتاريخ", twName:"اسم البطولة", twNamePh:"كأس الشتاء", twKick:"عنوان صغير فوق الاسم", twKickPh:"Winter Cup", twStart:"أول يوم", twDays:"عدد الأيام",
-  twMix:"مختلط", twS3:"٣ · الفئات والفرق", twS3s:"اختار عدد الفرق بكل فئة، وبعدين كم فريق بكل مجموعة.", twGz:"فرق بكل مجموعة", twGzS:"{g} مجموعات · {m} مباريات لكل فريق · بعدين {r}", twSF:"نصف النهائي", twOff:"بدون",
+  twMix:"مختلط", twS3:"٣ · الفئات والفرق", twS3s:"اختار عدد الفرق بكل فئة، وبعدين كم فريق بكل مجموعة.", twGz:"فرق بكل مجموعة", twGzS:"{g} مجموعات · {m} مباريات لكل فريق · بعدين {r}", twSF:"نصف النهائي", twOrd:"ترتيب اللعب", twOrdS:"مين بيبلش أول. اكبس على فئة لتطلعها لفوق. الأدوار الإقصائية بنفس الترتيب.", twUp:"لفوق",
+  twG1:"خلّص كل مباريات المجموعات بأول يوم (الإقصائيات من تاني يوم)", twG1ok:"✓ المجموعات بتخلص أول يوم الساعة {e}", twG1no:"✗ المجموعات ما بتزبط بأول يوم. ابدأ أبكر، خلّص أطول، زيد ملعب أو قصّر المباريات.", twOff:"بدون",
   twS4:"٤ · الملاعب والأوقات", twCourts:"الملاعب", twCn:"اسم الملعب {n}", twDayStart:"{d} بيبلش الساعة", twLast:"آخر مباراة بتبلش قبل", twFinals:"نصف النهائي والنهائي بآخر يوم",
   twS5:"٥ · نظام المباريات", twG:"مباريات المجموعات", twKo:"ربع النهائي", twSf:"نصف النهائي والنهائي", twMin:"{m} دقيقة", twSet6:"مجموعة لـ٦", twSet9:"مجموعة لـ٩",
   twS6:"٦ · مجموع الجوائز والتسجيل", twPrize:"مجموع الجوائز ($)", twFee:"رسم الفريق ($)", twFeeNo:"اتركه فاضي إذا مجاني", twSign:"الفرق بتسجل لحالها بالتطبيق", twSlug:"رابط الصفحة",
@@ -3993,13 +3999,15 @@ const twGz = (tw, c) => { const n = +tw.cats[c], o = TW_GZ[n] || [4]; const z = 
 function twRR(z){ const a = Array.from({length: z % 2 ? z + 1 : z}, (_, i) => i + 1), n = a.length, out = [];
   for (let r = 0; r < n - 1; r++){ const ms = []; for (let i = 0; i < n / 2; i++){ const x = a[i], y = a[n - 1 - i]; if (x <= z && y <= z) ms.push([Math.min(x, y), Math.max(x, y)]); } out.push(ms); a.splice(1, 0, a.pop()); }
   return out; }
+/* order of play: categories in the order chosen, then any others */
+const twOrd = tw => { const on = ["A", "B", "C", "D", "E", "X"].filter(c => tw.cats[c] > 0); return [...(tw.ord || []).filter(c => on.includes(c)), ...on.filter(c => !(tw.ord || []).includes(c))]; };
 const TW_THEME = c => /trio/i.test(c.name) ? ["trio", "trio-logo.png"] : /ace/i.test(c.name) ? ["ace", "ace-logo.png"] : /let.?s/i.test(c.name) ? ["lets", "lets-logo.png"] : /core/i.test(c.name) ? ["night", "core-logo.png"] : ["night", ""];
 const twClubs = () => S.clubs;
 const canMakeTour = () => !!(S.user && S.profile && S.profile.is_admin);
 function twInit(){
   const cs = twClubs(), c = cs[0]; const d = new Date(Date.now() + 14 * 864e5);
   const courts = c ? S.courts.filter(x => x.club_id === c.id) : [];
-  S.tw = {club: c && c.id, name: "", kick: "", start: dayKey(d), days: 4, cats: {A: 12, B: 12, C: 12, D: 12, E: 0, X: 0}, gz: {}, courts: Math.max(1, Math.min(4, courts.length || 2)),
+  S.tw = {club: c && c.id, name: "", kick: "", start: dayKey(d), days: 4, cats: {A: 12, B: 12, C: 12, D: 12, E: 0, X: 0}, gz: {}, ord: [], g1: true, courts: Math.max(1, Math.min(4, courts.length || 2)),
     cn: courts.map(x => x.name), ds: ["16:00", "15:00", "14:00", "12:00", "12:00"], last: "22:30", finals: true, gm: 45, qm: 50, sm: 75, gs: {A: 6, B: 9, C: 6, D: 6, E: 6, X: 6}, prize: "", fee: "", signup: true, replace: false};
 }
 const twMin = s => { const [h, m] = String(s || "0:0").split(":").map(Number); return h * 60 + (m || 0); };
@@ -4018,21 +4026,34 @@ function twBuild(tw){
   const nextDay = () => { if (day > D) return; E[day].push([twClock(t), "end", day < D ? `🌙 Day ${day} ends · see you tomorrow` : "🌙 End of the day"]); day++; if (day <= D) t = twMin(tw.ds[day - 1] || tw.ds[0]); else fits = false; };
   const wave = (items, dur, put) => { for (let i = 0; i < items.length; i += C){ if (day > D){ fits = false; return; } if (t > L) nextDay(); if (day > D) return;
       const ws = items.slice(i, i + C); span[day] = span[day] || [t, t]; ws.forEach((x, j) => put(x, j + 1, day, t)); t += dur; span[day][1] = t; } };
-  const order = r => r % 2 ? cats : [...cats].reverse();
-  const gsz = c => twGz(tw, c), gr = c => tw.cats[c] / gsz(c), RRc = {}; cats.forEach(c => { RRc[c] = twRR(gsz(c)); });
-  const nR = Math.max(...cats.map(c => RRc[c].length), 0);
-  for (let r = 0; r < nR; r++){
-    const ms = []; order(r).forEach(c => { if (!RRc[c][r]) return; for (let g = 1; g <= gr(c); g++) RRc[c][r].forEach(([a, b]) => ms.push({c, g, a, b})); });
-    wave(ms, +tw.gm, (m, court, d, tt) => { n++; G.push({id: "g" + n, cat: m.c, grp: m.g, rnd: r + 1, day: d, time: twClock(tt), court, t1: m.c + ((m.g - 1) * gsz(m.c) + m.a), t2: m.c + ((m.g - 1) * gsz(m.c) + m.b)}); });
+  const ord = twOrd(tw);
+  const gsz = c => twGz(tw, c), gr = c => tw.cats[c] / gsz(c);
+  /* group matches in the order of play (first category starts), round by round; each court slot takes the next match
+     whose two teams didn't just play, so teams get a rest, and free courts are filled by the next category */
+  const Q = []; ord.forEach(c => { twRR(gsz(c)).forEach((ms, r) => { for (let g = 1; g <= gr(c); g++) ms.forEach(([a, b]) => Q.push({c, g, r, t1: c + ((g - 1) * gsz(c) + a), t2: c + ((g - 1) * gsz(c) + b)})); }); });
+  let prev = new Set(), gDay = 1, gEnd = null;
+  while (Q.length){
+    if (day > D){ fits = false; break; }
+    if (t > L){ nextDay(); prev = new Set(); if (day > D){ fits = false; break; } }
+    const pick = rest => { const busy = new Set(rest ? prev : []), take = [];
+      for (let i = 0; i < Q.length && take.length < C; i++){ const m = Q[i]; if (busy.has(m.t1) || busy.has(m.t2)){ busy.add(m.t1); busy.add(m.t2); continue; } take.push(i); busy.add(m.t1); busy.add(m.t2); }
+      return take; };
+    let take = pick(true); if (!take.length) take = pick(false);
+    const ws = take.map(i => Q[i]); for (let i = take.length - 1; i >= 0; i--) Q.splice(take[i], 1);
+    span[day] = span[day] || [t, t];
+    ws.forEach((m, j) => { n++; G.push({id: "g" + n, cat: m.c, grp: m.g, rnd: m.r + 1, day, time: twClock(t), court: j + 1, t1: m.t1, t2: m.t2}); });
+    prev = new Set(ws.flatMap(m => [m.t1, m.t2])); t += +tw.gm; span[day][1] = t; gDay = day; gEnd = t;
   }
+  const g1 = !!tw.g1 && D > 1;
+  if (g1 && gDay === 1 && day < D) nextDay();
   const kput = (lab, court, d, tt) => { K[lab] = `${dshort[d]} ${twClock(tt)} Ct ${court}`; };
   const big = cats.filter(c => gr(c) === 8);
-  if (big.length) wave([].concat(...[...big].reverse().map(c => Array.from({length: 8}, (_, i) => `${c} R${i + 1}`))), +tw.qm, kput);
-  wave([].concat(...[...cats].reverse().filter(c => gr(c) > 2).map(c => [1, 2, 3, 4].map(i => `${c} QF${i}`))), +tw.qm, kput);
+  if (big.length) wave([].concat(...ord.filter(c => big.includes(c)).map(c => Array.from({length: 8}, (_, i) => `${c} R${i + 1}`))), +tw.qm, kput);
+  wave([].concat(...ord.filter(c => gr(c) > 2).map(c => [1, 2, 3, 4].map(i => `${c} QF${i}`))), +tw.qm, kput);
   if (tw.finals && D > 1 && day < D && day <= D){ nextDay(); }
-  wave([].concat(...[...cats].reverse().map(c => [`${c} Semi 1`, `${c} Semi 2`])), +tw.sm, kput);
+  wave([].concat(...ord.map(c => [`${c} Semi 1`, `${c} Semi 2`])), +tw.sm, kput);
   if (day <= D){ E[day].push([twClock(t), "break", "☕ Break before the finals (15 min)"]); t += 15; }
-  wave([...cats].reverse().map(c => `${c} FINAL`), +tw.sm, kput);
+  wave(ord.map(c => `${c} FINAL`), +tw.sm, kput);
   if (day <= D) E[day].push([twClock(t + 15), "award", `🏆 Award ceremony${tw.prize ? ` · $${(+tw.prize).toLocaleString("en-US")} prize pool` : ""}`]);
   const teams = cats.reduce((a, c) => a + +tw.cats[c], 0), cn = {};
   for (let i = 1; i <= C; i++) cn[i] = (tw.cn[i - 1] || "").trim() || `Court ${i}`;
@@ -4050,12 +4071,13 @@ function twBuild(tw){
     catv: Object.fromEntries(cats.map(c => [c, c === "A" ? "--gold" : `--cat${c}`])), groups: Object.fromEntries(cats.map(c => [c, gr(c)])), size: SIZE, sizes: Object.fromEntries(cats.map(c => [c, gsz(c)])),
     gsets: Object.fromEntries(cats.map(c => [c, +tw.gs[c]])), days, dshort, format: Object.fromEntries(cats.map(c => [c, setTxt(tw.gs[c])])),
     courts: Array.from({length: C}, (_, i) => i + 1), cn, T: {G, K, E}, info_html: info, signup: tw.signup ? "true" : "false", ...(tw.fee ? {fee: +tw.fee} : {})};
-  return {cfg, teams, g: G.length, k: Object.keys(K).length, fits: fits && day <= D, span, days, end: dayD(D), club};
+  return {cfg, teams, g: G.length, k: Object.keys(K).length, fits: fits && day <= D, span, days, end: dayD(D), club, ord, gDay, gEnd, g1};
 }
 
 const twSum = (tw, b) => `<section class="card twsec twsum"><b>${t("twSum")} · ${esc(tw.name || "")}</b>
     <span>${b.teams} teams · ${tf("twGrp", {g: b.g})} · ${tf("twKos", {k: b.k})}</span>
     ${Object.keys(b.span).map(d => `<span class="note">${esc(tf("twDayL", {d: b.days[d], a: twClock(b.span[d][0]), b: twClock(b.span[d][1])}))}</span>`).join("")}
+    ${b.g1 && b.gEnd != null ? (b.gDay === 1 ? `<b class="ok">${tf("twG1ok", {e: twClock(b.gEnd)})}</b>` : `<b class="bad">${t("twG1no")}</b>`) : ""}
     <b class="${b.fits ? "ok" : "bad"}">${b.fits ? tf("twFits", {d: tw.days}) : t("twNoFit")}</b>
     <span class="note">${t("twSlug")}: <b dir="ltr">t.html?${esc(twSlug(tw))}</b></span>
     ${S.twExists ? `<label class="row" style="font-size:14px;gap:8px"><input type="checkbox" data-twk="replace"${tw.replace ? " checked" : ""}> ${t("twReplace")}</label>` : ""}</section>`;
@@ -4070,7 +4092,9 @@ V.tnew = () => { if (!canMakeTour()) return V.events(); if (!S.tw) twInit(); con
     ${fld(t("twName"), "name", tw.name, `placeholder="${t("twNamePh")}"`)}${fld(t("twKick"), "kick", tw.kick, `placeholder="${t("twKickPh")}"`)}
     <div class="grid2">${fld(t("twStart"), "start", tw.start, `type="date"`)}<div class="fld"><span>${t("twDays")}</span>${chips("days", [1, 2, 3, 4, 5].map(x => [x, x]), tw.days)}</div></div></section>
    <section class="card twsec"><b>${t("twS3")}</b><span class="note">${t("twS3s")}</span>
-    ${["A", "B", "C", "D", "E", "X"].map(c => `<div class="twcat">${c === "X" ? `<span class="lv mixb">${t("twMix")}</span>` : `<span class="lv c${c}">${c}</span>`}${chips("cat" + c, [[0, t("twOff")], [6, 6], [8, 8], [12, 12], [16, 16], [24, 24], [32, 32]], tw.cats[c])}</div>${tw.cats[c] > 0 ? `<div class="twgz"><span>${t("twGz")}</span>${chips("gz" + c, (TW_GZ[tw.cats[c]] || [4]).map(z => [z, z]), twGz(tw, c))}<small>${tf("twGzS", {g: tw.cats[c] / twGz(tw, c), m: twGz(tw, c) - 1, r: tw.cats[c] / twGz(tw, c) === 2 ? t("twSF") : tw.cats[c] / twGz(tw, c) === 8 ? t("twR16") : t("twQF")})}</small></div>` : ""}`).join("")}</section>
+    ${["A", "B", "C", "D", "E", "X"].map(c => `<div class="twcat">${c === "X" ? `<span class="lv mixb">${t("twMix")}</span>` : `<span class="lv c${c}">${c}</span>`}${chips("cat" + c, [[0, t("twOff")], [6, 6], [8, 8], [12, 12], [16, 16], [24, 24], [32, 32]], tw.cats[c])}</div>${tw.cats[c] > 0 ? `<div class="twgz"><span>${t("twGz")}</span>${chips("gz" + c, (TW_GZ[tw.cats[c]] || [4]).map(z => [z, z]), twGz(tw, c))}<small>${tf("twGzS", {g: tw.cats[c] / twGz(tw, c), m: twGz(tw, c) - 1, r: tw.cats[c] / twGz(tw, c) === 2 ? t("twSF") : tw.cats[c] / twGz(tw, c) === 8 ? t("twR16") : t("twQF")})}</small></div>` : ""}`).join("")}
+    ${b.ord.length > 1 ? `<div class="tword"><span>${t("twOrd")}</span><small>${t("twOrdS")}</small><div class="tword-l">${b.ord.map((c, i) => `<button class="chip" data-twc="up|${c}"${i ? "" : " disabled"} aria-label="${t("twUp")}"><i>${i + 1}</i>${c === "X" ? t("twMix") : c}${i ? " ↑" : ""}</button>`).join("")}</div></div>` : ""}
+    ${+tw.days > 1 ? `<label class="row" style="font-size:14px;gap:8px"><input type="checkbox" data-twk="g1"${tw.g1 ? " checked" : ""}> ${t("twG1")}</label>` : ""}</section>
    <section class="card twsec"><b>${t("twS4")}</b>
     <div class="fld"><span>${t("twCourts")}</span>${chips("courts", [1, 2, 3, 4].map(x => [x, x]), tw.courts)}</div>
     <div class="grid2">${Array.from({length: +tw.courts}, (_, i) => fld(tf("twCn", {n: i + 1}), "cn" + i, tw.cn[i] || `Court ${i + 1}`)).join("")}</div>
@@ -4098,6 +4122,7 @@ app.addEventListener("click", async e => {
   if ("twnew" in d){ twInit(); S.twExists = false; go("tnew"); return; }
   if (d.twclub){ S.tw.club = d.twclub; S.tw.cn = S.courts.filter(x => x.club_id === d.twclub).map(x => x.name); S.tw.courts = Math.max(1, Math.min(4, S.tw.cn.length || 2)); render(); return; }
   if (d.twc){ const [k, v] = d.twc.split("|");
+    if (k === "up"){ const o = twOrd(S.tw), i = o.indexOf(v); if (i > 0){ o.splice(i, 1); o.splice(i - 1, 0, v); } S.tw.ord = o; render(); return; }
     if (/^cat[A-EX]$/.test(k)) S.tw.cats[k[3]] = +v; else if (/^gz[A-EX]$/.test(k)){ S.tw.gz = S.tw.gz || {}; S.tw.gz[k[2]] = +v; } else if (/^gs[A-EX]$/.test(k)) S.tw.gs[k[2]] = +v; else S.tw[k] = +v; render(); return; }
   if ("twgo" in d){ document.querySelectorAll("[data-tw]").forEach(x => { const k = x.dataset.tw; if (/^cn\d/.test(k)) S.tw.cn[+k.slice(2)] = x.value; else if (/^ds\d/.test(k)) S.tw.ds[+k.slice(2)] = x.value; else S.tw[k] = k === "prize" || k === "fee" ? x.value.replace(/[^\d]/g, "") : x.value; });
     const tw = S.tw, b = twBuild(tw), slug = twSlug(tw); if (!tw.name.trim()){ toast(t("twNeedName")); const n = document.querySelector('[data-tw="name"]'); if (n) n.focus(); return; } if (!b.fits){ render(); toast(t("twNoFit")); return; } el.disabled = true;
