@@ -1627,6 +1627,46 @@ button.m2s:not(.free){cursor:pointer}
 .m2-open{font-weight:800;font-size:14px;color:var(--b)}
 .mx2 .m2-ft .tag{background:rgba(255,255,255,.1);color:#fff;border-color:transparent}
 .m2-pill b{color:var(--b)}
+/* ===== open-match card v3: compact ticket in the club's theme */
+.mx3{position:relative;display:grid;grid-template-columns:84px minmax(0,1fr);border-radius:18px;overflow:hidden;color:#fff;margin:4px 2px 12px;
+ background:linear-gradient(135deg,color-mix(in srgb,var(--a) 30%,var(--d)),var(--d) 70%);border:1.5px solid color-mix(in srgb,var(--b) 40%,transparent);
+ box-shadow:0 0 0 3px color-mix(in srgb,var(--b) 8%,transparent),0 8px 20px -8px color-mix(in srgb,var(--b) 45%,transparent),0 10px 22px rgba(0,0,0,.25)}
+.om-row>.mx3{flex:0 0 88%;scroll-snap-align:center;margin:4px 0 14px}
+.m3-ph{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:8px 4px;text-align:center;
+ background:linear-gradient(90deg,color-mix(in srgb,var(--d) 35%,transparent),color-mix(in srgb,var(--d) 70%,transparent) 80%,var(--d)),var(--cv) 40% 60%/auto 100%;border-inline-end:1.5px dashed color-mix(in srgb,var(--b) 35%,transparent)}
+.m3-ph.nocov{background:radial-gradient(120% 90% at 0% 0%,color-mix(in srgb,var(--b) 30%,transparent),transparent 60%),linear-gradient(160deg,var(--a),var(--d))}
+.m3-ph>*{position:relative;text-shadow:0 1px 8px rgba(0,0,0,.85)}
+.m3-tag{font-size:9px;font-weight:900;letter-spacing:.08em;padding:3px 7px;border-radius:99px;background:var(--b);color:var(--d);text-shadow:none;margin-bottom:4px;white-space:nowrap}
+.m3-ph b{font-family:var(--disp);font-weight:800;font-size:27px;line-height:.95;letter-spacing:-.3px}
+.m3-ph small{font-size:11px;font-weight:800;text-transform:uppercase;color:var(--b);letter-spacing:.06em}
+.m3-d{font-size:11px;font-weight:600;color:rgba(255,255,255,.85);margin-top:2px}
+.m3-bd{min-width:0;padding:9px 11px 10px;display:flex;flex-direction:column;gap:8px}
+.m3-top{display:flex;align-items:center;gap:8px;min-width:0}
+.m3-top img{width:26px;height:26px;flex:0 0 26px;border-radius:50%;object-fit:cover;background:#fff;border:1.5px solid var(--b)}
+.m3-top>div{min-width:0;flex:1}
+.m3-top b{display:block;font-size:13.5px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m3-top small{display:block;font-size:11px;color:rgba(255,255,255,.6);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.m3-pr{flex:0 0 auto;font-size:12px;font-weight:800;color:var(--b);padding:3px 8px;border-radius:99px;background:color-mix(in srgb,var(--b) 14%,transparent)}
+.m3-tags{display:flex;gap:5px;flex-wrap:wrap}
+.m3-chip{font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:99px;background:rgba(255,255,255,.12)}
+.m3-chip.rv{background:#E5484D}
+.m3-ct{position:relative;display:grid;grid-template-columns:1fr 2px 1fr;align-items:center;gap:4px;padding:6px 4px;border-radius:12px;
+ background:linear-gradient(180deg,color-mix(in srgb,var(--a) 22%,transparent),color-mix(in srgb,var(--a) 10%,transparent));border:1px solid color-mix(in srgb,var(--b) 20%,transparent)}
+.m3-net{align-self:stretch;background:color-mix(in srgb,var(--b) 60%,transparent);border-radius:2px}
+.m3-sd{display:flex;justify-content:space-around;min-width:0}
+.mx3 .m2s{flex-direction:column;gap:2px;min-width:0;max-width:50%}
+.mx3 .m2s>i{width:28px;height:28px;font-size:11px;display:grid;place-items:center;border-radius:50%;font-style:normal;font-weight:800;background:var(--b);color:var(--d)}
+.mx3 .m2s.free>i{font-size:14px;background:color-mix(in srgb,var(--b) 10%,transparent);color:var(--b);border:1.5px dashed var(--b);box-shadow:none;animation:none}
+.mx3 .m2s.free>span{font-size:8.5px;letter-spacing:.06em}
+.mx3 .m2s .lv{transform:scale(.78);transform-origin:center top;margin:0 0 -4px}
+.mx3 .m2s small{font-size:9.5px;max-width:52px}
+.m3-ft{display:flex;align-items:center;gap:6px;min-width:0}
+.m3-lv{flex:0 1 auto;min-width:0;font-size:11px;font-weight:700;padding:5px 9px;border-radius:99px;background:rgba(255,255,255,.09);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mx3 .jb{display:flex;gap:5px;margin-inline-start:auto;flex:0 0 auto}
+.mx3 .jb button{padding:7px 13px!important;min-height:0!important;font-size:12.5px!important;border-radius:99px!important;font-weight:800;border:0;background:var(--b)!important;color:var(--d)!important;box-shadow:0 3px 12px -3px color-mix(in srgb,var(--b) 70%,transparent)!important}
+.mx3 .jb .sp{font-size:11px;color:rgba(255,255,255,.7)}
+.mx3 .jsheet{color:var(--ink);background:var(--card);border-radius:12px;padding:10px}
+html[dir=rtl] .m3-ph b{font-family:inherit;font-size:22px;letter-spacing:0}
 </style>
 </head>
 <body>
@@ -1738,7 +1778,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v78";
+const VERSION = "v79";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -1872,12 +1912,14 @@ const m2Head = (clubName, d, tag) => { const cov = WEL_COVER(clubName || "");
 const m2Club = (sv, name, sub) => `<div class="m2-club">${sv.k.logo ? `<img src="${esc(sv.k.logo)}" alt="" onerror="this.remove()">` : ""}<div><b>${esc(name)}</b><small>${sub}</small></div></div>`;
 function mx2(m, d, sv, map, canJoin, range, each, btns, sheet, ppl){
   const cov = WEL_COVER(m.club_name || ""), seat = k => m2Seat(map, k, {join: canJoin ? m.id : null});
-  return `<div class="mx2" style="${sv.style}${cov ? `;--cv:url(${cov})` : ""}">
-   <div class="m2-ph${cov ? "" : " nocov"}"><span class="m2-tag">${esc(m2Day(d))}</span><div class="m2-when"><b>${esc(fmtTime(d))}</b><span>${esc(fmtDay(d))}</span></div></div><div class="m2-st"></div>
-   <div class="m2-bd"><div class="m2-club">${sv.k.logo ? `<img src="${esc(sv.k.logo)}" alt="" onerror="this.remove()">` : ""}<div><b>${esc(m.club_name)}</b><small>${esc(m.court_name)} · ${m.minutes} ${t("min")}${m.split ? ` · ${t("splitTag")}` : ""}</small></div></div>
-    ${m.vis && m.vis !== "public" && m.inv ? `<span class="tag g" style="align-self:flex-start">${t("lobPrivTag")}</span>` : ""}${ppl.some(p => p.i && rivalIds().has(p.i)) ? `<span class="tag rvt" style="align-self:flex-start">${t("rvTag")}</span>` : ""}
-    <div class="m2-court"><div class="m2-side">${seat("AL")}${seat("AR")}</div><div class="m2-side">${seat("BR")}${seat("BL")}</div></div>
-    <div class="m2-ft"><span class="m2-pill">${m.level_min != null ? `${t("lvl")} ${range}` : range}</span><span class="m2-pill">${each}</span><span class="m2-sp"></span><div class="jb">${btns}</div></div>${sheet ? `<div>${sheet}</div>` : ""}</div></div>`; }
+  const tt = fmtTime(d), tm = tt.match(/^(.*\d)\s*(\D+)$/), day = d.toLocaleDateString(lang === "ar" ? "ar" : "en-GB", {timeZone: TZ, weekday: "short", day: "numeric"});
+  const tags = (m.vis && m.vis !== "public" && m.inv ? `<span class="m3-chip">${t("lobPrivTag")}</span>` : "") + (ppl.some(p => p.i && rivalIds().has(p.i)) ? `<span class="m3-chip rv">${t("rvTag")}</span>` : "");
+  return `<div class="mx3" style="${sv.style}${cov ? `;--cv:url(${cov})` : ""}">
+   <div class="m3-ph${cov ? "" : " nocov"}"><span class="m3-tag">${esc(m2Day(d))}</span><b>${esc(tm ? tm[1] : tt)}</b>${tm ? `<small>${esc(tm[2])}</small>` : ""}<span class="m3-d">${esc(day)}</span></div>
+   <div class="m3-bd"><div class="m3-top">${sv.k.logo ? `<img src="${esc(sv.k.logo)}" alt="" onerror="this.remove()">` : ""}<div><b>${esc(m.club_name)}</b><small>${esc(m.court_name)} · ${m.minutes} ${t("min")}${m.split ? ` · ${t("splitTag")}` : ""}</small></div><span class="m3-pr">${each}</span></div>
+    ${tags ? `<div class="m3-tags">${tags}</div>` : ""}
+    <div class="m3-ct"><div class="m3-sd">${seat("AL")}${seat("AR")}</div><i class="m3-net"></i><div class="m3-sd">${seat("BR")}${seat("BL")}</div></div>
+    <div class="m3-ft"><span class="m3-lv">${m.level_min != null ? `${t("lvl")} ${range}` : range}</span><div class="jb">${btns}</div></div>${sheet ? `<div>${sheet}</div>` : ""}</div></div>`; }
 
 /* ---------- views ---------- */
 const V = {};
@@ -1887,10 +1929,7 @@ V.home = () => { const next = S.mine.find(b => b.status !== "cancelled" && new D
   <div class="top"><div><div class="hello">${S.user ? `${t("hi")} ${esc(name)}` : t("guest")}</div><div class="logo"><img class="lgmark" src="volt3d.png" alt="" onerror="this.remove()">Padel <i>Live</i></div></div>
    <div class="row">${bell()}<button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button>${S.user ? "" : `<button class="pill" data-go="auth">${t("signin")}</button>`}</div></div>
   ${welcomeHome()}
-  ${next ? (() => { const nd = new Date(next.starts_at), sv = skinVars(next.club_name), cov = WEL_COVER(next.club_name || "");
-    return `<button class="mx2 mxnext" data-match="${next.id}" style="${sv.style}${cov ? `;--cv:url(${cov})` : ""}">${m2Head(next.club_name, nd, t("next"))}
-     <div class="m2-bd">${m2Club(sv, next.club_name, `${esc(next.court_name)} · ${next.minutes} ${t("min")}`)}
-      <div class="m2-ft">${statusTag(next.status)}${next.code ? `<span class="m2-pill">#${next.booking_no} · <b>${esc(next.code)}</b></span>` : ""}<span class="m2-sp"></span><span class="m2-open">${t("details")} ${lang === "ar" ? "←" : "→"}</span></div></div></button>`; })()
+  ${next ? `<button class="hero" data-match="${next.id}" style="text-align:start;width:100%"><div class="between" style="width:100%"><span class="kick2">${t("next")}</span>${statusTag(next.status).replace('tag g','tag w').replace('tag pend','tag w')}</div><span class="big">${esc(fmtDay(new Date(next.starts_at)) + " · " + fmtTime(new Date(next.starts_at)))}</span><span style="opacity:.92;font-size:14px">${esc(next.club_name)} · ${esc(next.court_name)} · ${next.minutes} ${t("min")}${next.code ? ` · #${next.booking_no} · <b>${esc(next.code)}</b>` : ""}</span></button>`
    : `<button class="hero" data-go="clubs" style="text-align:start;width:100%"><span class="kick2">${t("none")}</span><span class="big">${t("book")} →</span><span style="opacity:.9;font-size:14px">${t("bookFirst")}</span></button>`}
   <div class="quick"><button data-go="clubs">${IC.cal}${t("book")}</button><button data-go="matches">${IC.ppl}${t("find")}</button><button data-go="events">${IC.cup}${t("events")}</button></div>
   ${pushCard(true)}
@@ -4072,10 +4111,9 @@ function smartCard(){
   const ps = pendingScores()[0];
   if (ps) return `<button class="hero sc-alert" data-match="${ps.id}" style="text-align:start;width:100%"><span class="kick2">⚑ ${t("scScore")}</span><span class="big">${esc(fmtDay(new Date(ps.starts_at)))} · ${esc(ps.club_name)}</span><span style="opacity:.92;font-size:14px">${t("scScoreS")}</span><span class="sc-go">${t("scOpen")} →</span></button>`;
   const nx = upcoming()[0], today = nx && dayKey(new Date(nx.starts_at)) === dayKey(new Date());
-  const nextHero = b => { const nd = new Date(b.starts_at), sv = skinVars(b.club_name), cov = WEL_COVER(b.club_name || "");
-    return `<button class="mx2 mxnext" data-match="${b.id}" style="${sv.style}${cov ? `;--cv:url(${cov})` : ""}">${m2Head(b.club_name, nd, today ? "🔥 " + t("scToday") : t("scNextT"))}
-     <div class="m2-bd">${m2Club(sv, b.club_name, `${esc(b.court_name)} · ${b.minutes} ${t("min")}`)}
-      <div class="m2-ft">${statusTag(b.status)}${b.code ? `<span class="m2-pill">#${b.booking_no} · <b>${esc(b.code)}</b></span>` : ""}<span class="m2-sp"></span><span class="m2-open">${t("details")} ${lang === "ar" ? "←" : "→"}</span></div></div></button>`; };
+  const nextHero = b => `<button class="hero" data-match="${b.id}" style="text-align:start;width:100%"><div class="between" style="width:100%"><span class="kick2">${today ? "🔥 " + t("scToday") : t("scNextT")}</span>${statusTag(b.status).replace('tag g','tag w').replace('tag pend','tag w')}</div>
+    <span class="big">${esc(today ? fmtTime(new Date(b.starts_at)) : fmtDay(new Date(b.starts_at)) + " · " + fmtTime(new Date(b.starts_at)))}</span>
+    <span style="opacity:.92;font-size:14px">${esc(b.club_name)} · ${esc(b.court_name)} · ${b.minutes} ${t("min")}${b.code ? ` · #${b.booking_no} · <b>${esc(b.code)}</b>` : ""}</span></button>`;
   if (today) return nextHero(nx);
   const rp = (S.ratePend || []).filter(x => !ls.get("pl-rtx-" + x.id))[0];
   if (rp) return `<div class="sc-wrap"><button class="hero sc-rate" data-match="${rp.id}" style="text-align:start;width:100%"><span class="kick2">⭐ ${t("scRate")}</span><span class="big">${esc(fmtDay(new Date(rp.starts_at)))}</span><span style="opacity:.92;font-size:14px">${esc(tf("scRateS", {c: rp.club, n: (rp.players || []).map(p => String(p.name || "").split(" ")[0]).join(", ")}))}</span><span class="sc-go">${t("rtSend")} →</span></button><button class="sc-x" data-rtx="${rp.id}" aria-label="Close">×</button></div>`;
