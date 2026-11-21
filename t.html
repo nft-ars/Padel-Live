@@ -139,6 +139,13 @@ html:root{--catX:#D9669E;--catX-soft:rgba(217,102,158,.16)}
 .mvover{outline:3px solid #3ecf8e!important;outline-offset:-1px}
 .mvghost{position:fixed;z-index:9999;pointer-events:none;opacity:.92;transform:rotate(-2deg) scale(1.04);box-shadow:0 18px 40px rgba(0,0,0,.5)}
 .brow.mvnew{opacity:.9}
+/* ===== TV performance: no live blur, no moving blurred beams (TV browsers lag on these) */
+.tv,.tv *{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.tv .tv-bg i{animation:none!important;filter:none!important;opacity:.18!important}
+.tv.sk .tv-cin,.tv.sk .tv-card,.tv.sk .tv-grp,.tv.sk .tv-r,.tv.sk .tv-sp{background:linear-gradient(160deg,color-mix(in srgb,var(--tv-a) 30%,rgba(10,14,24,.92)),rgba(6,9,16,.94) 75%)!important}
+.tv.sk .tv-top{background:linear-gradient(100deg,color-mix(in srgb,var(--tv-a) 75%,#000) 0%,color-mix(in srgb,var(--tv-a) 30%,#000) 55%,rgba(0,0,0,.6))!important}
+.tv-ls{background:rgba(0,0,0,.78)!important}
+.tv,.tv-main{contain:layout paint}
 /* ===== live draw */
 .sec.draw,.draw-set{--line:rgba(217,184,92,.3);--gold:#D9B85C}.sec.draw{background:radial-gradient(120% 60% at 50% 0%,#14392c 0%,#04130d 65%);color:#EEF3EC;border-radius:24px;padding:16px 14px 18px;border:1px solid rgba(217,184,92,.35);box-shadow:0 20px 50px rgba(0,0,0,.35)}
 .sec.draw .su-s{color:#A9B8AE}.sec.draw h2{color:#EEF3EC}.sec.draw .btn{color:#EEF3EC;border-color:rgba(217,184,92,.45);background:rgba(255,255,255,.04)}.sec.draw .btn.primary{background:#D9B85C;color:#111}
@@ -3340,7 +3347,7 @@ function refApply(mid, st){
   const fin = finalOf(st);
   if (fin){ s.scores[mid] = fin; s.live = s.live.filter(x => x !== mid); }
   else { delete s.scores[mid]; if (!s.live.includes(mid)) s.live.push(mid); }
-  render(); refSend(mid, st);
+  render(); if (window.__rtPt) window.__rtPt(mid, st, fin || null); refSend(mid, st);
 }
 /* keep the referee's screen awake while a PIN is entered */
 let refLock = null, refLockOn = false;
@@ -3424,7 +3431,9 @@ const TVS = { i: 0, last: "", timer: null, prev: {}, burstT: null, ticker: "" };
 function tvPanels(){
   const all = allMatches(), p = [];
   const anyLive = COURTS.some(c => all.some(m => m.court === c && isLive(m.id) && !isDoneM(m)));
-  p.push({ id: "courts", dur: anyLive ? 22000 : 12000 });
+  /* while a referee has a match running, the screen stays on the live scores; it only rotates during breaks */
+  if (anyLive){ p.push({ id: "courts", dur: 600000 }); return p; }
+  p.push({ id: "courts", dur: 12000 });
   if (all.some(m => notStarted(m))) p.push({ id: "next", dur: 11000 });
   for (const c of CATS) if (all.some(m => m.cat === c && !m.id.includes("-"))) p.push({ id: "grp-" + c, dur: GROUPS[c] > 4 ? 13000 : 11000 });
   if (all.some(isDoneM)) p.push({ id: "results", dur: 11000 });
@@ -3527,18 +3536,24 @@ function renderTV(){
     TVS.prev = JSON.parse(JSON.stringify(cur().pts || {}));
   }
   const all = allMatches(), panels = tvPanels(); if (TVS.i >= panels.length) TVS.i = 0;
-  const p = panels[TVS.i];
+  if (panels.length === 1 && TVS.last && TVS.last !== "courts"){ TVS.i = 0; clearTimeout(TVS.timer); }
+  const p = panels[TVS.i], modeK = panels.length === 1 ? "L" : "R", remode = TVS.mode !== modeK; TVS.mode = modeK;
   const html = p.id === "courts" ? `<h2 class="tv-h"><span>On</span> court</h2><div class="tv-courts${COURTS.length > 2 ? " many" : ""}">${COURTS.map(c => tvCourt(all, c)).join("")}</div>`
     : p.id === "next" ? tvNext(all) : p.id === "results" ? tvResults(all) : p.id === "sponsors" ? tvSponsors() : tvGroups(p.id.slice(4));
   const main = document.getElementById("tv-main"), fresh = TVS.last !== p.id;
   const before = {}; main.querySelectorAll("[data-k]").forEach(e => before[e.dataset.k] = e.textContent);
-  if (fresh || main.dataset.h !== html){
-    main.innerHTML = html; main.dataset.h = html;
+  const skel = h => h.replace(/(data-k="[^"]*"[^>]*>)[^<]*/g, "$1");
+  if (!fresh && main.dataset.h !== html && main.dataset.sk === skel(html)){ /* same layout, new numbers: change only the numbers */
+    const tmp = document.createElement("div"); tmp.innerHTML = html; const nw = {}; tmp.querySelectorAll("[data-k]").forEach(e => nw[e.dataset.k] = e.textContent);
+    main.querySelectorAll("[data-k]").forEach(e => { const v = nw[e.dataset.k]; if (v != null && v !== e.textContent){ e.textContent = v; e.classList.remove("pop"); void e.offsetWidth; e.classList.add("pop"); } });
+    main.dataset.h = html; }
+  else if (fresh || main.dataset.h !== html){
+    main.innerHTML = html; main.dataset.h = html; main.dataset.sk = skel(html);
     if (fresh){ main.classList.remove("enter"); void main.offsetWidth; main.classList.add("enter");
       if (TVS.last){ const st = document.getElementById("tv-sting"); if (st){ st.classList.remove("go"); void st.offsetWidth; st.classList.add("go"); } } }
     else main.querySelectorAll("[data-k]").forEach(e => { if (before[e.dataset.k] != null && before[e.dataset.k] !== e.textContent) e.classList.add("pop"); });
   }
-  if (fresh){ const pr = document.getElementById("tv-prog"); pr.style.animation = "none"; void pr.offsetWidth; pr.style.animation = `tvprog ${p.dur}ms linear forwards`;
+  if (fresh || remode){ const pr = document.getElementById("tv-prog"); pr.style.animation = "none"; void pr.offsetWidth; pr.style.animation = modeK === "L" ? "none" : `tvprog ${p.dur}ms linear forwards`; pr.style.opacity = modeK === "L" ? "0" : "";
     clearTimeout(TVS.timer); TVS.timer = setTimeout(() => { TVS.i++; renderTV(); }, p.dur); }
   TVS.last = p.id;
   const lsEl = document.getElementById("tv-ls");
@@ -3792,8 +3807,14 @@ setInterval(() => { if (!document.hidden) pull(); }, MODE ? 3000 : 8000);
 let RT = null;
 try { if (sb.channel){ RT = sb.channel("tour-" + SLUG, {config: {broadcast: {self: false}}})
   .on("broadcast", {event: "bump"}, m => { const v = m && m.payload && m.payload.v; if (v == null || v !== VERSION) pull(); })
+  .on("broadcast", {event: "pt"}, m => { const x = m && m.payload; if (!x || !x.mid || !x.st || editMode) return;
+    try { const s = cur(); s.pts = s.pts || {}; s.pts[x.mid] = x.st;
+      if (x.fin){ s.scores[x.mid] = x.fin; s.live = s.live.filter(i => i !== x.mid); } else { delete s.scores[x.mid]; if (!s.live.includes(x.mid)) s.live.push(x.mid); }
+      render(); } catch (e) {}
+    clearTimeout(window.__ptChk); window.__ptChk = setTimeout(() => pull(true), 4000); /* the server stays the source of truth */ })
   .subscribe(); } } catch (e) { RT = null; }
 window.__rtBump = v => { try { if (RT) RT.send({type: "broadcast", event: "bump", payload: {v}}); } catch (e) {} };
+window.__rtPt = (mid, st, fin) => { try { if (RT) RT.send({type: "broadcast", event: "pt", payload: {mid, st, fin}}); } catch (e) {} };
 document.addEventListener("visibilitychange", () => { if (!document.hidden) pull(); });
 (async () => { try { const r = await sb.rpc("t_can_edit", {p_slug: SLUG}); if (r.data === true){ canEdit = true; render(); syncResults(); setInterval(() => syncResults(), 20000); } } catch (e) {} })();
 /* finished matches go to Padel Live: levels, wins, challenges (only teams that signed up in the app) */

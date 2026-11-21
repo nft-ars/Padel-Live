@@ -1617,6 +1617,16 @@ html.wa-on,html.wa-on body,html.wa-on .app{background:#07110D!important;--stage:
 
 .m2-ft .jb{margin-inline-start:auto}
 .m2s .lv{transform:scale(.88);transform-origin:left center}
+/* club-style card on the match page + next match on Home */
+.mx2.mxp,.mx2.mxnext{margin:4px 0 6px}
+button.mx2{display:block;width:100%;padding:0;text-align:start;font:inherit;cursor:pointer}
+.m2-h{font-family:var(--disp);font-style:italic;font-weight:800;font-size:18px;text-transform:uppercase;letter-spacing:.3px;color:#fff}
+.m2-note{font-size:12.5px;color:rgba(255,255,255,.7)}
+.m2s.sel>i{outline:3px solid #fff;outline-offset:2px}
+button.m2s:not(.free){cursor:pointer}
+.m2-open{font-weight:800;font-size:14px;color:var(--b)}
+.mx2 .m2-ft .tag{background:rgba(255,255,255,.1);color:#fff;border-color:transparent}
+.m2-pill b{color:var(--b)}
 </style>
 </head>
 <body>
@@ -1728,7 +1738,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v77";
+const VERSION = "v78";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -1851,10 +1861,17 @@ function matchRow(m){
 /* open-match card v2: the club's photo, logo and colours; flat court with tappable free spots */
 function m2Day(d){ const n = new Date(), a = new Date(n.getFullYear(), n.getMonth(), n.getDate()), b = new Date(d.getFullYear(), d.getMonth(), d.getDate()), k = Math.round((b - a) / 864e5);
   return k === 0 ? (d.getHours() >= 17 ? t("m2Tonight") : t("m2Today")) : k === 1 ? t("m2Tmrw") : d.toLocaleDateString(lang === "ar" ? "ar" : "en-GB", {weekday: "short"}).toUpperCase(); }
+function m2Seat(map, k, o){ const s = map[k], sd = k[1] === "L" ? t("sdL") : t("sdR"), sel = o.sel === k ? " sel" : "", tag = o.swap ? "button" : "span";
+  const sw = o.swap ? ` type="button" data-seat="${k}"` : "";
+  if (!s) return o.join ? `<button type="button" class="m2s free${sel}" data-join="${o.join}" data-jpos="${k}"><i>+</i><span>${sd}</span></button>` : `<${tag}${sw} class="m2s free${o.swap ? "" : " off"}${sel}"><i>+</i><span>${sd}</span></${tag}>`;
+  const p = s.p; return `<${tag}${sw} class="m2s${sel}"><i>${p.friend ? "👤" : esc(initials(p.n || "?"))}</i>${p.friend ? `<small>${esc(p.n)}</small>` : lvChip(p.l, p.b)}</${tag}>`; }
+const m2Court = (map, o) => `<div class="m2-court"><div class="m2-side">${m2Seat(map, "AL", o)}${m2Seat(map, "AR", o)}</div><div class="m2-side">${m2Seat(map, "BR", o)}${m2Seat(map, "BL", o)}</div></div>`;
+/* the club-style top of a card: photo, day tag, time */
+const m2Head = (clubName, d, tag) => { const cov = WEL_COVER(clubName || "");
+  return `<div class="m2-ph${cov ? "" : " nocov"}"><span class="m2-tag">${esc(tag || m2Day(d))}</span><div class="m2-when"><b>${esc(fmtTime(d))}</b><span>${esc(fmtDay(d))}</span></div></div><div class="m2-st"></div>`; };
+const m2Club = (sv, name, sub) => `<div class="m2-club">${sv.k.logo ? `<img src="${esc(sv.k.logo)}" alt="" onerror="this.remove()">` : ""}<div><b>${esc(name)}</b><small>${sub}</small></div></div>`;
 function mx2(m, d, sv, map, canJoin, range, each, btns, sheet, ppl){
-  const cov = WEL_COVER(m.club_name || ""), seat = k => { const s = map[k], sd = k[1] === "L" ? t("sdL") : t("sdR");
-    if (!s) return canJoin ? `<button type="button" class="m2s free" data-join="${m.id}" data-jpos="${k}"><i>+</i><span>${sd}</span></button>` : `<span class="m2s free off"><i>+</i><span>${sd}</span></span>`;
-    const p = s.p; return `<span class="m2s"><i>${p.friend ? "👤" : esc(initials(p.n || "?"))}</i>${p.friend ? `<small>${esc(p.n)}</small>` : lvChip(p.l, p.b)}</span>`; };
+  const cov = WEL_COVER(m.club_name || ""), seat = k => m2Seat(map, k, {join: canJoin ? m.id : null});
   return `<div class="mx2" style="${sv.style}${cov ? `;--cv:url(${cov})` : ""}">
    <div class="m2-ph${cov ? "" : " nocov"}"><span class="m2-tag">${esc(m2Day(d))}</span><div class="m2-when"><b>${esc(fmtTime(d))}</b><span>${esc(fmtDay(d))}</span></div></div><div class="m2-st"></div>
    <div class="m2-bd"><div class="m2-club">${sv.k.logo ? `<img src="${esc(sv.k.logo)}" alt="" onerror="this.remove()">` : ""}<div><b>${esc(m.club_name)}</b><small>${esc(m.court_name)} · ${m.minutes} ${t("min")}${m.split ? ` · ${t("splitTag")}` : ""}</small></div></div>
@@ -1870,9 +1887,10 @@ V.home = () => { const next = S.mine.find(b => b.status !== "cancelled" && new D
   <div class="top"><div><div class="hello">${S.user ? `${t("hi")} ${esc(name)}` : t("guest")}</div><div class="logo"><img class="lgmark" src="volt3d.png" alt="" onerror="this.remove()">Padel <i>Live</i></div></div>
    <div class="row">${bell()}<button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button>${S.user ? "" : `<button class="pill" data-go="auth">${t("signin")}</button>`}</div></div>
   ${welcomeHome()}
-  ${next ? `<div class="hero"><div class="between" style="width:100%"><span class="kick2">${t("next")}</span>${statusTag(next.status).replace('tag g','tag w').replace('tag pend','tag w')}</div>
-    <span class="big">${esc(fmtDay(new Date(next.starts_at)))} · ${esc(fmtTime(new Date(next.starts_at)))}</span>
-    <span style="opacity:.92;font-size:14px">${esc(next.club_name)} · ${esc(next.court_name)} · ${next.minutes} ${t("min")}${next.code ? ` · ${t("booking")} #${next.booking_no} · <b>${esc(next.code)}</b>` : ""}</span></div>`
+  ${next ? (() => { const nd = new Date(next.starts_at), sv = skinVars(next.club_name), cov = WEL_COVER(next.club_name || "");
+    return `<button class="mx2 mxnext" data-match="${next.id}" style="${sv.style}${cov ? `;--cv:url(${cov})` : ""}">${m2Head(next.club_name, nd, t("next"))}
+     <div class="m2-bd">${m2Club(sv, next.club_name, `${esc(next.court_name)} · ${next.minutes} ${t("min")}`)}
+      <div class="m2-ft">${statusTag(next.status)}${next.code ? `<span class="m2-pill">#${next.booking_no} · <b>${esc(next.code)}</b></span>` : ""}<span class="m2-sp"></span><span class="m2-open">${t("details")} ${lang === "ar" ? "←" : "→"}</span></div></div></button>`; })()
    : `<button class="hero" data-go="clubs" style="text-align:start;width:100%"><span class="kick2">${t("none")}</span><span class="big">${t("book")} →</span><span style="opacity:.9;font-size:14px">${t("bookFirst")}</span></button>`}
   <div class="quick"><button data-go="clubs">${IC.cal}${t("book")}</button><button data-go="matches">${IC.ppl}${t("find")}</button><button data-go="events">${IC.cup}${t("events")}</button></div>
   ${pushCard(true)}
@@ -3738,8 +3756,11 @@ function mxExtras(m){
   }
   if (m.seats && m.kind !== "lesson"){ const host = (m.players || []).find(p => p.booker), canSwap = !!(host && host.me) && !started && m.status !== "cancelled";
     const map = seatMap(m.seats, (m.players || []).map(p => ({id: p.id, n: p.name, l: p.level, b: p.b, host: !!p.booker}))), sv = skinVars(m.club);
-    h += `<div class="mx mxpage${sv.k.flip ? " flip" : ""}" style="${sv.style}"><div class="win">${courtHtml(map, {swap: canSwap, sel: S.seatSel, join: !m.in && !started && m.open_spots > 0 ? m.id : null})}</div>${sv.k.logo ? `<img class="lg" src="${esc(sv.k.logo)}" alt="" onerror="this.remove()">` : ""}
-     <div class="bd"><div class="h"><b>${t("sdSwapT")}</b></div>${canSwap ? `<span class="m">${t("sdSwapN")}</span>` : ""}</div></div>`; }
+    const cov = WEL_COVER(m.club || "");
+    h += `<div class="mx2 mxp" style="${sv.style}${cov ? `;--cv:url(${cov})` : ""}">${m2Head(m.club, d)}
+     <div class="m2-bd">${m2Club(sv, m.club, `${esc(m.court)} · ${m.minutes} ${t("min")}`)}
+      <b class="m2-h">${t("sdSwapT")}</b>${m2Court(map, {swap: canSwap, sel: S.seatSel, join: !m.in && !started && m.open_spots > 0 ? m.id : null})}
+      ${canSwap ? `<span class="m2-note">${t("sdSwapN")}</span>` : ""}</div></div>`; }
   h += m.in ? lobbyCard(m) : "";
   if (iBooked && !started && m.kind !== "lesson" && m.status !== "cancelled" && (!S.lobby || S.lobby.vis === "public")){
     const max = 3 - joined, cur = S.opSpots != null ? S.opSpots : m.open_spots, rng = S.opRange;
@@ -4051,9 +4072,10 @@ function smartCard(){
   const ps = pendingScores()[0];
   if (ps) return `<button class="hero sc-alert" data-match="${ps.id}" style="text-align:start;width:100%"><span class="kick2">⚑ ${t("scScore")}</span><span class="big">${esc(fmtDay(new Date(ps.starts_at)))} · ${esc(ps.club_name)}</span><span style="opacity:.92;font-size:14px">${t("scScoreS")}</span><span class="sc-go">${t("scOpen")} →</span></button>`;
   const nx = upcoming()[0], today = nx && dayKey(new Date(nx.starts_at)) === dayKey(new Date());
-  const nextHero = b => `<button class="hero" data-match="${b.id}" style="text-align:start;width:100%"><div class="between" style="width:100%"><span class="kick2">${today ? "🔥 " + t("scToday") : t("scNextT")}</span>${statusTag(b.status).replace('tag g','tag w').replace('tag pend','tag w')}</div>
-    <span class="big">${esc(today ? fmtTime(new Date(b.starts_at)) : fmtDay(new Date(b.starts_at)) + " · " + fmtTime(new Date(b.starts_at)))}</span>
-    <span style="opacity:.92;font-size:14px">${esc(b.club_name)} · ${esc(b.court_name)} · ${b.minutes} ${t("min")}${b.code ? ` · #${b.booking_no} · <b>${esc(b.code)}</b>` : ""}</span></button>`;
+  const nextHero = b => { const nd = new Date(b.starts_at), sv = skinVars(b.club_name), cov = WEL_COVER(b.club_name || "");
+    return `<button class="mx2 mxnext" data-match="${b.id}" style="${sv.style}${cov ? `;--cv:url(${cov})` : ""}">${m2Head(b.club_name, nd, today ? "🔥 " + t("scToday") : t("scNextT"))}
+     <div class="m2-bd">${m2Club(sv, b.club_name, `${esc(b.court_name)} · ${b.minutes} ${t("min")}`)}
+      <div class="m2-ft">${statusTag(b.status)}${b.code ? `<span class="m2-pill">#${b.booking_no} · <b>${esc(b.code)}</b></span>` : ""}<span class="m2-sp"></span><span class="m2-open">${t("details")} ${lang === "ar" ? "←" : "→"}</span></div></div></button>`; };
   if (today) return nextHero(nx);
   const rp = (S.ratePend || []).filter(x => !ls.get("pl-rtx-" + x.id))[0];
   if (rp) return `<div class="sc-wrap"><button class="hero sc-rate" data-match="${rp.id}" style="text-align:start;width:100%"><span class="kick2">⭐ ${t("scRate")}</span><span class="big">${esc(fmtDay(new Date(rp.starts_at)))}</span><span style="opacity:.92;font-size:14px">${esc(tf("scRateS", {c: rp.club, n: (rp.players || []).map(p => String(p.name || "").split(" ")[0]).join(", ")}))}</span><span class="sc-go">${t("rtSend")} →</span></button><button class="sc-x" data-rtx="${rp.id}" aria-label="Close">×</button></div>`;
