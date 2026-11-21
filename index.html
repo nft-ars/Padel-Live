@@ -1835,7 +1835,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v79";
+const VERSION = "v80";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -3781,7 +3781,7 @@ app.addEventListener("submit", async e => { if (e.target.id !== "snFindF") retur
 
 
 /* ---------- daily features: feed, open-match alerts, rematch, club posts, morning summary ---------- */
-Object.assign(W.en, {hmEv:"Events", wnDraw:"Live draw tonight at {w}", wnDrawS:"watch it live", wnWatch:"Watch", wnOpen:"Open", wnJoin:"Join", wnBook:"Book", wnLive:"{n} is live now", wnTmrw:"{n} starts tomorrow", wnSign:"Sign-up open: {n}", wnDeal:"{p}% off courts at {c}", wnDealS:"Courts starting in the next {h} h", wnUp:"{n} reached {c}", wnLeague:"League sign-up open: {n}", wnSmash:"{n} hit {v} km/h", wnSmashS:"Hardest swing this week", wnLiveTag:"LIVE NOW", wnOpenTag:"SIGN-UP OPEN", wnSoonTag:"COMING UP", wnIn:"starts in {n} days", wnPrize:"prize pool", wnTeams:"{n} of {m} teams", wnToday:"Today", wnWeek:"This week", wnOlder:"Earlier", wnEmpty:"Nothing new yet. Tournaments, club news and deals show up here.", ptT:"Play tonight", ptNone:"No open matches left tonight. See the coming days →", fdT:"What's new", fdAll:"See all", fdEmpty:"Play a match or follow a club, and news from your padel crowd shows up here.",
+Object.assign(W.en, {hmEv:"Events", wnDraw:"Live draw tonight at {w}", wnDrawS:"watch it live", wnWatch:"Watch", wnOpen:"Open", wnJoin:"Join", wnBook:"Book", wnLive:"{n} is live now", wnTmrw:"{n} starts tomorrow", wnSign:"Sign-up open: {n}", wnDeal:"{p}% off courts at {c}", wnDealS:"Courts starting in the next {h} h", wnUp:"{n} reached {c}", wnChamp:"{n} are the champions", wnLeague:"League sign-up open: {n}", wnSmash:"{n} hit {v} km/h", wnSmashS:"Hardest swing this week", wnLiveTag:"LIVE NOW", wnOpenTag:"SIGN-UP OPEN", wnSoonTag:"COMING UP", wnIn:"starts in {n} days", wnPrize:"prize pool", wnTeams:"{n} of {m} teams", wnToday:"Today", wnWeek:"This week", wnOlder:"Earlier", wnEmpty:"Nothing new yet. Tournaments, club news and deals show up here.", ptT:"Play tonight", ptNone:"No open matches left tonight. See the coming days →", fdT:"What's new", fdAll:"See all", fdEmpty:"Play a match or follow a club, and news from your padel crowd shows up here.",
   fdBeat:"{a} beat {b}", fdUp:"{n} moved up to {c}", fdDown:"{n} moved to {c}", fdLeague:"New league open: {n}", fdLeagueS:"Starts {d}{p}", fdSmash:"Hardest swing this week: {n} · {v} km/h",
   fdOpenClub:"Open club", ago_m:"{n}m ago", ago_h:"{n}h ago", ago_d:"{n}d ago", ago_now:"just now",
   alT:"Open match alerts", alTxt:"Get a notification when someone needs a player at your level.", alOn:"On", alOff:"Off",
@@ -3801,7 +3801,7 @@ Object.assign(W.en, {hmEv:"Events", wnDraw:"Live draw tonight at {w}", wnDrawS:"
   mTabPost:"Posts", tdT:"Today at a glance", tdBook:"Bookings", tdRev:"Expected", tdFree:"Free court-hours", tdFirst:"First game", tdDep:"Deposits to check", tdMem:"Membership requests", tdDeal:"Start a deal for empty slots", tdDealOn:"Deal running: {p}% off",
   nTPartner:"{n} signed you up as partner in {x} (Category {c}).", nTReq:"New team for {x} (Category {c}): {n}. Confirm or reject it on the tournament page.", nTOk:"Your team is confirmed in {x} (Category {c}). See you there!", nTNo:"Your team was not accepted in {x} (Category {c}).",
   nMatchOpen:"{n} needs {r} player(s) at {c}, {w}. Tap to join.", nRematch:"{n} booked a rematch at {c} on {w}. Your spot is saved: tap to join.", nClubPost:"{c}: {x}", nMorning:"Good morning! {c} today: {r} bookings, {b} free court-hours."});
-Object.assign(W.ar, {hmEv:"الفعاليات", wnDraw:"القرعة مباشر الليلة الساعة {w}", wnDrawS:"تابعها مباشر", wnWatch:"تابع", wnOpen:"افتح", wnJoin:"سجّل", wnBook:"احجز", wnLive:"{n} شغّالة هلق", wnTmrw:"{n} بتبلش بكرا", wnSign:"التسجيل مفتوح: {n}", wnDeal:"خصم {p}% على الملاعب بـ{c}", wnDealS:"للملاعب يلي بتبلش خلال {h} ساعات", wnUp:"{n} وصل لـ{c}", wnLeague:"التسجيل مفتوح بالدوري: {n}", wnSmash:"{n} ضرب {v} كم/س", wnSmashS:"أقوى ضربة هالأسبوع", wnLiveTag:"مباشر هلق", wnOpenTag:"التسجيل مفتوح", wnSoonTag:"قريباً", wnIn:"بتبلش بعد {n} أيام", wnPrize:"جوائز", wnTeams:"{n} من {m} فريق", wnToday:"اليوم", wnWeek:"هالأسبوع", wnOlder:"قبل", wnEmpty:"ما في جديد لسا. البطولات وأخبار النوادي والعروض بتطلع هون.", ptT:"العب الليلة", ptNone:"ما في مباريات مفتوحة الليلة. شوف الأيام الجاية ←", fdT:"شو الجديد", fdAll:"شوف الكل", fdEmpty:"العب مباراة أو تابع نادي، وأخبار جماعتك بالبادل رح تطلع هون.",
+Object.assign(W.ar, {hmEv:"الفعاليات", wnDraw:"القرعة مباشر الليلة الساعة {w}", wnDrawS:"تابعها مباشر", wnWatch:"تابع", wnOpen:"افتح", wnJoin:"سجّل", wnBook:"احجز", wnLive:"{n} شغّالة هلق", wnTmrw:"{n} بتبلش بكرا", wnSign:"التسجيل مفتوح: {n}", wnDeal:"خصم {p}% على الملاعب بـ{c}", wnDealS:"للملاعب يلي بتبلش خلال {h} ساعات", wnUp:"{n} وصل لـ{c}", wnChamp:"{n} أبطال البطولة", wnLeague:"التسجيل مفتوح بالدوري: {n}", wnSmash:"{n} ضرب {v} كم/س", wnSmashS:"أقوى ضربة هالأسبوع", wnLiveTag:"مباشر هلق", wnOpenTag:"التسجيل مفتوح", wnSoonTag:"قريباً", wnIn:"بتبلش بعد {n} أيام", wnPrize:"جوائز", wnTeams:"{n} من {m} فريق", wnToday:"اليوم", wnWeek:"هالأسبوع", wnOlder:"قبل", wnEmpty:"ما في جديد لسا. البطولات وأخبار النوادي والعروض بتطلع هون.", ptT:"العب الليلة", ptNone:"ما في مباريات مفتوحة الليلة. شوف الأيام الجاية ←", fdT:"شو الجديد", fdAll:"شوف الكل", fdEmpty:"العب مباراة أو تابع نادي، وأخبار جماعتك بالبادل رح تطلع هون.",
   fdBeat:"{a} غلبوا {b}", fdUp:"{n} طلع لـ {c}", fdDown:"{n} نزل لـ {c}", fdLeague:"دوري جديد مفتوح: {n}", fdLeagueS:"بيبلش {d}{p}", fdSmash:"أقوى ضربة هالأسبوع: {n} · {v} كم/س",
   fdOpenClub:"افتح النادي", ago_m:"من {n} د", ago_h:"من {n} س", ago_d:"من {n} يوم", ago_now:"هلّق",
   alT:"تنبيهات المباريات المفتوحة", alTxt:"بيوصلك إشعار لما حدا يحتاج لاعب بمستواك.", alOn:"شغّال", alOff:"موقّف",
@@ -3866,6 +3866,10 @@ function wnItems(){ const out = [], now = Date.now(), today = dayKey(new Date())
     else if (x.starts_on === dayKey(tm)) out.push({at: now - 2, a: sk.a, s: "#EEF2F0", logo: sk.logo, bd: "🏆", t: tf("wnTmrw", {n: nm}), sub: esc(x.club || ""), btn: t("wnOpen"), href: `t.html?${encodeURIComponent(x.slug)}`});
     else if (x.open) out.push({at: now - 3, a: sk.a, s: "#EEF2F0", logo: sk.logo, bd: "📝", t: tf("wnSign", {n: nm}), sub: `${esc(fmtDay(new Date(x.starts_on + "T12:00:00+03:00")))}${x.prize ? " · " + esc(x.prize.replace(/^prize pool\s*/i, "")) + " " + t("wnPrize") : ""}`, btn: t("wnJoin"), href: `t.html?${encodeURIComponent(x.slug)}#signup`});
   });
+  // champions of tournaments that just finished
+  (S.feedT || []).forEach(x => (x.champs || []).forEach(c => { if (!c.names) return; const sk = skin(x.club), at = c.at ? new Date(c.at).getTime() : now - 864e5;
+    if (now - at > 10 * 864e5) return;
+    out.push({at, a: "#7B4FD6", s: "#F0EAFC", ic: "👑", bd: "🏆", t: tf("wnChamp", {n: esc(c.names)}), sub: `${esc(x.name.split(" · ").slice(-1)[0])} · ${esc(c.catn || c.cat)}`, href: `t.html?${encodeURIComponent(x.slug)}#knockouts`, logoA: sk.logo}); }));
   // last-minute deals
   (S.clubs || []).filter(c => +c.deal_pct > 0 && bookOpen(c)).forEach(c => { const sk = clubSkin(c);
     out.push({at: now - 4, a: sk.a, s: "#EEF2F0", logo: sk.logo, bd: "🔥", t: tf("wnDeal", {p: c.deal_pct, c: esc(c.name)}), sub: tf("wnDealS", {h: c.deal_hours}), btn: t("wnBook"), deal: c.id}); });
@@ -3879,7 +3883,7 @@ function wnItems(){ const out = [], now = Date.now(), today = dayKey(new Date())
   });
   return out.sort((a, b) => (b.hot || 0) - (a.hot || 0) || b.at - a.at); }
 function wnBigCard(x){ if (!x) return ""; const sk = clubSkin(S.clubs.find(c => c.name === x.club) || {name: x.club || x.name}), cov = WEL_COVER(x.club || x.name), nm = x.name.split(" · ").slice(-1)[0];
-  const pct = x.max ? Math.min(100, Math.round(100 * x.teams / x.max)) : 0, d1 = new Date(x.starts_on + "T12:00:00+03:00"), d2 = new Date(x.ends_on + "T12:00:00+03:00");
+  const pct = x.max ? Math.min(100, Math.round(100 * x.teams / x.max)) : 0, d1 = new Date((x.starts_on || dayKey(new Date())) + "T12:00:00+03:00"), d2 = new Date((x.ends_on || x.starts_on || dayKey(new Date())) + "T12:00:00+03:00");
   const dd = new Intl.DateTimeFormat(lang === "ar" ? "ar-SY" : "en-GB", {timeZone: TZ, day: "numeric"}).format(d1) + " – " + new Intl.DateTimeFormat(lang === "ar" ? "ar-SY" : "en-GB", {timeZone: TZ, day: "numeric", month: "short"}).format(d2);
   const days = Math.ceil((d1 - new Date()) / 864e5), tag = x.st === "live" ? t("wnLiveTag") : x.st === "open" ? t("wnOpenTag") : t("wnSoonTag");
   const sub = [dd, x.prize ? x.prize.replace(/^prize pool\s*/i, "") + " " + t("wnPrize") : "", x.max ? tf("wnTeams", {n: x.teams, m: x.max}) : ""].filter(Boolean).map(esc).join(" · ");
@@ -3892,12 +3896,14 @@ function wnRow(x){ const attr = x.href ? `href="${x.href}"` : x.deal ? `data-dea
 function wnGroups(list){ const now = new Date(), d0 = dayKey(now), wk = now.getTime() - 7 * 864e5, g = {today: [], week: [], older: []};
   list.forEach(x => { const d = new Date(x.at); (dayKey(d) === d0 || x.hot ? g.today : d.getTime() > wk ? g.week : g.older).push(x); });
   return [["today", "wnToday"], ["week", "wnWeek"], ["older", "wnOlder"]].filter(([k]) => g[k].length).map(([k, l]) => `<div class="wn-lbl">${t(l)}</div>${g[k].map(wnRow).join("")}`).join(""); }
-function feedHome(){ if (!S.user || (!S.feed && !S.feedT)) return "";
-  const big = wnBig(), all = wnItems(), list = all.slice(0, 4);
-  if (!big && !list.length) return "";
+function feedHome(){ if (!S.user || (!S.feed && !S.feedT && !S.tours)) return "";
+  let big = null, all = [];
+  try { big = wnBig(); all = wnItems(); } catch (e) { try { console.error("whats-new", e); } catch (x) {} }
+  const list = all.slice(0, 4);
+  if (!list.length) return "";
   return `<div class="between"><h2>${t("fdT")}</h2>${all.length > 4 ? `<a href="#feed" data-go="feed" style="font-weight:700;font-size:13px;white-space:nowrap">${t("fdAll")} →</a>` : ""}</div>
-   <div class="wn">${wnBigCard(big)}${wnGroups(list)}</div>`; }
-V.feed = () => { const all = wnItems(); return `<main>${backBar(t("fdT"), "home")}<div class="wn">${wnBigCard(wnBig())}${wnGroups(all) || `<div class="card note">${t("wnEmpty")}</div>`}</div></main>${nav("home")}`; };
+   <div class="wn">${wnGroups(list)}</div>`; }
+V.feed = () => { let all = []; try { all = wnItems(); } catch (e) {} return `<main>${backBar(t("fdT"), "home")}<div class="wn">${wnGroups(all) || `<div class="card note">${t("wnEmpty")}</div>`}</div></main>${nav("home")}`; };
 async function loadFeed(){ if (!S.user) { S.feed = null; return; }
   const [r, ft] = await Promise.all([sb.rpc("feed").catch(() => ({error: 1})), sb.rpc("feed_tours").catch(() => ({error: 1}))]);
   S.feed = r.error ? [] : noHid(r.data || []); S.feedT = ft && !ft.error ? noHid(ft.data || []) : null; }
