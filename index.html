@@ -1580,11 +1580,11 @@ main.vlg input,main.vlg select{background:#0B1220;color:#fff;border-color:rgba(9
 .mx2 .jsheet{color:var(--ink);background:var(--card);border-radius:14px;padding:10px;margin-top:4px}
 /* ===== welcome A · Play. Rank. Rise. */
 html.wa-on,html.wa-on body,html.wa-on .app{background:#07110D!important;--stage:#07110D;--bg:#07110D}
-.wa{min-height:100vh;color:#EAF2EC;position:relative;padding-bottom:calc(60px + env(safe-area-inset-bottom))!important}
-.wa{isolation:isolate;background:transparent!important}.wa:before{content:"";position:fixed;top:0;right:0;bottom:0;left:0;z-index:-1;pointer-events:none;background:radial-gradient(60% 40% at 85% 8%,rgba(227,238,58,.20),transparent 70%),radial-gradient(70% 45% at 0% 60%,rgba(44,95,174,.25),transparent 70%),#07110D}
+main.wa{min-height:100vh;color:#EAF2EC;position:relative;padding-bottom:calc(60px + env(safe-area-inset-bottom))!important}
+main.wa{isolation:isolate;background:transparent!important}main.wa:before{content:"";position:fixed;top:0;right:0;bottom:0;left:0;z-index:-1;pointer-events:none;background:radial-gradient(60% 40% at 85% 8%,rgba(227,238,58,.20),transparent 70%),radial-gradient(70% 45% at 0% 60%,rgba(44,95,174,.25),transparent 70%),#07110D}
 .wa-top{display:flex;align-items:center;justify-content:space-between}
 .wa-logo{font-size:24px!important;color:#EAF2EC}.wa-logo i{color:var(--lime)!important}
-.wa .wel2-lang{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.12)}.wa .wel2-lang button{color:rgba(255,255,255,.6)}.wa .wel2-lang button[aria-pressed=true]{background:#EAF2EC;color:#07110D}
+main.wa .wel2-lang{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.12)}main.wa .wel2-lang button{color:rgba(255,255,255,.6)}main.wa .wel2-lang button[aria-pressed=true]{background:#EAF2EC;color:#07110D}
 .wa-hero{display:grid;grid-template-columns:1fr 104px;gap:8px;align-items:center;margin-top:18px}
 .wa-kick{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:rgba(234,242,236,.75);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);padding:5px 10px;border-radius:999px}
 .wa-kick i{width:7px;height:7px;border-radius:50%;background:#3EE07F;box-shadow:0 0 0 3px rgba(62,224,127,.2)}
@@ -1724,6 +1724,67 @@ html[dir=rtl] .wn-it:before{left:auto;right:0}
 .wn-cta{font:800 11.5px var(--body);padding:6px 11px;border-radius:99px;background:var(--a);color:#fff;white-space:nowrap}
 .wn-tier{display:inline-block;font:800 10px var(--body);padding:2px 7px;border-radius:6px;color:#fff;background:linear-gradient(90deg,#E8B93A,#C98A1E);margin-inline-start:3px;vertical-align:1px}
 [data-theme=dark] .wn-ic{background:rgba(255,255,255,.08)}
+/* ===== club page: online booking coming soon */
+.bks2{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:30px 20px 22px;border-radius:24px;color:#fff;
+ background:radial-gradient(120% 80% at 50% 0%,var(--a),var(--d) 75%);box-shadow:0 16px 34px -18px var(--a)}
+.bks2-glow{position:absolute;width:260px;height:260px;border-radius:50%;top:-140px;left:50%;margin-left:-130px;background:var(--b);opacity:.18;filter:blur(40px);pointer-events:none}
+.bks2>*:not(.bks2-glow){position:relative}
+.bks2-lg{width:76px;height:76px;border-radius:50%;background:#fff;border:3px solid var(--b);object-fit:cover;box-shadow:0 0 0 7px rgba(255,255,255,.08);display:grid;place-items:center;font-size:34px}
+.bks2-k{margin-top:6px;font:800 11px var(--body);letter-spacing:.2em;text-transform:uppercase;padding:5px 12px;border-radius:99px;background:var(--b);color:var(--d)}
+.bks2-t{font:800 italic 30px/1.02 var(--disp);text-transform:uppercase}
+.bks2 p{margin:0;max-width:300px;font-size:14.5px;line-height:1.45;opacity:.88}
+.bks2-dots{display:flex;gap:7px;margin:4px 0 2px}
+.bks2-dots i{width:8px;height:8px;border-radius:50%;background:var(--b);animation:bks2d 1.4s ease-in-out infinite}
+.bks2-dots i:nth-child(2){animation-delay:.2s}.bks2-dots i:nth-child(3){animation-delay:.4s}
+@keyframes bks2d{0%,100%{opacity:.25;transform:translateY(0)}50%{opacity:1;transform:translateY(-4px)}}
+.bks2-r{display:flex;gap:8px;width:100%;margin-top:6px}
+.bks2-b{flex:1;display:flex;align-items:center;justify-content:center;height:48px;border-radius:14px;background:var(--b);color:var(--d);font:800 15px var(--body);text-decoration:none}
+.bks2-b.ghost{background:rgba(255,255,255,.12);color:#fff;border:1.5px solid rgba(255,255,255,.25)}
+.bks2-m{width:100%;height:46px;border-radius:14px;border:0;background:rgba(0,0,0,.28);color:#fff;font:700 14.5px var(--body);cursor:pointer}
+.bks2-adm{border:0;background:none;color:rgba(255,255,255,.6);font:600 12.5px var(--body);text-decoration:underline;cursor:pointer;padding:4px}
+/* ===== Coming soon v3: "Keep it up" mini game */
+.bk3{position:relative;display:flex;flex-direction:column;gap:12px;padding:18px 16px 14px;border-radius:24px;color:#fff;overflow:hidden;
+ background:radial-gradient(130% 70% at 100% 0%,var(--a),var(--d) 70%);box-shadow:0 16px 34px -18px var(--a)}
+.bk3-hd{display:flex;align-items:center;gap:12px}
+.bk3-hd img{width:52px;height:52px;border-radius:50%;background:#fff;border:2.5px solid var(--b);object-fit:cover;flex:0 0 52px}
+.bk3-k{display:inline-block;font:800 10.5px var(--body);letter-spacing:.16em;text-transform:uppercase;padding:4px 10px;border-radius:99px;background:var(--b);color:var(--d)}
+.bk3-hd b{display:block;margin-top:5px;font:800 italic 24px/1 var(--disp);text-transform:uppercase}
+.bk3-s{margin:0;font-size:14px;line-height:1.4;opacity:.85}
+.bk3-game{border-radius:18px;background:rgba(0,0,0,.28);border:1.5px solid rgba(255,255,255,.1);padding:10px}
+.bk3-gh{display:flex;justify-content:space-between;align-items:center;padding:0 4px 8px}
+.bk3-gh b{font:800 italic 17px var(--disp);text-transform:uppercase}
+.bk3-gh span{font:700 12.5px var(--body);opacity:.85}.bk3-gh i{font-style:normal;color:var(--b);font-weight:800;font-size:15px}
+.bk3-ar{position:relative;height:270px;border-radius:14px;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;cursor:pointer;
+ background:linear-gradient(180deg,var(--a),var(--a));border:2px solid rgba(255,255,255,.75)}@supports (color:color-mix(in srgb,red 50%,blue)){.bk3-ar{background:linear-gradient(180deg,color-mix(in srgb,var(--a) 85%,#000),color-mix(in srgb,var(--a) 60%,#000))}}
+.bk3-ar>i{position:absolute;background:rgba(255,255,255,.55)}
+.bk3-l1{left:50%;top:0;bottom:0;width:2px;margin-left:-1px}
+.bk3-l2{left:0;right:0;top:28%;height:2px}.bk3-l3{left:0;right:0;bottom:28%;height:2px}
+.bk3-net{left:0;right:0;top:50%;height:4px!important;margin-top:-2px;background:repeating-linear-gradient(90deg,#fff 0 5px,rgba(255,255,255,.35) 5px 9px)!important}
+.bk3-lock{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-size:64px;opacity:.12;pointer-events:none}
+.bk3-sc{position:absolute;right:12px;top:8px;font:800 italic 40px/1 var(--disp);color:var(--b);text-shadow:0 2px 10px rgba(0,0,0,.4);pointer-events:none}
+.bk3-ball{position:absolute;left:0;top:0;width:44px;height:44px;font-size:38px;line-height:44px;text-align:center;will-change:transform;filter:drop-shadow(0 6px 6px rgba(0,0,0,.4));pointer-events:none}
+.bk3-ar:not(.live) .bk3-ball{animation:bk3bob 1.2s ease-in-out infinite}
+@keyframes bk3bob{50%{margin-top:-14px}}
+.bk3-msg{position:absolute;left:12px;right:12px;bottom:14px;text-align:center;font:800 15px var(--body);padding:9px 12px;border-radius:12px;background:rgba(0,0,0,.45);pointer-events:none}
+.bk3-msg b{font-size:20px;color:var(--b)}
+.bk3-pop{position:absolute;left:50%;top:36%;transform:translate(-50%,0);font:800 italic 26px var(--disp);color:var(--b);opacity:0;pointer-events:none;white-space:nowrap;text-shadow:0 2px 12px rgba(0,0,0,.5)}
+.bk3-pop.go{animation:bk3pop .9s ease-out}
+@keyframes bk3pop{0%{opacity:0;transform:translate(-50%,10px) scale(.7)}20%{opacity:1;transform:translate(-50%,0) scale(1.1)}100%{opacity:0;transform:translate(-50%,-30px) scale(1)}}
+.bk3-ar.hit{animation:bk3hit .18s}
+@keyframes bk3hit{50%{box-shadow:inset 0 0 0 4px var(--b)}}
+.bk3-bad{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.bk3-bad span{flex:1;text-align:center;font:800 11.5px var(--body);padding:7px 6px;border-radius:10px;background:rgba(255,255,255,.07);color:rgba(255,255,255,.45);white-space:nowrap}
+.bk3-bad span.on{background:var(--b);color:var(--d)}
+.bk3-m{width:100%;height:48px;border-radius:14px;border:0;background:var(--b);color:var(--d);font:800 15px var(--body);cursor:pointer}
+/* next match hero: league + tournament variants */
+.hero.hero-lg{background:linear-gradient(120deg,#5B3FD1,#2B1C7A)!important}
+.hero.hero-tn{background:linear-gradient(120deg,#C7442E,#7A1E14)!important;color:#fff}
+/* Home events: warm ember glow around each card */
+.ev-fire-l{display:flex;flex-direction:column;gap:16px;padding:4px 2px 8px}
+.ev-fire{border-radius:22px;box-shadow:0 0 0 2px rgba(255,86,48,.8),0 0 20px 3px rgba(255,70,30,.5),0 0 46px 8px rgba(255,130,40,.22);animation:evEmb 2.6s ease-in-out infinite}
+.ev-fire>*{margin:0!important}
+@keyframes evEmb{50%{box-shadow:0 0 0 2px rgba(255,130,60,.95),0 0 30px 5px rgba(255,80,30,.65),0 0 64px 12px rgba(255,150,40,.28)}}
+@media (prefers-reduced-motion:reduce){.ev-fire{animation:none}}
 </style>
 </head>
 <body>
@@ -1835,7 +1896,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v80";
+const VERSION = "v85";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -1888,13 +1949,13 @@ async function loadClubs(){
     c = await sb.from("clubs").select("id,slug,name,city,about,opens,closes,peak_from,late_from,usd_syp_rate,cancel_hours,area,photo,maps_url,phone,weekend_days,book_days,deal_pct,deal_hours").order("name");
     if (!c.error && c.data) c.data.forEach(x => { x.booking_on = true; }); }
   if (c.error) { S.err = t("loadErr"); return; }
-  S.err = null; S.clubs = noHid(c.data || []); S.courts = ct.data || []; S.prices = p.data || []; S.closures = cl.data || [];
+  S.err = null; S.clubs = clubSort(noHid(c.data || [])); S.courts = ct.data || []; S.prices = p.data || []; S.closures = cl.data || [];
   if (!S.club && S.clubs.length) S.club = S.clubs[0];
 }
 async function afterAuth(silent){
   if (S.user){
     const [p, mine, st] = await Promise.all([sb.from("profiles").select("*").eq("id", S.user.id).maybeSingle(), sb.rpc("my_bookings"), sb.rpc("my_clubs")]);
-    S.profile = p.data || null; S.mine = noHid(mine.data || []); S.staff = st.data || []; await Promise.all([loadNotifN(), loadCard(), loadMems(), loadPush()]); await onbAfterAuth();
+    S.profile = p.data || null; S.mine = noHid(mine.data || []); S.staff = noHid(st.data || []); if (S.mClub && !S.staff.some(c => c.id === S.mClub)) S.mClub = null; await Promise.all([loadNotifN(), loadCard(), loadMems(), loadPush()]); await onbAfterAuth();
     const hc = S.profile && S.profile.home_club && S.clubs.find(c => c.id === S.profile.home_club); if (hc && !S.clubPicked){ S.club = hc; S.clubPicked = true; }
   } else { S.profile = null; S.mine = []; S.staff = []; S.notifN = 0; S.card = null; S.mems = []; }
   const m = await sb.rpc("open_matches"); S.matches = noHid(m.data || []);
@@ -1971,7 +2032,8 @@ function mx2(m, d, sv, map, canJoin, range, each, btns, sheet, ppl){
   const cov = WEL_COVER(m.club_name || ""), seat = k => m2Seat(map, k, {join: canJoin ? m.id : null});
   const tt = fmtTime(d), tm = tt.match(/^(.*\d)\s*(\D+)$/), day = d.toLocaleDateString(lang === "ar" ? "ar" : "en-GB", {timeZone: TZ, weekday: "short", day: "numeric"});
   const tags = (m.vis && m.vis !== "public" && m.inv ? `<span class="m3-chip">${t("lobPrivTag")}</span>` : "") + (ppl.some(p => p.i && rivalIds().has(p.i)) ? `<span class="m3-chip rv">${t("rvTag")}</span>` : "");
-  return `<div class="mx3" style="${sv.style}${cov ? `;--cv:url(${cov})` : ""}">
+  const ov = /let.?s.?\s*padel/i.test(m.club_name || "") ? ";--a:#4B3BC4;--b:#C9F23E;--d:#0B0826" : ""; /* Let's Padel open matches: night-sky indigo with their lime */
+  return `<div class="mx3" style="${sv.style}${ov}${cov ? `;--cv:url(${cov})` : ""}">
    <div class="m3-ph${cov ? "" : " nocov"}"><span class="m3-tag">${esc(m2Day(d))}</span><b>${esc(tm ? tm[1] : tt)}</b>${tm ? `<small>${esc(tm[2])}</small>` : ""}<span class="m3-d">${esc(day)}</span></div>
    <div class="m3-bd"><div class="m3-top">${sv.k.logo ? `<img src="${esc(sv.k.logo)}" alt="" onerror="this.remove()">` : ""}<div><b>${esc(m.club_name)}</b><small>${esc(m.court_name)} · ${m.minutes} ${t("min")}${m.split ? ` · ${t("splitTag")}` : ""}</small></div><span class="m3-pr">${each}</span></div>
     ${tags ? `<div class="m3-tags">${tags}</div>` : ""}
@@ -2006,7 +2068,7 @@ V.clubs = () => { const areas = [...new Set(S.clubs.map(c => c.area).filter(Bool
   ${areas.length > 1 ? `<div class="chips">${[["", t("areaAll")]].concat(areas.map(a => [a, a])).map(([k, l]) => `<button class="chip" data-area="${esc(k)}" aria-pressed="${S.area === k}">${esc(l)}</button>`).join("")}</div>` : ""}
   ${S.fTime && !anyFree && list.length ? `<div class="notice">${tf("fNoneAll", {t: esc(fmtTime(findTimes().find(([k]) => k === S.fTime)?.[1] || new Date()).replace(/:00/, ""))})}</div>` : ""}
   ${list.map(({c, st}) => { const min = Math.min(...S.prices.filter(p => p.club_id === c.id && p.price != null && p.minutes === 60).map(p => +p.price));
-   const n = S.courts.filter(x => x.club_id === c.id).length, k = clubSkin(c), ph = clubCover(c);
+   const n = S.courts.filter(x => x.club_id === c.id).length, k = /let.?s.?\s*padel/i.test(c.name || "") ? Object.assign({}, clubSkin(c), {a: "#4B3BC4", b: "#C9F23E", d: "#0B0826", flip: null}) : clubSkin(c), ph = clubCover(c); /* Let's Padel book card: night-sky indigo, same as its open matches */
    const r = clubFree(c, S.fDay, S.fDur), open = (r.list || []).filter(x => x.courts.length), from = S.fTime ? after(c, S.fTime) : -1;
    const pool = S.fTime ? open.filter(x => x.m >= from).concat(open.filter(x => x.m < from)) : open, chips = pool.slice(0, 3), more = pool.length - chips.length;
    return `<div class="cpop${st.rank === 0 ? " fhit" : ""}${k.flip ? " flip" : ""}" style="--a:${k.a};--b:${k.b};--d:${k.d}${k.flip ? `;--fl1:${k.flip.l1};--fl2:${k.flip.l2};--fl3:${k.flip.l3}` : ""}">
@@ -2036,18 +2098,59 @@ function clubCtrls(c, courts, days){ return `<div class="days">${days.map(d => {
   <div class="row" style="flex-wrap:wrap"><b style="font-size:13px;color:var(--ink-2)">${t("length")}</b>${[60,90,120].map(m => `<button class="chip" data-dur="${m}" aria-pressed="${S.dur === m}">${m} ${t("min")}</button>`).join("")}</div>
   ${coachChips()}`; }
 const bookOpen = c => !!(c && (c.booking_on || (S.profile && S.profile.is_admin) || (S.staff || []).some(x => x.id === c.id)));
+function bkSoonHero(c){ const sk = clubSkin(c), staff = bookOpen(c), best = +(ls.get("pl-kup") || 0);
+  return `<div class="bk3" style="--a:${sk.a};--b:${sk.b};--d:${sk.d}">
+   <div class="bk3-hd">${sk.logo ? `<img src="${esc(sk.logo)}" alt="" onerror="this.remove()">` : ""}<div><span class="bk3-k">🔒 ${t("bk3K")}</span><b>${t("bk3T")}</b></div></div>
+   <p class="bk3-s">${tf("bk3S", {c: esc(c.name)})}</p>
+   <div class="bk3-game"><div class="bk3-gh"><b>🎾 ${t("bk3G")}</b><span>${t("bk3Best")} <i id="kup-best">${best}</i></span></div>
+    <div class="bk3-ar" id="kup-ar"><i class="bk3-l1"></i><i class="bk3-l2"></i><i class="bk3-l3"></i><i class="bk3-net"></i><span class="bk3-lock">🔒</span>
+     <span class="bk3-sc" id="kup-sc">0</span><span class="bk3-ball" id="kup-ball" style="left:calc(50% - 22px);top:38%">🎾</span><span class="bk3-msg" id="kup-msg">${t("bk3Tap")}</span><span class="bk3-pop" id="kup-pop"></span></div>
+    <div class="bk3-bad" id="kup-bad">${KUP_B.map(([n, k]) => `<span class="${best >= n ? "on" : ""}" data-n="${n}">${t(k)} · ${n}</span>`).join("")}</div></div>
+   <button class="bk3-m" data-go="matches">🎾 ${t("bk2M")} →</button>
+   ${staff ? `<button class="bks2-adm" data-bkany="${c.id}">${t("bk2Adm")}</button>` : ""}</div>`; }
+/* "Keep it up" mini game on the Coming soon screen: tap the ball before it drops */
+const KUP_B = [[10, "bk3B1"], [25, "bk3B2"], [50, "bk3B3"]];
+var KUP = { on: false, x: .5, y: .35, vx: 0, vy: 0, sc: 0, t: 0, raf: 0, over: false };
+function kupEls(){ return { ar: document.getElementById("kup-ar"), b: document.getElementById("kup-ball"), sc: document.getElementById("kup-sc"), m: document.getElementById("kup-msg"), best: document.getElementById("kup-best"), pop: document.getElementById("kup-pop"), bad: document.getElementById("kup-bad") }; }
+function kupDraw(E){ if (!E.ar) return; const W = E.ar.clientWidth, H = E.ar.clientHeight;
+  E.b.style.left = "0"; E.b.style.top = "0"; E.b.style.transform = `translate(${KUP.x * W - 22}px,${KUP.y * H - 22}px) rotate(${KUP.x * 720}deg)`; E.sc.textContent = KUP.sc; }
+function kupLoop(ts){ const E = kupEls(); if (!E.ar){ KUP.on = false; KUP.raf = 0; return; }
+  const dt = Math.min(.035, KUP.t ? (ts - KUP.t) / 1000 : .016); KUP.t = ts;
+  if (KUP.on){ const g = 1.5 + Math.min(1.6, KUP.sc * .05);
+    KUP.vy += g * dt; KUP.x += KUP.vx * dt; KUP.y += KUP.vy * dt;
+    if (KUP.x < .07){ KUP.x = .07; KUP.vx = Math.abs(KUP.vx); } if (KUP.x > .93){ KUP.x = .93; KUP.vx = -Math.abs(KUP.vx); }
+    if (KUP.y < .08){ KUP.y = .08; KUP.vy = Math.abs(KUP.vy) * .3; }
+    if (KUP.y > .93){ KUP.y = .93; KUP.on = false; KUP.over = true; const best = +(ls.get("pl-kup") || 0);
+      const rec = KUP.sc > best; if (rec) ls.set("pl-kup", String(KUP.sc));
+      if (E.best) E.best.textContent = Math.max(best, KUP.sc);
+      E.m.innerHTML = KUP.sc ? `${rec ? `🏆 ${t("bk3Rec")}<br>` : ""}<b>${KUP.sc}</b> · ${t("bk3Again")}` : t("bk3Tap"); E.m.style.display = "";
+      E.ar.classList.remove("live"); if (navigator.vibrate) try { navigator.vibrate([40, 40, 40]); } catch (e) {} } }
+  kupDraw(E); if (!KUP.on){ KUP.raf = 0; return; } KUP.raf = requestAnimationFrame(kupLoop); }
+function kupHit(){ const E = kupEls(); if (!E.ar) return;
+  if (!KUP.on){ KUP.on = true; KUP.over = false; KUP.sc = 0; KUP.x = .5; KUP.y = .55; E.m.style.display = "none"; E.ar.classList.add("live"); }
+  KUP.vy = -(1.25 + Math.random() * .25); KUP.vx = (Math.random() - .5) * .9; KUP.sc++;
+  if (navigator.vibrate) try { navigator.vibrate(12); } catch (e) {}
+  E.ar.classList.remove("hit"); void E.ar.offsetWidth; E.ar.classList.add("hit");
+  const b = KUP_B.find(([n]) => n === KUP.sc), five = KUP.sc % 5 === 0;
+  if (b || five){ E.pop.textContent = b ? `🏅 ${t(b[1])}!` : `🔥 ${KUP.sc}!`; E.pop.classList.remove("go"); void E.pop.offsetWidth; E.pop.classList.add("go"); }
+  if (b && E.bad){ const el = E.bad.querySelector(`[data-n="${b[0]}"]`); if (el) el.classList.add("on"); }
+  if (!KUP.raf){ KUP.t = 0; KUP.raf = requestAnimationFrame(kupLoop); } }
+document.addEventListener("pointerdown", e => { const ar = e.target.closest && e.target.closest("#kup-ar"); if (!ar) return;
+  e.preventDefault(); const r = ar.getBoundingClientRect(), bx = r.left + KUP.x * r.width, by = r.top + KUP.y * r.height;
+  if (!KUP.on || Math.hypot(e.clientX - bx, e.clientY - by) < 64) kupHit(); });
 V.club = () => { const c = S.club; if (!c) return V.clubs();
  const courts = S.courts.filter(x => x.club_id === c.id), days = nextDays(bookDays(c)), sl = slotsFor(c), pick = sl.list.find(x => x.iso === S.slot && !x.off);
  return `<main>${backBar(c.name, "clubs")}
   ${clubCover(c) ? `<div class="cpic">${clubPic(c)}</div>` : ""}
   <span class="note" style="margin-top:-8px">${esc([c.area, c.city].filter(Boolean).join(", "))} · ${esc(c.opens.slice(0,5))}–${esc(c.closes.slice(0,5))} · ${courts.length} ${courts.length === 1 ? "court" : "courts"}</span>
-  ${bookOpen(c) ? clubCtrls(c, courts, days) : ""}
+  ${!c.booking_on && !(S.bkAny || {})[c.id] ? bkSoonHero(c) : `${bookOpen(c) ? clubCtrls(c, courts, days) : ""}
 ${!bookOpen(c) ? `<div class="card bksoon"><b>🗓️ ${t("bkSoonT")}</b><span class="note">${t("bkSoonS")}</span><div class="row" style="gap:8px;flex-wrap:wrap">${c.phone ? `<a class="cta blue" href="tel:${esc(c.phone)}">${t("bkCall")}</a><a class="ghost" href="${esc(waLink(c.phone, "Hi, I'd like to book a court. I found you on Padel Live."))}" target="_blank" rel="noopener">${t("bkWa")}</a>` : ""}</div></div>`
   : (!c.booking_on ? `<div class="notice">${t("bkOffAdm")}</div>` : "") + (sl.closed ? `<div class="notice">${t("closedDay")}</div>` : `<div class="slots">${sl.list.map(x => `<button class="slot" data-slot="${x.iso}" aria-pressed="${S.slot === x.iso && !x.off}"${x.off ? " disabled" : ""}><b>${esc(fmtTime(x.d).replace(/\s?(am|pm)$/i,""))}</b>${x.off || x.price == null ? "" : `<small>${x.deal ? "🔥" : ""}$${x.price}</small>`}</button>`).join("")}</div>`)}
+`}
   ${clubExtras(c)}
   ${clubPostsHtml()}
   <div class="card" style="display:flex;flex-direction:column;gap:10px"><p class="note" style="margin:0">${esc(c.about)}</p>${clubLinks(c)}</div>
- </main>${!bookOpen(c) ? nav("clubs") : `<div class="bar"><div class="sum"><small>${esc(fmtDay(at(S.day,"12:00")))}${pick ? ` · ${esc(fmtTime(pick.d))}` : ""} · ${S.dur} ${t("min")}</small><b>${pick ? money(pick.price + coachFee()) : t("pick")}</b>${pick ? (coachSel() ? ` <span class="note">· ${t("lesson")} · ${esc(coachSel().name)}</span>` : ` <span class="note">· ${money(pick.price / 4)} ${t("each")}</span>`) : ""}</div><button class="cta" data-go="checkout"${pick ? "" : " disabled"}>${t("cont")}</button></div>`}`; };
+ </main>${!bookOpen(c) || (!c.booking_on && !(S.bkAny || {})[c.id]) ? nav("clubs") : `<div class="bar"><div class="sum"><small>${esc(fmtDay(at(S.day,"12:00")))}${pick ? ` · ${esc(fmtTime(pick.d))}` : ""} · ${S.dur} ${t("min")}</small><b>${pick ? money(pick.price + coachFee()) : t("pick")}</b>${pick ? (coachSel() ? ` <span class="note">· ${t("lesson")} · ${esc(coachSel().name)}</span>` : ` <span class="note">· ${money(pick.price / 4)} ${t("each")}</span>`) : ""}</div><button class="cta" data-go="checkout"${pick ? "" : " disabled"}>${t("cont")}</button></div>`}`; };
 
 /* ---------- public / private lobby ---------- */
 function pvBlock(){ if (coachSel()) return ""; const v = S.vis || "public";
@@ -2217,7 +2320,7 @@ V.reset = () => { if (!S.user) return V.auth();
  </main>`; };
 
 V.manager = () => { if (!S.user || !S.staff.length) return V.me();
- const club = S.clubs.find(c => c.id === S.mClub) || S.clubs.find(c => c.id === S.staff[0].id); if (!club) return V.me();
+ let club = S.clubs.find(c => c.id === S.mClub) || S.clubs.find(c => S.staff.some(x => x.id === c.id)); if (!club) return V.me(); if (S.mClub !== club.id){ S.mClub = club.id; }
  if (S.mTab && S.mTab !== "day") return mgrShell(club);
  const courts = S.courts.filter(x => x.club_id === club.id), days = nextDays(7), md = S.mData || {day:[], deps:[]};
  const len = openLen(club), start = at(S.mDay, club.opens);
@@ -2375,6 +2478,9 @@ function shrinkPhoto(file){ return new Promise((ok, no) => { const fr = new File
   const s = Math.min(1, 900 / Math.max(im.width, im.height)), c = document.createElement("canvas"); c.width = Math.round(im.width * s); c.height = Math.round(im.height * s);
   c.getContext("2d").drawImage(im, 0, 0, c.width, c.height); ok(c.toDataURL("image/jpeg", 0.72)); }; im.src = fr.result; }; fr.readAsDataURL(file); }); }
 const clubCover = c => /let.?s.?\s*padel/i.test(c.name || "") ? "lets-cover.jpg" : /ace\s*padel/i.test(c.name || "") ? "ace-cover.jpg" : /trio/i.test(c.name || "") ? "trio-cover.jpg" : /core/i.test(c.name || "") ? "core-cover.jpg" : (c.photo || "");
+/* clubs order on Book and everywhere: Core, Trio, Let's Padel, then the rest by name */
+const CLUB_ORDER = [/core/i, /trio/i, /let.?s.?\s*padel/i];
+const clubSort = a => a.slice().sort((x, y) => { const r = n => { const i = CLUB_ORDER.findIndex(re => re.test(n || "")); return i < 0 ? 99 : i; }; return r(x.name) - r(y.name) || String(x.name).localeCompare(String(y.name)); });
 /* clubs hidden from the app for now (kept in the database, shown again by removing the name here) */
 const HIDDEN_CLUBS = /ace\s*padel/i;
 const hidClub = x => { if (!x || typeof x !== "object") return false; for (const k of ["club_name", "club", "venue", "name", "club_title"]) if (typeof x[k] === "string" && HIDDEN_CLUBS.test(x[k])) return true; return false; };
@@ -3157,6 +3263,7 @@ async function goLoad(v){
   const side = Promise.all([v === "wallet" || v === "checkout" || v === "me" || v === "club" || v === "matches" || v === "home" ? loadWallet() : null,
     v === "me" ? loadWeek() : null, v === "me" || v === "matches" || v === "home" ? loadMeExtras() : null, v === "me" ? loadClaims() : null,
     S.user && v === "home" ? sb.rpc("my_leagues").then(r => { S.myLeagues = r.data || []; }).catch(() => {}) : null,
+    S.user && v === "home" ? sb.rpc("my_t_next").then(r => { S.tNext = r.error ? null : r.data; }).catch(() => {}) : null,
     S.user && v === "home" ? sb.rpc("my_champ").then(r => { if (r.data) setTimeout(() => champReveal(r.data), 600); }).catch(() => {}) : null,
     S.user && v === "me" ? sb.rpc("my_league_matches").then(r => { S.myLgMatches = r.data || []; }).catch(() => {}) : null]);
   if (v !== "checkin") ciStop(); else S.ciRes = null;
@@ -3295,6 +3402,7 @@ app.addEventListener("click", async e => {
   if (d.fdur){ S.fDur = +d.fdur; render(); return; }
   if (d.fgo){ const [cid, ct, iso] = d.fgo.split("|"); S.club = S.clubs.find(c => c.id === cid); S.day = S.fDay; S.dur = S.fDur; S.court = ct; S.slot = iso; S.coach = null; S.openSpots = 0;
     S.busy = S.fBusy[cid] || []; await loadClubExtras(); go("checkout"); return; }
+  if (d.bkany){ S.bkAny = Object.assign({}, S.bkAny, {[d.bkany]: 1}); render(); return; }
   if (d.club){ S.club = S.clubs.find(c => c.id === d.club); S.slot = null; if (S.fDay) S.day = S.fDay; if (S.fDur) S.dur = S.fDur; S.coach = null; S.classJoin = null; S.planBuy = null; go("club"); return; }
   if ("coach" in d && b.classList.contains("chip")){ S.coach = d.coach || null; if (S.coach) S.openSpots = 0; render(); return; }
   if (d.lesson){ S.coach = d.lesson; S.openSpots = 0; render(); window.scrollTo({top: 0, behavior: "smooth"}); return; }
@@ -3786,7 +3894,7 @@ Object.assign(W.en, {hmEv:"Events", wnDraw:"Live draw tonight at {w}", wnDrawS:"
   fdOpenClub:"Open club", ago_m:"{n}m ago", ago_h:"{n}h ago", ago_d:"{n}d ago", ago_now:"just now",
   alT:"Open match alerts", alTxt:"Get a notification when someone needs a player at your level.", alOn:"On", alOff:"Off",
   opT:"Need players?", opTxt:"Open spots and players at that level get a notification.", opSave:"Save", opNone:"No open spots", opSaved:"Saved. Players at that level are being notified.",
-  mjT:"This match needs {n}", mjJoin:"Join this match", mjSplit:"This match splits the court fee. Join from the Matches list to choose how you pay.", mjInv:"You're invited to this match. Your spot is saved.", bkSoonT:"Online booking coming soon", bkSoonS:"This club doesn't take bookings in Padel Live yet. Call or message the club to book a court.", bkSoonTag:"Booking soon", bkCall:"📞 Call the club", bkWa:"💬 WhatsApp", bkOffAdm:"Online booking is off for players at this club. You can still book as admin or staff.", omSoon:"Open matches start when online booking opens at the clubs. Tournaments and leagues are already on: check Events.", bkSwT:"Online booking", bkSwS:"Turn on a club when it's ready to take bookings in the app.", bkOn:"On", bkOff:"Off", sdL:"LEFT", sdR:"RIGHT", sdAny:"ANY", sdTA:"TEAM A", sdTB:"TEAM B", sdJoinL:"Join as Left", sdJoinR:"Join as Right", sdJoin:"Join", sdSpots:"{n} spots", sdSpot:"1 spot", sdFriend:"Friend",
+  nxLeague:"League match", nxTour:"Tournament match", bk3K:"Booking unlocks soon", bk3T:"Courts are almost ready", bk3S:"Online booking at {c} is coming to Padel Live. Warm up while you wait.", bk3G:"Keep it up", bk3Best:"Best", bk3Tap:"Tap the ball to start", bk3Again:"tap to play again", bk3Rec:"New best!", bk3B1:"Rally pro", bk3B2:"Wall master", bk3B3:"Legend", bk2K:"Coming soon", bk2T:"Online booking is on its way", bk2S:"We're getting {c} ready on Padel Live. Soon you'll book a court here in seconds.", bk2M:"Join an open match", bk2Adm:"Staff: open booking anyway", mjT:"This match needs {n}", mjJoin:"Join this match", mjSplit:"This match splits the court fee. Join from the Matches list to choose how you pay.", mjInv:"You're invited to this match. Your spot is saved.", bkSoonT:"Online booking coming soon", bkSoonS:"This club doesn't take bookings in Padel Live yet. Call or message the club to book a court.", bkSoonTag:"Booking soon", bkCall:"📞 Call the club", bkWa:"💬 WhatsApp", bkOffAdm:"Online booking is off for players at this club. You can still book as admin or staff.", omSoon:"Open matches start when online booking opens at the clubs. Tournaments and leagues are already on: check Events.", bkSwT:"Online booking", bkSwS:"Turn on a club when it's ready to take bookings in the app.", bkOn:"On", bkOff:"Off", sdL:"LEFT", sdR:"RIGHT", sdAny:"ANY", sdTA:"TEAM A", sdTB:"TEAM B", sdJoinL:"Join as Left", sdJoinR:"Join as Right", sdJoin:"Join", sdSpots:"{n} spots", sdSpot:"1 spot", sdFriend:"Friend",
   sdWhere:"Where do you play?", sdWhereN:"So players looking for the other side find your match.", sdLeft:"Left", sdLeftS:"Backhand side", sdRight:"Right", sdRightS:"Forehand side", sdEither:"Either", sdEitherS:"No preference",
   sdFree:"Which spot is free?", sdFreeL:"A left player", sdFreeR:"A right player", mfSideL:"Left player spots", mfSideR:"Right player spots", mfNL:"{n} matches need a Left player", mfNR:"{n} matches need a Right player",
   sdSwapT:"Positions", sdSwapN:"Tap a player, then tap another spot to swap them.", sdSwapped:"Positions updated.", pvT:"Public or private?", pvPub:"Public", pvPubS:"Anyone at your level", pvPriv:"Private", pvPrivS:"Only people you invite", pvFr:"Friends first", pvFrS:"Private, then public",
@@ -3806,7 +3914,7 @@ Object.assign(W.ar, {hmEv:"الفعاليات", wnDraw:"القرعة مباشر 
   fdOpenClub:"افتح النادي", ago_m:"من {n} د", ago_h:"من {n} س", ago_d:"من {n} يوم", ago_now:"هلّق",
   alT:"تنبيهات المباريات المفتوحة", alTxt:"بيوصلك إشعار لما حدا يحتاج لاعب بمستواك.", alOn:"شغّال", alOff:"موقّف",
   opT:"ناقصك لاعبين؟", opTxt:"افتح أماكن واللاعبين بهالمستوى بيوصلهم إشعار.", opSave:"احفظ", opNone:"ما في أماكن", opSaved:"انحفظ. عم نبعت إشعار للاعبين بهالمستوى.",
-  mjT:"هالمباراة ناقصها {n}", mjJoin:"انضم لهالمباراة", mjSplit:"بهالمباراة الحساب مقسوم. انضم من قائمة المباريات لتختار طريقة الدفع.", mjInv:"أنت معزوم على هالمباراة. مكانك محجوز.", bkSoonT:"الحجز أونلاين قريباً", bkSoonS:"هالنادي لسا ما بياخد حجوزات على Padel Live. اتصل أو راسل النادي لتحجز ملعب.", bkSoonTag:"الحجز قريباً", bkCall:"📞 اتصل بالنادي", bkWa:"💬 واتساب", bkOffAdm:"الحجز أونلاين مسكّر للاعبين بهالنادي. فيك تحجز كأدمن أو موظف.", omSoon:"المباريات المفتوحة بتبلش لما يفتح الحجز أونلاين بالنوادي. البطولات والدوريات شغالة: شوف الفعاليات.", bkSwT:"الحجز أونلاين", bkSwS:"شغّل النادي لما يكون جاهز ياخد حجوزات بالتطبيق.", bkOn:"شغال", bkOff:"مسكّر", sdL:"يسار", sdR:"يمين", sdAny:"أي جهة", sdTA:"الفريق A", sdTB:"الفريق B", sdJoinL:"انضم يسار", sdJoinR:"انضم يمين", sdJoin:"انضم", sdSpots:"{n} أماكن", sdSpot:"مكان واحد", sdFriend:"صديق",
+  nxLeague:"مباراة دوري", nxTour:"مباراة بطولة", bk3K:"الحجز رح يفتح قريباً", bk3T:"الملاعب صارت شبه جاهزة", bk3S:"الحجز أونلاين بـ{c} جاي على Padel Live. احمى شوي لحتى يفتح.", bk3G:"خليها بالهوا", bk3Best:"أفضل نتيجة", bk3Tap:"اضغط على الطابة لتبلش", bk3Again:"اضغط لتلعب كمان مرة", bk3Rec:"رقم قياسي جديد!", bk3B1:"ملك الرالي", bk3B2:"سيد الحيط", bk3B3:"أسطورة", bk2K:"قريباً", bk2T:"الحجز أونلاين جاي قريباً", bk2S:"عم نجهّز {c} على Padel Live. قريباً رح تحجز ملعب من هون بثواني.", bk2M:"انضم لمباراة مفتوحة", bk2Adm:"للموظفين: افتح الحجز", mjT:"هالمباراة ناقصها {n}", mjJoin:"انضم لهالمباراة", mjSplit:"بهالمباراة الحساب مقسوم. انضم من قائمة المباريات لتختار طريقة الدفع.", mjInv:"أنت معزوم على هالمباراة. مكانك محجوز.", bkSoonT:"الحجز أونلاين قريباً", bkSoonS:"هالنادي لسا ما بياخد حجوزات على Padel Live. اتصل أو راسل النادي لتحجز ملعب.", bkSoonTag:"الحجز قريباً", bkCall:"📞 اتصل بالنادي", bkWa:"💬 واتساب", bkOffAdm:"الحجز أونلاين مسكّر للاعبين بهالنادي. فيك تحجز كأدمن أو موظف.", omSoon:"المباريات المفتوحة بتبلش لما يفتح الحجز أونلاين بالنوادي. البطولات والدوريات شغالة: شوف الفعاليات.", bkSwT:"الحجز أونلاين", bkSwS:"شغّل النادي لما يكون جاهز ياخد حجوزات بالتطبيق.", bkOn:"شغال", bkOff:"مسكّر", sdL:"يسار", sdR:"يمين", sdAny:"أي جهة", sdTA:"الفريق A", sdTB:"الفريق B", sdJoinL:"انضم يسار", sdJoinR:"انضم يمين", sdJoin:"انضم", sdSpots:"{n} أماكن", sdSpot:"مكان واحد", sdFriend:"صديق",
   sdWhere:"وين بتلعب؟", sdWhereN:"مشان يلي بيدوروا عالجهة التانية يلاقوا مباراتك.", sdLeft:"يسار", sdLeftS:"جهة الباكهاند", sdRight:"يمين", sdRightS:"جهة الفورهاند", sdEither:"ما بتفرق", sdEitherS:"أي جهة",
   sdFree:"أي مكان فاضي؟", sdFreeL:"لاعب يسار", sdFreeR:"لاعب يمين", mfSideL:"أماكن لاعب يسار", mfSideR:"أماكن لاعب يمين", mfNL:"{n} مباريات بدها لاعب يسار", mfNR:"{n} مباريات بدها لاعب يمين",
   sdSwapT:"المراكز", sdSwapN:"اكبس على لاعب، بعدين على مكان تاني لتبدلهم.", sdSwapped:"تحدثت المراكز.", pvT:"عامة ولا خاصة؟", pvPub:"عامة", pvPubS:"أي حدا بمستواك", pvPriv:"خاصة", pvPrivS:"بس يلي بتعزمهم", pvFr:"الأصحاب أول", pvFrS:"خاصة، بعدين عامة",
@@ -3837,7 +3945,7 @@ function feedItem(x){
 /* Home: tonight's open matches only */
 function tonightRow(){
   const today = dayKey(new Date()), now = Date.now() - 15 * 60000;
-  const open = forMe((S.matches || []).filter(m => m.open_spots > 0 && !m.joined && dayKey(new Date(m.starts_at)) === today && new Date(m.starts_at).getTime() > now));
+  const myL = myLevel(), open = forMe((S.matches || []).filter(m => m.open_spots > 0 && !m.joined && dayKey(new Date(m.starts_at)) === today && new Date(m.starts_at).getTime() > now && (m.inv || (inRange(m, myL) && !tooHigh(m)))));
   return `<div class="between"><h2>${t("ptT")}</h2><a href="#matches" data-go="matches" style="font-weight:700;font-size:13px;white-space:nowrap">${t("all")} →</a></div>
    ${open.length ? `<div class="om-row">${open.slice(0, 8).map(matchRow).join("")}</div>` : `<button class="card note" data-go="matches" style="text-align:start;width:100%">${t("ptNone")}</button>`}`;
 }
@@ -3846,7 +3954,7 @@ function homeEvents(){
   const lg = S.user ? myLeagueCard() : "", ts = (S.tours || []).filter(x => !evPast(x)).slice(0, 3);
   if (!lg && !ts.length) return "";
   return `<div class="between"><h2>${t("hmEv")}</h2><a href="#events" data-go="events" style="font-weight:700;font-size:13px;white-space:nowrap">${t("all")} →</a></div>
-   <div style="display:flex;flex-direction:column;gap:14px">${lg}${ts.map(evCard).join("")}</div>`;
+   <div class="ev-fire-l">${[lg].concat(ts.map(evCard)).filter(Boolean).map(h => `<div class="ev-fire">${h}</div>`).join("")}</div>`;
 }
 /* ---------- What's new: events and big moments only (no match-by-match results) ---------- */
 function wnTours(){ return (S.feedT || (S.tours || []).filter(x => !evPast(x)).map(x => Object.assign({open: null}, x))).filter(x => !evPast(x)); }
@@ -4131,7 +4239,7 @@ V.welcome = () => { const x = (S.wi && S.wi.tours || [])[0], clubs = (S.clubs ||
       ${k.logo ? `<img src="${esc(k.logo)}" alt="" onerror="this.remove()">` : `<span class="wa-tl">🏆</span>`}<span class="wa-tt"><b>${esc(x.name)}</b><small>${esc(fmtDay(d1))}${d2 && x.ends_on !== x.starts_on ? " – " + esc(fmtDay(d2)) : ""}${cats ? " · " + esc(cats) : ""}${pz ? ` · <em>${esc(pz[0])}</em>` : ""}</small></span><span class="wa-arr">${lang === "ar" ? "←" : "→"}</span></a>`; }
   return `<main class="wa">
   <div class="wa-top"><div class="logo wa-logo">Padel <i>Live</i></div><div class="wel2-lang">${[["ar", "ع"], ["en", "EN"]].map(([k, l]) => `<button data-wlang="${k}" aria-pressed="${lang === k}">${l}</button>`).join("")}</div></div>
-  <div class="wa-hero"><div><span class="wa-kick"><i></i>${esc(tf("wAkick", {n: Math.max(4, (S.clubs || []).length)}))}</span>
+  <div class="wa-hero"><div><span class="wa-kick"><i></i>${esc(tf("wAkick", {n: Math.max(3, (S.clubs || []).length)}))}</span>
       <h1 class="wa-h">${t("wA1")}<br>${t("wA2")} <em>${t("wA3")}</em></h1><p class="wa-s">${t("wAsub")}</p></div>
     <div class="wa-cards"><div class="wa-mc back"></div><div class="wa-mc"><b>?</b><small>${t("wRankU")}</small><span class="wa-gems">${["E", "D", "C", "B", "A"].map(c => `<i style="background:${TIER[c][1]}"></i>`).join("")}</span></div></div></div>
   <div class="wa-ctas"><button class="wa-go" data-wgo="level">${t("wAgo")} <small>60s</small></button><button class="wa-look" data-wgo="home">${t("wAlook")}</button></div>
@@ -4239,8 +4347,15 @@ function smartCard(){
   if (!S.user) return welTour() + guestStart();
   const ps = pendingScores()[0];
   if (ps) return `<button class="hero sc-alert" data-match="${ps.id}" style="text-align:start;width:100%"><span class="kick2">⚑ ${t("scScore")}</span><span class="big">${esc(fmtDay(new Date(ps.starts_at)))} · ${esc(ps.club_name)}</span><span style="opacity:.92;font-size:14px">${t("scScoreS")}</span><span class="sc-go">${t("scOpen")} →</span></button>`;
-  const nx = upcoming()[0], today = nx && dayKey(new Date(nx.starts_at)) === dayKey(new Date());
-  const nextHero = b => `<button class="hero" data-match="${b.id}" style="text-align:start;width:100%"><div class="between" style="width:100%"><span class="kick2">${today ? "🔥 " + t("scToday") : t("scNextT")}</span>${statusTag(b.status).replace('tag g','tag w').replace('tag pend','tag w')}</div>
+  const nb = upcoming()[0], lgx = (S.myLeagues || []).find(x => x.next && x.next.at && new Date(x.next.at) > new Date(Date.now() - 90 * 60000)), tn = S.tNext && S.tNext.at ? S.tNext : null;
+  const cands = [nb ? {k: "b", at: new Date(nb.starts_at), b: nb} : null, lgx ? {k: "l", at: new Date(lgx.next.at), l: lgx} : null, tn ? {k: "t", at: new Date(tn.at), t: tn} : null].filter(Boolean).sort((a, b) => a.at - b.at);
+  const nc = cands[0], nx = nc && nc.k === "b" ? nb : nc, today = nc && dayKey(nc.at) === dayKey(new Date());
+  const whenTxt = d => today ? fmtTime(d) : fmtDay(d) + " · " + fmtTime(d);
+  const nextHero = b => b.k === "l" ? `<button class="hero hero-lg" data-league="${b.l.id}" style="text-align:start;width:100%"><div class="between" style="width:100%"><span class="kick2">${today ? "🔥 " + t("scToday") : t("scNextT")}</span><span class="tag w">🏅 ${t("nxLeague")}</span></div>
+    <span class="big">${esc(whenTxt(b.at))}</span><span style="opacity:.92;font-size:14px">${esc(b.l.name)} · vs ${esc(b.l.next.vs || "")}${b.l.next.court ? " · " + esc(b.l.next.court) : ""}</span></button>`
+   : b.k === "t" ? `<a class="hero hero-tn" href="t.html?${encodeURIComponent(b.t.slug)}#schedule" style="text-align:start;width:100%;display:flex;flex-direction:column;text-decoration:none"><div class="between" style="width:100%"><span class="kick2">${today ? "🔥 " + t("scToday") : t("scNextT")}</span><span class="tag w">🏆 ${t("nxTour")}</span></div>
+    <span class="big">${esc(whenTxt(b.at))}</span><span style="opacity:.92;font-size:14px">${esc(b.t.name)} · ${esc(b.t.catn || b.t.cat)} · vs ${esc(b.t.vs)} · ${esc(b.t.court)}</span></a>`
+   : `<button class="hero" data-match="${b.id}" style="text-align:start;width:100%"><div class="between" style="width:100%"><span class="kick2">${today ? "🔥 " + t("scToday") : t("scNextT")}</span>${statusTag(b.status).replace('tag g','tag w').replace('tag pend','tag w')}</div>
     <span class="big">${esc(today ? fmtTime(new Date(b.starts_at)) : fmtDay(new Date(b.starts_at)) + " · " + fmtTime(new Date(b.starts_at)))}</span>
     <span style="opacity:.92;font-size:14px">${esc(b.club_name)} · ${esc(b.court_name)} · ${b.minutes} ${t("min")}${b.code ? ` · #${b.booking_no} · <b>${esc(b.code)}</b>` : ""}</span></button>`;
   if (today) return nextHero(nx);
