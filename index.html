@@ -390,7 +390,7 @@ textarea{border-radius:12px;border:1px solid var(--line);background:var(--card);
 /* ---------- player card + celebrations ---------- */
 .pcard{--tc:#E8C96A;margin:6px auto 4px;width:min(300px,86vw);aspect-ratio:300/420;position:relative;border-radius:22px;padding:3px;background:conic-gradient(from 210deg,#FFF3C4,var(--tc),#5E4A1A,var(--tc),#8a7a5a,#FFF3C4);box-shadow:0 0 34px var(--tc),0 18px 36px rgba(0,0,0,.45);transform:rotate(-2deg)}@supports (color:color-mix(in srgb,red 50%,blue)){.pcard{box-shadow:0 0 34px color-mix(in srgb,var(--tc) 45%,transparent),0 18px 36px rgba(0,0,0,.45)}}
 .pc-in{height:100%;border-radius:19px;overflow:hidden;position:relative;background:linear-gradient(160deg,#2B2410 0%,#15120A 55%,#0C0A06 100%);color:#F4F1E6}
-.pc-holo{position:absolute;top:0;right:0;bottom:0;left:0;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.16) 45%,transparent 50%,transparent 65%);background-size:250% 100%;animation:pcholo 3.5s ease-in-out infinite}@supports (color:color-mix(in srgb,red 50%,blue)){.pc-holo{background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.16) 45%,color-mix(in srgb,var(--tc) 25%,transparent) 50%,transparent 65%)}}
+.pc-holo{position:absolute;top:0;right:0;bottom:0;left:0;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.16) 45%,transparent 50%,transparent 65%);background-size:250% 100%;animation:pcholo 3.5s ease-in-out infinite}@supports (color:color-mix(in srgb,red 50%,blue)){.pc-holo{background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.16) 45%,color-mix(in srgb,var(--tc) 25%,transparent) 50%,transparent 65%);background-size:250% 100%}}
 @keyframes pcholo{0%{background-position:120% 0}100%{background-position:-120% 0}}
 .pc-top{display:flex;justify-content:space-between;padding:14px 16px 0;position:relative}
 .pc-ovr{display:flex;flex-direction:column;align-items:center;line-height:.9}
@@ -954,7 +954,7 @@ details.lrules{border:2px solid #E8C96A;background:linear-gradient(160deg,var(--
 .gc-bg,.gc-pat,.gc-rays,.gc-spark{position:absolute;top:0;right:0;bottom:0;left:0;pointer-events:none}
 .gc-bg{z-index:0}.gc-pat{z-index:0;opacity:.18}.gc-rays{z-index:0;opacity:0}.pcard.gc .pc-holo{z-index:1}.gc-spark{z-index:1}
 /* rating + tier */
-.pcard.gc .pc-ovr b{font-size:54px;letter-spacing:-1px;background:linear-gradient(180deg,#fff,var(--tc) 60%,var(--tc));-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 2px 6px rgba(0,0,0,.6)) drop-shadow(0 0 12px var(--tc))}@supports (color:color-mix(in srgb,red 50%,blue)){.pcard.gc .pc-ovr b{background:linear-gradient(180deg,#fff,var(--tc) 60%,color-mix(in srgb,var(--tc) 55%,#000));filter:drop-shadow(0 2px 6px rgba(0,0,0,.6)) drop-shadow(0 0 12px color-mix(in srgb,var(--tc) 50%,transparent))}}
+.pcard.gc .pc-ovr b{font-size:54px;letter-spacing:-1px;background:linear-gradient(180deg,#fff,var(--tc) 60%,var(--tc));-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:none;filter:drop-shadow(0 2px 6px rgba(0,0,0,.6)) drop-shadow(0 0 12px var(--tc))}@supports (color:color-mix(in srgb,red 50%,blue)){.pcard.gc .pc-ovr b{background:linear-gradient(180deg,#fff,var(--tc) 60%,color-mix(in srgb,var(--tc) 55%,#000));filter:drop-shadow(0 2px 6px rgba(0,0,0,.6)) drop-shadow(0 0 12px color-mix(in srgb,var(--tc) 50%,transparent));-webkit-background-clip:text;background-clip:text}}
 .pcard.gc .pc-ovr small{color:var(--tc)}
 .gc-rib{display:inline-block;margin-top:2px;padding:3px 10px;font-size:10.5px!important;letter-spacing:.14em!important;color:#120f08!important;background:linear-gradient(180deg,#fff,var(--tc));clip-path:polygon(8px 0,calc(100% - 8px) 0,100% 50%,calc(100% - 8px) 100%,8px 100%,0 50%);font-weight:900!important}
 .pcard.gc .pc-rank svg{filter:drop-shadow(0 0 10px var(--tc))}@supports (color:color-mix(in srgb,red 50%,blue)){.pcard.gc .pc-rank svg{filter:drop-shadow(0 0 10px color-mix(in srgb,var(--tc) 70%,transparent))}}
@@ -1431,7 +1431,7 @@ main.vlg input,main.vlg select{background:#0B1220;color:#fff;border-color:rgba(9
   box-shadow:0 0 10px var(--b),inset 0 0 10px var(--b);
   background:linear-gradient(90deg,transparent calc(22% - .75px),var(--b) calc(22% - .75px) calc(22% + .75px),transparent calc(22% + .75px) calc(78% - .75px),var(--b) calc(78% - .75px) calc(78% + .75px),transparent calc(78% + .75px)),
    linear-gradient(0deg,transparent calc(50% - .75px),var(--b) calc(50% - .75px) calc(50% + .75px),transparent calc(50% + .75px)) 22% 0/56% 100% no-repeat}@supports (color:color-mix(in srgb,red 50%,blue)){.mx .court::before{border:1.5px solid color-mix(in srgb,var(--b) 85%,#fff);box-shadow:0 0 10px color-mix(in srgb,var(--b) 70%,transparent),inset 0 0 10px color-mix(in srgb,var(--b) 35%,transparent);background:linear-gradient(90deg,transparent calc(22% - .75px),color-mix(in srgb,var(--b) 85%,#fff) calc(22% - .75px) calc(22% + .75px),transparent calc(22% + .75px) calc(78% - .75px),color-mix(in srgb,var(--b) 85%,#fff) calc(78% - .75px) calc(78% + .75px),transparent calc(78% + .75px)),
-   linear-gradient(0deg,transparent calc(50% - .75px),color-mix(in srgb,var(--b) 85%,#fff) calc(50% - .75px) calc(50% + .75px),transparent calc(50% + .75px)) 22% 0/56% 100% no-repeat}}
+   linear-gradient(0deg,transparent calc(50% - .75px),color-mix(in srgb,var(--b) 85%,#fff) calc(50% - .75px) calc(50% + .75px),transparent calc(50% + .75px)) 22% 0/56% 100% no-repeat;border-radius:13px}}
 .mx .net{position:absolute;left:50%;top:2px;bottom:2px;width:4px;margin-left:-2px;border-radius:3px;background:linear-gradient(180deg,#fff,var(--b),#fff);box-shadow:0 0 12px var(--b),0 0 3px #fff;z-index:1}@supports (color:color-mix(in srgb,red 50%,blue)){.mx .net{background:linear-gradient(180deg,#fff,color-mix(in srgb,var(--b) 60%,#fff),#fff)}}
 .mx .glass{position:absolute;top:0;right:0;bottom:0;left:0;border-radius:20px;background:linear-gradient(115deg,rgba(255,255,255,.18) 0%,rgba(255,255,255,0) 28%,rgba(255,255,255,0) 72%,rgba(255,255,255,.08) 100%);pointer-events:none;z-index:3}
 .mx .tm{position:absolute;top:14px;font:900 8.5px Inter;letter-spacing:.22em;color:var(--b);opacity:.85;z-index:2}@supports (color:color-mix(in srgb,red 50%,blue)){.mx .tm{color:color-mix(in srgb,var(--b) 70%,#fff)}}.mx .tm.a{left:18px}.mx .tm.b{right:18px}
@@ -1518,7 +1518,7 @@ main.vlg input,main.vlg select{background:#0B1220;color:#fff;border-color:rgba(9
 .wel2-in{border:0;background:transparent;color:var(--ink-2);font:600 14px var(--body,inherit);padding:6px;cursor:pointer}.wel2-in b{color:var(--ink)}
 /* tournament card in its club's colours */
 .wt2{position:relative;display:flex;flex-direction:column;gap:6px;min-height:190px;padding:16px 16px 14px;border-radius:24px;overflow:hidden;text-decoration:none;color:#fff;
-  background:linear-gradient(160deg,var(--a),var(--d));box-shadow:0 14px 30px rgba(0,0,0,.25);border:1px solid var(--b);animation:welIn .55s .1s ease both}@supports (color:color-mix(in srgb,red 50%,blue)){.wt2{border:1px solid color-mix(in srgb,var(--b) 45%,transparent)}}
+  background:linear-gradient(160deg,var(--a),var(--d));box-shadow:0 14px 30px rgba(0,0,0,.25);border:1px solid var(--b);animation:welIn .55s .1s ease both}@supports (color:color-mix(in srgb,red 50%,blue)){.wt2{border:1px solid color-mix(in srgb,var(--b) 45%,transparent);border-radius:24px}}
 .wt2-bg{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;object-fit:cover}
 .wt2-sh{position:absolute;top:0;right:0;bottom:0;left:0;background:linear-gradient(180deg,transparent 0%,var(--d) 50%,var(--d) 100%)}@supports (color:color-mix(in srgb,red 50%,blue)){.wt2-sh{background:linear-gradient(180deg,color-mix(in srgb,var(--d) 25%,transparent) 0%,color-mix(in srgb,var(--d) 70%,transparent) 50%,var(--d) 100%)}}
 .wt2>*:not(.wt2-bg):not(.wt2-sh){position:relative}
@@ -1541,7 +1541,7 @@ main.vlg input,main.vlg select{background:#0B1220;color:#fff;border-color:rgba(9
 .phf:focus-within{outline:2px solid var(--blue,#2C5FAE);outline-offset:-1px}
 /* ===== open-match card v2 (club photo, flat court, pop) */
 .mx2{position:relative;border-radius:22px;overflow:hidden;color:#fff;background:var(--d);margin:6px 2px 18px;border:1.5px solid var(--b);
-  box-shadow:0 18px 34px -10px var(--a),0 0 0 4px transparent,0 0 26px transparent,inset 0 1px 0 rgba(255,255,255,.18)}@supports (color:color-mix(in srgb,red 50%,blue)){.mx2{border:1.5px solid color-mix(in srgb,var(--b) 45%,transparent);box-shadow:0 18px 34px -10px color-mix(in srgb,var(--a) 75%,transparent),0 0 0 4px color-mix(in srgb,var(--b) 10%,transparent),0 0 26px color-mix(in srgb,var(--b) 22%,transparent),inset 0 1px 0 rgba(255,255,255,.18)}}
+  box-shadow:0 18px 34px -10px var(--a),0 0 0 4px transparent,0 0 26px transparent,inset 0 1px 0 rgba(255,255,255,.18)}@supports (color:color-mix(in srgb,red 50%,blue)){.mx2{border:1.5px solid color-mix(in srgb,var(--b) 45%,transparent);box-shadow:0 18px 34px -10px color-mix(in srgb,var(--a) 75%,transparent),0 0 0 4px color-mix(in srgb,var(--b) 10%,transparent),0 0 26px color-mix(in srgb,var(--b) 22%,transparent),inset 0 1px 0 rgba(255,255,255,.18);border-radius:22px}}
 .mx2:after{content:"";position:absolute;top:0;right:0;bottom:0;left:0;border-radius:inherit;pointer-events:none;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.08) 42%,transparent 54%)}
 .om-row>.mx2{flex:0 0 86%;scroll-snap-align:center;margin:6px 0 22px}
 .m2-ph{position:relative;height:104px;background:var(--cv) center 60%/cover;filter:saturate(1.2) contrast(1.06)}
@@ -1558,7 +1558,7 @@ main.vlg input,main.vlg select{background:#0B1220;color:#fff;border-color:rgba(9
 .m2-club img{width:36px;height:36px;border-radius:50%;object-fit:cover;background:#fff;border:2px solid var(--b);box-shadow:0 0 0 3px transparent,0 0 16px var(--b)}@supports (color:color-mix(in srgb,red 50%,blue)){.m2-club img{box-shadow:0 0 0 3px color-mix(in srgb,var(--b) 22%,transparent),0 0 16px color-mix(in srgb,var(--b) 45%,transparent)}}
 .m2-club b{display:block;font-size:14.5px}.m2-club small{font-size:12px;color:rgba(255,255,255,.62)}
 .m2-court{position:relative;height:96px;border-radius:12px;display:grid;grid-template-columns:1fr 1fr;border:1.5px solid var(--b);
-  background:radial-gradient(120% 90% at 50% 0%,transparent,transparent);box-shadow:inset 0 0 22px transparent}@supports (color:color-mix(in srgb,red 50%,blue)){.m2-court{border:1.5px solid color-mix(in srgb,var(--b) 45%,transparent);background:radial-gradient(120% 90% at 50% 0%,color-mix(in srgb,var(--b) 12%,transparent),color-mix(in srgb,var(--a) 12%,transparent));box-shadow:inset 0 0 22px color-mix(in srgb,var(--b) 10%,transparent)}}
+  background:radial-gradient(120% 90% at 50% 0%,transparent,transparent);box-shadow:inset 0 0 22px transparent}@supports (color:color-mix(in srgb,red 50%,blue)){.m2-court{border:1.5px solid color-mix(in srgb,var(--b) 45%,transparent);background:radial-gradient(120% 90% at 50% 0%,color-mix(in srgb,var(--b) 12%,transparent),color-mix(in srgb,var(--a) 12%,transparent));box-shadow:inset 0 0 22px color-mix(in srgb,var(--b) 10%,transparent);border-radius:12px}}
 .m2-court:before{content:"";position:absolute;left:50%;top:6px;bottom:6px;width:1.5px;background:var(--b)}@supports (color:color-mix(in srgb,red 50%,blue)){.m2-court:before{background:color-mix(in srgb,var(--b) 55%,transparent)}}
 .m2-court:after{content:"";position:absolute;left:10%;right:10%;top:50%;height:1px;background:transparent}@supports (color:color-mix(in srgb,red 50%,blue)){.m2-court:after{background:color-mix(in srgb,var(--b) 22%,transparent)}}
 .m2-side{display:grid;grid-template-rows:1fr 1fr;align-items:center;justify-items:center;position:relative;z-index:1}
@@ -1606,7 +1606,7 @@ main.wa .wel2-lang{background:rgba(255,255,255,.07);border-color:rgba(255,255,25
 .wa-look{height:56px;padding:0 18px;border-radius:16px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.18);color:#EAF2EC;font:700 15px var(--body);cursor:pointer}
 .wa-lbl{margin:22px 0 10px;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:rgba(234,242,236,.55)}
 .wa-tour{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:center;padding:12px;border-radius:18px;text-decoration:none;color:#F4EAD0;
-  background:linear-gradient(90deg,var(--d) 30%,var(--d)),var(--cv,none) center/cover,var(--d);border:1px solid var(--b)}@supports (color:color-mix(in srgb,red 50%,blue)){.wa-tour{background:linear-gradient(90deg,color-mix(in srgb,var(--d) 96%,transparent) 30%,color-mix(in srgb,var(--d) 70%,transparent)),var(--cv,none) center/cover,var(--d);border:1px solid color-mix(in srgb,var(--b) 50%,transparent)}}
+  background:linear-gradient(90deg,var(--d) 30%,var(--d)),var(--cv,none) center/cover,var(--d);border:1px solid var(--b)}@supports (color:color-mix(in srgb,red 50%,blue)){.wa-tour{background:linear-gradient(90deg,color-mix(in srgb,var(--d) 96%,transparent) 30%,color-mix(in srgb,var(--d) 70%,transparent)),var(--cv,none) center/cover,var(--d);border:1px solid color-mix(in srgb,var(--b) 50%,transparent);border-radius:18px}}
 .wa-tour img,.wa-tl{width:52px;height:52px;border-radius:14px;border:1.5px solid var(--b);background:var(--d);object-fit:cover;display:grid;place-items:center;font-size:24px}
 .wa-tt b{display:block;font-family:var(--disp);font-weight:800;font-style:italic;font-size:19px;line-height:1.05;text-transform:uppercase;color:#fff}
 .wa-tt small{display:block;font-size:12px;color:rgba(244,234,208,.75);margin-top:3px}.wa-tt em{font-style:normal;color:var(--b);font-weight:800}
@@ -1631,7 +1631,7 @@ button.m2s:not(.free){cursor:pointer}
 /* ===== open-match card v3: compact ticket in the club's theme */
 .mx3{position:relative;display:grid;grid-template-columns:84px minmax(0,1fr);border-radius:18px;overflow:hidden;color:#fff;margin:4px 2px 12px;
  background:linear-gradient(135deg,var(--d),var(--d) 70%);border:1.5px solid var(--b);
- box-shadow:0 0 0 3px transparent,0 8px 20px -8px var(--b),0 10px 22px rgba(0,0,0,.25)}@supports (color:color-mix(in srgb,red 50%,blue)){.mx3{background:linear-gradient(135deg,color-mix(in srgb,var(--a) 30%,var(--d)),var(--d) 70%);border:1.5px solid color-mix(in srgb,var(--b) 40%,transparent);box-shadow:0 0 0 3px color-mix(in srgb,var(--b) 8%,transparent),0 8px 20px -8px color-mix(in srgb,var(--b) 45%,transparent),0 10px 22px rgba(0,0,0,.25)}}
+ box-shadow:0 0 0 3px transparent,0 8px 20px -8px var(--b),0 10px 22px rgba(0,0,0,.25)}@supports (color:color-mix(in srgb,red 50%,blue)){.mx3{background:linear-gradient(135deg,color-mix(in srgb,var(--a) 30%,var(--d)),var(--d) 70%);border:1.5px solid color-mix(in srgb,var(--b) 40%,transparent);box-shadow:0 0 0 3px color-mix(in srgb,var(--b) 8%,transparent),0 8px 20px -8px color-mix(in srgb,var(--b) 45%,transparent),0 10px 22px rgba(0,0,0,.25);border-radius:18px}}
 .om-row>.mx3{flex:0 0 88%;scroll-snap-align:center;margin:4px 0 14px}
 .m3-ph{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;padding:8px 4px;text-align:center;
  background:linear-gradient(90deg,var(--d),var(--d) 80%,var(--d)),var(--cv) 40% 60%/auto 100%;border-inline-end:1.5px dashed var(--b)}@supports (color:color-mix(in srgb,red 50%,blue)){.m3-ph{background:linear-gradient(90deg,color-mix(in srgb,var(--d) 35%,transparent),color-mix(in srgb,var(--d) 70%,transparent) 80%,var(--d)),var(--cv) 40% 60%/auto 100%;border-inline-end:1.5px dashed color-mix(in srgb,var(--b) 35%,transparent)}}
@@ -1652,7 +1652,7 @@ button.m2s:not(.free){cursor:pointer}
 .m3-chip{font-size:10.5px;font-weight:800;padding:2px 8px;border-radius:99px;background:rgba(255,255,255,.12)}
 .m3-chip.rv{background:#E5484D}
 .m3-ct{position:relative;display:grid;grid-template-columns:1fr 2px 1fr;align-items:center;gap:4px;padding:6px 4px;border-radius:12px;
- background:linear-gradient(180deg,transparent,transparent);border:1px solid transparent}@supports (color:color-mix(in srgb,red 50%,blue)){.m3-ct{background:linear-gradient(180deg,color-mix(in srgb,var(--a) 22%,transparent),color-mix(in srgb,var(--a) 10%,transparent));border:1px solid color-mix(in srgb,var(--b) 20%,transparent)}}
+ background:linear-gradient(180deg,transparent,transparent);border:1px solid transparent}@supports (color:color-mix(in srgb,red 50%,blue)){.m3-ct{background:linear-gradient(180deg,color-mix(in srgb,var(--a) 22%,transparent),color-mix(in srgb,var(--a) 10%,transparent));border:1px solid color-mix(in srgb,var(--b) 20%,transparent);border-radius:12px}}
 .m3-net{align-self:stretch;background:var(--b);border-radius:2px}@supports (color:color-mix(in srgb,red 50%,blue)){.m3-net{background:color-mix(in srgb,var(--b) 60%,transparent)}}
 .m3-sd{display:flex;justify-content:space-around;min-width:0}
 .mx3 .m2s{flex-direction:column;gap:2px;min-width:0;max-width:50%}
@@ -1785,6 +1785,182 @@ html[dir=rtl] .wn-it:before{left:auto;right:0}
 .ev-fire>*{margin:0!important}
 @keyframes evEmb{50%{box-shadow:0 0 0 2px rgba(255,130,60,.95),0 0 30px 5px rgba(255,80,30,.65),0 0 64px 12px rgba(255,150,40,.28)}}
 @media (prefers-reduced-motion:reduce){.ev-fire{animation:none}}
+/* ===== welcome: tournament card in the league-card style */
+.wtl{display:block;border-radius:22px;overflow:hidden;background:#05080F;color:#fff;text-decoration:none;
+ box-shadow:0 0 0 2px rgba(255,86,48,.85),0 0 22px 3px rgba(255,70,30,.5),0 0 50px 8px rgba(255,130,40,.2);animation:evEmb 2.6s ease-in-out infinite}
+.wtl-top{position:relative;display:block;height:150px;background:linear-gradient(180deg,rgba(5,8,15,0) 30%,rgba(5,8,15,.92)),var(--cv,none) center 35%/cover,linear-gradient(135deg,var(--a),var(--d))}
+.wtl-lg{position:absolute;left:14px;top:12px;width:50px;height:50px;border-radius:50%;background:#fff;border:3px solid var(--b);object-fit:cover;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+.wtl-cd{position:absolute;right:10px;top:10px;min-width:84px;text-align:center;background:rgba(0,0,0,.62);border:1.5px solid rgba(227,238,58,.35);border-radius:14px;padding:6px 10px;font:800 9.5px var(--body);letter-spacing:.1em;text-transform:uppercase}
+.wtl-cd small{display:block;opacity:.8}
+.wtl-cd b{display:block;font:italic 900 30px/1 var(--disp);color:#E3EE3A;letter-spacing:0;margin-top:2px}
+.wtl-cd em{display:block;font:800 13px var(--body);font-style:normal;letter-spacing:.06em;font-variant-numeric:tabular-nums;margin-top:1px}
+.wtl-live{color:#FF5A5F!important;animation:bks2d 1.2s infinite}
+.wtl-t{position:absolute;left:14px;right:110px;bottom:10px}
+.wtl-t small{font:800 10.5px var(--body);letter-spacing:.14em;color:#E3EE3A;text-transform:uppercase}
+.wtl-t b{display:block;font:italic 900 30px/1 var(--disp);text-transform:uppercase;text-shadow:0 2px 12px rgba(0,0,0,.6)}
+.wtl-bd{display:flex;flex-direction:column;gap:9px;padding:10px 14px 14px}
+.wtl-row{display:flex;justify-content:space-between;align-items:center;gap:8px;font:700 13px var(--body)}
+.wtl-pz b{color:#E3EE3A;font-size:15px}
+.wtl-left{font:800 12px var(--body);padding:4px 9px;border-radius:99px;background:rgba(255,255,255,.08)}
+.wtl-left.hot{background:linear-gradient(90deg,#FF3B1F,#FF8A1F)}
+.wtl-bar{display:block;height:7px;border-radius:99px;background:rgba(255,255,255,.12);overflow:hidden}
+.wtl-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#FF4A2E,#FFB21F)}
+.wtl-go{display:block;height:50px;border-radius:15px;background:#E3EE3A;color:#07110D;font:800 17px/50px var(--body);text-align:center;box-shadow:0 8px 22px -8px rgba(227,238,58,.7)}
+html[dir=rtl] .wtl-lg{left:auto;right:14px}html[dir=rtl] .wtl-cd{right:auto;left:10px}html[dir=rtl] .wtl-t{left:110px;right:14px}
+/* ===== welcome tournament card: league "Volt Arena" style */
+.wtv{position:relative;display:block;overflow:hidden;border-radius:24px;color:#fff;text-decoration:none;--vl:#E3EE3A;--vb:#5B8FE0;--vn:#05080F;
+ background-color:#05080F;background-image:radial-gradient(120% 60% at 70% 0%,rgba(44,95,174,.55),transparent 65%),url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='48'><path d='M14 1 L42 1 L55 24 L42 47 L14 47 L1 24 Z' fill='none' stroke='%232C5FAE' stroke-opacity='.22' stroke-width='1.2'/></svg>");
+ border:1.5px solid rgba(91,143,224,.55);box-shadow:0 18px 34px -16px rgba(44,95,174,.95),0 0 26px -6px rgba(91,143,224,.5)}
+.wtv-glow{position:absolute;right:-20px;top:-30px;width:220px;height:200px;background:radial-gradient(closest-side,rgba(227,238,58,.28),transparent);pointer-events:none}
+.wtv-medal{position:absolute;right:16px;top:58px;width:84px;height:84px;border-radius:50%;background:#fff;object-fit:cover;border:4px solid #2C5FAE;
+ box-shadow:0 0 0 6px rgba(91,143,224,.25),0 18px 30px rgba(0,0,0,.6);animation:vfloat 5s ease-in-out infinite}
+.wtv-medal.v{background:none;border:0;box-shadow:none;width:120px;height:120px;right:-6px;top:-6px;border-radius:0}
+.wtv-in{position:relative;display:flex;flex-direction:column;align-items:flex-start;padding:18px 16px 16px}
+.wtv-h{display:block;font:italic 900 38px/.92 var(--disp);text-transform:uppercase;margin:12px 0 4px;max-width:68%;text-shadow:0 4px 18px rgba(0,0,0,.8)}
+.wtv-h em{color:#E3EE3A;font-style:italic}
+.wtv .vsub{font:800 10px var(--body);letter-spacing:.2em;color:#5B8FE0;text-transform:uppercase;margin-bottom:10px}
+.wtv-chips{display:flex;flex-wrap:wrap;gap:6px}
+.wtv-chips span{font:800 11px var(--body);letter-spacing:.08em;text-transform:uppercase;padding:5px 10px;border-radius:99px;background:rgba(0,0,0,.5);border:1px solid rgba(91,143,224,.5);color:#fff}
+.wtv-bar{display:block;align-self:stretch;height:6px;margin-top:10px;border-radius:99px;background:rgba(91,143,224,.18);overflow:hidden}
+.wtv-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#2C5FAE,#5B8FE0,#E3EE3A)}
+.wtv-row{display:flex;gap:8px;align-self:stretch;margin-top:10px}
+.wtv-row .vprize{flex:1;margin:0;padding:9px 12px;border-radius:14px;background:linear-gradient(90deg,rgba(240,200,78,.2),rgba(5,8,15,.55));box-shadow:inset 0 0 0 1.5px rgba(240,200,78,.6)}
+.wtv-row .vprize small{display:block;font:800 9.5px var(--body);letter-spacing:.16em;color:#F0C84E;text-transform:uppercase}
+.wtv-row .vprize b{font:italic 900 24px/1.05 var(--disp);color:#F7D76A}
+.wtv-cd{flex:0 0 auto;min-width:96px;text-align:center;padding:7px 10px;border-radius:14px;background:rgba(5,8,15,.7);border:1.5px solid rgba(91,143,224,.5);font:800 9.5px var(--body);letter-spacing:.12em;text-transform:uppercase}
+.wtv-cd small{display:block;color:rgba(255,255,255,.7)}
+.wtv-cd b{display:block;font:italic 900 22px/1 var(--disp);color:#fff;letter-spacing:0;margin-top:2px}
+.wtv-cd em{display:block;font:800 12px var(--body);font-style:normal;color:#5B8FE0;letter-spacing:.06em;font-variant-numeric:tabular-nums}
+.wtv-go{align-self:stretch;margin-top:12px;height:50px;border-radius:15px;background:#E3EE3A;color:#05080F;font:800 17px/50px var(--body);text-align:center}
+html[dir=rtl] .wtv-medal{right:auto;left:16px}html[dir=rtl] .wtv-glow{right:auto;left:-20px}
+/* ===== welcome page in the league "Volt Arena" style */
+html.wa-on,html.wa-on body,html.wa-on .app{background:#05080F!important;--stage:#05080F;--bg:#05080F}
+main.wa:before{background-color:#05080F!important;background-image:radial-gradient(55% 32% at 80% 14%,rgba(227,238,58,.16),transparent 70%),radial-gradient(120% 50% at 50% 0%,rgba(44,95,174,.5),transparent 60%),url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='56' height='48'><path d='M14 1 L42 1 L55 24 L42 47 L14 47 L1 24 Z' fill='none' stroke='%232C5FAE' stroke-opacity='.2' stroke-width='1.2'/></svg>")!important}
+main.wa .wa-kick{font:900 10.5px var(--body);letter-spacing:.16em;text-transform:uppercase;background:#E3EE3A;color:#05080F;border:0;padding:6px 11px;border-radius:4px;transform:skewX(-10deg)}
+main.wa .wa-kick i{background:#05080F;box-shadow:none;animation:vpulse 1.4s infinite}
+main.wa .wa-h{color:#fff;font-weight:900;text-shadow:0 4px 18px rgba(0,0,0,.7)}
+main.wa .wa-h em{color:#E3EE3A}
+main.wa .wa-s{color:rgba(255,255,255,.72)}
+main.wa .wa-s:before{content:"PADEL LIVE · SEASON 1";display:block;font:800 10px var(--body);letter-spacing:.24em;color:#5B8FE0;margin-bottom:6px}
+html[lang=ar] main.wa .wa-s:before{content:"PADEL LIVE · الموسم 1";letter-spacing:.1em}
+main.wa .wa-cards:before{content:"";position:absolute;left:50%;top:50%;margin:-80px 0 0 -80px;width:160px;height:160px;border-radius:50%;background:radial-gradient(closest-side,rgba(227,238,58,.3),transparent);z-index:-1}
+main.wa .wa-mc{background:linear-gradient(160deg,#2C5FAE,#0B1530 75%);border:1.5px solid rgba(91,143,224,.7);box-shadow:0 0 0 4px rgba(91,143,224,.15),0 18px 30px rgba(0,0,0,.6),0 0 30px rgba(91,143,224,.35);animation:vfloat 5s ease-in-out infinite}
+main.wa .wa-mc.back{background:#0B1530;border-color:rgba(91,143,224,.35);box-shadow:none;animation:none}
+main.wa .wa-go{background:#E3EE3A;box-shadow:0 10px 26px -8px rgba(227,238,58,.7)}
+main.wa .wa-look{background:rgba(5,8,15,.7);border:1.5px solid rgba(91,143,224,.55);color:#fff}
+main.wa .wa-lbl{color:#5B8FE0;letter-spacing:.24em;font-size:11px}
+main.wa .wa-clubs img{border:2px solid rgba(91,143,224,.7);box-shadow:0 0 14px -2px rgba(91,143,224,.5)}
+main.wa .wa-clubs span{color:rgba(255,255,255,.55)}
+main.wa .wel2-lang{background:rgba(5,8,15,.7);border:1px solid rgba(91,143,224,.45)}
+main.wa .wel2-lang button[aria-pressed=true]{background:#E3EE3A;color:#05080F}
+main.wa .wa-in b{color:#E3EE3A}
+
+main.wa{overflow-x:hidden}
+html.wa-on,html.wa-on body{overflow-x:hidden}
+
+/* rank reveal: big category letter */
+.cl-cat{margin-top:12px;display:inline-flex;align-items:center;gap:12px;padding:6px 8px 6px 18px;border-radius:18px;border:2px solid var(--cc,#E3EE3A);background:rgba(0,0,0,.35);box-shadow:0 0 28px -6px var(--cc,#E3EE3A)}
+.cl-cat small{font:800 13px var(--body);letter-spacing:.22em;text-transform:uppercase;color:#F4F1E6;opacity:.85}
+.cl-cat b{display:grid;place-items:center;width:58px;height:58px;border-radius:13px;background:var(--cc,#E3EE3A);color:#0B0B0B;font-family:var(--disp);font-style:italic;font-weight:900;font-size:42px;line-height:1}
+
+/* ===== Welcome · Arcade ===== */
+main.wa.arc:before{background-color:#07051A!important;background-image:radial-gradient(60% 30% at 50% 18%,rgba(255,60,180,.25),transparent 70%),radial-gradient(60% 30% at 50% 58%,rgba(60,200,255,.16),transparent 70%)!important}
+main.wa.arc .arc-grid{position:fixed;left:-20%;right:-20%;bottom:0;height:42vh;z-index:-1;pointer-events:none;background:linear-gradient(transparent 0,transparent 47px,rgba(255,60,180,.5) 48px) 0 0/100% 48px,linear-gradient(90deg,transparent 0,transparent 47px,rgba(255,60,180,.5) 48px) 0 0/48px 100%;transform:perspective(300px) rotateX(60deg);transform-origin:bottom;opacity:.45;animation:arcRun 1.6s linear infinite}
+@keyframes arcRun{from{background-position:0 0,0 0}to{background-position:0 48px,0 0}}
+main.wa.arc .arc-h{margin:30px 0 0;text-align:center;font-family:var(--disp);font-style:italic;font-weight:900;text-transform:uppercase;font-size:62px;line-height:.9;color:#fff;text-shadow:0 0 18px rgba(255,60,180,.8),0 0 2px #fff}
+main.wa.arc .arc-h em{font-style:inherit;color:#3CF0FF;text-shadow:0 0 18px rgba(60,240,255,.9)}
+html[lang=ar] main.wa.arc .arc-h{font-size:54px;line-height:1.1}
+main.wa.arc .arc-ins{display:block;margin:12px auto 0;background:none;border:0;font:800 13px "Courier New",monospace;letter-spacing:.2em;color:#FFE14D;cursor:pointer;animation:arcBlink 1s steps(2) infinite}
+@keyframes arcBlink{50%{opacity:0}}
+main.wa.arc .arc-hs{margin:18px 0 0;padding:12px 16px;border-radius:14px;border:1.5px solid rgba(60,240,255,.5);background:rgba(7,5,26,.78);box-shadow:0 0 24px -6px rgba(60,240,255,.45);font:700 14px "Courier New",monospace;color:#fff}
+main.wa.arc .arc-hs div{display:flex;justify-content:space-between;gap:10px;padding:3px 0}
+main.wa.arc .arc-hs .t{color:#FF5BC6;font-weight:900;letter-spacing:.18em;margin-bottom:2px}
+main.wa.arc .arc-hs .y{color:#FFE14D;animation:arcBlink 1.6s steps(2) infinite}
+main.wa.arc .arc-ctas{margin-top:18px}
+main.wa.arc .wa-go{background:linear-gradient(90deg,#FF3CB4,#7B4FFF)!important;color:#fff!important;box-shadow:0 0 24px rgba(255,60,180,.55)!important}
+main.wa.arc .wa-go small{background:#fff;color:#7B4FFF}
+main.wa.arc .wa-look{background:rgba(7,5,26,.8);border:1.5px solid rgba(60,240,255,.45);color:#fff}
+main.wa.arc .wa-lbl{color:#3CF0FF;opacity:.8}
+main.wa.arc .wel2-lang{background:rgba(7,5,26,.8);border:1px solid rgba(255,60,180,.45)}
+main.wa.arc .wa-in b{color:#FFE14D}
+@media (prefers-reduced-motion:reduce){main.wa.arc .arc-grid,main.wa.arc .arc-ins,main.wa.arc .arc-hs .y{animation:none}}
+
+/* runner game */
+.run-ar{position:relative;height:210px;border-radius:14px;overflow:hidden;touch-action:none;user-select:none;-webkit-user-select:none;cursor:pointer;background:linear-gradient(180deg,rgba(255,255,255,.04),rgba(0,0,0,.25)),var(--d,#05080F);border:1.5px solid rgba(255,255,255,.1)}
+.run-ar canvas{position:absolute;top:0;right:0;bottom:0;left:0;width:100%;height:100%;display:block}
+.run-msg{position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);text-align:center;font:800 italic 22px/1.15 var(--disp);text-transform:uppercase;color:#fff;text-shadow:0 2px 10px rgba(0,0,0,.6);pointer-events:none;white-space:nowrap;transition:opacity .2s}
+.run-msg small{display:block;margin-top:6px;font:700 12px var(--body);text-transform:none;opacity:.8;animation:arcBlink 1.2s steps(2) infinite}
+.run-msg.off{opacity:0}
+@keyframes arcBlink{50%{opacity:0}}
+
+/* ===== Welcome · "Your padel card is waiting" (app style) ===== */
+main.wg{padding:14px 16px calc(40px + env(safe-area-inset-bottom))!important;display:flex;flex-direction:column;gap:14px;overflow-x:hidden}
+main.wg .wg-top{display:flex;justify-content:space-between;align-items:center}
+main.wg .wg-lang{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--card)}
+main.wg .wg-lang button{border:0;background:none;padding:8px 13px;font:800 13px var(--body);color:var(--ink-2)}
+main.wg .wg-lang button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+main.wg .wg-h{margin:6px 0 0;font-family:var(--disp);font-style:italic;font-weight:900;text-transform:uppercase;font-size:44px;line-height:.92;color:var(--ink)}
+main.wg .wg-h em{font-style:inherit;color:#2C5FAE}
+html[lang=ar] main.wg .wg-h{line-height:1.15;font-size:40px}
+main.wg .wg-s{margin:-4px 0 0;color:var(--ink-2);font-size:15px}
+main.wg .wg-card{transform:scale(.72);transform-origin:top center;margin:-6px 0 -150px}
+main.wg .wg-card .pc-prog,main.wg .wg-card .pc-badges,main.wg .wg-card>.row{display:none!important}
+main.wg .wg-ctas{display:flex;gap:10px}
+main.wg .wg-go{flex:1;height:56px;border:0;border-radius:16px;background:#E3EE3A;color:#10201A;font:800 17px var(--body);display:flex;align-items:center;justify-content:center;gap:8px;box-shadow:0 8px 20px -8px rgba(160,170,20,.8)}
+main.wg .wg-go small{font-size:11px;background:#10201A;color:#E3EE3A;padding:3px 7px;border-radius:99px}
+main.wg .wg-look{height:56px;padding:0 18px;border-radius:16px;border:1px solid var(--line);background:var(--card);font:800 16px var(--body);color:var(--ink)}
+main.wg .wg-lbl{font:800 12px var(--body);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-2);margin-top:4px}
+main.wg .wg-in{background:none;border:0;color:var(--ink-2);font:600 14px var(--body)}main.wg .wg-in b{color:#2C5FAE}
+
+/* ===== Tournament rank reveal ===== */
+.rk2{position:fixed;top:0;right:0;bottom:0;left:0;z-index:999;overflow:hidden;color:#F4F1E6;display:flex;justify-content:center;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.rk2-bg{position:fixed;top:0;right:0;bottom:0;left:0;background:radial-gradient(90% 55% at 50% 38%,#05080F 0%,#070A14 55%,#03050A 100%);transition:background .6s}@supports (color:color-mix(in srgb,red 50%,blue)){.rk2-bg{background:radial-gradient(90% 55% at 50% 38%,color-mix(in srgb,var(--tc) 30%,#05080F) 0%,#070A14 55%,#03050A 100%)}}
+.rk2:not(.go) .rk2-bg{background:radial-gradient(90% 55% at 50% 38%,#3B1F6E 0%,#0C0820 55%,#03050A 100%)}
+.rk2-rays{position:fixed;top:40%;left:50%;width:1400px;height:1400px;margin:-700px 0 0 -700px;background:repeating-conic-gradient(transparent 0 7deg,transparent 7deg 18deg);opacity:0;transform:scale(.4);transition:opacity .5s,transform 1.2s cubic-bezier(.2,1,.3,1)}@supports (color:color-mix(in srgb,red 50%,blue)){.rk2-rays{background:repeating-conic-gradient(color-mix(in srgb,var(--tc) 22%,transparent) 0 7deg,transparent 7deg 18deg)}}
+.rk2.go .rk2-rays{opacity:1;transform:scale(1);animation:clspin 22s linear infinite}
+.rk2-ring{position:fixed;top:40%;left:50%;width:260px;height:260px;margin:-130px 0 0 -130px;border-radius:50%;border:3px solid #B47CFF;box-shadow:0 0 40px #B47CFF,inset 0 0 40px #B47CFF;opacity:.0;animation:rk2charge 1.9s ease-in forwards}
+.rk2.go .rk2-ring{animation:rk2wave .9s ease-out forwards;border-color:var(--tc);box-shadow:0 0 50px var(--tc),inset 0 0 50px var(--tc)}
+@keyframes rk2charge{0%{opacity:0;transform:scale(1.9)}100%{opacity:.9;transform:scale(.55)}}
+@keyframes rk2wave{0%{opacity:1;transform:scale(.5)}100%{opacity:0;transform:scale(4)}}
+.rk2-flash{position:fixed;top:0;right:0;bottom:0;left:0;background:#fff;opacity:0;pointer-events:none}
+.rk2.go .rk2-flash{animation:rk2flash .7s ease-out}
+@keyframes rk2flash{0%{opacity:.95}100%{opacity:0}}
+.rk2 .cl-conf{position:fixed}
+.rk2-in{position:relative;width:min(400px,100vw);padding:calc(18px + env(safe-area-inset-top)) 18px calc(26px + env(safe-area-inset-bottom));display:flex;flex-direction:column;align-items:center;text-align:center}
+.rk2-top{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.rk2-chip{font:800 12px var(--body);letter-spacing:.06em;text-transform:uppercase;padding:6px 11px;border-radius:99px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16)}
+.rk2-chip.f{background:var(--tc);color:#0B0B0B;border-color:var(--tc)}
+.rk2:not(.go) .rk2-chip.f{background:rgba(255,255,255,.08);color:inherit;border-color:rgba(255,255,255,.16)}
+.rk2-kick{margin-top:12px;font:900 13px var(--body);letter-spacing:.42em;color:#E3EE3A;text-transform:uppercase}
+.rk2-stage{position:relative;width:314px;height:470px;margin:10px 0 0;transform:scale(.78);transform-origin:top center;margin-bottom:-96px}
+.rk2-card{position:absolute;top:0;right:0;bottom:0;left:0}
+.rk2-card.m{animation:rk2shake 1.9s ease-in forwards}
+.rk2-card.r{opacity:0;transform:scale(.55) rotateY(90deg)}
+.rk2.go .rk2-card.m{animation:none;opacity:0;transform:scale(1.25);transition:opacity .2s,transform .3s}
+.rk2.go .rk2-card.r{animation:rk2pop 1s cubic-bezier(.2,1.5,.35,1) .05s forwards}
+@keyframes rk2shake{0%{transform:scale(.92)}20%{transform:scale(.95) rotate(-1deg)}40%{transform:scale(.97) rotate(1.5deg)}60%{transform:scale(1) translateX(-3px) rotate(-2deg)}75%{transform:scale(1.02) translateX(4px) rotate(2.5deg)}88%{transform:scale(1.04) translateX(-5px) rotate(-3deg);filter:brightness(1.4)}100%{transform:scale(1.07);filter:brightness(2.2)}}
+@keyframes rk2pop{0%{opacity:0;transform:scale(.55) rotateY(90deg)}60%{opacity:1}100%{opacity:1;transform:scale(1) rotateY(0)}}
+.rk2-card.r .gcard-wrap{filter:drop-shadow(0 0 30px var(--tc))}
+.rk2-res{opacity:0;transform:translateY(18px);transition:opacity .5s .55s,transform .6s .55s;width:100%}
+.rk2.go .rk2-res{opacity:1;transform:none}
+.rk2-res h1{margin:0;font-family:var(--disp);font-style:italic;font-weight:900;font-size:60px;line-height:.95;text-transform:uppercase;color:#fff;text-shadow:0 0 26px var(--tc),0 5px 0 rgba(0,0,0,.45)}
+.rk2-res h1 em{font-style:inherit;color:var(--tc)}
+.rk2-meta{display:flex;gap:10px;justify-content:center;margin-top:12px}
+.rk2-cat,.rk2-lv{display:flex;align-items:center;gap:10px;padding:6px 7px 6px 15px;border-radius:16px;border:2px solid var(--tc);background:rgba(0,0,0,.35);box-shadow:0 0 22px -6px var(--tc)}
+.rk2-cat small,.rk2-lv small{font:800 11px var(--body);letter-spacing:.2em;text-transform:uppercase;opacity:.85}
+.rk2-cat b{display:grid;place-items:center;width:50px;height:50px;border-radius:12px;background:var(--tc);color:#0B0B0B;font:900 italic 36px/1 var(--disp)}
+.rk2-lv b{padding:0 10px;height:50px;display:grid;place-items:center;border-radius:12px;background:rgba(255,255,255,.1);font:900 italic 30px/1 var(--disp);color:#fff}
+.rk2-res p{margin:14px 6px 18px;font-weight:700;color:rgba(244,241,230,.82)}
+.rk2-btns{display:flex;gap:10px}
+.rk2-share{flex:1;height:54px;border:0;border-radius:15px;background:var(--tc);color:#0B0B0B;font:900 italic 19px var(--disp);text-transform:uppercase;letter-spacing:.03em;box-shadow:0 6px 0 rgba(0,0,0,.35),0 0 24px -4px var(--tc)}
+.rk2-ok{height:54px;padding:0 20px;border-radius:15px;border:2px solid rgba(255,255,255,.35);background:transparent;color:#fff;font:800 16px var(--body)}
+@media (prefers-reduced-motion:reduce){.rk2-card.m{animation:none}.rk2.go .rk2-rays{animation:none}}
+
+.rk2-redo{margin-top:12px;background:none;border:0;color:rgba(244,241,230,.7);font:700 14px var(--body);text-decoration:underline;text-underline-offset:3px}
+.rk2 .rk2-btns .rk2-share{flex:1}
+
+.a-need{display:block;margin-top:2px;padding:8px 10px;border-radius:10px;background:rgba(44,95,174,.1);color:#2C5FAE!important;font-weight:700}
+.rk2-areq{margin:12px auto 0;max-width:330px;padding:9px 12px;border-radius:12px;background:rgba(125,242,255,.12);border:1px solid rgba(125,242,255,.45);font:700 13.5px var(--body);color:#CFFAFF}
 </style>
 </head>
 <body>
@@ -1815,7 +1991,7 @@ const W = {
   forgot:"Forgot password?", vetK:"{n} MATCHES PLAYED", vetT:"VETERAN", vetS:"You unlocked the {t} Veteran frame.", vetS2:"It stays on your card forever.", vetBtn:"Wear it ✨", vetTag:"{n} MATCHES", lgTeamsIn:"Teams signed up", lgStartsIn:"Days to start", lgStarts:"Starts", lgToday:"Today", nLgNudge:"{x}: your league match has no time yet. Propose one before {d}.", nLgPropNudge:"{x}: the other team is waiting for your answer ({w}). Accept or suggest another time.", chKick:"League champions", chTitle:"Champions!", chSub:"{t} won {x}", chPrize:"Your prize", chCollect:"Collect your prize at {c}. Show this screen at the desk.", chShare:"Share", chClose:"Let's go", vlKick:"Season live · Round {r}/{n}", vlKickSign:"Sign-up open", vlKickDone:"Season finished", vlSub:"PADEL LIVE LEAGUE", vlTeams:"{n} teams", vlPrize:"1st place prize", vlClimb:"The Climb", vlRoundOf:"Round {r} of {n}", vlDaysLeft:"{d} days left", vlSummitPrize:"Summit prize", vlLegend:"You · ▲ climbing next round · ▼ dropping", vlNext:"Your next match", vlSummit:"Summit", vlBase:"Base", vlPrizeHere:"the prize is decided here", vlMoves:"1st ▲ · last ▼", vlPast:"Round {r} · final results", vlNoTime:"No time yet. Propose one to the other team.", vlMine:"My league", vlNextS:"Next", vlStartsSoon:"You are in. Round 1 starts soon.", vlPrizeSpot:"You are in the prize spot.", vlVs:"vs", vlWon:"Won", vlLost:"Lost", lgPropose:"📅 Propose a time", lgChange:"Change the time", lgChangeProp:"Change my proposal", lgSendProp:"Send to the other team", lgPropNote:"The other team gets a notification. When they accept, the court is booked for you (90 min, pay at the club).", lgAdminNote:"As admin this sets the time directly and books the court.", lgPropSent:"Sent. You'll be notified when they accept.", lgPropMine:"You proposed {w} at {c}", lgPropWait:"Waiting for the other team to accept.", lgPropThem:"{n} propose {w} at {c}", lgPropOthers:"Proposed: {w} at {c} (waiting for {n}'s opponents)", lgAccept:"Accept and book", lgOther:"Suggest another time", lgAccepted:"Done! The court is booked.", lgBooked:"court booked", nLgProp:"{n} proposes your league match: {w} at {c}. Open it to accept.", nLgBooked:"League match confirmed: {w} · {c} {k}. The court is booked.", sndT:"Announcer voice", musT:"Background music", tooHigh:"Above your level for now", apVer:"Verified · known player (can join stronger games from day one)", phoneOrEmail:"Phone number (or email)", wrongLogin:"Wrong phone number or password.", forgotPhone:"Message the Padel Live admin on WhatsApp and they will set a new password for you.", tjLv:"Starting level: Category {c} ({l})", tjLvUp:"Starting level: {l} (top of Category C)", tjLvUpN:"You can still play Category {c}. The admin checks players from B and A tournaments and moves them up.", tjLvNote:"You can fine-tune it later with the 60-second quiz in your Me tab.", tjQuiz:"Take the level quiz instead", apPass:"New password for this player", apPassBtn:"Set password", apPassOk:"Password changed. Send it to the player on WhatsApp.", passPh:"6+ characters", needEmail:"Type your email above first.", resetSent:"Check your email for a link to set a new password.", newPassT:"Set a new password", newPass:"New password (6+ characters)", setPass:"Save new password", passSaved:"Password changed. You're signed in.",
   delAcc:"Delete my account", delQ:"Delete your account? Your upcoming bookings will be cancelled. This can't be undone.", delDone:"Your account was deleted.",
   install:"Add Padel Live to your phone", installS:"Get the icon on your home screen. It opens full screen like a normal app.", installBtn:"Add to home screen", iosHow:"In Safari, tap the Share button, then Add to Home Screen.", andHow:"Tap ⋮ in Chrome, then Add to Home screen (or Install app).",
-  evLive:"Live scores", lvTitle:"Your level", tierE:"Iron", nTJoined:"{n} joined your team for {x} (Category {c}). Waiting for the organizer.", nTHelp:"💬 {n} sent a support message about {x}: “{m}”", nTResult:"{x}: {n}", nTStart:"{x}: {n} starts at {w} · {c}", nTRecap:"Your {x} results are in ({r}). See your new level and card.", tjT:"You\u2019re invited", tjS:"{n} wants you as their partner", tjCat:"Category {c}", tjStep1:"Create your account", tjStep2:"Find your level (60 sec)", tjStep3:"Accept and join the team", tjGo:"Accept and join", tjDone:"You\u2019re in! The organizer will confirm your team.", tjUsed:"This invite was already used.", tjClosed:"Sign-up for this tournament is closed.", tjBad:"This invite link is not valid.", wtOpen:"Sign-up open", wtSign:"Sign up your team", wtSee:"See the tournament", wtTeams:"{n} teams signed up", twAlso:"or just look around", tierD:"Bronze", tierC:"Silver", tierB:"Gold", tierA:"Diamond", plTag:"Placement {n}/5", serT:"Promotion series", serTag:"Promotion {w}–{l}", serTxt:"Win 2 of 3 against {t}-level players to reach {t}", serWeak:"Nice win, but it doesn\u2019t count for the series: the other team was below {t} level.", serFailT:"Series lost", serFail:"Keep winning and the next series starts by itself.", q6:"Which category do you usually play in?", q6x:"I don\u2019t know", q7:"Do you have a Playtomic level?", q7s:"Optional. It helps us start you at the right level.", q7ph:"e.g. 3.2", lvCapped:"Everyone starts at Silver or below (3.49 max). Gold and Diamond are won on court.", clT:"Levels to check", clFast:"⚡ Rising fast: started at {s}, now {n} after {r} matches", clS:"These players said they are stronger than where they started (3.49 max). If you know them, set their real level.", clNow:"Now", clSaid:"They said", clEst:"estimate", clSet:"Set level", clOk:"Leave it", plLeft:"Play {n} more rated matches to reveal your tier", plSub:"Placement matches", plDone:"Placement complete", plRevealed:"Your tier is revealed. From now on it moves with every match.", shieldOn:"Shield active", shieldTxt:"🛡️ Shield: win your next match to stay {t}", shieldHeld:"Shield held", stillT:"Still {t}", shieldSaved:"You stayed in your tier. The shield recharges next time.", divUp:"Division up", topDiv:"Top division", lvlU:"LEVEL", catU:"Category", provisional:"Provisional", winRate:"Win rate", matchesU:"Matches", seasonU:"Season", weeks:"weeks", topCat:"Top category", needsN:"Play {n} more rated matches to unlock {c}", needsShort:"{n} more matches to unlock", danger:"Danger zone · stay above {x}", to:"to", shareCard:"Share card", seasonBtn:"Season", seasonT:"Season leaderboard", seasonRule:"Win 3 pts · played 1 pt", pts:"pts", seasonEmpty:"No confirmed matches this month yet.", rankUnlocked:"RANK UNLOCKED", youReached:"You reached", backTo:"BACK TO", climbBack:"Win your next matches to climb back.", winU:"WIN!", levelUp:"Your level went up.", matchDone:"MATCH CONFIRMED", nextTime:"Get it back next time.", orgSet:"SET BY THE ORGANIZER", okBtn2:"Nice", cardSaved:"Card saved to your downloads.", b_first_win:"First win", b_comeback:"Comeback", b_night_owl:"Night owl", b_iron_man:"Iron man", b_regular:"Regular", b_champion:"Champion", apTitle:"Players (admin)", apSearch:"Name or phone", apFind:"Find", apAok:"Allowed in category A", apTitleChk:"Won a tournament (adds a title)", apNote:"Why", apNotePh:"Won Category C, Nov 2026", edit:"Edit", provNote:"Your first 5 rated matches are placement. Gold and Diamond are earned with a promotion series.",lvIntro:"Answer 5 quick questions. Your level then goes up or down with every confirmed match result.", lvYour:"Your level", lvCat:"Category", lvAnswer:"Answer all 5 questions", lvNote:"Levels go from 0.5 to 7. Category E (Iron) is below 1.5, D (Bronze) 1.5–2.5, C (Silver) 2.5–3.5, B (Gold) 3.5–4.5, A (Diamond) 4.5 and up.",
+  evLive:"Live scores", lvTitle:"Your level", tierE:"Iron", nTJoined:"{n} joined your team for {x} (Category {c}). Waiting for the organizer.", nTHelp:"💬 {n} sent a support message about {x}: “{m}”", nTResult:"{x}: {n}", nTStart:"{x}: {n} starts at {w} · {c}", nTRecap:"Your {x} results are in ({r}). See your new level and card.", nTRank:"🎉 Your rank is ready! {x}: you start at {c} ({l}). Open your card.", rkKick:"YOUR RANK IS HERE", rkSub:"From now on every match moves you up or down.", tjT:"You\u2019re invited", tjS:"{n} wants you as their partner", tjCat:"Category {c}", tjStep1:"Create your account", tjStep2:"Find your level (60 sec)", tjStep3:"Accept and join the team", tjGo:"Accept and join", tjDone:"You\u2019re in! The organizer will confirm your team.", tjUsed:"This invite was already used.", tjClosed:"Sign-up for this tournament is closed.", tjBad:"This invite link is not valid.", wtOpen:"Sign-up open", wtSign:"Sign up your team", wtSee:"See the tournament", wtTeams:"{n} teams signed up", twAlso:"or just look around", tierD:"Bronze", tierC:"Silver", tierB:"Gold", tierA:"Diamond", plTag:"Placement {n}/5", serT:"Promotion series", serTag:"Promotion {w}–{l}", serTxt:"Win 2 of 3 against {t}-level players to reach {t}", serWeak:"Nice win, but it doesn\u2019t count for the series: the other team was below {t} level.", serFailT:"Series lost", serFail:"Keep winning and the next series starts by itself.", q6:"Which category do you usually play in?", q6x:"I don\u2019t know", q7:"Do you have a Playtomic level?", q7s:"Optional. It helps us start you at the right level.", q7ph:"e.g. 3.2", lvCapped:"Everyone starts at Silver or below (3.49 max). Gold and Diamond are won on court.", clT:"Levels to check", clFast:"⚡ Rising fast: started at {s}, now {n} after {r} matches", clS:"Category A requests, players who said they are stronger than where they started, and players rising fast. If you know them, set their real level.", clNow:"Now", clSaid:"They said", clEst:"estimate", clSet:"Set level", clOk:"Leave it", plLeft:"Play {n} more rated matches to reveal your tier", plSub:"Placement matches", plDone:"Placement complete", plRevealed:"Your tier is revealed. From now on it moves with every match.", shieldOn:"Shield active", shieldTxt:"🛡️ Shield: win your next match to stay {t}", shieldHeld:"Shield held", stillT:"Still {t}", shieldSaved:"You stayed in your tier. The shield recharges next time.", divUp:"Division up", topDiv:"Top division", lvlU:"LEVEL", catU:"Category", provisional:"Provisional", winRate:"Win rate", matchesU:"Matches", seasonU:"Season", weeks:"weeks", topCat:"Top category", needsN:"Play {n} more rated matches to unlock {c}", needsShort:"{n} more matches to unlock", danger:"Danger zone · stay above {x}", to:"to", shareCard:"Share card", seasonBtn:"Season", seasonT:"Season leaderboard", seasonRule:"Win 3 pts · played 1 pt", pts:"pts", seasonEmpty:"No confirmed matches this month yet.", rankUnlocked:"RANK UNLOCKED", youReached:"You reached", backTo:"BACK TO", climbBack:"Win your next matches to climb back.", winU:"WIN!", levelUp:"Your level went up.", matchDone:"MATCH CONFIRMED", nextTime:"Get it back next time.", orgSet:"SET BY THE ORGANIZER", okBtn2:"Nice", cardSaved:"Card saved to your downloads.", b_first_win:"First win", b_comeback:"Comeback", b_night_owl:"Night owl", b_iron_man:"Iron man", b_regular:"Regular", b_champion:"Champion", apTitle:"Players (admin)", apSearch:"Name or phone", apFind:"Find", apAok:"Allowed in category A", apTitleChk:"Won a tournament (adds a title)", apNote:"Why", apNotePh:"Won Category C, Nov 2026", edit:"Edit", provNote:"Your rank starts at the category you pick. Then every match moves you up or down. Going up to Gold or Diamond takes a promotion series.",lvIntro:"Answer a few quick questions. Your rank starts at the category you pick, then every match moves you up or down.", lvYour:"Your level", lvCat:"Category", lvAnswer:"Answer all 5 questions", lvNote:"Levels go from 0.5 to 7. Category E (Iron) is below 1.5, D (Bronze) 1.5–2.5, C (Silver) 2.5–3.5, B (Gold) 3.5–4.5, A (Diamond) 4.5 and up.",
   q1:"How long have you played padel?", q1a:"I'm just starting", q1b:"Less than a year", q1c:"1 to 3 years", q1d:"More than 3 years",
   q2:"Other racket sports?", q2a:"None", q2b:"A little", q2c:"Tennis or squash regularly",
   q3:"Your game", q3a:"I'm learning to keep the ball in play", q3b:"I can rally at a steady pace", q3c:"I rally well and volley at the net", q3d:"I attack with bandeja, víbora and smash",
@@ -1846,7 +2022,7 @@ evDone:"Results", evSoonT:"Coming up", evSee:"See the results", evFollow:"Follow
   forgot:"نسيت كلمة السر؟", vetK:"{n} مباراة", vetT:"محارب قديم", vetS:"فتحت إطار المحارب {t}.", vetS2:"سيبقى على بطاقتك للأبد.", vetBtn:"البسه ✨", vetTag:"{n} مباراة", lgTeamsIn:"فرق مسجلة", lgStartsIn:"يوم للبداية", lgStarts:"البداية", lgToday:"اليوم", nLgNudge:"{x}: مباراة الدوري تبعك لسا بلا وقت. اقترح وقت قبل {d}.", nLgPropNudge:"{x}: الفريق التاني ناطر ردك ({w}). وافق أو اقترح وقت تاني.", chKick:"أبطال الدوري", chTitle:"أبطال!", chSub:"{t} ربحوا {x}", chPrize:"جائزتكن", chCollect:"استلموا جائزتكن من {c}. ورجوا هالشاشة عالاستقبال.", chShare:"شارك", chClose:"يلا", vlKick:"الموسم شغال · الجولة {r}/{n}", vlKickSign:"التسجيل مفتوح", vlKickDone:"انتهى الموسم", vlSub:"دوري PADEL LIVE", vlTeams:"{n} فريق", vlPrize:"جائزة المركز الأول", vlClimb:"الصعود", vlRoundOf:"الجولة {r} من {n}", vlDaysLeft:"باقي {d} يوم", vlSummitPrize:"جائزة القمة", vlLegend:"إنت · ▲ طالع الجولة الجاية · ▼ نازل", vlNext:"مباراتك الجاية", vlSummit:"القمة", vlBase:"القاعدة", vlPrizeHere:"هون بتنحسم الجائزة", vlMoves:"الأول ▲ · الأخير ▼", vlPast:"الجولة {r} · النتائج النهائية", vlNoTime:"ما في وقت لسا. اقترح وقت للفريق التاني.", vlMine:"دوريي", vlNextS:"الجاية", vlStartsSoon:"إنت مسجل. الجولة الأولى قريباً.", vlPrizeSpot:"إنت بمركز الجائزة.", vlVs:"ضد", vlWon:"ربحت", vlLost:"خسرت", lgPropose:"📅 اقترح وقت", lgChange:"غيّر الوقت", lgChangeProp:"غيّر اقتراحي", lgSendProp:"ابعتو للفريق التاني", lgPropNote:"الفريق التاني بيوصلو إشعار. لما يوافقوا بينحجز الملعب إلكن (٩٠ دقيقة، الدفع بالنادي).", lgAdminNote:"كأدمن، هاد بيحدد الوقت مباشرة وبيحجز الملعب.", lgPropSent:"انبعت. رح يوصلك إشعار لما يوافقوا.", lgPropMine:"اقترحت {w} بـ{c}", lgPropWait:"ناطرين موافقة الفريق التاني.", lgPropThem:"{n} عم يقترحوا {w} بـ{c}", lgPropOthers:"مقترح: {w} بـ{c}", lgAccept:"وافق واحجز", lgOther:"اقترح وقت تاني", lgAccepted:"تم! انحجز الملعب.", lgBooked:"الملعب محجوز", nLgProp:"{n} عم يقترح موعد مباراة الدوري: {w} بـ{c}. افتحها لتوافق.", nLgBooked:"تأكدت مباراة الدوري: {w} · {c} {k}. الملعب محجوز.", sndT:"صوت المعلّق", musT:"موسيقى بالخلفية", tooHigh:"أعلى من مستواك حالياً", apVer:"موثّق · لاعب معروف (بيقدر يلعب مع الأقوى من أول يوم)", phoneOrEmail:"رقم الموبايل (أو الإيميل)", wrongLogin:"رقم الموبايل أو كلمة السر غلط.", forgotPhone:"راسل أدمن Padel Live على واتساب ليعطيك كلمة سر جديدة.", tjLv:"مستواك المبدئي: فئة {c} ({l})", tjLvUp:"مستواك المبدئي: {l} (أعلى فئة C)", tjLvUpN:"فيك تلعب بفئة {c} عادي. الأدمن بيراجع لاعبين بطولات B و A وبيرفعهم.", tjLvNote:"فيك تضبطه بعدين بالاختبار (٦٠ ثانية) من صفحة حسابي.", tjQuiz:"اعمل اختبار المستوى بدلاً من هيك", apPass:"كلمة سر جديدة لهاللاعب", apPassBtn:"غيّر كلمة السر", apPassOk:"تغيّرت كلمة السر. ابعتها للاعب على واتساب.", passPh:"٦ أحرف أو أكثر", needEmail:"اكتب بريدك الإلكتروني أولاً.", resetSent:"تفقد بريدك، أرسلنا رابطاً لتعيين كلمة سر جديدة.", newPassT:"تعيين كلمة سر جديدة", newPass:"كلمة السر الجديدة (٦ أحرف أو أكثر)", setPass:"حفظ كلمة السر", passSaved:"تم تغيير كلمة السر وتسجيل دخولك.",
   delAcc:"حذف حسابي", delQ:"حذف حسابك؟ سيتم إلغاء حجوزاتك القادمة ولا يمكن التراجع.", delDone:"تم حذف حسابك.",
   install:"أضف بادل لايف إلى هاتفك", installS:"ضع الأيقونة على الشاشة الرئيسية ليفتح كتطبيق عادي.", installBtn:"إضافة إلى الشاشة الرئيسية", iosHow:"في سفاري اضغط زر المشاركة ثم «إضافة إلى الشاشة الرئيسية».", andHow:"في كروم اضغط ⋮ ثم «إضافة إلى الشاشة الرئيسية» أو «تثبيت التطبيق».",
-  evLive:"نتائج مباشرة", lvTitle:"مستواك", tierE:"حديدي", nTJoined:"{n} انضم لفريقك بـ{x} (فئة {c}). ناطرين تأكيد المنظم.", nTHelp:"💬 {n} بعت رسالة دعم عن {x}: «{m}»", nTResult:"{x}: {n}", nTStart:"{x}: {n} بتبلش الساعة {w} · {c}", nTRecap:"طلعت نتائجك بـ{x} ({r}). شوف مستواك وبطاقتك الجديدة.", tjT:"معك دعوة", tjS:"{n} بده ياك شريكه", tjCat:"فئة {c}", tjStep1:"اعمل حساب", tjStep2:"اعرف مستواك (٦٠ ثانية)", tjStep3:"اقبل وانضم للفريق", tjGo:"اقبل وانضم", tjDone:"صرت معهن! المنظم رح يأكد فريقكن.", tjUsed:"هالدعوة انستعملت.", tjClosed:"التسجيل بهالبطولة سكّر.", tjBad:"رابط الدعوة مو صالح.", wtOpen:"التسجيل مفتوح", wtSign:"سجّل فريقك", wtSee:"شوف البطولة", wtTeams:"{n} فرق مسجلين", twAlso:"أو اتفرج بس", tierD:"برونزي", tierC:"فضي", tierB:"ذهبي", tierA:"ماسي", plTag:"تحديد المستوى {n}/5", serT:"سلسلة الترقية", serTag:"ترقية {w}–{l}", serTxt:"اربح ٢ من ٣ ضد لاعبين بمستوى {t} لتوصل {t}", serWeak:"فوز حلو، بس ما انحسب للسلسلة: الفريق التاني كان أقل من مستوى {t}.", serFailT:"خسرت السلسلة", serFail:"كفّي ربح والسلسلة الجاية بتبلش لحالها.", q6:"بأي فئة بتلعب عادةً؟", q6x:"ما بعرف", q7:"عندك مستوى على Playtomic؟", q7s:"اختياري. بيساعدنا نبدأك بالمستوى الصح.", q7ph:"مثلاً 3.2", lvCapped:"الكل بيبدأ فضي أو أقل (أعلى شي 3.49). الذهبي والماسي بينربحوا بالملعب.", clT:"مستويات لازم تتأكد", clFast:"⚡ عم يطلع بسرعة: بلش {s}، هلق {n} بعد {r} مباريات", clS:"هالاعبين قالوا إنهن أقوى من مستوى البداية (أعلى شي 3.49). إذا بتعرفهن، حط مستواهن الحقيقي.", clNow:"هلأ", clSaid:"قالوا", clEst:"تقدير", clSet:"حط المستوى", clOk:"خليه", plLeft:"العب {n} مباريات مسجّلة لينكشف تصنيفك", plSub:"مباريات تحديد المستوى", plDone:"خلص تحديد المستوى", plRevealed:"انكشف تصنيفك. من هلأ بيتحرك مع كل مباراة.", shieldOn:"الدرع شغّال", shieldTxt:"🛡️ الدرع: اربح مباراتك الجاية لتبقى {t}", shieldHeld:"الدرع حماك", stillT:"لسا {t}", shieldSaved:"بقيت بتصنيفك. الدرع بيرجع يشحن المرة الجاية.", divUp:"ترقية درجة", topDiv:"أعلى درجة", lvlU:"المستوى", catU:"الفئة", provisional:"مؤقت", winRate:"نسبة الفوز", matchesU:"مباريات", seasonU:"الموسم", weeks:"أسابيع", topCat:"أعلى فئة", needsN:"العب {n} مباريات محسوبة كمان لتفتح {c}", needsShort:"{n} مباريات كمان للفتح", danger:"منطقة الخطر · خليك فوق {x}", to:"لـ", shareCard:"شارك البطاقة", seasonBtn:"الموسم", seasonT:"ترتيب الموسم", seasonRule:"الفوز ٣ نقاط · المشاركة نقطة", pts:"نقطة", seasonEmpty:"ما في مباريات مؤكدة هالشهر لسا.", rankUnlocked:"فئة جديدة", youReached:"وصلت لـ", backTo:"رجعت لـ", climbBack:"اربح مبارياتك الجاية لترجع تطلع.", winU:"فوز!", levelUp:"مستواك طلع.", matchDone:"تم تأكيد المباراة", nextTime:"المرة الجاية بترجعها.", orgSet:"حدده المنظم", okBtn2:"تمام", cardSaved:"انحفظت البطاقة بالتنزيلات.", b_first_win:"أول فوز", b_comeback:"العودة", b_night_owl:"بومة الليل", b_iron_man:"الرجل الحديدي", b_regular:"منتظم", b_champion:"بطل", apTitle:"اللاعبين (أدمن)", apSearch:"الاسم أو الرقم", apFind:"بحث", apAok:"مسموح بالفئة A", apTitleChk:"ربح بطولة (يضيف لقب)", apNote:"السبب", apNotePh:"ربح الفئة C، تشرين الثاني ٢٠٢٦", edit:"تعديل", provNote:"أول ٥ مباريات محسوبة لتحديد المستوى. الذهبي والماسي بينربحوا بسلسلة ترقية.",lvIntro:"جاوب على ٥ أسئلة سريعة. بعدها مستواك بيطلع أو بينزل مع كل نتيجة مباراة مؤكدة.", lvYour:"مستواك", lvCat:"الفئة", lvAnswer:"جاوب على الأسئلة الخمسة", lvNote:"المستويات من ٠٫٥ إلى ٧. الفئة E (حديدي) تحت ١٫٥، D (برونزي) ١٫٥–٢٫٥، C (فضي) ٢٫٥–٣٫٥، B (ذهبي) ٣٫٥–٤٫٥، A (ماسي) من ٤٫٥ وفوق.",
+  evLive:"نتائج مباشرة", lvTitle:"مستواك", tierE:"حديدي", nTJoined:"{n} انضم لفريقك بـ{x} (فئة {c}). ناطرين تأكيد المنظم.", nTHelp:"💬 {n} بعت رسالة دعم عن {x}: «{m}»", nTResult:"{x}: {n}", nTStart:"{x}: {n} بتبلش الساعة {w} · {c}", nTRecap:"طلعت نتائجك بـ{x} ({r}). شوف مستواك وبطاقتك الجديدة.", nTRank:"🎉 تصنيفك جاهز! {x}: بلشت {c} ({l}). افتح بطاقتك.", rkKick:"وصل تصنيفك", rkSub:"من هلأ كل مباراة بتطلّعك أو بتنزّلك.", tjT:"معك دعوة", tjS:"{n} بده ياك شريكه", tjCat:"فئة {c}", tjStep1:"اعمل حساب", tjStep2:"اعرف مستواك (٦٠ ثانية)", tjStep3:"اقبل وانضم للفريق", tjGo:"اقبل وانضم", tjDone:"صرت معهن! المنظم رح يأكد فريقكن.", tjUsed:"هالدعوة انستعملت.", tjClosed:"التسجيل بهالبطولة سكّر.", tjBad:"رابط الدعوة مو صالح.", wtOpen:"التسجيل مفتوح", wtSign:"سجّل فريقك", wtSee:"شوف البطولة", wtTeams:"{n} فرق مسجلين", twAlso:"أو اتفرج بس", tierD:"برونزي", tierC:"فضي", tierB:"ذهبي", tierA:"ماسي", plTag:"تحديد المستوى {n}/5", serT:"سلسلة الترقية", serTag:"ترقية {w}–{l}", serTxt:"اربح ٢ من ٣ ضد لاعبين بمستوى {t} لتوصل {t}", serWeak:"فوز حلو، بس ما انحسب للسلسلة: الفريق التاني كان أقل من مستوى {t}.", serFailT:"خسرت السلسلة", serFail:"كفّي ربح والسلسلة الجاية بتبلش لحالها.", q6:"بأي فئة بتلعب عادةً؟", q6x:"ما بعرف", q7:"عندك مستوى على Playtomic؟", q7s:"اختياري. بيساعدنا نبدأك بالمستوى الصح.", q7ph:"مثلاً 3.2", lvCapped:"الكل بيبدأ فضي أو أقل (أعلى شي 3.49). الذهبي والماسي بينربحوا بالملعب.", clT:"مستويات لازم تتأكد", clFast:"⚡ عم يطلع بسرعة: بلش {s}، هلق {n} بعد {r} مباريات", clS:"طلبات الفئة A، ولاعبين قالوا إنهن أقوى من مستوى البداية، ولاعبين عم يطلعوا بسرعة. إذا بتعرفهن، حط مستواهن الحقيقي.", clNow:"هلأ", clSaid:"قالوا", clEst:"تقدير", clSet:"حط المستوى", clOk:"خليه", plLeft:"العب {n} مباريات مسجّلة لينكشف تصنيفك", plSub:"مباريات تحديد المستوى", plDone:"خلص تحديد المستوى", plRevealed:"انكشف تصنيفك. من هلأ بيتحرك مع كل مباراة.", shieldOn:"الدرع شغّال", shieldTxt:"🛡️ الدرع: اربح مباراتك الجاية لتبقى {t}", shieldHeld:"الدرع حماك", stillT:"لسا {t}", shieldSaved:"بقيت بتصنيفك. الدرع بيرجع يشحن المرة الجاية.", divUp:"ترقية درجة", topDiv:"أعلى درجة", lvlU:"المستوى", catU:"الفئة", provisional:"مؤقت", winRate:"نسبة الفوز", matchesU:"مباريات", seasonU:"الموسم", weeks:"أسابيع", topCat:"أعلى فئة", needsN:"العب {n} مباريات محسوبة كمان لتفتح {c}", needsShort:"{n} مباريات كمان للفتح", danger:"منطقة الخطر · خليك فوق {x}", to:"لـ", shareCard:"شارك البطاقة", seasonBtn:"الموسم", seasonT:"ترتيب الموسم", seasonRule:"الفوز ٣ نقاط · المشاركة نقطة", pts:"نقطة", seasonEmpty:"ما في مباريات مؤكدة هالشهر لسا.", rankUnlocked:"فئة جديدة", youReached:"وصلت لـ", backTo:"رجعت لـ", climbBack:"اربح مبارياتك الجاية لترجع تطلع.", winU:"فوز!", levelUp:"مستواك طلع.", matchDone:"تم تأكيد المباراة", nextTime:"المرة الجاية بترجعها.", orgSet:"حدده المنظم", okBtn2:"تمام", cardSaved:"انحفظت البطاقة بالتنزيلات.", b_first_win:"أول فوز", b_comeback:"العودة", b_night_owl:"بومة الليل", b_iron_man:"الرجل الحديدي", b_regular:"منتظم", b_champion:"بطل", apTitle:"اللاعبين (أدمن)", apSearch:"الاسم أو الرقم", apFind:"بحث", apAok:"مسموح بالفئة A", apTitleChk:"ربح بطولة (يضيف لقب)", apNote:"السبب", apNotePh:"ربح الفئة C، تشرين الثاني ٢٠٢٦", edit:"تعديل", provNote:"تصنيفك بيبلش من الفئة اللي بتختارها. بعدها كل مباراة بتطلّعك أو بتنزّلك. الطلوع للذهبي أو الماسي بدو سلسلة ترقية.",lvIntro:"جاوب على كم سؤال سريع. تصنيفك بيبلش من الفئة اللي بتختارها، وبعدها كل مباراة بتطلّعك أو بتنزّلك.", lvYour:"مستواك", lvCat:"الفئة", lvAnswer:"جاوب على الأسئلة الخمسة", lvNote:"المستويات من ٠٫٥ إلى ٧. الفئة E (حديدي) تحت ١٫٥، D (برونزي) ١٫٥–٢٫٥، C (فضي) ٢٫٥–٣٫٥، B (ذهبي) ٣٫٥–٤٫٥، A (ماسي) من ٤٫٥ وفوق.",
   q1:"من قديش عم تلعب بادل؟", q1a:"لسا عم ابدأ", q1b:"أقل من سنة", q1c:"من سنة لـ ٣ سنين", q1d:"أكتر من ٣ سنين",
   q2:"رياضات مضرب تانية؟", q2a:"لا", q2b:"شوي", q2c:"تنس أو سكواش بشكل منتظم",
   q3:"لعبك", q3a:"عم اتعلم خلي الطابة بالملعب", q3b:"بقدر كمّل تبادل بسرعة ثابتة", q3c:"بتبادل منيح وبلعب فولي عالشبكة", q3d:"بهاجم بالبانديخا والفيبورا والسماش",
@@ -1896,7 +2072,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 /* ---------- state ---------- */
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
-const VERSION = "v85";
+const VERSION = "v94";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -2097,17 +2273,91 @@ function clubCtrls(c, courts, days){ return `<div class="days">${days.map(d => {
   <div class="seg">${courts.map(x => `<button data-court="${x.id}" aria-pressed="${S.court === x.id}" class="c-${esc(x.color)}">${esc(x.name)}</button>`).join("")}</div>
   <div class="row" style="flex-wrap:wrap"><b style="font-size:13px;color:var(--ink-2)">${t("length")}</b>${[60,90,120].map(m => `<button class="chip" data-dur="${m}" aria-pressed="${S.dur === m}">${m} ${t("min")}</button>`).join("")}</div>
   ${coachChips()}`; }
+const bookLive = () => (S.clubs || []).some(c => c.booking_on);   /* false = events-only launch: hide booking-based parts */
 const bookOpen = c => !!(c && (c.booking_on || (S.profile && S.profile.is_admin) || (S.staff || []).some(x => x.id === c.id)));
+function runGame(){ const best = +(ls.get("pl-run") || 0);
+  return `<div class="bk3-game"><div class="bk3-gh"><b>🏃 ${t("rnT")}</b><span>${t("bk3Best")} <i id="run-best">${best}</i></span></div>
+    <div class="run-ar" id="run-ar"><canvas id="run-cv"></canvas><span class="run-msg" id="run-msg">${t("rnTap")}</span></div>
+    <div class="bk3-bad" id="run-bad">${RUN_B.map(([n, k]) => `<span class="${best >= n ? "on" : ""}" data-n="${n}">${t(k)} · ${n}</span>`).join("")}</div></div>`; }
+function omSoonHero(){
+  return `<div class="bk3 om3" style="--a:#2C5FAE;--b:#E3EE3A;--d:#05080F">
+   <div class="bk3-hd"><span class="om3-ic">🎾</span><div><span class="bk3-k">🔒 ${t("bk3K")}</span><b>${t("om3T")}</b></div></div>
+   <p class="bk3-s">${t("om3S")}</p>
+   ${runGame()}
+   <button class="bk3-m" data-go="events">🏆 ${t("omTour")} →</button></div>`; }
+/* Runner game (open matches coming soon): Ballie jumps over nets and cones, it gets faster, touch one and it's over */
+const RUN_B = [[100, "rnB1"], [300, "rnB2"], [600, "rnB3"]];
+var RUN = {st: "idle", y: 0, vy: 0, sp: 0, d: 0, obs: [], next: 0, t: 0, raf: 0, held: false, leg: 0, flash: 0, W: 0, H: 0, best: 0};
+function runCv(){ const cv = document.getElementById("run-cv"); if (!cv) return null; const r = cv.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
+  if (cv.width !== Math.round(r.width * dpr) || cv.height !== Math.round(r.height * dpr)){ cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr); }
+  RUN.W = r.width; RUN.H = r.height; if (!RUN.col){ try { RUN.col = getComputedStyle(cv).getPropertyValue("--b").trim() || "#E3EE3A"; } catch (e) {} } const g = cv.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0); return g; }
+function runReset(){ Object.assign(RUN, {st: "run", y: 0, vy: 0, sp: 270, d: 0, obs: [], next: 260, t: 0, flash: 0}); RUN.best = +(ls.get("pl-run") || 0); }
+function runJump(){ if (RUN.st !== "run"){ runReset(); const m = document.getElementById("run-msg"); if (m) m.classList.add("off"); if (!RUN.raf) RUN.raf = requestAnimationFrame(runLoop); }
+  if (RUN.y === 0){ RUN.vy = 820; RUN.held = true; try { navigator.vibrate && navigator.vibrate(8); } catch (e) {} } }
+function runDraw(g){ const W = RUN.W, H = RUN.H, gy = H - 30, sc = Math.floor(RUN.d / 10);
+  g.clearRect(0, 0, W, H);
+  /* court: back wall glass + lines moving slower */
+  g.strokeStyle = "rgba(255,255,255,.08)"; g.lineWidth = 1;
+  const off = (RUN.d * .3) % 90; for (let x = -off; x < W; x += 90){ g.beginPath(); g.moveTo(x, 12); g.lineTo(x, gy - 40); g.stroke(); }
+  const ac = RUN.col || "#E3EE3A";
+  g.strokeStyle = ac; g.lineWidth = 2; g.beginPath(); g.moveTo(0, gy + .5); g.lineTo(W, gy + .5); g.stroke();
+  g.globalAlpha = .4; g.fillStyle = ac; const o2 = RUN.d % 34; for (let x = -o2; x < W; x += 34) g.fillRect(x, gy + 9, 12, 2); g.globalAlpha = 1;
+  g.fillStyle = "rgba(255,255,255,.18)"; const o3 = (RUN.d * 1.4) % 57; for (let x = -o3; x < W; x += 57) g.fillRect(x, gy + 18, 3, 2);
+  /* obstacles */
+  for (const o of RUN.obs){ if (o.k === "net"){ g.fillStyle = "#F4F1E6"; g.fillRect(o.x, gy - o.h, 3, o.h); g.fillRect(o.x + o.w - 3, gy - o.h, 3, o.h); g.fillRect(o.x, gy - o.h, o.w, 4);
+      g.strokeStyle = "rgba(244,241,230,.55)"; g.lineWidth = 1; for (let y = gy - o.h + 9; y < gy; y += 6){ g.beginPath(); g.moveTo(o.x + 3, y); g.lineTo(o.x + o.w - 3, y); g.stroke(); }
+      for (let x = o.x + 7; x < o.x + o.w - 3; x += 6){ g.beginPath(); g.moveTo(x, gy - o.h + 4); g.lineTo(x, gy); g.stroke(); } }
+    else { g.fillStyle = "#FF6A2B"; g.beginPath(); g.moveTo(o.x, gy); g.lineTo(o.x + o.w / 2 - 3, gy - o.h); g.lineTo(o.x + o.w / 2 + 3, gy - o.h); g.lineTo(o.x + o.w, gy); g.closePath(); g.fill();
+      g.fillStyle = "#fff"; g.fillRect(o.x + o.w * .27, gy - o.h * .55, o.w * .46, 4); } }
+  /* Ballie */
+  const R = 16, cx = 52, cy = gy - R - 4 - RUN.y, run = RUN.st === "run" && RUN.y === 0, lg = run ? Math.sin(RUN.leg) * 5 : 0;
+  g.strokeStyle = "#05080F"; g.lineWidth = 3; g.lineCap = "round";
+  g.beginPath(); g.moveTo(cx - 5, cy + R - 2); g.lineTo(cx - 5 + lg, cy + R + 5); g.moveTo(cx + 5, cy + R - 2); g.lineTo(cx + 5 - lg, cy + R + 5); g.stroke();
+  g.strokeStyle = "#E3EE3A"; g.beginPath(); g.moveTo(cx - 5, cy + R - 2); g.lineTo(cx - 5 + lg, cy + R + 5); g.moveTo(cx + 5, cy + R - 2); g.lineTo(cx + 5 - lg, cy + R + 5); g.stroke();
+  g.fillStyle = "#D7F23A"; g.beginPath(); g.arc(cx, cy, R, 0, Math.PI * 2); g.fill();
+  g.strokeStyle = "rgba(255,255,255,.9)"; g.lineWidth = 2; g.beginPath(); g.arc(cx - R * 1.25, cy, R * .95, -.65, .65); g.stroke(); g.beginPath(); g.arc(cx + R * 1.25, cy, R * .95, Math.PI - .65, Math.PI + .65); g.stroke();
+  g.fillStyle = "#E5484D"; g.fillRect(cx - R + 2, cy - 9, R * 2 - 4, 4);
+  const dead = RUN.st === "over"; g.fillStyle = "#05080F";
+  if (dead){ g.strokeStyle = "#05080F"; g.lineWidth = 2; [[cx + 2, cy - 1], [cx + 9, cy - 1]].forEach(([x, y]) => { g.beginPath(); g.moveTo(x - 2.5, y - 2.5); g.lineTo(x + 2.5, y + 2.5); g.moveTo(x + 2.5, y - 2.5); g.lineTo(x - 2.5, y + 2.5); g.stroke(); }); }
+  else { g.beginPath(); g.arc(cx + 3, cy - 1, 2.6, 0, Math.PI * 2); g.arc(cx + 10, cy - 1, 2.6, 0, Math.PI * 2); g.fill(); }
+  /* score */
+  g.font = "700 15px 'Courier New', monospace"; g.textAlign = "right"; g.fillStyle = RUN.flash > 0 && Math.floor(RUN.flash * 8) % 2 ? "rgba(255,255,255,0)" : "#fff";
+  g.fillText(String(sc).padStart(5, "0"), W - 12, 24); g.fillStyle = "rgba(255,255,255,.5)"; g.fillText("HI " + String(RUN.best).padStart(5, "0"), W - 80, 24); g.textAlign = "left"; }
+function runLoop(ts){ const g = runCv(); if (!g){ RUN.raf = 0; RUN.st = "idle"; return; }
+  const dt = Math.min(.033, RUN.t ? (ts - RUN.t) / 1000 : .016); RUN.t = ts;
+  if (RUN.st === "run"){ RUN.sp = Math.min(720, RUN.sp + 9 * dt); const mv = RUN.sp * dt; RUN.d += mv; RUN.leg += dt * RUN.sp / 18;
+    const grav = RUN.vy > 0 && !RUN.held ? 4200 : 2500; RUN.vy -= grav * dt; RUN.y = Math.max(0, RUN.y + RUN.vy * dt); if (RUN.y === 0) RUN.vy = 0;
+    RUN.obs.forEach(o => o.x -= mv); RUN.obs = RUN.obs.filter(o => o.x + o.w > -10);
+    RUN.next -= mv; if (RUN.next <= 0){ const lvl = Math.min(1, (RUN.sp - 270) / 400), net = Math.random() < .55;
+      const o = net ? {k: "net", w: 22 + Math.random() * 18 * (1 + lvl), h: 28 + Math.random() * 16} : {k: "cone", w: 20, h: 26 + Math.random() * 12};
+      o.x = RUN.W + 10; RUN.obs.push(o);
+      if (lvl > .35 && Math.random() < .3){ RUN.obs.push({k: "cone", w: 18, h: 24, x: o.x + o.w + 4}); }
+      RUN.next = RUN.sp * (.62 + Math.random() * .75) + 120; }
+    const sc = Math.floor(RUN.d / 10); if (sc > 0 && sc % 100 === 0 && RUN.flash <= 0 && RUN._m !== sc){ RUN._m = sc; RUN.flash = .8; } RUN.flash = Math.max(0, RUN.flash - dt);
+    const gy = RUN.H - 30, cx = 52, cy = gy - 20 - RUN.y, r = 13;
+    for (const o of RUN.obs){ const nx = Math.max(o.x + 2, Math.min(cx, o.x + o.w - 2)), ny = Math.max(gy - o.h + 3, Math.min(cy, gy)); if ((cx - nx) ** 2 + (cy - ny) ** 2 < r * r){ runOver(); break; } } }
+  runDraw(g);
+  if (RUN.st === "run") RUN.raf = requestAnimationFrame(runLoop); else RUN.raf = 0; }
+function runOver(){ RUN.st = "over"; const sc = Math.floor(RUN.d / 10), rec = sc > RUN.best; if (rec){ RUN.best = sc; ls.set("pl-run", String(sc)); }
+  try { navigator.vibrate && navigator.vibrate([40, 30, 80]); } catch (e) {}
+  const m = document.getElementById("run-msg"); if (m){ m.innerHTML = `${rec && sc ? `🏆 ${t("rnRec")}<br>` : `${t("rnOver")}<br>`}<small>${t("rnAgain")}</small>`; m.classList.remove("off"); }
+  const b = document.getElementById("run-best"); if (b) b.textContent = RUN.best;
+  document.querySelectorAll("#run-bad span").forEach(x => x.classList.toggle("on", RUN.best >= +x.dataset.n)); }
+document.addEventListener("pointerdown", e => { if (!e.target.closest || !e.target.closest("#run-ar")) return; e.preventDefault(); runJump(); });
+document.addEventListener("pointerup", () => { RUN.held = false; });
+document.addEventListener("keydown", e => { if (!document.getElementById("run-ar") || !(e.code === "Space" || e.code === "ArrowUp")) return; e.preventDefault(); if (!e.repeat) runJump(); });
+document.addEventListener("keyup", e => { if (e.code === "Space" || e.code === "ArrowUp") RUN.held = false; });
 function bkSoonHero(c){ const sk = clubSkin(c), staff = bookOpen(c), best = +(ls.get("pl-kup") || 0);
   return `<div class="bk3" style="--a:${sk.a};--b:${sk.b};--d:${sk.d}">
    <div class="bk3-hd">${sk.logo ? `<img src="${esc(sk.logo)}" alt="" onerror="this.remove()">` : ""}<div><span class="bk3-k">🔒 ${t("bk3K")}</span><b>${t("bk3T")}</b></div></div>
    <p class="bk3-s">${tf("bk3S", {c: esc(c.name)})}</p>
-   <div class="bk3-game"><div class="bk3-gh"><b>🎾 ${t("bk3G")}</b><span>${t("bk3Best")} <i id="kup-best">${best}</i></span></div>
-    <div class="bk3-ar" id="kup-ar"><i class="bk3-l1"></i><i class="bk3-l2"></i><i class="bk3-l3"></i><i class="bk3-net"></i><span class="bk3-lock">🔒</span>
-     <span class="bk3-sc" id="kup-sc">0</span><span class="bk3-ball" id="kup-ball" style="left:calc(50% - 22px);top:38%">🎾</span><span class="bk3-msg" id="kup-msg">${t("bk3Tap")}</span><span class="bk3-pop" id="kup-pop"></span></div>
-    <div class="bk3-bad" id="kup-bad">${KUP_B.map(([n, k]) => `<span class="${best >= n ? "on" : ""}" data-n="${n}">${t(k)} · ${n}</span>`).join("")}</div></div>
-   <button class="bk3-m" data-go="matches">🎾 ${t("bk2M")} →</button>
+   ${runGame()}
+   ${bookLive() ? `<button class="bk3-m" data-go="matches">🎾 ${t("bk2M")} →</button>` : `<button class="bk3-m" data-go="events">🏆 ${t("omTour")} →</button>`}
    ${staff ? `<button class="bks2-adm" data-bkany="${c.id}">${t("bk2Adm")}</button>` : ""}</div>`; }
+/* welcome tournament countdown, ticking every second */
+setInterval(() => { document.querySelectorAll("[data-wcd]").forEach(e => { const ms = +e.dataset.wcd - Date.now(); if (ms <= 0){ e.textContent = e.dataset.f === "d" ? "0d" : "00:00:00"; return; }
+  const d = Math.floor(ms / 864e5), h = Math.floor(ms / 36e5) % 24, m = Math.floor(ms / 6e4) % 60, sec = Math.floor(ms / 1e3) % 60, p = n => String(n).padStart(2, "0");
+  const v = e.dataset.f === "d" ? (d ? d + "d" : h + "h") : `${p(d ? h : m)}:${p(d ? m : sec)}${d ? ":" + p(sec) : ""}`; if (e.textContent !== v) e.textContent = v; }); }, 1000);
 /* "Keep it up" mini game on the Coming soon screen: tap the ball before it drops */
 const KUP_B = [[10, "bk3B1"], [25, "bk3B2"], [50, "bk3B3"]];
 var KUP = { on: false, x: .5, y: .35, vx: 0, vy: 0, sc: 0, t: 0, raf: 0, over: false };
@@ -2228,7 +2478,8 @@ function mfPass(m, f){ const d = new Date(m.starts_at), dk = x => new Intl.DateT
   if (f.spots === "one" && m.open_spots !== 1) return false;
   if (f.spots === "two" && m.open_spots < 2) return false;
   return true; }
-V.matches = () => { const f = mfGet(), list = S.matches.filter(m => mfPass(m, f)), on = f.when !== "all" || f.side !== "all" || f.spots !== "all" || !f.lvl;
+V.matches = () => { if (!bookLive() && !(S.matches || []).length) return `<main>${backBar(t("open"), "home")}${omSoonHero()}</main>${nav("matches")}`;
+  const f = mfGet(), list = S.matches.filter(m => mfPass(m, f)), on = f.when !== "all" || f.side !== "all" || f.spots !== "all" || !f.lvl;
   const ch = (k, v, l) => `<button class="chip${k === "lvl" && f.lvl ? " on2" : ""}" data-mf="${k}|${v}" aria-pressed="${k === "lvl" ? f.lvl : f[k] === v}">${l}</button>`;
   const clubs = [...new Map(S.matches.map(m => [m.club_id, m.club_name])).entries()];
   return `<main>${backBar(t("open"), "home")}
@@ -2372,9 +2623,15 @@ const CAT_MID = {E: 1.0, D: 2.0, C: 3.0, B: 4.0, A: 5.0}, START_CAP = 3.49;
 /* combines the skill answers with the category the player says they play and their Playtomic level */
 function quizResult(a){ const base = Math.max(0.5, Math.min(5.5, 1 + LV_Q.reduce((s, [q, opts]) => s + (a[q] != null ? opts[a[q]][1] : 0), 0)));
   const cat = ["E", "D", "C", "B", "A", null][a.q6 != null ? a.q6 : 5], pt = a.pt != null && a.pt !== "" && +a.pt >= 0.5 && +a.pt <= 7 ? +a.pt : null;
-  let raw = cat ? 0.6 * base + 0.4 * CAT_MID[cat] : base; if (pt != null) raw = 0.4 * raw + 0.6 * pt;
-  raw = Math.round(Math.max(0.5, Math.min(7, raw)) * 100) / 100;
-  return {raw, start: Math.min(START_CAP, raw), claim: {cat, pt, raw}}; }
+  let raw;
+  if (cat){ const lo = {E: 0.5, D: 1.5, C: 2.5, B: 3.5, A: 4.5}[cat], frac = Math.max(0, Math.min(1, (base - 1) / 5.3));
+    raw = pt != null && pt >= lo && pt < lo + 1 ? pt : lo + 0.15 + 0.7 * frac; }
+  else { raw = base; if (pt != null) raw = 0.4 * raw + 0.6 * pt; }
+  raw = Math.round(Math.max(0.5, Math.min(5.5, raw)) * 100) / 100;
+  if (cat && lvCat(raw) !== cat) raw = {E: 1.0, D: 2.0, C: 3.0, B: 4.0, A: 5.0}[cat];
+  /* Category A needs Padel Live's approval: start in Gold and send a request */
+  const aReq = raw >= 4.5 && !(S.profile && S.profile.a_ok);
+  return {raw, start: aReq ? Math.min(raw, 4.40) : raw, aReq, claim: {cat, pt, raw}}; }
 const lvl2 = l => l == null ? "–" : Number(l).toFixed(2);
 const lvCat = l => l == null ? "" : l >= 4.5 ? "A" : l >= 3.5 ? "B" : l >= 2.5 ? "C" : l >= 1.5 ? "D" : "E";
 const lvChip = (l, b) => l == null ? `<span class="lv none">?</span>` : b && b.v ? vetChip(lvCat(l), `<span class="lv c${lvCat(l)}">${lvl2(l)}</span>`) : `<span class="lv c${lvCat(l)}">${lvl2(l)}</span>`;
@@ -2384,14 +2641,14 @@ const tooHigh = m => { const p = S.profile; if (!p || !p.level_set || p.verified
   return ls2.reduce((a, b) => a + b, 0) / ls2.length > +p.level + 0.75; };
 const inRange = (m, l) => m.level_min == null || l == null || (l >= +m.level_min && l <= +m.level_max);
 V.level = () => {
-  const a = S.quiz || {}, done = LV_Q.every(([q]) => a[q] != null) && a.q6 != null, R = quizResult(a), score = R.start; S.quizClaim = R.claim;
+  const a = S.quiz || {}, done = LV_Q.every(([q]) => a[q] != null) && a.q6 != null, R = quizResult(a), score = R.start; S.quizClaim = R.claim; S.quizAReq = done && R.aReq;
   return `<main>${backBar(t("lvTitle"), S.user ? "me" : "home")}
    <p class="note" style="margin:-6px 0 0">${t("lvIntro")}</p>
    ${LV_Q.map(([q, opts]) => `<div class="card" style="display:flex;flex-direction:column;gap:8px"><b>${t(q)}</b>${opts.map(([k], i) => `<button class="opt" data-quiz="${q}|${i}" aria-pressed="${a[q] === i}"><i></i><span><b>${t(k)}</b></span></button>`).join("")}</div>`).join("")}
-   <div class="card" style="display:flex;flex-direction:column;gap:8px"><b>${t("q6")}</b><div class="chips" style="flex-wrap:wrap">${["E", "D", "C", "B", "A"].map((c, i) => `<button class="chip" data-quiz="q6|${i}" aria-pressed="${a.q6 === i}">${t("catU")} ${c}</button>`).join("")}<button class="chip" data-quiz="q6|5" aria-pressed="${a.q6 === 5}">${t("q6x")}</button></div></div>
+   <div class="card" style="display:flex;flex-direction:column;gap:8px"><b>${t("q6")}</b><div class="chips" style="flex-wrap:wrap">${["E", "D", "C", "B", "A"].map((c, i) => `<button class="chip" data-quiz="q6|${i}" aria-pressed="${a.q6 === i}">${t("catU")} ${c}</button>`).join("")}<button class="chip" data-quiz="q6|5" aria-pressed="${a.q6 === 5}">${t("q6x")}</button></div>${R.aReq && a.q6 != null ? `<span class="note a-need">🔷 ${t("aNeed")}</span>` : ""}</div>
    <div class="card" style="display:flex;flex-direction:column;gap:8px"><b>${t("q7")}</b><span class="note" style="margin-top:-4px">${t("q7s")}</span><input id="q-pt" inputmode="decimal" placeholder="${t("q7ph")}" value="${a.pt != null ? esc(a.pt) : ""}" style="height:46px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:0 14px;font:inherit;font-size:16px"></div>
-   <div class="card lvres"><span class="note">${t("lvYour")}</span>${done ? `<b class="lvbig">${lvl2(score)}</b><span class="tag l">${t("lvCat")} ${lvCat(score)}</span>${R.raw > START_CAP ? `<span class="note">${t("lvCapped")}</span>` : ""}` : `<span class="note">${t("lvAnswer")}</span>`}</div>
-   <p class="note" style="margin:0">${t("lvNote")} ${t("provNote")}</p>
+   <div class="card lvres"><span class="note">${t("lvYour")}</span>${done ? `<b class="lvbig">${lvl2(score)}</b><span class="tag l">${t("lvCat")} ${lvCat(score)}</span>` : `<span class="note">${t("lvAnswer")}</span>`}</div>
+   <p class="note" style="margin:0">${t("lvNote")} ${bookLive() ? t("provNote") : t("provNoteE")}</p>
   </main><div class="bar"><div class="sum"><small>${t("lvYour")}</small><b>${done ? lvl2(score) : "–"}</b></div><button class="cta blue" ${S.user ? "data-setlevel" : "data-guestlv"}="${done ? score.toFixed(2) : ""}"${done ? "" : " disabled"}>${S.user ? t("save") : t("rvReveal")}</button></div>`; };
 
 /* ---------- notifications ---------- */
@@ -2537,7 +2794,7 @@ function subTier(c){ if (!c || !c.category) return ""; return divName(divIdx(c.l
 const emblem = (col, size) => `<svg viewBox="0 0 100 100" width="${size}" height="${size}" aria-hidden="true"><path d="M50 4 L90 20 L90 52 C90 76 70 90 50 97 C30 90 10 76 10 52 L10 20 Z" fill="${col}" stroke="rgba(0,0,0,.45)" stroke-width="3"/><path d="M50 14 L80 26 L80 52 C80 70 66 81 50 87 C34 81 20 70 20 52 L20 26 Z" fill="#14110A"/><circle cx="50" cy="50" r="18" fill="none" stroke="${col}" stroke-width="5"/><path d="M36 42 Q50 50 64 42 M36 58 Q50 50 64 58" stroke="${col}" stroke-width="3" fill="none"/><path d="M30 76 L50 70 L70 76" stroke="#E3EE3A" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`;
 const BADGE_IC = {first_win: "🏅", comeback: "🔁", night_owl: "🌙", iron_man: "🔥", regular: "🎾", champion: "🏆"};
 function progressInfo(c){ const l = +c.level, cat = c.category || "D", e = DIV_EDGES[cat], dv = divIdx(l, cat), order = ["E", "D", "C", "B", "A"];
-  if (c.placement > 0){ const done = 5 - c.placement; return {placement: true, done, pct: done / 5 * 100, txt: tf("plLeft", {n: c.placement})}; }
+  if (c.placement > 0){ const done = 5 - c.placement; return {placement: true, done, pct: done / 5 * 100, txt: bookLive() ? tf("plLeft", {n: c.placement}) : t("plLeftE")}; }
   if (c.shield) return {pct: 4, txt: tf("shieldTxt", {t: tierName(cat)}), danger: true, shield: true};
   if (c.series) return {series: true, w: +c.series.w || 0, l: +c.series.l || 0, to: c.series.to, txt: tf("serTxt", {t: tierName(c.series.to)})};
   const lo = e[0], hi = e[3], pct = Math.max(3, Math.min(100, (l - lo) / (hi - lo) * 100));
@@ -2553,12 +2810,12 @@ function playerCard(c){
   return `<div class="gcard-wrap${vet ? " vet" : ""}" style="--tc:${col}" data-tilt><span class="g3d-sh"></span><div class="g3d-f"><div class="g3d">${[1, 2, 3, 4, 5, 6].map(z => `<i class="g3d-e" style="--z:${z}"></i>`).join("")}${vet ? vetFrame(c.category || "D", c.rated) : ""}<div class="pcard gc t-${pl ? "P" : c.category || "D"}" style="--tc:${col}"><div class="pc-in">
     <span class="gc-bg"></span><span class="gc-pat"></span><span class="gc-rays"></span><span class="pc-holo"></span><span class="gc-spark"></span>${pl ? `<span class="gc-scan"></span><span class="gc-qs">${"?".repeat(14).split("").map((q, i) => `<i style="--i:${i}">?</i>`).join("")}</span>` : ""}
     ${c.streak >= 2 ? `<span class="pc-streak">🔥 ${c.streak} ${t("weeks")}</span>` : ""}
-    <div class="pc-top"><div class="pc-ovr"><b>${pl ? "?" : (+c.level).toFixed(2)}</b><small>${t("lvlU")}</small></div><div class="pc-rank">${emblem(col, 50)}<span class="gc-rib">${pl ? tf("plTag", {n: pr.done}) : pr.series ? tf("serTag", {w: pr.w, l: pr.l}) : `${esc(tierName(c.category))} ${st}`}</span></div></div>
+    <div class="pc-top"><div class="pc-ovr"><b>${pl ? "?" : (+c.level).toFixed(2)}</b><small>${t("lvlU")}</small></div><div class="pc-rank">${emblem(col, 50)}<span class="gc-rib">${pl ? (bookLive() ? tf("plTag", {n: pr.done}) : t("plTagE")) : pr.series ? tf("serTag", {w: pr.w, l: pr.l}) : `${esc(tierName(c.category))} ${st}`}</span></div></div>
     <div class="gc-avw"><span class="gc-ring"></span><div class="pc-av">${esc(initials(c.name))}</div></div>
-    <div class="pc-name"><span class="gc-plate"><b>${esc(c.name || "")}</b></span><small>${pl ? t("plSub") : `${t("catU")} ${esc(c.category || "–")}${c.shield ? " · 🛡️" : ""}`}</small></div>
+    <div class="pc-name"><span class="gc-plate"><b>${esc(c.name || "")}</b></span><small>${pl ? (bookLive() ? t("plSub") : t("plSubE")) : `${t("catU")} ${esc(c.category || "–")}${c.shield ? " · 🛡️" : ""}`}</small></div>
     <div class="pc-stats"><div><i>⚔️</i><b>${wr}</b><span>${t("winRate")}</span></div><div><i>🎾</i><b>${played}</b><span>${t("matchesU")}</span></div><div><i>👑</i><b>${c.season && c.season.rank ? "#" + c.season.rank : "–"}</b><span>${c.season ? esc(c.season.club) : t("seasonU")}</span></div></div>
    </div></div></div></div></div>
-   <div class="pc-prog${pr.danger ? " danger" : ""}${pl ? " plc" : ""}${pr.series ? " plc ser" : ""}">${pr.series ? `<div class="pips">${[0, 1, 2].map(i => `<i class="${i < pr.w ? "on" : i < pr.w + pr.l ? "x" : ""}"></i>`).join("")}</div>` : pl ? `<div class="pips">${[0, 1, 2, 3, 4].map(i => `<i class="${i < pr.done ? "on" : ""}"></i>`).join("")}</div>` : `<div class="bar"><i style="width:${pr.pct}%"></i>${(pr.marks || []).map(m => `<b style="left:${m}%"></b>`).join("")}</div>`}<div class="lbl"><span>${pl ? tf("plTag", {n: pr.done}) : pr.series ? `${t("serT")} → ${esc(tierName(pr.to))}` : `${esc(tierName(c.category))} ${st} · ${esc(c.category || "")}`}</span><em>${esc(pr.txt)}</em></div></div>
+   <div class="pc-prog${pr.danger ? " danger" : ""}${pl ? " plc" : ""}${pr.series ? " plc ser" : ""}">${pr.series ? `<div class="pips">${[0, 1, 2].map(i => `<i class="${i < pr.w ? "on" : i < pr.w + pr.l ? "x" : ""}"></i>`).join("")}</div>` : pl ? (bookLive() ? `<div class="pips">${[0, 1, 2, 3, 4].map(i => `<i class="${i < pr.done ? "on" : ""}"></i>`).join("")}</div>` : "") : `<div class="bar"><i style="width:${pr.pct}%"></i>${(pr.marks || []).map(m => `<b style="left:${m}%"></b>`).join("")}</div>`}<div class="lbl"><span>${pl ? (bookLive() ? tf("plTag", {n: pr.done}) : t("plTagE")) : pr.series ? `${t("serT")} → ${esc(tierName(pr.to))}` : `${esc(tierName(c.category))} ${st} · ${esc(c.category || "")}`}</span><em>${esc(pr.txt)}</em></div></div>
    <div class="pc-badges">${[...(S.wi && S.wi.quest && (S.wi.quest.done || S.wi.quest.new) ? [{k: "rookie", got: !!S.wi.quest.done}] : []), ...(c.badges || []), ...achList(S.myAch)].map(b => `<div class="bd${b.got ? "" : " lock"}"><i>${BADGE_IC[b.k] || "★"}</i>${t("b_" + b.k)}${S.rarity && S.rarity[b.k] != null ? `<small class="rar">${tf("rarity", {p: S.rarity[b.k]})}</small>` : ""}</div>`).join("")}</div>
    <div class="row" style="gap:10px"><button class="cta gold wide" data-sharecard>${t("shareCard")} ↗</button>${c.season ? `<button class="ghost" style="width:auto;padding:0 16px" data-season="${c.season.club_id}">${t("seasonBtn")}</button>` : ""}</div>`;
 }
@@ -2572,18 +2829,20 @@ async function loadCard(){ if (!S.user) { S.card = null; return; } try { const r
 function celebrate(){
   const c = S.card && S.card.celebrate; if (!c || document.getElementById("celeb")) return;
   try { if (sessionStorage.getItem("pl-celeb") === String(c.id)) return; sessionStorage.setItem("pl-celeb", String(c.id)); } catch (e) {}
+  if (c.shield === "tour_rank" && c.cat_after) return rankReveal(c);
   const up = c.cat_after && c.cat_before && _rank(c.cat_after) > _rank(c.cat_before), down = c.cat_after && c.cat_before && _rank(c.cat_after) < _rank(c.cat_before);
   const d = c.after != null && c.before != null ? +c.after - +c.before : 0, [, col] = TIER[c.cat_after || "D"];
   let kick, big, sub, conf = false, reveal = false;
   const dB = divIdx(c.before, c.cat_before || c.cat_after), dA = divIdx(c.after, c.cat_after);
-  if (c.rated != null && c.rated < 5 && !c.note){ kick = tf("plTag", {n: c.rated}); big = c.won ? t("winU") : t("matchDone"); sub = tf("plLeft", {n: 5 - c.rated}); conf = !!c.won; }
-  else if (c.rated === 5 && !c.note){ kick = t("plDone"); big = `${tierName(c.cat_after)} ${divName(dA)}`; sub = t("plRevealed"); conf = true; reveal = true; }
+  if (false){ kick = tf("plTag", {n: c.rated}); big = c.won ? t("winU") : t("matchDone"); sub = tf("plLeft", {n: 5 - c.rated}); conf = !!c.won; }
+  else if (false){ kick = t("plDone"); big = `${tierName(c.cat_after)} ${divName(dA)}`; sub = t("plRevealed"); conf = true; reveal = true; }
   else if (c.shield === "series_on"){ const to = (S.card && S.card.series && S.card.series.to) || ""; kick = "⚔️ " + t("serT"); big = tierName(to); sub = tf("serTxt", {t: tierName(to)}); conf = true; }
   else if (c.shield === "series_w" || c.shield === "series_l"){ const sr = (S.card && S.card.series) || {}; kick = "⚔️ " + t("serT") + ` ${sr.w || 0}–${sr.l || 0}`; big = c.shield === "series_w" ? t("winU") : t("matchDone"); sub = tf("serTxt", {t: tierName(sr.to)}); conf = c.shield === "series_w"; }
   else if (c.shield === "series_weak"){ const sr = (S.card && S.card.series) || {}; kick = "⚔️ " + t("serT"); big = t("winU"); sub = tf("serWeak", {t: tierName(sr.to)}); }
   else if (c.shield === "series_fail"){ kick = t("serFailT"); big = tf("stillT", {t: tierName(c.cat_after)}); sub = t("serFail"); }
   else if (c.shield === "on"){ kick = "🛡️ " + t("shieldOn"); big = tierName(c.cat_after); sub = tf("shieldTxt", {t: tierName(c.cat_after)}); }
   else if (c.shield === "saved"){ kick = "🛡️ " + t("shieldHeld"); big = tf("stillT", {t: tierName(c.cat_after)}); sub = t("shieldSaved"); conf = true; }
+  else if (c.shield === "tour_rank"){ kick = "🎉 " + t("rkKick"); big = `${tierName(c.cat_after)} ${divName(dA)}`; sub = (c.note || "") + " · " + t("rkSub"); conf = true; reveal = true; }
   else if (c.note){ kick = t("orgSet"); big = `${tierName(c.cat_after)} · ${c.cat_after}`; sub = c.note; conf = up; }
   else if (up){ kick = t("rankUnlocked"); big = tierName(c.cat_after); sub = `${t("youReached")} ${t("catU")} ${c.cat_after}`; conf = true; }
   else if (down){ kick = t("backTo"); big = tierName(c.cat_after); sub = t("climbBack"); }
@@ -2592,8 +2851,8 @@ function celebrate(){
   else { kick = t("matchDone"); big = `${d >= 0 ? "+" : "−"}${Math.abs(d).toFixed(2)}`; sub = t("nextTime"); }
   const el = document.createElement("div"); el.id = "celeb"; el.className = "celeb" + (conf ? " party" : "") + (reveal ? " reveal" : "") + (c.shield === "on" ? " shieldc" : "");
   el.innerHTML = `<div class="cl-rays"></div><div class="cl-conf"></div><div class="cl-in"><span class="cl-kick">${esc(kick)}</span>
-    <div class="cl-emb">${emblem(col, 170)}</div><h1>${esc(big)}</h1>
-    <div class="cl-delta"${c.rated != null && c.rated < 5 ? ' style="display:none"' : ""}><span>${(+c.before).toFixed(2)}</span>→<span><em>${(+c.after).toFixed(2)}</em></span></div><p>${esc(sub)}</p>
+    <div class="cl-emb">${emblem(col, 170)}</div><h1>${esc(big)}</h1>${c.shield === "tour_rank" && c.cat_after ? `<div class="cl-cat" style="--cc:${col}"><small>${t("catU")}</small><b>${esc(c.cat_after)}</b></div>` : ""}
+    <div class="cl-delta"${c.shield === "tour_rank" && !c.cat_before ? ' style="display:none"' : ""}><span>${(+c.before).toFixed(2)}</span>→<span><em>${(+c.after).toFixed(2)}</em></span></div><p>${esc(sub)}</p>
     <div class="row" style="gap:10px;width:100%"><button class="cta gold wide" data-celebshare>${t("shareCard")}</button><button class="ghost" data-celebok style="color:#F4F1E6;border-color:rgba(244,241,230,.35);background:transparent">${t("okBtn2")}</button></div></div>`;
   document.body.appendChild(el);
   if (conf){ const cf = el.querySelector(".cl-conf"), cols = ["#E8C96A", "#E3EE3A", "#FFF3C4", "#E5484D", "#5B8FE0"];
@@ -2601,6 +2860,36 @@ function celebrate(){
   try { navigator.vibrate && navigator.vibrate(conf ? [60, 40, 120] : 40); } catch (e) {}
 }
 const _rank = c => ({E: 0, D: 1, C: 2, B: 3, A: 4})[c] ?? -1;
+/* Tournament rank reveal: the mystery card charges up, bursts, and turns into the player's real tier card */
+function rankReveal(c){
+  const cat = c.cat_after, [, col] = TIER[cat] || TIER.D, card = S.card || {}, dA = divIdx(c.after, cat);
+  const parts = String(c.note || "").split(" · "), tname = parts[0] || "", fin = parts[1] || "";
+  const real = playerCard(Object.assign({}, card, {placement: 0, category: cat, level: c.after}));
+  const myst = playerCard(Object.assign({}, card, {placement: 5, rated: 0}));
+  const el = document.createElement("div"); el.id = "celeb"; el.className = "rk2"; el.style.setProperty("--tc", col);
+  el.innerHTML = `<div class="rk2-bg"></div><div class="rk2-rays"></div><div class="rk2-ring"></div><div class="rk2-flash"></div><div class="cl-conf"></div>
+   <div class="rk2-in">
+    <div class="rk2-top"><span class="rk2-chip">🏟️ ${esc(tname)}</span>${fin ? `<span class="rk2-chip f">${esc(fin)}</span>` : ""}</div>
+    <div class="rk2-kick">${t("rkKick")}</div>
+    <div class="rk2-stage"><div class="rk2-card m">${myst}</div><div class="rk2-card r">${real}</div></div>
+    <div class="rk2-res">
+      <h1>${esc(tierName(cat))} <em>${divName(dA)}</em></h1>
+      <div class="rk2-meta"><div class="rk2-cat"><small>${t("catU")}</small><b>${esc(cat)}</b></div><div class="rk2-lv"><small>${t("lvlU")}</small><b>${(+c.after).toFixed(2)}</b></div></div>
+      <p>${t("rkSub")}</p>
+      <div class="rk2-btns"><button class="rk2-share" data-celebshare>${t("shareCard")} ↗</button><button class="rk2-ok" data-celebok>${t("okBtn2")}</button></div>
+    </div>
+   </div>`;
+  document.body.appendChild(el);
+  el.querySelectorAll(".pc-prog,.pc-badges,.gcard-wrap+.row,.row").forEach(x => { if (x.closest(".rk2-card")) x.remove(); });
+  rk2Burst(el, col);
+}
+function rk2Burst(el, col){
+  setTimeout(() => { if (!el.isConnected) return; el.classList.add("go");
+    const cf = el.querySelector(".cl-conf"), cols = [col, "#FFFFFF", "#E3EE3A", col, "#FFE7A8"];
+    for (let i = 0; i < 70; i++){ const x = document.createElement("i"); x.style.left = Math.random() * 100 + "%"; x.style.background = cols[i % 5]; x.style.animationDuration = (2.4 + Math.random() * 2.6) + "s"; x.style.animationDelay = (-Math.random() * 3) + "s"; cf.appendChild(x); }
+    try { navigator.vibrate && navigator.vibrate([60, 40, 140]); } catch (e) {} }, 1900);
+  try { navigator.vibrate && navigator.vibrate([20, 60, 20, 60, 20]); } catch (e) {}
+}
 async function closeCeleb(){ const el = document.getElementById("celeb"); if (el) el.remove(); try { await sb.rpc("mark_seen"); } catch (e) {} if (S.card) S.card.celebrate = null; }
 document.addEventListener("click", async e => {
   if (e.target.closest("[data-celebok]")){ closeCeleb(); return; }
@@ -2637,7 +2926,8 @@ function adminPlayers(){ if (!S.profile || !S.profile.is_admin) return "";
   const cl = S.claims || [];
   return `${cl.length ? `<div class="card" style="display:flex;flex-direction:column;gap:8px"><b>⚑ ${t("clT")} · ${cl.length}</b><span class="note" style="margin-top:-4px">${t("clS")}</span>${cl.map(p => `<div class="aprow"><div class="row" style="justify-content:space-between;gap:8px"><b>${esc(p.name)}</b><span class="note" dir="ltr">${esc(p.phone || "")}</span></div>
      <span class="note">${t("clNow")} ${(+p.level).toFixed(2)} · ${p.rated} ${t("ratedN")} — ${p.claim ? `${t("clSaid")}: ${p.claim.cat ? t("catU") + " " + esc(p.claim.cat) : "–"}${p.claim.src === "invite" ? " (invite)" : ""}${p.claim.pt ? ` · Playtomic ${esc(p.claim.pt)}` : ""} · ${t("clEst")} ${(+p.claim.raw).toFixed(2)}` : ""}</span>${p.start != null && +p.level >= +p.start + 0.5 ? `<span class="note" style="color:#E8A23A">${tf("clFast", {s: lvl2(p.start), n: lvl2(p.level), r: p.rated})}</span>` : ""}
-     <div class="row" style="gap:8px"><button class="sbtn" type="button" data-clset="${p.id}">${t("clSet")}</button><button class="sbtn" type="button" data-cldone="${p.id}">${t("clOk")}</button></div></div>`).join("")}</div>` : ""}<form id="apF" class="card" style="display:flex;flex-direction:column;gap:10px"><b>${t("apTitle")}</b><div class="row" style="gap:8px"><input id="ap-q" placeholder="${t("apSearch")}" style="flex:1;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:0 12px"><button class="cta blue sm" type="submit">${t("apFind")}</button></div>
+     ${p.claim && p.claim.a_req && p.category !== "A" ? `<span class="note" style="color:#2C5FAE;font-weight:800">🔷 ${t("aWants")}</span><div class="row" style="gap:8px"><button class="sbtn" type="button" data-adec="${p.id}|1" style="background:#2C5FAE;color:#fff">✅ ${t("aYes")}</button><button class="sbtn" type="button" data-adec="${p.id}|0">${t("aNo")}</button></div>`
+       : `<div class="row" style="gap:8px"><button class="sbtn" type="button" data-clset="${p.id}">${t("clSet")}</button><button class="sbtn" type="button" data-cldone="${p.id}">${t("clOk")}</button></div>`}</div>`).join("")}</div>` : ""}<form id="apF" class="card" style="display:flex;flex-direction:column;gap:10px"><b>${t("apTitle")}</b><div class="row" style="gap:8px"><input id="ap-q" placeholder="${t("apSearch")}" style="flex:1;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:0 12px"><button class="cta blue sm" type="submit">${t("apFind")}</button></div>
    ${(S.apList || []).map(p => `<div class="aprow"><div class="row" style="justify-content:space-between;gap:8px"><b>${esc(p.name)}</b><span class="note" dir="ltr">${esc(p.phone || "")}</span></div>
      ${S.apEdit === p.id ? `<div class="grid2"><label class="fld"><span>${t("lvl")}</span><input id="ap-l" inputmode="decimal" value="${(+p.level).toFixed(2)}"></label><label class="fld"><span>${t("catU")}</span><select id="ap-c">${["E","D","C","B","A"].map(x => `<option${p.category === x ? " selected" : ""}>${x}</option>`).join("")}</select></label></div>
        <label class="row" style="font-size:14px;gap:8px"><input type="checkbox" id="ap-a"${p.a_ok ? " checked" : ""}> ${t("apAok")}</label><label class="row" style="font-size:14px;gap:8px"><input type="checkbox" id="ap-t"> ${t("apTitleChk")}</label><label class="row" style="font-size:14px;gap:8px"><input type="checkbox" id="ap-v"${p.verified ? " checked" : ""}> ${t("apVer")}</label>
@@ -2923,8 +3213,8 @@ function nText2(n){ const d = n.data || {}, nm = esc(d.name || t("someone")), w 
     league_round: tf("nLgRound", {r: d.round, x, b: d.box, d: esc(d.until || "")}), league_result: tf("nLgResult", {n: nm}),
     league_disputed: tf("nLgDisp", {n: nm}), lobby_invite: tf("nLobby", {n: nm, w, c}), league_tmatch: tf("nLgTM", {x: esc(d.x || "")}) + (d.booked ? t("nLgTMc") : ""), league_champ: tf("nLgChamp", {x, c}), booking_new: tf(d.pending ? "nBookingDep" : "nBooking", {n: nm, k: esc(d.court || ""), w}), league_sched: tf("nLgSched", {n: nm, w, c}), league_prop: tf("nLgProp", {n: nm, w, c}), league_nudge: tf("nLgNudge", {x, d: esc(d.until || "")}), league_prop_nudge: tf("nLgPropNudge", {x, w}), league_booked: tf("nLgBooked", {w, c, k: d.court ? "· " + esc(d.court) : ""}), league_ref: tf("nLgRef", {x, w, c: c ? "· " + c : ""}), league_ref_set: tf("nLgRefSet", {n: nm, w}), league_final: t("nLgFinal"),
     match_open: tf("nMatchOpen", {n: nm, r: d.round, c, w}), rematch: tf("nRematch", {n: nm, c, w}), club_post: tf("nClubPost", {c, x: esc(d.title || "")}), morning: tf("nMorning", {c, r: d.round, b: d.box}),
-    tour_help: tf("nTHelp", {n: nm, x, m: esc(d.x || "")}), tour_partner: tf("nTPartner", {n: nm, x, c}), tour_req: tf("nTReq", {n: nm, x, c}), tour_ok: tf("nTOk", {x, c}), tour_no: tf("nTNo", {x, c}) , invite_joined: tf("nInvJoined", {n: nm}), late_cancel: tf("nLateCancel", {n: esc(d.n || ""), b: d.b, w: esc(d.w || "")}), level_ok: tf("nLevelOk", {c: esc(d.c || "")}), wallet_refund: tf("nWRefund", {x: money(+d.x), c: esc(d.c || "")}), wallet_topup: tf("nWTopup", {x: money(+d.x), c: esc(d.c || "")}), wallet_no: tf("nWNo", {x: money(+d.x), c: esc(d.c || "")}), wallet_req: tf("nWReq", {n: nm, x: money(+d.x)}), result_auto: t("nResAuto"), deposit_expired: tf("nDepExp", {b: d.b}), join_expired: tf("nJoinExp", {b: d.b}), reminder: tf("nRemind", {w: esc(d.w || ""), c: esc(d.c || ""), x: esc(d.x || "")}), tour_joined: tf("nTJoined", {n: nm, x: esc(d.title || ""), c: esc(d.cat || "")}), tour_result: tf("nTResult", {n: esc(d.name || ""), x: esc(d.title || "")}), tour_start: tf("nTStart", {n: esc(d.name || ""), w: esc(d.when || ""), c: esc(d.club || ""), x: esc(d.title || "")}), tour_recap: tf("nTRecap", {x: esc(d.title || ""), r: esc(d.x || "")})})[n.kind]; }
-const nLink = n => n.kind === "invite_joined" ? `data-go="home"` : n.kind === "wallet_req" ? `data-go="manager"` : /^wallet_/.test(n.kind) ? `data-go="wallet"` : n.kind === "late_cancel" ? `data-go="manager"` : n.kind === "level_ok" ? `data-go="me"` : /^tour_/.test(n.kind) && n.data && n.data.slug ? `data-turl="t.html?${esc(encodeURIComponent(n.data.slug))}${n.kind === "tour_help" ? "#help" : ""}"` : n.kind === "club_post" && n.data && n.data.club_id ? `data-club="${esc(n.data.club_id)}"` : n.kind === "morning" ? `data-go="manager"` : n.kind === "booking_new" ? `data-go="manager"` : /^league_/.test(n.kind) ? ((S.myLeagues || []).find(x => x.name === (n.data || {}).league) ? `data-league="${(S.myLeagues || []).find(x => x.name === (n.data || {}).league).id}"` : `data-go="events"`) : /^member_/.test(n.kind) ? (n.kind === "member_req" ? `data-go="manager"` : `data-go="me"`) : /^class_/.test(n.kind) || n.kind === "lesson_new" ? `data-go="me"` : "";
+    tour_help: tf("nTHelp", {n: nm, x, m: esc(d.x || "")}), tour_partner: tf("nTPartner", {n: nm, x, c}), tour_req: tf("nTReq", {n: nm, x, c}), tour_ok: tf("nTOk", {x, c}), tour_no: tf("nTNo", {x, c}) , invite_joined: tf("nInvJoined", {n: nm}), late_cancel: tf("nLateCancel", {n: esc(d.n || ""), b: d.b, w: esc(d.w || "")}), level_ok: tf("nLevelOk", {c: esc(d.c || "")}), wallet_refund: tf("nWRefund", {x: money(+d.x), c: esc(d.c || "")}), wallet_topup: tf("nWTopup", {x: money(+d.x), c: esc(d.c || "")}), wallet_no: tf("nWNo", {x: money(+d.x), c: esc(d.c || "")}), wallet_req: tf("nWReq", {n: nm, x: money(+d.x)}), result_auto: t("nResAuto"), deposit_expired: tf("nDepExp", {b: d.b}), join_expired: tf("nJoinExp", {b: d.b}), reminder: tf("nRemind", {w: esc(d.w || ""), c: esc(d.c || ""), x: esc(d.x || "")}), tour_joined: tf("nTJoined", {n: nm, x: esc(d.title || ""), c: esc(d.cat || "")}), tour_result: tf("nTResult", {n: esc(d.name || ""), x: esc(d.title || "")}), tour_start: tf("nTStart", {n: esc(d.name || ""), w: esc(d.when || ""), c: esc(d.club || ""), x: esc(d.title || "")}), tour_recap: tf("nTRecap", {x: esc(d.title || ""), r: esc(d.x || "")}), a_request: tf("nAReq", {n: nm, x: esc(d.x || "")}), a_no: t("nANo"), rank_ready: tf("nTRank", {x: esc(d.title || ""), c: esc(tierName(d.c || "D")), l: (+d.lv || 0).toFixed(2)})})[n.kind]; }
+const nLink = n => n.kind === "invite_joined" ? `data-go="home"` : n.kind === "wallet_req" ? `data-go="manager"` : /^wallet_/.test(n.kind) ? `data-go="wallet"` : n.kind === "late_cancel" ? `data-go="manager"` : n.kind === "level_ok" || n.kind === "rank_ready" || n.kind === "a_no" ? `data-go="me"` : n.kind === "a_request" ? `data-meset="1"` : /^tour_/.test(n.kind) && n.data && n.data.slug ? `data-turl="t.html?${esc(encodeURIComponent(n.data.slug))}${n.kind === "tour_help" ? "#help" : ""}"` : n.kind === "club_post" && n.data && n.data.club_id ? `data-club="${esc(n.data.club_id)}"` : n.kind === "morning" ? `data-go="manager"` : n.kind === "booking_new" ? `data-go="manager"` : /^league_/.test(n.kind) ? ((S.myLeagues || []).find(x => x.name === (n.data || {}).league) ? `data-league="${(S.myLeagues || []).find(x => x.name === (n.data || {}).league).id}"` : `data-go="events"`) : /^member_/.test(n.kind) ? (n.kind === "member_req" ? `data-go="manager"` : `data-go="me"`) : /^class_/.test(n.kind) || n.kind === "lesson_new" ? `data-go="me"` : "";
 
 function lgGrab(){ const v = id => { const el = document.getElementById(id); return el ? el.value : undefined; }; const f = S.lgForm || (S.lgForm = {});
   [["name","le-name"],["starts_on","le-s"],["ends_on","le-e"],["round_days","le-rd"],["box_size","le-bx"],["fee","le-fee"],["prize","le-prize"],["about","le-about"]].forEach(([k, id]) => { const x = v(id); if (x !== undefined) f[k] = x; }); }
@@ -3243,15 +3533,16 @@ function myRefCard(){ const r = S.myRefs || []; if (!r.length) return "";
 
 /* ---------- render + actions ---------- */
 const app = document.getElementById("app");
+function runIdle(){ RUN.col = ""; if (!document.getElementById("run-cv")) return; if (RUN.st === "run"){ const m = document.getElementById("run-msg"); if (m) m.classList.add("off"); } if (RUN.raf) return; if (RUN.st !== "over") RUN.st = "idle"; RUN.best = +(ls.get("pl-run") || 0); requestAnimationFrame(() => { const g = runCv(); if (g) runDraw(g); }); }
 function render(){
   document.documentElement.lang = lang; document.documentElement.dir = lang === "ar" ? "rtl" : "ltr";
-  app.classList.toggle("mgr", S.view === "manager"); document.documentElement.classList.toggle("wa-on", S.view === "welcome");
+  app.classList.toggle("mgr", S.view === "manager"); document.documentElement.classList.toggle("wa-on", false);
   if (S.err && !S.clubs.length){ app.innerHTML = `<main><div class="logo"><img class="lgmark" src="volt3d.png" alt="" onerror="this.remove()">Padel <i>Live</i></div><div class="card">${esc(S.err)}</div><button class="cta" data-retry>${t("retry")}</button><button class="ghost" data-resetapp>Reset app (signs you out)</button><p class="note" style="font-size:11px;opacity:.7">${VERSION} · ${esc(S.step || "")}${S.lastErr ? " · " + esc(S.lastErr) : ""}</p></main>`; return; }
   if (!S.loaded){ const secs = Math.round((Date.now() - T0) / 1000);
     app.innerHTML = `<main><div class="logo"><img class="lgmark" src="volt3d.png" alt="" onerror="this.remove()">Padel <i>Live</i></div><div class="card note">… ${secs > 3 ? secs + "s" : ""}</div>
     ${secs >= 6 ? `<button class="cta" data-reload>${t("retry")}</button><button class="ghost" data-resetapp>Reset app (signs you out)</button>` : ""}
     <p class="note" style="font-size:11px;opacity:.7">${VERSION} · ${esc(S.step || "start")}${S.lastErr ? " · " + esc(S.lastErr) : ""}</p></main>`; return; }
-  try { app.innerHTML = (V[S.view] || V.home)() + sheetHtml(); }
+  try { app.innerHTML = (V[S.view] || V.home)() + sheetHtml(); runIdle(); const ra = app.querySelector(".rk2[data-rkauto]"); if (ra) rk2Burst(ra, ra.dataset.rkauto); }
   catch (e) { console.error(e); if (S.view !== "home"){ S.view = "home"; history.replaceState(null, "", "#home"); app.innerHTML = V.home(); } }
 }
 const QUICK = ["home", "matches", "me", "clubs", "events", "feed", "season", "inbox", "wallet", "manager"];
@@ -3271,7 +3562,7 @@ async function goLoad(v){
   if (v === "events"){ try { const [r, lg] = await within(Promise.all([sb.rpc("t_list"), sb.rpc("league_list")]), 8000); S.tours = noHid(r.data || []); S.leagues = noHid(lg.data || []); } catch (e) {} }
   if (v === "league"){ if (S.leagueId) await loadLeague(S.leagueId); }
   if (v === "tjoin") await loadTJ();
-  if (v === "matches" || v === "home" || v === "welcome"){ const [m] = await Promise.all([sb.rpc("open_matches"), v === "home" ? loadFeed() : null, v !== "matches" ? loadWI() : null, v === "home" ? loadRatePend() : null, v === "home" && S.user && S.profile && S.profile.home_club ? loadClubPosts() : null, v === "home" ? loadHomeFree() : null]); S.matches = m.data ? noHid(m.data) : S.matches; }
+  if (v === "matches" || v === "home" || v === "welcome"){ const [m] = await Promise.all([sb.rpc("open_matches"), v === "home" ? loadFeed() : null, v !== "matches" ? loadWI() : null, v === "welcome" ? sb.rpc("feed_tours").then(r => { if (!r.error) S.feedT = noHid(r.data || []); }).catch(() => {}) : null, v === "home" ? loadRatePend() : null, v === "home" && S.user && S.profile && S.profile.home_club ? loadClubPosts() : null, v === "home" ? loadHomeFree() : null]); S.matches = m.data ? noHid(m.data) : S.matches; }
   if (v === "feed"){ await loadFeed(); }
   if (v === "me" && S.user){ const [mine, rs, pf] = await Promise.all([sb.rpc("my_bookings"), sb.rpc("my_results"), sb.from("profiles").select("*").eq("id", S.user.id).maybeSingle()]); S.mine = noHid(mine.data || []); S.results = noHid(rs.data || []); if (pf.data) S.profile = pf.data; loadNotifN(); const [mc, rf] = await Promise.all([sb.rpc("my_classes"), sb.rpc("league_ref_matches")]); S.myClasses = mc.data || []; S.myRefs = rf.data || []; await Promise.all([loadCard(), loadMems()]); }
   if (v === "season"){ await loadBoards(); }
@@ -3894,7 +4185,7 @@ Object.assign(W.en, {hmEv:"Events", wnDraw:"Live draw tonight at {w}", wnDrawS:"
   fdOpenClub:"Open club", ago_m:"{n}m ago", ago_h:"{n}h ago", ago_d:"{n}d ago", ago_now:"just now",
   alT:"Open match alerts", alTxt:"Get a notification when someone needs a player at your level.", alOn:"On", alOff:"Off",
   opT:"Need players?", opTxt:"Open spots and players at that level get a notification.", opSave:"Save", opNone:"No open spots", opSaved:"Saved. Players at that level are being notified.",
-  nxLeague:"League match", nxTour:"Tournament match", bk3K:"Booking unlocks soon", bk3T:"Courts are almost ready", bk3S:"Online booking at {c} is coming to Padel Live. Warm up while you wait.", bk3G:"Keep it up", bk3Best:"Best", bk3Tap:"Tap the ball to start", bk3Again:"tap to play again", bk3Rec:"New best!", bk3B1:"Rally pro", bk3B2:"Wall master", bk3B3:"Legend", bk2K:"Coming soon", bk2T:"Online booking is on its way", bk2S:"We're getting {c} ready on Padel Live. Soon you'll book a court here in seconds.", bk2M:"Join an open match", bk2Adm:"Staff: open booking anyway", mjT:"This match needs {n}", mjJoin:"Join this match", mjSplit:"This match splits the court fee. Join from the Matches list to choose how you pay.", mjInv:"You're invited to this match. Your spot is saved.", bkSoonT:"Online booking coming soon", bkSoonS:"This club doesn't take bookings in Padel Live yet. Call or message the club to book a court.", bkSoonTag:"Booking soon", bkCall:"📞 Call the club", bkWa:"💬 WhatsApp", bkOffAdm:"Online booking is off for players at this club. You can still book as admin or staff.", omSoon:"Open matches start when online booking opens at the clubs. Tournaments and leagues are already on: check Events.", bkSwT:"Online booking", bkSwS:"Turn on a club when it's ready to take bookings in the app.", bkOn:"On", bkOff:"Off", sdL:"LEFT", sdR:"RIGHT", sdAny:"ANY", sdTA:"TEAM A", sdTB:"TEAM B", sdJoinL:"Join as Left", sdJoinR:"Join as Right", sdJoin:"Join", sdSpots:"{n} spots", sdSpot:"1 spot", sdFriend:"Friend",
+  wlWeek:"This week", wlLiveL:"Happening now", wlThis:"This {d}", wlIn:"Starts in", wlLiveB:"Live", wlLiveK:"Live now", wlLeft:"🔥 {n} spots left", wlFull:"Full", wlEnter:"Enter the tournament", wlWatch:"Watch live", nxLeague:"League match", nxTour:"Tournament match", bk3K:"Booking unlocks soon", bk3T:"Courts are almost ready", bk3S:"Online booking at {c} is coming to Padel Live. Warm up while you wait.", bk3G:"Keep it up", bk3Best:"Best", bk3Tap:"Tap the ball to start", bk3Again:"tap to play again", bk3Rec:"New best!", bk3B1:"Rally pro", bk3B2:"Wall master", bk3B3:"Legend", bk2K:"Coming soon", bk2T:"Online booking is on its way", bk2S:"We're getting {c} ready on Padel Live. Soon you'll book a court here in seconds.", bk2M:"Join an open match", bk2Adm:"Staff: open booking anyway", mjT:"This match needs {n}", mjJoin:"Join this match", mjSplit:"This match splits the court fee. Join from the Matches list to choose how you pay.", mjInv:"You're invited to this match. Your spot is saved.", bkSoonT:"Online booking coming soon", bkSoonS:"This club doesn't take bookings in Padel Live yet. Call or message the club to book a court.", bkSoonTag:"Booking soon", bkCall:"📞 Call the club", bkWa:"💬 WhatsApp", bkOffAdm:"Online booking is off for players at this club. You can still book as admin or staff.", omSoon:"Open matches start when online booking opens at the clubs. Tournaments and leagues are already on: check Events.", bkSwT:"Online booking", bkSwS:"Turn on a club when it's ready to take bookings in the app.", bkOn:"On", bkOff:"Off", sdL:"LEFT", sdR:"RIGHT", sdAny:"ANY", sdTA:"TEAM A", sdTB:"TEAM B", sdJoinL:"Join as Left", sdJoinR:"Join as Right", sdJoin:"Join", sdSpots:"{n} spots", sdSpot:"1 spot", sdFriend:"Friend",
   sdWhere:"Where do you play?", sdWhereN:"So players looking for the other side find your match.", sdLeft:"Left", sdLeftS:"Backhand side", sdRight:"Right", sdRightS:"Forehand side", sdEither:"Either", sdEitherS:"No preference",
   sdFree:"Which spot is free?", sdFreeL:"A left player", sdFreeR:"A right player", mfSideL:"Left player spots", mfSideR:"Right player spots", mfNL:"{n} matches need a Left player", mfNR:"{n} matches need a Right player",
   sdSwapT:"Positions", sdSwapN:"Tap a player, then tap another spot to swap them.", sdSwapped:"Positions updated.", pvT:"Public or private?", pvPub:"Public", pvPubS:"Anyone at your level", pvPriv:"Private", pvPrivS:"Only people you invite", pvFr:"Friends first", pvFrS:"Private, then public",
@@ -3914,7 +4205,7 @@ Object.assign(W.ar, {hmEv:"الفعاليات", wnDraw:"القرعة مباشر 
   fdOpenClub:"افتح النادي", ago_m:"من {n} د", ago_h:"من {n} س", ago_d:"من {n} يوم", ago_now:"هلّق",
   alT:"تنبيهات المباريات المفتوحة", alTxt:"بيوصلك إشعار لما حدا يحتاج لاعب بمستواك.", alOn:"شغّال", alOff:"موقّف",
   opT:"ناقصك لاعبين؟", opTxt:"افتح أماكن واللاعبين بهالمستوى بيوصلهم إشعار.", opSave:"احفظ", opNone:"ما في أماكن", opSaved:"انحفظ. عم نبعت إشعار للاعبين بهالمستوى.",
-  nxLeague:"مباراة دوري", nxTour:"مباراة بطولة", bk3K:"الحجز رح يفتح قريباً", bk3T:"الملاعب صارت شبه جاهزة", bk3S:"الحجز أونلاين بـ{c} جاي على Padel Live. احمى شوي لحتى يفتح.", bk3G:"خليها بالهوا", bk3Best:"أفضل نتيجة", bk3Tap:"اضغط على الطابة لتبلش", bk3Again:"اضغط لتلعب كمان مرة", bk3Rec:"رقم قياسي جديد!", bk3B1:"ملك الرالي", bk3B2:"سيد الحيط", bk3B3:"أسطورة", bk2K:"قريباً", bk2T:"الحجز أونلاين جاي قريباً", bk2S:"عم نجهّز {c} على Padel Live. قريباً رح تحجز ملعب من هون بثواني.", bk2M:"انضم لمباراة مفتوحة", bk2Adm:"للموظفين: افتح الحجز", mjT:"هالمباراة ناقصها {n}", mjJoin:"انضم لهالمباراة", mjSplit:"بهالمباراة الحساب مقسوم. انضم من قائمة المباريات لتختار طريقة الدفع.", mjInv:"أنت معزوم على هالمباراة. مكانك محجوز.", bkSoonT:"الحجز أونلاين قريباً", bkSoonS:"هالنادي لسا ما بياخد حجوزات على Padel Live. اتصل أو راسل النادي لتحجز ملعب.", bkSoonTag:"الحجز قريباً", bkCall:"📞 اتصل بالنادي", bkWa:"💬 واتساب", bkOffAdm:"الحجز أونلاين مسكّر للاعبين بهالنادي. فيك تحجز كأدمن أو موظف.", omSoon:"المباريات المفتوحة بتبلش لما يفتح الحجز أونلاين بالنوادي. البطولات والدوريات شغالة: شوف الفعاليات.", bkSwT:"الحجز أونلاين", bkSwS:"شغّل النادي لما يكون جاهز ياخد حجوزات بالتطبيق.", bkOn:"شغال", bkOff:"مسكّر", sdL:"يسار", sdR:"يمين", sdAny:"أي جهة", sdTA:"الفريق A", sdTB:"الفريق B", sdJoinL:"انضم يسار", sdJoinR:"انضم يمين", sdJoin:"انضم", sdSpots:"{n} أماكن", sdSpot:"مكان واحد", sdFriend:"صديق",
+  wlWeek:"هالأسبوع", wlLiveL:"شغّالة هلق", wlThis:"يوم {d}", wlIn:"بتبلش بعد", wlLiveB:"مباشر", wlLiveK:"مباشر هلق", wlLeft:"🔥 باقي {n} أماكن", wlFull:"اكتملت", wlEnter:"سجّل بالبطولة", wlWatch:"تابع مباشر", nxLeague:"مباراة دوري", nxTour:"مباراة بطولة", bk3K:"الحجز رح يفتح قريباً", bk3T:"الملاعب صارت شبه جاهزة", bk3S:"الحجز أونلاين بـ{c} جاي على Padel Live. احمى شوي لحتى يفتح.", bk3G:"خليها بالهوا", bk3Best:"أفضل نتيجة", bk3Tap:"اضغط على الطابة لتبلش", bk3Again:"اضغط لتلعب كمان مرة", bk3Rec:"رقم قياسي جديد!", bk3B1:"ملك الرالي", bk3B2:"سيد الحيط", bk3B3:"أسطورة", bk2K:"قريباً", bk2T:"الحجز أونلاين جاي قريباً", bk2S:"عم نجهّز {c} على Padel Live. قريباً رح تحجز ملعب من هون بثواني.", bk2M:"انضم لمباراة مفتوحة", bk2Adm:"للموظفين: افتح الحجز", mjT:"هالمباراة ناقصها {n}", mjJoin:"انضم لهالمباراة", mjSplit:"بهالمباراة الحساب مقسوم. انضم من قائمة المباريات لتختار طريقة الدفع.", mjInv:"أنت معزوم على هالمباراة. مكانك محجوز.", bkSoonT:"الحجز أونلاين قريباً", bkSoonS:"هالنادي لسا ما بياخد حجوزات على Padel Live. اتصل أو راسل النادي لتحجز ملعب.", bkSoonTag:"الحجز قريباً", bkCall:"📞 اتصل بالنادي", bkWa:"💬 واتساب", bkOffAdm:"الحجز أونلاين مسكّر للاعبين بهالنادي. فيك تحجز كأدمن أو موظف.", omSoon:"المباريات المفتوحة بتبلش لما يفتح الحجز أونلاين بالنوادي. البطولات والدوريات شغالة: شوف الفعاليات.", bkSwT:"الحجز أونلاين", bkSwS:"شغّل النادي لما يكون جاهز ياخد حجوزات بالتطبيق.", bkOn:"شغال", bkOff:"مسكّر", sdL:"يسار", sdR:"يمين", sdAny:"أي جهة", sdTA:"الفريق A", sdTB:"الفريق B", sdJoinL:"انضم يسار", sdJoinR:"انضم يمين", sdJoin:"انضم", sdSpots:"{n} أماكن", sdSpot:"مكان واحد", sdFriend:"صديق",
   sdWhere:"وين بتلعب؟", sdWhereN:"مشان يلي بيدوروا عالجهة التانية يلاقوا مباراتك.", sdLeft:"يسار", sdLeftS:"جهة الباكهاند", sdRight:"يمين", sdRightS:"جهة الفورهاند", sdEither:"ما بتفرق", sdEitherS:"أي جهة",
   sdFree:"أي مكان فاضي؟", sdFreeL:"لاعب يسار", sdFreeR:"لاعب يمين", mfSideL:"أماكن لاعب يسار", mfSideR:"أماكن لاعب يمين", mfNL:"{n} مباريات بدها لاعب يسار", mfNR:"{n} مباريات بدها لاعب يمين",
   sdSwapT:"المراكز", sdSwapN:"اكبس على لاعب، بعدين على مكان تاني لتبدلهم.", sdSwapped:"تحدثت المراكز.", pvT:"عامة ولا خاصة؟", pvPub:"عامة", pvPubS:"أي حدا بمستواك", pvPriv:"خاصة", pvPrivS:"بس يلي بتعزمهم", pvFr:"الأصحاب أول", pvFrS:"خاصة، بعدين عامة",
@@ -3944,6 +4235,7 @@ function feedItem(x){
 }
 /* Home: tonight's open matches only */
 function tonightRow(){
+  if (!bookLive() && !(S.matches || []).length) return "";
   const today = dayKey(new Date()), now = Date.now() - 15 * 60000;
   const myL = myLevel(), open = forMe((S.matches || []).filter(m => m.open_spots > 0 && !m.joined && dayKey(new Date(m.starts_at)) === today && new Date(m.starts_at).getTime() > now && (m.inv || (inRange(m, myL) && !tooHigh(m)))));
   return `<div class="between"><h2>${t("ptT")}</h2><a href="#matches" data-go="matches" style="font-weight:700;font-size:13px;white-space:nowrap">${t("all")} →</a></div>
@@ -4231,37 +4523,59 @@ function welTour(){ const x = (S.wi && S.wi.tours || [])[0]; if (!x) return "";
     <b class="wt2-name">${esc(x.name)}</b>
     <span class="wt2-meta">${esc(dates)}${x.club ? " · " + esc(x.club) : ""}${cats ? " · " + esc(cats) : ""}</span>
     <span class="wt2-foot">${x.prize ? (m => m ? `<span class="wt2-pz"><b class="wt2-prize">${esc(m[0])}</b><small>${t("wPrize")}</small></span>` : `<b class="wt2-prize sm">${esc(x.prize)}</b>`)(String(x.prize).match(/\$\s?[\d,.]+k?/i)) : "<span></span>"}<span class="wt2-go">${t("wtSign")} ${lang === "ar" ? "←" : "→"}</span></span></a>`; }
+Object.assign(W.en, {aNeed:"Category A needs approval from Padel Live. You start in Gold (B) and we check your request.", aPend:"Category A request sent. You'll get a notification when it's approved.", aWants:"Wants Category A", aYes:"Approve A", aNo:"Not now", aYesQ:"Approve this player for Category A? They get their Diamond card right away.", aNoQ:"Keep this player in their current category? They can still earn A by winning.", nAReq:"🔷 {n} ({x}) asks for Category A. Open Me → Settings → Levels to check.", nANo:"Your Category A request wasn't approved for now. Keep winning matches to climb there!"});
+Object.assign(W.ar, {aNeed:"الفئة A بدها موافقة من بادل لايف. بتبلش بالذهبي (B) ومنراجع طلبك.", aPend:"انبعت طلب الفئة A. رح يوصلك إشعار لما ينقبل.", aWants:"بده الفئة A", aYes:"وافق على A", aNo:"مو هلأ", aYesQ:"توافق على هاللاعب بالفئة A؟ بتوصله بطاقته الماسية فوراً.", aNoQ:"تخلّي هاللاعب بفئته الحالية؟ فيه يوصل A بالربح.", nAReq:"🔷 {n} ({x}) طالب الفئة A. افتح أنا ← الإعدادات ← مستويات لازم تتأكد.", nANo:"طلبك للفئة A ما انقبل هلأ. كفّي ربح لتوصل لهونيك!"});
+Object.assign(W.en, {rnT:"Ballie run", rnTap:"Tap to jump", rnOver:"Game over", rnRec:"New record!", rnAgain:"Tap to play again", rnB1:"Warm-up", rnB2:"Rally", rnB3:"Pro runner"});
+Object.assign(W.ar, {rnT:"ركضة بولي", rnTap:"اضغط لتنط", rnOver:"خسرت", rnRec:"رقم قياسي جديد!", rnAgain:"اضغط لتلعب كمان", rnB1:"إحماء", rnB2:"تبادل", rnB3:"عدّاء محترف"});
+Object.assign(W.en, {plLeftE:"Take the quiz or join a tournament to reveal your tier", plTagE:"Unranked", plSubE:"Take the quiz or join a tournament to reveal your tier", provNoteE:"Your rank starts at the category you pick. Then every match, league and tournament moves you up or down.", gmTour:"Your tournament matches show here. See the events →", omTour:"Play a tournament", om3T:"Open matches are on their way", om3S:"Soon you'll join games with players at your level, right here. Until then, play a tournament and get your rank.",
+  arT1:"Play.", arT2:"Rank.", arT3:"Rise.", arStart:"▶ PRESS START", arHs:"HIGH SCORES", arLvl:"LVL", arYou:"YOU", arGo:"Find my rank", arLook:"Explore", wgYou:"You", wgH1:"Your padel card", wgH2:"is", wgH3:"waiting.", wgSub:"Take the 60-second quiz or join a tournament and get your rank, from Iron to Diamond.", rvQuizChip:"Level quiz", wgLook:"Look around"});
+Object.assign(W.ar, {plLeftE:"اعمل الاختبار أو ادخل بطولة لينكشف تصنيفك", plTagE:"بدون تصنيف", plSubE:"اعمل الاختبار أو ادخل بطولة لينكشف تصنيفك", provNoteE:"تصنيفك بيبلش من الفئة اللي بتختارها. بعدها كل مباراة ودوري وبطولة بتطلّعك أو بتنزّلك.", gmTour:"مباريات البطولة بتطلع هون. شوف الفعاليات ←", omTour:"العب بطولة", om3T:"المباريات المفتوحة جايّة", om3S:"قريباً رح تقدر تنضم لمباريات مع لاعبين بمستواك من هون. لهلأ، العب بطولة وخود تصنيفك.",
+  arT1:"العب.", arT2:"تصنّف.", arT3:"اطلع.", arStart:"▶ اضغط ابدأ", arHs:"أعلى النتائج", arLvl:"مستوى", arYou:"إنت", arGo:"اعرف تصنيفي", arLook:"اتفرّج", wgYou:"إنت", wgH1:"بطاقة البادل تبعك", wgH2:"عم", wgH3:"تستناك.", wgSub:"اعمل اختبار الـ٦٠ ثانية أو ادخل بطولة وخود تصنيفك، من الحديدي للماسي.", rvQuizChip:"اختبار المستوى", wgLook:"اتفرّج"});
 V.welcome = () => { const x = (S.wi && S.wi.tours || [])[0], clubs = (S.clubs || []).filter(c => clubSkin(c).logo).slice(0, 5);
   let tour = "";
   if (x){ const k = clubSkin({name: x.club || x.name || ""}), cov = WEL_COVER(x.club || x.name || ""), d1 = new Date(x.starts_on + "T12:00:00+03:00"), d2 = x.ends_on ? new Date(x.ends_on + "T12:00:00+03:00") : null;
     const cats = (x.cats || []).filter(Boolean).map(c => c === "X" ? t("wMix") : c).join(" · "), pz = String(x.prize || "").match(/\$\s?[\d,.]+k?/i);
-    tour = `<div class="wa-lbl">${t("wtOpen")}</div><a class="wa-tour" href="t.html?${encodeURIComponent(x.slug)}#signup" data-wseen style="--a:${k.a};--b:${k.b};--d:${k.d}${cov ? `;--cv:url(${cov})` : ""}">
-      ${k.logo ? `<img src="${esc(k.logo)}" alt="" onerror="this.remove()">` : `<span class="wa-tl">🏆</span>`}<span class="wa-tt"><b>${esc(x.name)}</b><small>${esc(fmtDay(d1))}${d2 && x.ends_on !== x.starts_on ? " – " + esc(fmtDay(d2)) : ""}${cats ? " · " + esc(cats) : ""}${pz ? ` · <em>${esc(pz[0])}</em>` : ""}</small></span><span class="wa-arr">${lang === "ar" ? "←" : "→"}</span></a>`; }
-  return `<main class="wa">
-  <div class="wa-top"><div class="logo wa-logo">Padel <i>Live</i></div><div class="wel2-lang">${[["ar", "ع"], ["en", "EN"]].map(([k, l]) => `<button data-wlang="${k}" aria-pressed="${lang === k}">${l}</button>`).join("")}</div></div>
-  <div class="wa-hero"><div><span class="wa-kick"><i></i>${esc(tf("wAkick", {n: Math.max(3, (S.clubs || []).length)}))}</span>
-      <h1 class="wa-h">${t("wA1")}<br>${t("wA2")} <em>${t("wA3")}</em></h1><p class="wa-s">${t("wAsub")}</p></div>
-    <div class="wa-cards"><div class="wa-mc back"></div><div class="wa-mc"><b>?</b><small>${t("wRankU")}</small><span class="wa-gems">${["E", "D", "C", "B", "A"].map(c => `<i style="background:${TIER[c][1]}"></i>`).join("")}</span></div></div></div>
-  <div class="wa-ctas"><button class="wa-go" data-wgo="level">${t("wAgo")} <small>60s</small></button><button class="wa-look" data-wgo="home">${t("wAlook")}</button></div>
-  ${tour}
-  ${clubs.length ? `<div class="wa-lbl">${t("wAplay")}</div><div class="wa-clubs">${clubs.map(c => `<img src="${esc(clubSkin(c).logo)}" alt="${esc(c.name)}" onerror="this.remove()">`).join("")}<span>${t("wAmore")}</span></div>` : ""}
-  <button class="wa-in" data-wgo="auth">${t("wHave2")}</button>
+    const ft = (S.feedT || []).find(z => z.slug === x.slug) || {}, start = new Date(x.starts_on + "T16:00:00+03:00"), live = Date.now() >= start.getTime();
+    const left = ft.max ? Math.max(0, ft.max - (+ft.teams || 0)) : null, pct = ft.max ? Math.min(100, Math.round(100 * (+ft.teams || 0) / ft.max)) : 0;
+    const dname = new Intl.DateTimeFormat(lang === "ar" ? "ar-SY" : "en-GB", {timeZone: TZ, weekday: "long"}).format(d1);
+    const soon = (start - Date.now()) < 7 * 864e5 ? tf("wlThis", {d: dname}) : esc(fmtDay(d1));
+    tour = `<div class="wa-lbl">${live ? t("wlLiveL") : t("wlWeek")}</div><a class="wtl" href="t.html?${encodeURIComponent(x.slug)}${live ? "" : "#signup"}" data-wseen style="--a:${k.a};--b:${k.b};--d:${k.d}${cov ? `;--cv:url(${cov})` : ""}">
+      <span class="wtl-top">${k.logo ? `<img class="wtl-lg" src="${esc(k.logo)}" alt="" onerror="this.remove()">` : ""}
+        <span class="wtl-cd">${live ? `<small>${t("wlLiveB")}</small><b class="wtl-live">●</b>` : `<small>${t("wlIn")}</small><b data-wcd="${start.getTime()}" data-f="d">–</b><em data-wcd="${start.getTime()}" data-f="t">--:--:--</em>`}</span>
+        <span class="wtl-t"><small>🔥 ${live ? t("wlLiveK") : soon}</small><b>${esc(x.name.split(" · ").slice(-1)[0])}</b></span></span>
+      <span class="wtl-bd"><span class="wtl-row">${pz ? `<span class="wtl-pz">🏆 <b>${esc(pz[0])}</b> ${t("wPrize")}</span>` : `<span class="wtl-pz">🏆 ${esc(fmtDay(d1))}</span>`}${left != null ? `<span class="wtl-left${left <= 10 ? " hot" : ""}">${left ? tf("wlLeft", {n: left}) : t("wlFull")}</span>` : ""}</span>
+        ${ft.max ? `<span class="wtl-bar"><i style="width:${Math.max(4, pct)}%"></i></span>` : ""}
+        <span class="wtl-go">${live ? t("wlWatch") : t("wlEnter")} ${lang === "ar" ? "←" : "→"}</span></span></a>`; }
+  const ev = (S.tours || []).filter(z => !evPast(z))[0] || x;
+  const card = playerCard({name: t("wgYou"), placement: 5, rated: 0, category: "D", level: 0, level_set: true, wins: 0, losses: 0, streak: 0, badges: [], titles: 0});
+  return `<main class="wg">
+  <div class="wg-top"><div class="logo"><img class="lgmark" src="volt3d.png" alt="" onerror="this.remove()">Padel <i>Live</i></div><div class="wg-lang">${[["ar", "ع"], ["en", "EN"]].map(([k, l]) => `<button data-wlang="${k}" aria-pressed="${lang === k}">${l}</button>`).join("")}</div></div>
+  <h1 class="wg-h">${t("wgH1")}<br>${t("wgH2")} <em>${t("wgH3")}</em></h1>
+  <p class="wg-s">${t("wgSub")}</p>
+  <div class="wg-card">${card.replace(/<div class="pc-av">[^<]*<\/div>/, '<div class="pc-av">?</div>')}</div>
+  <div class="wg-ctas"><button class="wg-go" data-wgo="level">${t("arGo")} <small>60s</small></button><button class="wg-look" data-wgo="home">${t("wgLook")}</button></div>
+  ${ev && ev.slug ? `<div class="wg-lbl">${t("wlWeek")}</div><div class="ev-fire" data-wseen>${evCard(ev)}</div>` : ""}
+  <button class="wg-in" data-wgo="auth">${t("wHave2")}</button>
  </main>`; };
 
 /* card reveal */
 V.reveal = () => { const L = S.revealLevel != null ? S.revealLevel : myLevel(); if (L == null) return V.level();
-  const cat = lvCat(L), [, col] = TIER[cat], nm = S.profile && S.profile.full_name ? S.profile.full_name : "";
-  return `<main class="rv">
-   <span class="rv-kick">${t("rvKick")}</span>
-   <div class="rv-stage"><div class="rv-card" style="--tc:${col}"><div class="rv-back"><div class="logo"><img class="lgmark" src="volt3d.png" alt="" onerror="this.remove()">Padel <i>Live</i></div></div>
-     <div class="rv-front"><span class="pc-holo"></span><div class="pc-top"><div class="pc-ovr"><b>${lvl2(L)}</b><small>${t("lvlU")}</small></div><div class="pc-rank">${emblem(col, 54)}<span>${esc(tierName(cat))}</span></div></div>
-       <div class="pc-av">${nm ? esc(initials(nm)) : "🎾"}</div><div class="pc-name"><b>${esc(nm || t("rvMe"))}</b><small>${t("catU")} ${cat}</small></div></div></div>
-     <div class="rv-spark">${Array.from({length: 14}, (_, i) => `<i style="--a:${i * 26}deg;--d:${(i % 4) * .06}s"></i>`).join("")}</div></div>
-   <h2 class="rv-h">${tf("rvYou", {t: `<span class="rv-tier" style="--tc:${col}">${esc(tierName(cat))}</span>`})}</h2>
-   <p class="note rv-p">${tf("rvSub", {l: lvl2(L), c: cat})}</p>
-   ${S.user ? `<button class="cta blue wide" data-rvnext>${t("rvNext")}</button>` : `<button class="cta blue wide" data-rvkeep>${t("rvKeep")}</button>`}
-   <button class="linkbtn" data-go="level">${t("rvRedo")}</button>
-  </main>`; };
+  const cat = lvCat(L), [, col] = TIER[cat], nm = S.profile && S.profile.full_name ? S.profile.full_name : t("rvMe"), base = Object.assign({wins: 0, losses: 0, streak: 0, badges: [], titles: 0, rated: 0}, S.card || {}, {name: nm});
+  const real = playerCard(Object.assign({}, base, {placement: 0, category: cat, level: L, level_set: true})), myst = playerCard(Object.assign({}, base, {placement: 5, rated: 0, level_set: true}));
+  const strip = h => h.replace(/\s*<div class="pc-prog[\s\S]*$/, "");
+  return `<div class="rk2" data-rkauto="${col}" style="--tc:${col}"><div class="rk2-bg"></div><div class="rk2-rays"></div><div class="rk2-ring"></div><div class="rk2-flash"></div><div class="cl-conf"></div>
+   <div class="rk2-in">
+    <div class="rk2-top"><span class="rk2-chip">🎯 ${t("rvQuizChip")}</span><span class="rk2-chip f">${t("catU")} ${cat}</span></div>
+    <div class="rk2-kick">${t("rkKick")}</div>
+    <div class="rk2-stage"><div class="rk2-card m">${strip(myst)}</div><div class="rk2-card r">${strip(real)}</div></div>
+    <div class="rk2-res">
+      <h1>${esc(tierName(cat))} <em>${divName(divIdx(L, cat))}</em></h1>
+      <div class="rk2-meta"><div class="rk2-cat"><small>${t("catU")}</small><b>${cat}</b></div><div class="rk2-lv"><small>${t("lvlU")}</small><b>${lvl2(L)}</b></div></div>
+      ${S.quizAReq ? `<div class="rk2-areq">🔷 ${t("aPend")}</div>` : ""}<p>${t("rkSub")}</p>
+      <div class="rk2-btns">${S.user ? `<button class="rk2-share" data-rvnext>${t("rvNext")} →</button>` : `<button class="rk2-share" data-rvkeep>${t("rvKeep")}</button>`}</div>
+      <button class="rk2-redo" data-go="level">${t("rvRedo")}</button>
+    </div>
+   </div></div>`; };
 
 /* home club */
 V.pickclub = () => { if (!S.user) return V.auth();
@@ -4392,14 +4706,14 @@ V.home = () => { const name = S.profile && S.profile.full_name ? S.profile.full_
 /* Me in three tabs */
 V.me = () => { if (!S.user) return V.auth();
  const p = S.profile || {}, tab = S.meTab || "card", todo = pendingScores().length;
- const head = `<div class="top"><div class="row" style="gap:12px;min-width:0">${avF(p.full_name, myLevel(), S.mySoc && S.mySoc.b, 'style="width:48px;height:48px;font-size:16px;margin:0"')}<div style="min-width:0"><h2 style="margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(p.full_name || "")}</h2><span class="note">${S.card && S.card.placement > 0 ? esc(tf("plTag", {n: 5 - S.card.placement})) : myLevel() != null ? `${t("lvlU")} ${lvl2(myLevel())} · ${esc(tierName((S.card && S.card.category) || lvCat(myLevel())))} ${S.card ? subTier(S.card) : ""}` : esc(S.user.email || "")}</span></div></div>
+ const head = `<div class="top"><div class="row" style="gap:12px;min-width:0">${avF(p.full_name, myLevel(), S.mySoc && S.mySoc.b, 'style="width:48px;height:48px;font-size:16px;margin:0"')}<div style="min-width:0"><h2 style="margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(p.full_name || "")}</h2><span class="note">${S.card && S.card.placement > 0 ? esc(bookLive() ? tf("plTag", {n: 5 - S.card.placement}) : t("plTagE")) : myLevel() != null ? `${t("lvlU")} ${lvl2(myLevel())} · ${esc(tierName((S.card && S.card.category) || lvCat(myLevel())))} ${S.card ? subTier(S.card) : ""}` : esc(S.user.email || "")}</span></div></div>
    <div class="row">${S.staff.length ? `<button class="pill" data-go="manager">${t("meMgr")}</button>` : ""}${bell()}</div></div>
   <div class="seg">${[["card", "meCard"], ["games", "meGames"], ["set", "meSet"]].map(([k, l]) => `<button data-metab="${k}" aria-pressed="${tab === k}">${k === "set" ? "⚙️ " : ""}${t(l)}${k === "games" && todo ? `<i class="dot"></i>` : ""}</button>`).join("")}</div>`;
  let body = "";
  if (tab === "card") body = `${walletCard()}${playerCard(S.card)}${seasonCard()}<button class="cta wide pfbtn" data-profile="me">📊 ${t("pfMine")} →</button>`;
  else if (tab === "games"){ const up = upcoming(), past = S.mine.filter(b => !up.includes(b));
    body = `${todo ? `<h2>⚑ ${t("meToDo")}</h2><div class="glist">${pendingScores().map(gameRow).join("")}</div>` : ""}
-    <h2>${t("myGames")}</h2><div class="glist">${leagueRows()}${up.map(gameRow).join("") || ((S.myLgMatches || []).some(m => m.status === "open") ? "" : `<button class="card note" data-go="clubs" style="text-align:start">${t("bookFirst")}</button>`)}</div>
+    <h2>${t("myGames")}</h2><div class="glist">${leagueRows()}${up.map(gameRow).join("") || ((S.myLgMatches || []).some(m => m.status === "open") ? "" : (bookLive() ? `<button class="card note" data-go="clubs" style="text-align:start">${t("bookFirst")}</button>` : `<button class="card note" data-go="events" style="text-align:start">🏆 ${t("gmTour")}</button>`))}</div>
     ${rivalsHtml()}
     ${myRefCard()}${meExtras()}
     <h2>${t("myResults")}</h2><div class="glist" style="gap:8px">${leagueResults()}${(S.results || []).slice(0, 5).map(resultRow).join("") || ((S.myLgMatches || []).length ? "" : `<div class="card note">${t("noResults")}</div>`)}</div>
@@ -4766,7 +5080,7 @@ function walletOpt(club, amount, cur){
 const wChip = (clubId, amount, cur, attr) => { const ok = wBal(clubId) >= amount - 0.001;
   return `<button class="chip" ${attr}="wallet" aria-pressed="${cur === "wallet"}"${ok ? "" : " disabled"}>💳 ${t("wPay")} · ${money(wBal(clubId))}</button>`; };
 
-function walletCard(){ if (!S.wallet) return "";
+function walletCard(){ if (!S.wallet || (!bookLive() && !(S.staff || []).length)) return "";
   return `<button class="card wcard" data-go="wallet"><span class="w-ic">💳</span><span class="tn-b"><b>${t("wT")} · ${money(wTotal())}</b><span class="note">${t("wCardS")}</span></span><span class="tn-go">→</span></button>`; }
 
 V.wallet = () => { if (!S.user) return V.auth(); const w = S.wallet || {clubs: [], tx: []}, f = S.wf || (S.wf = {club: (S.clubs[0] || {}).id, amt: 20, pay: "cash", ref: ""});
@@ -4984,11 +5298,13 @@ app.addEventListener("click", async e => { const el = e.target.closest("[data-ev
     if (r.error){ toast(errMsg(r.error)); render(); return; } toast(t("evDeleted")); if (k === "tour") S.tours = (S.tours || []).filter(x => x.slug !== id); else S.leagues = (S.leagues || []).filter(x => x.id !== id); render(); return; }
 });
 app.addEventListener("input", e => { if (e.target.id === "q-pt"){ S.quiz = S.quiz || {}; S.quiz.pt = e.target.value.replace(",", ".").replace(/[^\d.]/g, "");
-  const R = quizResult(S.quiz), done = LV_Q.every(([q]) => S.quiz[q] != null) && S.quiz.q6 != null; S.quizClaim = R.claim;
+  const R = quizResult(S.quiz), done = LV_Q.every(([q]) => S.quiz[q] != null) && S.quiz.q6 != null; S.quizClaim = R.claim; S.quizAReq = done && R.aReq;
   if (done){ const b = document.querySelector(".lvres .lvbig"), sm = document.querySelector(".bar .sum b"), btn = document.querySelector("[data-setlevel],[data-guestlv]"); const v = R.start.toFixed(2);
     if (b) b.textContent = v; if (sm) sm.textContent = v; if (btn){ if (btn.hasAttribute("data-setlevel")) btn.setAttribute("data-setlevel", v); else btn.setAttribute("data-guestlv", v); } } } });
 async function loadClaims(){ if (!(S.profile && S.profile.is_admin)) return; try { const r = await sb.rpc("admin_level_claims"); S.claims = r.error ? [] : r.data; } catch (e) { S.claims = []; } }
-app.addEventListener("click", async e => { const el = e.target.closest("[data-clset],[data-cldone]"); if (!el) return; const d = el.dataset;
+app.addEventListener("click", e => { const m = e.target.closest("[data-meset]"); if (!m) return; S.meTab = "set"; go("me"); });
+app.addEventListener("click", async e => { const el = e.target.closest("[data-clset],[data-cldone],[data-adec]"); if (!el) return; const d = el.dataset;
+  if (d.adec){ const [id, ok] = d.adec.split("|"); if (!confirm(ok === "1" ? t("aYesQ") : t("aNoQ"))) return; const r = await sb.rpc("admin_a_decide", {p_user: id, p_ok: ok === "1"}); if (r.error){ toast(errMsg(r.error)); return; } toast("✓"); S.claims = (S.claims || []).filter(x => x.id !== id); render(); return; }
   if (d.cldone){ const r = await sb.rpc("admin_claim_done", {p_user: d.cldone}); if (r.error){ toast(errMsg(r.error)); return; } S.claims = (S.claims || []).filter(x => x.id !== d.cldone); render(); return; }
   if (d.clset){ const p = (S.claims || []).find(x => x.id === d.clset); if (!p) return; S.apList = [{id: p.id, name: p.name, phone: p.phone, level: p.claim.raw, category: lvCat(+p.claim.raw), rated: p.rated, titles: 0, a_ok: false, verified: true}]; S.apEdit = p.id; render();
     const f = document.getElementById("apF"); if (f) f.scrollIntoView({behavior: "smooth", block: "center"}); return; } });
@@ -5008,7 +5324,7 @@ app.addEventListener("click", async e => { const el = e.target.closest("[data-tj
   if ("tjauth" in d){ S.authMode = "up"; ls.set("pl-seen", "1"); go("auth"); return; }
   if ("tjin" in d){ S.authMode = "in"; ls.set("pl-seen", "1"); go("auth"); return; }
   if ("tjquit" in d){ ls.del("pl-tjoin"); ls.set("pl-seen", "1"); go("home"); return; }
-  if ("tjgo" in d){ if (!(S.profile && S.profile.level_set) && S.tj){ const lv = TJ_LV[S.tj.cat] || 2.5; const sl = await sb.rpc("set_my_level", {p_level: lv, p_claim: {src: "invite", cat: S.tj.cat, raw: lv}}); if (sl.error){ toast(errMsg(sl.error)); return; } await afterAuth(true); }
+  if ("tjgo" in d){ if (false && !(S.profile && S.profile.level_set) && S.tj){ /* open entry: no level needed; ranks come after the tournament */ const lv = TJ_LV[S.tj.cat] || 2.5; const sl = await sb.rpc("set_my_level", {p_level: lv, p_claim: {src: "invite", cat: S.tj.cat, raw: lv}}); if (sl.error){ toast(errMsg(sl.error)); return; } await afterAuth(true); }
     const r = await sb.rpc("t_invite_accept", {p_token: ls.get("pl-tjoin"), p_note: null}); if (r.error){ toast(errMsg(r.error)); return; }
     ls.del("pl-tjoin"); toast(t("tjDone")); setTimeout(() => { location.href = "t.html?" + encodeURIComponent(r.data); }, 900); } });
 app.addEventListener("click", e => { if (e.target.closest("[data-wseen]")) ls.set("pl-seen", "1"); });
