@@ -1,4 +1,4 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#2F4A41"><title>Padel Live · Tournament</title><link rel="icon" href="icon-192.png"><link rel="preconnect" href="https://fonts.googleapis.com">
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#2F4A41"><title>PlayPal · Tournament</title><link rel="icon" href="icon-192.png"><link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800;1,900&family=Figtree:wght@400;500;600;700&display=swap"><style>body{margin:0;font:14px/1.4 system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}.board.c3 .bhd,.board.c3 .brow{grid-template-columns:40px repeat(3,minmax(0,1fr));gap:4px}.board.c3 .brow.ev{grid-template-columns:40px 1fr}.board.c3 .bn,.board.c3 .bc{font-size:12px}.board.c4 .bhd,.board.c4 .brow{grid-template-columns:36px repeat(4,minmax(0,1fr));gap:3px}.board.c4 .brow.ev{grid-template-columns:36px 1fr}.board.c4 .bn,.board.c4 .bc{font-size:11px}.days{overflow-x:auto;scrollbar-width:none}
 .su .su-counts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
 .su-s{font-size:13px;color:var(--ink-2);margin:0;line-height:1.45}
@@ -3455,7 +3455,7 @@ document.addEventListener("click", async e => { const d = e.target.closest("[dat
     const r = await sb.rpc("t_rank_mode_set", {p_slug: SLUG, p_on: on}); if (r.error){ RK.err = (r.error.message || "").replace(/^.*?: /, ""); } else RK.info = r.data; render(); }
 });
 function vInfo(){ const top = CFG.info2 === false || !CATS.length || !T.G || !T.G.length ? (CFG.info_html || "") : info2();
-  if (!canEdit) return top + helpSec() + `<p class="org-foot">Club staff? <a href="./#auth">Sign in to Padel Live</a> with your staff account to manage this tournament.</p>`;
+  if (!canEdit) return top + helpSec() + `<p class="org-foot">Club staff? <a href="./#auth">Sign in to PlayPal</a> with your staff account to manage this tournament.</p>`;
   return top + `<div class="org-zone"><div class="org-zh"><b>Organizer tools</b><span>Only you and your staff see this part. Players don't.</span></div>${rankSec()}${helpAdmin()}${orgTools()}<section class="sec info"><h2>Scores</h2><p>You can edit scores: use the Organizer bar at the top.</p></section></div>`; }
 function adminBar(){
   if (!canEdit) return "";
@@ -3489,7 +3489,7 @@ function render(){
   const views = {schedule: vSchedule, standings: vStandings, knockouts: vKnockouts, teams: vTeams, info: vInfo, draw: vDraw};
   const vt = view.tab === "draw" && !drawOn() && !canEdit ? "schedule" : view.tab;
   app.innerHTML = `${THEME === "night" || THEME === "trio" || THEME === "ace" || THEME === "lets" ? `<header class="top"><div class="wrap gut"><div class="hrow"><span class="kick"><i class="dot"></i>${esc(CFG.kicker || "Live")}</span><div class="upd">Last update<b>${esc(updatedText())}</b></div></div><div class="brand">${CFG.club_logo ? `<img class="emb" src="${CFG.club_logo}" alt="">` : ""}<div><h1>${CFG.title_html || esc(TNAME)}</h1><p>${esc(THEME === "night" && /\d+ categor/i.test(CFG.tagline || "") ? "Tournament · " + CATS.map(c => c === "X" ? "Mixed" : c).join(" · ") : (CFG.tagline || ""))}</p></div></div></div><div class="scene-wrap">${THEME === "trio" ? TSCENE : THEME === "ace" ? ASCENE : THEME === "lets" ? LSCENE : SCENE}</div><div class="wrap gut hero-bar"><div class="chips">${heroFacts().map(([x, g]) => `<span${g ? ` class="g"` : ""}>${esc(x)}</span>`).join("")}</div>${LOGO ? `<div class="presented"><span>${esc(CFG.sponsor_label || "Presented by")}</span><img src="${LOGO}" alt="${esc(CFG.sponsor_alt || "")}"></div>` : ""}</div></header>` : THEME === "movara" ? `<header class="top"><div class="hero-fx" aria-hidden="true"><i class="ln1"></i><i class="ln2"></i><i class="ball"></i></div><div class="wrap gut"><div class="hrow"><span class="kick"><i class="dot"></i>${esc(CFG.kicker || "Live")}</span><div class="upd">Last update<b>${esc(updatedText())}</b></div></div><div class="brand"><h1>${CFG.title_html || esc(TNAME)}</h1><p>${(CFG.facts || []).map(x => `<span>${esc(x)}</span>`).join("")}</p></div>${LOGO ? `<div class="sponsor"><span>${esc(CFG.sponsor_label || "")}</span><img src="${LOGO}" alt="${esc(CFG.sponsor_alt || "")}"></div>` : ""}</div></header>` : `<header class="top"><div class="wrap gut"><img src="${CFG.club_logo || ""}" alt=""><div class="brand"><h1>${esc(TNAME)}</h1><p>${esc(CFG.subtitle || "Live results")}</p></div><div class="upd">Last update<b>${esc(updatedText())}</b></div></div></header>`}
-  <nav class="tabs" aria-label="Sections"><div class="wrap gut" role="tablist"><a class="tback" href="./#events" aria-label="Back to Padel Live"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>${[["schedule","Schedule"],["standings","Groups"],["knockouts","Knockouts"],["teams","Teams"],["info","Info"]].concat(drawOn() || canEdit ? [["draw", drawState() === "live" || drawState() === "running" ? "Draw 🔴" : "Draw"]] : []).map(([k, l]) => `<button role="tab" data-tab="${k}" aria-selected="${view.tab === k}">${l}</button>`).join("")}</div></nav>
+  <nav class="tabs" aria-label="Sections"><div class="wrap gut" role="tablist"><a class="tback" href="./#events" aria-label="Back to PlayPal"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>${[["schedule","Schedule"],["standings","Groups"],["knockouts","Knockouts"],["teams","Teams"],["info","Info"]].concat(drawOn() || canEdit ? [["draw", drawState() === "live" || drawState() === "running" ? "Draw 🔴" : "Draw"]] : []).map(([k, l]) => `<button role="tab" data-tab="${k}" aria-selected="${view.tab === k}">${l}</button>`).join("")}</div></nav>
   <main><div class="wrap gut">${adminBar()}${deskBox()}${banner()}${drawPill()}${vt === "draw" ? "" : passBox() + signupBox()}${views[vt]()}</div></main>${saveBar()}`;
   document.body.classList.toggle("editing", editMode);
   if (f){ const el = document.getElementById(f); if (el){ el.focus(); try { if (sel != null) el.setSelectionRange(sel, sel); } catch (e) {} } }
@@ -4020,7 +4020,7 @@ function tvAppCard(){
   const url = location.origin + "/";
   let qr = ""; try { qr = qrSvg(url); } catch (e) {}
   const lg = CFG.club_logo ? `<img src="${CFG.club_logo}" alt="">` : "";
-  return `<div class="tv-app"><span class="k">Padel Live</span><h3>Get the app</h3><div class="tv-app-row"><div class="tv-qr">${qr}${lg}</div><ul><li><i>🏅</i>Your rank &amp; player card</li><li><i>🎾</i>Join open matches</li><li><i>📲</i>Live scores &amp; alerts</li></ul></div><div class="tv-url">Scan · ${esc(location.host)}</div></div>`;
+  return `<div class="tv-app"><span class="k">PlayPal</span><h3>Get the app</h3><div class="tv-app-row"><div class="tv-qr">${qr}${lg}</div><ul><li><i>🏅</i>Your rank &amp; player card</li><li><i>🎾</i>Join open matches</li><li><i>📲</i>Live scores &amp; alerts</li></ul></div><div class="tv-url">Scan · ${esc(location.host)}</div></div>`;
 }
 function tvNext(all){
   const list = all.filter(m => notStarted(m)).slice(0, 6);
@@ -4046,7 +4046,7 @@ function tvTicker(all){
     .map(m => `<span class="tk"><i style="background:${cvar(m.cat)}"></i>${esc(m.tag)}: <b>${esc(sideName(m.w === 0 ? m.A : m.B))}</b> beat ${esc(sideName(m.w === 0 ? m.B : m.A))} ${m.s ? (m.w === 0 ? m.s[0] + "-" + m.s[1] : m.s[1] + "-" + m.s[0]) : ""}</span>`);
   const sp = SPONSORS.map(p => `<span class="tk sp">${esc(p.n)}</span>`);
   const items = [...res, ...sp];
-  items.unshift(`<span class="tk scan">Scan the QR to get <b>Padel Live</b></span>`);
+  items.unshift(`<span class="tk scan">Scan the QR to get <b>PlayPal</b></span>`);
   if (cur().notice) items.unshift(`<span class="tk note">${esc(cur().notice)}</span>`);
   if (!items.length) items.push(`<span class="tk">Live scores on your phone: ${esc(location.host)}/t.html?${esc(SLUG)}</span>`);
   else items.push(`<span class="tk">Follow live on your phone: ${esc(location.host)}/t.html?${esc(SLUG)}</span>`);
@@ -4164,7 +4164,7 @@ document.addEventListener("click", async e => {
   const b = e.target.closest("[data-copy]"); if (!b) return;
   try { await navigator.clipboard.writeText(b.dataset.copy); b.textContent = "Copied"; } catch (x) { b.textContent = "Press and hold the link to copy"; }
 });
-/* ---------- publish: saved in the Padel Live database ---------- */
+/* ---------- publish: saved in the PlayPal database ---------- */
 let VERSION = VER0, EDITV = EDITV0;
 async function save(){
   if (!draft || busy) return;
@@ -4297,7 +4297,7 @@ function signupBox(){ const I = SU.info; if (!I || editMode) return "";
     h += `<section class="sec su"><h2>Team sign-up ${I.open ? `<small>Open until the day before the tournament</small>` : ""}</h2>${suCounts()}`;
     if (!I.signed && I.open && !SU.open) h += suWhy() + `<button class="btn primary su-go" data-suopen>Sign up your team →</button>`;
     else if (!I.signed){ const up = SU.auth === "up";
-      h += `<div class="su-form"><p class="su-step">Step 1 of 2 · ${up ? "Create your Padel Live account" : "Sign in"}</p>
+      h += `<div class="su-form"><p class="su-step">Step 1 of 2 · ${up ? "Create your PlayPal account" : "Sign in"}</p>
         ${up ? `<label class="lbl">Full name<input id="su-aname" autocomplete="name" value="${esc(SU.aName)}" placeholder="First and last name"></label>` : ""}
         ${up ? `<div class="lbl">Your WhatsApp number${phField("su-aphone", SU.aCC, esc(SU.aPhone))}</div>` : `<label class="lbl">WhatsApp number or email<input id="su-aphone" inputmode="text" autocomplete="username" dir="ltr" placeholder="Your number or email" value="${esc(SU.aPhone)}"></label>`}
         <label class="lbl">Password<input id="su-apass" type="password" autocomplete="${up ? "new-password" : "current-password"}" dir="ltr" placeholder="6+ characters"></label>
@@ -4321,7 +4321,7 @@ function signupBox(){ const I = SU.info; if (!I || editMode) return "";
         ${!CFG.level_check ? `<p class="su-s">🔓 Open entry: pick the category you want to play. The organizer confirms every team. No rank yet? You get this category as your rank and your tier card as soon as your team is confirmed.</p>` : !SU.info.level || SU.autoLv ? `<p class="su-s">Your first matches fine-tune your level. B and A players are checked by the admin.</p>` : ""}
         <span class="lbl">Who's your partner?</span>
         <div class="su-pm"><button class="su-pmo" data-supm="inv" aria-pressed="${inv}"><span class="su-pmi">📲</span><span><b>Invite them on WhatsApp</b><small>They tap your link, make an account in a minute, and your team is in.</small></span></button>
-          <button class="su-pmo" data-supm="acc" aria-pressed="${!inv}"><span class="su-pmi">👤</span><span><b>They're already on Padel Live</b><small>Type their WhatsApp number.</small></span></button></div>
+          <button class="su-pmo" data-supm="acc" aria-pressed="${!inv}"><span class="su-pmi">👤</span><span><b>They're already on PlayPal</b><small>Type their WhatsApp number.</small></span></button></div>
         ${inv ? `<button class="btn primary su-wa big" data-suinv${SU.cat && !SU.busy ? "" : " disabled"}>${SU.busy ? "…" : SU.cat ? "Send invite on WhatsApp" : "Pick your category first"}</button>`
           : `<label class="lbl">Partner's WhatsApp number<input id="su-phone" inputmode="tel" dir="ltr" placeholder="+963 9XX XXX XXX" value="${esc(SU.phone)}"></label>
         ${ck ? (!ck.ok ? `<p class="su-bad">${esc(ck.reason)}</p>` : !CFG.level_check ? `<p class="su-ok">✓ ${esc(ck.partner)} · ${esc(CATN[SU.cat] || SU.cat)}</p>` : ck.fits ? `<p class="su-ok">✓ ${esc(ck.partner)} (${(+ck.plevel).toFixed(2)}) · team level ${(+ck.avg).toFixed(2)} · fits ${esc(CATN[SU.cat] || SU.cat)}</p>${suWho(ck)}`
@@ -4401,7 +4401,7 @@ window.__rtBump = v => { try { if (RT) RT.send({type: "broadcast", event: "bump"
 window.__rtPt = (mid, st, fin) => { try { if (RT) RT.send({type: "broadcast", event: "pt", payload: {mid, st, fin}}); } catch (e) {} };
 document.addEventListener("visibilitychange", () => { if (!document.hidden) pull(); });
 (async () => { try { const r = await sb.rpc("t_can_edit", {p_slug: SLUG}); if (r.data === true){ canEdit = true; render(); syncResults(); setInterval(() => syncResults(), 20000); } } catch (e) {} })();
-/* finished matches go to Padel Live: levels, wins, challenges (only teams that signed up in the app) */
+/* finished matches go to PlayPal: levels, wins, challenges (only teams that signed up in the app) */
 let lastSync = "";
 async function syncResults(pin){ if (!canEdit && !pin) return;
   try { const rows = allMatches().filter(m => m.A && m.B && m.A.id && m.B.id && m.s && m.w !== null && m.w !== undefined && !m.flag).map(m => ({mid: m.id, t1: m.A.id, t2: m.B.id, s: m.s, w: m.w}));
@@ -4409,12 +4409,13 @@ async function syncResults(pin){ if (!canEdit && !pin) return;
     const r = await sb.rpc("t_sync_results", {p_slug: SLUG, p_rows: rows, p_pin: pin || null}); if (!r.error) lastSync = key; } catch (e) {} }
 
 }
-function tFail(msg){ document.getElementById("app").innerHTML = '<div style="padding:40px 20px;font:500 16px system-ui;color:#333"><p><b>' + msg + '</b></p><p><a href="./">Open Padel Live</a></p><button onclick="location.reload()" style="padding:10px 16px;font:600 15px system-ui">Try again</button></div>'; }
+const brandFetch = async (u, o) => { const r = await fetch(u, o); try { if (!/\/rest\/v1\/rpc\//.test(String((u && u.url) || u))) return r; const tx = await r.clone().text(); if (!/Padel Live|بادل لايف/.test(tx)) return r; return new Response(tx.replace(/Padel Live/g, "PlayPal").replace(/بادل لايف/g, "بلاي بال"), {status: r.status, statusText: r.statusText, headers: r.headers}); } catch (e) { return r; } };
+function tFail(msg){ document.getElementById("app").innerHTML = '<div style="padding:40px 20px;font:500 16px system-ui;color:#333"><p><b>' + msg + '</b></p><p><a href="./">Open PlayPal</a></p><button onclick="location.reload()" style="padding:10px 16px;font:600 15px system-ui">Try again</button></div>'; }
 async function tImport(slug, sb){
   var f = null; try { var x = await fetch(slug + ".json", {cache: "no-store"}); if (x.ok) f = await x.json(); } catch (e) {}
   if (!f){ tFail("This tournament isn't published yet."); return; }
   var clubs = []; try { var c = await sb.rpc("my_clubs"); clubs = c.data || []; } catch (e) {}
-  if (!clubs.length){ tFail("This tournament isn't published yet. Club staff: sign in to Padel Live first, then open this page again to publish it."); return; }
+  if (!clubs.length){ tFail("This tournament isn't published yet. Club staff: sign in to PlayPal first, then open this page again to publish it."); return; }
   document.getElementById("app").innerHTML = '<div style="padding:40px 20px;font:500 16px system-ui;color:#333"><p><b>' + f.name + '</b> is ready to publish to ' + clubs[0].name + '.</p><button id="timp" style="padding:12px 18px;font:700 16px system-ui;border-radius:10px;border:0;background:#1A6B3C;color:#fff">Publish tournament</button><p id="tmsg"></p></div>';
   document.getElementById("timp").onclick = async function(){
     this.disabled = true; var r = await sb.rpc("t_create", {p_slug: slug, p_name: f.name, p_club: clubs[0].id, p_starts: f.starts_on, p_ends: f.ends_on, p_config: f.config, p_state: f.state});
@@ -4426,14 +4427,14 @@ async function tBoot(){
   var slug = (location.search.replace(/^\?/, "").split("&")[0] || "").replace(/[^a-z0-9-]/g, "");
   if (!slug){ tFail("No tournament chosen."); return; }
   var sb;
-  try { sb = window.__MOCK || window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {auth:{lock: async function(n, w, fn){ return await fn(); }}}); } catch (e) { tFail("Can't reach the server."); return; }
+  try { sb = window.__MOCK || window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {auth:{lock: async function(n, w, fn){ return await fn(); }}, global:{fetch: brandFetch}}); } catch (e) { tFail("Can't reach the server."); return; }
   var timer = setTimeout(function(){ tFail("Can't reach the server. Check your connection."); }, 15000);
   try {
     var r = await sb.rpc("t_get", {p_slug: slug});
     clearTimeout(timer);
     if (r.error) throw r.error;
     if (!r.data){ tImport(slug, sb); return; }
-    document.title = r.data.name + " · Padel Live";
+    document.title = r.data.name + " · PlayPal";
     startT(r.data.config, r.data.state || {}, r.data.version, slug, r.data.name, sb, r.data.edit_version || 1);
   } catch (e) { clearTimeout(timer); tFail("Can't load the tournament right now."); }
 }
