@@ -1,5 +1,5 @@
-// Padel Live service worker: offline fallback + phone notifications
-const CACHE = "pl-v7";
+// PlayPal service worker: offline fallback + phone notifications
+const CACHE = "pl-v10";
 self.addEventListener("install", () => self.skipWaiting());
 self.addEventListener("activate", e => e.waitUntil((async () => {
   const keys = await caches.keys(); await Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))); await self.clients.claim();
@@ -14,7 +14,7 @@ self.addEventListener("fetch", e => {
 });
 self.addEventListener("push", e => {
   let d = {}; try { d = e.data ? e.data.json() : {}; } catch (x) { d = { body: e.data ? e.data.text() : "" }; }
-  e.waitUntil(self.registration.showNotification(d.title || "Padel Live", {
+  e.waitUntil(self.registration.showNotification((!d.title || d.title === "Padel Live" ? "PlayPal" : d.title), {
     body: d.body || "", icon: "icon-192.png", badge: "icon-192.png", tag: d.tag || undefined, renotify: !!d.tag, data: { url: d.url || "/#inbox" } }));
 });
 self.addEventListener("notificationclick", e => {
