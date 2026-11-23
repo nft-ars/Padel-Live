@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#10201A">
 <link rel="manifest" id="pl-manifest">
+<script>try { document.documentElement.dataset.theme = localStorage.getItem("pl-theme") || "dark"; } catch (e) { document.documentElement.dataset.theme = "dark"; }</script>
 <script>(function(){ var b = location.href.replace(/[#?].*$/, "").replace(/[^/]*$/, ""), m = {name: "PlayPal", short_name: "PlayPal", description: "Padel tournaments, ranks and court booking in Syria.",
   start_url: b + "#home", scope: b, display: "standalone", orientation: "portrait", background_color: "#10201A", theme_color: "#10201A",
   icons: [{src: b + "icon-192.png", sizes: "192x192", type: "image/png", purpose: "any"}, {src: b + "icon-512.png", sizes: "512x512", type: "image/png", purpose: "any"}, {src: b + "icon-maskable-512.png", sizes: "512x512", type: "image/png", purpose: "maskable"}]};
@@ -2392,7 +2393,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
 const brandFetch = async (u, o) => { const r = await fetch(u, o); try { if (!/\/rest\/v1\/rpc\//.test(String((u && u.url) || u))) return r; const tx = await r.clone().text(); if (!/Padel Live|بادل لايف/.test(tx)) return r; return new Response(tx.replace(/Padel Live/g, "PlayPal").replace(/بادل لايف/g, "بلاي بال"), {status: r.status, statusText: r.statusText, headers: r.headers}); } catch (e) { return r; } };
-const VERSION = "v128";
+const VERSION = "v129";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -4171,7 +4172,7 @@ app.addEventListener("click", async e => {
   if ("mode" in d){ S.authMode = S.authMode === "up" ? "in" : "up"; render(); return; }
   if ("music" in d){ const on = !musicOn(); ls.set("pl-music", on ? "1" : "0"); if (on) musicStart(); else musicStop(); render(); return; }
   if ("snd" in d){ const on = ls.get("pl-snd") === "0"; ls.set("pl-snd", on ? "1" : "0"); if (on){ VOICE.played = {}; voice("events", true); } render(); return; }
-  if ("dark" in d){ const r = document.documentElement; r.dataset.theme = r.dataset.theme === "dark" ? "light" : "dark"; render(); return; }
+  if ("dark" in d){ const r = document.documentElement; r.dataset.theme = r.dataset.theme === "dark" ? "light" : "dark"; try { localStorage.setItem("pl-theme", r.dataset.theme); } catch (x) {} render(); return; }
   if ("install" in d){ if (installEvt){ installEvt.prompt(); try { await installEvt.userChoice; } catch (x) {} installEvt = null; render(); } else toast(isIOS() ? t("iosHow") : t("andHow")); return; }
   if ("forgot" in d){ const em = (document.getElementById("a-email") || {}).value || ""; if (!em.includes("@")){ toast(t("forgotPhone")); return; }
     b.disabled = true; const r = await sb.auth.resetPasswordForEmail(em.trim(), {redirectTo: location.origin + location.pathname}); b.disabled = false;

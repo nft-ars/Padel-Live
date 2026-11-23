@@ -3339,13 +3339,14 @@ function info2(){
   const prize = (CFG.facts || []).map(String).find(x => /prize/i.test(x)), prizeAmt = prize ? (prize.match(/\$[\d,]+/) || [""])[0] : "";
   const fee = CFG.fee ? +CFG.fee : 0;
   return `<section class="sec info2"><h2>The tournament</h2><div class="i-cats">${CATS.map(cat).join("")}</div></section>
-  <section class="sec info2"><h2>Road to the final</h2><ol class="i-road">${road}</ol></section>
+  <section class="sec info2"><h2>Road to victory</h2><ol class="i-road">${road}</ol></section>
   <section class="sec info2"><h2>Golden point</h2>
   <div class="i-gold lit"><div class="i-score"><span>40</span><i>:</i><span>40</span></div><div><strong>One deuce, then sudden death</strong><p>The first time it's 40–40 you play advantage. On the next deuce, the next point wins the game.</p></div></div>
   <p class="i-tb">Tiebreaks to 7: at 8–8 in a set to 9, at 6–6 in a set to 6.</p></section>
   <section class="sec info2"><h2>${Object.keys(DAYS).length === 1 ? "The day" : Object.keys(DAYS).length + " days"}</h2><div class="i-days">${days}</div></section>
   <section class="sec info2"><h2>On the day</h2><div class="i-rules">
     ${rule("desk", fee ? "Pay at the desk" : "Arrive early", "Come 30 minutes before your first match." + (fee ? " Show your entry pass (QR) from this page at the desk and pay your entry. <b class=\"i-must\">If you don't pay, you don't play.</b>" : ""))}
+    ${fee ? "" : rule("desk", "Entry fee on the desk", "Pay your entry fee at the desk when you check in, before your first match. <b class=\"i-must\">If you don't pay, you don't play.</b>")}
     ${rule("chat", "Need anything?", "A question, a change of time, payment or anything else: tap <b>Contact support</b> at the bottom of this page and send us a message.")}
     ${rule("fire", "Warm-up", "3 minutes in groups, 5 in knockouts, inside your slot.")}
     ${rule("late", "10-minute rule", "Not on court 10 minutes after your call: walkover.")}
@@ -4324,7 +4325,7 @@ function suWhy(){ const fee = CFG.fee ? +CFG.fee : 0, prize = (CFG.facts || []).
   return `<div class="su-why"><div class="su-why-r">
     <div class="su-w"><small>ENTRY FEE</small><b>${fee ? "$" + fee : "ON THE DESK"}</b><span>${fee ? "per team · pay at the desk" : "pay when you check in"}</span></div>
     ${per ? `<div class="su-w hot"><small>Prize per category</small><b>${money(per)}</b><span>🥇 ${money(per * sp[0] / 100)} · 🥈 ${money(per * (sp[1] || 0) / 100)}</span></div>` : ""}</div>
-    <ul class="su-why-l"><li>${d0} day${d0 > 1 ? "s" : ""} · group matches, then knockouts to the finals</li><li>Teams play in their level category</li><li>Live scores, your schedule and the draw on your phone</li></ul></div>`; }
+    </div>`; }
 function suPill(){ const I = SU.info; if (!I || editMode || !I.open || (I.mine && (I.mine.status === "pending" || I.mine.status === "confirmed"))) return "";
   return `<button class="su-pill" data-gosignup><span class="su-pill-d"></span><b>Sign up your team</b><small>Closes the day before</small><span class="su-pill-go">→</span></button>`; }
 document.addEventListener("click", e => { if (!e.target.closest("[data-gosignup]")) return; view.tab = "info"; try { history.replaceState(null, "", "#info"); } catch (x) {} render(); setTimeout(() => { const el = document.querySelector(".su"), nv = document.querySelector("nav.tabs"); if (el) window.scrollTo({top: el.getBoundingClientRect().top + scrollY - (nv ? nv.getBoundingClientRect().height : 0) - 12, behavior: "smooth"}); }, 60); });
@@ -4332,8 +4333,8 @@ function signupBox(){ const I = SU.info; if (!I || editMode) return "";
   const mine = I.mine && (I.mine.status === "pending" || I.mine.status === "confirmed") ? I.mine : null;
   let h = "";
   if (I.open || mine){
-    h += `<section class="sec su"><h2>Team sign-up ${I.open ? `<small>Open until the day before the tournament</small>` : ""}</h2>`;
-    if (!I.signed && I.open && !SU.open) h += suWhy() + `<label class="su-read"><input type="checkbox" id="su-read"${SU.read ? " checked" : ""}><span>I have read the tournament info</span></label><button class="btn primary su-go" data-suopen${SU.read ? "" : " disabled"}>Sign up your team →</button>`;
+    h += `<section class="sec su">`;
+    if (!I.signed && I.open && !SU.open) h += `<label class="su-read"><input type="checkbox" id="su-read"${SU.read ? " checked" : ""}><span>I have read the tournament info</span></label><button class="btn primary su-go" data-suopen${SU.read ? "" : " disabled"}>Sign up your team →</button>`;
     else if (!I.signed){ const up = SU.auth === "up";
       h += `<div class="su-form"><p class="su-step">Step 1 of 2 · ${up ? "Create your PlayPal account" : "Sign in"}</p>
         ${up ? `<label class="lbl">Full name<input id="su-aname" autocomplete="name" value="${esc(SU.aName)}" placeholder="First and last name"></label>` : ""}
@@ -4349,7 +4350,7 @@ function signupBox(){ const I = SU.info; if (!I || editMode) return "";
         <li><b>Pay at the desk${fee ? ` · $${fee}` : ""}</b><span>Show your entry pass (QR) when you check in. If you don't pay, you don't play.</span></li></ol>
         ${I.open ? `<button class="btn small" data-suwd>Withdraw</button>` : ""}</div>`; }
     else if (I.open && SU.myInv) h += suWaiting();
-    else if (I.open && !SU.open) h += suWhy() + `<label class="su-read"><input type="checkbox" id="su-read"${SU.read ? " checked" : ""}><span>I have read the tournament info</span></label><button class="btn primary su-go" data-suopen${SU.read ? "" : " disabled"}>Sign up your team →</button>${I.mine && I.mine.status === "rejected" ? `<p class="su-s">Your last request was not accepted. You can sign up again.</p>` : ""}`;
+    else if (I.open && !SU.open) h += `<label class="su-read"><input type="checkbox" id="su-read"${SU.read ? " checked" : ""}><span>I have read the tournament info</span></label><button class="btn primary su-go" data-suopen${SU.read ? "" : " disabled"}>Sign up your team →</button>${I.mine && I.mine.status === "rejected" ? `<p class="su-s">Your last request was not accepted. You can sign up again.</p>` : ""}`;
     else if (I.open){
       const ck = SU.check;
       const inv = SU.pmode !== "acc";
