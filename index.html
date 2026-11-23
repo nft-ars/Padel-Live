@@ -2273,6 +2273,13 @@ html[dir=rtl] .nw-b b{font-style:normal}
 .rel{display:flex;flex-direction:column;gap:2px;padding:10px 14px;border-radius:14px;background:var(--card);border:1px solid var(--line)}
 .rel b{font:italic 900 18px var(--disp);text-transform:uppercase;color:var(--green,#1E9E5A)}.rel span{font-size:12.5px;color:var(--ink-2)}
 .rel.warn b{color:var(--red,#E5484D)}
+
+/* Me: name in gold */
+.me-nm{margin:0;font:italic 900 30px/1.05 var(--disp);text-transform:uppercase;letter-spacing:.3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;padding-bottom:2px;
+  background:linear-gradient(180deg,#FFF3C4,#FFD21F 55%,#B8860B);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 2px 6px rgba(255,210,31,.25))}
+html[dir=rtl] .me-nm{font-style:normal}
+:root[data-theme="light"] .me-nm{background:linear-gradient(180deg,#D9A300,#A87400);-webkit-background-clip:text;background-clip:text;filter:none}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) .me-nm{background:linear-gradient(180deg,#D9A300,#A87400);-webkit-background-clip:text;background-clip:text;filter:none}}
 </style>
 </head>
 <body>
@@ -2385,7 +2392,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
 const brandFetch = async (u, o) => { const r = await fetch(u, o); try { if (!/\/rest\/v1\/rpc\//.test(String((u && u.url) || u))) return r; const tx = await r.clone().text(); if (!/Padel Live|بادل لايف/.test(tx)) return r; return new Response(tx.replace(/Padel Live/g, "PlayPal").replace(/بادل لايف/g, "بلاي بال"), {status: r.status, statusText: r.statusText, headers: r.headers}); } catch (e) { return r; } };
-const VERSION = "v123";
+const VERSION = "v128";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -5263,7 +5270,7 @@ V.home = () => { const name = S.profile && S.profile.full_name ? S.profile.full_
 /* Me in three tabs */
 V.me = () => { if (!S.user) return V.auth();
  const p = S.profile || {}, tab = S.meTab || "card", todo = pendingScores().length;
- const head = `<div class="top"><div class="row" style="gap:12px;min-width:0">${avF(p.full_name, myLevel(), S.mySoc && S.mySoc.b, 'style="width:48px;height:48px;font-size:16px;margin:0"')}<div style="min-width:0"><h2 class="me-led">${ledImg(p.full_name || "", "me")}</h2><span class="note">${S.card && S.card.placement > 0 ? esc(bookLive() ? tf("plTag", {n: 5 - S.card.placement}) : t("plTagE")) : myLevel() != null ? `${t("lvlU")} ${lvl2(myLevel())} · ${esc(tierName((S.card && S.card.category) || lvCat(myLevel())))} ${S.card ? subTier(S.card) : ""}` : esc(S.user.email || "")}</span></div></div>
+ const head = `<div class="top"><div class="row" style="gap:12px;min-width:0">${avF(p.full_name, myLevel(), S.mySoc && S.mySoc.b, 'style="width:48px;height:48px;font-size:16px;margin:0"')}<div style="min-width:0"><h2 class="me-nm">${esc(p.full_name || "")}</h2><span class="note">${S.card && S.card.placement > 0 ? esc(bookLive() ? tf("plTag", {n: 5 - S.card.placement}) : t("plTagE")) : myLevel() != null ? `${t("lvlU")} ${lvl2(myLevel())} · ${esc(tierName((S.card && S.card.category) || lvCat(myLevel())))} ${S.card ? subTier(S.card) : ""}` : esc(S.user.email || "")}</span></div></div>
    <div class="row">${S.staff.length ? `<button class="pill" data-go="manager">${t("meMgr")}</button>` : ""}${bell()}</div></div>
   <div class="seg">${[["card", "meCard"], ["games", "meGames"], ["set", "meSet"]].map(([k, l]) => `<button data-metab="${k}" aria-pressed="${tab === k}">${k === "set" ? "⚙️ " : ""}${t(l)}${k === "games" && todo ? `<i class="dot"></i>` : ""}</button>`).join("")}</div>`;
  let body = "";
@@ -5324,7 +5331,7 @@ app.addEventListener("click", async e => {
 /* ---------- new tournament wizard (admin, or staff for their club) ---------- */
 Object.assign(W.en, {twBtn:"+ Tournament", twT:"New tournament", twS1:"1 · Club & theme", twS1s:"The tournament page takes this club's look, logo and courts.",
   twS2:"2 · Name & dates", twName:"Tournament name", twNamePh:"Winter Cup", twKick:"Small title above the name", twKickPh:"Winter Cup", twStart:"First day", twDays:"Days",
-  twMix:"Mixed", twS3:"3 · Categories & teams", twS3s:"Pick the number of teams in each category, then how many teams go in each group.", twGz:"Teams per group", twGzS:"{g} groups · {m} group matches each · then {r}", twSF:"semifinals", twOrd:"Order of play", twOrdS:"Who starts first. Tap a category to move it up. Knockouts follow the same order.", twUp:"Move up", twRest:"Rest between group matches", twRest0:"No rest", twRest2:"Play 2, rest 1", twRest1:"Rest after every match",
+  twMix:"Mixed", twS3:"3 · Categories & teams", twS3s:"Pick the number of teams in each category, then how many teams go in each group.", twGz:"Teams per group", twGzS:"{g} groups · {m} group matches each · then {r}", twSF:"semifinals", twOrd:"Order of play · lowest category first", twOrdS:"Who starts first. Tap a category to move it up. Knockouts follow the same order.", twUp:"Move up", twRest:"Rest between group matches", twRest0:"No rest", twRest2:"Play 2, rest 1", twRest1:"Rest after every match",
   twG1:"Finish all group matches on day 1 (knockouts start day 2)", twG1ok:"✓ Group stage ends day 1 at {e}", twG1no:"✗ Group stage doesn't fit on day 1. Start earlier, finish later, add a court or use shorter matches.", twOff:"Off",
   twS4:"4 · Courts & times", twCourts:"Courts", twCn:"Court {n} name", twDayStart:"{d} starts at", twLast:"Day ends at (last match done by)", twFinals:"Semis and finals on the last day",
   twS5:"5 · Match format", twG:"Group matches", twKo:"Quarterfinals", twSf:"Semis & finals", twMin:"{m} min", twSet6:"1 set to 6", twSet9:"1 set to 9",
@@ -5334,7 +5341,7 @@ Object.assign(W.en, {twBtn:"+ Tournament", twT:"New tournament", twS1:"1 · Club
   twGrp:"{g} group matches", twKos:"{k} knockout matches", twDayL:"{d}: {a} – {b}", twQual:"Top 2 of each group{x} go to the {r}.", twBest:"+ the {n} best 3rd places", twR16:"round of 16", twQF:"quarterfinals"});
 Object.assign(W.ar, {twBtn:"+ بطولة", twT:"بطولة جديدة", twS1:"١ · النادي والشكل", twS1s:"صفحة البطولة بتاخد شكل هالنادي ولوغو وملاعبه.",
   twS2:"٢ · الاسم والتاريخ", twName:"اسم البطولة", twNamePh:"كأس الشتاء", twKick:"عنوان صغير فوق الاسم", twKickPh:"Winter Cup", twStart:"أول يوم", twDays:"عدد الأيام",
-  twMix:"مختلط", twS3:"٣ · الفئات والفرق", twS3s:"اختار عدد الفرق بكل فئة، وبعدين كم فريق بكل مجموعة.", twGz:"فرق بكل مجموعة", twGzS:"{g} مجموعات · {m} مباريات لكل فريق · بعدين {r}", twSF:"نصف النهائي", twOrd:"ترتيب اللعب", twOrdS:"مين بيبلش أول. اكبس على فئة لتطلعها لفوق. الأدوار الإقصائية بنفس الترتيب.", twUp:"لفوق", twRest:"الراحة بين مباريات المجموعات", twRest0:"بلا راحة", twRest2:"مباراتين وراحة", twRest1:"راحة بعد كل مباراة",
+  twMix:"مختلط", twS3:"٣ · الفئات والفرق", twS3s:"اختار عدد الفرق بكل فئة، وبعدين كم فريق بكل مجموعة.", twGz:"فرق بكل مجموعة", twGzS:"{g} مجموعات · {m} مباريات لكل فريق · بعدين {r}", twSF:"نصف النهائي", twOrd:"ترتيب اللعب · من الفئة الأدنى", twOrdS:"مين بيبلش أول. اكبس على فئة لتطلعها لفوق. الأدوار الإقصائية بنفس الترتيب.", twUp:"لفوق", twRest:"الراحة بين مباريات المجموعات", twRest0:"بلا راحة", twRest2:"مباراتين وراحة", twRest1:"راحة بعد كل مباراة",
   twG1:"خلّص كل مباريات المجموعات بأول يوم (الإقصائيات من تاني يوم)", twG1ok:"✓ المجموعات بتخلص أول يوم الساعة {e}", twG1no:"✗ المجموعات ما بتزبط بأول يوم. ابدأ أبكر، خلّص أطول، زيد ملعب أو قصّر المباريات.", twOff:"بدون",
   twS4:"٤ · الملاعب والأوقات", twCourts:"الملاعب", twCn:"اسم الملعب {n}", twDayStart:"{d} بيبلش الساعة", twLast:"اليوم بيخلص الساعة (آخر مباراة بتخلص)", twFinals:"نصف النهائي والنهائي بآخر يوم",
   twS5:"٥ · نظام المباريات", twG:"مباريات المجموعات", twKo:"ربع النهائي", twSf:"نصف النهائي والنهائي", twMin:"{m} دقيقة", twSet6:"مجموعة لـ٦", twSet9:"مجموعة لـ٩",
@@ -5352,7 +5359,9 @@ function twRR(z){ const a = Array.from({length: z % 2 ? z + 1 : z}, (_, i) => i 
   for (let r = 0; r < n - 1; r++){ const ms = []; for (let i = 0; i < n / 2; i++){ const x = a[i], y = a[n - 1 - i]; if (x <= z && y <= z) ms.push([Math.min(x, y), Math.max(x, y)]); } out.push(ms); a.splice(1, 0, a.pop()); }
   return out; }
 /* order of play: categories in the order chosen, then any others */
-const twOrd = tw => { const on = ["A", "B", "C", "D", "E", "X"].filter(c => tw.cats[c] > 0); return [...(tw.ord || []).filter(c => on.includes(c)), ...on.filter(c => !(tw.ord || []).includes(c))]; };
+/* always from the lowest category to the highest: E, D, Mixed, C, B, A */
+const TW_LV = ["E", "D", "X", "C", "B", "A"];
+const twOrd = tw => TW_LV.filter(c => tw.cats[c] > 0);
 const TW_THEME = c => /trio/i.test(c.name) ? ["trio", "trio-logo.png"] : /ace/i.test(c.name) ? ["ace", "ace-logo.png"] : /let.?s/i.test(c.name) ? ["lets", "lets-logo.png"] : /core/i.test(c.name) ? ["night", "core-logo.png"] : ["night", ""];
 const twClubs = () => S.clubs;
 const canMakeTour = () => !!(S.user && S.profile && S.profile.is_admin);
@@ -5371,9 +5380,10 @@ const twClock = m => { m = ((m % 1440) + 1440) % 1440; const h = Math.floor(m / 
 const twSlug = tw => { const c = S.clubs.find(x => x.id === tw.club) || {}; return ((String(c.name || "").split(/\s+/)[0] + "-" + (tw.name || "cup") + "-" + (tw.start || "").slice(0, 4)).toLowerCase().normalize("NFKD").replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 40)) || "cup"; };
 
 /* builds the tournament page config: groups, order of play and knockout times */
-function twBuild(tw){
+function twBuild(tw){ return twBuild0(tw, true); }
+function twBuild0(tw, firstAll){
   const club = S.clubs.find(c => c.id === tw.club) || {}, [theme, logo] = TW_THEME(club);
-  const cats = ["A", "B", "C", "D", "E", "X"].filter(c => tw.cats[c] > 0), C = +tw.courts, D = +tw.days, SIZE = 4;
+  const cats = TW_LV.filter(c => tw.cats[c] > 0), C = +tw.courts, D = +tw.days, SIZE = 4;
   const d0 = new Date(tw.start + "T12:00:00+03:00"), dayD = i => new Date(d0.getTime() + (i - 1) * 864e5);
   const fmtD = (d, o) => new Intl.DateTimeFormat("en-GB", Object.assign({timeZone: TZ}, o)).format(d);
   const days = {}, dshort = {}; for (let i = 1; i <= D; i++){ days[i] = fmtD(dayD(i), {weekday: "long", day: "numeric", month: "short"}).replace(",", ""); dshort[i] = fmtD(dayD(i), {weekday: "short"}); }
@@ -5389,14 +5399,25 @@ function twBuild(tw){
   /* group matches strictly in the order of play: all of the first category, then the next; round by round.
      A court is only given to the next category when the current one has no match left that can be played in that slot */
   const Q = []; ord.forEach(c => { twRR(gsz(c)).forEach((ms, r) => { for (let g = 1; g <= gr(c); g++) ms.forEach(([a, b]) => Q.push({c, g, r, t1: c + ((g - 1) * gsz(c) + a), t2: c + ((g - 1) * gsz(c) + b)})); }); });
+  /* every team plays at least once on day 1: first the rounds that give each team its first match (lowest category first), then the rest */
+  let LATER = null;
+  if (firstAll){ /* day 1: one block per category (D, then C, then B), each team plays at least once; spare slots go to the lower category first */
+    const first = {}, rest = {};
+    ord.forEach(c => { first[c] = []; rest[c] = []; const seen = new Set(), n = +tw.cats[c], ms = Q.filter(m => m.c === c), rs = [...new Set(ms.map(m => m.r))].sort((a, b) => a - b);
+      rs.forEach(r => { const rm = ms.filter(m => m.r === r); if (seen.size < n){ rm.forEach(m => { first[c].push(m); seen.add(m.t1); seen.add(m.t2); }); } else rm.forEach(m => rest[c].push(m)); }); });
+    const cap = Math.floor((Lend() - t) / +tw.gm) * C; let extra = cap - ord.reduce((a, c) => a + first[c].length, 0);
+    const day1 = [], later = [];
+    ord.forEach(c => { day1.push(...first[c]); const k = Math.max(0, Math.min(extra, rest[c].length)); day1.push(...rest[c].slice(0, k)); later.push(...rest[c].slice(k)); extra -= k; });
+    Q.length = 0; day1.forEach(m => Q.push(m)); LATER = {}; ord.forEach(c => { LATER[c] = later.filter(m => m.c === c); }); }
   /* rest rule: 0 = back-to-back is fine, 2 = at most 2 matches in a row then rest one, 1 = rest after every match */
   const maxRun = +tw.rest || 0; let run = {}, gDay = 1, gEnd = null;
   while (Q.length){
+    if (Q[0].brk){ Q.shift(); if (day === 1){ nextDay(); run = {}; } continue; }
     if (day > D){ fits = false; break; }
     if (t + +tw.gm > Lend()){ nextDay(); run = {}; if (day > D){ fits = false; break; } }
     const pick = () => { const busy = new Set(maxRun ? Object.keys(run).filter(k => run[k] >= maxRun) : []), take = [];
       let held = false; /* a match of this category had to wait, so the next category doesn't start yet */
-      for (let i = 0; i < Q.length && take.length < C; i++){ const m = Q[i]; if (held && m.c !== Q[0].c) break;
+      for (let i = 0; i < Q.length && take.length < C; i++){ const m = Q[i]; if (m.brk) break; if (held && m.c !== Q[0].c) break;
         if (busy.has(m.t1) || busy.has(m.t2)){ busy.add(m.t1); busy.add(m.t2); if (m.c === Q[0].c) held = true; continue; } take.push(i); busy.add(m.t1); busy.add(m.t2); }
       return take; };
     const take = pick();
@@ -5407,15 +5428,24 @@ function twBuild(tw){
     const nr = {}; ws.forEach(m => [m.t1, m.t2].forEach(x => { nr[x] = (run[x] || 0) + 1; })); run = nr; t += +tw.gm; span[day][1] = t; gDay = day; gEnd = t;
   }
   const g1 = !!tw.g1 && D > 1;
-  if (g1 && gDay === 1 && day < D) nextDay();
   const kput = (lab, court, d, tt) => { K[lab] = `${dshort[d]} ${twClock(tt)} Ct ${court}`; };
   const big = cats.filter(c => gr(c) === 8);
-  if (big.length) wave([].concat(...ord.filter(c => big.includes(c)).map(c => Array.from({length: 8}, (_, i) => `${c} R${i + 1}`))), +tw.qm, kput);
-  wave([].concat(...ord.filter(c => gr(c) > 2).map(c => [1, 2, 3, 4].map(i => `${c} QF${i}`))), +tw.qm, kput);
+  /* leftover group matches of one category (no team twice in the same slot) */
+  const gwave = ms => { const q = ms.slice(); while (q.length){ if (day > D){ fits = false; return; } if (t + +tw.gm > Lend()){ nextDay(); if (day > D){ fits = false; return; } }
+      const busy = new Set(), take = []; for (let i = 0; i < q.length && take.length < C; i++){ const m = q[i]; if (busy.has(m.t1) || busy.has(m.t2)) continue; take.push(i); busy.add(m.t1); busy.add(m.t2); }
+      const ws = take.map(i => q[i]); for (let i = take.length - 1; i >= 0; i--) q.splice(take[i], 1);
+      span[day] = span[day] || [t, t]; ws.forEach((m, j) => { n++; G.push({id: "g" + n, cat: m.c, grp: m.g, rnd: m.r + 1, day, time: twClock(t), court: j + 1, t1: m.t1, t2: m.t2}); }); t += +tw.gm; span[day][1] = t; gDay = day; gEnd = t; } };
+  const hasLeft = LATER && ord.some(c => (LATER[c] || []).length);
+  if (hasLeft ? day === 1 && day < D : g1 && gDay === 1 && day < D) nextDay();
+  /* every day the same order: lowest category first, and a category never comes back once its block is done */
+  ord.forEach(c => { if (LATER) gwave(LATER[c] || []);
+    if (big.includes(c)) wave(Array.from({length: 8}, (_, i) => `${c} R${i + 1}`), +tw.qm, kput);
+    if (gr(c) > 2) wave([1, 2, 3, 4].map(i => `${c} QF${i}`), +tw.qm, kput); });
   if (tw.finals && D > 1 && day < D && day <= D){ nextDay(); }
-  wave([].concat(...ord.map(c => [`${c} Semi 1`, `${c} Semi 2`])), +tw.sm, kput);
+  /* semifinals D → C → B, then all finals together at the end, one at a time: D final, C final, B final */
+  ord.forEach(c => wave([`${c} Semi 1`, `${c} Semi 2`], +tw.sm, kput));
   if (day <= D){ E[day].push([twClock(t), "break", "☕ Break before the finals (15 min)"]); t += 15; }
-  wave(ord.map(c => `${c} FINAL`), +tw.sm, kput);
+  ord.forEach(c => wave([`${c} FINAL`], +tw.sm, kput));
   if (day <= D) E[day].push([twClock(t + 15), "award", `🏆 Award ceremony${tw.prize ? ` · $${(+tw.prize).toLocaleString("en-US")} prize pool` : ""}`]);
   const teams = cats.reduce((a, c) => a + +tw.cats[c], 0), cn = {};
   for (let i = 1; i <= C; i++) cn[i] = (tw.cn[i - 1] || "").trim() || `Court ${i}`;
@@ -5433,7 +5463,9 @@ function twBuild(tw){
     catv: Object.fromEntries(cats.map(c => [c, c === "A" ? "--gold" : `--cat${c}`])), groups: Object.fromEntries(cats.map(c => [c, gr(c)])), size: SIZE, sizes: Object.fromEntries(cats.map(c => [c, gsz(c)])),
     gsets: Object.fromEntries(cats.map(c => [c, +tw.gs[c]])), days, dshort, format: Object.fromEntries(cats.map(c => [c, setTxt(tw.gs[c])])),
     courts: Array.from({length: C}, (_, i) => i + 1), cn, T: {G, K, E}, info_html: info, signup: tw.signup ? "true" : "false", ...(tw.fee ? {fee: +tw.fee} : {})};
-  return {cfg, teams, g: G.length, k: Object.keys(K).length, fits: fits && day <= D, span, days, end: dayD(D), club, ord, gDay, gEnd, g1};
+  const d1 = new Set(); G.filter(m => m.day === 1).forEach(m => { d1.add(m.t1); d1.add(m.t2); });
+  const g1miss = cats.some(c => { for (let i = 1; i <= +tw.cats[c]; i++) if (!d1.has(c + i)) return true; return false; });
+  return {cfg, teams, g: G.length, k: Object.keys(K).length, fits: fits && day <= D, span, days, end: dayD(D), club, ord, gDay, gEnd, g1, g1miss};
 }
 
 const twSum = (tw, b) => `<section class="card twsec twsum"><b>${t("twSum")} · ${esc(tw.name || "")}</b>
@@ -5455,7 +5487,7 @@ V.tnew = () => { if (!canMakeTour()) return V.events(); if (!S.tw) twInit(); con
     <div class="grid2">${fld(t("twStart"), "start", tw.start, `type="date"`)}<div class="fld"><span>${t("twDays")}</span>${chips("days", [1, 2, 3, 4, 5].map(x => [x, x]), tw.days)}</div></div></section>
    <section class="card twsec"><b>${t("twS3")}</b><span class="note">${t("twS3s")}</span>
     ${["A", "B", "C", "D", "E", "X"].map(c => `<div class="twcat">${c === "X" ? `<span class="lv mixb">${t("twMix")}</span>` : `<span class="lv c${c}">${c}</span>`}${chips("cat" + c, [[0, t("twOff")], [6, 6], [8, 8], [12, 12], [16, 16], [24, 24], [32, 32]], tw.cats[c])}</div>${tw.cats[c] > 0 ? `<div class="twgz"><span>${t("twGz")}</span>${chips("gz" + c, (TW_GZ[tw.cats[c]] || [4]).map(z => [z, z]), twGz(tw, c))}<small>${tf("twGzS", {g: tw.cats[c] / twGz(tw, c), m: twGz(tw, c) - 1, r: tw.cats[c] / twGz(tw, c) === 2 ? t("twSF") : tw.cats[c] / twGz(tw, c) === 8 ? t("twR16") : t("twQF")})}</small></div>` : ""}`).join("")}
-    ${b.ord.length > 1 ? `<div class="tword"><span>${t("twOrd")}</span><small>${t("twOrdS")}</small><div class="tword-l">${b.ord.map((c, i) => `<button class="chip" data-twc="up|${c}"${i ? "" : " disabled"} aria-label="${t("twUp")}"><i>${i + 1}</i>${c === "X" ? t("twMix") : c}${i ? " ↑" : ""}</button>`).join("")}</div></div>` : ""}
+    ${b.ord.length > 1 ? `<div class="tword"><span>${t("twOrd")}</span><small>${t("twOrdS")}</small><div class="tword-l">${b.ord.map((c, i) => `<span class="chip"><i>${i + 1}</i>${c === "X" ? t("twMix") : c}</span>`).join(" → ")}</div></div>` : ""}
     ${+tw.days > 1 ? `<label class="row" style="font-size:14px;gap:8px"><input type="checkbox" data-twk="g1"${tw.g1 ? " checked" : ""}> ${t("twG1")}</label>` : ""}
     <div class="fld"><span>${t("twRest")}</span>${chips("rest", [[0, t("twRest0")], [2, t("twRest2")], [1, t("twRest1")]], tw.rest || 0)}</div></section>
    <section class="card twsec"><b>${t("twS4")}</b>
