@@ -2212,6 +2212,24 @@ html[lang=ar] .lbme-b b{font-family:inherit;font-style:normal}
 /* 4 bottom tabs fill the bar */
 nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
 nav.tabs button{font-size:12px;min-height:50px}nav.tabs svg{width:24px;height:24px}
+
+/* LED pixel page titles */
+.play-h{line-height:0}.play-h .ledt{height:34px;width:auto;max-width:100%;display:block}
+.me-led{margin:0;line-height:0;min-width:0}.me-led .ledt{height:24px;width:auto;max-width:100%;display:block;object-fit:contain;object-position:left center}
+html[dir=rtl] .me-led .ledt{object-position:right center}
+html[dir=rtl] .play-h .ledt{height:40px}
+.ledt-fb{font:italic 900 34px/1 var(--disp);text-transform:uppercase}
+/* Home greeting further from the logo */
+
+
+/* LED titles in light mode: dark bulbs */
+
+/* v114: gold LED panel titles + Home identity */
+.play-h .ledt{height:46px;filter:drop-shadow(0 6px 14px rgba(0,0,0,.35))}html[dir=rtl] .play-h .ledt{height:50px}
+.me-led .ledt{height:32px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.3))}
+.hm-id{display:inline-flex;flex-direction:column;align-items:center;gap:6px}
+.hm-id .logo .lgword{height:40px}
+.hm-id .hello{font-size:13px;color:var(--ink-2);text-align:center;margin:0}
 </style>
 </head>
 <body>
@@ -2324,7 +2342,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
 const brandFetch = async (u, o) => { const r = await fetch(u, o); try { if (!/\/rest\/v1\/rpc\//.test(String((u && u.url) || u))) return r; const tx = await r.clone().text(); if (!/Padel Live|بادل لايف/.test(tx)) return r; return new Response(tx.replace(/Padel Live/g, "PlayPal").replace(/بادل لايف/g, "بلاي بال"), {status: r.status, statusText: r.statusText, headers: r.headers}); } catch (e) { return r; } };
-const VERSION = "v111";
+const VERSION = "v114";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -2397,9 +2415,25 @@ const installCard = () => standalone() ? "" : `<div class="card inst"><img src="
 const av = (s, o) => `<span class="av${o ? " o" : ""}">${esc(o ? "+" : initials(s))}</span>`;
 const initials = n => (String(n || "?").trim().split(/\s+/).map(x => x[0]).join("").slice(0,2) || "?").toUpperCase();
 const anyLive = () => { const d = new Intl.DateTimeFormat("en-CA", {timeZone: "Asia/Damascus"}).format(new Date()); return (S.tours || S.feedT || []).some(x => x && x.starts_on && x.starts_on <= d && (x.ends_on || x.starts_on) >= d); };
-const nav = cur => { if (cur === "clubs") cur = "matches"; const pop = S._navLast !== cur; S._navLast = cur; return `<nav class="tabs${pop ? " pop" : ""}" aria-label="Main">${[["home",IC.home,"home"],["matches",IC.ppl,"tMatches"],["events",IC.cup,"tEvents"],["me",IC.me,"tProfile"]].map(([v,i,k]) => `<button data-go="${v}"${cur === v ? ' aria-current="page"' : ""}>${i}${t(k)}${v === "events" && anyLive() ? `<span class="nav-live">${t("liveB")}</span>` : ""}</button>`).join("")}</nav>`; };
+const nav = cur => { if (cur === "matches") cur = "clubs"; const pop = S._navLast !== cur; S._navLast = cur; return `<nav class="tabs${pop ? " pop" : ""}" aria-label="Main">${[["home",IC.home,"home"],["clubs",IC.ppl,"tMatches"],["events",IC.cup,"tEvents"],["me",IC.me,"tProfile"]].map(([v,i,k]) => `<button data-go="${v}"${cur === v ? ' aria-current="page"' : ""}>${i}${t(k)}${v === "events" && anyLive() ? `<span class="nav-live">${t("liveB")}</span>` : ""}</button>`).join("")}</nav>`; };
+/* LED pixel text for page titles (white bulbs, like the PLAYPAL logo) */
+const LEDTX = {};
+function ledText(txt, rows){ rows = rows || 15; const key = txt + "|" + rows; if (LEDTX[key]) return LEDTX[key];
+  try { const ar = /[؀-ۿ]/.test(txt), T = ar ? txt : txt.toUpperCase(), o = document.createElement("canvas"), g = o.getContext("2d");
+    const F = ar ? `900 ${Math.round(rows * 1.05)}px Cairo, "IBM Plex Sans Arabic", Tahoma, sans-serif` : `italic 900 ${Math.round(rows * 1.25)}px "Barlow Condensed", "Arial Narrow", sans-serif`;
+    g.font = F; if (!ar) g.letterSpacing = "1px"; const w = Math.ceil(g.measureText(T).width) + 6, H = ar ? rows + 6 : rows;
+    o.width = w; o.height = H; g.font = F; if (!ar) g.letterSpacing = "1px"; g.fillStyle = "#fff"; g.textBaseline = "alphabetic";
+    if (ar){ g.direction = "rtl"; g.textAlign = "right"; g.fillText(T, w - 3, rows + 1); } else g.fillText(T, 2, rows - 1);
+    const d = g.getImageData(0, 0, w, H).data; let y0 = H, y1 = 0, x0 = w, x1 = 0; for (let y = 0; y < H; y++) for (let x = 0; x < w; x++) if (d[(y * w + x) * 4 + 3] > 110){ if (y < y0) y0 = y; if (y > y1) y1 = y; if (x < x0) x0 = x; if (x > x1) x1 = x; }
+    if (y1 < y0) return ""; const R = y1 - y0 + 1, C = x1 - x0 + 1, pad = 1.3, step = 10, c = document.createElement("canvas"); c.width = Math.round((C + pad * 2) * step); c.height = Math.round((R + pad * 2) * step); const x = c.getContext("2d");
+    x.fillStyle = "#05070A"; x.beginPath(); if (x.roundRect) x.roundRect(0, 0, c.width, c.height, step * 1.4); else x.rect(0, 0, c.width, c.height); x.fill(); x.lineWidth = step * .45; x.strokeStyle = "#B8860B"; x.stroke();
+    for (let y = 0; y < R; y++) for (let xx = 0; xx < C; xx++){ const on = d[((y + y0) * w + xx + x0) * 4 + 3] > 110; x.beginPath(); x.arc((xx + pad) * step + step / 2, (y + pad) * step + step / 2, step * .38, 0, 7);
+      if (on){ x.fillStyle = "#FFD21F"; x.shadowColor = "#FFD21F"; x.shadowBlur = step * 1.1; } else { x.fillStyle = "rgba(255,255,255,.07)"; x.shadowBlur = 0; } x.fill(); }
+    return (LEDTX[key] = c.toDataURL()); } catch (e) { return ""; } }
+const ledImg = (txt, cls) => { const u = ledText(txt); return u ? `<img class="ledt ${cls || ""}" src="${u}" alt="${esc(txt)}" data-ledt="${esc(txt)}">` : `<span class="ledt-fb ${cls || ""}">${esc(txt)}</span>`; };
+try { document.fonts && document.fonts.ready.then(() => { for (const k in LEDTX) delete LEDTX[k]; document.querySelectorAll("img[data-ledt]").forEach(i => { const u = ledText(i.dataset.ledt); if (u) i.src = u; }); }); } catch (e) {}
 /* Play page = Create a game (book a court) + Find a game (open matches) */
-const playHead = on => `<div class="top"><h1 class="play-h">${t("tMatches")}</h1></div><div class="mpA" role="tablist"><button data-go="clubs" role="tab" aria-selected="${on === "c"}"${on === "c" ? ' class="on"' : ""}>${t("pCreate")}</button><button data-go="matches" role="tab" aria-selected="${on === "f"}"${on === "f" ? ' class="on"' : ""}>${t("pFind")}</button></div>`;
+const playHead = on => `<div class="top"><h1 class="play-h">${ledImg(t("tMatches"))}</h1></div><div class="mpA" role="tablist"><button data-go="clubs" role="tab" aria-selected="${on === "c"}"${on === "c" ? ' class="on"' : ""}>${t("pCreate")}</button><button data-go="matches" role="tab" aria-selected="${on === "f"}"${on === "f" ? ' class="on"' : ""}>${t("pFind")}</button></div>`;
 const backBar = (title, to, extra) => `<div class="top"><div class="back"><button class="ib" data-go="${to}" aria-label="Back">${IC.back}</button><h1>${esc(title)}</h1></div>${extra || ""}</div>`;
 const statusTag = s => s === "deposit_pending" ? `<span class="tag pend">${t("pending")}</span>` : s === "cancelled" ? `<span class="tag b">${t("cancelled")}</span>` : `<span class="tag g">${t("confirmedS")}</span>`;
 function courtsArt(){ return `<svg viewBox="0 0 400 110" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="cs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0E1A2C"/><stop offset="1" stop-color="#1F3F70"/></linearGradient></defs><rect width="400" height="110" fill="url(#cs)"/><g fill="#FFE7A8" opacity=".85"><circle cx="40" cy="18" r="3"/><circle cx="360" cy="18" r="3"/></g><path d="M40 18 L10 110 H80Z M360 18 L320 110 H390Z" fill="#FFE7A8" opacity=".08"/><polygon points="120,40 200,40 196,110 90,110" fill="#2C5FAE" stroke="#fff" stroke-width="2"/><polygon points="210,40 290,40 320,110 214,110" fill="#C4452F" stroke="#fff" stroke-width="2"/><line x1="105" y1="72" x2="198" y2="72" stroke="#fff" stroke-width="2"/><line x1="212" y1="72" x2="305" y2="72" stroke="#fff" stroke-width="2"/><circle cx="170" cy="92" r="4" fill="#E3EE3A"/></svg>`; }
@@ -2456,7 +2490,7 @@ function m2Seat(map, k, o){ const s = map[k], sd = k[1] === "L" ? t("sdL") : t("
   const sw = o.swap ? ` type="button" data-seat="${k}"` : "";
   if (!s) return o.join ? `<button type="button" class="m2s free${sel}" data-join="${o.join}" data-jpos="${k}"><i>+</i><span>${sd}</span></button>` : `<${tag}${sw} class="m2s free${o.swap ? "" : " off"}${sel}"><i>+</i><span>${sd}</span></${tag}>`;
   const p = s.p; return `<${tag}${sw} class="m2s${sel}"><i>${p.friend ? "👤" : esc(initials(p.n || "?"))}</i>${p.friend ? `<small>${esc(p.n)}</small>` : lvChip(p.l, p.b)}</${tag}>`; }
-const m2Court = (map, o) => `<div class="m2-court"><div class="m2-side">${m2Seat(map, "AL", o)}${m2Seat(map, "AR", o)}</div><div class="m2-side">${m2Seat(map, "BR", o)}${m2Seat(map, "BL", o)}</div></div>`;
+const m2Court = (map, o) => `<div class="m2-court"><div class="m2-side">${m2Seat(map, "AL", o)}${m2Seat(map, "AR", o)}</div><div class="m2-side">${m2Seat(map, "BL", o)}${m2Seat(map, "BR", o)}</div></div>`;
 /* the club-style top of a card: photo, day tag, time */
 const m2Head = (clubName, d, tag) => { const cov = WEL_COVER(clubName || "");
   return `<div class="m2-ph${cov ? "" : " nocov"}"><span class="m2-tag">${esc(tag || m2Day(d))}</span><div class="m2-when"><b>${esc(fmtTime(d))}</b><span>${esc(fmtDay(d))}</span></div></div><div class="m2-st"></div>`; };
@@ -2470,7 +2504,7 @@ function mx2(m, d, sv, map, canJoin, range, each, btns, sheet, ppl){
    <div class="m3-ph${cov ? "" : " nocov"}"><span class="m3-tag">${esc(m2Day(d))}</span><b>${esc(tm ? tm[1] : tt)}</b>${tm ? `<small>${esc(tm[2])}</small>` : ""}<span class="m3-d">${esc(day)}</span></div>
    <div class="m3-bd"><div class="m3-top">${sv.k.logo ? `<img src="${esc(sv.k.logo)}" alt="" onerror="this.remove()">` : ""}<div><b>${esc(m.club_name)}</b><small>${esc(m.court_name)} · ${m.minutes} ${t("min")}${m.split ? ` · ${t("splitTag")}` : ""}</small></div><span class="m3-pr">${each}</span></div>
     ${tags ? `<div class="m3-tags">${tags}</div>` : ""}
-    <div class="m3-ct"><div class="m3-sd">${seat("AL")}${seat("AR")}</div><i class="m3-net"></i><div class="m3-sd">${seat("BR")}${seat("BL")}</div></div>
+    <div class="m3-ct"><div class="m3-sd">${seat("AL")}${seat("AR")}</div><i class="m3-net"></i><div class="m3-sd">${seat("BL")}${seat("BR")}</div></div>
     <div class="m3-ft"><span class="m3-lv">${m.level_min != null ? `${t("lvl")} ${range}` : range}</span><div class="jb">${btns}</div></div>${sheet ? `<div>${sheet}</div>` : ""}</div></div>`; }
 
 /* ---------- views ---------- */
@@ -2478,7 +2512,7 @@ const V = {};
 V.home = () => { const next = S.mine.find(b => b.status !== "cancelled" && new Date(b.starts_at) > new Date());
  const name = S.profile && S.profile.full_name ? S.profile.full_name.split(" ")[0] : "";
  return `<main>
-  <div class="top"><div><div class="hello">${S.user ? `${t("hi")} ${esc(name)}` : t("guest")}</div><div class="logo"><img class="lgword" src="playpal-word.png" alt="PlayPal"></div></div>
+  <div class="top"><div class="hm-id"><div class="logo"><img class="lgword" src="playpal-word.png" alt="PlayPal"></div><div class="hello">${S.user ? `${t("hi")} ${esc(name)}` : t("guest")}</div></div>
    <div class="row">${muteBtn()}${bell()}<button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button>${S.user ? "" : `<button class="pill" data-go="auth">${t("signin")}</button>`}</div></div>
   ${welcomeHome()}
   ${next ? `<button class="hero" data-match="${next.id}" style="text-align:start;width:100%"><div class="between" style="width:100%"><span class="kick2">${t("next")}</span>${statusTag(next.status).replace('tag g','tag w').replace('tag pend','tag w')}</div><span class="big">${esc(fmtDay(new Date(next.starts_at)) + " · " + fmtTime(new Date(next.starts_at)))}</span><span style="opacity:.92;font-size:14px">${esc(next.club_name)} · ${esc(next.court_name)} · ${next.minutes} ${t("min")}${next.code ? ` · #${next.booking_no} · <b>${esc(next.code)}</b>` : ""}</span></button>`
@@ -2768,10 +2802,9 @@ const evDel = (kind, id, name) => S.evEdit ? `<button class="evdel" data-evdel="
 V.events = () => { const tours = S.tours || [], leagues = S.leagues || [], admin = !!(S.profile && S.profile.is_admin);
   const upT = tours.filter(x => !evPast(x)), oldT = tours.filter(evPast), upL = leagues.filter(l => l.status !== "done"), oldL = leagues.filter(l => l.status === "done");
   const fm = d => d ? new Intl.DateTimeFormat(lang === "ar" ? "ar-SY" : "en-GB", {timeZone: TZ, day: "numeric", month: "short", year: "numeric"}).format(new Date(d + "T12:00:00+03:00")) : "";
-  const seg = S.cmpSeg || "all", showL = seg !== "tour", showT = seg !== "league";
-  return `<main>${backBar("", "home")}
-  <div class="cmp-hero">${cmpHeroArt()}<h1>${t("cmpH1")}<em>${t("cmpH2")}</em></h1><p>${t("cmpSub")}</p></div>
-  <div class="cmp-seg">${[["all", "cmpAll", 0], ["tour", "cmpTours", upT.length], ["league", "cmpLgs", upL.length]].map(([k, l, n]) => `<button data-cmpseg="${k}" aria-pressed="${seg === k}">${t(l)}${k !== "all" ? ` <i>${n}</i>` : ""}</button>`).join("")}</div>
+  const seg = S.cmpSeg === "league" ? "league" : "tour", showL = seg === "league", showT = seg === "tour";
+  return `<main><div class="top"><h1 class="play-h">${ledImg(t("tEvents"))}</h1></div>
+  <div class="mpA" role="tablist">${[["tour", "cmpTours"], ["league", "cmpLgs"]].map(([k, l]) => `<button data-cmpseg="${k}" role="tab" aria-selected="${seg === k}"${seg === k ? ' class="on"' : ""}>${t(l)}</button>`).join("")}</div>
   ${myEntriesSec(seg)}
 
   ${admin ? `<div class="row" style="gap:8px;justify-content:flex-end"><button class="chip" data-evedit aria-pressed="${!!S.evEdit}">${S.evEdit ? "✓ " + t("evEditDone") : "🗑 " + t("evEdit")}</button></div>` : ""}
@@ -2780,9 +2813,9 @@ V.events = () => { const tours = S.tours || [], leagues = S.leagues || [], admin
   ${canMakeTour() ? `<button class="cta wide twnew" data-twnew>🏆 ${t("twT")} →</button>` : ""}
   <div class="ev-fire" style="display:flex;flex-direction:column;gap:14px">${upT.map(x => evCard(x) + evDel("tour", x.slug, x.name)).join("")
    || `<div class="ev"><div class="in"><span class="tag l" style="align-self:flex-start">Soon</span><div class="t">${t("evSoon")}</div><div class="sm">${t("evTxt")}</div></div></div>`}</div>` : ""}
-  ${oldT.length || oldL.length ? `<details class="card hist"${S.evEdit ? " open" : ""}><summary>🏛️ ${t("evHist")} · ${oldT.length + oldL.length}</summary><div class="hist-l">
-    ${oldT.map(x => `<div class="hist-r"><a href="t.html?${encodeURIComponent(x.slug)}"><b>${esc(x.name)}</b><small>${esc(fm(x.starts_on))}${x.club ? " · " + esc(x.club) : ""}</small><span>›</span></a>${evDel("tour", x.slug, x.name)}</div>`).join("")}
-    ${oldL.map(l => `<div class="hist-r"><button data-league="${l.id}"><b>${esc(l.name)}</b><small>${t("league")} · ${esc(fm(l.starts_on))}</small><span>›</span></button>${evDel("league", l.id, l.name)}</div>`).join("")}
+  ${(showT ? oldT.length : oldL.length) ? `<details class="card hist"${S.evEdit ? " open" : ""}><summary>🏛️ ${t("evHist")} · ${showT ? oldT.length : oldL.length}</summary><div class="hist-l">
+    ${(showT ? oldT : []).map(x => `<div class="hist-r"><a href="t.html?${encodeURIComponent(x.slug)}"><b>${esc(x.name)}</b><small>${esc(fm(x.starts_on))}${x.club ? " · " + esc(x.club) : ""}</small><span>›</span></a>${evDel("tour", x.slug, x.name)}</div>`).join("")}
+    ${(showL ? oldL : []).map(l => `<div class="hist-r"><button data-league="${l.id}"><b>${esc(l.name)}</b><small>${t("league")} · ${esc(fm(l.starts_on))}</small><span>›</span></button>${evDel("league", l.id, l.name)}</div>`).join("")}
   </div></details>` : ""}
  </main>${nav("events")}`; };
 
@@ -5024,7 +5057,7 @@ V.pickclub = () => { if (!S.user) return V.auth();
 /* first-time tips over the tab bar */
 function showTips(){
   if (ls.get("pl-tips") || document.getElementById("tips") || S.view !== "home") return;
-  const steps = (bookLive() ? [["matches", "tip1"]] : []).concat([["events", "tip2"], ["me", "tip3"]]); let i = 0;
+  const steps = (bookLive() ? [["clubs", "tip1"]] : []).concat([["events", "tip2"], ["me", "tip3"]]); let i = 0;
   const ov = document.createElement("div"); ov.id = "tips"; document.body.appendChild(ov);
   const draw = () => { const b = document.querySelector(`nav.tabs button[data-go="${steps[i][0]}"]`); if (!b){ close(); return; }
     const r = b.getBoundingClientRect(), cx = r.left + r.width / 2;
@@ -5131,7 +5164,7 @@ function matchesRow(){
 
 V.home = () => { const name = S.profile && S.profile.full_name ? S.profile.full_name.split(" ")[0] : "";
  return `<main>
-  <div class="top"><div><div class="hello">${S.user ? `${t("hi")} ${esc(name)}` : t("guest")}</div><div class="logo"><img class="lgword" src="playpal-word.png" alt="PlayPal"></div></div>
+  <div class="top"><div class="hm-id"><div class="logo"><img class="lgword" src="playpal-word.png" alt="PlayPal"></div><div class="hello">${S.user ? `${t("hi")} ${esc(name)}` : t("guest")}</div></div>
    <div class="row">${muteBtn()}${bell()}<button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button>${S.user ? "" : `<button class="pill" data-go="auth">${t("signin")}</button>`}</div></div>
   ${smartCard()}
   ${tonightRow()}
@@ -5143,7 +5176,7 @@ V.home = () => { const name = S.profile && S.profile.full_name ? S.profile.full_
 /* Me in three tabs */
 V.me = () => { if (!S.user) return V.auth();
  const p = S.profile || {}, tab = S.meTab || "card", todo = pendingScores().length;
- const head = `<div class="top"><div class="row" style="gap:12px;min-width:0">${avF(p.full_name, myLevel(), S.mySoc && S.mySoc.b, 'style="width:48px;height:48px;font-size:16px;margin:0"')}<div style="min-width:0"><h2 style="margin:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(p.full_name || "")}</h2><span class="note">${S.card && S.card.placement > 0 ? esc(bookLive() ? tf("plTag", {n: 5 - S.card.placement}) : t("plTagE")) : myLevel() != null ? `${t("lvlU")} ${lvl2(myLevel())} · ${esc(tierName((S.card && S.card.category) || lvCat(myLevel())))} ${S.card ? subTier(S.card) : ""}` : esc(S.user.email || "")}</span></div></div>
+ const head = `<div class="top"><div class="row" style="gap:12px;min-width:0">${avF(p.full_name, myLevel(), S.mySoc && S.mySoc.b, 'style="width:48px;height:48px;font-size:16px;margin:0"')}<div style="min-width:0"><h2 class="me-led">${ledImg(p.full_name || "", "me")}</h2><span class="note">${S.card && S.card.placement > 0 ? esc(bookLive() ? tf("plTag", {n: 5 - S.card.placement}) : t("plTagE")) : myLevel() != null ? `${t("lvlU")} ${lvl2(myLevel())} · ${esc(tierName((S.card && S.card.category) || lvCat(myLevel())))} ${S.card ? subTier(S.card) : ""}` : esc(S.user.email || "")}</span></div></div>
    <div class="row">${S.staff.length ? `<button class="pill" data-go="manager">${t("meMgr")}</button>` : ""}${bell()}</div></div>
   <div class="seg">${[["card", "meCard"], ["games", "meGames"], ["set", "meSet"]].map(([k, l]) => `<button data-metab="${k}" aria-pressed="${tab === k}">${k === "set" ? "⚙️ " : ""}${t(l)}${k === "games" && todo ? `<i class="dot"></i>` : ""}</button>`).join("")}</div>`;
  let body = "";
