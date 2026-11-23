@@ -86,7 +86,7 @@ html[dir="rtl"] h2{font-style:normal}
 .mid{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .mid b{font-size:15px}
 .mid span{font-size:13px;color:var(--ink-2)}
-nav.tabs{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:440px;background:var(--card);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding:6px max(6px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(6px,env(safe-area-inset-left,0px));z-index:5}
+nav.tabs{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:440px;background:var(--card);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:6px max(6px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(6px,env(safe-area-inset-left,0px));z-index:5}
 nav.tabs button{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:600;color:var(--ink-2);min-height:46px;justify-content:center}
 nav.tabs button[aria-current="page"]{color:var(--blue);font-weight:800}
 nav.tabs svg{width:22px;height:22px}
@@ -2188,6 +2188,30 @@ html[lang=ar] .vlc-volt{right:auto;left:-10px;transform:rotate(8deg)}
 
 html[lang=ar] .vhero .vvolt{right:auto;left:-4px;transform:rotate(8deg)}html[lang=ar] .vhero .vvolt.vround{left:6px;transform:rotate(6deg)}
 html[lang=ar] .vmylg .vtop img{width:66px;height:66px;right:84px;top:2px}
+
+/* mute music button */
+.ib.mute{color:var(--ink)}.ib.mute.off{color:#8A93A3;border-style:dashed}
+/* Leaderboards card on Me (LED scoreboard style) */
+.lbme{display:flex;align-items:center;gap:12px;width:100%;text-align:start;border:1px solid rgba(227,238,58,.28);border-radius:18px;padding:12px 14px;cursor:pointer;color:#fff;
+  background:radial-gradient(circle,rgba(255,255,255,.07) 1.2px,transparent 1.6px) 0 0/8px 8px,linear-gradient(135deg,#0B1530,#05070A 70%);box-shadow:0 10px 24px rgba(0,0,0,.35),inset 0 0 0 1px rgba(255,255,255,.03)}
+.lbme img{width:58px;height:58px;border-radius:12px;flex:none;transform:rotate(-6deg);filter:drop-shadow(0 6px 12px rgba(0,0,0,.5))}
+.lbme-b{display:flex;flex-direction:column;min-width:0;flex:1}.lbme-b small{font:800 10px var(--body);letter-spacing:.2em;text-transform:uppercase;color:#FFD21F}
+.lbme-b b{font:italic 900 26px/1 var(--disp);text-transform:uppercase;margin:2px 0 3px;background:linear-gradient(90deg,#C2CAD2,#F0904A 30%,#F2F6FA 55%,#FFD21F 75%,#6FE3FF);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lbme-b span{font-size:12px;color:rgba(255,255,255,.7);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lbme-rk{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:56px;padding:6px 8px;border-radius:12px;background:#05070A;border:1px solid rgba(255,210,31,.45)}
+.lbme-rk small{font:800 9px var(--body);letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6)}.lbme-rk b{font:italic 900 26px/1 var(--disp);color:#FFD21F;text-shadow:0 0 10px rgba(255,210,31,.6)}
+.lbme-go{font-size:22px;font-weight:800;color:#E3EE3A}
+html[lang=ar] .lbme-b b{font-family:inherit;font-style:normal}
+
+/* Play page switch (Create a game / Find a game) */
+.play-h{font:italic 900 34px/1 var(--disp);text-transform:uppercase;margin:0}
+.mpA{display:grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:999px;background:var(--card);border:1px solid var(--line);margin:0 0 14px}
+.mpA button{height:44px;border-radius:999px;border:0;background:transparent;color:var(--ink);font:800 15px var(--body);cursor:pointer;opacity:.7;transition:background .2s,opacity .2s}
+.mpA button.on{background:#E3EE3A;color:#0B1530;opacity:1;box-shadow:0 6px 16px rgba(227,238,58,.25)}
+
+/* 4 bottom tabs fill the bar */
+nav.tabs{grid-template-columns:repeat(4,minmax(0,1fr))!important}
+nav.tabs button{font-size:12px;min-height:50px}nav.tabs svg{width:24px;height:24px}
 </style>
 </head>
 <body>
@@ -2300,7 +2324,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
 const brandFetch = async (u, o) => { const r = await fetch(u, o); try { if (!/\/rest\/v1\/rpc\//.test(String((u && u.url) || u))) return r; const tx = await r.clone().text(); if (!/Padel Live|بادل لايف/.test(tx)) return r; return new Response(tx.replace(/Padel Live/g, "PlayPal").replace(/بادل لايف/g, "بلاي بال"), {status: r.status, statusText: r.statusText, headers: r.headers}); } catch (e) { return r; } };
-const VERSION = "v108";
+const VERSION = "v111";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -2373,7 +2397,9 @@ const installCard = () => standalone() ? "" : `<div class="card inst"><img src="
 const av = (s, o) => `<span class="av${o ? " o" : ""}">${esc(o ? "+" : initials(s))}</span>`;
 const initials = n => (String(n || "?").trim().split(/\s+/).map(x => x[0]).join("").slice(0,2) || "?").toUpperCase();
 const anyLive = () => { const d = new Intl.DateTimeFormat("en-CA", {timeZone: "Asia/Damascus"}).format(new Date()); return (S.tours || S.feedT || []).some(x => x && x.starts_on && x.starts_on <= d && (x.ends_on || x.starts_on) >= d); };
-const nav = cur => { const pop = S._navLast !== cur; S._navLast = cur; return `<nav class="tabs${pop ? " pop" : ""}" aria-label="Main">${[["home",IC.home,"home"],["clubs",IC.cal,"tBook"],["matches",IC.ppl,"tMatches"],["events",IC.cup,"tEvents"],["me",IC.me,"tProfile"]].map(([v,i,k]) => `<button data-go="${v}"${cur === v ? ' aria-current="page"' : ""}>${i}${t(k)}${v === "events" && anyLive() ? `<span class="nav-live">${t("liveB")}</span>` : ""}</button>`).join("")}</nav>`; };
+const nav = cur => { if (cur === "clubs") cur = "matches"; const pop = S._navLast !== cur; S._navLast = cur; return `<nav class="tabs${pop ? " pop" : ""}" aria-label="Main">${[["home",IC.home,"home"],["matches",IC.ppl,"tMatches"],["events",IC.cup,"tEvents"],["me",IC.me,"tProfile"]].map(([v,i,k]) => `<button data-go="${v}"${cur === v ? ' aria-current="page"' : ""}>${i}${t(k)}${v === "events" && anyLive() ? `<span class="nav-live">${t("liveB")}</span>` : ""}</button>`).join("")}</nav>`; };
+/* Play page = Create a game (book a court) + Find a game (open matches) */
+const playHead = on => `<div class="top"><h1 class="play-h">${t("tMatches")}</h1></div><div class="mpA" role="tablist"><button data-go="clubs" role="tab" aria-selected="${on === "c"}"${on === "c" ? ' class="on"' : ""}>${t("pCreate")}</button><button data-go="matches" role="tab" aria-selected="${on === "f"}"${on === "f" ? ' class="on"' : ""}>${t("pFind")}</button></div>`;
 const backBar = (title, to, extra) => `<div class="top"><div class="back"><button class="ib" data-go="${to}" aria-label="Back">${IC.back}</button><h1>${esc(title)}</h1></div>${extra || ""}</div>`;
 const statusTag = s => s === "deposit_pending" ? `<span class="tag pend">${t("pending")}</span>` : s === "cancelled" ? `<span class="tag b">${t("cancelled")}</span>` : `<span class="tag g">${t("confirmedS")}</span>`;
 function courtsArt(){ return `<svg viewBox="0 0 400 110" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="cs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0E1A2C"/><stop offset="1" stop-color="#1F3F70"/></linearGradient></defs><rect width="400" height="110" fill="url(#cs)"/><g fill="#FFE7A8" opacity=".85"><circle cx="40" cy="18" r="3"/><circle cx="360" cy="18" r="3"/></g><path d="M40 18 L10 110 H80Z M360 18 L320 110 H390Z" fill="#FFE7A8" opacity=".08"/><polygon points="120,40 200,40 196,110 90,110" fill="#2C5FAE" stroke="#fff" stroke-width="2"/><polygon points="210,40 290,40 320,110 214,110" fill="#C4452F" stroke="#fff" stroke-width="2"/><line x1="105" y1="72" x2="198" y2="72" stroke="#fff" stroke-width="2"/><line x1="212" y1="72" x2="305" y2="72" stroke="#fff" stroke-width="2"/><circle cx="170" cy="92" r="4" fill="#E3EE3A"/></svg>`; }
@@ -2453,7 +2479,7 @@ V.home = () => { const next = S.mine.find(b => b.status !== "cancelled" && new D
  const name = S.profile && S.profile.full_name ? S.profile.full_name.split(" ")[0] : "";
  return `<main>
   <div class="top"><div><div class="hello">${S.user ? `${t("hi")} ${esc(name)}` : t("guest")}</div><div class="logo"><img class="lgword" src="playpal-word.png" alt="PlayPal"></div></div>
-   <div class="row">${bell()}<button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button>${S.user ? "" : `<button class="pill" data-go="auth">${t("signin")}</button>`}</div></div>
+   <div class="row">${muteBtn()}${bell()}<button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button>${S.user ? "" : `<button class="pill" data-go="auth">${t("signin")}</button>`}</div></div>
   ${welcomeHome()}
   ${next ? `<button class="hero" data-match="${next.id}" style="text-align:start;width:100%"><div class="between" style="width:100%"><span class="kick2">${t("next")}</span>${statusTag(next.status).replace('tag g','tag w').replace('tag pend','tag w')}</div><span class="big">${esc(fmtDay(new Date(next.starts_at)) + " · " + fmtTime(new Date(next.starts_at)))}</span><span style="opacity:.92;font-size:14px">${esc(next.club_name)} · ${esc(next.court_name)} · ${next.minutes} ${t("min")}${next.code ? ` · #${next.booking_no} · <b>${esc(next.code)}</b>` : ""}</span></button>`
    : `<button class="hero" data-go="clubs" style="text-align:start;width:100%"><span class="kick2">${t("none")}</span><span class="big">${t("book")} →</span><span style="opacity:.9;font-size:14px">${t("bookFirst")}</span></button>`}
@@ -2470,7 +2496,7 @@ V.clubs = () => { const areas = [...new Set(S.clubs.map(c => c.area).filter(Bool
  const list = S.clubs.filter(c => !S.area || c.area === S.area).map(c => ({c, st: findStatus(c)}));
  if (S.fTime) list.sort((a, b) => a.st.rank - b.st.rank);
  const anyFree = list.some(x => x.st.rank === 0);
- return `<main>${backBar(t("findCourt"), "home")}
+ return `<main>${playHead("c")}
   ${findBar()}
   ${areas.length > 1 ? `<div class="chips">${[["", t("areaAll")]].concat(areas.map(a => [a, a])).map(([k, l]) => `<button class="chip" data-area="${esc(k)}" aria-pressed="${S.area === k}">${esc(l)}</button>`).join("")}</div>` : ""}
   ${S.fTime && !anyFree && list.length ? `<div class="notice">${tf("fNoneAll", {t: esc(fmtTime(findTimes().find(([k]) => k === S.fTime)?.[1] || new Date()).replace(/:00/, ""))})}</div>` : ""}
@@ -2709,11 +2735,11 @@ function mfPass(m, f){ const d = new Date(m.starts_at), dk = x => new Intl.DateT
   if (f.spots === "one" && m.open_spots !== 1) return false;
   if (f.spots === "two" && m.open_spots < 2) return false;
   return true; }
-V.matches = () => { if (!bookLive() && !(S.matches || []).length) return `<main>${backBar(t("open"), "home")}${omSoonHero()}</main>${nav("matches")}`;
+V.matches = () => { if (!bookLive() && !(S.matches || []).length) return `<main>${playHead("f")}${omSoonHero()}</main>${nav("matches")}`;
   const f = mfGet(), list = S.matches.filter(m => mfPass(m, f)), on = f.when !== "all" || f.side !== "all" || f.spots !== "all" || !f.lvl;
   const ch = (k, v, l) => `<button class="chip${k === "lvl" && f.lvl ? " on2" : ""}" data-mf="${k}|${v}" aria-pressed="${k === "lvl" ? f.lvl : f[k] === v}">${l}</button>`;
   const clubs = [...new Map(S.matches.map(m => [m.club_id, m.club_name])).entries()];
-  return `<main>${backBar(t("open"), "home")}
+  return `<main>${playHead("f")}
   <div class="mfbar"><div class="mfrow">${ch("when", "today", t("mfToday"))}${ch("when", "tonight", t("mfTonight"))}${ch("when", "tomorrow", t("mfTom"))}${ch("when", "week", t("mfWeek"))}</div>
    <div class="mfrow">${myLevel() != null ? ch("lvl", "x", (f.lvl ? "✓ " : "") + t("mfLvl")) : ""}${ch("side", "L", t("mfSideL"))}${ch("side", "R", t("mfSideR"))}${ch("spots", "one", t("mfOne"))}${ch("spots", "two", t("mfTwo"))}</div>
    <div class="mfcount"><span>${f.side === "L" ? tf("mfNL", {n: list.length}) : f.side === "R" ? tf("mfNR", {n: list.length}) : list.length === 1 ? t("mfN1") : tf("mfN", {n: list.length})}</span>${on ? `<button data-mfclear>${t("mfClear")}</button>` : ""}</div></div>
@@ -2747,7 +2773,7 @@ V.events = () => { const tours = S.tours || [], leagues = S.leagues || [], admin
   <div class="cmp-hero">${cmpHeroArt()}<h1>${t("cmpH1")}<em>${t("cmpH2")}</em></h1><p>${t("cmpSub")}</p></div>
   <div class="cmp-seg">${[["all", "cmpAll", 0], ["tour", "cmpTours", upT.length], ["league", "cmpLgs", upL.length]].map(([k, l, n]) => `<button data-cmpseg="${k}" aria-pressed="${seg === k}">${t(l)}${k !== "all" ? ` <i>${n}</i>` : ""}</button>`).join("")}</div>
   ${myEntriesSec(seg)}
-  ${eventsBoardCard()}
+
   ${admin ? `<div class="row" style="gap:8px;justify-content:flex-end"><button class="chip" data-evedit aria-pressed="${!!S.evEdit}">${S.evEdit ? "✓ " + t("evEditDone") : "🗑 " + t("evEdit")}</button></div>` : ""}
   ${showL && (upL.length || admin) ? `<div class="between"><h2>🏆 ${t("leagues")}</h2>${lgAdminBtn()}</div><div style="display:flex;flex-direction:column;gap:12px">${upL.map(l => lgCard(l) + evDel("league", l.id, l.name)).join("")}</div>` : ""}
   ${showT ? `<h2>🔥 ${t("cmpOpen")}</h2>
@@ -2891,6 +2917,7 @@ function nText(n){ const d = n.data || {}, nm = esc(d.name || t("someone")), w =
   return ({ joined: t("nJoined").replace("{n}", nm).replace("{w}", w), left: t("nLeft").replace("{n}", nm).replace("{w}", w),
     deposit_ok: t("nDepOk"), club_cancelled: t("nClubCancel").replace("{w}", w), share_ok: t("nShareOk"), share_no: t("nShareNo"),
     result: t("nResult").replace("{n}", nm), result_ok: t("nResultOk"), result_no: t("nResultNo").replace("{n}", nm), chat: t("nChat").replace("{n}", nm) })[n.kind] || nText2(n) || n.kind; }
+const muteBtn = () => { const on = musicOn(); return `<button class="ib mute${on ? "" : " off"}" data-music aria-pressed="${!on}" aria-label="${on ? t("muMute") : t("muOn")}" title="${on ? t("muMute") : t("muOn")}"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z" fill="currentColor"/>${on ? '<path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' : '<path d="M16 9.5l5 5M21 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>'}</svg></button>`; };
 const bell = () => S.user ? `<button class="ib bell" data-go="inbox" aria-label="${t("inbox")}">${IC.bell}${S.notifN ? `<span class="badge">${S.notifN > 9 ? "9+" : S.notifN}</span>` : ""}</button>` : "";
 V.inbox = () => { if (!S.user) return V.auth();
   return `<main>${backBar(t("inbox"), "home")}
@@ -3052,7 +3079,7 @@ function playerCard(c){
    </div></div></div></div></div>
    <div class="pc-prog${pr.danger ? " danger" : ""}${pl ? " plc" : ""}${pr.series ? " plc ser" : ""}">${pr.series ? `<div class="pips">${[0, 1, 2].map(i => `<i class="${i < pr.w ? "on" : i < pr.w + pr.l ? "x" : ""}"></i>`).join("")}</div>` : pl ? (bookLive() ? `<div class="pips">${[0, 1, 2, 3, 4].map(i => `<i class="${i < pr.done ? "on" : ""}"></i>`).join("")}</div>` : "") : `<div class="bar"><i style="width:${pr.pct}%"></i>${(pr.marks || []).map(m => `<b style="left:${m}%"></b>`).join("")}</div>`}<div class="lbl"><span>${pl ? (bookLive() ? tf("plTag", {n: pr.done}) : t("plTagE")) : pr.series ? `${t("serT")} → ${esc(tierName(pr.to))}` : `${esc(tierName(c.category))} ${st} · ${esc(c.category || "")}`}</span><em>${esc(pr.txt)}</em></div></div>
    <div class="pc-badges">${[...(S.wi && S.wi.quest && (S.wi.quest.done || S.wi.quest.new) ? [{k: "rookie", got: !!S.wi.quest.done}] : []), ...(c.badges || []), ...achList(S.myAch)].map(b => `<div class="bd${b.got ? "" : " lock"}"><i>${BADGE_IC[b.k] || "★"}</i>${t("b_" + b.k)}${S.rarity && S.rarity[b.k] != null ? `<small class="rar">${tf("rarity", {p: S.rarity[b.k]})}</small>` : ""}</div>`).join("")}</div>
-   <div class="row" style="gap:10px"><button class="cta gold wide" data-sharecard>${t("shareCard")} ↗</button>${c.season ? `<button class="ghost" style="width:auto;padding:0 16px" data-season="${c.season.club_id}">${t("seasonBtn")}</button>` : ""}</div>`;
+   <div class="row" style="gap:10px"><button class="cta gold wide" data-sharecard>${t("shareCard")} ↗</button></div>`;
 }
 V.season = () => { const rows = S.board || [];
   return `<main>${backBar(t("seasonT"), "me")}
@@ -4496,14 +4523,14 @@ function tonightRow(){
   if (!bookLive() && !(S.matches || []).length) return "";
   const today = dayKey(new Date()), now = Date.now() - 15 * 60000;
   const myL = myLevel(), open = forMe((S.matches || []).filter(m => m.open_spots > 0 && !m.joined && dayKey(new Date(m.starts_at)) === today && new Date(m.starts_at).getTime() > now && (m.inv || (inRange(m, myL) && !tooHigh(m)))));
-  return `<div class="between"><h2>${t("ptT")}</h2><a href="#matches" data-go="matches" style="font-weight:700;font-size:13px;white-space:nowrap">${t("all")} →</a></div>
-   ${open.length ? `<div class="om-row">${open.slice(0, 8).map(matchRow).join("")}</div>` : `<button class="card note" data-go="matches" style="text-align:start;width:100%">${t("ptNone")}</button>`}`;
+  return `<div class="between"><h2>${t("hmPlay")}</h2><a href="#matches" ${bookLive() ? `data-go="matches"` : `data-soon="m"`} style="font-weight:700;font-size:13px;white-space:nowrap">${t("all")} →</a></div>
+   ${open.length ? `<div class="om-row">${open.slice(0, 8).map(matchRow).join("")}</div>` : `<button class="card note" ${bookLive() ? `data-go="matches"` : `data-soon="m"`} style="text-align:start;width:100%">${t("ptNone")}</button>`}`;
 }
 /* Home: events happening now or coming up, same cards as the Events page */
 function homeEvents(){
   const lg = S.user ? myLeagueCard() : "", ts = (S.tours || []).filter(x => !evPast(x)).slice(0, 3);
   if (!lg && !ts.length) return "";
-  return `<div class="between"><h2>${t("hmEv")}</h2><a href="#events" data-go="events" style="font-weight:700;font-size:13px;white-space:nowrap">${t("all")} →</a></div>
+  return `<div class="between"><h2>${t("hmComp")}</h2><a href="#events" data-go="events" style="font-weight:700;font-size:13px;white-space:nowrap">${t("all")} →</a></div>
    <div class="ev-fire-l">${[lg].concat(ts.map(evCard)).filter(Boolean).map(h => `<div class="ev-fire">${h}</div>`).join("")}</div>`;
 }
 /* ---------- What's new: events and big moments only (no match-by-match results) ---------- */
@@ -4779,12 +4806,12 @@ function snScene(k){
 }
 function soonRow(){ if (bookLive()) return "";
   const lg = (S.leagues || []).some(l => l && (l.status === "signup" || l.status === "running"));
-  const items = [["matches", "🎾", "snM1", "snM2", ["snMc1", "snMc2"], `data-go="matches"`], ["book", "🗓️", "snB1", "snB2", ["snBc1", "snBc2"], `data-go="clubs"`]].concat(lg || !S.lgKnown ? [] : [["league", "🏆", "snL1", "snL2", ["snLc1", "snLc2"], `data-soonlg="1"`]]);
-  return `<div class="between"><h2>${t("snT")}</h2><span class="sn-lock">🔒 ${t("snLock")}</span></div>
+  const items = [["matches", "🎾", "snM1", "snM2", ["snMc1", "snMc2"], `data-soon="m"`], ["book", "🗓️", "snB1", "snB2", ["snBc1", "snBc2"], `data-soon="b"`]].concat(lg || !S.lgKnown ? [] : [["league", "🏆", "snL1", "snL2", ["snLc1", "snLc2"], `data-soon="l"`]]);
+  return `<div class="between"><h2>${t("hmNews")}</h2><span class="sn-lock">🔒 ${t("snLock")}</span></div>
    <div class="sn2-row">${items.map(([k, ic, t1, t2, ch, go]) => `<button class="evc sn2 sn2-${k}" ${go}><span class="sn2-sc">${snScene(k)}</span><span class="evc-shade"></span>
      <span class="evc-mid"><span class="evc-kick2 sn2-kick">${t("snSoonL")}</span><span class="evc-t">${t(t1)}<br><em>${t(t2)}</em></span><span class="evc-chips">${ch.map(c => `<span>${t(c)}</span>`).join("")}</span></span>
      <span class="evc-go sn2-go" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16"><rect x="5" y="10" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></span></button>`).join("")}</div>`; }
-app.addEventListener("click", e => { if (e.target.closest("[data-soonlg]")) toast(t("snLt")); });
+app.addEventListener("click", e => { const x = e.target.closest("[data-soon]"); if (!x) return; e.preventDefault(); e.stopPropagation(); toast(t({m: "snMt", b: "snBt", l: "snLt"}[x.dataset.soon] || "snLt")); }, true);
 /* ---------- Match day: on the day you play, Home becomes a big countdown ---------- */
 function matchDay(nc){
   const cat = (S.card && S.card.category) || (myLevel() != null ? lvCat(myLevel()) : "D"), [, col] = TIER[cat] || TIER.D;
@@ -4926,8 +4953,8 @@ Object.assign(W.en, {meEnt:"My entries", meWait:"Waiting for confirmation", meOk
 Object.assign(W.ar, {meEnt:"مشاركاتي", meWait:"بانتظار التأكيد", meOk:"مؤكد", meWl:"قائمة الانتظار", meWith:"مع", meOpen:"افتح", meNoTime:"وقت المباراة لسا ما تحدد", calAdd:"ضيف للتقويم", calApple:"تقويم آبل", calGoogle:"تقويم غوغل", vsL:"ضد", ptsU:"نقطة"});
 Object.assign(W.en, {accGone:"Your account was reset. Please create a new account to continue."});
 Object.assign(W.ar, {accGone:"انعمل تصفير لحسابك. اعمل حساب جديد لتكمّل."});
-Object.assign(W.en, {snSoonL:"Coming soon", snM1:"Open", snM2:"matches", snMc1:"Your level", snMc2:"Every night", snB1:"Court", snB2:"booking", snBc1:"Core · Trio · Let's", snBc2:"In seconds", snL1:"Box", snL2:"leagues", snLc1:"Weekly", snLc2:"Prizes"});
-Object.assign(W.ar, {snSoonL:"قريباً", snM1:"مباريات", snM2:"مفتوحة", snMc1:"بمستواك", snMc2:"كل ليلة", snB1:"حجز", snB2:"الملاعب", snBc1:"Core · Trio · Let's", snBc2:"بثواني", snL1:"الدوريات", snL2:"الأسبوعية", snLc1:"كل أسبوع", snLc2:"جوايز"});
+Object.assign(W.en, {pCreate:"Create a game", pFind:"Find a game", hmPlay:"Play", hmComp:"Compete", hmNews:"News", snMt:"🎾 Open matches are coming soon. Stay tuned!", snBt:"🗓️ Court booking is coming soon. Stay tuned!", muMute:"Mute music", muOn:"Play music", lbKick:"This week", lbYou:"You", lbSub:"{c} · resets Monday", snSoonL:"Coming soon", snM1:"Open", snM2:"matches", snMc1:"Your level", snMc2:"Every night", snB1:"Court", snB2:"booking", snBc1:"Core · Trio · Let's", snBc2:"In seconds", snL1:"Box", snL2:"leagues", snLc1:"Weekly", snLc2:"Prizes"});
+Object.assign(W.ar, {pCreate:"اعمل لعبة", pFind:"لاقي لعبة", hmPlay:"العب", hmComp:"تنافس", hmNews:"الأخبار", snMt:"🎾 المباريات المفتوحة جايّة قريباً. خليك متابع!", snBt:"🗓️ حجز الملاعب جاي قريباً. خليك متابع!", muMute:"اكتم الموسيقى", muOn:"شغّل الموسيقى", lbKick:"هالأسبوع", lbYou:"إنت", lbSub:"{c} · بيتصفّر يوم الاثنين", snSoonL:"قريباً", snM1:"مباريات", snM2:"مفتوحة", snMc1:"بمستواك", snMc2:"كل ليلة", snB1:"حجز", snB2:"الملاعب", snBc1:"Core · Trio · Let's", snBc2:"بثواني", snL1:"الدوريات", snL2:"الأسبوعية", snLc1:"كل أسبوع", snLc2:"جوايز"});
 Object.assign(W.en, {snT:"Coming soon", snLock:"Unlocking next", snSoon:"Soon", snM:"Open matches", snMs:"Join games at your level, any night of the week.", snB:"Court booking", snBs:"Book Core, Trio and Let's Padel courts in seconds.", snL:"Leagues", snLs:"Weekly box leagues. Climb, get promoted, win prizes.", snUnl:"Unlocking soon", snLt:"🏆 Leagues are coming soon. Stay tuned!"});
 Object.assign(W.ar, {snT:"قريباً", snLock:"عم ينفتح", snSoon:"قريباً", snM:"مباريات مفتوحة", snMs:"انضم لمباريات بمستواك بأي ليلة بالأسبوع.", snB:"حجز الملاعب", snBs:"احجز ملاعب Core وTrio وLet's Padel بثواني.", snL:"الدوريات", snLs:"دوريات أسبوعية. اطلع، ترقّى، واربح جوايز.", snUnl:"عم ينفتح قريباً", snLt:"🏆 الدوريات جايّة قريباً. خليك متابع!"});
 Object.assign(W.en, {rsQk:"Your rank", rsQt:"What's your rank?", rsQs:"Take the 60-second quiz and get your tier card.", rsK:"Your rank"});
@@ -5105,7 +5132,7 @@ function matchesRow(){
 V.home = () => { const name = S.profile && S.profile.full_name ? S.profile.full_name.split(" ")[0] : "";
  return `<main>
   <div class="top"><div><div class="hello">${S.user ? `${t("hi")} ${esc(name)}` : t("guest")}</div><div class="logo"><img class="lgword" src="playpal-word.png" alt="PlayPal"></div></div>
-   <div class="row">${bell()}<button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button>${S.user ? "" : `<button class="pill" data-go="auth">${t("signin")}</button>`}</div></div>
+   <div class="row">${muteBtn()}${bell()}<button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button>${S.user ? "" : `<button class="pill" data-go="auth">${t("signin")}</button>`}</div></div>
   ${smartCard()}
   ${tonightRow()}
   ${homeEvents()}
@@ -5120,7 +5147,7 @@ V.me = () => { if (!S.user) return V.auth();
    <div class="row">${S.staff.length ? `<button class="pill" data-go="manager">${t("meMgr")}</button>` : ""}${bell()}</div></div>
   <div class="seg">${[["card", "meCard"], ["games", "meGames"], ["set", "meSet"]].map(([k, l]) => `<button data-metab="${k}" aria-pressed="${tab === k}">${k === "set" ? "⚙️ " : ""}${t(l)}${k === "games" && todo ? `<i class="dot"></i>` : ""}</button>`).join("")}</div>`;
  let body = "";
- if (tab === "card") body = `${walletCard()}${playerCard(S.card)}${seasonCard()}<button class="cta wide pfbtn" data-profile="me">📊 ${t("pfMine")} →</button>`;
+ if (tab === "card") body = `${walletCard()}${playerCard(S.card)}${meBoardCard()}${seasonCard()}<button class="cta wide pfbtn" data-profile="me">📊 ${t("pfMine")} →</button>`;
  else if (tab === "games"){ const up = upcoming(), past = S.mine.filter(b => !up.includes(b));
    body = `${todo ? `<h2>⚑ ${t("meToDo")}</h2><div class="glist">${pendingScores().map(gameRow).join("")}</div>` : ""}
     ${schedSec()}
@@ -5650,6 +5677,8 @@ function seasonCard(){ const s = S.season; if (!s) return "";
 function rivalsHtml(){ const L = S.rivals || []; if (!L.length) return "";
   return `<h2>${t("rvT")}</h2><span class="note" style="margin-top:-8px">${t("rvS")}</span><div class="card" style="padding:6px 10px">${L.map(r => `<div class="srow"><span class="srk">⚔️</span>${avF(r.name, r.level, r.b)}<b>${pLink(r.id, r.name)}${nameBadges(r.b)}</b><span class="spts rv${r.w > r.l ? " up" : r.w < r.l ? " down" : ""}">${tf("rvYou", {w: r.w, l: r.l})}</span></div>`).join("")}</div>`; }
 
+function meBoardCard(){ if (!S.user) return ""; const c = S.clubs.find(x => x.id === boardClub()) || {}, rk = S.card && S.card.season && S.card.season.rank;
+  return `<button class="lbme" data-go="season"><img src="led-trophy.png" alt="" aria-hidden="true"><span class="lbme-b"><small>${t("lbKick")}</small><b>${t("lbT")}</b><span>${esc(tf("lbSub", {c: c.name || ""}))}</span></span>${rk ? `<span class="lbme-rk"><small>${t("lbYou")}</small><b>#${esc(rk)}</b></span>` : `<span class="lbme-go">→</span>`}</button>`; }
 function eventsBoardCard(){ if (!S.user) return ""; const c = S.clubs.find(x => x.id === boardClub()) || {};
   return `<button class="card lbcard" data-go="season"><span class="w-ic">🏆</span><span class="tn-b"><b>${t("lbOpen")}</b><span class="note">${esc(tf("lbOpenS", {c: c.name || ""}))}</span></span><span class="tn-go">→</span></button>`; }
 
