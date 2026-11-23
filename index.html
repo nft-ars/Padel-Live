@@ -2393,7 +2393,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
 const brandFetch = async (u, o) => { const r = await fetch(u, o); try { if (!/\/rest\/v1\/rpc\//.test(String((u && u.url) || u))) return r; const tx = await r.clone().text(); if (!/Padel Live|بادل لايف/.test(tx)) return r; return new Response(tx.replace(/Padel Live/g, "PlayPal").replace(/بادل لايف/g, "بلاي بال"), {status: r.status, statusText: r.statusText, headers: r.headers}); } catch (e) { return r; } };
-const VERSION = "v129";
+const VERSION = "v130";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -2934,7 +2934,7 @@ V.me = () => { if (!S.user) return V.auth();
   ${installCard()}
   <button class="ghost" data-signout style="color:var(--red)">${t("signout")}</button>
   <button class="linkbtn" data-delacc style="color:var(--ink-3)">${t("delAcc")}</button>
-  <p class="note" style="text-align:center;font-size:11px;opacity:.6;margin:0">PlayPal ${VERSION}</p>
+  ${S.profile && S.profile.is_admin ? `<p class="note" style="text-align:center;font-size:12px;opacity:.7;margin:0">PlayPal ${VERSION} · only you see this (admin)</p>` : ""}
  </main>${nav("me")}`; };
 
 V.reset = () => { if (!S.user) return V.auth();
@@ -3938,7 +3938,7 @@ function render(){
     if (secs < 6){ if (!app.querySelector(".splash")) app.innerHTML = `<div class="splash"><img class="spw" src="${SPLASH}" alt="PlayPal"><span></span></div>`; return; }
     app.innerHTML = `<main><div class="logo"><img class="lgword" src="${SPLASH}" alt="PlayPal"></div><div class="card note">… ${secs}s</div>
     <button class="cta" data-reload>${t("retry")}</button><button class="ghost" data-resetapp>Reset app (signs you out)</button>
-    <p class="note" style="font-size:11px;opacity:.7">${VERSION} · ${esc(S.step || "start")}${S.lastErr ? " · " + esc(S.lastErr) : ""}</p></main>`; return; }
+    <p class="note" style="font-size:11px;opacity:.7">${esc(S.step || "start")}${S.lastErr ? " · " + esc(S.lastErr) : ""}</p></main>`; return; }
   try { app.innerHTML = (V[S.view] || V.home)() + sheetHtml(); runIdle(); try { const tc = S.card && TIER[S.card.category]; document.documentElement.style.setProperty("--tierc", tc ? tc[1] : "#2C5FAE"); } catch (e) {} const ra = app.querySelector(".rk2[data-rkauto]"); if (ra) rk2Burst(ra, ra.dataset.rkauto); }
   catch (e) { console.error(e); if (S.view !== "home"){ S.view = "home"; history.replaceState(null, "", "#home"); app.innerHTML = V.home(); } }
 }
@@ -5293,7 +5293,7 @@ V.me = () => { if (!S.user) return V.auth();
   ${adminCard()}${adminPlayers()}${installCard()}
   <button class="ghost" data-signout style="color:var(--red)">${t("signout")}</button>
   <button class="linkbtn" data-delacc style="color:var(--ink-3)">${t("delAcc")}</button>
-  <p class="note" style="text-align:center;font-size:11px;opacity:.6;margin:0">PlayPal ${VERSION}</p>`;
+  ${S.profile && S.profile.is_admin ? `<p class="note" style="text-align:center;font-size:12px;opacity:.7;margin:0">PlayPal ${VERSION} · only you see this (admin)</p>` : ""}`;
  return `<main>${head}${body}</main>${nav("me")}`; };
 
 /* bottom sheets: push and install asked at the right moment, manager quick actions */
