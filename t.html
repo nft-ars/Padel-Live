@@ -109,6 +109,10 @@ header.top .chips span.g,header.top .brand p span.g{border-color:#E3EE3A!importa
 .su-pill b{font:800 14px/1.1 inherit;white-space:nowrap}.su-pill small{flex:1;min-width:0;font-size:12px;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .su-pill-d{width:8px;height:8px;border-radius:50%;background:#E3EE3A;box-shadow:0 0 8px #E3EE3A;flex:none;animation:suPd 1.4s ease-in-out infinite}@keyframes suPd{50%{opacity:.3}}
 .su-pill-go{flex:none;width:26px;height:26px;border-radius:50%;background:#E3EE3A;color:#0B1530;display:grid;place-items:center;font-weight:900}
+
+.su-found{display:flex;flex-direction:column;gap:6px;margin:-2px 0 8px}
+.su-found button{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--line,#d9dcd3);background:var(--card,#fff);color:inherit;font:inherit;cursor:pointer;text-align:start}
+.su-found button b{font-weight:700}.su-found button span{font-size:13px;opacity:.65;white-space:nowrap}
 </style><style>.phf{display:flex;align-items:stretch;gap:0;border:1px solid var(--line,rgba(127,127,127,.35));border-radius:12px;overflow:hidden;background:var(--card,transparent)}
 .phf .phcc{position:relative;display:flex;align-items:center;padding:0 10px 0 12px;border-inline-end:1px solid var(--line,rgba(127,127,127,.35));white-space:nowrap;font-weight:700;font-size:15px;cursor:pointer;margin:0}
 .phf .phcc:after{content:"▾";font-size:11px;opacity:.6;margin-inline-start:6px}
@@ -4227,8 +4231,16 @@ function suWaiting(){ const v = SU.myInv;
 let suTimer = null;
 function suWho(ck){ const nw = (on, v) => on ? ` <small>(counts as ${(+v).toFixed(2)} until placement is done)</small>` : "";
   return `<p class="su-s">You ${(+ck.me).toFixed(2)}${nw(ck.me_new, ck.me)} + ${esc(ck.partner)} ${(+ck.plevel).toFixed(2)}${nw(ck.p_new, ck.plevel)}</p>`; }
+function suFound(){ if (SU.pickName || !SU.q || SU.q.replace(/\D/g, "").length >= 6) return "";
+  if (SU.finding) return `<p class="su-s">Searching…</p>`;
+  if (!SU.found) return "";
+  if (!SU.found.length) return `<p class="su-s">No player found with that name. Try their WhatsApp number, or invite them on WhatsApp.</p>`;
+  return `<div class="su-found">${SU.found.map(p => `<button type="button" data-supick="${esc(p.key)}|${esc(p.name)}"><b>${esc(p.name)}</b><span>${p.level != null ? (+p.level).toFixed(2) : ""}${p.tail ? ` · ${esc(p.tail)}` : ""}</span></button>`).join("")}</div>`; }
+let suFindT; function suFind(){ clearTimeout(suFindT); const q = (SU.q || "").trim(); SU.found = null;
+  if (q.length < 2 || q.replace(/\D/g, "").length >= 6){ SU.finding = false; return; } SU.finding = true;
+  suFindT = setTimeout(async () => { const r = await sb.rpc("t_find_partner", {p_slug: SLUG, p_q: q}); if ((SU.q || "").trim() !== q) return; SU.finding = false; SU.found = r.error ? [] : (r.data || []); render(); }, 350); }
 function suCheck(){ clearTimeout(suTimer); SU.check = null;
-  if (!SU.cat || SU.phone.replace(/\D/g, "").length < 9) return;
+  if (!SU.cat || (!/^id:/.test(SU.phone) && SU.phone.replace(/\D/g, "").length < 9)) return;
   suTimer = setTimeout(async () => { const r = await sb.rpc("t_check", {p_slug: SLUG, p_cat: SU.cat, p_partner_phone: SU.phone}); SU.check = r.error ? {ok: false, reason: r.error.message} : r.data; render(); }, 400); }
 function suCounts(){ const c = (SU.info && SU.info.counts) || {};
   return `<div class="su-counts">${CATS.map(k => { const x = c[k] || {}; const full = x.max && x.confirmed >= x.max;
@@ -4332,9 +4344,9 @@ function signupBox(){ const I = SU.info; if (!I || editMode) return "";
         ${!CFG.level_check ? `<p class="su-s">🔓 Open entry: pick the category you want to play. The organizer confirms every team. No rank yet? You get this category as your rank and your tier card as soon as your team is confirmed.</p>` : !SU.info.level || SU.autoLv ? `<p class="su-s">Your first matches fine-tune your level. B and A players are checked by the admin.</p>` : ""}
         <span class="lbl">Who's your partner?</span>
         <div class="su-pm"><button class="su-pmo" data-supm="inv" aria-pressed="${inv}"><span class="su-pmi">📲</span><span><b>Invite them on WhatsApp</b><small>They tap your link, make an account in a minute, and your team is in.</small></span></button>
-          <button class="su-pmo" data-supm="acc" aria-pressed="${!inv}"><span class="su-pmi">👤</span><span><b>They're already on PlayPal</b><small>Type their WhatsApp number.</small></span></button></div>
+          <button class="su-pmo" data-supm="acc" aria-pressed="${!inv}"><span class="su-pmi">👤</span><span><b>They're already on PlayPal</b><small>Search by name or WhatsApp number.</small></span></button></div>
         ${inv ? `<button class="btn primary su-wa big" data-suinv${SU.cat && !SU.busy ? "" : " disabled"}>${SU.busy ? "…" : SU.cat ? "Send invite on WhatsApp" : "Pick your category first"}</button>`
-          : `<label class="lbl">Partner's WhatsApp number<input id="su-phone" inputmode="tel" dir="ltr" placeholder="+963 9XX XXX XXX" value="${esc(SU.phone)}"></label>
+          : `<label class="lbl">Partner's name or WhatsApp number<input id="su-phone" autocomplete="off" placeholder="e.g. Rami or 09XX XXX XXX" value="${esc(SU.q != null ? SU.q : SU.phone)}"></label>${suFound()}
         ${ck ? (!ck.ok ? `<p class="su-bad">${esc(ck.reason)}</p>` : !CFG.level_check ? `<p class="su-ok">✓ ${esc(ck.partner)} · ${esc(CATN[SU.cat] || SU.cat)}</p>` : ck.fits ? `<p class="su-ok">✓ ${esc(ck.partner)} (${(+ck.plevel).toFixed(2)}) · team level ${(+ck.avg).toFixed(2)} · fits ${esc(CATN[SU.cat] || SU.cat)}</p>${suWho(ck)}`
            : `<p class="su-bad">${esc(ck.reason)}</p>${suWho(ck)}<label class="lbl">Ask the organizer for an exception<textarea id="su-note" rows="2" maxlength="300" placeholder="Why you'd like to play in this category">${esc(SU.note)}</textarea></label>`) : ""}
         <div class="su-act"><button class="btn primary" data-susend${SU.busy || !ck || !ck.ok ? " disabled" : ""}>${SU.busy ? "…" : ck && ck.ok && !ck.fits ? "Send request" : "Sign up"}</button></div>`}
@@ -4375,6 +4387,7 @@ document.addEventListener("click", async e => {
     SU.myInv = {token: r.data, cat: SU.cat}; SU.open = false; SU.copied = false; render();
     location.href = suWa(r.data, SU.cat); return; }
   if (d.supm){ SU.pmode = d.supm; SU.msg = ""; render(); return; }
+  if (d.supick){ const i = d.supick.indexOf("|"); SU.phone = d.supick.slice(0, i); SU.pickName = d.supick.slice(i + 1); SU.q = SU.pickName; SU.found = null; suCheck(); render(); return; }
   if ("sucopy" in d && SU.myInv){ const u = suInvUrl(SU.myInv.token); try { await navigator.clipboard.writeText(suInvMsg(SU.myInv.token, SU.myInv.cat)); } catch (er) { prompt("Copy this link", u); } SU.copied = true; render(); setTimeout(() => { SU.copied = false; render(); }, 2500); return; }
   if ("sucancel" in d){ if (!confirm("Cancel this invite? The link you sent will stop working.")) return; await sb.rpc("t_invite_cancel", {p_slug: SLUG}); SU.myInv = null; SU.open = true; SU.pmode = "inv"; render(); return; }
   if ("suclose" in d){ SU.open = false; SU.check = null; SU.msg = ""; render(); return; }
@@ -4386,13 +4399,13 @@ document.addEventListener("click", async e => {
   if ("susend" in d){ SU.busy = true; SU.msg = ""; render();
     const r = await sb.rpc("t_signup", {p_slug: SLUG, p_cat: SU.cat, p_partner_phone: SU.phone, p_note: SU.note || null}); SU.busy = false;
     if (r.error){ SU.msg = r.error.message; render(); return; }
-    SU.open = false; SU.phone = ""; SU.note = ""; SU.check = null; await loadSU(); return; }
+    SU.open = false; SU.phone = ""; SU.q = null; SU.pickName = ""; SU.found = null; SU.note = ""; SU.check = null; await loadSU(); return; }
   if ("suwd" in d){ if (!confirm("Withdraw your team from this tournament?")) return; const r = await sb.rpc("t_withdraw", {p_slug: SLUG}); if (r.error){ alert(r.error.message); return; } await loadSU(); pull(true); return; }
   if (d.suset){ if (d.sust === "rejected" && !confirm("Remove this team?")) return; b.disabled = true;
     const r = await sb.rpc("t_entry_set", {p_id: d.suset, p_status: d.sust}); if (r.error){ alert(r.error.message); b.disabled = false; return; } await loadSU(); pull(true); return; }
 });
 document.addEventListener("input", e => { const el = e.target;
-  if (el.id === "su-phone"){ SU.phone = el.value; suCheck(); return; }
+  if (el.id === "su-phone"){ SU.q = el.value; SU.pickName = ""; const dg = el.value.replace(/\D/g, ""); if (dg.length >= 9 && !/[A-Za-z\u0600-\u06FF]/.test(el.value)){ SU.phone = el.value; SU.found = null; } else { SU.phone = ""; suFind(); } suCheck(); render(); return; }
   if (el.id === "su-aname"){ SU.aName = el.value; return; } if (el.id === "su-aphone"){ SU.aPhone = el.value; return; } if (el.id === "su-aphone-cc"){ SU.aCC = el.value; return; }
   if (el.id === "su-note"){ SU.note = el.value; return; } });
 loadSU().then(async () => { await loadPass(); render(); if (location.hash === "#signup"){ const e = document.querySelector(".su"), nv = document.querySelector("nav.tabs"); if (e) window.scrollTo({top: e.getBoundingClientRect().top + scrollY - (nv ? nv.getBoundingClientRect().height : 0) - 12}); } });
