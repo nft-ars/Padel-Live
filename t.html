@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#2F4A41"><title>PlayPal · Tournament</title><link rel="icon" href="icon-192.png"><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800;1,900&family=Figtree:wght@400;500;600;700&display=swap"><style>body{margin:0;font:14px/1.4 system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}.board.c3 .bhd,.board.c3 .brow{grid-template-columns:40px repeat(3,minmax(0,1fr));gap:4px}.board.c3 .brow.ev{grid-template-columns:40px 1fr}.board.c3 .bn,.board.c3 .bc{font-size:12px}.board.c4 .bhd,.board.c4 .brow{grid-template-columns:36px repeat(4,minmax(0,1fr));gap:3px}.board.c4 .brow.ev{grid-template-columns:36px 1fr}.board.c4 .bn,.board.c4 .bc{font-size:11px}.days{overflow-x:auto;scrollbar-width:none}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800;1,900&family=Figtree:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800;1,900&family=Figtree:wght@400;500;600;700&display=swap"></noscript><style>body{margin:0;font:14px/1.4 system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}.board.c3 .bhd,.board.c3 .brow{grid-template-columns:40px repeat(3,minmax(0,1fr));gap:4px}.board.c3 .brow.ev{grid-template-columns:40px 1fr}.board.c3 .bn,.board.c3 .bc{font-size:12px}.board.c4 .bhd,.board.c4 .brow{grid-template-columns:36px repeat(4,minmax(0,1fr));gap:3px}.board.c4 .brow.ev{grid-template-columns:36px 1fr}.board.c4 .bn,.board.c4 .bc{font-size:11px}.days{overflow-x:auto;scrollbar-width:none}
 .su .su-counts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
 .su-s{font-size:13px;color:var(--ink-2);margin:0;line-height:1.45}
 .su-c{display:flex;flex-direction:column;gap:0;font-size:13px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);border-left:5px solid var(--c);background:var(--surface)}
@@ -113,6 +113,8 @@ header.top .chips span.g,header.top .brand p span.g{border-color:#E3EE3A!importa
 .su-found{display:flex;flex-direction:column;gap:6px;margin:-2px 0 8px}
 .su-found button{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;padding:11px 14px;border-radius:12px;border:1px solid var(--line,#d9dcd3);background:var(--card,#fff);color:inherit;font:inherit;cursor:pointer;text-align:start}
 .su-found button b{font-weight:700}.su-found button span{font-size:13px;opacity:.65;white-space:nowrap}
+
+.nm-hid{display:flex;flex-direction:column;gap:2px;margin:10px 0 6px;padding:10px 14px;border-radius:14px;background:#0B1530;color:#fff;border:1px solid rgba(255,210,31,.4)}.nm-hid b{font-size:14px}.nm-hid span{font-size:12.5px;opacity:.75}
 </style><style>.phf{display:flex;align-items:stretch;gap:0;border:1px solid var(--line,rgba(127,127,127,.35));border-radius:12px;overflow:hidden;background:var(--card,transparent)}
 .phf .phcc{position:relative;display:flex;align-items:center;padding:0 10px 0 12px;border-inline-end:1px solid var(--line,rgba(127,127,127,.35));white-space:nowrap;font-weight:700;font-size:15px;cursor:pointer;margin:0}
 .phf .phcc:after{content:"▾";font-size:11px;opacity:.6;margin-inline-start:6px}
@@ -2903,7 +2905,7 @@ html{-webkit-tap-highlight-color:transparent}
 @media (hover:none) and (pointer:coarse){#app *{cursor:pointer}}
 @supports (-webkit-touch-callout:none){input,select,textarea{font-size:16px!important}}
 nav.tabs .tback{position:sticky;inset-inline-start:0;z-index:2;flex:0 0 auto;align-self:center;display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:linear-gradient(rgba(255,255,255,.16),rgba(255,255,255,.16)),var(--club-2);box-shadow:6px 0 10px -4px rgba(0,0,0,.35);color:var(--on-club);text-decoration:none;margin-inline-end:6px}html[dir=rtl] nav.tabs .tback svg{transform:scaleX(-1)}
-</style></head><body><div id="app"><p style="padding:40px 20px;font:600 16px system-ui;color:#555">Loading tournament…</p></div>
+</style><link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.50.0"></head><body><div id="app"><p style="padding:40px 20px;font:600 16px system-ui;color:#555">Loading tournament…</p></div>
 <script>
 var SUPABASE_URL = "https://ebrlwfmkbwlbytslfvdn.supabase.co", SUPABASE_KEY = "sb_publishable_Pf2THTG2L1otqh1PYX4HLw_1360KwwF";
 function startT(CFG, S0, VER0, SLUG, TNAME, sb, EDITV0){
@@ -3272,8 +3274,9 @@ function vKnockouts(){
     h += `</section>`; }
   return h;
 }
+function namesNote(){ return ""; return window.__NAMESHID && !canEdit ? `<div class="nm-hid"><b>🔒 Team names are hidden while sign-up is open</b><span>Signed-up players can see them now. Everyone sees them once sign-up closes.</span></div>` : ""; }
 function vTeams(){
-  let h = editMode ? `<p class="note">Type each team's player names, then press Save &amp; publish.</p>` : "";
+  let h = namesNote() + (editMode ? `<p class="note">Type each team's player names, then press Save &amp; publish.</p>` : "");
   for (const c of CATS){ const n = GROUPS[c] * SZ(c);
     h += `<section class="sec"><div class="cat-head" style="background:${cvar(c)}">${CATN[c]}<small>${n} teams · ${GROUPS[c]} groups of ${SZ(c)}</small></div><div class="teams">`;
     for (let i = 1; i <= n; i++){ const id = c + i;
@@ -3502,7 +3505,7 @@ function render(){
   const vt = view.tab === "draw" && !drawOn() && !canEdit ? "schedule" : view.tab;
   app.innerHTML = `${THEME === "night" || THEME === "trio" || THEME === "ace" || THEME === "lets" ? `<header class="top"><div class="wrap gut"><div class="hrow"><span class="kick"><i class="dot"></i>${esc(CFG.kicker || "Live")}</span><div class="upd">Last update<b>${esc(updatedText())}</b></div></div><div class="brand">${CFG.club_logo ? `<img class="emb" src="${CFG.club_logo}" alt="">` : ""}<div><h1>${CFG.title_html || esc(TNAME)}</h1><p>${esc(THEME === "night" && /\d+ categor/i.test(CFG.tagline || "") ? "Tournament · " + CATS.map(c => c === "X" ? "Mixed" : c).join(" · ") : (CFG.tagline || ""))}</p></div></div></div><div class="scene-wrap">${THEME === "trio" ? TSCENE : THEME === "ace" ? ASCENE : THEME === "lets" ? LSCENE : SCENE}</div><div class="wrap gut hero-bar"><div class="chips">${heroFacts().map(([x, g]) => `<span${g ? ` class="g"` : ""}>${esc(x)}</span>`).join("")}</div>${LOGO ? `<div class="presented"><span>${esc(CFG.sponsor_label || "Presented by")}</span><img src="${LOGO}" alt="${esc(CFG.sponsor_alt || "")}"></div>` : ""}</div></header>` : THEME === "movara" ? `<header class="top"><div class="hero-fx" aria-hidden="true"><i class="ln1"></i><i class="ln2"></i><i class="ball"></i></div><div class="wrap gut"><div class="hrow"><span class="kick"><i class="dot"></i>${esc(CFG.kicker || "Live")}</span><div class="upd">Last update<b>${esc(updatedText())}</b></div></div><div class="brand"><h1>${CFG.title_html || esc(TNAME)}</h1><p>${heroFacts().map(([x, g]) => `<span${g ? ` class="g"` : ""}>${esc(x)}</span>`).join("")}</p></div>${LOGO ? `<div class="sponsor"><span>${esc(CFG.sponsor_label || "")}</span><img src="${LOGO}" alt="${esc(CFG.sponsor_alt || "")}"></div>` : ""}</div></header>` : `<header class="top"><div class="wrap gut"><img src="${CFG.club_logo || ""}" alt=""><div class="brand"><h1>${esc(TNAME)}</h1><p>${esc(CFG.subtitle || "Live results")}</p></div><div class="upd">Last update<b>${esc(updatedText())}</b></div></div></header>`}
   <nav class="tabs" aria-label="Sections"><div class="wrap gut" role="tablist"><a class="tback" href="./#events" aria-label="Back to PlayPal"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>${[["schedule","Schedule"],["standings","Groups"],["knockouts","Knockouts"],["teams","Teams"],["info","Info"]].concat(drawOn() || canEdit ? [["draw", drawState() === "live" || drawState() === "running" ? "Draw 🔴" : "Draw"]] : []).map(([k, l]) => `<button role="tab" data-tab="${k}" aria-selected="${view.tab === k}">${l}</button>`).join("")}</div></nav>
-  <main><div class="wrap gut">${adminBar()}${deskBox()}${banner()}${drawPill()}${vt === "draw" ? "" : passBox()}${vt === "schedule" ? suPill() : ""}${vt === "info" ? signupBox() : ""}${views[vt]()}</div></main>${saveBar()}`;
+  <main><div class="wrap gut">${adminBar()}${deskBox()}${banner()}${drawPill()}${vt === "draw" ? "" : passBox()}${vt === "schedule" ? suPill() : ""}${vt === "schedule" || vt === "standings" ? namesNote() : ""}${vt === "info" ? signupBox() : ""}${views[vt]()}</div></main>${saveBar()}`;
   document.body.classList.toggle("editing", editMode);
   if (f){ const el = document.getElementById(f); if (el){ el.focus(); try { if (sel != null) el.setSelectionRange(sel, sel); } catch (e) {} } }
   tabsFix();
@@ -4205,6 +4208,7 @@ async function pull(force){
   try {
     const r = await sb.rpc("t_state", {p_slug: SLUG, p_have: force ? -1 : VERSION});
     if (r.error || !r.data) return;
+    const hid = !!r.data.names_hidden, flip = hid !== !!window.__NAMESHID; window.__NAMESHID = hid; if (flip && !r.data.state && !force){ pull(true); return; }
     if (r.data.edit_version) EDITV = r.data.edit_version; if (r.data.state && r.data.version !== VERSION || force){ if (r.data.state){ S = norm(r.data.state); VERSION = r.data.version; } if (!editMode) render(); }
   } catch (e) {}
 }
@@ -4380,7 +4384,7 @@ document.addEventListener("click", async e => {
     else if (!em.includes("@")){ const pl = await sb.rpc("phone_login", {p_phone: em, p_pass: pass}); if (pl.error) r = pl; else if (!pl.data) r = {error: {message: "Wrong phone number or password."}}; else em = pl.data; }
     if (!r) r = await sb.auth.signInWithPassword({email: em, password: pass});
     SU.busy = false; if (r.error){ SU.msg = r.error.message; render(); return; }
-    SU.open = true; await loadSU(); return; }
+    SU.open = true; await loadSU(); pull(true); return; }
   if ("suinv" in d){ SU.busy = true; SU.msg = ""; render();
     const r = await sb.rpc("t_invite_create", {p_slug: SLUG, p_cat: SU.cat, p_note: SU.note || null}); SU.busy = false;
     if (r.error){ SU.msg = r.error.message; render(); return; }
@@ -4399,7 +4403,7 @@ document.addEventListener("click", async e => {
   if ("susend" in d){ SU.busy = true; SU.msg = ""; render();
     const r = await sb.rpc("t_signup", {p_slug: SLUG, p_cat: SU.cat, p_partner_phone: SU.phone, p_note: SU.note || null}); SU.busy = false;
     if (r.error){ SU.msg = r.error.message; render(); return; }
-    SU.open = false; SU.phone = ""; SU.q = null; SU.pickName = ""; SU.found = null; SU.note = ""; SU.check = null; await loadSU(); return; }
+    pull(true); SU.open = false; SU.phone = ""; SU.q = null; SU.pickName = ""; SU.found = null; SU.note = ""; SU.check = null; await loadSU(); return; }
   if ("suwd" in d){ if (!confirm("Withdraw your team from this tournament?")) return; const r = await sb.rpc("t_withdraw", {p_slug: SLUG}); if (r.error){ alert(r.error.message); return; } await loadSU(); pull(true); return; }
   if (d.suset){ if (d.sust === "rejected" && !confirm("Remove this team?")) return; b.disabled = true;
     const r = await sb.rpc("t_entry_set", {p_id: d.suset, p_status: d.sust}); if (r.error){ alert(r.error.message); b.disabled = false; return; } await loadSU(); pull(true); return; }
@@ -4458,7 +4462,7 @@ async function tBoot(){
     clearTimeout(timer);
     if (r.error) throw r.error;
     if (!r.data){ tImport(slug, sb); return; }
-    document.title = r.data.name + " · PlayPal";
+    document.title = r.data.name + " · PlayPal"; window.__NAMESHID = !!r.data.names_hidden;
     startT(r.data.config, r.data.state || {}, r.data.version, slug, r.data.name, sb, r.data.edit_version || 1);
   } catch (e) { clearTimeout(timer); tFail("Can't load the tournament right now."); }
 }
