@@ -104,6 +104,11 @@
 html:root{--catX:#D9669E;--catX-soft:rgba(217,102,158,.16)}
 
 header.top .chips span.g,header.top .brand p span.g{border-color:#E3EE3A!important;color:#E3EE3A!important;box-shadow:0 0 12px rgba(227,238,58,.25)}
+
+.su-pill{display:flex;align-items:center;gap:10px;width:100%;margin:10px 0 4px;padding:9px 14px;border-radius:999px;border:1.5px solid #E3EE3A;background:#0B1530;color:#fff;font:inherit;cursor:pointer;text-align:start;box-shadow:0 6px 16px rgba(0,0,0,.18)}
+.su-pill b{font:800 14px/1.1 inherit;white-space:nowrap}.su-pill small{flex:1;min-width:0;font-size:12px;opacity:.7;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.su-pill-d{width:8px;height:8px;border-radius:50%;background:#E3EE3A;box-shadow:0 0 8px #E3EE3A;flex:none;animation:suPd 1.4s ease-in-out infinite}@keyframes suPd{50%{opacity:.3}}
+.su-pill-go{flex:none;width:26px;height:26px;border-radius:50%;background:#E3EE3A;color:#0B1530;display:grid;place-items:center;font-weight:900}
 </style><style>.phf{display:flex;align-items:stretch;gap:0;border:1px solid var(--line,rgba(127,127,127,.35));border-radius:12px;overflow:hidden;background:var(--card,transparent)}
 .phf .phcc{position:relative;display:flex;align-items:center;padding:0 10px 0 12px;border-inline-end:1px solid var(--line,rgba(127,127,127,.35));white-space:nowrap;font-weight:700;font-size:15px;cursor:pointer;margin:0}
 .phf .phcc:after{content:"▾";font-size:11px;opacity:.6;margin-inline-start:6px}
@@ -2918,7 +2923,7 @@ let draft = null, canEdit = false, artifactNS = null, editMode = false, busy = f
 let view = { tab: "schedule", cat: "all", q: "", mine: false, layout: "courts", day: 0 };
 let myTeam = ""; try { myTeam = localStorage.getItem("cpn-team-" + SLUG) || ""; } catch (e) {}
 const TABS = ["schedule","standings","knockouts","teams","info","draw"];
-try { const h = location.hash.replace("#",""); if (TABS.includes(h)) view.tab = h; else if (h === "help") { view.tab = "info"; setTimeout(() => { const el = document.getElementById("help-admin") || document.getElementById("help"); if (el) el.scrollIntoView({block: "start"}); }, 1800); } } catch (e) {}
+try { const h = location.hash.replace("#",""); if (h === "signup") view.tab = "info"; else if (TABS.includes(h)) view.tab = h; else if (h === "help") { view.tab = "info"; setTimeout(() => { const el = document.getElementById("help-admin") || document.getElementById("help"); if (el) el.scrollIntoView({block: "start"}); }, 1800); } } catch (e) {}
 
 const cur = () => draft || S;
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -3273,9 +3278,9 @@ function vTeams(){
   return h;
 }
 /* Info tab in the Core Padel Round 2 style, built from this tournament's own settings */
-function heroFacts(){ const F = (CFG.facts || []).map(String), last = F.length - 1;
+function heroFacts(){ const VEN = String(CFG.venue || CFG.club || "").toLowerCase(), F = (CFG.facts || []).map(String).filter(x => !/prize/i.test(x) && !/\b(club|arena|padel)\b/i.test(x) && (!VEN || x.toLowerCase() !== VEN)), last = F.length - 1;
   const PZ = x => /prize/i.test(x), pzTxt = x => { const a = (String(x).match(/\$[\d,]+/) || [""])[0]; return a ? "Prize Pool " + a : x; };
-  if (THEME !== "night" || !/\d+ teams/i.test(F.join(" "))) return F.map((x, i) => PZ(x) ? [pzTxt(x), true] : [x, i === last && CFG.highlight_last && !F.some(PZ)]);
+  if (THEME !== "night" || !/\d+ teams/i.test(F.join(" "))) return F.map((x, i) => PZ(x) ? [pzTxt(x), true] : [x, false]);
   const pr = F.find(PZ);
   return [[F[0], false], ...(F[1] && !/teams|courts|·/.test(F[1]) ? [[F[1], false]] : []), ...(pr ? [[pzTxt(pr), true]] : [])]; }
 function info2(){
@@ -3493,7 +3498,7 @@ function render(){
   const vt = view.tab === "draw" && !drawOn() && !canEdit ? "schedule" : view.tab;
   app.innerHTML = `${THEME === "night" || THEME === "trio" || THEME === "ace" || THEME === "lets" ? `<header class="top"><div class="wrap gut"><div class="hrow"><span class="kick"><i class="dot"></i>${esc(CFG.kicker || "Live")}</span><div class="upd">Last update<b>${esc(updatedText())}</b></div></div><div class="brand">${CFG.club_logo ? `<img class="emb" src="${CFG.club_logo}" alt="">` : ""}<div><h1>${CFG.title_html || esc(TNAME)}</h1><p>${esc(THEME === "night" && /\d+ categor/i.test(CFG.tagline || "") ? "Tournament · " + CATS.map(c => c === "X" ? "Mixed" : c).join(" · ") : (CFG.tagline || ""))}</p></div></div></div><div class="scene-wrap">${THEME === "trio" ? TSCENE : THEME === "ace" ? ASCENE : THEME === "lets" ? LSCENE : SCENE}</div><div class="wrap gut hero-bar"><div class="chips">${heroFacts().map(([x, g]) => `<span${g ? ` class="g"` : ""}>${esc(x)}</span>`).join("")}</div>${LOGO ? `<div class="presented"><span>${esc(CFG.sponsor_label || "Presented by")}</span><img src="${LOGO}" alt="${esc(CFG.sponsor_alt || "")}"></div>` : ""}</div></header>` : THEME === "movara" ? `<header class="top"><div class="hero-fx" aria-hidden="true"><i class="ln1"></i><i class="ln2"></i><i class="ball"></i></div><div class="wrap gut"><div class="hrow"><span class="kick"><i class="dot"></i>${esc(CFG.kicker || "Live")}</span><div class="upd">Last update<b>${esc(updatedText())}</b></div></div><div class="brand"><h1>${CFG.title_html || esc(TNAME)}</h1><p>${heroFacts().map(([x, g]) => `<span${g ? ` class="g"` : ""}>${esc(x)}</span>`).join("")}</p></div>${LOGO ? `<div class="sponsor"><span>${esc(CFG.sponsor_label || "")}</span><img src="${LOGO}" alt="${esc(CFG.sponsor_alt || "")}"></div>` : ""}</div></header>` : `<header class="top"><div class="wrap gut"><img src="${CFG.club_logo || ""}" alt=""><div class="brand"><h1>${esc(TNAME)}</h1><p>${esc(CFG.subtitle || "Live results")}</p></div><div class="upd">Last update<b>${esc(updatedText())}</b></div></div></header>`}
   <nav class="tabs" aria-label="Sections"><div class="wrap gut" role="tablist"><a class="tback" href="./#events" aria-label="Back to PlayPal"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>${[["schedule","Schedule"],["standings","Groups"],["knockouts","Knockouts"],["teams","Teams"],["info","Info"]].concat(drawOn() || canEdit ? [["draw", drawState() === "live" || drawState() === "running" ? "Draw 🔴" : "Draw"]] : []).map(([k, l]) => `<button role="tab" data-tab="${k}" aria-selected="${view.tab === k}">${l}</button>`).join("")}</div></nav>
-  <main><div class="wrap gut">${adminBar()}${deskBox()}${banner()}${drawPill()}${vt === "draw" ? "" : passBox() + signupBox()}${views[vt]()}</div></main>${saveBar()}`;
+  <main><div class="wrap gut">${adminBar()}${deskBox()}${banner()}${drawPill()}${vt === "draw" ? "" : passBox()}${vt === "schedule" ? suPill() : ""}${vt === "info" ? signupBox() : ""}${views[vt]()}</div></main>${saveBar()}`;
   document.body.classList.toggle("editing", editMode);
   if (f){ const el = document.getElementById(f); if (el){ el.focus(); try { if (sel != null) el.setSelectionRange(sel, sel); } catch (e) {} } }
   tabsFix();
@@ -4293,6 +4298,9 @@ function suWhy(){ const fee = CFG.fee ? +CFG.fee : 0, prize = (CFG.facts || []).
     <div class="su-w"><small>Entry</small><b>${fee ? "$" + fee : "At the desk"}</b><span>${fee ? "per team · pay at the desk" : "pay when you check in"}</span></div>
     ${per ? `<div class="su-w hot"><small>Prize per category</small><b>${money(per)}</b><span>🥇 ${money(per * sp[0] / 100)} · 🥈 ${money(per * (sp[1] || 0) / 100)}</span></div>` : ""}</div>
     <ul class="su-why-l"><li>${d0} day${d0 > 1 ? "s" : ""} · group matches, then knockouts to the final</li><li>Teams play in their level category</li><li>Live scores, your schedule and the draw on your phone</li></ul></div>`; }
+function suPill(){ const I = SU.info; if (!I || editMode || !I.open || (I.mine && (I.mine.status === "pending" || I.mine.status === "confirmed"))) return "";
+  return `<button class="su-pill" data-gosignup><span class="su-pill-d"></span><b>Sign up your team</b><small>Closes the day before</small><span class="su-pill-go">→</span></button>`; }
+document.addEventListener("click", e => { if (!e.target.closest("[data-gosignup]")) return; view.tab = "info"; try { history.replaceState(null, "", "#info"); } catch (x) {} render(); setTimeout(() => { const el = document.querySelector(".su"), nv = document.querySelector("nav.tabs"); if (el) window.scrollTo({top: el.getBoundingClientRect().top + scrollY - (nv ? nv.getBoundingClientRect().height : 0) - 12, behavior: "smooth"}); }, 60); });
 function signupBox(){ const I = SU.info; if (!I || editMode) return "";
   const mine = I.mine && (I.mine.status === "pending" || I.mine.status === "confirmed") ? I.mine : null;
   let h = "";
@@ -4387,7 +4395,7 @@ document.addEventListener("input", e => { const el = e.target;
   if (el.id === "su-phone"){ SU.phone = el.value; suCheck(); return; }
   if (el.id === "su-aname"){ SU.aName = el.value; return; } if (el.id === "su-aphone"){ SU.aPhone = el.value; return; } if (el.id === "su-aphone-cc"){ SU.aCC = el.value; return; }
   if (el.id === "su-note"){ SU.note = el.value; return; } });
-loadSU().then(async () => { await loadPass(); render(); if (location.hash === "#signup"){ const e = document.querySelector(".su"); if (e) e.scrollIntoView({block: "start"}); } });
+loadSU().then(async () => { await loadPass(); render(); if (location.hash === "#signup"){ const e = document.querySelector(".su"), nv = document.querySelector("nav.tabs"); if (e) window.scrollTo({top: e.getBoundingClientRect().top + scrollY - (nv ? nv.getBoundingClientRect().height : 0) - 12}); } });
 render();
 setInterval(() => { if (!document.hidden) pull(); }, MODE ? 3000 : 8000);
 /* instant updates: every score change is pushed to the TV and phones the moment it happens (the timer above stays as a backup) */

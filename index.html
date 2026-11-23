@@ -2363,7 +2363,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
 const brandFetch = async (u, o) => { const r = await fetch(u, o); try { if (!/\/rest\/v1\/rpc\//.test(String((u && u.url) || u))) return r; const tx = await r.clone().text(); if (!/Padel Live|بادل لايف/.test(tx)) return r; return new Response(tx.replace(/Padel Live/g, "PlayPal").replace(/بادل لايف/g, "بلاي بال"), {status: r.status, statusText: r.statusText, headers: r.headers}); } catch (e) { return r; } };
-const VERSION = "v115";
+const VERSION = "v116";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -4577,8 +4577,8 @@ function tonightRow(){
   if (!bookLive() && !(S.matches || []).length) return "";
   const today = dayKey(new Date()), now = Date.now() - 15 * 60000;
   const myL = myLevel(), open = forMe((S.matches || []).filter(m => m.open_spots > 0 && !m.joined && dayKey(new Date(m.starts_at)) === today && new Date(m.starts_at).getTime() > now && (m.inv || (inRange(m, myL) && !tooHigh(m)))));
-  return `<div class="between"><h2>${t("hmPlay")}</h2><a href="#matches" ${bookLive() ? `data-go="matches"` : `data-soon="m"`} style="font-weight:700;font-size:13px;white-space:nowrap">${t("all")} →</a></div>
-   ${open.length ? `<div class="om-row">${open.slice(0, 8).map(matchRow).join("")}</div>` : `<button class="card note" ${bookLive() ? `data-go="matches"` : `data-soon="m"`} style="text-align:start;width:100%">${t("ptNone")}</button>`}`;
+  return `<div class="between"><h2>${t("hmPlay")}</h2><a href="#clubs" data-go="clubs" style="font-weight:700;font-size:13px;white-space:nowrap">${t("all")} →</a></div>
+   ${open.length ? `<div class="om-row">${open.slice(0, 8).map(matchRow).join("")}</div>` : `<button class="card note" data-go="clubs" style="text-align:start;width:100%">${t("ptNone")}</button>`}`;
 }
 /* Home: events happening now or coming up, same cards as the Events page */
 function homeEvents(){
