@@ -2230,6 +2230,27 @@ html[dir=rtl] .play-h .ledt{height:40px}
 .hm-id{display:inline-flex;flex-direction:column;align-items:center;gap:6px}
 .hm-id .logo .lgword{height:40px}
 .hm-id .hello{font-size:13px;color:var(--ink-2);text-align:center;margin:0}
+
+/* v115: Home header row aligned (logo with the buttons, Hello under) */
+.top.hm-top{align-items:flex-start}.hm-top>.row{height:40px;align-items:center}
+.hm-id{align-items:flex-start}.hm-id .logo{height:40px;display:flex;align-items:center}.top.hm-top{position:relative;padding-bottom:24px}.hm-id .hello{position:absolute;left:0;right:0;bottom:0;text-align:center}
+html[dir=rtl] .hm-id{align-items:flex-end}
+/* News teasers: LED scoreboard cards */
+.nw{flex:0 0 82%;scroll-snap-align:start;position:relative;display:flex;align-items:center;gap:12px;text-align:start;border-radius:18px;padding:14px;min-height:104px;cursor:pointer;color:#fff;
+  border:1px solid rgba(255,210,31,.35);background:radial-gradient(circle,rgba(255,255,255,.07) 1.2px,transparent 1.6px) 0 0/8px 8px,linear-gradient(135deg,#0B1530,#05070A 72%);box-shadow:0 10px 24px rgba(0,0,0,.35)}
+.nw-led{flex:none;width:70px;height:70px;border-radius:12px;background:#05070A;border:1px solid rgba(255,255,255,.08);display:grid;place-items:center;box-shadow:inset 0 0 18px rgba(0,0,0,.8)}
+.nw-led img{width:62px;height:62px}
+.nw-b{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.nw-tag{display:inline-flex;align-items:center;gap:6px;font:800 10px var(--body);letter-spacing:.2em;text-transform:uppercase;color:#FFD21F}
+.nw-tag i{width:7px;height:7px;border-radius:50%;background:#FFD21F;box-shadow:0 0 8px #FFD21F;animation:nwBlink 1.4s ease-in-out infinite}
+@keyframes nwBlink{50%{opacity:.25}}
+.nw-b b{font:italic 900 24px/1 var(--disp);text-transform:uppercase;letter-spacing:.2px}
+.nw-find .nw-b b{color:#E3EE3A}.nw-league .nw-b b{color:#FFD21F}
+.nw-b small{font-size:12px;color:rgba(255,255,255,.68);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.nw-lk{position:absolute;top:10px;inset-inline-end:10px;color:rgba(255,255,255,.45)}
+html[dir=rtl] .nw-b b{font-style:normal}
+@media (prefers-reduced-motion:reduce){.nw-tag i{animation:none}}
+.sn2-row{scroll-padding-inline:16px}
 </style>
 </head>
 <body>
@@ -2342,7 +2363,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
 const brandFetch = async (u, o) => { const r = await fetch(u, o); try { if (!/\/rest\/v1\/rpc\//.test(String((u && u.url) || u))) return r; const tx = await r.clone().text(); if (!/Padel Live|بادل لايف/.test(tx)) return r; return new Response(tx.replace(/Padel Live/g, "PlayPal").replace(/بادل لايف/g, "بلاي بال"), {status: r.status, statusText: r.statusText, headers: r.headers}); } catch (e) { return r; } };
-const VERSION = "v114";
+const VERSION = "v115";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -2512,7 +2533,7 @@ const V = {};
 V.home = () => { const next = S.mine.find(b => b.status !== "cancelled" && new Date(b.starts_at) > new Date());
  const name = S.profile && S.profile.full_name ? S.profile.full_name.split(" ")[0] : "";
  return `<main>
-  <div class="top"><div class="hm-id"><div class="logo"><img class="lgword" src="playpal-word.png" alt="PlayPal"></div><div class="hello">${S.user ? `${t("hi")} ${esc(name)}` : t("guest")}</div></div>
+  <div class="top hm-top"><div class="hm-id"><div class="logo"><img class="lgword" src="playpal-word.png" alt="PlayPal"></div><div class="hello">${S.user ? `${t("hi")} ${esc(name)}` : t("guest")}</div></div>
    <div class="row">${muteBtn()}${bell()}<button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button>${S.user ? "" : `<button class="pill" data-go="auth">${t("signin")}</button>`}</div></div>
   ${welcomeHome()}
   ${next ? `<button class="hero" data-match="${next.id}" style="text-align:start;width:100%"><div class="between" style="width:100%"><span class="kick2">${t("next")}</span>${statusTag(next.status).replace('tag g','tag w').replace('tag pend','tag w')}</div><span class="big">${esc(fmtDay(new Date(next.starts_at)) + " · " + fmtTime(new Date(next.starts_at)))}</span><span style="opacity:.92;font-size:14px">${esc(next.club_name)} · ${esc(next.court_name)} · ${next.minutes} ${t("min")}${next.code ? ` · #${next.booking_no} · <b>${esc(next.code)}</b>` : ""}</span></button>`
@@ -4837,13 +4858,23 @@ function snScene(k){
     <g fill="#E3EE3A"><path d="M372 92 l10 -14 l10 14 h-6 v12 h-8 v-12z"/></g><g fill="#FF6A6A"><path d="M548 96 l10 14 l10 -14 h-6 v-12 h-8 v12z"/></g>
     ${Array.from({length: 14}, (_, i) => `<rect x="${360 + (i * 41) % 220}" y="${(i * 29) % 70 + 10}" width="5" height="9" rx="1" fill="${["#FFD21F", "#E3EE3A", "#7DF2FF", "#FF8A2B"][i % 4]}" transform="rotate(${i * 33} ${362 + (i * 41) % 220} ${(i * 29) % 70 + 14})" opacity=".85"/>`).join("")}</g></svg>`;
 }
+/* LED pixel icons for the News teasers */
+const LEDSP = {
+ create: [".GG.....GG.","WWWWWWWWWWW","WWWWWWWWWWW","W.........W","W.L.L.L.L.W","W.........W","W.L.L.L.L.W","W.........W","W.L.L.GGG.W","W.....GGG.W","WWWWWWWWWWW"],
+ find: ["..WWWWW....",".W.....W...","W..LLL..W..","W.LLLLL.W..","W.LLLLL.W..","W.LLLLL.W..","W..LLL..W..",".W.....W...","..WWWWWWW..",".......WWW.","........WWW"],
+ league: ["GGGGGGGGGGG","G.GGGGGGG.G","G.GGGGGGG.G",".GGGGGGGGG.","..GGGGGGG..","...GGGGG...","....GGG....",".....G.....","....GGG....","...LLLLL...","...LLLLL..."]};
+const LEDSPC = {G: "#FFD21F", W: "#F2F6FA", L: "#E3EE3A", D: "#6FE3FF"}, LEDSPU = {};
+function ledSprite(k){ if (LEDSPU[k]) return LEDSPU[k]; try { const g = LEDSP[k], n = 13, step = 10, c = document.createElement("canvas"); c.width = c.height = n * step; const x = c.getContext("2d");
+  for (let y = 0; y < n; y++) for (let xx = 0; xx < n; xx++){ const ch = (g[y - 1] || "")[xx - 1], col = LEDSPC[ch]; x.beginPath(); x.arc(xx * step + step / 2, y * step + step / 2, step * .38, 0, 7);
+    if (col){ x.fillStyle = col; x.shadowColor = col; x.shadowBlur = step * 1.1; } else { x.fillStyle = "rgba(255,255,255,.07)"; x.shadowBlur = 0; } x.fill(); }
+  return (LEDSPU[k] = c.toDataURL()); } catch (e) { return ""; } }
 function soonRow(){ if (bookLive()) return "";
   const lg = (S.leagues || []).some(l => l && (l.status === "signup" || l.status === "running"));
-  const items = [["matches", "🎾", "snM1", "snM2", ["snMc1", "snMc2"], `data-soon="m"`], ["book", "🗓️", "snB1", "snB2", ["snBc1", "snBc2"], `data-soon="b"`]].concat(lg || !S.lgKnown ? [] : [["league", "🏆", "snL1", "snL2", ["snLc1", "snLc2"], `data-soon="l"`]]);
+  const items = [["create", "b", "pCreate", "nwC"], ["find", "m", "pFind", "nwF"]].concat(lg || !S.lgKnown ? [] : [["league", "l", "cmpLgs", "nwL"]]);
   return `<div class="between"><h2>${t("hmNews")}</h2><span class="sn-lock">🔒 ${t("snLock")}</span></div>
-   <div class="sn2-row">${items.map(([k, ic, t1, t2, ch, go]) => `<button class="evc sn2 sn2-${k}" ${go}><span class="sn2-sc">${snScene(k)}</span><span class="evc-shade"></span>
-     <span class="evc-mid"><span class="evc-kick2 sn2-kick">${t("snSoonL")}</span><span class="evc-t">${t(t1)}<br><em>${t(t2)}</em></span><span class="evc-chips">${ch.map(c => `<span>${t(c)}</span>`).join("")}</span></span>
-     <span class="evc-go sn2-go" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16"><rect x="5" y="10" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></span></button>`).join("")}</div>`; }
+   <div class="sn2-row">${items.map(([k, sk, tk, sub]) => `<button class="nw nw-${k}" data-soon="${sk}"><span class="nw-led"><img src="${ledSprite(k)}" alt="" aria-hidden="true"></span>
+     <span class="nw-b"><span class="nw-tag"><i></i>${t("snSoonL")}</span><b>${t(tk)}</b><small>${t(sub)}</small></span>
+     <span class="nw-lk" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16"><rect x="5" y="10" width="14" height="10" rx="2" fill="currentColor"/><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" stroke-width="2.5"/></svg></span></button>`).join("")}</div>`; }
 app.addEventListener("click", e => { const x = e.target.closest("[data-soon]"); if (!x) return; e.preventDefault(); e.stopPropagation(); toast(t({m: "snMt", b: "snBt", l: "snLt"}[x.dataset.soon] || "snLt")); }, true);
 /* ---------- Match day: on the day you play, Home becomes a big countdown ---------- */
 function matchDay(nc){
@@ -4986,8 +5017,8 @@ Object.assign(W.en, {meEnt:"My entries", meWait:"Waiting for confirmation", meOk
 Object.assign(W.ar, {meEnt:"مشاركاتي", meWait:"بانتظار التأكيد", meOk:"مؤكد", meWl:"قائمة الانتظار", meWith:"مع", meOpen:"افتح", meNoTime:"وقت المباراة لسا ما تحدد", calAdd:"ضيف للتقويم", calApple:"تقويم آبل", calGoogle:"تقويم غوغل", vsL:"ضد", ptsU:"نقطة"});
 Object.assign(W.en, {accGone:"Your account was reset. Please create a new account to continue."});
 Object.assign(W.ar, {accGone:"انعمل تصفير لحسابك. اعمل حساب جديد لتكمّل."});
-Object.assign(W.en, {pCreate:"Create a game", pFind:"Find a game", hmPlay:"Play", hmComp:"Compete", hmNews:"News", snMt:"🎾 Open matches are coming soon. Stay tuned!", snBt:"🗓️ Court booking is coming soon. Stay tuned!", muMute:"Mute music", muOn:"Play music", lbKick:"This week", lbYou:"You", lbSub:"{c} · resets Monday", snSoonL:"Coming soon", snM1:"Open", snM2:"matches", snMc1:"Your level", snMc2:"Every night", snB1:"Court", snB2:"booking", snBc1:"Core · Trio · Let's", snBc2:"In seconds", snL1:"Box", snL2:"leagues", snLc1:"Weekly", snLc2:"Prizes"});
-Object.assign(W.ar, {pCreate:"اعمل لعبة", pFind:"لاقي لعبة", hmPlay:"العب", hmComp:"تنافس", hmNews:"الأخبار", snMt:"🎾 المباريات المفتوحة جايّة قريباً. خليك متابع!", snBt:"🗓️ حجز الملاعب جاي قريباً. خليك متابع!", muMute:"اكتم الموسيقى", muOn:"شغّل الموسيقى", lbKick:"هالأسبوع", lbYou:"إنت", lbSub:"{c} · بيتصفّر يوم الاثنين", snSoonL:"قريباً", snM1:"مباريات", snM2:"مفتوحة", snMc1:"بمستواك", snMc2:"كل ليلة", snB1:"حجز", snB2:"الملاعب", snBc1:"Core · Trio · Let's", snBc2:"بثواني", snL1:"الدوريات", snL2:"الأسبوعية", snLc1:"كل أسبوع", snLc2:"جوايز"});
+Object.assign(W.en, {pCreate:"Create a game", pFind:"Find a game", nwC:"Book a court at Core · Trio · Let's", nwF:"Join a game at your level", nwL:"Weekly matches · prizes", hmPlay:"Play", hmComp:"Compete", hmNews:"News", snMt:"🎾 Open matches are coming soon. Stay tuned!", snBt:"🗓️ Court booking is coming soon. Stay tuned!", muMute:"Mute music", muOn:"Play music", lbKick:"This week", lbYou:"You", lbSub:"{c} · resets Monday", snSoonL:"Coming soon", snM1:"Open", snM2:"matches", snMc1:"Your level", snMc2:"Every night", snB1:"Court", snB2:"booking", snBc1:"Core · Trio · Let's", snBc2:"In seconds", snL1:"Box", snL2:"leagues", snLc1:"Weekly", snLc2:"Prizes"});
+Object.assign(W.ar, {pCreate:"اعمل لعبة", pFind:"لاقي لعبة", nwC:"احجز ملعب بـ Core · Trio · Let's", nwF:"العب مع ناس بمستواك", nwL:"مباريات كل أسبوع · جوائز", hmPlay:"العب", hmComp:"تنافس", hmNews:"الأخبار", snMt:"🎾 المباريات المفتوحة جايّة قريباً. خليك متابع!", snBt:"🗓️ حجز الملاعب جاي قريباً. خليك متابع!", muMute:"اكتم الموسيقى", muOn:"شغّل الموسيقى", lbKick:"هالأسبوع", lbYou:"إنت", lbSub:"{c} · بيتصفّر يوم الاثنين", snSoonL:"قريباً", snM1:"مباريات", snM2:"مفتوحة", snMc1:"بمستواك", snMc2:"كل ليلة", snB1:"حجز", snB2:"الملاعب", snBc1:"Core · Trio · Let's", snBc2:"بثواني", snL1:"الدوريات", snL2:"الأسبوعية", snLc1:"كل أسبوع", snLc2:"جوايز"});
 Object.assign(W.en, {snT:"Coming soon", snLock:"Unlocking next", snSoon:"Soon", snM:"Open matches", snMs:"Join games at your level, any night of the week.", snB:"Court booking", snBs:"Book Core, Trio and Let's Padel courts in seconds.", snL:"Leagues", snLs:"Weekly box leagues. Climb, get promoted, win prizes.", snUnl:"Unlocking soon", snLt:"🏆 Leagues are coming soon. Stay tuned!"});
 Object.assign(W.ar, {snT:"قريباً", snLock:"عم ينفتح", snSoon:"قريباً", snM:"مباريات مفتوحة", snMs:"انضم لمباريات بمستواك بأي ليلة بالأسبوع.", snB:"حجز الملاعب", snBs:"احجز ملاعب Core وTrio وLet's Padel بثواني.", snL:"الدوريات", snLs:"دوريات أسبوعية. اطلع، ترقّى، واربح جوايز.", snUnl:"عم ينفتح قريباً", snLt:"🏆 الدوريات جايّة قريباً. خليك متابع!"});
 Object.assign(W.en, {rsQk:"Your rank", rsQt:"What's your rank?", rsQs:"Take the 60-second quiz and get your tier card.", rsK:"Your rank"});
@@ -5164,7 +5195,7 @@ function matchesRow(){
 
 V.home = () => { const name = S.profile && S.profile.full_name ? S.profile.full_name.split(" ")[0] : "";
  return `<main>
-  <div class="top"><div class="hm-id"><div class="logo"><img class="lgword" src="playpal-word.png" alt="PlayPal"></div><div class="hello">${S.user ? `${t("hi")} ${esc(name)}` : t("guest")}</div></div>
+  <div class="top hm-top"><div class="hm-id"><div class="logo"><img class="lgword" src="playpal-word.png" alt="PlayPal"></div><div class="hello">${S.user ? `${t("hi")} ${esc(name)}` : t("guest")}</div></div>
    <div class="row">${muteBtn()}${bell()}<button class="pill" data-lang>${lang === "en" ? "عربي" : "EN"}</button>${S.user ? "" : `<button class="pill" data-go="auth">${t("signin")}</button>`}</div></div>
   ${smartCard()}
   ${tonightRow()}
