@@ -102,6 +102,8 @@
 .desk-r>div:first-child{display:flex;flex-direction:column;gap:2px;min-width:0}
 .desk-b{display:flex;gap:6px;flex:none}.desk-b .chip.on{background:#2E9E5B;color:#fff;border-color:#2E9E5B}
 html:root{--catX:#D9669E;--catX-soft:rgba(217,102,158,.16)}
+
+header.top .chips span.g,header.top .brand p span.g{border-color:#E3EE3A!important;color:#E3EE3A!important;box-shadow:0 0 12px rgba(227,238,58,.25)}
 </style><style>.phf{display:flex;align-items:stretch;gap:0;border:1px solid var(--line,rgba(127,127,127,.35));border-radius:12px;overflow:hidden;background:var(--card,transparent)}
 .phf .phcc{position:relative;display:flex;align-items:center;padding:0 10px 0 12px;border-inline-end:1px solid var(--line,rgba(127,127,127,.35));white-space:nowrap;font-weight:700;font-size:15px;cursor:pointer;margin:0}
 .phf .phcc:after{content:"▾";font-size:11px;opacity:.6;margin-inline-start:6px}
@@ -2864,7 +2866,7 @@ header.top .brand .emb{background:#fff;border-radius:50%}
 .su-w b{font:800 italic 30px/1.05 var(--display);color:var(--ink);margin-top:2px}
 .su-w span{font-size:12.5px;color:var(--ink-2)}
 .su-w.hot{border-color:var(--club);box-shadow:0 0 18px -6px var(--club)}
-.su-why-l{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--ink-2)}
+.su-why-l li::marker{color:currentColor}.su-why-l{list-style:disc;margin:0;padding:0;padding-inline-start:20px;display:flex;flex-direction:column;gap:6px;font-size:14px;color:var(--ink-2)}
 .btn.su-go{width:100%;height:54px;font-size:18px;border-radius:16px}
 .su-c.first{border-style:dashed}
 .su-c.hot{box-shadow:0 0 0 1.5px #FF6A3D,0 0 14px -4px #FF6A3D}
@@ -3272,9 +3274,10 @@ function vTeams(){
 }
 /* Info tab in the Core Padel Round 2 style, built from this tournament's own settings */
 function heroFacts(){ const F = (CFG.facts || []).map(String), last = F.length - 1;
-  if (THEME !== "night" || !/\d+ teams/i.test(F.join(" "))) return F.map((x, i) => [x, i === last && CFG.highlight_last]);
-  const pr = F.find(x => /prize/i.test(x));
-  return [[F[0], false], ...(F[1] && !/teams|courts|·/.test(F[1]) ? [[F[1], false]] : []), ...(pr ? [[pr.replace(/Prize Pool (\$[\d,]+)/i, "$1 prizes").toUpperCase(), true]] : [])]; }
+  const PZ = x => /prize/i.test(x), pzTxt = x => { const a = (String(x).match(/\$[\d,]+/) || [""])[0]; return a ? "Prize Pool " + a : x; };
+  if (THEME !== "night" || !/\d+ teams/i.test(F.join(" "))) return F.map((x, i) => PZ(x) ? [pzTxt(x), true] : [x, i === last && CFG.highlight_last && !F.some(PZ)]);
+  const pr = F.find(PZ);
+  return [[F[0], false], ...(F[1] && !/teams|courts|·/.test(F[1]) ? [[F[1], false]] : []), ...(pr ? [[pzTxt(pr), true]] : [])]; }
 function info2(){
   const I = {
     clock:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
@@ -3326,7 +3329,7 @@ function info2(){
     ${rule("late", "10-minute rule", "Not on court 10 minutes after your call: walkover.")}
     ${rule("pen", "Scores", "The referee enters every point. Scores show here live, as they happen.")}
     ${rule("bolt", "Live on your phone", "Follow every court, your next match and the draw right here.")}</div></section>
-  ${fee || prizeAmt ? `<section class="sec info2"><h2>Entry &amp; prizes</h2><div class="i-ticket lit">${fee ? `<div><small>Entry</small><b>$${fee}</b><span>per team · pay at the desk</span></div>` : `<div><small>Entry</small><b>Desk</b><span>pay when you check in</span></div>`}<i></i><div><small>Prize pool</small><b>${esc(prizeAmt || "—")}</b><span>across ${CATS.map(c => esc(CATL[c] || c)).join(", ")}</span></div></div>${prizeSplit(prizeAmt)}</section>` : ""}`;
+  ${fee || prizeAmt ? `<section class="sec info2"><h2>Entry &amp; prizes</h2><div class="i-ticket lit">${fee ? `<div><small>Entry</small><b>$${fee}</b><span>per team · pay at the desk</span></div>` : `<div><small>Entry</small><b>Desk</b><span>pay when you check in</span></div>`}<i></i><div><small>Prize Pool</small><b>${esc(prizeAmt || "—")}</b><span>across ${CATS.map(c => esc(CATL[c] || c)).join(", ")}</span></div></div>${prizeSplit(prizeAmt)}</section>` : ""}`;
 }
 /* prize pool split: the pool shared equally by category, then 70% to 1st and 30% to 2nd (CFG.prize_split can change the %s) */
 function prizeSplit(amt){
@@ -3488,7 +3491,7 @@ function render(){
   const app = document.getElementById("app"); const f = document.activeElement && document.activeElement.id; const sel = f && document.activeElement.selectionStart;
   const views = {schedule: vSchedule, standings: vStandings, knockouts: vKnockouts, teams: vTeams, info: vInfo, draw: vDraw};
   const vt = view.tab === "draw" && !drawOn() && !canEdit ? "schedule" : view.tab;
-  app.innerHTML = `${THEME === "night" || THEME === "trio" || THEME === "ace" || THEME === "lets" ? `<header class="top"><div class="wrap gut"><div class="hrow"><span class="kick"><i class="dot"></i>${esc(CFG.kicker || "Live")}</span><div class="upd">Last update<b>${esc(updatedText())}</b></div></div><div class="brand">${CFG.club_logo ? `<img class="emb" src="${CFG.club_logo}" alt="">` : ""}<div><h1>${CFG.title_html || esc(TNAME)}</h1><p>${esc(THEME === "night" && /\d+ categor/i.test(CFG.tagline || "") ? "Tournament · " + CATS.map(c => c === "X" ? "Mixed" : c).join(" · ") : (CFG.tagline || ""))}</p></div></div></div><div class="scene-wrap">${THEME === "trio" ? TSCENE : THEME === "ace" ? ASCENE : THEME === "lets" ? LSCENE : SCENE}</div><div class="wrap gut hero-bar"><div class="chips">${heroFacts().map(([x, g]) => `<span${g ? ` class="g"` : ""}>${esc(x)}</span>`).join("")}</div>${LOGO ? `<div class="presented"><span>${esc(CFG.sponsor_label || "Presented by")}</span><img src="${LOGO}" alt="${esc(CFG.sponsor_alt || "")}"></div>` : ""}</div></header>` : THEME === "movara" ? `<header class="top"><div class="hero-fx" aria-hidden="true"><i class="ln1"></i><i class="ln2"></i><i class="ball"></i></div><div class="wrap gut"><div class="hrow"><span class="kick"><i class="dot"></i>${esc(CFG.kicker || "Live")}</span><div class="upd">Last update<b>${esc(updatedText())}</b></div></div><div class="brand"><h1>${CFG.title_html || esc(TNAME)}</h1><p>${(CFG.facts || []).map(x => `<span>${esc(x)}</span>`).join("")}</p></div>${LOGO ? `<div class="sponsor"><span>${esc(CFG.sponsor_label || "")}</span><img src="${LOGO}" alt="${esc(CFG.sponsor_alt || "")}"></div>` : ""}</div></header>` : `<header class="top"><div class="wrap gut"><img src="${CFG.club_logo || ""}" alt=""><div class="brand"><h1>${esc(TNAME)}</h1><p>${esc(CFG.subtitle || "Live results")}</p></div><div class="upd">Last update<b>${esc(updatedText())}</b></div></div></header>`}
+  app.innerHTML = `${THEME === "night" || THEME === "trio" || THEME === "ace" || THEME === "lets" ? `<header class="top"><div class="wrap gut"><div class="hrow"><span class="kick"><i class="dot"></i>${esc(CFG.kicker || "Live")}</span><div class="upd">Last update<b>${esc(updatedText())}</b></div></div><div class="brand">${CFG.club_logo ? `<img class="emb" src="${CFG.club_logo}" alt="">` : ""}<div><h1>${CFG.title_html || esc(TNAME)}</h1><p>${esc(THEME === "night" && /\d+ categor/i.test(CFG.tagline || "") ? "Tournament · " + CATS.map(c => c === "X" ? "Mixed" : c).join(" · ") : (CFG.tagline || ""))}</p></div></div></div><div class="scene-wrap">${THEME === "trio" ? TSCENE : THEME === "ace" ? ASCENE : THEME === "lets" ? LSCENE : SCENE}</div><div class="wrap gut hero-bar"><div class="chips">${heroFacts().map(([x, g]) => `<span${g ? ` class="g"` : ""}>${esc(x)}</span>`).join("")}</div>${LOGO ? `<div class="presented"><span>${esc(CFG.sponsor_label || "Presented by")}</span><img src="${LOGO}" alt="${esc(CFG.sponsor_alt || "")}"></div>` : ""}</div></header>` : THEME === "movara" ? `<header class="top"><div class="hero-fx" aria-hidden="true"><i class="ln1"></i><i class="ln2"></i><i class="ball"></i></div><div class="wrap gut"><div class="hrow"><span class="kick"><i class="dot"></i>${esc(CFG.kicker || "Live")}</span><div class="upd">Last update<b>${esc(updatedText())}</b></div></div><div class="brand"><h1>${CFG.title_html || esc(TNAME)}</h1><p>${heroFacts().map(([x, g]) => `<span${g ? ` class="g"` : ""}>${esc(x)}</span>`).join("")}</p></div>${LOGO ? `<div class="sponsor"><span>${esc(CFG.sponsor_label || "")}</span><img src="${LOGO}" alt="${esc(CFG.sponsor_alt || "")}"></div>` : ""}</div></header>` : `<header class="top"><div class="wrap gut"><img src="${CFG.club_logo || ""}" alt=""><div class="brand"><h1>${esc(TNAME)}</h1><p>${esc(CFG.subtitle || "Live results")}</p></div><div class="upd">Last update<b>${esc(updatedText())}</b></div></div></header>`}
   <nav class="tabs" aria-label="Sections"><div class="wrap gut" role="tablist"><a class="tback" href="./#events" aria-label="Back to PlayPal"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></a>${[["schedule","Schedule"],["standings","Groups"],["knockouts","Knockouts"],["teams","Teams"],["info","Info"]].concat(drawOn() || canEdit ? [["draw", drawState() === "live" || drawState() === "running" ? "Draw 🔴" : "Draw"]] : []).map(([k, l]) => `<button role="tab" data-tab="${k}" aria-selected="${view.tab === k}">${l}</button>`).join("")}</div></nav>
   <main><div class="wrap gut">${adminBar()}${deskBox()}${banner()}${drawPill()}${vt === "draw" ? "" : passBox() + signupBox()}${views[vt]()}</div></main>${saveBar()}`;
   document.body.classList.toggle("editing", editMode);
@@ -4289,12 +4292,12 @@ function suWhy(){ const fee = CFG.fee ? +CFG.fee : 0, prize = (CFG.facts || []).
   return `<div class="su-why"><div class="su-why-r">
     <div class="su-w"><small>Entry</small><b>${fee ? "$" + fee : "At the desk"}</b><span>${fee ? "per team · pay at the desk" : "pay when you check in"}</span></div>
     ${per ? `<div class="su-w hot"><small>Prize per category</small><b>${money(per)}</b><span>🥇 ${money(per * sp[0] / 100)} · 🥈 ${money(per * (sp[1] || 0) / 100)}</span></div>` : ""}</div>
-    <ul class="su-why-l"><li>🎾 ${d0} day${d0 > 1 ? "s" : ""} · group matches, then knockouts to the final</li><li>⚖️ Teams play in their level category</li><li>📲 Live scores, your schedule and the draw on your phone</li></ul></div>`; }
+    <ul class="su-why-l"><li>${d0} day${d0 > 1 ? "s" : ""} · group matches, then knockouts to the final</li><li>Teams play in their level category</li><li>Live scores, your schedule and the draw on your phone</li></ul></div>`; }
 function signupBox(){ const I = SU.info; if (!I || editMode) return "";
   const mine = I.mine && (I.mine.status === "pending" || I.mine.status === "confirmed") ? I.mine : null;
   let h = "";
   if (I.open || mine){
-    h += `<section class="sec su"><h2>Team sign-up ${I.open ? `<small>Open until the day before the tournament</small>` : ""}</h2>${suCounts()}`;
+    h += `<section class="sec su"><h2>Team sign-up ${I.open ? `<small>Open until the day before the tournament</small>` : ""}</h2>`;
     if (!I.signed && I.open && !SU.open) h += suWhy() + `<button class="btn primary su-go" data-suopen>Sign up your team →</button>`;
     else if (!I.signed){ const up = SU.auth === "up";
       h += `<div class="su-form"><p class="su-step">Step 1 of 2 · ${up ? "Create your PlayPal account" : "Sign in"}</p>
