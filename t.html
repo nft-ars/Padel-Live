@@ -28,6 +28,8 @@
 .pch-send{width:44px;height:44px;flex:none;border-radius:50%;border:0;background:#E3EE3A;color:#000;font-size:19px;cursor:pointer}.pch-send:disabled{opacity:.35}.pch[dir=rtl] .pch-bar:not([dir=ltr]) .pch-send{transform:scaleX(-1)}
 .su-chatgo{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%;margin-bottom:10px}.su-chatgo small{font-weight:600;opacity:.75;font-size:12px}
 .su-or{text-align:center;font-size:12px;opacity:.6;margin:2px 0 10px}
+.su-more{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%;margin:10px 0 4px;border:1.5px dashed var(--line,rgba(127,127,127,.4))}.su-more small{font-weight:600;opacity:.7;font-size:12px}
+.su-cats .chip:disabled{opacity:.35;text-decoration:line-through}
 body{margin:0;font:14px/1.4 system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}.board.c3 .bhd,.board.c3 .brow{grid-template-columns:40px repeat(3,minmax(0,1fr));gap:4px}.board.c3 .brow.ev{grid-template-columns:40px 1fr}.board.c3 .bn,.board.c3 .bc{font-size:12px}.board.c4 .bhd,.board.c4 .brow{grid-template-columns:36px repeat(4,minmax(0,1fr));gap:3px}.board.c4 .brow.ev{grid-template-columns:36px 1fr}.board.c4 .bn,.board.c4 .bc{font-size:11px}.days{overflow-x:auto;scrollbar-width:none}
 .su .su-counts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
 .su-s{font-size:13px;color:var(--ink-2);margin:0;line-height:1.45}
@@ -4438,8 +4440,10 @@ async function pull(force){
 const SU = { pmode: "inv", myInv: null, copied: false, auth: "up", aName: "", aPhone: "", aCC: "963", aPass: "", autoLv: false, info: null, open: false, cat: "", phone: "", note: "", check: null, busy: false, msg: "", orgCat: "" };
 const CATR = { E: "under 1.5", D: "1.5–2.5", C: "2.5–3.5", B: "3.5–4.5", A: "4.5+", X: "1 man + 1 woman" };
 const START_LV = { E: 1.0, D: 1.5, C: 2.5, B: 3.49, A: 3.49 };
+function suMine(){ const I = SU.info; if (!I) return []; const a = Array.isArray(I.mine_all) ? I.mine_all : (I.mine && /pending|confirmed/.test(I.mine.status || "") ? [I.mine] : []); return a.filter(m => m && /pending|confirmed/.test(m.status || "")); }
+function suFree(){ const tk = suMine().map(m => m.cat); return CATS.filter(k => !tk.includes(k)); }
 async function loadSU(){ try { const r = await sb.rpc("t_signup_info", {p_slug: SLUG}); if (!r.error){ SU.info = r.data; SUOPEN = !!(r.data && r.data.open); }
-    const I = SU.info, mine = I && I.mine && (I.mine.status === "pending" || I.mine.status === "confirmed");
+    const I = SU.info, mine = I && !suFree().length;
     if (I && I.signed && I.open && !mine){ const m = await sb.rpc("t_my_invite", {p_slug: SLUG}); SU.myInv = m.error ? null : m.data; } else SU.myInv = null;
     } catch (e) {} if (!editMode) render(); try { pcAuto(); } catch (e) {} }
 /* while you wait for your partner, check every 20 seconds if they joined */
@@ -4535,7 +4539,13 @@ function suWhy(){ const fee = CFG.fee ? +CFG.fee : 0, prize = (CFG.facts || []).
     <div class="su-w"><small>ENTRY FEE</small><b>${fee ? "$" + fee : "ON THE DESK"}</b><span>${fee ? "per team · pay at the desk" : "pay when you check in"}</span></div>
     ${per ? `<div class="su-w hot"><small>Prize per category</small><b>${money(per)}</b><span>🥇 ${money(per * sp[0] / 100)} · 🥈 ${money(per * (sp[1] || 0) / 100)}</span></div>` : ""}</div>
     </div>`; }
-function suPill(){ const I = SU.info; if (!I || editMode || !I.open || (I.mine && (I.mine.status === "pending" || I.mine.status === "confirmed"))) return "";
+function suCard(mine){ const I = SU.info, ok = mine.status === "confirmed", fee = CFG.fee ? +CFG.fee : 0;
+  return `<div class="su-in${ok ? " ok" : ""}"><div class="su-in-h"><i>${ok ? "✅" : "⏳"}</i><div><b>${ok ? "You're in!" : "Your team is signed up"}</b><span>${esc(mine.team)} · ${esc(CATN[mine.cat] || mine.cat)}${mine.slot && !drawPend() && !preTeams() ? ` · Team ${esc(mine.slot)}` : ""}</span></div></div><p class="su-s su-who">You're on this team. Didn't sign up yourself? Your partner added you. Something wrong? Use <b>Contact support</b> above. · إذا ما سجّلت إنت، شريكك ضافك.</p>
+        <ol class="su-next"><li class="${ok ? "sn-done" : "sn-now"}"><b>${ok ? "Confirmed by the organizer" : "The organizer confirms your team"}</b><span>${ok ? "Your place is saved." : "You'll get a notification as soon as it's confirmed."}</span></li>
+        <li class="${ok ? "sn-now" : ""}"><b>${drawOn() ? "Watch the live draw" : "Check your matches"}</b><span>${drawOn() ? "See which group you land in, live." : "Your times show on the Schedule after sign-up closes."}</span></li>
+        <li><b>Pay at the desk${fee ? ` · $${fee}` : ""}</b><span>Show your entry pass (QR) when you check in. If you don't pay, you don't play.</span></li></ol>
+        ${I.open ? `<button class="btn small" data-suwd="${esc(mine.cat)}">Withdraw</button>` : ""}</div>`; }
+function suPill(){ const I = SU.info; if (!I || editMode || !I.open || !suFree().length) return "";
   return `<button class="su-pill" data-gosignup><span class="su-pill-d"></span><b>Sign up your team</b><small>Closes the day before</small><span class="su-pill-go">→</span></button>`; }
 document.addEventListener("click", e => { if (!e.target.closest("[data-gosignup]")) return; view.tab = "info"; try { history.replaceState(null, "", "#info"); } catch (x) {} render(); setTimeout(() => { const el = document.querySelector(".su"), nv = document.querySelector("nav.tabs"); if (el) window.scrollTo({top: el.getBoundingClientRect().top + scrollY - (nv ? nv.getBoundingClientRect().height : 0) - 12, behavior: "smooth"}); }, 60); });
 /* ---------- sign up by chat (EN / AR) ---------- */
@@ -4552,7 +4562,7 @@ en: { title: "Sign-up Assistant", online: "online", pick: "Pick an answer above"
   pwNew: "Last one: choose a <b>password</b> (at least 6 characters).", pwQ: "And your <b>password</b>?", pw: "Password", pwBad: "At least 6 characters please 🔒",
   wait: "One moment…", made: "✅ Your account is ready. Welcome to PlayPal!\nNow let's sign up your team.", back: n => `✅ Welcome back${n ? ", " + n : ""}!`,
   authErr: "That didn't work:", retry: "Try again", other: "I'll use the form instead",
-  already: (tm, c, ok) => `You're already on a team in this tournament:${tm}\n${ok ? "✅ Confirmed by the organizer." : "⏳ Waiting for the organizer to confirm."}\nIf you didn't sign up yourself, your partner added you. Not right? Ask the organizer via <b>Contact support</b> in the Info tab.`, waiting: "You already sent an invite. We're waiting for your partner to join ⏳ You can see it on the page.",
+  another: c => `Want to sign up a team in another category too?\nStill open for you: <b>${c}</b>`, anotherY: "Yes, another category", already: (tm, c, ok) => `You're already on a team in this tournament:${tm}\n${ok ? "✅ Confirmed by the organizer." : "⏳ Waiting for the organizer to confirm."}\nIf you didn't sign up yourself, your partner added you. Not right? Ask the organizer via <b>Contact support</b> in the Info tab.`, waiting: "You already sent an invite. We're waiting for your partner to join ⏳ You can see it on the page.",
   catQ: "Which <b>category</b> will your team play?", unsure: "Not sure 🤔", full: "Full",
   catHelp: "No problem:\n• <b>D</b>: you play for fun, still learning\n• <b>C</b>: you play every week, good rallies\n• <b>B</b>: strong player, plays matches often\nThe organizer checks every team, so pick your best guess.",
   catOk: c => `👌 ${c}. Now, who's your <b>partner</b>?`, onPP: ["They're on PlayPal", "search by name or number"], invite: ["Invite them on WhatsApp", "they join with your link"],
@@ -4576,7 +4586,7 @@ ar: { title: "مساعد التسجيل", online: "متصل", pick: "اختار 
   pwNew: "آخر شي: اختار <b>كلمة سر</b> (٦ أحرف عالأقل).", pwQ: "و<b>كلمة السر</b>؟", pw: "كلمة السر", pwBad: "٦ أحرف عالأقل لو سمحت 🔒",
   wait: "لحظة…", made: "✅ صار عندك حساب. أهلاً فيك بـ PlayPal!\nهلأ خلينا نسجّل فريقك.", back: n => `✅ أهلاً فيك من جديد${n ? " يا " + n : ""}!`,
   authErr: "ما زبطت:", retry: "جرّب مرة تانية", other: "رح استعمل الفورم",
-  already: (tm, c, ok) => `إنت موجود بفريق بهالبطولة:${tm}\n${ok ? "✅ المنظّم أكّد الفريق." : "⏳ عم ننتظر المنظّم يأكّد."}\nإذا ما سجّلت إنت، يعني شريكك ضافك. في غلط؟ احكي المنظّم من <b>Contact support</b> بتبويب Info.`, waiting: "بعتت دعوة من قبل. عم ننتظر شريكك يدخل ⏳ فيك تشوفها بالصفحة.",
+  another: c => `بدك تسجّل فريق بفئة تانية كمان؟\nلسا فيك: <b>${c}</b>`, anotherY: "إيه، فئة تانية", already: (tm, c, ok) => `إنت موجود بفريق بهالبطولة:${tm}\n${ok ? "✅ المنظّم أكّد الفريق." : "⏳ عم ننتظر المنظّم يأكّد."}\nإذا ما سجّلت إنت، يعني شريكك ضافك. في غلط؟ احكي المنظّم من <b>Contact support</b> بتبويب Info.`, waiting: "بعتت دعوة من قبل. عم ننتظر شريكك يدخل ⏳ فيك تشوفها بالصفحة.",
   catQ: "بأي <b>فئة</b> بدو يلعب فريقك؟", unsure: "مو متأكد 🤔", full: "مليانة",
   catHelp: "ولا يهمك:\n• <b>D</b>: بتلعب للمتعة وعم تتعلم\n• <b>C</b>: بتلعب كل أسبوع وتبادلاتك منيحة\n• <b>B</b>: لاعب قوي وبتلعب مباريات كتير\nالمنظّم بيراجع كل فريق، فاختار أقرب شي إلك.",
   catOk: c => `👌 ${c}. هلأ، مين <b>شريكك</b>؟`, onPP: ["شريكي على PlayPal", "دوّر بالاسم أو الرقم"], invite: ["ابعتله دعوة عالواتساب", "بيدخل من رابطك"],
@@ -4654,14 +4664,17 @@ async function pcFlow(run){ const box = () => PC.el;
       await pcBot(`${L.authErr} ${esc(r.error.message)}`, 300);
       if (await pcChoices([[L.retry, "r"], [L.other, "f"]]) === "f"){ pcClose(); SU.open = true; SU.read = true; render(); return; } }
   } else await pcBot(L.signedIn, 350);
-  const I = SU.info, mine = I.mine && (I.mine.status === "pending" || I.mine.status === "confirmed");
-  if (mine){ const M = I.mine; await pcBot(L.already(pcCard([[L.team, `<bdi>${esc(M.team || "")}</bdi>`], [L.cat, esc(pcCatN(M.cat))]]), M.cat, M.status === "confirmed")); return pcEnd(); }
-  if (SU.myInv){ await pcBot(L.waiting); return pcEnd(); }
+  const I = SU.info, mines = suMine(), free = suFree();
+  if (mines.length){ for (const M of mines) await pcBot(L.already(pcCard([[L.team, `<bdi>${esc(M.team || "")}</bdi>`], [L.cat, esc(pcCatN(M.cat))]]), M.cat, M.status === "confirmed"), 450);
+    if (!free.length) return pcEnd();
+    await pcBot(L.another(free.map(pcCatN).join(" · ")));
+    if (await pcChoices([[L.anotherY, "y"], [L.close, "n"]]) === "n"){ pcClose(); return; } }
+  if (SU.myInv && !free.filter(k => k !== SU.myInv.cat).length){ await pcBot(L.waiting); return pcEnd(); }
   /* 2. category */
   let cat;
   const pickCat = async () => { const c = I.counts || {}; await pcBot(L.catQ);
-    const opts = CATS.map(k => { const x = c[k] || {}, full = x.max && x.confirmed >= x.max; return [pcCatN(k), full ? null : k, full ? L.full : CATR[k] || ""]; });
-    let v = await pcChoices(opts.concat(CATS.length > 1 ? [[L.unsure, "?"]] : []));
+    const fr = suFree(), opts = CATS.filter(k => fr.includes(k)).map(k => { const x = c[k] || {}, full = x.max && x.confirmed >= x.max; return [pcCatN(k), full ? null : k, full ? L.full : CATR[k] || ""]; });
+    let v = await pcChoices(opts.concat(opts.length > 1 ? [[L.unsure, "?"]] : []));
     if (v === "?"){ await pcBot(L.catHelp, 900); v = await pcChoices(opts); }
     if (CFG.level_check && (!I.level || SU.autoLv)){ const lv = START_LV[v] || 2.5; const r = await sb.rpc("set_my_level", {p_level: lv, p_claim: {src: "event", cat: v, raw: lv}}); if (!r.error){ SU.autoLv = true; I.level = lv; } }
     return v; };
@@ -4710,7 +4723,7 @@ async function pcFlow(run){ const box = () => PC.el;
   await pcBot(L.req, 700); await pcBot(L.next(CFG.fee ? +CFG.fee : 0), 900);
   return pcEnd(true); }
 
-function pcCan(){ const I = SU.info; return !!(I && I.open && !SU.myInv && !(I.mine && /pending|confirmed/.test(I.mine.status || "")) && MODE !== "tv" && MODE !== "ref" && !editMode); }
+function pcCan(){ const I = SU.info; return !!(I && I.open && !SU.myInv && suFree().length && MODE !== "tv" && MODE !== "ref" && !editMode); }
 function pcAuto(){ if (PC.auto) return; PC.auto = true; if (!pcCan()) return;
   if (location.hash === "#chat"){ try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {} setTimeout(() => { if (!PC.el && pcCan()) pcOpen(); }, 600); } }
 async function pcEnd(done){ const L = pcL(); await pcChoices([[L.close, "x"]]); pcClose(); if (done) setTimeout(instPop, 500); }
@@ -4734,10 +4747,12 @@ function instPop(){ let hide = false; try { hide = !!localStorage.getItem("pl-in
     if (tIOS()){ ov.querySelector(".ip-x").innerHTML = steps; const g = ov.querySelector(".ip-go"); g.textContent = "Got it"; g.onclick = close; ov.querySelector(".ip-no").remove(); }
     else { alert("Tap ⋮ in Chrome, then Add to Home screen (or Install app)."); close(); } }; }
 function signupBox(){ const I = SU.info; if (!I || editMode) return "";
-  const mine = I.mine && (I.mine.status === "pending" || I.mine.status === "confirmed") ? I.mine : null;
+  const mines = suMine(), free = suFree(), mine = mines.length && !free.length ? mines[0] : null;
   let h = "";
-  if (I.open || mine){
+  if (I.open || mines.length){
     h += `<section class="sec su">`;
+    h += mines.map(suCard).join("");
+    if (mines.length && free.length && I.open && !SU.open && !SU.myInv) h += `<button class="btn su-more" data-suopen>+ Sign up in another category <small>${free.map(k => esc(CATN[k] || k)).join(" · ")}</small></button>`;
     if (!I.signed && I.open && !SU.open) h += `<label class="su-read"><input type="checkbox" id="su-read"${SU.read ? " checked" : ""}><span>I have read the tournament info</span></label><button class="btn primary su-go" data-suopen${SU.read ? "" : " disabled"}>Sign up your team →</button>`;
     else if (!I.signed){ const up = SU.auth === "up";
       h += `<div class="su-form"><p class="su-step">Step 1 of 2 · ${up ? "Create your PlayPal account" : "Sign in"}</p>
@@ -4747,20 +4762,15 @@ function signupBox(){ const I = SU.info; if (!I || editMode) return "";
         <div class="su-act"><button class="btn primary" data-suauth${SU.busy ? " disabled" : ""}>${SU.busy ? "…" : up ? "Create account and continue" : "Sign in and continue"}</button><button class="btn" data-suclose>Cancel</button></div>
         <button class="btn small ghostl" data-sumode>${up ? "I already have an account" : "New here? Create an account"}</button>
         ${SU.msg ? `<p class="su-bad">${esc(SU.msg)}</p>` : ""}</div>`; }
-    else if (mine){ const ok = mine.status === "confirmed", fee = CFG.fee ? +CFG.fee : 0;
-      h += `<div class="su-in${ok ? " ok" : ""}"><div class="su-in-h"><i>${ok ? "✅" : "⏳"}</i><div><b>${ok ? "You're in!" : "Your team is signed up"}</b><span>${esc(mine.team)} · ${esc(CATN[mine.cat] || mine.cat)}${mine.slot && !drawPend() && !preTeams() ? ` · Team ${esc(mine.slot)}` : ""}</span></div></div><p class="su-s su-who">You're on this team. Didn't sign up yourself? Your partner added you. Something wrong? Use <b>Contact support</b> above. · إذا ما سجّلت إنت، شريكك ضافك.</p>
-        <ol class="su-next"><li class="${ok ? "sn-done" : "sn-now"}"><b>${ok ? "Confirmed by the organizer" : "The organizer confirms your team"}</b><span>${ok ? "Your place is saved." : "You'll get a notification as soon as it's confirmed."}</span></li>
-        <li class="${ok ? "sn-now" : ""}"><b>${drawOn() ? "Watch the live draw" : "Check your matches"}</b><span>${drawOn() ? "See which group you land in, live." : "Your times show on the Schedule after sign-up closes."}</span></li>
-        <li><b>Pay at the desk${fee ? ` · $${fee}` : ""}</b><span>Show your entry pass (QR) when you check in. If you don't pay, you don't play.</span></li></ol>
-        ${I.open ? `<button class="btn small" data-suwd>Withdraw</button>` : ""}</div>`; }
+    else if (mine){ /* every category taken: the team cards above say it all */ }
     else if (I.open && SU.myInv) h += suWaiting();
-    else if (I.open && !SU.open) h += `<label class="su-read"><input type="checkbox" id="su-read"${SU.read ? " checked" : ""}><span>I have read the tournament info</span></label><button class="btn primary su-go" data-suopen${SU.read ? "" : " disabled"}>Sign up your team →</button>${I.mine && I.mine.status === "rejected" ? `<p class="su-s">Your last request was not accepted. You can sign up again.</p>` : ""}`;
+    else if (I.open && !SU.open && !mines.length) h += `<label class="su-read"><input type="checkbox" id="su-read"${SU.read ? " checked" : ""}><span>I have read the tournament info</span></label><button class="btn primary su-go" data-suopen${SU.read ? "" : " disabled"}>Sign up your team →</button>${I.mine && I.mine.status === "rejected" ? `<p class="su-s">Your last request was not accepted. You can sign up again.</p>` : ""}`;
     else if (I.open){
       const ck = SU.check;
       const inv = SU.pmode !== "acc";
       h += `<div class="su-form">
         <p class="su-step">Step 2 of 2 · Your team</p>
-        <span class="lbl">Your category</span><div class="su-cats">${CATS.map(k => `<button class="chip" data-sucat="${k}" aria-pressed="${SU.cat === k}">${esc(CATN[k] || k)}${CATR[k] ? ` <small>${CATR[k]}</small>` : ""}</button>`).join("")}</div>${SU.cat === "X" ? `<p class="su-s">Mixed: one man and one woman, any level. The organizer checks every mixed team.</p>` : ""}
+        <span class="lbl">Your category</span><div class="su-cats">${CATS.map(k => `<button class="chip" data-sucat="${k}" aria-pressed="${SU.cat === k}"${free.includes(k) ? "" : " disabled title=\"You already have a team here\""}>${esc(CATN[k] || k)}${CATR[k] ? ` <small>${CATR[k]}</small>` : ""}</button>`).join("")}</div>${SU.cat === "X" ? `<p class="su-s">Mixed: one man and one woman, any level. The organizer checks every mixed team.</p>` : ""}
         ${!CFG.level_check ? `<p class="su-s">🔓 Open entry: pick the category you want to play. The organizer confirms every team. No rank yet? You get this category as your rank and your tier card as soon as your team is confirmed.</p>` : !SU.info.level || SU.autoLv ? `<p class="su-s">Your first matches fine-tune your level. B and A players are checked by the admin.</p>` : ""}
         <span class="lbl">Who's your partner?</span>
         <div class="su-pm"><button class="su-pmo" data-supm="inv" aria-pressed="${inv}"><span class="su-pmi">📲</span><span><b>Invite them on WhatsApp</b><small>They tap your link, make an account in a minute, and your team is in.</small></span></button>
@@ -4820,7 +4830,7 @@ document.addEventListener("click", async e => {
     const r = await sb.rpc("t_signup", {p_slug: SLUG, p_cat: SU.cat, p_partner_phone: SU.phone, p_note: SU.note || null}); SU.busy = false;
     if (r.error){ SU.msg = r.error.message; render(); return; }
     pull(true); SU.open = false; SU.phone = ""; SU.q = null; SU.pickName = ""; SU.found = null; SU.note = ""; SU.check = null; await loadSU(); setTimeout(instPop, 600); return; }
-  if ("suwd" in d){ if (!confirm("Withdraw your team from this tournament?")) return; const r = await sb.rpc("t_withdraw", {p_slug: SLUG}); if (r.error){ alert(r.error.message); return; } await loadSU(); pull(true); return; }
+  if ("suwd" in d){ if (!confirm(d.suwd ? `Withdraw your ${CATN[d.suwd] || d.suwd} team?` : "Withdraw your team from this tournament?")) return; const r = await sb.rpc("t_withdraw", d.suwd ? {p_slug: SLUG, p_cat: d.suwd} : {p_slug: SLUG}); if (r.error){ alert(r.error.message); return; } await loadSU(); pull(true); return; }
   if (d.suset){ if (d.sust === "rejected" && !confirm("Remove this team?")) return; b.disabled = true;
     const r = await sb.rpc("t_entry_set", {p_id: d.suset, p_status: d.sust}); if (r.error){ alert(r.error.message); b.disabled = false; return; } await loadSU(); pull(true); return; }
 });
