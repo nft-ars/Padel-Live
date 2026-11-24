@@ -1,5 +1,8 @@
 <!doctype html><html lang="en"><head><script>try { document.documentElement.dataset.theme = localStorage.getItem("pl-theme") || "dark"; } catch (e) { document.documentElement.dataset.theme = "dark"; }</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#2F4A41"><title>PlayPal · Tournament</title><link rel="icon" href="icon-192.png"><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800;1,900&family=Figtree:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800;1,900&family=Figtree:wght@400;500;600;700&display=swap"></noscript><style>.pch-lock,.pch-lock body{overflow:hidden}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800;1,900&family=Figtree:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800;1,900&family=Figtree:wght@400;500;600;700&display=swap"></noscript><style>#pcfab{position:fixed;z-index:900;bottom:calc(18px + env(safe-area-inset-bottom));right:16px;display:flex;align-items:center;gap:10px;border:0;border-radius:32px;padding:7px 18px 7px 7px;text-align:left;background:#E3EE3A;color:#0A0D10;font:800 15px/1 system-ui,-apple-system,sans-serif;box-shadow:0 10px 28px rgba(0,0,0,.45),0 0 0 4px rgba(227,238,58,.25);cursor:pointer;animation:pchFab .5s ease-out}
+#pcfab img{width:40px;height:40px;border-radius:50%;background:#000;flex:none}#pcfab .pf-b{display:flex;flex-direction:column;gap:3px}#pcfab .pf-b b{font-size:15px}#pcfab .pf-b small{font-size:11.5px;font-weight:700;opacity:.7}#pcfab:after{content:"";position:absolute;top:4px;left:40px;width:12px;height:12px;border-radius:50%;background:#25D366;border:2px solid #E3EE3A;animation:pchPing 1.6s ease-out infinite}
+@keyframes pchFab{from{opacity:0;transform:translateY(20px) scale(.9)}}@keyframes pchPing{0%{box-shadow:0 0 0 0 rgba(37,211,102,.6)}70%{box-shadow:0 0 0 9px rgba(37,211,102,0)}}
+.pch-lock,.pch-lock body{overflow:hidden}
 .pch{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;background:#0B1014;color:#fff;font:15px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;animation:pchIn .22s ease-out}
 .pch.ar{font-family:"IBM Plex Sans Arabic","Cairo",system-ui,sans-serif}
 @keyframes pchIn{from{opacity:0;transform:translateY(16px)}}
@@ -4438,7 +4441,7 @@ const START_LV = { E: 1.0, D: 1.5, C: 2.5, B: 3.49, A: 3.49 };
 async function loadSU(){ try { const r = await sb.rpc("t_signup_info", {p_slug: SLUG}); if (!r.error){ SU.info = r.data; SUOPEN = !!(r.data && r.data.open); }
     const I = SU.info, mine = I && I.mine && (I.mine.status === "pending" || I.mine.status === "confirmed");
     if (I && I.signed && I.open && !mine){ const m = await sb.rpc("t_my_invite", {p_slug: SLUG}); SU.myInv = m.error ? null : m.data; } else SU.myInv = null;
-    } catch (e) {} if (!editMode) render(); }
+    } catch (e) {} if (!editMode) render(); try { pcAuto(); } catch (e) {} }
 /* while you wait for your partner, check every 20 seconds if they joined */
 setInterval(() => { if (SU.myInv && !document.hidden) loadSU(); }, 20000);
 document.addEventListener("visibilitychange", () => { if (SU.myInv && !document.hidden) loadSU(); });
@@ -4538,8 +4541,8 @@ document.addEventListener("click", e => { if (!e.target.closest("[data-gosignup]
 /* ---------- sign up by chat (EN / AR) ---------- */
 const PC = { el: null, run: 0, lang: "en" };
 const PCT = {
-en: { title: "PlayPal Assistant", online: "online", pick: "Pick an answer above", type: "Type here…",
-  hi: n => `Hi 👋 I'm the PlayPal assistant.\nI'll sign up your team for <b><bdi>${n}</bdi></b> in about a minute.`,
+en: { title: "Sign-up Assistant", online: "online", pick: "Pick an answer above", type: "Type here…",
+  hi: n => `Hi 👋 I'm the PlayPal Sign-up Assistant.\nI'll sign up your team for <b><bdi>${n}</bdi></b> in about a minute.`,
   dates: "📅 Dates", prize: "🏆 Prizes", entry: "💵 Entry", entryV: f => f ? `$${f} per team, at the desk` : "Pay at the desk", rule: "⏱️ Rule", ruleV: "10 min late = walkover",
   go: "Let's go 👍", info: "Read the full info first", infoA: "Sure, it's all in the <b>Info</b> tab. Tap the chat button again when you're ready 🙂",
   closed: "Sign-up for this tournament is closed 🙏", hasAcc: "Do you already have a PlayPal account?", yes: "Yes, sign me in", no: "No, I'm new",
@@ -4562,8 +4565,8 @@ en: { title: "PlayPal Assistant", online: "online", pick: "Pick an answer above"
   sum: "Here's your team. All good?", team: "👥 Team", cat: "🏷️ Category", confirm: "Confirm sign-up ✅", change: "Change category",
   req: "🎉 <b>Request sent!</b>", next: f => `What happens next:\n1️⃣ The organizer confirms your team. You get a notification.\n2️⃣ Your match times show on the <b>Schedule</b>.\n3️⃣ On the day, come 30 min early${f ? ` and pay <b>$${f} as a team</b> at the desk` : ""}.\n\n⚠️ 10 minutes late = you lose by walkover.`,
   close: "Close", err: "Something went wrong:" },
-ar: { title: "مساعد PlayPal", online: "متصل", pick: "اختار جواب من فوق", type: "اكتب هون…",
-  hi: n => `أهلاً 👋 أنا مساعد PlayPal.\nرح سجّلك فريقك ببطولة <b><bdi>${n}</bdi></b> بأقل من دقيقة.`,
+ar: { title: "مساعد التسجيل", online: "متصل", pick: "اختار جواب من فوق", type: "اكتب هون…",
+  hi: n => `أهلاً 👋 أنا مساعد التسجيل من PlayPal.\nرح سجّلك فريقك ببطولة <b><bdi>${n}</bdi></b> بأقل من دقيقة.`,
   dates: "📅 المواعيد", prize: "🏆 الجوائز", entry: "💵 الاشتراك", entryV: f => f ? `$${f} للفريق، عالديسك` : "الدفع عالديسك", rule: "⏱️ القاعدة", ruleV: "تأخير ١٠ دقايق = خسارة",
   go: "يلا نبلّش 👍", info: "بدي اقرأ كل المعلومات أول", infoA: "أكيد، كلها بتبويب <b>Info</b>. اضغط زر الدردشة مرة تانية لما تكون جاهز 🙂",
   closed: "التسجيل بهالبطولة مسكّر 🙏", hasAcc: "عندك حساب على PlayPal؟", yes: "إيه، سجّلني دخول", no: "لا، أنا جديد",
@@ -4589,9 +4592,9 @@ ar: { title: "مساعد PlayPal", online: "متصل", pick: "اختار جوا�
 const PC_EN_NAME = /^[A-Za-z][A-Za-z'.\- ]*$/;
 function pcOpen(){ if (PC.el) PC.el.remove(); PC.run++; const run = PC.run;
   const el = document.createElement("div"); el.id = "pchat"; el.className = "pch";
-  el.innerHTML = `<div class="pch-top"><button class="pch-x" aria-label="Close">‹</button><img src="icon-192.png" alt=""><div><b class="pch-t">PlayPal Assistant</b><span class="pch-on">● online</span></div></div>
+  el.innerHTML = `<div class="pch-top"><button class="pch-x" aria-label="Close">‹</button><img src="icon-192.png" alt=""><div><b class="pch-t">Sign-up Assistant</b><span class="pch-on">● online</span></div></div>
     <div class="pch-msgs" aria-live="polite"></div><form class="pch-bar"><span class="pch-cc" dir="ltr">+963</span><input class="pch-in" autocomplete="off" disabled placeholder="…"><button class="pch-send" disabled aria-label="Send">➤</button></form>`;
-  document.body.appendChild(el); PC.el = el; document.documentElement.classList.add("pch-lock");
+  document.body.appendChild(el); PC.el = el; document.documentElement.classList.add("pch-lock"); { const f = document.getElementById("pcfab"); if (f) f.remove(); }
   el.querySelector(".pch-x").onclick = pcClose;
   pcFlow(run).catch(e => { if (run === PC.run && PC.el) pcBot(esc(String(e && e.message || e)), 200).catch(() => {}); }); }
 function pcClose(){ PC.run++; if (PC.el) PC.el.remove(); PC.el = null; document.documentElement.classList.remove("pch-lock"); loadSU(); }
@@ -4706,6 +4709,16 @@ async function pcFlow(run){ const box = () => PC.el;
   SU.open = false; pull(true); await loadSU(); pcAlive(run);
   await pcBot(L.req, 700); await pcBot(L.next(CFG.fee ? +CFG.fee : 0), 900);
   return pcEnd(true); }
+
+function pcCan(){ const I = SU.info; return !!(I && I.open && !SU.myInv && !(I.mine && /pending|confirmed/.test(I.mine.status || "")) && MODE !== "tv" && MODE !== "ref" && !editMode); }
+function pcAuto(){ const can = pcCan(); let fab = document.getElementById("pcfab");
+  if (can && !PC.el){ if (!fab){ fab = document.createElement("button"); fab.id = "pcfab"; fab.type = "button"; fab.setAttribute("data-chatopen", "");
+      fab.innerHTML = `<img src="icon-192.png" alt=""><span class="pf-b"><b>Sign-up Assistant</b><small>مساعد التسجيل</small></span>`; document.body.appendChild(fab); } }
+  else if (fab) fab.remove();
+  if (PC.auto) return; PC.auto = true; if (!can) return;
+  let seen = false; try { seen = !!localStorage.getItem("pl-chat-seen-" + SLUG); localStorage.setItem("pl-chat-seen-" + SLUG, "1"); } catch (e) {}
+  const viaLink = location.hash === "#chat" || location.hash === "#signup";
+  if (viaLink || !seen){ if (viaLink) try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {} setTimeout(() => { if (!PC.el && pcCan()) pcOpen(); }, 700); } }
 async function pcEnd(done){ const L = pcL(); await pcChoices([[L.close, "x"]]); pcClose(); if (done) setTimeout(instPop, 500); }
 document.addEventListener("click", e => { if (e.target.closest("[data-chatopen]")){ e.preventDefault(); pcOpen(); } });
 /* after signing up: "Add PlayPal to your home screen" (once, until installed or closed) */
@@ -4731,7 +4744,7 @@ function signupBox(){ const I = SU.info; if (!I || editMode) return "";
   let h = "";
   if (I.open || mine){
     h += `<section class="sec su">`;
-    if (!I.signed && I.open && !SU.open) h += `<button class="btn primary big su-chatgo" data-chatopen>💬 Sign up by chat<small>English · العربية · 1 minute</small></button><p class="su-or">or use the form</p><label class="su-read"><input type="checkbox" id="su-read"${SU.read ? " checked" : ""}><span>I have read the tournament info</span></label><button class="btn primary su-go" data-suopen${SU.read ? "" : " disabled"}>Sign up your team →</button>`;
+    if (!I.signed && I.open && !SU.open) h += `<button class="btn primary big su-chatgo" data-chatopen>🤖 Sign-up Assistant<small>sign up by chat · English · العربية · 1 minute</small></button><p class="su-or">or use the form</p><label class="su-read"><input type="checkbox" id="su-read"${SU.read ? " checked" : ""}><span>I have read the tournament info</span></label><button class="btn primary su-go" data-suopen${SU.read ? "" : " disabled"}>Sign up your team →</button>`;
     else if (!I.signed){ const up = SU.auth === "up";
       h += `<div class="su-form"><p class="su-step">Step 1 of 2 · ${up ? "Create your PlayPal account" : "Sign in"}</p>
         ${up ? `<label class="lbl">Full name<input id="su-aname" autocomplete="name" value="${esc(SU.aName)}" placeholder="First and last name"></label>` : ""}
@@ -4747,7 +4760,7 @@ function signupBox(){ const I = SU.info; if (!I || editMode) return "";
         <li><b>Pay at the desk${fee ? ` · $${fee}` : ""}</b><span>Show your entry pass (QR) when you check in. If you don't pay, you don't play.</span></li></ol>
         ${I.open ? `<button class="btn small" data-suwd>Withdraw</button>` : ""}</div>`; }
     else if (I.open && SU.myInv) h += suWaiting();
-    else if (I.open && !SU.open) h += `<button class="btn primary big su-chatgo" data-chatopen>💬 Sign up by chat<small>English · العربية · 1 minute</small></button><p class="su-or">or use the form</p><label class="su-read"><input type="checkbox" id="su-read"${SU.read ? " checked" : ""}><span>I have read the tournament info</span></label><button class="btn primary su-go" data-suopen${SU.read ? "" : " disabled"}>Sign up your team →</button>${I.mine && I.mine.status === "rejected" ? `<p class="su-s">Your last request was not accepted. You can sign up again.</p>` : ""}`;
+    else if (I.open && !SU.open) h += `<button class="btn primary big su-chatgo" data-chatopen>🤖 Sign-up Assistant<small>sign up by chat · English · العربية · 1 minute</small></button><p class="su-or">or use the form</p><label class="su-read"><input type="checkbox" id="su-read"${SU.read ? " checked" : ""}><span>I have read the tournament info</span></label><button class="btn primary su-go" data-suopen${SU.read ? "" : " disabled"}>Sign up your team →</button>${I.mine && I.mine.status === "rejected" ? `<p class="su-s">Your last request was not accepted. You can sign up again.</p>` : ""}`;
     else if (I.open){
       const ck = SU.check;
       const inv = SU.pmode !== "acc";
