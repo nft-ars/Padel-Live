@@ -4053,7 +4053,7 @@ function liveTxt(id){
 function doneTxt(id){ const st = (cur().pts || {})[id]; return st && st.done && st.kind === "sets" ? setsText(st) : ""; }
 
 /* ---------- shared bits for referee + TV ---------- */
-const MODE = (() => { try { const h = location.hash.replace("#", ""); return h === "ref" || h === "tv" ? h : ""; } catch (e) { return ""; } })();
+const MODE = (() => { try { const h = location.hash.replace("#", ""); if (h === "ref" || h === "tv") return h; const p = (location.pathname.match(/\/(tv|ref)\/?$/) || [])[1]; return p || ""; } catch (e) { return ""; } })();
 const PINKEY = "pl-refpin-" + SLUG, CTKEY = "pl-refct-" + SLUG;
 const lsGet = k => { try { return localStorage.getItem(k) || ""; } catch (e) { return ""; } };
 const lsSet = (k, v) => { try { if (v) localStorage.setItem(k, v); else localStorage.removeItem(k); } catch (e) {} };
@@ -4879,9 +4879,14 @@ async function tImport(slug, sb){
 }
 async function tBoot(){
   var slug = (location.search.replace(/^\?/, "").split("&")[0] || "").replace(/[^a-z0-9-]/g, "");
-  if (!slug){ tFail("No tournament chosen."); return; }
   var sb;
   try { sb = window.__MOCK || window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, {auth:{lock: async function(n, w, fn){ return await fn(); }}, global:{fetch: brandFetch}}); } catch (e) { tFail("Can't reach the server."); return; }
+  /* short links (/tv, /ref, /t): no name given, so open the tournament that is on now, else the next one, else the latest */
+  if (!slug){ try { var L = await sb.rpc("t_list"); var ts = (L && L.data) || [], d = new Date(Date.now() + 3 * 3600e3).toISOString().slice(0, 10);
+      var on = ts.filter(function(x){ return x.starts_on <= d && (x.ends_on || x.starts_on) >= d; }).sort(function(a, b){ return a.starts_on < b.starts_on ? 1 : -1; })[0];
+      var nx = ts.filter(function(x){ return x.starts_on > d; }).sort(function(a, b){ return a.starts_on < b.starts_on ? -1 : 1; })[0];
+      var pick = on || nx || ts.slice().sort(function(a, b){ return a.starts_on < b.starts_on ? 1 : -1; })[0]; slug = pick ? pick.slug : ""; } catch (e) {} }
+  if (!slug){ tFail("No tournament chosen."); return; }
   var timer = setTimeout(function(){ tFail("Can't reach the server. Check your connection."); }, 15000);
   try {
     var r = await sb.rpc("t_get", {p_slug: slug});
