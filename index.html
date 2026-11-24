@@ -5144,9 +5144,9 @@ const dayKey = d => new Intl.DateTimeFormat("en-CA", {timeZone: TZ}).format(d);
 /* tournament banner */
 function tourBanner(){
   const mineS = new Set((S.myEntries || []).map(e => e.slug));
-  const ts = (S.wi && S.wi.tours || []).filter(x => !ls.get("pl-tx-" + x.slug) && !mineS.has(x.slug)); if (!ts.length) return "";
+  const ts = (S.wi && S.wi.tours || []).filter(x => !ls.get("pl-sua-x-" + x.slug)); if (!ts.length) return ""; void mineS;
   const x = ts[0], msg = esc(t("suaLed")(lang === "ar" ? x.name : String(x.name || "").toUpperCase()));
-  return `<div class="chatfab cf-led"><a href="t.html?${encodeURIComponent(x.slug)}#chat" aria-label="${t("suaT")}"><img src="icon-192.png" alt=""><span class="led"><span class="mq">${msg}</span><span class="mq" aria-hidden="true">${msg}</span></span></a><button class="cf-x" data-tourx="${esc(x.slug)}" aria-label="Close">×</button></div>`;
+  return `<div class="chatfab cf-led"><a href="t.html?${encodeURIComponent(x.slug)}#chat" aria-label="${t("suaT")}"><img src="icon-192.png" alt=""><span class="led"><span class="mq">${msg}</span><span class="mq" aria-hidden="true">${msg}</span></span></a><button class="cf-x" data-tourx="sua:${esc(x.slug)}" aria-label="Close">×</button></div>`;
 }
 
 /* Home top card when nothing is coming up: about the player, not the event (events have their own section) */
@@ -5441,7 +5441,7 @@ app.addEventListener("click", async e => {
   if ("pcskip" in d){ ls.set("pl-noclub", "1"); go("home"); return; }
   if ("invite" in d){ invite(); return; }
   if ("qdone" in d){ ls.set("pl-qdone", "1"); if (d.qdone) go(d.qdone); else render(); return; }
-  if (d.tourx){ ls.set("pl-tx-" + d.tourx, "1"); render(); return; }
+  if (d.tourx){ if (d.tourx.startsWith("sua:")) ls.set("pl-sua-x-" + d.tourx.slice(4), "1"); else ls.set("pl-tx-" + d.tourx, "1"); render(); return; }
   if (d.nbon){ const on = d.nbon === "1", r = await sb.rpc("match_set_newbie", {p_booking: S.match.id, p_on: on}); if (r.error){ toast(errMsg(r.error)); return; }
     S.nbState = Object.assign(S.nbState || {}, {[S.match.id]: on}); toast("✓"); render(); return; }
 });
