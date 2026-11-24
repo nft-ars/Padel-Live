@@ -2324,6 +2324,50 @@ html[dir=rtl] .stl-t b{font-style:normal}
 .stb-h{width:60px;height:54px;display:grid;place-items:center;clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%);background:var(--chip);color:var(--ink-3);opacity:.7}
 .stb.on .stb-h{opacity:1;background:linear-gradient(160deg,#fff -30%,var(--bc) 45%,#000);color:#07110D;filter:drop-shadow(0 0 8px var(--bc))}@supports (color:color-mix(in srgb,red 50%,blue)){.stb.on .stb-h{background:linear-gradient(160deg,#fff -30%,var(--bc) 45%,color-mix(in srgb,var(--bc) 45%,#000));filter:drop-shadow(0 0 8px color-mix(in srgb,var(--bc) 45%,transparent))}}
 .stb b{font:800 11.5px var(--body);text-transform:uppercase;line-height:1.15}.stb:not(.on) b{color:var(--ink-3)}.stb small{font:600 10px var(--body);color:var(--ink-3)}
+
+/* ===== Admin dashboard ===== */
+.adm-entry{display:flex;justify-content:space-between;align-items:center;background:#E3EE3A!important;color:#07110D!important;font:900 italic 20px var(--disp)!important;text-transform:uppercase;padding:0 18px!important}
+html[dir=rtl] .adm-entry{font-style:normal!important}
+.adm-tabs{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -16px 6px;padding:0 16px 4px}.adm-tabs::-webkit-scrollbar{display:none}
+.adm-tabs button{flex:none;padding:8px 14px;border-radius:99px;border:0;background:var(--chip);color:var(--ink-2);font:800 13px var(--body);cursor:pointer}
+.adm-tabs button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.adm-upd{margin:0 0 8px;font-size:12px}
+.adm-kpi{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.adm-kpi>div{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 12px;min-width:0}
+.adm-kpi small,.adm-mini small{display:block;font:800 10px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.adm-kpi b{display:block;font:900 italic 34px/1.05 var(--disp)}.adm-kpi em{display:block;font:700 12px var(--body);font-style:normal}
+.adm .up{color:#1FAE63}:root[data-theme=dark] .adm .up{color:#3DDC84}.adm .dn{color:#E5484D}.adm .lime{color:#8A9600}:root[data-theme=dark] .adm .lime{color:#E3EE3A}.adm .mut{color:var(--ink-3)}
+.adm-c{margin-bottom:12px}.adm-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}.adm-h b{font:900 italic 19px var(--disp);text-transform:uppercase}.adm-h span{font:700 12px var(--body);color:var(--ink-3);text-align:end}
+html[dir=rtl] .adm-h b,html[dir=rtl] .adm-kpi b{font-style:normal}
+.adm-big b{display:block;font:900 italic 36px/1.05 var(--disp)}.adm-big span{font:600 13px var(--body);color:var(--ink-2)}
+.adm-sub{font:800 11px var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3);margin:12px 0 4px}
+.adm-bars{display:flex;align-items:flex-end;gap:4px;height:96px}.adm-bar{flex:1;height:100%;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;min-width:0}
+.adm-bar i{display:block;width:100%;border-radius:4px 4px 0 0;background:#2C5FAE}.adm-bar i.hi{background:#C9D41F}:root[data-theme=dark] .adm-bar i.hi{background:#E3EE3A}
+.adm-bar em{font:800 10px var(--body);font-style:normal;color:var(--ink-2);margin-bottom:2px}
+.adm-ax{display:flex;justify-content:space-between;font:700 10.5px var(--body);color:var(--ink-3);margin-top:4px}
+.adm-hr{display:grid;grid-template-columns:minmax(0,9.5em) 1fr auto;gap:8px;align-items:center;margin:7px 0;font:700 13.5px var(--body)}
+.adm-hr>span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.adm-hr b{font:900 italic 17px var(--disp);text-align:end;white-space:nowrap}
+.adm-hr small{grid-column:1/-1;margin-top:-5px;font:600 11.5px var(--body);color:var(--ink-3)}
+.adm-tr{height:12px;border-radius:6px;background:var(--chip);overflow:hidden;display:flex}.adm-tr i{display:block;height:100%;background:linear-gradient(90deg,#2C5FAE,#C9D41F)}
+:root[data-theme=dark] .adm-tr i{background:linear-gradient(90deg,#2C5FAE,#E3EE3A)}
+.adm-need{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font:700 14px var(--body)}.adm-need:last-child{border:0}.adm-need i{width:10px;height:10px;border-radius:50%;flex:none}.adm-need span{flex:1}
+.adm-go{border:0;background:none;color:#2C5FAE;font:800 13px var(--body);cursor:pointer;white-space:nowrap;padding:4px 0;text-decoration:none}:root[data-theme=dark] .adm-go{color:#E3EE3A}
+.adm-srch{display:flex;gap:8px;margin-bottom:8px}.adm-srch input{flex:1;height:46px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:0 12px;font:600 15px var(--body);min-width:0}
+.adm-chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:8px}.adm-chips button{flex:none;padding:6px 12px;border-radius:99px;border:0;background:var(--chip);color:var(--ink);font:800 12.5px var(--body);cursor:pointer}
+.adm-chips button[aria-pressed=true]{background:#E3EE3A;color:#07110D}
+.adm-pl{width:100%;display:grid;grid-template-columns:40px 1fr auto;gap:10px;align-items:center;padding:10px 0;border:0;border-bottom:1px solid var(--line);background:none;color:var(--ink);text-align:start;cursor:pointer;font:inherit}.adm-pl:last-child{border-bottom:0}
+.adm-hx{width:40px;height:36px;clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%);display:grid;place-items:center;font:900 italic 16px var(--disp);color:#07110D;flex:none}.adm-hx.big{width:54px;height:48px;font-size:22px}
+.adm-pn{min-width:0;display:flex;flex-direction:column}.adm-pn b{font:800 15px var(--body);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.adm-pn small{font:600 12px var(--body);color:var(--ink-3);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.adm-pr{text-align:end;display:flex;flex-direction:column}.adm-pr b{font:900 italic 19px var(--disp);line-height:1}.adm-pr small{font:600 11px var(--body);color:var(--ink-3);white-space:nowrap}
+.adm-sh{width:100%;display:flex;flex-direction:column;gap:10px;text-align:start}
+.adm-st{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.adm-st>div{background:var(--chip);border-radius:12px;padding:8px 4px;text-align:center;min-width:0}.adm-st b{display:block;font:900 italic 19px var(--disp);font-size:clamp(13px,4.6vw,19px);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.adm-st small{font:700 10.5px var(--body);color:var(--ink-3)}
+.adm-act{display:flex;flex-direction:column;gap:8px}.adm-act a{text-align:center;text-decoration:none;display:grid;place-items:center}
+.adm-team{display:grid;grid-template-columns:22px 1fr auto auto;gap:8px;align-items:center;padding:9px 0;border-top:1px solid var(--line)}.adm-team>b{font:900 italic 19px var(--disp)}
+.adm-team div{min-width:0;display:flex;flex-direction:column}.adm-team span{font:800 14px var(--body)}.adm-team small{font:600 12px var(--body);color:var(--ink-3)}
+.adm-ok{background:#E3EE3A!important;color:#07110D!important;border:0!important}.adm-no{background:rgba(229,72,77,.12)!important;color:#E5484D!important;border:0!important;min-width:40px}
+.adm-ret{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.adm-ret>div{border-radius:12px;padding:10px 4px;text-align:center;background:#E3EE3A;color:#07110D}.adm-ret>div:nth-child(2){background:#C9D41F}.adm-ret>div:nth-child(3){background:#8FB8FF}.adm-ret>div:nth-child(4){background:#4F8BFF;color:#fff}
+.adm-ret>div.off{background:var(--chip);color:var(--ink-3)}.adm-ret b{display:block;font:900 italic 24px var(--disp)}.adm-ret small{display:block;font:800 11px var(--body)}.adm-ret em{font:600 10.5px var(--body);font-style:normal;opacity:.8}
+.adm-minis{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.adm-mini{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:10px 12px;min-width:0}.adm-mini b{display:block;font:900 italic 28px/1.1 var(--disp)}.adm-mini span{font:600 11.5px var(--body);color:var(--ink-3)}
+.adm-top{display:grid;grid-template-columns:22px 1fr auto;gap:8px;align-items:center;padding:6px 0;font:700 14px var(--body)}.adm-top i{font-style:normal;color:var(--ink-3)}.adm-top b{font:900 italic 16px var(--disp)}
 </style>
 </head>
 <body>
@@ -2436,7 +2480,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
 const brandFetch = async (u, o) => { const r = await fetch(u, o); try { if (!/\/rest\/v1\/rpc\//.test(String((u && u.url) || u))) return r; const tx = await r.clone().text(); if (!/Padel Live|بادل لايف/.test(tx)) return r; return new Response(tx.replace(/Padel Live/g, "PlayPal").replace(/بادل لايف/g, "بلاي بال"), {status: r.status, statusText: r.statusText, headers: r.headers}); } catch (e) { return r; } };
-const VERSION = "v135";
+const VERSION = "v136";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -4064,6 +4108,7 @@ const QUICK = ["home", "matches", "me", "clubs", "events", "feed", "season", "in
 async function goLoad(v){
   if (v === "club" && S.club){ if (!S.day) S.day = nextDays(1)[0]; const cs = S.courts.filter(x => x.club_id === S.club.id); if (!cs.some(x => x.id === S.court) && cs[0]) S.court = cs[0].id; await Promise.all([loadBusy(), loadClubExtras(), loadClubPosts()]); }
   if (v === "clubs"){ await loadFindBusy(); }
+  if (v === "admin"){ await adminLoad(); }
   if (v === "profile"){ S.pfSoc = null; await Promise.all([loadProfile(S.pfId), snLoad(S.pfId), loadSoc(S.pfId)]); }
   if (v === "match"){ S.rtEdit = false; S.rt = null; }
   const side = Promise.all([v === "wallet" || v === "checkout" || v === "me" || v === "club" || v === "matches" || v === "home" ? loadWallet() : null,
@@ -4290,6 +4335,16 @@ app.addEventListener("click", async e => {
   if ("music" in d){ const on = !musicOn(); ls.set("pl-music", on ? "1" : "0"); if (on) musicStart(); else musicStop(); render(); return; }
   if ("snd" in d){ const on = ls.get("pl-snd") === "0"; ls.set("pl-snd", on ? "1" : "0"); if (on){ VOICE.played = {}; voice("events", true); } render(); return; }
   if ("dark" in d){ const r = document.documentElement; r.dataset.theme = r.dataset.theme === "dark" ? "light" : "dark"; try { localStorage.setItem("pl-theme", r.dataset.theme); } catch (x) {} render(); return; }
+  if ("admtab" in d){ S.admTab = d.admtab; render(); scrollTo(0, 0); return; }
+  if ("admre" in d){ S.adm = null; render(); await adminLoad(); render(); return; }
+  if ("admcat" in d){ S.admCat = d.admcat; S.admTab = "players"; S.admPl = null; render(); await adminPlLoad(); render(); return; }
+  if ("admpl" in d){ S.admPlId = d.admpl; S.sheet = "admpl"; render(); return; }
+  if ("admclaims" in d){ S.meTab = "set"; go("me"); return; }
+  if ("admedit" in d){ const p = (S.admPl || []).find(x => x.id === d.admedit); S.sheet = null; if (!p) return;
+    S.apQ = p.phone || p.name || ""; const r = await sb.rpc("admin_find_players", {p_q: S.apQ}); S.apList = (r.data || []).filter(x => x.id === p.id); if (!S.apList.length) S.apList = r.data || [];
+    S.apEdit = p.id; S.meTab = "set"; await go("me"); setTimeout(() => { const el = document.getElementById("ap-l"); if (el) el.scrollIntoView({block: "center"}); }, 300); return; }
+  if ("admte" in d){ const [id, st] = d.admte.split("|"); if (st === "rejected" && !confirm("Decline this team?")) return;
+    const r = await sb.rpc("t_entry_set", {p_id: id, p_status: st}); if (r.error){ toast(errMsg(r.error)); return; } toast(st === "confirmed" ? "Team confirmed" : "Team declined"); await adminLoad(); render(); return; }
   if ("runlb" in d){ S.sheet = "runlb"; render(); return; }
   if ("instx" in d){ ls.set("pl-inst-hide", "1"); render(); return; }
   if ("inst1" in d){ if (installEvt){ installEvt.prompt(); let ok = false; try { ok = (await installEvt.userChoice).outcome === "accepted"; } catch (x) {} installEvt = null; if (ok) ls.set("pl-inst-hide", "1"); render(); return; }
@@ -4366,6 +4421,7 @@ app.addEventListener("submit", async e => {
     if (r.error) toast(errMsg(r.error)); else { toast(t("saved")); await afterAuth(true); render(); } return; }
   if (f.id === "staffF"){ const r = await sb.rpc("join_club_staff", {p_code: document.getElementById("s-code").value});
     if (r.error){ toast(errMsg(r.error)); return; } await afterAuth(true); S.mClub = r.data; go("manager"); return; }
+  if (f.id === "admQF"){ S.admQ = document.getElementById("adm-q").value; S.admPl = null; render(); await adminPlLoad(); render(); return; }
   if (f.id === "apF"){ S.apQ = document.getElementById("ap-q").value; const r = await sb.rpc("admin_find_players", {p_q: S.apQ}); if (r.error){ toast(errMsg(r.error)); return; } S.apList = r.data || []; S.apEdit = null; render(); const qi = document.getElementById("ap-q"); if (qi) qi.value = S.apQ; return; }
   if (f.id === "lgJoinF" && !document.getElementById("lg-read").checked){ toast(t("lgMustRead")); const r = document.getElementById("lrules"); if (r){ r.open = true; r.scrollIntoView({behavior: "smooth"}); } return; }
   if (f.id === "lgJoinF"){ const rf = document.getElementById("lg-ref"); const r = await sb.rpc("league_join", {p_league: S.leagueId, p_category: S.lgCat, p_partner_phone: document.getElementById("lg-ph").value, p_pay: S.lgPay, p_ref: S.lgPay === "club" ? null : (rf ? rf.value : "")});
@@ -5391,13 +5447,112 @@ V.home = () => { const name = S.profile && S.profile.full_name ? S.profile.full_
  </main>${nav("home")}`; };
 
 /* Me in three tabs */
+/* ===== Time in app: counts seconds while the app is open and on screen, per page (Step 70) ===== */
+const ACT = {t: Date.now(), page: "", open: true, hid: 0};
+function actFlush(page){ if (!S.user || !sb) { ACT.t = Date.now(); return; }
+  const now = Date.now(), secs = Math.min(120, Math.round((now - ACT.t) / 1000)); ACT.t = now;
+  if (secs < 3 && !ACT.open) return; const o = ACT.open; ACT.open = false;
+  Promise.resolve(sb.rpc("ping_activity", {p_secs: secs, p_open: o, p_page: page || ACT.page || S.view || ""})).catch(() => {}); }
+setInterval(() => { if (document.visibilityState !== "visible") return; const pg = S.view || "";
+  if (ACT.page && pg !== ACT.page){ actFlush(ACT.page); } ACT.page = pg;
+  if (ACT.open || Date.now() - ACT.t >= 60000) actFlush(pg); }, 5000);
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden"){ actFlush(ACT.page); ACT.hid = Date.now(); }
+  else { if (ACT.hid && Date.now() - ACT.hid > 5 * 60000) ACT.open = true; ACT.t = Date.now(); } });
+
+/* ===== Admin dashboard (Step 70) ===== */
+const ADM_PAGES = {home: "Home", matches: "Play", clubs: "Play · clubs", club: "Club booking", events: "Compete", season: "Compete · leagues", league: "League", me: "Me", profile: "Stats page",
+  match: "Match page", inbox: "Notifications", wallet: "Wallet", manager: "Club manager", feed: "News", auth: "Sign in", admin: "Admin", pickclub: "Home · pick a club", settings: "Settings", tournament: "Tournament page", checkout: "Checkout", create: "Create a game"};
+const admPg = p => ADM_PAGES[p] || (p ? p.charAt(0).toUpperCase() + p.slice(1) : "Other");
+const admMin = m => m >= 60 ? `${Math.floor(m / 60)} h ${m % 60} min` : `${m} min`;
+async function adminLoad(){ let r; try { r = await sb.rpc("admin_dashboard"); } catch (e) { r = {error: e}; }
+  S.adm = r && !r.error ? r.data : null; S.admErr = r && r.error ? errMsg(r.error) : ""; await adminPlLoad(); }
+async function adminPlLoad(){ let r; try { r = await sb.rpc("admin_players_list", {p_q: S.admQ || "", p_cat: S.admCat || ""}); } catch (e) { r = {error: e}; } S.admPl = r && !r.error ? r.data || [] : []; }
+const admBars = (arr, val, lab, opt = {}) => { const mx = Math.max(1, ...arr.map(val));
+  return `<div class="adm-bars">${arr.map((x, i) => { const v = val(x); return `<div class="adm-bar"><em>${v || ""}</em><i style="height:${Math.max(3, v / mx * 100)}%"${(opt.hi && opt.hi(x, i)) ? ' class="hi"' : ""}></i></div>`; }).join("")}</div>
+   <div class="adm-ax">${(opt.axis || [lab(arr[0]), "", lab(arr[arr.length - 1])]).map(x => `<span>${x}</span>`).join("")}</div>`; };
+const admRow = (l, v, pct, col, sub) => `<div class="adm-hr"><span>${l}</span><span class="adm-tr"><i style="width:${Math.max(0, Math.min(100, pct))}%;${col ? "background:" + col : ""}"></i></span><b>${v}</b>${sub ? `<small>${sub}</small>` : ""}</div>`;
+const admDay = d => new Intl.DateTimeFormat("en-GB", {day: "numeric", month: "short"}).format(new Date(d + "T12:00:00"));
+function admOver(d){ const k = d.kpi, P = Math.max(1, k.players), T = d.time, n = d.needs;
+  const tile = (l, v, sub, cls) => `<div><small>${l}</small><b>${v}</b><em class="${cls || "mut"}">${sub}</em></div>`;
+  const needs = [
+    n.pending && [`${n.pending} team${n.pending > 1 ? "s" : ""} waiting to be confirmed`, "#E3EE3A", 'data-admtab="tours"', "Open"],
+    n.claims && [`${n.claims} level claim${n.claims > 1 ? "s" : ""} to check`, "#4F8BFF", "data-admclaims", "Open"],
+    n.no_level && [`${n.no_level} player${n.no_level > 1 ? "s" : ""} haven't picked a level`, "#FFB020", 'data-admcat="-"', "See"],
+    n.cat_e && [`${n.cat_e} player${n.cat_e > 1 ? "s" : ""} in Category E`, "#FF6B6B", 'data-admcat="E"', "See"],
+    n.owed && [`${n.owed} unpaid no-show${n.owed > 1 ? "s" : ""}`, "#FF6B6B", "", ""]].filter(Boolean);
+  return `<div class="adm-kpi">${tile("Players", k.players, `+${k.new_24h} today · +${k.new_7d} this week`, "up")}${tile("Active today", k.active_today, `${Math.round(k.active_today / P * 100)}% · ${k.active_7d} this week`)}
+    ${tile("Teams signed up", k.teams, k.pending ? `${k.pending} waiting for you` : "all confirmed", k.pending ? "lime" : "mut")}${tile("Notifications on", k.push, `${Math.round(k.push / P * 100)}% of players`, k.push / P < .5 ? "dn" : "up")}</div>
+   <div class="card adm-c"><div class="adm-h"><b>Time in the app</b><span>today</span></div>
+    <div class="adm-big"><b>${admMin(T.today_min)}</b><span>by ${T.today_users} player${T.today_users === 1 ? "" : "s"} · avg ${T.avg_min} min a day each (7 days)</span></div>
+    ${(T.pages || []).length ? `<div class="adm-sub">Most time spent on (7 days)</div>${T.pages.slice(0, 4).map(x => admRow(admPg(x.p), admMin(x.min), x.min / Math.max(1, T.pages[0].min) * 100, "#4F8BFF")).join("")}` : `<p class="note">Starts counting once players open the new version.</p>`}</div>
+   <div class="card adm-c"><div class="adm-h"><b>Sign-ups · 14 days</b><span>${k.new_7d} this week</span></div>${admBars(d.signups, x => x.n, x => admDay(x.d), {hi: (x, i) => i === d.signups.length - 1})}</div>
+   <div class="card adm-c"><div class="adm-h"><b>Player funnel</b><span>where people drop</span></div>
+    ${[["Signed up", d.funnel.signed], ["Picked a level", d.funnel.level], ["In a team or league", d.funnel.team], ["Played a match", d.funnel.played], ["Turned on alerts", d.funnel.alerts]].map(([l, v]) => admRow(l, v, v / Math.max(1, d.funnel.signed) * 100)).join("")}</div>
+   <div class="card adm-c"><div class="adm-h"><b>Needs you</b><span>${needs.length ? needs.length + " item" + (needs.length > 1 ? "s" : "") : ""}</span></div>
+    ${needs.length ? needs.map(([tx, c, at, b]) => `<div class="adm-need"><i style="background:${c}"></i><span>${tx}</span>${b ? `<button class="adm-go" ${at}>${b} →</button>` : ""}</div>`).join("") : `<p class="note">All clear.</p>`}</div>`; }
+function admPlayers(){ const L = S.admPl || [], cat = S.admCat || "";
+  const chips = [["", "All"], ["A", "A"], ["B", "B"], ["C", "C"], ["D", "D"], ["E", "E"], ["-", "No level"]];
+  const sub = p => { const parts = []; if (p.level_set && p.cat) parts.push(`${(TIER[p.cat] || [p.cat])[0]} ${divName(divIdx(p.level, p.cat))} · ${(+p.level).toFixed(2)}`); else parts.push("No level yet");
+    parts.push(p.last ? `seen ${ago(p.last)}` : `joined ${ago(p.joined)}`); if (p.noshows) parts.push(`${p.noshows} no-show`); return parts.join(" · "); };
+  return `<form id="admQF" class="adm-srch"><input id="adm-q" placeholder="Search name or phone…" value="${esc(S.admQ || "")}" dir="auto"><button class="sbtn">Find</button></form>
+   <div class="adm-chips">${chips.map(([k, l]) => `<button data-admcat="${k}" aria-pressed="${cat === k}">${l}</button>`).join("")}</div>
+   <p class="note" style="margin:0 0 6px">${L.length} player${L.length === 1 ? "" : "s"}${L.length >= 300 ? " (first 300)" : ""}</p>
+   <div class="card adm-c" style="padding-top:2px;padding-bottom:2px">${L.map(p => `<button class="adm-pl" data-admpl="${p.id}"><span class="adm-hx" style="background:${p.cat && TIER[p.cat] ? TIER[p.cat][1] : "#3a4a43"}">${esc(p.cat || "–")}</span>
+     <span class="adm-pn"><b>${esc(p.name || "—")}${p.admin ? ' <small class="lime">admin</small>' : ""}</b><small>${sub(p)}</small></span><span class="adm-pr"><b>${p.played}</b><small>matches</small><small>${admMin(p.min7)} / wk</small></span></button>`).join("") || `<p class="note">No players found.</p>`}</div>`; }
+function admPlSheet(id){ const p = (S.admPl || []).find(x => x.id === id); if (!p) return "";
+  const st = (v, l) => `<div><b>${v}</b><small>${l}</small></div>`, ph = String(p.phone || "").replace(/\D/g, "");
+  return `<div class="adm-sh"><div class="row" style="gap:12px;align-items:center"><span class="adm-hx big" style="background:${p.cat && TIER[p.cat] ? TIER[p.cat][1] : "#3a4a43"}">${esc(p.cat || "–")}</span><div style="min-width:0"><b style="font-size:19px">${esc(p.name || "")}</b>
+     <div class="note" dir="ltr" style="text-align:start">${esc(p.phone || "no phone")} · joined ${admDay(String(p.joined).slice(0, 10))}</div></div></div>
+   <div class="adm-st">${st(p.played, "matches")}${st(p.played ? Math.round(p.wins / p.played * 100) + "%" : "–", "wins")}${st(p.noshows, "no-shows")}${st(p.teams, "teams")}</div>
+   <div class="adm-st">${st(admMin(p.mint), "time in app")}${st(admMin(p.min7), "this week")}${st(p.days, "days active")}${st(p.opens, "opens")}</div>
+   ${(p.pages || []).length ? `<div class="adm-sub">Spends most time on</div>${p.pages.map(x => admRow(admPg(x.p), admMin(x.min), x.min / Math.max(1, p.pages[0].min) * 100, "#4F8BFF")).join("")}` : ""}
+   <p class="note" style="margin:4px 0">${p.last ? "Last seen " + ago(p.last) : "Not seen since tracking started"} · alerts ${p.push ? "on" : "off"} · ${p.verified ? "level verified" : "level not verified"}</p>
+   <div class="adm-act"><button class="cta blue" data-admedit="${p.id}">Edit level · category · password</button>${ph ? `<a class="cta" style="background:#25D366;color:#fff" href="https://wa.me/${ph.startsWith("0") ? "963" + ph.slice(1) : ph}" target="_blank" rel="noopener">WhatsApp</a>` : ""}
+   <button class="ghost" data-profile="${p.id}">Open their stats page</button><button class="ghost" data-shx>Close</button></div></div>`; }
+function admTours(d){ if (!d.tours.length) return `<div class="card note">No current or upcoming tournaments.</div>`;
+  return d.tours.map(tr => { const cats = tr.cats || [], tot = cats.reduce((a, c) => a + (+c.max || 0), 0), used = cats.reduce((a, c) => a + c.conf + c.pend, 0);
+    const warn = cats.filter(c => c.max && c.conf + c.pend < c.max / 2).map(c => `Cat ${c.cat} needs ${c.max - c.conf - c.pend} more`);
+    const pl = (x, cat) => x ? `${esc(x.n || "?")} <span class="${x.c && x.c !== cat ? "dn" : "mut"}">(${esc(x.c || "no level")})</span>` : "?";
+    return `<div class="card adm-c"><div class="adm-h"><b>${esc(tr.name)}</b><a class="adm-go" href="t.html?${encodeURIComponent(tr.slug)}" target="_blank">Open →</a></div>
+     <p class="note" style="margin:-4px 0 8px">${esc(tr.club || "")} · ${admDay(tr.starts)}${tr.ends && tr.ends !== tr.starts ? " – " + admDay(tr.ends) : ""} · ${tr.sponsors} sponsor${tr.sponsors === 1 ? "" : "s"}</p>
+     ${cats.map(c => { const col = TIER[c.cat] ? TIER[c.cat][1] : "#E3EE3A"; return `<div class="adm-hr"><span>Cat ${esc(c.cat)}</span><span class="adm-tr"><i style="width:${c.max ? c.conf / c.max * 100 : 0}%;background:${col}"></i><i style="width:${c.max ? c.pend / c.max * 100 : 0}%;background:${col};opacity:.4"></i></span><b>${c.conf + c.pend}/${c.max || "?"}</b></div>`; }).join("")}
+     ${tot ? `<p class="note" style="margin:6px 0 0">${used} of ${tot} spots · dark = confirmed, light = waiting${warn.length ? ` · <span class="dn">${warn.join(" · ")}</span>` : ""}</p>` : ""}
+     ${tr.pending.length ? `<div class="adm-sub">Waiting for you · ${tr.pending.length}</div>${tr.pending.map(e => `<div class="adm-team"><b class="lime">${esc(e.cat)}</b><div><span>${esc(e.team || "")}</span><small>${pl(e.p1, e.cat)} & ${pl(e.p2, e.cat)} · ${ago(e.at)}</small></div>
+        <button class="sbtn adm-ok" data-admte="${e.id}|confirmed">Confirm</button><button class="sbtn adm-no" data-admte="${e.id}|rejected" aria-label="Decline">✕</button></div>`).join("")}` : ""}</div>`; }).join(""); }
+function admEng(d){ const R = d.retention, T = d.time, g = d.games;
+  const ret = R.map(r => `<div class="${r.elig ? "" : "off"}"><b>${r.elig ? Math.round(r.back / r.elig * 100) + "%" : "–"}</b><small>Day ${r.n}</small><em>${r.elig ? `${r.back} of ${r.elig}` : "not yet"}</em></div>`).join("");
+  const order = ["A", "B", "C", "D", "E"], byCat = order.map(c => ({c, list: d.ranks.filter(x => x.cat === c)})).filter(x => x.list.length), mx = Math.max(1, ...d.ranks.map(x => x.n));
+  const mini = (l, v, s, cls) => `<div class="adm-mini"><small>${l}</small><b class="${cls || ""}">${v}</b><span>${s}</span></div>`;
+  const att = g.played_30d + g.noshows_30d ? Math.round(g.played_30d / (g.played_30d + g.noshows_30d) * 100) : null;
+  return `<div class="card adm-c"><div class="adm-h"><b>Coming back</b><span>players who returned after joining</span></div><div class="adm-ret">${ret}</div>
+     <p class="note" style="margin:8px 0 0">Day 1 = came back the next day or later, Day 7 = a week or more after joining. Counts app opens${d.tracking_since ? ` (since ${admDay(d.tracking_since)})` : ""}, bookings, team sign-ups and games.</p></div>
+   <div class="card adm-c"><div class="adm-h"><b>Time in the app · 14 days</b><span>minutes a day</span></div>${admBars(T.days, x => x.min, x => admDay(x.d), {hi: (x, i) => i === T.days.length - 1})}
+     <p class="note" style="margin:6px 0 0">Avg ${T.avg_min} min a day per player · ${T.opens_7d} opens this week</p>
+     ${(T.pages || []).length ? `<div class="adm-sub">Time per page · 7 days</div>${T.pages.map(x => admRow(admPg(x.p), admMin(x.min), x.min / Math.max(1, T.pages[0].min) * 100, "#4F8BFF", `${x.users} player${x.users === 1 ? "" : "s"}`)).join("")}` : ""}
+     ${(T.top || []).length ? `<div class="adm-sub">Most time in the app · 7 days</div>${T.top.map((x, i) => `<div class="adm-top"><i>${i + 1}</i><span>${esc(x.name || "")}</span><b>${admMin(+x.m)}</b></div>`).join("")}` : ""}</div>
+   <div class="card adm-c"><div class="adm-h"><b>Players by rank</b><span>${d.kpi.players} players</span></div>${byCat.map(x => x.list.map(r => admRow(`${TIER[x.c] ? TIER[x.c][0] : x.c} ${r.div}`, r.n, r.n / mx * 100, TIER[x.c] ? TIER[x.c][1] : "")).join("")).join("")}
+     ${d.needs.no_level ? admRow("No level yet", d.needs.no_level, d.needs.no_level / mx * 100, "#3a4a43") : ""}</div>
+   <div class="adm-minis">${mini("Matches played", g.club + g.league + g.tour, `${g.club} club · ${g.league} league · ${g.tour} tournament`)}${mini("Showed up", att == null ? "–" : att + "%", `${g.noshows_30d} no-show${g.noshows_30d === 1 ? "" : "s"} · 30 days`, att == null ? "" : att >= 90 ? "up" : "dn")}
+     ${mini("Ballie run", g.run_players, g.run_best ? `players this month · best ${g.run_best}` : "players this month")}${mini("Points recorded", g.points, "tournament points, point by point")}</div>
+   <div class="card adm-c"><div class="adm-h"><b>Busiest times</b><span>bookings by start hour · 60 days</span></div>${admBars(g.hours, x => x.n, x => x.h, {axis: ["8 AM", "4 PM", "1 AM"], hi: x => x.n === Math.max(...g.hours.map(y => y.n)) && x.n > 0})}</div>`; }
+function admClubs(d){ return d.clubs.map(c => `<div class="card adm-c"><div class="adm-h"><b>${esc(c.name)}</b><span class="${c.booking_on ? "up" : "mut"}">${c.booking_on ? "Booking on" : "Booking off"}</span></div>
+   <div class="adm-st">${[[c.courts, "courts"], [c.staff, "staff"], [c.bookings_7d, "bookings / wk"], [c.bookings_30d, "bookings / 30d"]].map(([v, l]) => `<div><b>${v}</b><small>${l}</small></div>`).join("")}</div>
+   <div class="adm-st">${[[c.members, "members"], [c.tours, "tournaments"], [c.owed, "unpaid no-shows"], [esc(c.city || "–"), "city"]].map(([v, l]) => `<div><b>${v}</b><small>${l}</small></div>`).join("")}</div></div>`).join("") || `<div class="card note">No clubs yet.</div>`; }
+V.admin = () => { if (!S.profile || !S.profile.is_admin) return V.me();
+  const d = S.adm, tab = S.admTab || "over", tabs = [["over", "Overview"], ["players", "Players"], ["tours", "Tournaments"], ["eng", "Engagement"], ["clubs", "Clubs"]];
+  const head = backBar("Admin", "me", `<button class="ib" data-admre aria-label="Refresh">${IC.refresh || "↻"}</button>`);
+  const nav2 = `<div class="adm-tabs">${tabs.map(([k, l]) => `<button data-admtab="${k}" aria-pressed="${tab === k}">${l}</button>`).join("")}</div>`;
+  let body;
+  if (!d) body = S.admErr ? `<div class="card" style="display:flex;flex-direction:column;gap:8px"><b>Couldn't load the dashboard</b><span class="note">${esc(S.admErr)}</span><span class="note">If it says a function is missing, run Step 70 on the SQL page.</span><button class="cta blue" data-admre>Try again</button></div>` : `<div class="card note">…</div>`;
+  else body = tab === "players" ? admPlayers() : tab === "tours" ? admTours(d) : tab === "eng" ? admEng(d) : tab === "clubs" ? admClubs(d) : admOver(d);
+  return `<main class="adm">${head}${nav2}${d ? `<p class="note adm-upd">Updated ${new Intl.DateTimeFormat("en-GB", {hour: "numeric", minute: "2-digit"}).format(new Date())} · only you see this</p>` : ""}${body}</main>${nav("me")}`; };
 V.me = () => { if (!S.user) return V.auth();
  const p = S.profile || {}, tab = S.meTab || "card", todo = pendingScores().length;
  const head = `<div class="top"><div class="row" style="gap:12px;min-width:0">${avF(p.full_name, myLevel(), S.mySoc && S.mySoc.b, 'style="width:48px;height:48px;font-size:16px;margin:0"')}<div style="min-width:0"><h2 class="me-nm">${esc(p.full_name || "")}</h2><span class="note">${S.card && S.card.placement > 0 ? esc(bookLive() ? tf("plTag", {n: 5 - S.card.placement}) : t("plTagE")) : myLevel() != null ? `${t("lvlU")} ${lvl2(myLevel())} · ${esc(tierName((S.card && S.card.category) || lvCat(myLevel())))} ${S.card ? subTier(S.card) : ""}` : esc(S.user.email || "")}</span></div></div>
    <div class="row">${S.staff.length ? `<button class="pill" data-go="manager">${t("meMgr")}</button>` : ""}${bell()}</div></div>
   <div class="seg">${[["card", "meCard"], ["games", "meGames"], ["set", "meSet"]].map(([k, l]) => `<button data-metab="${k}" aria-pressed="${tab === k}">${k === "set" ? "⚙️ " : ""}${t(l)}${k === "games" && todo ? `<i class="dot"></i>` : ""}</button>`).join("")}</div>`;
  let body = "";
- if (tab === "card") body = `${walletCard()}${playerCard(S.card)}${relLine()}${meBoardCard()}${seasonCard()}<button class="cta wide pfbtn" data-profile="me">📊 ${t("pfMine")} →</button>`;
+  if (tab === "card") body = `${p.is_admin ? `<button class="cta wide adm-entry" data-go="admin"><span>Admin dashboard</span><b>→</b></button>` : ""}${walletCard()}${playerCard(S.card)}${relLine()}${meBoardCard()}${seasonCard()}<button class="cta wide pfbtn" data-profile="me">📊 ${t("pfMine")} →</button>`;
  else if (tab === "games"){ const up = upcoming(), past = S.mine.filter(b => !up.includes(b));
    body = `${todo ? `<h2>⚑ ${t("meToDo")}</h2><div class="glist">${pendingScores().map(gameRow).join("")}</div>` : ""}
     ${schedSec()}
@@ -5424,6 +5579,7 @@ function sheetHtml(){
   let inner = "";
   if (S.sheet === "push") inner = `<span class="sh-ic">🔔</span><b>${t("shPushT")}</b><p class="note">${t("shPushS")}</p><button class="cta blue wide" data-pushon data-shx>${t("psOn")}</button><button class="ghost" data-shx>${t("shLater")}</button>`;
   else if (S.sheet === "runlb") inner = runLbSheet();
+  else if (S.sheet === "admpl") inner = admPlSheet(S.admPlId);
   else if (S.sheet === "iosinst") inner = `<img src="icon-192.png" alt="" width="64" height="64" style="border-radius:16px"><b>${t("instIosT")}</b><div class="ios-steps"><div><i>1</i><span>${t("instIos1")}</span><em>${iosShare}</em></div><div><i>2</i><span>${t("instIos2")}</span><em>＋</em></div></div><button class="cta wide" data-shx style="background:#E3EE3A;color:#07110D">${t("okBtn2")}</button>`;
   else if (S.sheet === "install") inner = `<img src="icon-192.png" alt="" width="56" height="56" style="border-radius:14px"><b>${t("shInstT")}</b><p class="note">${t("shInstS")}</p><button class="cta blue wide" data-install data-shx>${t("installBtn")}</button><button class="ghost" data-shx>${t("shLater")}</button>`;
   else if (S.sheet === "late"){ const b = S.mine.find(x => x.id === S.lateId) || {}, w = cxDeadline(S.clubs.find(x => x.id === b.club_id || x.name === b.club_name), b.starts_at).w;
