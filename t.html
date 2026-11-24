@@ -27,6 +27,7 @@
 .pch-in{flex:1;min-width:0;background:#1A242D;border:0;border-radius:22px;padding:11px 15px;color:#fff;font:inherit;font-size:16px;outline:none}.pch-in:disabled{opacity:.45}
 .pch-send{width:44px;height:44px;flex:none;border-radius:50%;border:0;background:#E3EE3A;color:#000;font-size:19px;cursor:pointer}.pch-send:disabled{opacity:.35}.pch[dir=rtl] .pch-bar:not([dir=ltr]) .pch-send{transform:scaleX(-1)}
 .su-chatgo{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%;margin-bottom:10px}.su-chatgo small{font-weight:600;opacity:.75;font-size:12px}
+.org-long{display:block;font-size:11px;opacity:.55;margin-top:3px;word-break:break-all}
 .su-or{text-align:center;font-size:12px;opacity:.6;margin:2px 0 10px}
 .su-more{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%;margin:10px 0 4px;border:1.5px dashed var(--line,rgba(127,127,127,.4))}.su-more small{font-weight:600;opacity:.7;font-size:12px}
 .su-cats .chip:disabled{opacity:.35;text-decoration:line-through}
@@ -322,7 +323,8 @@ body.refmode{background:var(--bg);color:var(--ink)}
 .rf-vs i{font-style:normal;color:var(--ink-2);font-weight:700}
 .rf-mh{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
 .rf-setline{font:700 15px var(--body);color:var(--ink)!important}
-.rf-note{align-self:center;padding:4px 12px;border-radius:999px;background:var(--warn);color:#fff!important;font:800 14px var(--display);text-transform:uppercase;letter-spacing:.06em}
+.rf-note{align-self:center;min-height:28px;display:flex;align-items:center;padding:4px 14px;border-radius:999px;background:transparent;color:transparent!important;font:800 14px var(--display);text-transform:uppercase;letter-spacing:.06em;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:background-color .25s ease,color .25s ease}
+.rf-note.on{color:#fff!important}.rf-note.du{background:var(--warn)}.rf-note.gp{background:#D64545;box-shadow:0 0 0 3px rgba(214,69,69,.25)}.rf-note.ad{background:#2F7BFF}.rf-note.tb{background:#7A5CFF}
 .rf-team{display:grid;grid-template-columns:1fr auto;grid-template-rows:auto auto;gap:4px 10px;align-items:center;text-align:left;padding:16px;border-radius:16px;border:2px solid var(--line);background:var(--surface-2);color:var(--ink);cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
 .rf-team:active{transform:scale(.985);background:var(--gold-soft)}
 .rf-team.won{border-color:var(--win)}
@@ -4033,6 +4035,7 @@ function ptsLabel(st){
   if (a >= 3 && b >= 3){ if (a === b) return ["40", "40"]; return a > b ? ["AD", "40"] : ["40", "AD"]; }
   return [L[Math.min(a, 3)], L[Math.min(b, 3)]];
 }
+function advOf(st){ if (!st || st.done || st.tb || st.stb) return null; const [a, b] = st.p; if (a >= 3 && b >= 3 && Math.abs(a - b) === 1) return a > b ? 0 : 1; return null; }
 function ptsNote(st){
   if (!st || st.done) return "";
   if (st.stb) return "Super tiebreak to 10";
@@ -4099,7 +4102,7 @@ async function refSend(mid, st){
   }
   REF.sending = false; render();
 }
-function refApply(mid, st){
+function refApply(mid, st){ REF.tap = Date.now();
   const s = cur(); s.pts = s.pts || {}; s.pts[mid] = st;
   const fin = finalOf(st);
   if (fin){ s.scores[mid] = fin; s.live = s.live.filter(x => x !== mid); }
@@ -4149,7 +4152,7 @@ function renderRef(){
     };
     body = `<div class="rf-card rf-match"><div class="rf-mh"><span class="tag" style="background:${cvar(m.cat, 1)};color:${cvar(m.cat)}">${esc(m.tag)}</span><span class="rf-fmt">${fmtLine}</span></div>
       ${st.sets.length ? `<p class="rf-setline">Sets: ${esc(setsText(st))}</p>` : ""}
-      ${note ? `<p class="rf-note">${esc(note)}</p>` : ""}
+      <p class="rf-note${note ? " on " + (/golden/i.test(note) ? "gp" : /deuce/i.test(note) ? "du" : "tb") : (advOf(st) != null ? " on ad" : "")}">${note ? esc(note) : advOf(st) != null ? `Advantage ${esc(sideName(advOf(st) ? m.B : m.A))}` : "&nbsp;"}</p>
       ${team(0)}${team(1)}
       ${st.done ? `<p class="rf-final">Final: ${esc(sideName(st.win ? m.B : m.A))} win ${esc(kind === "sets" ? setsText(st) : st.g.join("-"))}. Sent to everyone.</p>` : ""}
       ${st.done ? "" : (() => { const be = brkEnd(m.id, st); return be ? `<div class="rf-brk-on" data-brkbox><span>Break</span><b data-brkend="${be}">${brkFmt(be - Date.now())}</b><button class="rf-brk-x" data-rf="brkx" data-mid="${m.id}">End break</button></div>`
@@ -4372,23 +4375,25 @@ function renderTV(){
       lb.innerHTML = on ? `<span class="tv-dot"></span>Live` : nx ? `Next ${esc(fmt(nx.t + (+d0[nx.court] || 0)))}` : ""; } }
   const up = document.getElementById("tv-upn");
   if (up){ const uh = p.id === "next" ? "" : tvUpNext(all); if (up.dataset.h !== uh){ up.innerHTML = uh; up.dataset.h = uh; } up.classList.toggle("off", !uh); }
-  document.getElementById("tv-clock").textContent = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
+  document.getElementById("tv-clock").textContent = tvNow();
   tvEvents(all); window.__tvABlast = tvAllBreak(); setTimeout(brkTick, 0);
 }
+/* Syria is UTC+3 all year (since 2022): show that, whatever time zone the TV or browser is set to */
+function tvNow(){ try { return new Date(Date.now() + 3 * 3600e3).toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", timeZone: "UTC" }); } catch (e) { const d = new Date(Date.now() + 3 * 3600e3), h = d.getUTCHours(), m = d.getUTCMinutes(); return `${(h % 12) || 12}:${String(m).padStart(2, "0")} ${h < 12 ? "AM" : "PM"}`; } }
 if (MODE === "tv"){
-  setInterval(() => { const c = document.getElementById("tv-clock"); if (c) c.textContent = new Date().toLocaleTimeString([], { hour: "numeric", minute: "2-digit" }); }, 15000);
+  setInterval(() => { const c = document.getElementById("tv-clock"); if (c) c.textContent = tvNow(); }, 15000);
   document.addEventListener("click", () => { try { document.documentElement.requestFullscreen().catch(() => {}); } catch (e) {} }, { once: true });
 }
 
 /* ---------- organizer tools (Info tab) ---------- */
 function orgTools(){
   if (!canEdit) return "";
-  const base = location.origin + location.pathname + "?" + SLUG;
+  const base = location.origin + location.pathname.replace(/\/(tv|ref|t)\/?$/, "/t.html") + "?" + SLUG, root = location.origin;
   return `<section class="sec info"><h2>Referees &amp; TVs</h2><div class="org-tools">
     <form id="pinF" class="org-row"><label>Referee PIN (6 digits)<input id="org-pin" inputmode="numeric" maxlength="6" placeholder="e.g. 482913"></label><button class="btn" type="submit">Save PIN</button></form>
     <p class="org-msg" id="org-msg"></p>
-    <div class="org-row"><span><b>Referee link</b><code>${esc(base)}#ref</code></span><button class="btn small" data-copy="${esc(base)}#ref">Copy</button></div>
-    <div class="org-row"><span><b>TV link</b><code>${esc(base)}#tv</code></span><button class="btn small" data-copy="${esc(base)}#tv">Copy</button></div>
+    <div class="org-row"><span><b>Referee link</b><code>${esc(root)}/ref</code><small class="org-long">Long link (always this tournament): ${esc(base)}#ref</small></span><button class="btn small" data-copy="${esc(root)}/ref">Copy</button></div>
+    <div class="org-row"><span><b>TV link</b><code>${esc(root)}/tv</code><small class="org-long">Long link (always this tournament): ${esc(base)}#tv</small></span><button class="btn small" data-copy="${esc(root)}/tv">Copy</button></div>
     <p class="org-note">Give referees the link and the PIN. Each referee picks their court and taps + point after every point. Open the TV link on the club TVs' browser.</p></div></section>`;
 }
 document.addEventListener("submit", async e => {
@@ -4432,7 +4437,9 @@ async function pull(force){
     const r = await sb.rpc("t_state", {p_slug: SLUG, p_have: force ? -1 : VERSION});
     if (r.error || !r.data) return;
     const hid = !!r.data.names_hidden, flip = hid !== !!window.__NAMESHID; window.__NAMESHID = hid; if (flip && !r.data.state && !force){ pull(true); return; }
-    if (r.data.edit_version) EDITV = r.data.edit_version; if (r.data.state && r.data.version !== VERSION || force){ if (r.data.state){ S = norm(r.data.state); VERSION = r.data.version; } if (!editMode) render(); }
+    if (r.data.edit_version) EDITV = r.data.edit_version;
+    if (MODE === "ref" && !force && r.data.state && (REF.sending || REF.pending || Date.now() - (REF.tap || 0) < 4000 || r.data.version < VERSION)) return; /* keep the referee's own taps on screen */
+    if (r.data.state && r.data.version !== VERSION || force){ if (r.data.state){ S = norm(r.data.state); VERSION = r.data.version; } if (!editMode) render(); }
   } catch (e) {}
 }
 
