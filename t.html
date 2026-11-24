@@ -1,5 +1,31 @@
 <!doctype html><html lang="en"><head><script>try { document.documentElement.dataset.theme = localStorage.getItem("pl-theme") || "dark"; } catch (e) { document.documentElement.dataset.theme = "dark"; }</script><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#2F4A41"><title>PlayPal · Tournament</title><link rel="icon" href="icon-192.png"><link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800;1,900&family=Figtree:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800;1,900&family=Figtree:wght@400;500;600;700&display=swap"></noscript><style>body{margin:0;font:14px/1.4 system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}.board.c3 .bhd,.board.c3 .brow{grid-template-columns:40px repeat(3,minmax(0,1fr));gap:4px}.board.c3 .brow.ev{grid-template-columns:40px 1fr}.board.c3 .bn,.board.c3 .bc{font-size:12px}.board.c4 .bhd,.board.c4 .brow{grid-template-columns:36px repeat(4,minmax(0,1fr));gap:3px}.board.c4 .brow.ev{grid-template-columns:36px 1fr}.board.c4 .bn,.board.c4 .bc{font-size:11px}.days{overflow-x:auto;scrollbar-width:none}
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800;1,900&family=Figtree:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700;1,800;1,900&family=Figtree:wght@400;500;600;700&display=swap"></noscript><style>.pch-lock,.pch-lock body{overflow:hidden}
+.pch{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;background:#0B1014;color:#fff;font:15px/1.4 system-ui,-apple-system,"Segoe UI",sans-serif;animation:pchIn .22s ease-out}
+.pch.ar{font-family:"IBM Plex Sans Arabic","Cairo",system-ui,sans-serif}
+@keyframes pchIn{from{opacity:0;transform:translateY(16px)}}
+.pch-top{display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top)) 12px 10px;background:#121A20;border-bottom:1px solid #1E2830}
+.pch-x{background:none;border:0;color:#E3EE3A;font-size:30px;line-height:1;padding:0 6px;cursor:pointer}.pch[dir=rtl] .pch-x{transform:scaleX(-1)}
+.pch-top img{width:38px;height:38px;border-radius:50%;background:#000}.pch-top b{display:block;font-size:16px}.pch-on{font-size:12px;color:#3DDC84}
+.pch-msgs{flex:1;overflow-y:auto;padding:14px 12px 10px;background:#0B1014 radial-gradient(circle,#151D24 1.4px,transparent 1.8px) 0 0/16px 16px;-webkit-overflow-scrolling:touch}
+.pch-m{display:flex;margin:4px 0;animation:pchIn .2s ease-out}.pch-m.u{justify-content:flex-end}
+.pch-b{max-width:84%;padding:8px 11px 5px;border-radius:14px;white-space:pre-line;word-wrap:break-word}
+.pch-m.b .pch-b{background:#1A242D;border-start-start-radius:4px}.pch-m.u .pch-b{background:#E3EE3A;color:#0A0D10;font-weight:600;border-start-end-radius:4px}
+.pch-tm{display:block;text-align:end;font-size:10.5px;opacity:.55;margin-top:2px;font-weight:400}
+.pch-typing .pch-b{display:flex;gap:4px;padding:12px 14px}.pch-typing i{width:7px;height:7px;border-radius:50%;background:#7D8893;animation:pchDot 1s infinite}.pch-typing i:nth-child(2){animation-delay:.15s}.pch-typing i:nth-child(3){animation-delay:.3s}
+@keyframes pchDot{50%{transform:translateY(-4px);opacity:.4}}
+.pch-card{background:#10171D;border:1px solid #2A343E;border-radius:12px;padding:8px 12px;margin-top:6px;white-space:normal}
+.pch-row{display:flex;justify-content:space-between;gap:12px;padding:4px 0;font-size:14px;border-bottom:1px dashed #26303A}.pch-row:last-child{border:0}.pch-row span{color:#8C99A6;flex:none}.pch-row b{text-align:end}
+.pch-qr{display:flex;flex-wrap:wrap;gap:7px;justify-content:flex-end;margin:6px 0 4px}
+.pch-qr button,.pch-wa{background:transparent;border:1.5px solid #E3EE3A;color:#E3EE3A;border-radius:18px;padding:8px 13px;font:inherit;font-size:14px;font-weight:700;cursor:pointer;text-decoration:none;animation:pchIn .2s ease-out}
+.pch-qr button small{display:block;font-weight:500;font-size:11px;opacity:.75}.pch-qr button:disabled{opacity:.35;border-style:dashed}
+.pch-wa{background:#25D366;border-color:#25D366;color:#04260F}
+.pch-bar{display:flex;gap:8px;align-items:center;padding:8px 10px calc(10px + env(safe-area-inset-bottom));background:#121A20;border-top:1px solid #1E2830;margin:0}
+.pch-cc{display:none;color:#C3CCD5;font-weight:700;font-size:15px;padding:0 2px}.pch-bar.num .pch-cc{display:block}
+.pch-in{flex:1;min-width:0;background:#1A242D;border:0;border-radius:22px;padding:11px 15px;color:#fff;font:inherit;font-size:16px;outline:none}.pch-in:disabled{opacity:.45}
+.pch-send{width:44px;height:44px;flex:none;border-radius:50%;border:0;background:#E3EE3A;color:#000;font-size:19px;cursor:pointer}.pch-send:disabled{opacity:.35}.pch[dir=rtl] .pch-bar:not([dir=ltr]) .pch-send{transform:scaleX(-1)}
+.su-chatgo{display:flex;flex-direction:column;align-items:center;gap:2px;width:100%;margin-bottom:10px}.su-chatgo small{font-weight:600;opacity:.75;font-size:12px}
+.su-or{text-align:center;font-size:12px;opacity:.6;margin:2px 0 10px}
+body{margin:0;font:14px/1.4 system-ui,-apple-system,sans-serif}img{max-width:100%}[hidden]{display:none!important}.board.c3 .bhd,.board.c3 .brow{grid-template-columns:40px repeat(3,minmax(0,1fr));gap:4px}.board.c3 .brow.ev{grid-template-columns:40px 1fr}.board.c3 .bn,.board.c3 .bc{font-size:12px}.board.c4 .bhd,.board.c4 .brow{grid-template-columns:36px repeat(4,minmax(0,1fr));gap:3px}.board.c4 .brow.ev{grid-template-columns:36px 1fr}.board.c4 .bn,.board.c4 .bc{font-size:11px}.days{overflow-x:auto;scrollbar-width:none}
 .su .su-counts{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:10px}
 .su-s{font-size:13px;color:var(--ink-2);margin:0;line-height:1.45}
 .su-c{display:flex;flex-direction:column;gap:0;font-size:13px;padding:6px 10px;border-radius:999px;border:1px solid var(--line);border-left:5px solid var(--c);background:var(--surface)}
@@ -3514,13 +3540,13 @@ function info2(){
   <p class="i-tb">Tiebreaks to 7: at 8–8 in a set to 9, at 6–6 in a set to 6.</p></section>
   <section class="sec info2"><h2>${Object.keys(DAYS).length === 1 ? "The day" : Object.keys(DAYS).length + " days"}</h2><div class="i-days">${days}</div></section>
   <section class="sec info2"><h2>On the day</h2><div class="i-rules">
-    ${rule("desk", fee ? "Pay at the desk" : "Arrive early", "Come 30 minutes before your first match." + (fee ? " Show your entry pass (QR) from this page at the desk and pay your entry. <b class=\"i-must\">If you don't pay, you don't play.</b>" : ""))}
+    ${rule("desk", fee ? "Pay at the desk" : "Arrive early", "Come 30 minutes before your first match." + (fee ? ` Show your entry pass (QR) from this page at the desk and pay <b>$${fee} as a team</b> (one payment for both players). <b class=\"i-must\">If you don't pay, you don't play.</b>` : ""))}
     ${fee ? "" : rule("desk", "Entry fee on the desk", "Pay your entry fee at the desk when you check in, before your first match. <b class=\"i-must\">If you don't pay, you don't play.</b>")}
     ${rule("fire", "Warm-up", "3 minutes in groups, 5 in knockouts, inside your slot.")}
-    ${rule("late", "10-minute rule", "Not on court 10 minutes after your call: walkover.")}
+    ${rule("late", "10-minute rule", "If your team is not on court 10 minutes after your match starts, it's no match: <b class=\"i-must\">you lose it by walkover.</b>")}
     ${rule("pen", "Scores", "The referee enters every point. Scores show here live, as they happen.")}
-    ${rule("bolt", "Live on your phone", "Follow every court, your next match and the draw right here.")}</div></section>
-  ${fee || prizeAmt ? `<section class="sec info2"><h2>Entry &amp; prizes</h2><div class="i-ticket lit">${fee ? `<div><small>Entry</small><b>$${fee}</b><span>per team · pay at the desk</span></div>` : `<div><small>Entry</small><b>Desk</b><span>pay when you check in</span></div>`}<i></i><div><small>Prize Pool</small><b>${esc(prizeAmt || "—")}</b><span>across ${CATS.map(c => esc(CATL[c] || c)).join(", ")}</span></div></div>${prizeSplit(prizeAmt)}</section>` : ""}`;
+    ${rule("bolt", "Watch live from anywhere", "Follow every court, every score, your next match and the draw right here, from anywhere.")}</div></section>
+  ${fee || prizeAmt ? `<section class="sec info2"><h2>Entry &amp; prizes</h2><div class="i-ticket lit">${fee ? `<div><small>Entry</small><b>$${fee}</b><span>per team · pay as a team at the desk</span></div>` : `<div><small>Entry</small><b>Desk</b><span>pay when you check in</span></div>`}<i></i><div><small>Prize Pool</small><b>${esc(prizeAmt || "—")}</b><span>across ${CATS.map(c => esc(CATL[c] || c)).join(", ")}</span></div></div>${prizeSplit(prizeAmt)}</section>` : ""}`;
 }
 /* prize pool split: the pool shared equally by category, then 70% to 1st and 30% to 2nd (CFG.prize_split can change the %s) */
 function prizeSplit(amt){
@@ -4508,7 +4534,180 @@ function suWhy(){ const fee = CFG.fee ? +CFG.fee : 0, prize = (CFG.facts || []).
     </div>`; }
 function suPill(){ const I = SU.info; if (!I || editMode || !I.open || (I.mine && (I.mine.status === "pending" || I.mine.status === "confirmed"))) return "";
   return `<button class="su-pill" data-gosignup><span class="su-pill-d"></span><b>Sign up your team</b><small>Closes the day before</small><span class="su-pill-go">→</span></button>`; }
-document.addEventListener("click", e => { if (!e.target.closest("[data-gosignup]")) return; view.tab = "info"; try { history.replaceState(null, "", "#info"); } catch (x) {} render(); setTimeout(() => { const el = document.querySelector(".su"), nv = document.querySelector("nav.tabs"); if (el) window.scrollTo({top: el.getBoundingClientRect().top + scrollY - (nv ? nv.getBoundingClientRect().height : 0) - 12, behavior: "smooth"}); }, 60); });
+document.addEventListener("click", e => { if (!e.target.closest("[data-gosignup]")) return; if (SU.info && SU.info.open && !SU.myInv && !(SU.info.mine && /pending|confirmed/.test(SU.info.mine.status || ""))){ pcOpen(); return; } view.tab = "info"; try { history.replaceState(null, "", "#info"); } catch (x) {} render(); setTimeout(() => { const el = document.querySelector(".su"), nv = document.querySelector("nav.tabs"); if (el) window.scrollTo({top: el.getBoundingClientRect().top + scrollY - (nv ? nv.getBoundingClientRect().height : 0) - 12, behavior: "smooth"}); }, 60); });
+/* ---------- sign up by chat (EN / AR) ---------- */
+const PC = { el: null, run: 0, lang: "en" };
+const PCT = {
+en: { title: "PlayPal Assistant", online: "online", pick: "Pick an answer above", type: "Type here…",
+  hi: n => `Hi 👋 I'm the PlayPal assistant.\nI'll sign up your team for <b><bdi>${n}</bdi></b> in about a minute.`,
+  dates: "📅 Dates", prize: "🏆 Prizes", entry: "💵 Entry", entryV: f => f ? `$${f} per team, at the desk` : "Pay at the desk", rule: "⏱️ Rule", ruleV: "10 min late = walkover",
+  go: "Let's go 👍", info: "Read the full info first", infoA: "Sure, it's all in the <b>Info</b> tab. Tap the chat button again when you're ready 🙂",
+  closed: "Sign-up for this tournament is closed 🙏", hasAcc: "Do you already have a PlayPal account?", yes: "Yes, sign me in", no: "No, I'm new",
+  signedIn: "You're signed in ✓", nameQ: "Great, let's make one. What's your <b>full name</b>?\n<i>Write it in English letters</i> (example: Omar Haddad)",
+  namePh: "First and last name in English", nameEn: "Please write your name in <b>English letters</b> 🙏\nExample: <b>Omar Haddad</b>", name2: "Please write your first <b>and</b> last name 🙏",
+  nice: n => `Nice to meet you, ${n}! What's your <b>WhatsApp number</b>?`, phQ: "What's your <b>WhatsApp number</b>?", phBad: "That doesn't look right. Try like <b>9XX XXX XXX</b>",
+  pwNew: "Last one: choose a <b>password</b> (at least 6 characters).", pwQ: "And your <b>password</b>?", pw: "Password", pwBad: "At least 6 characters please 🔒",
+  wait: "One moment…", made: "✅ Account created. Welcome to PlayPal!", back: n => `✅ Welcome back${n ? ", " + n : ""}!`,
+  authErr: "That didn't work:", retry: "Try again", other: "I'll use the form instead",
+  already: "Good news: your team is already signed up 🎉", waiting: "You already sent an invite. We're waiting for your partner to join ⏳ You can see it on the page.",
+  catQ: "Which <b>category</b> will your team play?", unsure: "Not sure 🤔", full: "Full",
+  catHelp: "No problem:\n• <b>D</b>: you play for fun, still learning\n• <b>C</b>: you play every week, good rallies\n• <b>B</b>: strong player, plays matches often\nThe organizer checks every team, so pick your best guess.",
+  catOk: c => `👌 ${c}. Now, who's your <b>partner</b>?`, onPP: ["They're on PlayPal", "search by name or number"], invite: ["Invite them on WhatsApp", "they join with your link"],
+  search: "Type their <b>name</b> or <b>WhatsApp number</b>:", searchPh: "e.g. Sami or 09XX XXX XXX", found: "Which one is your partner?", none: "None of these",
+  noOne: "I couldn't find anyone with that name. Try their WhatsApp number, or invite them on WhatsApp.", tryNum: "Search again", useInv: "Invite on WhatsApp",
+  isIt: "Is this your partner?", isYes: "Yes, that's them ✓", isNo: "No, search again",
+  noFit: "Heads up:", askEx: "Ask the organizer for an exception", otherCat: "Pick another category", otherP: "Different partner",
+  noteQ: "Tell the organizer why (one line):", inv: "I made your invite link 🔗 Send it to your partner. When they open it and make an account, your team is signed up automatically.",
+  sendWa: "Send on WhatsApp", sent: "📲 Done! I'll keep checking. The page shows when your partner joins.",
+  sum: "Here's your team. All good?", team: "👥 Team", cat: "🏷️ Category", confirm: "Confirm sign-up ✅", change: "Change category",
+  req: "🎉 <b>Request sent!</b>", next: f => `What happens next:\n1️⃣ The organizer confirms your team. You get a notification.\n2️⃣ Your match times show on the <b>Schedule</b>.\n3️⃣ On the day, come 30 min early${f ? ` and pay <b>$${f} as a team</b> at the desk` : ""}.\n\n⚠️ 10 minutes late = you lose by walkover.`,
+  close: "Close", err: "Something went wrong:" },
+ar: { title: "مساعد PlayPal", online: "متصل", pick: "اختار جواب من فوق", type: "اكتب هون…",
+  hi: n => `أهلاً 👋 أنا مساعد PlayPal.\nرح سجّلك فريقك ببطولة <b><bdi>${n}</bdi></b> بأقل من دقيقة.`,
+  dates: "📅 المواعيد", prize: "🏆 الجوائز", entry: "💵 الاشتراك", entryV: f => f ? `$${f} للفريق، عالديسك` : "الدفع عالديسك", rule: "⏱️ القاعدة", ruleV: "تأخير ١٠ دقايق = خسارة",
+  go: "يلا نبلّش 👍", info: "بدي اقرأ كل المعلومات أول", infoA: "أكيد، كلها بتبويب <b>Info</b>. اضغط زر الدردشة مرة تانية لما تكون جاهز 🙂",
+  closed: "التسجيل بهالبطولة مسكّر 🙏", hasAcc: "عندك حساب على PlayPal؟", yes: "إيه، سجّلني دخول", no: "لا، أنا جديد",
+  signedIn: "إنت مسجّل دخول ✓", nameQ: "تمام، خلينا نعملك حساب. شو <b>اسمك الكامل</b>؟\n<i>اكتبه بالأحرف الإنجليزية</i> (مثلاً: Omar Haddad)",
+  namePh: "الاسم والكنية بالإنجليزي", nameEn: "لو سمحت اكتب اسمك <b>بالأحرف الإنجليزية</b> 🙏\nمثلاً: <b>Omar Haddad</b>", name2: "اكتب اسمك <b>والكنية</b> لو سمحت 🙏",
+  nice: n => `أهلين ${n}! شو <b>رقم الواتساب</b> تبعك؟`, phQ: "شو <b>رقم الواتساب</b> تبعك؟", phBad: "الرقم مو مزبوط. جرّب هيك: <b>9XX XXX XXX</b>",
+  pwNew: "آخر شي: اختار <b>كلمة سر</b> (٦ أحرف عالأقل).", pwQ: "و<b>كلمة السر</b>؟", pw: "كلمة السر", pwBad: "٦ أحرف عالأقل لو سمحت 🔒",
+  wait: "لحظة…", made: "✅ انعمل حسابك. أهلاً فيك بـ PlayPal!", back: n => `✅ أهلاً فيك من جديد${n ? " يا " + n : ""}!`,
+  authErr: "ما زبطت:", retry: "جرّب مرة تانية", other: "رح استعمل الفورم",
+  already: "خبر حلو: فريقك مسجّل من قبل 🎉", waiting: "بعتت دعوة من قبل. عم ننتظر شريكك يدخل ⏳ فيك تشوفها بالصفحة.",
+  catQ: "بأي <b>فئة</b> بدو يلعب فريقك؟", unsure: "مو متأكد 🤔", full: "مليانة",
+  catHelp: "ولا يهمك:\n• <b>D</b>: بتلعب للمتعة وعم تتعلم\n• <b>C</b>: بتلعب كل أسبوع وتبادلاتك منيحة\n• <b>B</b>: لاعب قوي وبتلعب مباريات كتير\nالمنظّم بيراجع كل فريق، فاختار أقرب شي إلك.",
+  catOk: c => `👌 ${c}. هلأ، مين <b>شريكك</b>؟`, onPP: ["شريكي على PlayPal", "دوّر بالاسم أو الرقم"], invite: ["ابعتله دعوة عالواتساب", "بيدخل من رابطك"],
+  search: "اكتب <b>اسمه</b> أو <b>رقم الواتساب</b> تبعه:", searchPh: "مثلاً Sami أو 09XX XXX XXX", found: "مين فيهن شريكك؟", none: "ولا واحد",
+  noOne: "ما لقيت حدا بهالاسم. جرّب رقم الواتساب تبعه، أو ابعتله دعوة.", tryNum: "دوّر مرة تانية", useInv: "ابعت دعوة عالواتساب",
+  isIt: "هاد شريكك؟", isYes: "إيه، هو ✓", isNo: "لا، دوّر مرة تانية",
+  noFit: "انتبه:", askEx: "اطلب استثناء من المنظّم", otherCat: "اختار فئة تانية", otherP: "شريك تاني",
+  noteQ: "قول للمنظّم ليش (سطر واحد):", inv: "جهّزتلك رابط الدعوة 🔗 ابعته لشريكك. أول ما يفتحه ويعمل حساب، بيتسجّل فريقكم تلقائياً.",
+  sendWa: "ابعت عالواتساب", sent: "📲 تمام! الصفحة بتبيّن أول ما يدخل شريكك.",
+  sum: "هاد فريقك. كلشي تمام؟", team: "👥 الفريق", cat: "🏷️ الفئة", confirm: "أكّد التسجيل ✅", change: "غيّر الفئة",
+  req: "🎉 <b>انبعت طلبك!</b>", next: f => `شو بيصير بعدين:\n1️⃣ المنظّم بيأكّد فريقك وبيوصلك إشعار.\n2️⃣ مواعيد مبارياتك بتطلع بـ <b>الجدول</b>.\n3️⃣ يوم البطولة تعا قبل بـ ٣٠ دقيقة${f ? ` وادفعوا <b>$${f} كفريق</b> عالديسك` : ""}.\n\n⚠️ تأخير ١٠ دقايق = بتخسر المباراة.`,
+  close: "سكّر", err: "صار خطأ:" } };
+const PC_EN_NAME = /^[A-Za-z][A-Za-z'.\- ]*$/;
+function pcOpen(){ if (PC.el) PC.el.remove(); PC.run++; const run = PC.run;
+  const el = document.createElement("div"); el.id = "pchat"; el.className = "pch";
+  el.innerHTML = `<div class="pch-top"><button class="pch-x" aria-label="Close">‹</button><img src="icon-192.png" alt=""><div><b class="pch-t">PlayPal Assistant</b><span class="pch-on">● online</span></div></div>
+    <div class="pch-msgs" aria-live="polite"></div><form class="pch-bar"><span class="pch-cc" dir="ltr">+963</span><input class="pch-in" autocomplete="off" disabled placeholder="…"><button class="pch-send" disabled aria-label="Send">➤</button></form>`;
+  document.body.appendChild(el); PC.el = el; document.documentElement.classList.add("pch-lock");
+  el.querySelector(".pch-x").onclick = pcClose;
+  pcFlow(run).catch(e => { if (run === PC.run && PC.el) pcBot(esc(String(e && e.message || e)), 200).catch(() => {}); }); }
+function pcClose(){ PC.run++; if (PC.el) PC.el.remove(); PC.el = null; document.documentElement.classList.remove("pch-lock"); loadSU(); }
+const pcSleep = ms => new Promise(r => setTimeout(r, ms));
+const pcL = () => PCT[PC.lang];
+function pcAlive(run){ if (run !== PC.run || !PC.el) throw new Error("__closed"); }
+function pcAdd(who, html){ const box = PC.el.querySelector(".pch-msgs"), m = document.createElement("div"); m.className = "pch-m " + who;
+  const d = new Date(); m.innerHTML = `<div class="pch-b">${html}<span class="pch-tm" dir="ltr">${String(d.getHours()).padStart(2, "0")}:${String(d.getMinutes()).padStart(2, "0")}</span></div>`;
+  box.appendChild(m); box.scrollTop = 1e6; }
+async function pcBot(html, wait){ const run = PC.run, box = PC.el.querySelector(".pch-msgs"), t = document.createElement("div"); t.className = "pch-m b pch-typing"; t.innerHTML = `<div class="pch-b"><i></i><i></i><i></i></div>`;
+  box.appendChild(t); box.scrollTop = 1e6; await pcSleep(wait == null ? 650 : wait); t.remove(); pcAlive(run); pcAdd("b", html); }
+function pcMe(html){ pcAdd("u", html); }
+function pcChoices(list){ const run = PC.run; return new Promise((res, rej) => { const box = PC.el.querySelector(".pch-msgs"), q = document.createElement("div"); q.className = "pch-qr";
+  list.forEach(([label, val, sub, cls]) => { const b = document.createElement("button"); b.type = "button"; if (cls) b.className = cls; if (val === null) b.disabled = true;
+    b.innerHTML = esc(label) + (sub ? `<small>${esc(sub)}</small>` : ""); b.onclick = () => { if (run !== PC.run) return; q.remove(); pcMe(esc(label)); res(val); }; q.appendChild(b); });
+  box.appendChild(q); box.scrollTop = 1e6; }); }
+function pcAsk(ph, opt){ opt = opt || {}; const run = PC.run; return new Promise(res => { const f = PC.el.querySelector(".pch-bar"), inp = f.querySelector(".pch-in"), sb2 = f.querySelector(".pch-send");
+  f.classList.toggle("num", !!opt.num); f.dir = opt.num || opt.ltr ? "ltr" : ""; inp.disabled = false; sb2.disabled = false; inp.value = ""; inp.placeholder = ph;
+  inp.type = opt.pw ? "password" : "text"; inp.inputMode = opt.num ? "tel" : "text"; inp.dir = opt.num || opt.ltr || opt.pw ? "ltr" : "auto"; inp.autocomplete = opt.pw ? (opt.newpw ? "new-password" : "current-password") : "off";
+  setTimeout(() => { try { inp.focus(); } catch (e) {} }, 50);
+  f.onsubmit = async e => { e.preventDefault(); if (run !== PC.run) return; const raw = inp.value.trim(); if (!raw) return; const v = opt.num ? raw.replace(/[٠-٩]/g, x => "٠١٢٣٤٥٦٧٨٩".indexOf(x)).replace(/[^\d+]/g, "") : raw;
+    const bad = opt.check ? opt.check(v) : null; if (bad){ inp.value = opt.pw ? "" : inp.value; await pcBot(bad, 300); return; }
+    inp.value = ""; inp.disabled = true; sb2.disabled = true; f.classList.remove("num"); inp.placeholder = pcL().pick; f.onsubmit = e2 => e2.preventDefault();
+    pcMe(opt.pw ? "•".repeat(Math.min(v.length, 12)) : opt.num ? `<bdi dir="ltr">${/^\+/.test(v) ? esc(v) : "+963 " + esc(v.replace(/^0/, ""))}</bdi>` : `<bdi>${esc(v)}</bdi>`); res(v); }; }); }
+const pcCard = rows => `<div class="pch-card">${rows.map(([a, b]) => `<div class="pch-row"><span>${a}</span><b>${b}</b></div>`).join("")}</div>`;
+function pcFacts(){ const F = (CFG.facts || []).map(String), L = pcL(), fee = CFG.fee ? +CFG.fee : 0;
+  const d = F.find(x => /\b(jan|feb|mar|apr|may|jun|jul|aug|sep|oct|nov|dec)/i.test(x) && /\d/.test(x)) || "", pr = F.find(x => /prize/i.test(x)), amt = pr ? (pr.match(/\$[\d,]+/) || [""])[0] : "";
+  const rows = []; if (d) rows.push([L.dates, `<bdi dir="ltr">${esc(d)}</bdi>`]); if (amt) rows.push([L.prize, `<bdi dir="ltr">${esc(amt)}</bdi>`]); rows.push([L.entry, L.entryV(fee)]); rows.push([L.rule, L.ruleV]); return pcCard(rows); }
+const pcCatN = k => `${PC.lang === "ar" ? "فئة" : "Category"} ${k}`;
+async function pcFlow(run){ const box = () => PC.el;
+  await pcBot("👋 Choose your language<br>اختار اللغة", 450);
+  PC.lang = await pcChoices([["English", "en"], ["العربية", "ar"]]); pcAlive(run); const L = pcL();
+  box().dir = PC.lang === "ar" ? "rtl" : "ltr"; box().classList.toggle("ar", PC.lang === "ar"); box().querySelector(".pch-t").textContent = L.title; box().querySelector(".pch-on").textContent = "● " + L.online; box().querySelector(".pch-in").placeholder = L.pick;
+  try { localStorage.setItem("pl-chat-lang", PC.lang); } catch (e) {}
+  await pcBot(L.hi(esc(TNAME)), 800); await pcBot(pcFacts(), 450);
+  if (!SU.info) await loadSU(); pcAlive(run);
+  if (!SU.info || !SU.info.open){ await pcBot(L.closed); return pcEnd(); }
+  if (await pcChoices([[L.go, "go"], [L.info, "info"]]) === "info"){ await pcBot(L.infoA); await pcSleep(1600); pcAlive(run); view.tab = "info"; try { history.replaceState(null, "", "#info"); } catch (x) {} pcClose(); render(); return; }
+  /* 1. account */
+  if (!SU.info.signed){
+    const acc = await pcChoices([[L.yes, "in"], [L.no, "up"]]);
+    for (;;){ let name = "", ph, pass;
+      if (acc === "up"){ await pcBot(L.nameQ);
+        name = await pcAsk(L.namePh, {ltr: true, check: v => !PC_EN_NAME.test(v) ? L.nameEn : v.split(/\s+/).filter(Boolean).length < 2 ? L.name2 : null});
+        name = name.replace(/\s+/g, " ").split(" ").map(w => w[0].toUpperCase() + w.slice(1)).join(" ");
+        await pcBot(L.nice(esc(name.split(" ")[0]))); }
+      else await pcBot(L.phQ);
+      ph = await pcAsk("9XX XXX XXX", {num: true, check: v => /^\+\d{8,15}$/.test(v) || /^0?9\d{8}$/.test(v) ? null : L.phBad});
+      await pcBot(acc === "up" ? L.pwNew : L.pwQ);
+      pass = await pcAsk(L.pw, {pw: true, newpw: acc === "up", check: v => v.length < 6 ? L.pwBad : null});
+      await pcBot(L.wait, 200); let r = null, em = "";
+      if (acc === "up"){ const ps = await sb.rpc("phone_signup", {p_name: name, p_phone: phFull("963", ph), p_pass: pass}); if (ps.error) r = ps; else em = ps.data; }
+      else { const pl = await sb.rpc("phone_login", {p_phone: phFull("963", ph), p_pass: pass}); if (pl.error) r = pl; else if (!pl.data) r = {error: {message: PC.lang === "ar" ? "الرقم أو كلمة السر غلط." : "Wrong phone number or password."}}; else em = pl.data; }
+      if (!r) r = await sb.auth.signInWithPassword({email: em, password: pass});
+      pcAlive(run);
+      if (!r.error){ await loadSU(); pcAlive(run); await pcBot(acc === "up" ? L.made : L.back(""), 500); break; }
+      await pcBot(`${L.authErr} ${esc(r.error.message)}`, 300);
+      if (await pcChoices([[L.retry, "r"], [L.other, "f"]]) === "f"){ pcClose(); SU.open = true; SU.read = true; render(); return; } }
+  } else await pcBot(L.signedIn, 350);
+  const I = SU.info, mine = I.mine && (I.mine.status === "pending" || I.mine.status === "confirmed");
+  if (mine){ await pcBot(L.already); return pcEnd(); }
+  if (SU.myInv){ await pcBot(L.waiting); return pcEnd(); }
+  /* 2. category */
+  let cat;
+  const pickCat = async () => { const c = I.counts || {}; await pcBot(L.catQ);
+    const opts = CATS.map(k => { const x = c[k] || {}, full = x.max && x.confirmed >= x.max; return [pcCatN(k), full ? null : k, full ? L.full : CATR[k] || ""]; });
+    let v = await pcChoices(opts.concat(CATS.length > 1 ? [[L.unsure, "?"]] : []));
+    if (v === "?"){ await pcBot(L.catHelp, 900); v = await pcChoices(opts); }
+    if (CFG.level_check && (!I.level || SU.autoLv)){ const lv = START_LV[v] || 2.5; const r = await sb.rpc("set_my_level", {p_level: lv, p_claim: {src: "event", cat: v, raw: lv}}); if (!r.error){ SU.autoLv = true; I.level = lv; } }
+    return v; };
+  cat = await pickCat(); pcAlive(run);
+  /* 3. partner */
+  let partner = null, pname = "", note = "";
+  for (;;){ await pcBot(L.catOk(esc(pcCatN(cat))));
+    const pm = await pcChoices([[L.onPP[0], "acc", L.onPP[1]], [L.invite[0], "inv", L.invite[1]]]);
+    if (pm === "inv"){ await pcBot(L.wait, 200); const r = await sb.rpc("t_invite_create", {p_slug: SLUG, p_cat: cat, p_note: null}); pcAlive(run);
+      if (r.error){ await pcBot(`${L.err} ${esc(r.error.message)}`); continue; }
+      SU.myInv = {token: r.data, cat}; await pcBot(L.inv, 600);
+      const box2 = PC.el.querySelector(".pch-msgs"), a = document.createElement("div"); a.className = "pch-qr"; a.innerHTML = `<a class="pch-wa" href="${esc(suWa(r.data, cat))}" target="_blank" rel="noopener">${esc(L.sendWa)}</a>`; box2.appendChild(a); box2.scrollTop = 1e6;
+      await new Promise(res => a.querySelector("a").addEventListener("click", () => setTimeout(res, 300), {once: true})); pcAlive(run);
+      await pcBot(L.sent); return pcEnd(); }
+    /* search */
+    let chosen = null;
+    while (!chosen){ await pcBot(L.search); const q = await pcAsk(L.searchPh, {});
+      const digits = q.replace(/[٠-٩]/g, x => "٠١٢٣٤٥٦٧٨٩".indexOf(x)).replace(/\D/g, "");
+      if (digits.length >= 9){ chosen = {key: phFull("963", digits), name: ""}; break; }
+      const r = await sb.rpc("t_find_partner", {p_slug: SLUG, p_q: q.trim()}); pcAlive(run); const list = r.error ? [] : (r.data || []);
+      if (!list.length){ await pcBot(L.noOne); if (await pcChoices([[L.tryNum, "s"], [L.useInv, "i"]]) === "i"){ chosen = "inv"; break; } continue; }
+      await pcBot(L.found);
+      const v = await pcChoices(list.slice(0, 5).map((p, i) => [p.name, i, (p.level != null ? (+p.level).toFixed(2) : "") + (p.tail ? " · " + p.tail : "")]).concat([[L.none, -1]]));
+      if (v >= 0) chosen = list[v]; }
+    if (chosen === "inv") continue;
+    await pcBot(L.wait, 200); const ck = await sb.rpc("t_check", {p_slug: SLUG, p_cat: cat, p_partner_phone: chosen.key}); pcAlive(run);
+    const c = ck.error ? {ok: false, reason: ck.error.message} : ck.data || {ok: false, reason: "?"};
+    if (!c.ok){ await pcBot(`${L.noFit} ${esc(c.reason)}`); const w = await pcChoices([[L.otherP, "p"], [L.otherCat, "c"]]); if (w === "c") cat = await pickCat(); continue; }
+    pname = c.partner || chosen.name;
+    if (!chosen.name){ await pcBot(`${L.isIt}${pcCard([[" 👤", `<bdi>${esc(pname)}</bdi>`]])}`); if (await pcChoices([[L.isYes, "y"], [L.isNo, "n"]]) === "n") continue; }
+    if (CFG.level_check && !c.fits){ await pcBot(`${L.noFit} ${esc(c.reason || "")}`);
+      const w = await pcChoices([[L.askEx, "x"], [L.otherCat, "c"], [L.otherP, "p"]]);
+      if (w === "c"){ cat = await pickCat(); continue; } if (w === "p") continue;
+      await pcBot(L.noteQ); note = await pcAsk("…", {}); }
+    partner = chosen.key; break; }
+  /* 4. confirm */
+  for (;;){
+    await pcBot(L.sum + pcCard([[L.team, `${PC.lang === "ar" ? "إنت" : "You"} & <bdi>${esc(pname)}</bdi>`], [L.cat, esc(pcCatN(cat))], [L.entry, L.entryV(CFG.fee ? +CFG.fee : 0)]]), 600);
+    const w = await pcChoices([[L.confirm, "ok"], [L.change, "c"]]);
+    if (w === "c"){ cat = await pickCat(); const ck = await sb.rpc("t_check", {p_slug: SLUG, p_cat: cat, p_partner_phone: partner}); pcAlive(run); const c = ck.error ? {ok: false, reason: ck.error.message} : ck.data;
+      if (!c || !c.ok){ await pcBot(`${L.noFit} ${esc((c && c.reason) || "")}`); } continue; }
+    await pcBot(L.wait, 200); const r = await sb.rpc("t_signup", {p_slug: SLUG, p_cat: cat, p_partner_phone: partner, p_note: note || null}); pcAlive(run);
+    if (r.error){ await pcBot(`${L.err} ${esc(r.error.message)}`); if (await pcChoices([[L.retry, "r"], [L.other, "f"]]) === "f"){ pcClose(); return; } continue; }
+    break; }
+  SU.open = false; pull(true); await loadSU(); pcAlive(run);
+  await pcBot(L.req, 700); await pcBot(L.next(CFG.fee ? +CFG.fee : 0), 900);
+  return pcEnd(true); }
+async function pcEnd(done){ const L = pcL(); await pcChoices([[L.close, "x"]]); pcClose(); if (done) setTimeout(instPop, 500); }
+document.addEventListener("click", e => { if (e.target.closest("[data-chatopen]")){ e.preventDefault(); pcOpen(); } });
 /* after signing up: "Add PlayPal to your home screen" (once, until installed or closed) */
 let instEvt = null; window.addEventListener("beforeinstallprompt", e => { e.preventDefault(); instEvt = e; });
 window.addEventListener("appinstalled", () => { try { localStorage.setItem("pl-inst-hide", "1"); } catch (e) {} });
@@ -4532,7 +4731,7 @@ function signupBox(){ const I = SU.info; if (!I || editMode) return "";
   let h = "";
   if (I.open || mine){
     h += `<section class="sec su">`;
-    if (!I.signed && I.open && !SU.open) h += `<label class="su-read"><input type="checkbox" id="su-read"${SU.read ? " checked" : ""}><span>I have read the tournament info</span></label><button class="btn primary su-go" data-suopen${SU.read ? "" : " disabled"}>Sign up your team →</button>`;
+    if (!I.signed && I.open && !SU.open) h += `<button class="btn primary big su-chatgo" data-chatopen>💬 Sign up by chat<small>English · العربية · 1 minute</small></button><p class="su-or">or use the form</p><label class="su-read"><input type="checkbox" id="su-read"${SU.read ? " checked" : ""}><span>I have read the tournament info</span></label><button class="btn primary su-go" data-suopen${SU.read ? "" : " disabled"}>Sign up your team →</button>`;
     else if (!I.signed){ const up = SU.auth === "up";
       h += `<div class="su-form"><p class="su-step">Step 1 of 2 · ${up ? "Create your PlayPal account" : "Sign in"}</p>
         ${up ? `<label class="lbl">Full name<input id="su-aname" autocomplete="name" value="${esc(SU.aName)}" placeholder="First and last name"></label>` : ""}
@@ -4548,7 +4747,7 @@ function signupBox(){ const I = SU.info; if (!I || editMode) return "";
         <li><b>Pay at the desk${fee ? ` · $${fee}` : ""}</b><span>Show your entry pass (QR) when you check in. If you don't pay, you don't play.</span></li></ol>
         ${I.open ? `<button class="btn small" data-suwd>Withdraw</button>` : ""}</div>`; }
     else if (I.open && SU.myInv) h += suWaiting();
-    else if (I.open && !SU.open) h += `<label class="su-read"><input type="checkbox" id="su-read"${SU.read ? " checked" : ""}><span>I have read the tournament info</span></label><button class="btn primary su-go" data-suopen${SU.read ? "" : " disabled"}>Sign up your team →</button>${I.mine && I.mine.status === "rejected" ? `<p class="su-s">Your last request was not accepted. You can sign up again.</p>` : ""}`;
+    else if (I.open && !SU.open) h += `<button class="btn primary big su-chatgo" data-chatopen>💬 Sign up by chat<small>English · العربية · 1 minute</small></button><p class="su-or">or use the form</p><label class="su-read"><input type="checkbox" id="su-read"${SU.read ? " checked" : ""}><span>I have read the tournament info</span></label><button class="btn primary su-go" data-suopen${SU.read ? "" : " disabled"}>Sign up your team →</button>${I.mine && I.mine.status === "rejected" ? `<p class="su-s">Your last request was not accepted. You can sign up again.</p>` : ""}`;
     else if (I.open){
       const ck = SU.check;
       const inv = SU.pmode !== "acc";
@@ -4588,7 +4787,7 @@ document.addEventListener("click", async e => {
   const b = e.target.closest("button"); if (!b) return; const d = b.dataset;
   if ("suopen" in d){ SU.open = true; SU.msg = ""; render(); return; }
   if ("sumode" in d){ SU.auth = SU.auth === "up" ? "in" : "up"; SU.msg = ""; render(); return; }
-  if ("suauth" in d){ const pass = (document.getElementById("su-apass") || {}).value || ""; SU.busy = true; SU.msg = ""; render();
+  if ("suauth" in d){ const pass = (document.getElementById("su-apass") || {}).value || ""; if (SU.auth === "up" && !PC_EN_NAME.test(SU.aName.trim())){ SU.msg = "Please write your name in English letters, like Omar Haddad. · اكتب اسمك بالأحرف الإنجليزية"; render(); return; } SU.busy = true; SU.msg = ""; render();
     let em = SU.aPhone.trim(), r = null;
     if (SU.auth === "up"){ const ps = await sb.rpc("phone_signup", {p_name: SU.aName.trim(), p_phone: phFull(SU.aCC, em), p_pass: pass}); if (ps.error) r = ps; else em = ps.data; }
     else if (!em.includes("@")){ const pl = await sb.rpc("phone_login", {p_phone: em, p_pass: pass}); if (pl.error) r = pl; else if (!pl.data) r = {error: {message: "Wrong phone number or password."}}; else em = pl.data; }
