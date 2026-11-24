@@ -2290,6 +2290,40 @@ html[dir=rtl] .ib1 b{font-style:normal}
 .ib1-x{position:absolute;top:-9px;inset-inline-end:-6px;width:26px;height:26px;border-radius:50%;background:#1E2A26;border:1px solid rgba(255,255,255,.25);color:#fff;font-size:12px;display:grid;place-items:center;cursor:pointer;padding:0}
 .ios-steps{display:flex;flex-direction:column;gap:10px;width:100%;text-align:start}.ios-steps>div{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:var(--chip)}
 .ios-steps i{width:28px;height:28px;border-radius:50%;background:#E3EE3A;color:#07110D;font:900 15px var(--body);font-style:normal;display:grid;place-items:center;flex:none}.ios-steps span{flex:1;font-weight:700}.ios-steps em{font-style:normal;font-size:20px;color:#2C5FAE;display:grid;place-items:center}
+
+/* Ballie run leaderboard (podium) */
+.rlb{margin-top:10px;border-radius:14px;padding:12px;background:linear-gradient(135deg,#0B1530,#05070A);border:1px solid rgba(227,238,58,.35);color:#fff}
+.rlb-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}.rlb-hd b{font:900 italic 17px var(--disp);letter-spacing:.04em;text-transform:uppercase}
+html[dir=rtl] .rlb-hd b{font-style:normal}.rlb-hd span,.rlb-hd button{font:700 12px var(--body);color:#E3EE3A;background:none;border:0;padding:4px 0;cursor:pointer}
+.rlb-pod{display:grid;grid-template-columns:1fr 1.15fr 1fr;gap:8px;align-items:end}
+.rlb-pod>div{text-align:center;border-radius:12px 12px 6px 6px;padding:8px 4px;font:700 12px var(--body);min-width:0}
+.rlb-pod span{display:block;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.rlb-pod em{display:block;font-style:normal;font-size:22px;line-height:1.2}.rlb-pod strong{display:block;font:900 italic 20px var(--disp);color:#E3EE3A}
+.rlb-pod .p1{background:linear-gradient(180deg,rgba(227,238,58,.28),rgba(227,238,58,.05));border:1.5px solid #E3EE3A;padding-top:16px;box-shadow:0 0 22px rgba(227,238,58,.25)}
+.rlb-pod .p2,.rlb-pod .p3{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15)}.rlb-pod .me{outline:2px solid #7FB2FF;outline-offset:1px}
+.rlb-you{width:100%;margin-top:10px;display:flex;justify-content:space-between;gap:8px;padding:9px 12px;border-radius:10px;background:rgba(44,95,174,.25);border:1px solid rgba(127,178,255,.4);color:#fff;font:700 13px var(--body);text-align:start}
+.rlb-you i{font-style:normal;color:#7FB2FF;white-space:nowrap}.rlb-you.top{background:rgba(227,238,58,.14);border-color:#E3EE3A}.rlb-you.top i{color:#E3EE3A}button.rlb-you{cursor:pointer}
+.rlb-sh{width:100%;display:flex;flex-direction:column;gap:6px;text-align:start}.rlb-sht{font:900 italic 24px var(--disp);text-transform:uppercase;color:#C9A800}
+:root[data-theme=dark] .rlb-sht{color:#F5C518}.rlb-sh .note{margin:0 0 6px}
+.rlb-r{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;background:var(--chip);font:700 15px var(--body)}.rlb-r b{width:26px;font-size:17px;text-align:center}
+.rlb-r span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rlb-r small{opacity:.55;font-size:12px}.rlb-r i{font-style:normal;font:900 17px 'Courier New',monospace}
+.rlb-r.me{background:rgba(44,95,174,.25);border:1px solid rgba(127,178,255,.5)}.rlb-sh .cta{margin-top:8px}
+
+/* Stats clean list (profile) */
+.stl{display:flex;flex-direction:column;gap:0;padding-top:6px;padding-bottom:6px}
+.stl-r{padding:11px 0;border-bottom:1px solid var(--line)}.stl-r:last-child{border-bottom:0}
+.stl-t{display:flex;justify-content:space-between;align-items:baseline;gap:10px}.stl-t span{font:700 15px var(--body)}.stl-t b{font:900 italic 21px var(--disp);white-space:nowrap}
+html[dir=rtl] .stl-t b{font-style:normal}
+.stl-r small{display:block;margin-top:3px;font:600 12.5px var(--body);color:var(--ink-3)}
+.stl-b{height:8px;border-radius:99px;background:var(--chip);overflow:hidden;margin-top:7px}.stl-b i{display:block;height:100%;border-radius:99px;background:#C9D41F}
+:root[data-theme=dark] .stl-b i{background:#E3EE3A}.stl-b.bl i{background:#4F8BFF}
+.sttr{display:flex;align-items:center;gap:14px}.sttr svg{flex:none;filter:drop-shadow(0 4px 10px rgba(245,197,24,.3))}.sttr b{display:block;font:900 italic 24px var(--disp)}html[dir=rtl] .sttr b{font-style:normal}
+.stb-n{font:700 14px var(--body);color:var(--ink-3);font-style:normal;margin-inline-start:6px}
+.stbs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 4px}
+.stb{display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center;min-width:0}
+.stb-h{width:60px;height:54px;display:grid;place-items:center;clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%);background:var(--chip);color:var(--ink-3);opacity:.7}
+.stb.on .stb-h{opacity:1;background:linear-gradient(160deg,#fff -30%,var(--bc) 45%,#000);color:#07110D;filter:drop-shadow(0 0 8px var(--bc))}@supports (color:color-mix(in srgb,red 50%,blue)){.stb.on .stb-h{background:linear-gradient(160deg,#fff -30%,var(--bc) 45%,color-mix(in srgb,var(--bc) 45%,#000));filter:drop-shadow(0 0 8px color-mix(in srgb,var(--bc) 45%,transparent))}}
+.stb b{font:800 11.5px var(--body);text-transform:uppercase;line-height:1.15}.stb:not(.on) b{color:var(--ink-3)}.stb small{font:600 10px var(--body);color:var(--ink-3)}
 </style>
 </head>
 <body>
@@ -2402,7 +2436,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
 const brandFetch = async (u, o) => { const r = await fetch(u, o); try { if (!/\/rest\/v1\/rpc\//.test(String((u && u.url) || u))) return r; const tx = await r.clone().text(); if (!/Padel Live|بادل لايف/.test(tx)) return r; return new Response(tx.replace(/Padel Live/g, "PlayPal").replace(/بادل لايف/g, "بلاي بال"), {status: r.status, statusText: r.statusText, headers: r.headers}); } catch (e) { return r; } };
-const VERSION = "v131";
+const VERSION = "v134";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -2663,7 +2697,25 @@ const bookOpen = c => !!(c && (c.booking_on || (S.profile && S.profile.is_admin)
 function runGame(){ const best = +(ls.get("pl-run") || 0);
   return `<div class="bk3-game"><div class="bk3-gh"><b>🏃 ${t("rnT")}</b><span>${t("bk3Best")} <i id="run-best">${best}</i></span></div>
     <div class="run-ar" id="run-ar"><canvas id="run-cv"></canvas><span class="run-msg" id="run-msg">${t("rnTap")}</span></div>
-    <div class="bk3-bad" id="run-bad">${RUN_B.map(([n, k]) => `<span class="${best >= n ? "on" : ""}" data-n="${n}">${t(k)} · ${n}</span>`).join("")}</div></div>`; }
+    <div class="bk3-bad" id="run-bad">${RUN_B.map(([n, k]) => `<span class="${best >= n ? "on" : ""}" data-n="${n}">${t(k)} · ${n}</span>`).join("")}</div>
+    <div class="rlb" id="run-lb">${runLbIn()}</div></div>`; }
+/* Ballie run leaderboard: monthly, everyone sees it (Step 66) */
+function runLbLoad(force){ if (!force && S.runLbAt && Date.now() - S.runLbAt < 60000) return; S.runLbAt = Date.now();
+  sb.rpc("run_board").then(r => { if (!r.error && r.data){ S.runLb = r.data; runLbPaint(); } }).catch(() => {}); }
+function runLbPaint(){ const el = document.getElementById("run-lb"); if (el) el.innerHTML = runLbIn(); if (S.sheet === "runlb") render(); }
+function runLbIn(){ runLbLoad(); const L = S.runLb || {top: [], total: 0, me: null}, T = L.top || [], me = L.me;
+  const pod = i => { const p = T[i]; return `<div class="p${i + 1}${p && p.me ? " me" : ""}"><em>${["🥇","🥈","🥉"][i]}</em><span><bdi>${p ? esc(p.name) : "—"}</bdi></span><strong>${p ? p.score : "·"}</strong></div>`; };
+  const you = !S.user ? `<button class="rlb-you" data-go="auth"><span>${t("rlIn")}</span><i>${lang === "ar" ? "←" : "→"}</i></button>`
+    : !me ? `<div class="rlb-you"><span>${t(T.length ? "rlNone" : "rlEmpty")}</span></div>`
+    : me.rank === 1 ? `<div class="rlb-you top"><span>${t("rlFirst")}</span><i>${me.score}</i></div>`
+    : `<div class="rlb-you"><span>${t("rlYou")} · #${me.rank} ${t("rlOf")} ${L.total}</span><i>${me.score}${me.rank > 5 && T[4] ? ` · ${t("rlTo5").replace("{n}", T[4].score - me.score + 1)}` : ""}</i></div>`;
+  return `<div class="rlb-hd"><b>🏆 ${t("rlT")}</b>${L.total > 3 ? `<button data-runlb>${t("rlAll")} ${lang === "ar" ? "←" : "→"}</button>` : `<span>${t("rlMonth")}</span>`}</div>
+    <div class="rlb-pod">${pod(1)}${pod(0)}${pod(2)}</div>${you}`; }
+function runLbSheet(){ const L = S.runLb || {top: [], total: 0, me: null}, T = L.top || [], me = L.me;
+  return `<div class="rlb-sh"><b class="rlb-sht">${t("rlSheetT")}</b><p class="note">${t("rlSheetS")}</p>
+    ${T.map((p, i) => `<div class="rlb-r${p.me ? " me" : ""}"><b>${i < 3 ? ["🥇","🥈","🥉"][i] : i + 1}</b><span><bdi>${esc(p.name)}</bdi></span>${p.cat ? `<small>${t("rlCat")} ${esc(p.cat)}</small>` : ""}<i>${p.score}</i></div>`).join("")}
+    ${me && me.rank > 10 ? `<div class="rlb-r me"><b>${me.rank}</b><span>${t("rlYou")}</span><i>${me.score}</i></div>` : ""}
+    <button class="cta wide" data-shx style="background:#E3EE3A;color:#07110D">${t("okBtn2")}</button></div>`; }
 function omSoonHero(){
   return `<div class="bk3 om3" style="--a:#2C5FAE;--b:#E3EE3A;--d:#05080F">
    <div class="bk3-hd"><span class="om3-ic">🎾</span><div><span class="bk3-k">🔒 ${t("bk3K")}</span><b>${t("om3T")}</b></div></div>
@@ -2676,7 +2728,7 @@ var RUN = {st: "idle", y: 0, vy: 0, sp: 0, d: 0, obs: [], next: 0, t: 0, raf: 0,
 function runCv(){ const cv = document.getElementById("run-cv"); if (!cv) return null; const r = cv.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
   if (cv.width !== Math.round(r.width * dpr) || cv.height !== Math.round(r.height * dpr)){ cv.width = Math.round(r.width * dpr); cv.height = Math.round(r.height * dpr); }
   RUN.W = r.width; RUN.H = r.height; if (!RUN.col){ try { RUN.col = getComputedStyle(cv).getPropertyValue("--b").trim() || "#E3EE3A"; } catch (e) {} } const g = cv.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0); return g; }
-function runReset(){ Object.assign(RUN, {st: "run", y: 0, vy: 0, sp: 270, d: 0, obs: [], next: 260, t: 0, flash: 0}); RUN.best = +(ls.get("pl-run") || 0); }
+function runReset(){ RUN.t0 = performance.now(); Object.assign(RUN, {st: "run", y: 0, vy: 0, sp: 270, d: 0, obs: [], next: 260, t: 0, flash: 0}); RUN.best = +(ls.get("pl-run") || 0); }
 function runJump(){ if (RUN.st !== "run"){ runReset(); const m = document.getElementById("run-msg"); if (m) m.classList.add("off"); if (!RUN.raf) RUN.raf = requestAnimationFrame(runLoop); }
   if (RUN.y === 0){ RUN.vy = 820; RUN.held = true; try { navigator.vibrate && navigator.vibrate(8); } catch (e) {} } }
 function runDraw(g){ const W = RUN.W, H = RUN.H, gy = H - 30, sc = Math.floor(RUN.d / 10);
@@ -2727,7 +2779,9 @@ function runOver(){ RUN.st = "over"; const sc = Math.floor(RUN.d / 10), rec = sc
   try { navigator.vibrate && navigator.vibrate([40, 30, 80]); } catch (e) {}
   const m = document.getElementById("run-msg"); if (m){ m.innerHTML = `${rec && sc ? `🏆 ${t("rnRec")}<br>` : `${t("rnOver")}<br>`}<small>${t("rnAgain")}</small>`; m.classList.remove("off"); }
   const b = document.getElementById("run-best"); if (b) b.textContent = RUN.best;
-  document.querySelectorAll("#run-bad span").forEach(x => x.classList.toggle("on", RUN.best >= +x.dataset.n)); }
+  document.querySelectorAll("#run-bad span").forEach(x => x.classList.toggle("on", RUN.best >= +x.dataset.n));
+  const mine = S.runLb && S.runLb.me ? S.runLb.me.score : 0;
+  if (S.user && sc > 0 && sc > mine) sb.rpc("run_submit", {p_score: sc, p_ms: Math.round(performance.now() - (RUN.t0 || 0))}).then(r => { if (!r.error && r.data){ S.runLb = r.data; S.runLbAt = Date.now(); runLbPaint(); } }).catch(() => {}); }
 document.addEventListener("pointerdown", e => { if (!e.target.closest || !e.target.closest("#run-ar")) return; e.preventDefault(); runJump(); });
 document.addEventListener("pointerup", () => { RUN.held = false; });
 document.addEventListener("keydown", e => { if (!document.getElementById("run-ar") || !(e.code === "Space" || e.code === "ArrowUp")) return; e.preventDefault(); if (!e.repeat) runJump(); });
@@ -3685,12 +3739,59 @@ Object.assign(W.ar, {pfTitle:"ملف اللاعب", pfMine:"ملفي وإحصا�
   pfSets:"المجموعات", pfGames:"الأشواط", pfSince:"بيلعب من {d}", pfEmpty:"ما في مباريات مؤكدة لسا. العب مباراة وأكد النتيجة لتبلش إحصائياتك.",
   pfFind:"ابحث عن لاعب", pfFindPh:"اكتب اسم", pfLeague:"دوري", pfNoData:"العب أكتر لتفتح"});
 Object.assign(S, {pf:null, pfId:null, pfQ:"", pfList:[]});
-async function loadProfile(id){ const r = await sb.rpc("player_profile", {p_user: id || null}); if (r.error){ toast(errMsg(r.error)); S.pf = null; return; } S.pf = r.data; }
+async function loadProfile(id){ const [r, mo, ra] = await Promise.all([sb.rpc("player_profile", {p_user: id || null}), sb.rpc("player_more", {p_user: id || null}).catch(() => ({})), S.rarity ? null : sb.rpc("ach_rarity").catch(() => null)]);
+  if (r.error){ toast(errMsg(r.error)); S.pf = null; return; } S.pf = r.data; S.pfMore = mo && !mo.error ? mo.data : null; if (ra && !ra.error) S.rarity = ra.data; }
 const pLink = (id, name) => id ? `<button class="plink" data-profile="${id}">${esc(name)}</button>` : esc(name);
 function spark(vals){ if (!vals || vals.length < 2) return "";
   const w = 300, h = 70, mn = Math.min(...vals) - .05, mx = Math.max(...vals) + .05, x = i => i / (vals.length - 1) * w, y = v => h - (v - mn) / (mx - mn) * h;
   const pts = vals.map((v, i) => `${x(i).toFixed(1)},${y(+v).toFixed(1)}`).join(" ");
   return `<svg viewBox="0 0 ${w} ${h + 6}" class="spark" preserveAspectRatio="none"><defs><linearGradient id="spg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E8C96A" stop-opacity=".45"/><stop offset="1" stop-color="#E8C96A" stop-opacity="0"/></linearGradient></defs><polygon points="0,${h + 6} ${pts} ${w},${h + 6}" fill="url(#spg)"/><polyline points="${pts}" fill="none" stroke="#E8C96A" stroke-width="2.5" stroke-linejoin="round"/><circle cx="${x(vals.length - 1)}" cy="${y(+vals[vals.length - 1])}" r="4" fill="#E3EE3A"/></svg>`; }
+
+/* Stats list (profile page): clean list + tournaments + badges. Numbers from player_more (Step 67) */
+const STB_IC = {
+  first_win: '<path d="M12 3a6 7 0 1 1 0 14a6 7 0 1 1 0-14zM12 17v5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="18.5" cy="18" r="2.2" fill="currentColor"/>',
+  comeback: '<path d="M5 13a7 7 0 0 0 12.5 3M19 11A7 7 0 0 0 6.5 8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/><path d="M3 6l3.5 3.5L9 5.5zM21 18l-3.5-3.5L15 18.5z" fill="currentColor"/>',
+  night_owl: '<path d="M15.5 3.5A8.5 8.5 0 1 0 20.5 15 7 7 0 0 1 15.5 3.5z" fill="currentColor"/>',
+  iron_man: '<path d="M12 2c1.5 4 6 6 6 11a6 6 0 0 1-12 0c0-2.5 1.2-4.3 2.4-5.5 0 1.8.8 3 2 3.6C10 8 11 5 12 2z" fill="currentColor"/>',
+  regular: '<text x="12" y="16.5" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-style="italic" font-weight="900" font-size="13" fill="currentColor">25</text>',
+  champion: '<path d="M7 4h10v4c0 3.5-2.2 6-5 6s-5-2.5-5-6zM7 6H4c0 3 1.5 5 4 5.3M17 6h3c0 3-1.5 5-4 5.3M10 14h4v3h-4zM8 17h8v3H8z" fill="currentColor"/>',
+  globetrotter: '<circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3.5 12h17M12 3.5c3 3 3 14 0 17M12 3.5c-3 3-3 14 0 17" fill="none" stroke="currentColor" stroke-width="1.8"/>',
+  social: '<circle cx="8.5" cy="8" r="3.2" fill="currentColor"/><circle cx="16" cy="9" r="2.7" fill="currentColor"/><path d="M2.5 20c.5-4 3-6 6-6s5.5 2 6 6zM14 20c.3-2 .3-3.5-.8-5.3 3.8-.8 7 1.3 7.8 5.3z" fill="currentColor"/>',
+  centurion: '<text x="12" y="16.5" text-anchor="middle" font-family="Barlow Condensed,sans-serif" font-style="italic" font-weight="900" font-size="13" fill="currentColor">50</text>',
+  early_bird: '<path d="M4 17h16M7 17a5 5 0 0 1 10 0" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><path d="M12 4v3M5.5 8l2 2M18.5 8l-2 2M3 13h2M19 13h2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>',
+  warrior: '<path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z" fill="currentColor"/>',
+  fire: '<path d="M3 18h18l-2-10-4.5 4L12 5l-2.5 7L5 8z" fill="currentColor"/><rect x="3" y="19" width="18" height="2.4" rx="1" fill="currentColor"/>'};
+const STB_COL = {first_win: "#E3EE3A", comeback: "#B47CFF", night_owl: "#6E8BFF", iron_man: "#FF6B3D", regular: "#3DDC84", champion: "#F5C518",
+  globetrotter: "#2EC5D3", social: "#FF7AB6", centurion: "#4F8BFF", early_bird: "#FFB020", warrior: "#E5484D", fire: "#FF8A00"};
+const STB_ORDER = ["first_win", "comeback", "iron_man", "champion", "regular", "centurion", "night_owl", "early_bird", "social", "globetrotter", "warrior", "fire"];
+const stTrophy = () => `<svg viewBox="0 0 64 64" width="60" height="60" aria-hidden="true"><defs><linearGradient id="sttg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FFF3B0"/><stop offset=".35" stop-color="#F5C518"/><stop offset=".7" stop-color="#C98A06"/><stop offset="1" stop-color="#8A5A00"/></linearGradient></defs>
+  <path d="M18 12h28v10c0 9-6 16-14 16s-14-7-14-16z" fill="url(#sttg)"/><path d="M18 15H10c0 8 4 13 10 14M46 15h8c0 8-4 13-10 14" fill="none" stroke="url(#sttg)" stroke-width="3.5" stroke-linecap="round"/>
+  <path d="M22 14c0 8 2 14 7 18" stroke="#fff" stroke-width="2.4" stroke-linecap="round" opacity=".7" fill="none"/><path d="M29 38h6v8h-6zM22 46h20l2 6H20z" fill="url(#sttg)"/><rect x="17" y="52" width="30" height="6" rx="1.5" fill="#3A2A08" stroke="#C98A06"/>
+  <path d="M32 18l2.2 4.5 5 .7-3.6 3.5.9 5-4.5-2.4-4.5 2.4.9-5-3.6-3.5 5-.7z" fill="#FFF8D6" opacity=".9"/></svg>`;
+function statsList(p){ const m = S.pfMore; if (!m) return "";
+  const mon = d => new Intl.DateTimeFormat(lang === "ar" ? "ar-SY" : "en-GB", {month: "long", timeZone: TZ}).format(d);
+  const now = new Date(), prev = new Date(now.getFullYear(), now.getMonth() - 1, 15);
+  const row = (k, v, sub, bar, cls) => `<div class="stl-r"><div class="stl-t"><span>${k}</span><b>${v}</b></div>${bar != null ? `<div class="stl-b${cls ? " " + cls : ""}"><i style="width:${Math.max(0, Math.min(100, bar))}%"></i></div>` : ""}${sub ? `<small>${sub}</small>` : ""}</div>`;
+  const pct = (a, b) => a + b ? Math.round(a / (a + b) * 100) : 0, diff = m.m_w - m.p_w;
+  const rows = [];
+  if (m.rank && m.rank_of){ const tp = Math.max(1, Math.ceil(m.rank / m.rank_of * 100));
+    rows.push(row(t("stRank"), tf("stRankV", {r: m.rank, n: m.rank_of}), `${t("catU")} ${esc(p.category || "")}${m.rank === 1 ? ` · ${t("stBest")}` : tp <= 50 ? ` · ${tf("stTop", {p: tp})}` : ""}`)); }
+  if (p.played){
+    rows.push(row(t("stMonth"), tf("stWL", {w: m.m_w, l: m.m_l}), diff > 0 ? tf(diff === 1 ? "stMore1" : "stMore", {n: diff, m: mon(prev)}) : diff < 0 ? tf(diff === -1 ? "stLess1" : "stLess", {n: -diff, m: mon(prev)}) : tf("stSame", {m: mon(prev)})));
+    rows.push(row(t("stSets"), `${p.sets_w} – ${p.sets_l}`, "", pct(p.sets_w, p.sets_l)));
+    rows.push(row(t("stGames"), `${p.games_w} – ${p.games_l}`, "", pct(p.games_w, p.games_l)));
+    rows.push(row(t("stLoves"), m.loves_w, t("stLovesS") + (m.loves_l ? ` · ${tf("stLost", {n: m.loves_l})}` : "")));
+    rows.push(row(t("stUpsets"), m.upsets, t("stUpsetsS")));
+    rows.push(row(t("stTime"), `${Math.round(m.minutes / 6) / 10} ${t("stH")}`, ""));
+    if ((p.clubs || [])[0]) rows.push(row(t("stClub"), esc(p.clubs[0].club), tf("stClubS", {n: p.clubs[0].n})));
+    rows.push(row(t("stLikes"), m.likes, ""));
+    const tot = p.played + m.noshows; if (tot) rows.push(row(t("stShow"), `${pct(p.played, m.noshows)}%`, m.noshows ? tf("stNoShow", {n: m.noshows}) : "", pct(p.played, m.noshows), "bl"));
+  }
+  const b = m.badges || {}, got = STB_ORDER.filter(k => b[k]).length;
+  const badges = STB_ORDER.map(k => `<div class="stb${b[k] ? " on" : ""}" style="--bc:${STB_COL[k]}"><span class="stb-h"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">${STB_IC[k]}</svg></span><b>${t("b_" + k)}</b><small>${b[k] && S.rarity && S.rarity[k] != null ? tf("rarity", {p: S.rarity[k]}) : b[k] ? "" : t("stLocked")}</small></div>`).join("");
+  return `${rows.length ? `<h2>${t("stT")}</h2><div class="card stl">${rows.join("")}</div>` : ""}
+  ${m.tours || m.titles ? `<h2>${t("stTours")}</h2><div class="card sttr">${stTrophy()}<div><b>${tf(m.titles === 1 ? "stTitle1" : "stTitles", {n: m.titles})}</b>${m.tours ? `<span class="note">${tf(m.tours === 1 ? "stPlayed1" : "stPlayed", {n: m.tours})}</span>` : ""}</div></div>` : ""}
+  <h2>${t("stBadges")} <small class="stb-n">${got}/${STB_ORDER.length}</small></h2><div class="card"><div class="stbs">${badges}</div></div>`; }
 V.profile = () => { if (!S.user) return V.auth(); const p = S.pf;
   if (!p) return `<main>${backBar(t("pfTitle"), "me")}<div class="card note">…</div></main>${nav("me")}`;
   const pct = p.played ? Math.round(p.wins / p.played * 100) : 0, [, col] = TIER[p.category || "D"];
@@ -3702,9 +3803,10 @@ V.profile = () => { if (!S.user) return V.auth(); const p = S.pf;
     <div class="pfmeta">${p.level != null ? `<span class="pfl">${lvl2(p.level)}</span>` : ""}${p.category ? `<span>${esc(tierName(p.category))} · ${esc(p.category)}</span>` : ""}${p.titles ? `<span>🏆 ${p.titles}</span>` : ""}</div>
     <small>${tf("pfSince", {d: esc(p.since)})}</small></div></div>
   ${socialBlock()}
-  ${!p.played ? `<div class="card note">${t("pfEmpty")}</div>${snProfile()}` : `
+  ${!p.played ? `<div class="card note">${t("pfEmpty")}</div>${statsList(p)}${snProfile()}` : `
   <div class="pfstats"><div><b>${p.played}</b><small>${t("pfPlayed")}</small></div><div><b>${p.wins}</b><small>${t("pfWins")}</small></div><div class="hl"><b>${pct}%</b><small>${t("pfWinPct")}</small></div><div><b>${p.streak ? "🔥" + p.streak : "0"}</b><small>${t("pfStreak")}</small></div><div><b>${p.best_streak}</b><small>${t("pfBest")}</small></div></div>
   <div class="card"><div class="between"><b>${t("pfForm")}</b><span class="note">${t("pfSets")} ${p.sets_w}-${p.sets_l} · ${t("pfGames")} ${p.games_w}-${p.games_l}</span></div><div class="form">${(p.form || []).map(w => `<span class="${w ? "w" : "l"}">${w ? "W" : "L"}</span>`).join("")}</div></div>
+  ${statsList(p)}
   ${snProfile()}
   <h2>${t("pfChem")}</h2>
   ${p.best_partner ? `<div class="card bestp"><span class="av">${esc(initials(p.best_partner.name))}</span><div style="flex:1;min-width:0"><small>💞 ${t("pfBestPartner")}</small><b>${pLink(p.best_partner.id, p.best_partner.name)}</b><span class="note">${tf("pfTogether", {w: p.best_partner.w, n: p.best_partner.n})}</span></div><span class="big">${Math.round(p.best_partner.w / p.best_partner.n * 100)}%</span></div>` : ""}
@@ -3718,7 +3820,7 @@ V.profile = () => { if (!S.user) return V.auth(); const p = S.pf;
    ${p.biggest ? `<div class="card wide"><small>💥 ${t("pfBiggest")}</small><b>${esc(sets(p.biggest.sets))}</b><span class="note">${t("pfVs")} ${esc(p.biggest.opps || "")}</span></div>` : ""}</div>
   ${(p.levels || []).length > 1 ? `<div class="card"><div class="between"><b>${t("pfLevel")}</b><span class="note">${lvl2(p.levels[0])} → ${lvl2(p.levels[p.levels.length - 1])}</span></div>${spark(p.levels)}</div>` : ""}
   <h2>${t("pfRecent")}</h2>
-  <div class="card">${(p.recent || []).map(g => `<div class="grow ${g.won ? "w" : "l"}"><span class="res">${g.won ? "W" : "L"}</span><div style="flex:1;min-width:0"><b>${esc(sets(g.sets))}</b><span class="note">${g.mate ? `${t("pfWith")} ${esc(g.mate)} · ` : ""}${t("pfVs")} ${esc(g.opps || "")}</span><span class="note">${esc(fmtDay(new Date(g.at)))} · ${esc(g.club)}${g.kind === "league" ? ` · ${t("pfLeague")}` : ""}</span></div></div>`).join("")}</div>`}
+  <div class="card">${(p.recent || []).map(g => `<div class="grow ${g.won ? "w" : "l"}"><span class="res">${g.won ? "W" : "L"}</span><div style="flex:1;min-width:0"><b>${esc(sets(g.sets))}</b><span class="note">${g.mate ? `${t("pfWith")} ${esc(g.mate)} · ` : ""}${t("pfVs")} ${esc(g.opps || "")}</span><span class="note">${esc(fmtDay(new Date(g.at)))} · ${esc(g.club)}${g.kind === "league" ? ` · ${t("pfLeague")}` : g.kind === "tournament" ? ` · ${t("pfTourK")}` : ""}</span></div></div>`).join("")}</div>`}
   <form id="pfFindF" class="card" style="display:flex;flex-direction:column;gap:8px"><b>${t("pfFind")}</b><div class="row" style="gap:8px"><input id="pf-q" value="${esc(S.pfQ)}" placeholder="${t("pfFindPh")}" style="flex:1;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:0 12px"><button class="cta blue sm" type="submit">${t("apFind")}</button></div>
    ${(S.pfList || []).map(x => `<div class="prow2"><b>${pLink(x.id, x.name)}</b>${lvChip(x.level)}</div>`).join("")}</form>
  </main>${nav("me")}`; };
@@ -4188,6 +4290,7 @@ app.addEventListener("click", async e => {
   if ("music" in d){ const on = !musicOn(); ls.set("pl-music", on ? "1" : "0"); if (on) musicStart(); else musicStop(); render(); return; }
   if ("snd" in d){ const on = ls.get("pl-snd") === "0"; ls.set("pl-snd", on ? "1" : "0"); if (on){ VOICE.played = {}; voice("events", true); } render(); return; }
   if ("dark" in d){ const r = document.documentElement; r.dataset.theme = r.dataset.theme === "dark" ? "light" : "dark"; try { localStorage.setItem("pl-theme", r.dataset.theme); } catch (x) {} render(); return; }
+  if ("runlb" in d){ S.sheet = "runlb"; render(); return; }
   if ("instx" in d){ ls.set("pl-inst-hide", "1"); render(); return; }
   if ("inst1" in d){ if (installEvt){ installEvt.prompt(); let ok = false; try { ok = (await installEvt.userChoice).outcome === "accepted"; } catch (x) {} installEvt = null; if (ok) ls.set("pl-inst-hide", "1"); render(); return; }
     ls.set("pl-inst-hide", "1"); if (isIOSdev()){ S.sheet = "iosinst"; render(); } else { toast(t("andHow")); render(); } return; }
@@ -5099,8 +5202,8 @@ Object.assign(W.en, {meEnt:"My entries", meWait:"Waiting for confirmation", meOk
 Object.assign(W.ar, {meEnt:"مشاركاتي", meWait:"بانتظار التأكيد", meOk:"مؤكد", meWl:"قائمة الانتظار", meWith:"مع", meOpen:"افتح", meNoTime:"وقت المباراة لسا ما تحدد", calAdd:"ضيف للتقويم", calApple:"تقويم آبل", calGoogle:"تقويم غوغل", vsL:"ضد", ptsU:"نقطة"});
 Object.assign(W.en, {accGone:"Your account was reset. Please create a new account to continue."});
 Object.assign(W.ar, {accGone:"انعمل تصفير لحسابك. اعمل حساب جديد لتكمّل."});
-Object.assign(W.en, {ciWho:"Tap each player who's here. Anyone not marked counts as a no-show.", ciHere:"Here", ciTapHere:"Tap if here", nsT:"No-shows", nsS:"Players who didn't come to a game they were in (last 60 days). Tap \"They came\" if the desk forgot to mark them.", nsTimes:"{n}×", nsPaused:"Paused", nsOwes:"owes {x}", nsPaid:"paid ✓", nsMarkPaid:"Paid", nsUndo:"They came", nsUndoQ:"Mark this player as here? The no-show is removed.", nsOne:"1 no-show recently", nsMany:"{n} no-shows recently", nsTag:"Didn't show up", kickB:"Remove", kickQ:"Remove {n} from your game? They'll be told and their spot opens again.", kickOk:"{n} was removed.", nNs:"🚫 You missed your game on {w} at {c}. No-show {n} of 3: at 3, booking and joining pause for 2 weeks.", nNs3:"🚫 You missed your game on {w} at {c}. That's 3 no-shows, so booking and joining are paused for 2 weeks.", nNsOwe:"You still owe your share ({x}) at the desk.", nNsOther:"{n} didn't show up to your game on {w}. Sorry about that, the club has been told.", nKicked:"{n} removed you from the game on {w}.", relT:"Shows up {p}%", relGood:"{n} games, never missed one", relGood1:"1 game, never missed", relMissed:"Missed {n} recently · 3 pauses booking for 2 weeks", relPaused:"Booking paused until {d}", instAdd:"Add", instS2:"One tap · opens full screen like an app", instIosT:"Add PlayPal in 2 taps", instIos1:"Tap the Share button at the bottom of Safari", instIos2:"Tap “Add to Home Screen”", cxBook:"Cancel this booking", cxLeave:"Leave this match", cxBookQ:"Cancel this booking? The court is freed and the other players are told.", cxLeaveQ:"Leave this match? Your spot opens for someone else.", pCreate:"Create a game", pFind:"Find a game", nwC:"Book a court at Core · Trio · Let's", nwF:"Join a game at your level", nwL:"Weekly matches · prizes", hmPlay:"Play", hmComp:"Compete", hmNews:"News", snMt:"🎾 Open matches are coming soon. Stay tuned!", snBt:"🗓️ Court booking is coming soon. Stay tuned!", muMute:"Mute music", muOn:"Play music", lbKick:"This week", lbYou:"You", lbSub:"{c} · resets Monday", snSoonL:"Coming soon", snM1:"Open", snM2:"matches", snMc1:"Your level", snMc2:"Every night", snB1:"Court", snB2:"booking", snBc1:"Core · Trio · Let's", snBc2:"In seconds", snL1:"Box", snL2:"leagues", snLc1:"Weekly", snLc2:"Prizes"});
-Object.assign(W.ar, {ciWho:"اضغط على كل لاعب موجود. يلي ما بتعلّم عليه بينحسب ما إجا.", ciHere:"موجود", ciTapHere:"اضغط إذا موجود", nsT:"ما إجوا", nsS:"لاعبين ما إجوا عمباراة كانوا فيها (آخر ٦٠ يوم). اضغط \"إجا\" إذا الاستقبال نسي يعلّم عليه.", nsTimes:"{n}×", nsPaused:"موقوف", nsOwes:"عليه {x}", nsPaid:"دفع ✓", nsMarkPaid:"دفع", nsUndo:"إجا", nsUndoQ:"تعلّم إنه إجا؟ بتنشال الغيبة.", nsOne:"غاب مرة مؤخراً", nsMany:"غاب {n} مرات مؤخراً", nsTag:"ما إجا", kickB:"شيل", kickQ:"بدك تشيل {n} من لعبتك؟ بيوصله خبر ومكانه بينفتح.", kickOk:"انشال {n}.", nNs:"🚫 ما إجيت على لعبتك يوم {w} بـ{c}. غياب {n} من ٣: بالتالت بيتوقف الحجز والانضمام أسبوعين.", nNs3:"🚫 ما إجيت على لعبتك يوم {w} بـ{c}. هي ٣ غيابات، فالحجز والانضمام موقوفين أسبوعين.", nNsOwe:"لسا عليك حصتك ({x}) بالاستقبال.", nNsOther:"{n} ما إجا على لعبتكن يوم {w}. منعتذر، النادي عرف.", nKicked:"{n} شالك من لعبة يوم {w}.", relT:"بيجي {p}%", relGood:"{n} مباريات، ولا مرة غاب", relGood1:"مباراة وحدة، وما غاب", relMissed:"غاب {n} مؤخراً · ٣ غيابات بتوقف الحجز أسبوعين", relPaused:"الحجز موقوف لـ{d}", instAdd:"أضف", instS2:"كبسة وحدة · بيفتح شاشة كاملة متل التطبيق", instIosT:"أضف PlayPal بكبستين", instIos1:"اكبس زر المشاركة تحت بـSafari", instIos2:"اكبس «إضافة إلى الشاشة الرئيسية»", cxBook:"ألغِ هالحجز", cxLeave:"انسحب من المباراة", cxBookQ:"بدك تلغي الحجز؟ الملعب بيتحرر وباقي اللاعبين بيوصلهن خبر.", cxLeaveQ:"بدك تنسحب؟ مكانك بينفتح لحدا تاني.", pCreate:"اعمل لعبة", pFind:"لاقي لعبة", nwC:"احجز ملعب بـ Core · Trio · Let's", nwF:"العب مع ناس بمستواك", nwL:"مباريات كل أسبوع · جوائز", hmPlay:"العب", hmComp:"تنافس", hmNews:"الأخبار", snMt:"🎾 المباريات المفتوحة جايّة قريباً. خليك متابع!", snBt:"🗓️ حجز الملاعب جاي قريباً. خليك متابع!", muMute:"اكتم الموسيقى", muOn:"شغّل الموسيقى", lbKick:"هالأسبوع", lbYou:"إنت", lbSub:"{c} · بيتصفّر يوم الاثنين", snSoonL:"قريباً", snM1:"مباريات", snM2:"مفتوحة", snMc1:"بمستواك", snMc2:"كل ليلة", snB1:"حجز", snB2:"الملاعب", snBc1:"Core · Trio · Let's", snBc2:"بثواني", snL1:"الدوريات", snL2:"الأسبوعية", snLc1:"كل أسبوع", snLc2:"جوايز"});
+Object.assign(W.en, {ciWho:"Tap each player who's here. Anyone not marked counts as a no-show.", ciHere:"Here", ciTapHere:"Tap if here", nsT:"No-shows", nsS:"Players who didn't come to a game they were in (last 60 days). Tap \"They came\" if the desk forgot to mark them.", nsTimes:"{n}×", nsPaused:"Paused", nsOwes:"owes {x}", nsPaid:"paid ✓", nsMarkPaid:"Paid", nsUndo:"They came", nsUndoQ:"Mark this player as here? The no-show is removed.", nsOne:"1 no-show recently", nsMany:"{n} no-shows recently", nsTag:"Didn't show up", kickB:"Remove", kickQ:"Remove {n} from your game? They'll be told and their spot opens again.", kickOk:"{n} was removed.", nNs:"🚫 You missed your game on {w} at {c}. No-show {n} of 3: at 3, booking and joining pause for 2 weeks.", nNs3:"🚫 You missed your game on {w} at {c}. That's 3 no-shows, so booking and joining are paused for 2 weeks.", nNsOwe:"You still owe your share ({x}) at the desk.", nNsOther:"{n} didn't show up to your game on {w}. Sorry about that, the club has been told.", nKicked:"{n} removed you from the game on {w}.", relT:"Shows up {p}%", relGood:"{n} games, never missed one", relGood1:"1 game, never missed", relMissed:"Missed {n} recently · 3 pauses booking for 2 weeks", relPaused:"Booking paused until {d}", instAdd:"Add", instS2:"One tap · opens full screen like an app", instIosT:"Add PlayPal in 2 taps", instIos1:"Tap the Share button at the bottom of Safari", instIos2:"Tap “Add to Home Screen”", rlT:"Top runners", rlMonth:"This month", rlAll:"See all", rlYou:"You", rlOf:"of", rlTo5:"{n} to Top 5", rlFirst:"You're #1 this month 👑", rlNone:"Play a run to get on the board", rlEmpty:"No scores yet this month. Be the first!", rlIn:"Sign in to get on the board", rlSheetT:"Ballie run · Top 10", rlSheetS:"Everyone on PlayPal · resets on the 1st of every month", rlCat:"Cat", stT:"Stats", stRank:"Rank", stRankV:"#{r} of {n}", stTop:"Top {p}%", stMonth:"This month", stMore:"{n} more wins than {m}", stLess:"{n} fewer wins than {m}", stMore1:"1 more win than {m}", stLess1:"1 fewer win than {m}", stWL:"{w} W · {l} L", stBest:"Best in the category", stSame:"Same wins as {m}", stSets:"Sets won", stGames:"Games won", stLoves:"Loves served", stLovesS:"6-0 sets", stLost:"{n} lost", stUpsets:"Upsets", stUpsetsS:"wins vs higher-level teams", stTime:"Time played", stH:"h", stClub:"Most club", stClubS:"{n} matches", stLikes:"Likes from opponents", stShow:"Showed up", stNoShow:"{n} no-show", stTours:"Tournaments", stTitles:"{n} titles", stTitle1:"1 title", stPlayed:"{n} tournaments played", stPlayed1:"1 tournament played", stBadges:"Badges", stLocked:"locked", pfTourK:"Tournament", cxBook:"Cancel this booking", cxLeave:"Leave this match", cxBookQ:"Cancel this booking? The court is freed and the other players are told.", cxLeaveQ:"Leave this match? Your spot opens for someone else.", pCreate:"Create a game", pFind:"Find a game", nwC:"Book a court at Core · Trio · Let's", nwF:"Join a game at your level", nwL:"Weekly matches · prizes", hmPlay:"Play", hmComp:"Compete", hmNews:"News", snMt:"🎾 Open matches are coming soon. Stay tuned!", snBt:"🗓️ Court booking is coming soon. Stay tuned!", muMute:"Mute music", muOn:"Play music", lbKick:"This week", lbYou:"You", lbSub:"{c} · resets Monday", snSoonL:"Coming soon", snM1:"Open", snM2:"matches", snMc1:"Your level", snMc2:"Every night", snB1:"Court", snB2:"booking", snBc1:"Core · Trio · Let's", snBc2:"In seconds", snL1:"Box", snL2:"leagues", snLc1:"Weekly", snLc2:"Prizes"});
+Object.assign(W.ar, {ciWho:"اضغط على كل لاعب موجود. يلي ما بتعلّم عليه بينحسب ما إجا.", ciHere:"موجود", ciTapHere:"اضغط إذا موجود", nsT:"ما إجوا", nsS:"لاعبين ما إجوا عمباراة كانوا فيها (آخر ٦٠ يوم). اضغط \"إجا\" إذا الاستقبال نسي يعلّم عليه.", nsTimes:"{n}×", nsPaused:"موقوف", nsOwes:"عليه {x}", nsPaid:"دفع ✓", nsMarkPaid:"دفع", nsUndo:"إجا", nsUndoQ:"تعلّم إنه إجا؟ بتنشال الغيبة.", nsOne:"غاب مرة مؤخراً", nsMany:"غاب {n} مرات مؤخراً", nsTag:"ما إجا", kickB:"شيل", kickQ:"بدك تشيل {n} من لعبتك؟ بيوصله خبر ومكانه بينفتح.", kickOk:"انشال {n}.", nNs:"🚫 ما إجيت على لعبتك يوم {w} بـ{c}. غياب {n} من ٣: بالتالت بيتوقف الحجز والانضمام أسبوعين.", nNs3:"🚫 ما إجيت على لعبتك يوم {w} بـ{c}. هي ٣ غيابات، فالحجز والانضمام موقوفين أسبوعين.", nNsOwe:"لسا عليك حصتك ({x}) بالاستقبال.", nNsOther:"{n} ما إجا على لعبتكن يوم {w}. منعتذر، النادي عرف.", nKicked:"{n} شالك من لعبة يوم {w}.", relT:"بيجي {p}%", relGood:"{n} مباريات، ولا مرة غاب", relGood1:"مباراة وحدة، وما غاب", relMissed:"غاب {n} مؤخراً · ٣ غيابات بتوقف الحجز أسبوعين", relPaused:"الحجز موقوف لـ{d}", instAdd:"أضف", instS2:"كبسة وحدة · بيفتح شاشة كاملة متل التطبيق", instIosT:"أضف PlayPal بكبستين", instIos1:"اكبس زر المشاركة تحت بـSafari", instIos2:"اكبس «إضافة إلى الشاشة الرئيسية»", rlT:"الأوائل", rlMonth:"هالشهر", rlAll:"شوف الكل", rlYou:"إنت", rlOf:"من", rlTo5:"باقيلك {n} لتدخل أول 5", rlFirst:"إنت الأول هالشهر 👑", rlNone:"العب جولة لتطلع عاللوحة", rlEmpty:"ما في نتائج هالشهر لسا. كون الأول!", rlIn:"سجّل دخول لتطلع عاللوحة", rlSheetT:"Ballie run · أفضل 10", rlSheetS:"كل لاعبين PlayPal · بتبلّش من جديد أول كل شهر", rlCat:"فئة", stT:"الإحصائيات", stRank:"الترتيب", stRankV:"#{r} من {n}", stTop:"أفضل {p}%", stMonth:"هالشهر", stMore:"{n} فوز أكتر من {m}", stLess:"{n} فوز أقل من {m}", stMore1:"فوز واحد أكتر من {m}", stLess1:"فوز واحد أقل من {m}", stWL:"{w} فوز · {l} خسارة", stBest:"الأول بالفئة", stSame:"نفس عدد الفوز متل {m}", stSets:"أشواط ربحتها", stGames:"غيمات ربحتها", stLoves:"أشواط ٦-٠", stLovesS:"ربحتها ٦-٠", stLost:"خسرت {n}", stUpsets:"مفاجآت", stUpsetsS:"فوز على فرق مستواها أعلى", stTime:"وقت اللعب", stH:"س", stClub:"أكتر نادي", stClubS:"{n} مباراة", stLikes:"إعجابات من الخصوم", stShow:"الحضور", stNoShow:"{n} غياب", stTours:"البطولات", stTitles:"{n} ألقاب", stTitle1:"لقب واحد", stPlayed:"لعبت {n} بطولات", stPlayed1:"لعبت بطولة وحدة", stBadges:"الشارات", stLocked:"مقفلة", pfTourK:"بطولة", cxBook:"ألغِ هالحجز", cxLeave:"انسحب من المباراة", cxBookQ:"بدك تلغي الحجز؟ الملعب بيتحرر وباقي اللاعبين بيوصلهن خبر.", cxLeaveQ:"بدك تنسحب؟ مكانك بينفتح لحدا تاني.", pCreate:"اعمل لعبة", pFind:"لاقي لعبة", nwC:"احجز ملعب بـ Core · Trio · Let's", nwF:"العب مع ناس بمستواك", nwL:"مباريات كل أسبوع · جوائز", hmPlay:"العب", hmComp:"تنافس", hmNews:"الأخبار", snMt:"🎾 المباريات المفتوحة جايّة قريباً. خليك متابع!", snBt:"🗓️ حجز الملاعب جاي قريباً. خليك متابع!", muMute:"اكتم الموسيقى", muOn:"شغّل الموسيقى", lbKick:"هالأسبوع", lbYou:"إنت", lbSub:"{c} · بيتصفّر يوم الاثنين", snSoonL:"قريباً", snM1:"مباريات", snM2:"مفتوحة", snMc1:"بمستواك", snMc2:"كل ليلة", snB1:"حجز", snB2:"الملاعب", snBc1:"Core · Trio · Let's", snBc2:"بثواني", snL1:"الدوريات", snL2:"الأسبوعية", snLc1:"كل أسبوع", snLc2:"جوايز"});
 Object.assign(W.en, {snT:"Coming soon", snLock:"Unlocking next", snSoon:"Soon", snM:"Open matches", snMs:"Join games at your level, any night of the week.", snB:"Court booking", snBs:"Book Core, Trio and Let's Padel courts in seconds.", snL:"Leagues", snLs:"Weekly box leagues. Climb, get promoted, win prizes.", snUnl:"Unlocking soon", snLt:"🏆 Leagues are coming soon. Stay tuned!"});
 Object.assign(W.ar, {snT:"قريباً", snLock:"عم ينفتح", snSoon:"قريباً", snM:"مباريات مفتوحة", snMs:"انضم لمباريات بمستواك بأي ليلة بالأسبوع.", snB:"حجز الملاعب", snBs:"احجز ملاعب Core وTrio وLet's Padel بثواني.", snL:"الدوريات", snLs:"دوريات أسبوعية. اطلع، ترقّى، واربح جوايز.", snUnl:"عم ينفتح قريباً", snLt:"🏆 الدوريات جايّة قريباً. خليك متابع!"});
 Object.assign(W.en, {rsQk:"Your rank", rsQt:"What's your rank?", rsQs:"Take the 60-second quiz and get your tier card.", rsK:"Your rank"});
@@ -5320,6 +5423,7 @@ function sheetHtml(){
   if (!S.sheet) return "";
   let inner = "";
   if (S.sheet === "push") inner = `<span class="sh-ic">🔔</span><b>${t("shPushT")}</b><p class="note">${t("shPushS")}</p><button class="cta blue wide" data-pushon data-shx>${t("psOn")}</button><button class="ghost" data-shx>${t("shLater")}</button>`;
+  else if (S.sheet === "runlb") inner = runLbSheet();
   else if (S.sheet === "iosinst") inner = `<img src="icon-192.png" alt="" width="64" height="64" style="border-radius:16px"><b>${t("instIosT")}</b><div class="ios-steps"><div><i>1</i><span>${t("instIos1")}</span><em>${iosShare}</em></div><div><i>2</i><span>${t("instIos2")}</span><em>＋</em></div></div><button class="cta wide" data-shx style="background:#E3EE3A;color:#07110D">${t("okBtn2")}</button>`;
   else if (S.sheet === "install") inner = `<img src="icon-192.png" alt="" width="56" height="56" style="border-radius:14px"><b>${t("shInstT")}</b><p class="note">${t("shInstS")}</p><button class="cta blue wide" data-install data-shx>${t("installBtn")}</button><button class="ghost" data-shx>${t("shLater")}</button>`;
   else if (S.sheet === "late"){ const b = S.mine.find(x => x.id === S.lateId) || {}, w = cxDeadline(S.clubs.find(x => x.id === b.club_id || x.name === b.club_name), b.starts_at).w;
@@ -5763,13 +5867,13 @@ Object.assign(W.en, {wkT:"This week's challenges", wkS:"New ones every Monday. F
   wkStars:"⭐ {n} weeks done", wkStars1:"⭐ 1 week done", wkStreak:"🔥 {n}-week streak",
   ck_new_club:"Play at a club you've never played at", ck_new_people:"Play with 2 people you've never played with", ck_play3:"Play 3 matches", ck_win2:"Win 2 matches",
   ck_open1:"Join someone's open match", ck_rate3:"Rate 3 matches", ck_early1:"Play a match before 2 PM",
-  b_globetrotter:"Globetrotter", b_social:"Social player", b_centurion:"50 matches", b_early_bird:"Early bird", b_warrior:"Weekly warrior", b_fire:"Top 10 🔥",
+  b_globetrotter:"Globetrotter", b_social:"Social player", b_centurion:"50 matches", b_early_bird:"Early bird", b_warrior:"Weekly warrior", b_fire:"Top 10",
   frFire:"Top 10 player"});
 Object.assign(W.ar, {wkT:"تحديات هالأسبوع", wkS:"تحديات جديدة كل يوم اثنين. خلّص الثلاثة لتاخد ⭐.", wkLeft:"باقي {d} أيام", wkLast:"آخر يوم", wkDone:"خلصت الأسبوع! ⭐",
   wkStars:"⭐ {n} أسابيع", wkStars1:"⭐ أسبوع واحد", wkStreak:"🔥 {n} أسابيع ورا بعض",
   ck_new_club:"العب بنادي ما لعبت فيه قبل", ck_new_people:"العب مع شخصين ما لعبت معهن قبل", ck_play3:"العب ٣ مباريات", ck_win2:"اربح مباراتين",
   ck_open1:"انضم لمباراة مفتوحة لحدا", ck_rate3:"قيّم ٣ مباريات", ck_early1:"العب مباراة قبل الساعة ٢ الظهر",
-  b_globetrotter:"جوّال", b_social:"اجتماعي", b_centurion:"٥٠ مباراة", b_early_bird:"بكّير", b_warrior:"محارب الأسبوع", b_fire:"أفضل ١٠ 🔥",
+  b_globetrotter:"جوّال", b_social:"اجتماعي", b_centurion:"٥٠ مباراة", b_early_bird:"بكّير", b_warrior:"محارب الأسبوع", b_fire:"أفضل ١٠",
   frFire:"من أفضل ١٠ لاعبين"});
 Object.assign(BADGE_IC, {globetrotter: "🌍", social: "🤝", centurion: "💯", early_bird: "🌅", warrior: "⭐", fire: "🔥"});
 const CK_IC = {new_club: "🏟️", new_people: "🤝", play3: "🎾", win2: "🏅", open1: "🚪", rate3: "⭐", early1: "🌅"};
