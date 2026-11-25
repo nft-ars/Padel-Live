@@ -3099,6 +3099,7 @@ nav.tabs .tback{position:sticky;inset-inline-start:0;z-index:2;flex:0 0 auto;ali
 #tv-root.v2 .sb-mom{animation:none!important}
 #tv-root.v2 [data-k]{will-change:transform}
 #tv-root.v2 .tv-court{contain:layout paint}
+#tv-root .tv-sw-g.n5,#tv-root .tv-sw-g.n6{grid-template-columns:repeat(3,1fr);gap:calc(12*var(--u))}#tv-root .tv-sw-g.n5 .tv-sw-t,#tv-root .tv-sw-g.n6 .tv-sw-t{height:calc(118*var(--u));padding:calc(8*var(--u))}#tv-root .tv-sw-g.n5 .tv-sw-t img,#tv-root .tv-sw-g.n6 .tv-sw-t img{max-height:calc(100*var(--u))}
 </style><link rel="preload" as="script" href="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.50.0"></head><body><div id="app"><p style="padding:40px 20px;font:600 16px system-ui;color:#555">Loading tournament…</p></div>
 <script>
 var SUPABASE_URL = "https://ebrlwfmkbwlbytslfvdn.supabase.co", SUPABASE_KEY = "sb_publishable_Pf2THTG2L1otqh1PYX4HLw_1360KwwF";
@@ -4280,7 +4281,7 @@ function tvNm(n){ return esc(n || "").replace(/\s(&amp;|\/)\s/g, ' <em class="am
 function tvSponsWall(){
   const list = SPONSORS.length ? SPONSORS : [{n: "PlayPal", src: "playpal-word.png"}, ...(CFG.club_logo ? [{n: TNAME, src: CFG.club_logo}] : [])];
   const cols = ["#E3EE3A", "#FFFFFF", "#4F8BFF", "#FF5A5F"], n = list.length, per = 2.6;
-  return `<div class="tv-sw"><div class="tv-sw-h">Partners</div><div class="tv-sw-g n${Math.min(n, 4)}">${list.slice(0, 4).map((p, k) => `<div class="tv-sw-t" style="--c:${p.a || cols[k % 4]};--r:${[-3, 2.5, 2, -2.5][k % 4]}deg;--dl:${(k * per).toFixed(1)}s;--cy:${(n * per).toFixed(1)}s">${p.src ? `<img src="${p.src}" alt="${esc(p.n)}">` : `<b class="wm">${esc(p.n)}</b>`}</div>`).join("")}</div></div>`;
+  return `<div class="tv-sw"><div class="tv-sw-h">Partners</div><div class="tv-sw-g n${Math.min(n, 6)}">${list.slice(0, 6).map((p, k) => `<div class="tv-sw-t" style="--c:${p.a || cols[k % 4]};--r:${[-3, 2.5, 2, -2.5][k % 4]}deg;--dl:${(k * per).toFixed(1)}s;--cy:${(n * per).toFixed(1)}s">${p.src ? `<img src="${p.src}" alt="${esc(p.n)}">` : `<b class="wm">${esc(p.n)}</b>`}</div>`).join("")}</div></div>`;
 }
 function tvAppCard(){
   const url = location.origin + "/";
