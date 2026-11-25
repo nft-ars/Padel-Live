@@ -186,6 +186,7 @@ header.top .hrow{align-items:center}header.top .hrow .tback2+.kick{margin-inline
 @keyframes v2Glow{0%,24%{opacity:1}32%,100%{opacity:0}}
 .village2.paused .v2-lg,.village2.paused .v2-lg::after{animation-play-state:paused}
 @media (prefers-reduced-motion:reduce){.v2-lg,.v2-lg::after{animation:none}}
+.sec-hide{display:flex;flex-direction:column;gap:4px;margin:12px 0;padding:14px 16px;border-radius:14px;border:1px dashed rgba(255,255,255,.28);background:rgba(255,255,255,.05);color:inherit;font-size:14px;line-height:1.4}.sec-hide b{font-size:15px}.sec-hide span{opacity:.8}.sec-hide.org{border-style:solid;border-color:#2BD9FE}.sec-rev{margin-top:8px;min-height:44px;border-radius:12px;border:0;font-weight:800;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:#05080F;background:linear-gradient(90deg,#2BD9FE,#8A7BFF,#FF9F1C);cursor:pointer}.sec-rev:disabled{opacity:.6}
 </style><style>.phf{display:flex;align-items:stretch;gap:0;border:1px solid var(--line,rgba(127,127,127,.35));border-radius:12px;overflow:hidden;background:var(--card,transparent)}
 .phf .phcc{position:relative;display:flex;align-items:center;padding:0 10px 0 12px;border-inline-end:1px solid var(--line,rgba(127,127,127,.35));white-space:nowrap;font-weight:700;font-size:15px;cursor:pointer;margin:0}
 .phf .phcc:after{content:"▾";font-size:11px;opacity:.6;margin-inline-start:6px}
@@ -3126,10 +3127,15 @@ try { const h = location.hash.replace("#",""); if (h === "signup") view.tab = "i
 
 const cur = () => draft || S;
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
-const nm = id => (drawPend() && !canEdit ? "" : (cur().names[id] || "")).trim(); /* names stay hidden until the live draw */
+/* hidden match times: the organizer finalizes the schedule, then taps Reveal (group tables and teams still show names) */
+let NMK = 0;
+function schedSecret(){ return !canEdit && !!(CFG && CFG.hide_sched); }
+function secretNow(){ return NMK === 0 && schedSecret(); }
+function keepNames(f){ return function(){ NMK++; try { return f.apply(this, arguments); } finally { NMK--; } }; }
+const nm = id => (drawPend() && !canEdit ? "" : secretNow() ? "" : (cur().names[id] || "")).trim(); /* names stay hidden until the live draw */
 var SUOPEN = false;
 function preTeams(){ return !canEdit && (drawPend() || (SUOPEN && !(CFG.draw && CFG.draw.res))) && view.tab !== "teams"; }
-const label = id => preTeams() ? "TBD" : (nm(id) || ("Team " + id));
+const label = id => preTeams() || secretNow() ? "TBD" : (nm(id) || ("Team " + id));
 const cvar = (c, soft) => `var(${CATV[c]}${soft ? "-soft" : ""})`;
 function mins(t){ const m = /(\d+):(\d+)\s*(AM|PM)/.exec(t); let h = +m[1] % 12 + (m[3] === "PM" ? 12 : 0); if (m[3] === "AM" && h < 6) h += 24; return h * 60 + +m[2]; }
 function fmt(v){ let h = Math.floor(v / 60) % 24, m = v % 60; const ap = h >= 12 ? "PM" : "AM"; h = h % 12 || 12; return `${h}:${String(m).padStart(2,"0")} ${ap}`; }
@@ -3266,12 +3272,12 @@ function allMatches(){
         meta: `${o.sets ? "Best of 3 · super tiebreak" : o.tb ? "1 set to 6" : "1 set to 9"} · ${CN[w.court]}`, kind: o.sets ? "sets" : o.tb ? 6 : 9 }); } }
   return list.sort((a, b) => a.day - b.day || a.t - b.t || a.court - b.court);
 }
-const involves = (m, id) => !!id && (m.A.id === id || m.B.id === id);
+const involves = (m, id) => !!id && !secretNow() && (m.A.id === id || m.B.id === id);
 
 /* ---------- rendering pieces ---------- */
 function teamLine(side, score, won, lost, flag){
   const id = side.id, n = id ? nm(id) : "";
-  const name = id ? (n ? `${esc(n)}<span class="id">${esc(id)}</span>` : `Team ${esc(id)}`) : esc(side.ph);
+  const name = id ? (secretNow() ? "TBD" : n ? `${esc(n)}<span class="id">${esc(id)}</span>` : `Team ${esc(id)}`) : esc(side.ph);
   const me = id && id === myTeam ? ` <span class="you">You</span>` : "";
   return `<div class="row"><span class="tm${won ? " won" : ""}${id ? "" : " ph"}">${name}${me}${won && flag ? ` <span class="flag">${flag}</span>` : ""}</span>${score != null ? `<span class="sc${lost ? " lose" : ""}">${score}</span>` : ""}</div>`;
 }
@@ -3348,7 +3354,7 @@ function mini(m){
   return `<div class="mini" style="border-color:${cvar(m.cat)}"><span class="tag" style="background:${cvar(m.cat, 1)};color:${cvar(m.cat)}">${esc(m.tag)}</span><div>${side(m.A)}</div><div class="vs">vs</div><div>${side(m.B)}</div>${isLive(m.id) && liveTxt(m.id) ? `<div class="mini-live">${esc(liveTxt(m.id))}</div>` : ""}</div>`;
 }
 function myCard(){
-  if (!myTeam) return "";
+  if (!myTeam || schedSecret()) return "";
   const all = allMatches(); const next = all.find(m => involves(m, myTeam) && notDoneish(m));
   const d = cur().delay || {};
   let body;
@@ -3407,10 +3413,17 @@ function board(all, day){
     h += `<div class="brow mvnew" role="row">${tm8(nt)}${COURTS.map(c => `<div class="tile empty mvslot" data-mvc="${day}|${nt}|${c}"><span>Move here</span></div>`).join("")}</div>`; }
   return h + `</div>`;
 }
+function secretBox(){ if (!CFG.hide_sched) return "";
+  if (canEdit) return `<div class="sec-hide org"><b>🔒 Match times are hidden from players</b><span>Players see the draw and their groups, but TBD in the schedule. Swap matches now: no messages are sent. When you're done, tap Reveal.</span><button class="sec-rev" data-reveal="1">Reveal schedule to everyone</button></div>`;
+  return `<div class="sec-hide"><b>🔒 Match times coming soon</b><span>The organizer is finalizing the schedule. Your matches will appear here shortly.</span><span dir="rtl" lang="ar">مواعيد المباريات تظهر هنا قريباً</span></div>`; }
+document.addEventListener("click", e => { const b = e.target.closest && e.target.closest("[data-reveal]"); if (!b || !canEdit) return;
+  if (!b.dataset.sure){ b.dataset.sure = "1"; b.textContent = "Tap again to reveal now"; return; }
+  b.disabled = true; b.textContent = "Revealing…";
+  Promise.resolve(sb.rpc("t_reveal", {p_slug: SLUG})).then(r => { if (r && r.error){ b.disabled = false; delete b.dataset.sure; b.textContent = "Couldn't reveal. Try again"; return; } CFG.hide_sched = false; render(); }).catch(() => { b.disabled = false; delete b.dataset.sure; b.textContent = "Couldn't reveal. Try again"; }); });
 function vSchedule(){
   const all = allMatches();
   if (!view.day) view.day = todayGuess(all);
-  let h = myCard() + ( /* "On court" strip removed from the page */(THEME === "night" || THEME === "trio" || THEME === "ace" || THEME === "lets") && SPONSORS.length && !editMode ? sponsorWall() : "") + filters();
+  let h = secretBox() + myCard() + ( /* "On court" strip removed from the page */(THEME === "night" || THEME === "trio" || THEME === "ace" || THEME === "lets") && SPONSORS.length && !editMode ? sponsorWall() : "") + filters();
   const useBoard = !editMode;
   h += `<div class="sched-bar"><div class="days" role="tablist" aria-label="Day">${Object.keys(DAYS).map(Number).map(d => `<button role="tab" class="dayb" data-day="${d}" aria-selected="${useBoard ? view.day === d : false}"${useBoard ? "" : " disabled"}><b>${DSHORT[d]}</b><span>${DAYS[d].split(" ").slice(1).join(" ")}</span></button>`).join("")}</div></div>`;
   h += mvBar();
@@ -3501,6 +3514,7 @@ function vTeams(){
     h += `</div></section>`; }
   return h;
 }
+vStandings = keepNames(vStandings); vTeams = keepNames(vTeams); tvGroups = keepNames(tvGroups);
 /* Info tab in the Core Padel Round 2 style, built from this tournament's own settings */
 function heroFacts(){ const VEN = String(CFG.venue || CFG.club || "").toLowerCase(), F = (CFG.facts || []).map(String).filter(x => !/prize/i.test(x) && !/\b(club|arena|padel)\b/i.test(x) && (!VEN || x.toLowerCase() !== VEN)), last = F.length - 1;
   const PZ = x => /prize/i.test(x), pzTxt = x => { const a = (String(x).match(/\$[\d,]+/) || [""])[0]; return a ? "Prize Pool " + a : x; };
@@ -3824,7 +3838,7 @@ document.addEventListener("pointerup", e => { const g = MVS.drag; if (!g) return
   if (tgt) mvDo(g.id, tgt); else render(); });
 /* everyone's page picks up a moved schedule */
 async function pullSched(){ if (MVS.on) return; try { const r = await sb.rpc("t_sched", {p_slug: SLUG, p_sv: +CFG.sv || 0}); if (r.error || !r.data) return;
-  T.G.splice(0, T.G.length, ...r.data.G); Object.keys(T.K).forEach(k => delete T.K[k]); Object.assign(T.K, r.data.K); CFG.sv = r.data.sv;
+  T.G.splice(0, T.G.length, ...r.data.G); Object.keys(T.K).forEach(k => delete T.K[k]); Object.assign(T.K, r.data.K); CFG.sv = r.data.sv; if ("H" in r.data) CFG.hide_sched = !!r.data.H;
   if ("D" in r.data){ const had = CFG.draw && CFG.draw.res; CFG.draw = r.data.D || undefined; if (!had && CFG.draw && CFG.draw.res) { try { await pull(true); } catch (e) {} } }
   if (!(view.tab === "draw" && drawState() === "live")) render(); } catch (e) {} }
 setInterval(() => { if (!document.hidden) pullSched(); }, 30000);
@@ -4558,7 +4572,7 @@ function suWhy(){ const fee = CFG.fee ? +CFG.fee : 0, prize = (CFG.facts || []).
     ${per ? `<div class="su-w hot"><small>Prize per category</small><b>${money(per)}</b><span>🥇 ${money(per * sp[0] / 100)} · 🥈 ${money(per * (sp[1] || 0) / 100)}</span></div>` : ""}</div>
     </div>`; }
 function suCard(mine){ const I = SU.info, ok = mine.status === "confirmed", fee = CFG.fee ? +CFG.fee : 0;
-  return `<div class="su-in${ok ? " ok" : ""}"><div class="su-in-h"><i>${ok ? "✅" : "⏳"}</i><div><b>${ok ? "You're in!" : "Your team is signed up"}</b><span>${esc(mine.team)} · ${esc(CATN[mine.cat] || mine.cat)}${mine.slot && !drawPend() && !preTeams() ? ` · Team ${esc(mine.slot)}` : ""}</span></div></div><p class="su-s su-who">You're on this team. Didn't sign up yourself? Your partner added you. Something wrong? Use <b>Contact support</b> above. · إذا ما سجّلت إنت، شريكك ضافك.</p>
+  return `<div class="su-in${ok ? " ok" : ""}"><div class="su-in-h"><i>${ok ? "✅" : "⏳"}</i><div><b>${ok ? "You're in!" : "Your team is signed up"}</b><span>${esc(mine.team)} · ${esc(CATN[mine.cat] || mine.cat)}${mine.slot && !drawPend() && !preTeams() && !schedSecret() ? ` · Team ${esc(mine.slot)}` : ""}</span></div></div><p class="su-s su-who">You're on this team. Didn't sign up yourself? Your partner added you. Something wrong? Use <b>Contact support</b> above. · إذا ما سجّلت إنت، شريكك ضافك.</p>
         <ol class="su-next"><li class="${ok ? "sn-done" : "sn-now"}"><b>${ok ? "Confirmed by the organizer" : "The organizer confirms your team"}</b><span>${ok ? "Your place is saved." : "You'll get a notification as soon as it's confirmed."}</span></li>
         <li class="${ok ? "sn-now" : ""}"><b>${drawOn() ? "Watch the live draw" : "Check your matches"}</b><span>${drawOn() ? "See which group you land in, live." : "Your times show on the Schedule after sign-up closes."}</span></li>
         <li><b>Pay at the desk${fee ? ` · $${fee}` : ""}</b><span>Show your entry pass (QR) when you check in. If you don't pay, you don't play.</span></li></ol>
@@ -4862,7 +4876,7 @@ setInterval(() => { if (!document.hidden) pull(); }, MODE === "tv" ? 2000 : MODE
 /* instant updates: every score change is pushed to the TV and phones the moment it happens (the timer above stays as a backup) */
 let RT = null;
 try { if (sb.channel){ RT = sb.channel("tour-" + SLUG, {config: {broadcast: {self: false}}})
-  .on("broadcast", {event: "bump"}, m => { const v = m && m.payload && m.payload.v; if (v == null || v !== VERSION) pull(); })
+  .on("broadcast", {event: "bump"}, m => { const v = m && m.payload && m.payload.v; if (v == null || v !== VERSION) pull(); try { pullSched(); } catch (e) {} })
   .on("broadcast", {event: "pt"}, m => { const x = m && m.payload; if (!x || !x.mid || !x.st || editMode) return;
     try { const s = cur(); s.pts = s.pts || {}; s.pts[x.mid] = x.st;
       if (x.fin){ s.scores[x.mid] = x.fin; s.live = s.live.filter(i => i !== x.mid); } else { delete s.scores[x.mid]; if (!s.live.includes(x.mid)) s.live.push(x.mid); }
