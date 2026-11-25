@@ -2537,6 +2537,51 @@ main.tj2{display:flex;flex-direction:column;gap:12px;padding-bottom:30px}
 @media (prefers-reduced-motion:reduce){.tj2-cta:before{animation:none}}
 
 .hm-seeall{display:block;text-align:end;font-weight:700;font-size:13px;margin:-4px 2px 14px;opacity:.85}
+/* ---------- levels the Playtomic way (v139) ---------- */
+.of7{font-style:normal;opacity:.65;font-size:.8em;margin-inline-start:2px}
+.pc-ovr small .of7{font-size:1em;opacity:.7}
+.pc-prog.dn .lbl em{color:#ff9a8a}
+.pc-prog.ser.dn .pips i.on{background:linear-gradient(90deg,#1f7a46,#3ccf7a)}
+.pc-prog.ser.dn .pips i.x{background:linear-gradient(90deg,#8a1f1f,#E5484D);box-shadow:0 0 10px rgba(229,72,77,.55)}
+.lvbox{display:flex;flex-direction:column;gap:8px}
+.lvb-top{display:flex;align-items:center;gap:12px}
+.lvb-t{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.lvb-t b{font:800 24px/1 var(--display,inherit)}.lvb-t b small{font-size:14px;opacity:.6}
+.lvb-t span{font-size:13px;font-weight:700}.lvb-t .note{font-weight:500}
+.lvb-d{display:flex;flex-direction:column;align-items:flex-end;font-weight:800;font-size:15px;white-space:nowrap}
+.lvb-d small{font-size:11px;font-weight:600;opacity:.65}
+.lvb-d.up{color:#2DBE73}.lvb-d.down{color:#E5484D}
+.lvb-h{display:flex;justify-content:space-between;font-size:13px;margin-top:2px}
+.lvg{width:100%;height:80px;display:block}
+.lvg-k{display:flex;gap:10px;font-size:11px;opacity:.6;margin-top:-2px}
+.lvg-e{margin:0;font-size:13px}
+.lvb-s{margin:0;font-size:12.5px}
+.lvb-g{align-self:flex-start;font-weight:700;padding:6px 0}
+.rel-ring{flex:none;color:var(--ink)}
+.lvguide{display:flex;flex-direction:column;padding:6px 12px}
+.lvgd{display:grid;grid-template-columns:78px 1fr auto;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:13.5px}
+.lvgd:last-child{border-bottom:0}
+.lvgd b{font-size:15px;white-space:nowrap}
+.lvgd.me{background:rgba(62,224,138,0.1);background:color-mix(in srgb,#3EE08A 10%,transparent);margin:0 -12px;padding:10px 12px;border-radius:10px}
+.lvgd em{font-style:normal;color:#2DBE73;font-weight:800;white-space:nowrap}
+.lvgd .lv{white-space:nowrap}
+.lvb-rel{display:flex;align-items:center;gap:12px}.lvb-rel>div{display:flex;flex-direction:column;gap:2px}
+.coachc{display:flex;flex-direction:column;gap:8px}
+.gtype{display:flex;flex-direction:column;gap:8px}
+.gtrow{display:flex;align-items:center;gap:10px;margin-top:8px}
+.resall{display:flex;flex-direction:column;gap:4px;border-top:1px solid var(--line);padding-top:8px}
+.resall small{font-size:12px;opacity:.7}
+.resall span{display:flex;justify-content:space-between;font-size:14px}
+.resall em{font-style:normal;font-weight:800}.resall em.up{color:#2DBE73}.resall em.down{color:#E5484D}
+.lvstart{gap:8px}
+.lvstart .lvbig small{font-size:.45em}
+.st-bar{position:relative;height:10px;border-radius:6px;background:linear-gradient(90deg,rgba(232,201,106,.25),rgba(232,201,106,.9));margin:6px 0 2px}
+.st-bar i{position:absolute;top:-4px;width:4px;height:18px;border-radius:3px;background:var(--ink);box-shadow:0 0 6px rgba(255,255,255,.6)}
+.st-pts{margin:4px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;font-size:13.5px;text-align:start}
+.lvres.lvstart{flex-direction:column;align-items:stretch}
+.lvbox .lvb-t>b{font-size:26px!important;font-weight:800;line-height:1;letter-spacing:.01em}
+.lvbox .lvb-t>b small{font-size:14px;opacity:.6;font-weight:700}
+.lvbox .lvb-h b{font-size:14px}
 </style>
 </head>
 <body>
@@ -2649,7 +2694,7 @@ const money = n => { if (n == null) return "–"; const r = Math.round(n * 100) 
 const S = {view:"home", user:null, profile:null, clubs:[], courts:[], prices:[], closures:[], club:null, day:null, court:null, dur:90, slot:null, busy:[], pay:"club", ref:"", openSpots:0, level:"", last:null, mine:[], matches:[], staff:[], mClub:null, mDay:null, mData:null, authMode:"in", busyOp:false, err:null, loaded:false, notifN:0, inbox:[], match:null, chat:[], quiz:{}, joinFor:null, joinPay:"club", joinRef:"", split:false, lvRange:"any", results:[], area:""};
 let sb = null;
 const brandFetch = async (u, o) => { const r = await fetch(u, o); try { if (!/\/rest\/v1\/rpc\//.test(String((u && u.url) || u))) return r; const tx = await r.clone().text(); if (!/Padel Live|بادل لايف/.test(tx)) return r; return new Response(tx.replace(/Padel Live/g, "PlayPal").replace(/بادل لايف/g, "بلاي بال"), {status: r.status, statusText: r.statusText, headers: r.headers}); } catch (e) { return r; } };
-const VERSION = "v137";
+const VERSION = "v139";
 const T0 = Date.now();
 window.addEventListener("error", e => { S.lastErr = (e && e.message) || "error"; if (!S.loaded) render(); });
 window.addEventListener("unhandledrejection", e => { S.lastErr = String((e && e.reason && (e.reason.message || e.reason)) || "rejection"); if (!S.loaded) render(); });
@@ -3095,6 +3140,7 @@ V.checkout = () => { const c = S.club; const sl = c && slotsFor(c).list.find(x =
    ${S.openSpots && (S.vis || "public") === "public" ? `<b>${t("lvRange")}</b>${myLevel() == null ? `<span class="note">${t("setLvFirst")}</span>` : `<div class="chips" style="flex-wrap:wrap">${[["any", t("anyLvl")], ["0.5", `${t("aroundMe")} ±0.5`], ["1", `${t("aroundMe")} ±1`]].map(([k, l]) => `<button class="chip" data-lvr="${k}" aria-pressed="${S.lvRange === k}">${esc(l)}</button>`).join("")}</div>${S.lvRange !== "any" ? `<span class="note">${t("lvl")} ${lvl2(Math.max(0.5, myLevel() - +S.lvRange))}–${lvl2(Math.min(7, myLevel() + +S.lvRange))}</span>` : ""}`}
    ` : ""}
    ${S.openSpots ? `<b>${t("payWho")}</b><div class="chips"><button class="chip" data-split="0" aria-pressed="${!S.split}">${t("payAll")}</button><button class="chip" data-split="1" aria-pressed="${S.split}">${t("payShare")}</button></div>` : ""}</div>
+  ${coachSel() ? "" : `<div class="card gtype"><b>${t("gtT")}</b><div class="chips"><button class="chip" data-gtype="c" aria-pressed="${!S.friendly}">${t("gtComp")}</button><button class="chip" data-gtype="f" aria-pressed="${!!S.friendly}">${t("gtFr")}</button></div><span class="note">${S.friendly ? t("gtFrS") : t("gtCompS")}</span></div>`}
   <h2>${t("how")}</h2>
   <div style="display:flex;flex-direction:column;gap:8px">${walletOpt(c, S.split && S.openSpots ? sl.price / 4 : sl.price + coachFee(), S.pay)}${opt("club","p1","p1s")}${opt("shamcash","p2","p2s")}${opt("syriatel","p3","p3s")}</div>
   ${S.pay !== "club" && S.pay !== "wallet" ? `<label class="fld"><span>${t("ref")}</span><input id="ref" inputmode="numeric" autocomplete="off" value="${esc(S.ref)}"></label>` : ""}
@@ -3274,7 +3320,11 @@ const LV_Q = [
   ["q2", [["q2a", 0], ["q2b", 0.25], ["q2c", 0.5]]],
   ["q3", [["q3a", 0], ["q3b", 0.5], ["q3c", 1.0], ["q3d", 1.5]]],
   ["q4", [["q4a", 0], ["q4b", 0.4], ["q4c", 0.8]]],
-  ["q5", [["q5a", 0], ["q5b", 0.3], ["q5c", 0.6], ["q5d", 1.0]]]];
+  ["q5", [["q5a", 0], ["q5b", 0.3], ["q5c", 0.6], ["q5d", 1.0]]],
+  ["q8", [["q8a", 0], ["q8b", 0.15], ["q8c", 0.3], ["q8d", 0.45]]],
+  ["q9", [["q9a", 0], ["q9b", 0.2], ["q9c", 0.4]]]];
+/* new ranks start near the bottom of the category (same numbers as the server) */
+const START_LV = {E: 0.58, D: 1.58, C: 2.58, B: 3.58, A: 4.58};
 const CAT_MID = {E: 1.0, D: 2.0, C: 3.0, B: 4.0, A: 5.0}, START_CAP = 3.49;
 /* combines the skill answers with the category the player says they play and their Playtomic level */
 function quizResult(a){ const base = Math.max(0.5, Math.min(5.5, 1 + LV_Q.reduce((s, [q, opts]) => s + (a[q] != null ? opts[a[q]][1] : 0), 0)));
@@ -3286,8 +3336,8 @@ function quizResult(a){ const base = Math.max(0.5, Math.min(5.5, 1 + LV_Q.reduce
   raw = Math.round(Math.max(0.5, Math.min(5.5, raw)) * 100) / 100;
   if (cat && lvCat(raw) !== cat) raw = {E: 1.0, D: 2.0, C: 3.0, B: 4.0, A: 5.0}[cat];
   /* Category A needs PlayPal's approval: start in Gold and send a request */
-  const aReq = raw >= 4.5 && !(S.profile && S.profile.a_ok);
-  return {raw, start: aReq ? Math.min(raw, 4.40) : raw, aReq, claim: {cat, pt, raw}}; }
+  const aReq = raw >= 4.5 && !(S.profile && S.profile.a_ok), startCat = aReq ? "B" : lvCat(raw);
+  return {raw, start: START_LV[startCat], startCat, aReq, claim: {cat, pt, raw}}; }
 const lvl2 = l => l == null ? "–" : Number(l).toFixed(2);
 const lvCat = l => l == null ? "" : l >= 4.5 ? "A" : l >= 3.5 ? "B" : l >= 2.5 ? "C" : l >= 1.5 ? "D" : "E";
 const lvChip = (l, b) => l == null ? `<span class="lv none">?</span>` : b && b.v ? vetChip(lvCat(l), `<span class="lv c${lvCat(l)}">${lvl2(l)}</span>`) : `<span class="lv c${lvCat(l)}">${lvl2(l)}</span>`;
@@ -3297,22 +3347,56 @@ const tooHigh = m => { const p = S.profile; if (!p || !p.level_set || p.verified
   return ls2.reduce((a, b) => a + b, 0) / ls2.length > +p.level + 0.75; };
 const inRange = (m, l) => m.level_min == null || l == null || (l >= +m.level_min && l <= +m.level_max);
 V.level = () => {
+  if (S.user && S.profile && S.profile.level_set) return lvGuide();
   const a = S.quiz || {}, done = LV_Q.every(([q]) => a[q] != null) && a.q6 != null, R = quizResult(a), score = R.start; S.quizClaim = R.claim; S.quizAReq = done && R.aReq;
   return `<main>${backBar(t("lvTitle"), S.user ? "me" : "home")}
    <p class="note" style="margin:-6px 0 0">${t("lvIntro")}</p>
    ${LV_Q.map(([q, opts]) => `<div class="card" style="display:flex;flex-direction:column;gap:8px"><b>${t(q)}</b>${opts.map(([k], i) => `<button class="opt" data-quiz="${q}|${i}" aria-pressed="${a[q] === i}"><i></i><span><b>${t(k)}</b></span></button>`).join("")}</div>`).join("")}
    <div class="card" style="display:flex;flex-direction:column;gap:8px"><b>${t("q6")}</b><div class="chips" style="flex-wrap:wrap">${["E", "D", "C", "B", "A"].map((c, i) => `<button class="chip" data-quiz="q6|${i}" aria-pressed="${a.q6 === i}">${t("catU")} ${c}</button>`).join("")}<button class="chip" data-quiz="q6|5" aria-pressed="${a.q6 === 5}">${t("q6x")}</button></div>${R.aReq && a.q6 != null ? `<span class="note a-need">🔷 ${t("aNeed")}</span>` : ""}</div>
    <div class="card" style="display:flex;flex-direction:column;gap:8px"><b>${t("q7")}</b><span class="note" style="margin-top:-4px">${t("q7s")}</span><input id="q-pt" inputmode="decimal" placeholder="${t("q7ph")}" value="${a.pt != null ? esc(a.pt) : ""}" style="height:46px;border-radius:12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:0 14px;font:inherit;font-size:16px"></div>
-   <div class="card lvres"><span class="note">${t("lvYour")}</span>${done ? `<b class="lvbig">${lvl2(score)}</b><span class="tag l">${t("lvCat")} ${lvCat(score)}</span>` : `<span class="note">${t("lvAnswer")}</span>`}</div>
+   <div class="card lvres${done ? " lvstart" : ""}"><span class="note">${done ? t("stT") : t("lvYour")}</span>${done ? `<b class="lvbig"><bdi dir="ltr">${lvl2(score)}<small class="of7">${t("of7")}</small></bdi></b><span class="tag l">${esc(tierName(R.startCat))} ${divName(divIdx(score, R.startCat))} · ${t("lvCat")} ${R.startCat}</span>
+     <div class="st-bar" dir="ltr"><i style="left:${Math.round((score - Math.floor(score - 0.5) - 0.5) * 100)}%"></i></div><span class="note">${tf("stInfo", {t: esc(tierName(R.startCat))})}</span>
+     <ul class="st-pts"><li>📈 ${t("stB1")}</li><li>⚠️ ${t("stB2")}</li><li>🔒 ${t("stB3")}</li></ul>` : `<span class="note">${t("lvAnswer")}</span>`}</div>
    <p class="note" style="margin:0">${t("lvNote")} ${bookLive() ? t("provNote") : t("provNoteE")}</p>
   </main><div class="bar"><div class="sum"><small>${t("lvYour")}</small><b>${done ? lvl2(score) : "–"}</b></div><button class="cta blue" ${S.user ? "data-setlevel" : "data-guestlv"}="${done ? score.toFixed(2) : ""}"${done ? "" : " disabled"}>${S.user ? t("save") : t("rvReveal")}</button></div>`; };
 
+
+/* ---------- level box: level / 7, reliability ring, history graph ---------- */
+function relRing(p, sz){ const r = 18, c = 2 * Math.PI * r, v = Math.max(0, Math.min(100, +p || 0)), col = v >= 70 ? "#3EE08A" : v >= 40 ? "#E8C96A" : "#FF9F43";
+  return `<svg class="rel-ring" width="${sz}" height="${sz}" viewBox="0 0 44 44" role="img" aria-label="${v}% ${t("relRing")}"><circle cx="22" cy="22" r="${r}" fill="none" stroke="rgba(127,127,127,.25)" stroke-width="4"/><circle cx="22" cy="22" r="${r}" fill="none" stroke="${col}" stroke-width="4" stroke-linecap="round" stroke-dasharray="${(c * v / 100).toFixed(1)} ${c.toFixed(1)}" transform="rotate(-90 22 22)"/><text x="22" y="26" text-anchor="middle" font-size="11" font-weight="800" fill="currentColor">${v}%</text></svg>`; }
+function lvGraph(info){ const pts = [...(info.start != null ? [+info.start] : []), ...(info.hist || []).map(h => +h.l)].filter(x => isFinite(x));
+  if (pts.length < 2) return `<p class="note lvg-e">${t("lvHistE")}</p>`;
+  const W = 300, H = 80, lo = Math.min(...pts), hi = Math.max(...pts), pad = Math.max(0.05, (hi - lo) * 0.15), a = lo - pad, b = hi + pad;
+  const x = i => (i / (pts.length - 1) * (W - 8) + 4).toFixed(1), y = v => (H - 6 - (v - a) / (b - a) * (H - 12)).toFixed(1);
+  const line = pts.map((v, i) => `${i ? "L" : "M"}${x(i)} ${y(v)}`).join(" "), up = pts[pts.length - 1] >= pts[0], col = up ? "#3EE08A" : "#FF6B6B";
+  const lines = ["E", "D", "C", "B", "A"].map(k => ({k, v: {E: 0.5, D: 1.5, C: 2.5, B: 3.5, A: 4.5}[k]})).filter(o => o.v > a && o.v < b);
+  return `<svg class="lvg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="none" aria-hidden="true">${lines.map(o => `<line x1="0" x2="${W}" y1="${y(o.v)}" y2="${y(o.v)}" stroke="rgba(127,127,127,.35)" stroke-dasharray="3 4"/>`).join("")}<path d="${line} L${x(pts.length - 1)} ${H} L${x(0)} ${H}Z" fill="${col}" opacity=".14"/><path d="${line}" fill="none" stroke="${col}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/></svg>
+    <div class="lvg-k">${lines.map(o => `<span>${o.k} ${o.v.toFixed(1)}</span>`).join("")}</div>`; }
+function lvBox(info, mine){ if (!info || info.level == null) return "";
+  const last = info.last != null ? +info.last : null;
+  return `<div class="card lvbox">
+    <div class="lvb-top">${relRing(info.rel, 54)}<div class="lvb-t"><b><bdi dir="ltr">${lvl2(info.level)} <small>${t("of7")}</small></bdi></b><span>${esc(t("lvRelT"))} · <bdi dir="ltr">${info.rel}%</bdi></span><span class="note">${tf("lvMatches", {n: +info.matches || 0})}</span></div>
+      ${last != null ? `<span class="lvb-d ${last >= 0 ? "up" : "down"}"><bdi dir="ltr">${last >= 0 ? "▲ +" : "▼ "}${last.toFixed(2)}</bdi><small>${t("lvLast")}</small></span>` : ""}</div>
+    <div class="lvb-h"><b>${t("lvHist")}</b></div>${lvGraph(info)}
+    ${mine ? `<p class="note lvb-s">${t("lvRelS")}</p><button class="linkbtn lvb-g" data-go="level">ⓘ ${t("lvGuideBtn")}</button>` : ""}</div>`; }
+const LV_BANDS = [["0 – 1.49", "E", "lvD0"], ["1.5 – 2.49", "D", "lvD1"], ["2.5 – 3.49", "C", "lvD2"], ["3.5 – 4.49", "B", "lvD3"], ["4.5 – 5.49", "A", "lvD4"], ["5.5 – 7", "A", "lvD5"]];
+function lvGuide(){ const me = myLevel(), band = me == null ? -1 : me >= 5.5 ? 5 : ["E", "D", "C", "B", "A"].indexOf(lvCat(me));
+  return `<main>${backBar(t("lvGuideT"), "me")}
+   <p class="note" style="margin:-6px 0 0">${t("lvGuideS")}</p>
+   <div class="card lvguide">${LV_BANDS.map(([r, c, d], i) => `<div class="lvgd${i === band ? " me" : ""}"><b>${r}</b><span>${t(d)}${i === band ? ` <em>← ${t("lvYou")}</em>` : ""}</span><span class="lv c${c}">${esc(tierName(c))} · ${c}</span></div>`).join("")}</div>
+   ${S.lvInfo ? `<div class="card lvb-rel">${relRing(S.lvInfo.rel, 46)}<div><b>${t("lvRelT")}</b><span class="note">${t("lvRelS")}</span></div></div>` : ""}
+   <div class="card note">🔒 ${t("lvOnce")}</div>
+   ${coachCard()}
+  </main>${nav("me")}`; }
+function coachCard(){ if (!S.user) return "";
+  return `<div class="card coachc"><b>🎓 ${t("coachT")}</b><span class="note">${t("coachS")}</span>${S.lvReq ? `<span class="tag g">${esc(S.lvReq)}</span>` : `<button class="ghost" data-lvreq>${t("coachBtn")}</button>`}</div>`; }
 /* ---------- notifications ---------- */
 function nText(n){ const d = n.data || {}, nm = esc(d.name || t("someone")), w = esc(d.when || "");
   return ({ joined: t("nJoined").replace("{n}", nm).replace("{w}", w), left: t("nLeft").replace("{n}", nm).replace("{w}", w),
     deposit_ok: t("nDepOk"), club_cancelled: t("nClubCancel").replace("{w}", w), share_ok: t("nShareOk"), share_no: t("nShareNo"),
     result: t("nResult").replace("{n}", nm), result_ok: t("nResultOk"), result_no: t("nResultNo").replace("{n}", nm), chat: t("nChat").replace("{n}", nm), noshow: tf(+d.n >= 3 ? "nNs3" : "nNs", {w, c: esc(d.club || ""), n: d.n || 1}) + (+d.owed ? " " + tf("nNsOwe", {x: money(d.owed)}) : ""), noshow_other: tf("nNsOther", {n: nm, w}), kicked: tf("nKicked", {n: nm, w}) })[n.kind] || nText2(n) || n.kind; }
-const muteBtn = () => { const on = musicOn(); return `<button class="ib mute${on ? "" : " off"}" data-music aria-pressed="${!on}" aria-label="${on ? t("muMute") : t("muOn")}" title="${on ? t("muMute") : t("muOn")}"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z" fill="currentColor"/>${on ? '<path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' : '<path d="M16 9.5l5 5M21 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>'}</svg></button>`; };
+const sndOn = () => ls.get("pl-snd") !== "0";
+const muteBtn = () => { const on = musicOn() || sndOn(); return `<button class="ib mute${on ? "" : " off"}" data-mute aria-pressed="${!on}" aria-label="${on ? t("muMute") : t("muOn")}" title="${on ? t("muMute") : t("muOn")}"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M4 9.5h3.2L12 5.5v13l-4.8-4H4z" fill="currentColor"/>${on ? '<path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>' : '<path d="M16 9.5l5 5M21 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>'}</svg></button>`; };
 const bell = () => S.user ? `<button class="ib bell" data-go="inbox" aria-label="${t("inbox")}">${IC.bell}${S.notifN ? `<span class="badge">${S.notifN > 9 ? "9+" : S.notifN}</span>` : ""}</button>` : "";
 V.inbox = () => { if (!S.user) return V.auth();
   return `<main>${backBar(t("inbox"), "home")}
@@ -3345,6 +3429,8 @@ V.match = () => { const m = S.match; if (!m) return V.me();
       <div class="rteam${r.winner === 0 ? " win" : ""}"><span>${esc(nameOf(r.team_a[0]))} / ${esc(nameOf(r.team_a[1]))}</span><b>${r.sets.map(s => s[0]).join(" ")}</b></div>
       <div class="rteam${r.winner === 1 ? " win" : ""}"><span>${esc(nameOf(r.team_b[0]))} / ${esc(nameOf(r.team_b[1]))}</span><b>${r.sets.map(s => s[1]).join(" ")}</b></div>
       ${delta != null ? `<p class="note" style="margin:0">${t("yourLevel")}: <b class="${delta >= 0 ? "up" : "down"}">${delta >= 0 ? "+" : ""}${delta.toFixed(2)}</b></p>` : ""}
+      ${r.deltas && Object.keys(r.deltas).length > 1 ? `<div class="resall"><small>${t("resAll")}</small>${[...r.team_a, ...r.team_b].filter(id => r.deltas[id] != null).map(id => { const v = +r.deltas[id]; return `<span><b>${esc(nameOf(id))}</b><em class="${v >= 0 ? "up" : "down"}" dir="ltr">${v >= 0 ? "+" : ""}${v.toFixed(2)}</em></span>`; }).join("")}</div>` : ""}
+      ${m.friendly && r.status === "confirmed" ? `<p class="note" style="margin:0">🤝 ${t("gtFrNote")}</p>` : ""}
       ${r.status === "pending" && myTeam !== repTeam ? `<div class="row"><button class="cta blue sm" data-confres="1">${t("confirmRes")}</button><button class="ghost sm" data-confres="0">${t("notRight")}</button></div>` : ""}</div>`;
   }
   if ((!r || r.status === "disputed") && started && full && m.status !== "cancelled"){
@@ -3355,12 +3441,12 @@ V.match = () => { const m = S.match; if (!m) return V.me();
       <div class="sets"><div class="sh"><span></span><b>${t("set")} 1</b><b>${t("set")} 2</b><b>${t("set")} 3</b></div>
        <div class="sr"><span>${t("you")} + ${esc(nameOf(partner))}</span>${[0,1,2].map(i => `<input inputmode="numeric" maxlength="2" id="sa${i}" aria-label="${t("set")} ${i + 1}">`).join("")}</div>
        <div class="sr"><span>${esc(opp.map(p => p.name).join(" + "))}</span>${[0,1,2].map(i => `<input inputmode="numeric" maxlength="2" id="sb${i}" aria-label="${t("set")} ${i + 1}">`).join("")}</div></div>
-      <input type="hidden" id="r-partner" value="${partner}"><button class="cta blue" type="submit">${t("sendRes")}</button><span class="note">${t("resNote")}</span></form>`;
+      <input type="hidden" id="r-partner" value="${partner}"><button class="cta blue" type="submit">${t("sendRes")}</button><span class="note">${t("resNote")}</span>${m.friendly ? "" : `<span class="note">${t("resSetsNote")}</span>`}</form>`;
   } else if (!r && !ended) res = `<div class="card note">${t("resLater")}</div>`;
   else if (!r && !started) res = `<div class="card note">🎟️ ${t("resCheckin")}</div>`;
   else if (!r && !full) res = `<div class="card note">${t("resNeed4")}</div>`;
   return `<main>${backBar(t("match"), "me")}
-   <div class="card"><div class="between"><b>${esc(fmtDay(d))} · ${esc(fmtTime(d))}</b>${statusTag(m.status)}</div><span class="note">${esc(m.club)} · ${esc(m.court)} · ${m.minutes} ${t("min")}${m.level_min != null ? ` · ${t("lvl")} ${lvl2(m.level_min)}–${lvl2(m.level_max)}` : ""}</span>${m.code ? `<span class="note" style="display:block">${t("booking")} #${m.booking_no} · ${t("code")} <b>${esc(m.code)}</b></span>` : ""}</div>
+   <div class="card"><div class="between"><b>${esc(fmtDay(d))} · ${esc(fmtTime(d))}</b>${statusTag(m.status)}</div>${m.kind === "game" && "friendly" in m ? `<div class="gtrow"><span class="tag ${m.friendly ? "" : "l"}">${m.friendly ? t("gtFr") : t("gtComp")}</span>${m.host && !(r && r.status === "confirmed") && m.status !== "cancelled" ? `<button class="linkbtn" data-gtoggle="${m.friendly ? "0" : "1"}">${t("gtChange")}</button>` : ""}</div>` : ""}<span class="note">${esc(m.club)} · ${esc(m.court)} · ${m.minutes} ${t("min")}${m.level_min != null ? ` · ${t("lvl")} ${lvl2(m.level_min)}–${lvl2(m.level_max)}` : ""}</span>${m.code ? `<span class="note" style="display:block">${t("booking")} #${m.booking_no} · ${t("code")} <b>${esc(m.code)}</b></span>` : ""}</div>
    ${passCard(m)}
    <h2>${t("players")}</h2>
    <div class="card" style="display:flex;flex-direction:column;gap:10px">${m.players.map(p => `<div class="prow">${avF(p.name, p.level, p.b)}<div style="flex:1;min-width:0"><b>${pLink(p.id, p.name)}${nameBadges(p.b)}${p.me ? ` <span class="note">(${t("you")})</span>` : ""}</b>${p.booker ? `<small class="note" style="display:block">${t("booker")}</small>` : ""}${p.ns ? `<small class="ns-tag">⚠️ ${tf(p.ns === 1 ? "nsOne" : "nsMany", {n: p.ns})}</small>` : ""}${ended && m.checked_in && p.here === false ? `<small class="ns-tag">🚫 ${t("nsTag")}</small>` : ""}</div>${lvChip(p.level, p.b)}${m.split ? paidTag(p.paid) : ""}${m.host && !p.booker && !p.me && d > new Date() ? `<button class="sbtn kick" data-kick="${m.id}|${p.id}|${esc(p.name)}">${t("kickB")}</button>` : ""}</div>`).join("")}
@@ -3455,6 +3541,7 @@ const BADGE_IC = {first_win: "🏅", comeback: "🔁", night_owl: "🌙", iron_m
 function progressInfo(c){ const l = +c.level, cat = c.category || "D", e = DIV_EDGES[cat], dv = divIdx(l, cat), order = ["E", "D", "C", "B", "A"];
   if (c.placement > 0){ const done = 5 - c.placement; return {placement: true, done, pct: done / 5 * 100, txt: bookLive() ? tf("plLeft", {n: c.placement}) : t("plLeftE")}; }
   if (c.shield) return {pct: 4, txt: tf("shieldTxt", {t: tierName(cat)}), danger: true, shield: true};
+  if (c.series && c.series.dir === "down") return {series: true, down: true, w: +c.series.w || 0, l: +c.series.l || 0, to: c.series.to, txt: tf("dmTxt", {t: tierName(c.series.to), t2: tierName(cat)})};
   if (c.series) return {series: true, w: +c.series.w || 0, l: +c.series.l || 0, to: c.series.to, txt: tf("serTxt", {t: tierName(c.series.to)})};
   const lo = e[0], hi = e[3], pct = Math.max(3, Math.min(100, (l - lo) / (hi - lo) * 100));
   if (cat === "A" && dv === 2) return {pct, txt: `${t("topDiv")} · ${tierName("A")} I`};
@@ -3469,12 +3556,12 @@ function playerCard(c){
   return `<div class="gcard-wrap${vet ? " vet" : ""}" style="--tc:${col}" data-tilt><span class="g3d-sh"></span><div class="g3d-f"><div class="g3d">${[1, 2, 3, 4, 5, 6].map(z => `<i class="g3d-e" style="--z:${z}"></i>`).join("")}${vet ? vetFrame(c.category || "D", c.rated) : ""}<div class="pcard gc t-${pl ? "P" : c.category || "D"}" style="--tc:${col}"><div class="pc-in">
     <span class="gc-bg"></span><span class="gc-pat"></span><span class="gc-rays"></span><span class="pc-holo"></span><span class="gc-spark"></span>${pl ? `<span class="gc-scan"></span><span class="gc-qs">${"?".repeat(14).split("").map((q, i) => `<i style="--i:${i}">?</i>`).join("")}</span>` : ""}
     ${c.streak >= 2 ? `<span class="pc-streak">🔥 ${c.streak} ${t("weeks")}</span>` : ""}
-    <div class="pc-top"><div class="pc-ovr"><b>${pl ? "?" : (+c.level).toFixed(2)}</b><small>${t("lvlU")}</small></div><div class="pc-rank">${emblem(col, 50)}<span class="gc-rib">${pl ? (bookLive() ? tf("plTag", {n: pr.done}) : t("plTagE")) : pr.series ? tf("serTag", {w: pr.w, l: pr.l}) : `${esc(tierName(c.category))} ${st}`}</span></div></div>
+    <div class="pc-top"><div class="pc-ovr"><b>${pl ? "?" : (+c.level).toFixed(2)}</b><small>${t("lvlU")} <i class="of7">${t("of7")}</i></small></div><div class="pc-rank">${emblem(col, 50)}<span class="gc-rib">${pl ? (bookLive() ? tf("plTag", {n: pr.done}) : t("plTagE")) : pr.series ? tf(pr.down ? "dmTag" : "serTag", {w: pr.w, l: pr.l}) : `${esc(tierName(c.category))} ${st}`}</span></div></div>
     <div class="gc-avw"><span class="gc-ring"></span><div class="pc-av">${esc(initials(c.name))}</div></div>
     <div class="pc-name"><span class="gc-plate"><b>${esc(c.name || "")}</b></span><small>${pl ? (bookLive() ? t("plSub") : t("plSubE")) : `${t("catU")} ${esc(c.category || "–")}${c.shield ? " · 🛡️" : ""}`}</small></div>
     <div class="pc-stats"><div><i>⚔️</i><b>${wr}</b><span>${t("winRate")}</span></div><div><i>🎾</i><b>${played}</b><span>${t("matchesU")}</span></div><div><i>👑</i><b>${c.season && c.season.rank ? "#" + c.season.rank : "–"}</b><span>${c.season ? esc(c.season.club) : t("seasonU")}</span></div></div>
    </div></div></div></div></div>
-   <div class="pc-prog${pr.danger ? " danger" : ""}${pl ? " plc" : ""}${pr.series ? " plc ser" : ""}">${pr.series ? `<div class="pips">${[0, 1, 2].map(i => `<i class="${i < pr.w ? "on" : i < pr.w + pr.l ? "x" : ""}"></i>`).join("")}</div>` : pl ? (bookLive() ? `<div class="pips">${[0, 1, 2, 3, 4].map(i => `<i class="${i < pr.done ? "on" : ""}"></i>`).join("")}</div>` : "") : `<div class="bar"><i style="width:${pr.pct}%"></i>${(pr.marks || []).map(m => `<b style="left:${m}%"></b>`).join("")}</div>`}<div class="lbl"><span>${pl ? (bookLive() ? tf("plTag", {n: pr.done}) : t("plTagE")) : pr.series ? `${t("serT")} → ${esc(tierName(pr.to))}` : `${esc(tierName(c.category))} ${st} · ${esc(c.category || "")}`}</span><em>${esc(pr.txt)}</em></div></div>
+   <div class="pc-prog${pr.danger ? " danger" : ""}${pl ? " plc" : ""}${pr.series ? " plc ser" : ""}${pr.down ? " dn" : ""}">${pr.series ? `<div class="pips">${[0, 1, 2].map(i => `<i class="${i < pr.w ? "on" : i < pr.w + pr.l ? "x" : ""}"></i>`).join("")}</div>` : pl ? (bookLive() ? `<div class="pips">${[0, 1, 2, 3, 4].map(i => `<i class="${i < pr.done ? "on" : ""}"></i>`).join("")}</div>` : "") : `<div class="bar"><i style="width:${pr.pct}%"></i>${(pr.marks || []).map(m => `<b style="left:${m}%"></b>`).join("")}</div>`}<div class="lbl"><span>${pl ? (bookLive() ? tf("plTag", {n: pr.done}) : t("plTagE")) : pr.series ? (pr.down ? `${t("dmT")} · ${esc(tierName(c.category))}` : `${t("serT")} → ${esc(tierName(pr.to))}`) : `${esc(tierName(c.category))} ${st} · ${esc(c.category || "")}`}</span><em>${esc(pr.txt)}</em></div></div>
    <div class="pc-badges">${[...(S.wi && S.wi.quest && (S.wi.quest.done || S.wi.quest.new) ? [{k: "rookie", got: !!S.wi.quest.done}] : []), ...(c.badges || []), ...achList(S.myAch)].map(b => `<div class="bd${b.got ? "" : " lock"}"><i>${BADGE_IC[b.k] || "★"}</i>${t("b_" + b.k)}${S.rarity && S.rarity[b.k] != null ? `<small class="rar">${tf("rarity", {p: S.rarity[b.k]})}</small>` : ""}</div>`).join("")}</div>
    <div class="row" style="gap:10px"><button class="cta gold wide" data-sharecard>${t("shareCard")} ↗</button></div>`;
 }
@@ -3498,6 +3585,11 @@ function celebrate(){
   else if (c.shield === "series_on"){ const to = (S.card && S.card.series && S.card.series.to) || ""; kick = "⚔️ " + t("serT"); big = tierName(to); sub = tf("serTxt", {t: tierName(to)}); conf = true; }
   else if (c.shield === "series_w" || c.shield === "series_l"){ const sr = (S.card && S.card.series) || {}; kick = "⚔️ " + t("serT") + ` ${sr.w || 0}–${sr.l || 0}`; big = c.shield === "series_w" ? t("winU") : t("matchDone"); sub = tf("serTxt", {t: tierName(sr.to)}); conf = c.shield === "series_w"; }
   else if (c.shield === "series_weak"){ const sr = (S.card && S.card.series) || {}; kick = "⚔️ " + t("serT"); big = t("winU"); sub = tf("serWeak", {t: tierName(sr.to)}); }
+  else if (c.shield === "demote_on"){ kick = t("dmOnK"); big = tierName(c.cat_after); sub = tf("dmOnS", {t: tierName(c.cat_after)}); }
+  else if (c.shield === "demote_w" || c.shield === "demote_l"){ const sr = (S.card && S.card.series) || {}; kick = `⚠️ ${t("dmT")} ${sr.w || 0}–${sr.l || 0}`; big = c.shield === "demote_w" ? t("winU") : t("matchDone"); sub = tf("dmTxt", {t: tierName(sr.to || ""), t2: tierName(c.cat_after)}); conf = c.shield === "demote_w"; }
+  else if (c.shield === "demote_saved"){ kick = "💪 " + t("dmT"); big = tf("stillT", {t: tierName(c.cat_after)}); sub = tf("dmSaved", {t: tierName(c.cat_after)}); conf = true; }
+  else if (c.shield === "demote_off"){ kick = "💪 " + t("dmT"); big = tf("stillT", {t: tierName(c.cat_after)}); sub = tf("dmOff", {t: tierName(c.cat_after)}); conf = true; }
+  else if (c.shield === "demoted"){ kick = t("backTo"); big = tierName(c.cat_after); sub = t("dmDown") + " " + t("climbBack"); }
   else if (c.shield === "series_fail"){ kick = t("serFailT"); big = tf("stillT", {t: tierName(c.cat_after)}); sub = t("serFail"); }
   else if (c.shield === "on"){ kick = "🛡️ " + t("shieldOn"); big = tierName(c.cat_after); sub = tf("shieldTxt", {t: tierName(c.cat_after)}); }
   else if (c.shield === "saved"){ kick = "🛡️ " + t("shieldHeld"); big = tf("stillT", {t: tierName(c.cat_after)}); sub = t("shieldSaved"); conf = true; }
@@ -3593,7 +3685,7 @@ function adminPlayers(){ if (!S.profile || !S.profile.is_admin) return "";
    ${(S.apList || []).map(p => `<div class="aprow"><div class="row" style="justify-content:space-between;gap:8px"><b>${esc(p.name)}</b><span class="note" dir="ltr">${esc(p.phone || "")}</span></div>
      ${S.apEdit === p.id ? `<div class="grid2"><label class="fld"><span>${t("lvl")}</span><input id="ap-l" inputmode="decimal" value="${(+p.level).toFixed(2)}"></label><label class="fld"><span>${t("catU")}</span><select id="ap-c">${["E","D","C","B","A"].map(x => `<option${p.category === x ? " selected" : ""}>${x}</option>`).join("")}</select></label></div>
        <label class="row" style="font-size:14px;gap:8px"><input type="checkbox" id="ap-a"${p.a_ok ? " checked" : ""}> ${t("apAok")}</label><label class="row" style="font-size:14px;gap:8px"><input type="checkbox" id="ap-t"> ${t("apTitleChk")}</label><label class="row" style="font-size:14px;gap:8px"><input type="checkbox" id="ap-v"${p.verified ? " checked" : ""}> ${t("apVer")}</label>
-       <label class="fld"><span>${t("apNote")}</span><input id="ap-n" placeholder="${t("apNotePh")}"></label><button class="cta blue sm" type="button" data-apsave="${p.id}">${t("save")}</button>
+       <label class="fld"><span>${t("apNote")}</span><input id="ap-n" placeholder="${t("apNotePh")}"></label><span class="note">🎓 ${t("admRel50")}</span><button class="cta blue sm" type="button" data-apsave="${p.id}">${t("save")}</button>
        <div class="row" style="gap:8px;align-items:flex-end"><label class="fld" style="flex:1"><span>${t("apPass")}</span><input id="ap-pw" dir="ltr" placeholder="${t("passPh")}"></label><button class="sbtn" type="button" data-appw="${p.id}">${t("apPassBtn")}</button></div>`
      : `<div class="row" style="justify-content:space-between"><span class="note">${(+p.level).toFixed(2)} · ${t("catU")} ${esc(p.category || "–")} · ${p.rated} ${t("ratedN")}${p.titles ? ` · 🏆 ${p.titles}` : ""}</span><button class="sbtn" type="button" data-apedit="${p.id}">${t("edit")}</button></div>`}</div>`).join("")}</form>`; }
 
@@ -3869,7 +3961,7 @@ function meExtras(){ const ms = S.mems || [], cs = S.myClasses || [];
 
 /* ---------- notifications ---------- */
 function nText2(n){ const d = n.data || {}, nm = esc(d.name || t("someone")), w = esc(d.when || ""), x = esc(d.plan || d.title || d.league || ""), c = esc(d.club || d.cat || "");
-  return ({ member_req: tf("nMemReq", {n: nm, x}), member_ok: tf("nMemOk", {x, c}), member_no: tf("nMemNo", {x, c}), lesson_new: tf("nLesson", {n: nm, w}),
+  return ({ lvl_req: tf("nLvlReq", {n: nm, x: esc(d.x || "")}), member_req: tf("nMemReq", {n: nm, x}), member_ok: tf("nMemOk", {x, c}), member_no: tf("nMemNo", {x, c}), lesson_new: tf("nLesson", {n: nm, w}),
     class_join: tf("nClassJoin", {n: nm, x, w}), class_cancel: tf("nClassCancel", {x, w}), league_partner: tf("nLgPartner", {n: nm, x, c}),
     league_req: tf("nLgReq", {n: nm, x, c}), league_ok: tf("nLgOk", {x}), league_no: tf("nLgNo", {x}),
     league_round: tf("nLgRound", {r: d.round, x, b: d.box, d: esc(d.until || "")}), league_result: tf("nLgResult", {n: nm}),
@@ -4015,6 +4107,7 @@ V.profile = () => { if (!S.user) return V.auth(); const p = S.pf;
   <div class="pfhero" style="--tc:${col}"><div class="pfav">${esc(initials(p.name))}</div><div class="pfid"><h1>${esc(p.name)}${nameBadges(S.pfSoc && S.pfSoc.b)}</h1>
     <div class="pfmeta">${p.level != null ? `<span class="pfl">${lvl2(p.level)}</span>` : ""}${p.category ? `<span>${esc(tierName(p.category))} · ${esc(p.category)}</span>` : ""}${p.titles ? `<span>🏆 ${p.titles}</span>` : ""}</div>
     <small>${tf("pfSince", {d: esc(p.since)})}</small></div></div>
+  ${S.pfLv && S.pfLv.level != null ? lvBox(S.pfLv, false) : ""}
   ${socialBlock()}
   ${!p.played ? `<div class="card note">${t("pfEmpty")}</div>${statsList(p)}${snProfile()}` : `
   <div class="pfstats"><div><b>${p.played}</b><small>${t("pfPlayed")}</small></div><div><b>${p.wins}</b><small>${t("pfWins")}</small></div><div class="hl"><b>${pct}%</b><small>${t("pfWinPct")}</small></div><div><b>${p.streak ? "🔥" + p.streak : "0"}</b><small>${t("pfStreak")}</small></div><div><b>${p.best_streak}</b><small>${t("pfBest")}</small></div></div>
@@ -4281,7 +4374,8 @@ async function goLoad(v){
   if (v === "profile"){ S.pfSoc = null; await Promise.all([loadProfile(S.pfId), snLoad(S.pfId), loadSoc(S.pfId)]); }
   if (v === "match"){ S.rtEdit = false; S.rt = null; }
   const side = Promise.all([v === "wallet" || v === "checkout" || v === "me" || v === "club" || v === "matches" || v === "home" ? loadWallet() : null,
-    v === "me" ? loadWeek() : null, v === "me" || v === "matches" || v === "home" ? loadMeExtras() : null, v === "me" ? loadClaims() : null,
+    v === "me" ? loadWeek() : null, S.user && v === "me" ? sb.rpc("level_info").then(r => { if (!r.error) S.lvInfo = r.data; }).catch(() => {}) : null,
+    S.user && v === "profile" ? sb.rpc("level_info", {p_user: S.pfId && S.pfId !== "me" ? S.pfId : null}).then(r => { S.pfLv = r.error ? null : r.data; }).catch(() => { S.pfLv = null; }) : null, v === "me" || v === "matches" || v === "home" ? loadMeExtras() : null, v === "me" ? loadClaims() : null,
     S.user && v === "home" ? sb.rpc("my_leagues").then(r => { S.myLeagues = r.data || []; }).catch(() => {}) : null,
     S.user && v === "home" ? sb.rpc("my_t_next").then(r => { S.tNext = r.error ? null : r.data; }).catch(() => {}) : null,
     v === "home" && !S.lgKnown ? sb.rpc("league_list").then(r => { if (!r.error){ S.leagues = noHid(r.data || []); S.lgKnown = true; if (S.view === "home" && !S.leagues.some(l => l.status === "signup" || l.status === "running") && document.querySelector(".sn2-row") && !document.querySelector(".sn2-league")) render(); } }).catch(() => {}) : null,
@@ -4301,7 +4395,7 @@ async function goLoad(v){
   if (false){ const [r, sn] = await Promise.all([sb.rpc("season_board", {p_club: S.boardClubId}), sb.rpc("sensor_board", {p_club: S.boardClubId, p_days: 30})]); S.board = r.data || []; S.snBoard = sn.error ? null : sn.data; }
   if (v === "inbox" && S.user){ await loadInbox(); }
   if (v === "match"){ if (S.matchId) await loadMatch(S.matchId); }
-  if (v === "level"){ S.quiz = S.quiz || {}; }
+  if (v === "level"){ S.quiz = S.quiz || {}; if (S.user && S.profile && S.profile.level_set && !S.lvInfo){ try { const r = await sb.rpc("level_info"); if (!r.error) S.lvInfo = r.data; } catch (e) {} } }
   if (v === "manager"){ if (!S.mClub && S.staff[0]) S.mClub = S.staff[0].id; if (!S.mDay) S.mDay = nextDays(1)[0]; await Promise.all([loadManager(), loadMgrTab(), loadToday(), loadWPend()]); }
   await side;
   snapSave();
@@ -4377,7 +4471,7 @@ function softRender(){
   S.dirty = false; render();
   const tl2 = document.querySelector(".tl"); if (tl2) tl2.scrollLeft = sx; const ch2 = document.querySelector(".chips"); if (ch2) ch2.scrollLeft = cx;
 }
-function ding(){ try { const A = window.AudioContext || window.webkitAudioContext; if (!A) return; const c = ding.c || (ding.c = new A()); const o = c.createOscillator(), g = c.createGain(); o.frequency.value = 880; g.gain.setValueAtTime(.15, c.currentTime); g.gain.exponentialRampToValueAtTime(.001, c.currentTime + .5); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime + .5); } catch (e) {} try { navigator.vibrate && navigator.vibrate([120, 60, 120]); } catch (e) {} }
+function ding(){ if (ls.get("pl-snd") === "0") return; try { const A = window.AudioContext || window.webkitAudioContext; if (!A) return; const c = ding.c || (ding.c = new A()); const o = c.createOscillator(), g = c.createGain(); o.frequency.value = 880; g.gain.setValueAtTime(.15, c.currentTime); g.gain.exponentialRampToValueAtTime(.001, c.currentTime + .5); o.connect(g); g.connect(c.destination); o.start(); o.stop(c.currentTime + .5); } catch (e) {} try { navigator.vibrate && navigator.vibrate([120, 60, 120]); } catch (e) {} }
 let polling = false, tick = 0;
 async function poll(force){
   if (polling || !sb || document.hidden || !S.loaded) return; polling = true; tick++;
@@ -4403,7 +4497,10 @@ async function poll(force){
 }
 document.addEventListener("focusout", () => { if (S.dirty) setTimeout(() => { if (S.dirty) softRender(); }, 300); });
 let tt; function toast(msg){ const el = document.getElementById("toast"); el.textContent = msg; el.classList.add("on"); clearTimeout(tt); tt = setTimeout(() => el.classList.remove("on"), 2800); }
-const errMsg = e => (e && (e.message || e.error_description)) || String(e);
+const errMsg = e => { const m = (e && (e.message || e.error_description)) || String(e);
+  if (/^Check the set scores: a set ends/.test(m)) return t("errSets");
+  if (/^You already have a level/.test(m)) return t("errOnce");
+  return m; };
 
 app.addEventListener("click", async e => {
   const b = e.target.closest("button,a"); if (!b) return; const d = b.dataset;
@@ -4502,6 +4599,10 @@ app.addEventListener("click", async e => {
   if (d.mlvl){ S.level = d.mlvl; render(); return; }
   if ("mode" in d){ S.authMode = S.authMode === "up" ? "in" : "up"; render(); return; }
   if ("music" in d){ const on = !musicOn(); ls.set("pl-music", on ? "1" : "0"); if (on) musicStart(); else musicStop(); render(); return; }
+  if ("mute" in d){ /* Home speaker: one switch for the music AND the announcer voices */
+    if (musicOn() || sndOn()){ ls.set("pl-music", "0"); ls.set("pl-snd", "0"); musicStop(); try { Object.values(VOICE.el).forEach(x => { x.pause(); x.currentTime = 0; }); } catch (x) {} VOICE.talking = false; }
+    else { ls.set("pl-music", "1"); ls.set("pl-snd", "1"); musicStart(); }
+    render(); return; }
   if ("snd" in d){ const on = ls.get("pl-snd") === "0"; ls.set("pl-snd", on ? "1" : "0"); if (on){ VOICE.played = {}; voice("events", true); } render(); return; }
   if ("dark" in d){ const r = document.documentElement; r.dataset.theme = r.dataset.theme === "dark" ? "light" : "dark"; try { localStorage.setItem("pl-theme", r.dataset.theme); } catch (x) {} render(); return; }
   if ("admtab" in d){ S.admTab = d.admtab; render(); scrollTo(0, 0); return; }
@@ -4534,6 +4635,8 @@ app.addEventListener("click", async e => {
     S.busyOp = false;
     if (r.error){ toast(errMsg(r.error)); await loadBusy(); render(); return; }
     S.last = Array.isArray(r.data) ? r.data[0] : r.data;
+    if (S.friendly && S.last && S.last.id && !coachSel()){ try { await sb.rpc("set_game_friendly", {p_booking: S.last.id, p_on: true}); } catch (e) {} }
+    S.friendly = false;
     if (S.openSpots && S.last && S.last.id && !coachSel()){ try { await sb.rpc("set_seats", {p_booking: S.last.id, p_side: S.mySide || (S.profile && S.profile.side) || "E", p_free: S.openSpots === 1 ? (S.freeSide || "L") : null}); } catch (e) {} }
     S.slot = null; S.ref = ""; S.openSpots = 0; S.coach = null;
     const mine = await sb.rpc("my_bookings"); S.mine = noHid(mine.data || []);
@@ -4554,6 +4657,9 @@ app.addEventListener("click", async e => {
   if (d.match){ S.matchId = d.match; S.partner = null; go("match"); return; }
   if (d.quiz){ const [q, i] = d.quiz.split("|"); S.quiz[q] = +i; render(); return; }
   if ("setlevel" in d && d.setlevel){ const first = !(S.profile && S.profile.level_set); const r = await sb.rpc("set_my_level", {p_level: +d.setlevel, p_claim: S.quizClaim || null}); if (r.error){ toast(errMsg(r.error)); return; } toast(t("saved")); await afterAuth(true); if (first){ S.revealLevel = +d.setlevel; go("reveal"); } else go(ls.get("pl-tjoin") ? "tjoin" : "me"); return; }
+  if (d.gtype){ S.friendly = d.gtype === "f"; render(); return; }
+  if (d.gtoggle && S.match){ const r = await sb.rpc("set_game_friendly", {p_booking: S.match.id, p_on: d.gtoggle === "1"}); if (r.error){ toast(errMsg(r.error)); return; } S.match.friendly = d.gtoggle === "1"; toast("✓"); render(); return; }
+  if ("lvreq" in d){ const r = await sb.rpc("request_levelling"); if (r.error){ toast(errMsg(r.error)); return; } S.lvReq = r.data === false ? t("coachAgain") : t("coachSent"); render(); return; }
   if ("guestlv" in d && d.guestlv){ S.revealLevel = +d.guestlv; go("reveal"); return; }
   if (d.partner){ S.partner = d.partner; render(); return; }
   if ("confres" in d){ const r = await sb.rpc("confirm_result", {p_booking: S.match.id, p_ok: d.confres === "1"}); if (r.error) toast(errMsg(r.error)); else toast("✓"); await afterAuth(true); await loadMatch(S.match.id); render(); setTimeout(celebrate, 300); return; }
@@ -5456,14 +5562,54 @@ Object.assign(W.en, {meEnt:"My entries", meWait:"Waiting for confirmation", meOk
 Object.assign(W.ar, {meEnt:"مشاركاتي", meWait:"بانتظار التأكيد", meOk:"مؤكد", meWl:"قائمة الانتظار", meWith:"مع", meOpen:"افتح", meNoTime:"وقت المباراة لسا ما تحدد", calAdd:"ضيف للتقويم", calApple:"تقويم آبل", calGoogle:"تقويم غوغل", vsL:"ضد", ptsU:"نقطة"});
 Object.assign(W.en, {accGone:"Your account was reset. Please create a new account to continue."});
 Object.assign(W.ar, {accGone:"انعمل تصفير لحسابك. اعمل حساب جديد لتكمّل."});
-Object.assign(W.en, {ciWho:"Tap each player who's here. Anyone not marked counts as a no-show.", ciHere:"Here", ciTapHere:"Tap if here", nsT:"No-shows", nsS:"Players who didn't come to a game they were in (last 60 days). Tap \"They came\" if the desk forgot to mark them.", nsTimes:"{n}×", nsPaused:"Paused", nsOwes:"owes {x}", nsPaid:"paid ✓", nsMarkPaid:"Paid", nsUndo:"They came", nsUndoQ:"Mark this player as here? The no-show is removed.", nsOne:"1 no-show recently", nsMany:"{n} no-shows recently", nsTag:"Didn't show up", kickB:"Remove", kickQ:"Remove {n} from your game? They'll be told and their spot opens again.", kickOk:"{n} was removed.", nNs:"🚫 You missed your game on {w} at {c}. No-show {n} of 3: at 3, booking and joining pause for 2 weeks.", nNs3:"🚫 You missed your game on {w} at {c}. That's 3 no-shows, so booking and joining are paused for 2 weeks.", nNsOwe:"You still owe your share ({x}) at the desk.", nNsOther:"{n} didn't show up to your game on {w}. Sorry about that, the club has been told.", nKicked:"{n} removed you from the game on {w}.", relT:"Shows up {p}%", relGood:"{n} games, never missed one", relGood1:"1 game, never missed", relMissed:"Missed {n} recently · 3 pauses booking for 2 weeks", relPaused:"Booking paused until {d}", instAdd:"Add", instS2:"One tap · opens full screen like an app", instIosT:"Add PlayPal in 2 taps", instIos1:"Tap the Share button at the bottom of Safari", instIos2:"Tap “Add to Home Screen”", rlT:"Top runners", rlMonth:"This month", rlAll:"See all", rlYou:"You", rlOf:"of", rlTo5:"{n} to Top 5", rlFirst:"You're #1 this month 👑", rlNone:"Play a run to get on the board", rlEmpty:"No scores yet this month. Be the first!", rlIn:"Sign in to get on the board", rlSheetT:"Ballie run · Top 10", rlSheetS:"Everyone on PlayPal · resets on the 1st of every month", rlCat:"Cat", stT:"Stats", stRank:"Rank", stRankV:"#{r} of {n}", stTop:"Top {p}%", stMonth:"This month", stMore:"{n} more wins than {m}", stLess:"{n} fewer wins than {m}", stMore1:"1 more win than {m}", stLess1:"1 fewer win than {m}", stWL:"{w} W · {l} L", stBest:"Best in the category", stSame:"Same wins as {m}", stSets:"Sets won", stGames:"Games won", stLoves:"Loves served", stLovesS:"6-0 sets", stLost:"{n} lost", stUpsets:"Upsets", stUpsetsS:"wins vs higher-level teams", stTime:"Time played", stH:"h", stClub:"Most club", stClubS:"{n} matches", stLikes:"Likes from opponents", stShow:"Showed up", stNoShow:"{n} no-show", stTours:"Tournaments", stTitles:"{n} titles", stTitle1:"1 title", stPlayed:"{n} tournaments played", stPlayed1:"1 tournament played", stBadges:"Badges", stLocked:"locked", pfTourK:"Tournament", pfErrT:"Couldn't load the stats. Check the internet and try again.", retry2:"Try again", suaT:"Sign-up Assistant", suaLed:n => `SIGN UP YOUR TEAM ▸ ${n} ▸ SIGN-UP ASSISTANT · 1 MINUTE ▸ `, suaK:"SIGN-UP ASSISTANT · 1 MINUTE", suaS:"sign up your team by chat", suaGo:"Start", nameEn:"Please write your name in English letters, like Omar Haddad.", cxBook:"Cancel this booking", cxLeave:"Leave this match", cxBookQ:"Cancel this booking? The court is freed and the other players are told.", cxLeaveQ:"Leave this match? Your spot opens for someone else.", pCreate:"Create a game", pFind:"Find a game", nwC:"Book a court at Core · Trio · Let's", nwF:"Join a game at your level", nwL:"Weekly matches · prizes", hmPlay:"Play", hmComp:"Compete", hmNews:"News", snMt:"🎾 Open matches are coming soon. Stay tuned!", snBt:"🗓️ Court booking is coming soon. Stay tuned!", muMute:"Mute music", muOn:"Play music", lbKick:"This week", lbYou:"You", lbSub:"{c} · resets Monday", snSoonL:"Coming soon", snM1:"Open", snM2:"matches", snMc1:"Your level", snMc2:"Every night", snB1:"Court", snB2:"booking", snBc1:"Core · Trio · Let's", snBc2:"In seconds", snL1:"Box", snL2:"leagues", snLc1:"Weekly", snLc2:"Prizes"});
-Object.assign(W.ar, {ciWho:"اضغط على كل لاعب موجود. يلي ما بتعلّم عليه بينحسب ما إجا.", ciHere:"موجود", ciTapHere:"اضغط إذا موجود", nsT:"ما إجوا", nsS:"لاعبين ما إجوا عمباراة كانوا فيها (آخر ٦٠ يوم). اضغط \"إجا\" إذا الاستقبال نسي يعلّم عليه.", nsTimes:"{n}×", nsPaused:"موقوف", nsOwes:"عليه {x}", nsPaid:"دفع ✓", nsMarkPaid:"دفع", nsUndo:"إجا", nsUndoQ:"تعلّم إنه إجا؟ بتنشال الغيبة.", nsOne:"غاب مرة مؤخراً", nsMany:"غاب {n} مرات مؤخراً", nsTag:"ما إجا", kickB:"شيل", kickQ:"بدك تشيل {n} من لعبتك؟ بيوصله خبر ومكانه بينفتح.", kickOk:"انشال {n}.", nNs:"🚫 ما إجيت على لعبتك يوم {w} بـ{c}. غياب {n} من ٣: بالتالت بيتوقف الحجز والانضمام أسبوعين.", nNs3:"🚫 ما إجيت على لعبتك يوم {w} بـ{c}. هي ٣ غيابات، فالحجز والانضمام موقوفين أسبوعين.", nNsOwe:"لسا عليك حصتك ({x}) بالاستقبال.", nNsOther:"{n} ما إجا على لعبتكن يوم {w}. منعتذر، النادي عرف.", nKicked:"{n} شالك من لعبة يوم {w}.", relT:"بيجي {p}%", relGood:"{n} مباريات، ولا مرة غاب", relGood1:"مباراة وحدة، وما غاب", relMissed:"غاب {n} مؤخراً · ٣ غيابات بتوقف الحجز أسبوعين", relPaused:"الحجز موقوف لـ{d}", instAdd:"أضف", instS2:"كبسة وحدة · بيفتح شاشة كاملة متل التطبيق", instIosT:"أضف PlayPal بكبستين", instIos1:"اكبس زر المشاركة تحت بـSafari", instIos2:"اكبس «إضافة إلى الشاشة الرئيسية»", rlT:"الأوائل", rlMonth:"هالشهر", rlAll:"شوف الكل", rlYou:"إنت", rlOf:"من", rlTo5:"باقيلك {n} لتدخل أول 5", rlFirst:"إنت الأول هالشهر 👑", rlNone:"العب جولة لتطلع عاللوحة", rlEmpty:"ما في نتائج هالشهر لسا. كون الأول!", rlIn:"سجّل دخول لتطلع عاللوحة", rlSheetT:"Ballie run · أفضل 10", rlSheetS:"كل لاعبين PlayPal · بتبلّش من جديد أول كل شهر", rlCat:"فئة", stT:"الإحصائيات", stRank:"الترتيب", stRankV:"#{r} من {n}", stTop:"أفضل {p}%", stMonth:"هالشهر", stMore:"{n} فوز أكتر من {m}", stLess:"{n} فوز أقل من {m}", stMore1:"فوز واحد أكتر من {m}", stLess1:"فوز واحد أقل من {m}", stWL:"{w} فوز · {l} خسارة", stBest:"الأول بالفئة", stSame:"نفس عدد الفوز متل {m}", stSets:"أشواط ربحتها", stGames:"غيمات ربحتها", stLoves:"أشواط ٦-٠", stLovesS:"ربحتها ٦-٠", stLost:"خسرت {n}", stUpsets:"مفاجآت", stUpsetsS:"فوز على فرق مستواها أعلى", stTime:"وقت اللعب", stH:"س", stClub:"أكتر نادي", stClubS:"{n} مباراة", stLikes:"إعجابات من الخصوم", stShow:"الحضور", stNoShow:"{n} غياب", stTours:"البطولات", stTitles:"{n} ألقاب", stTitle1:"لقب واحد", stPlayed:"لعبت {n} بطولات", stPlayed1:"لعبت بطولة وحدة", stBadges:"الشارات", stLocked:"مقفلة", pfTourK:"بطولة", pfErrT:"ما قدرنا نحمّل الإحصائيات. تأكد من النت وجرّب مرة تانية.", retry2:"جرّب مرة تانية", suaT:"مساعد التسجيل", suaLed:n => `سجّل فريقك ◂ ${n} ◂ مساعد التسجيل · دقيقة وحدة ◂ `, suaK:"مساعد التسجيل · دقيقة وحدة", suaS:"سجّل فريقك بالدردشة", suaGo:"يلا", nameEn:"اكتب اسمك بالأحرف الإنجليزية، مثلاً Omar Haddad.", cxBook:"ألغِ هالحجز", cxLeave:"انسحب من المباراة", cxBookQ:"بدك تلغي الحجز؟ الملعب بيتحرر وباقي اللاعبين بيوصلهن خبر.", cxLeaveQ:"بدك تنسحب؟ مكانك بينفتح لحدا تاني.", pCreate:"اعمل لعبة", pFind:"لاقي لعبة", nwC:"احجز ملعب بـ Core · Trio · Let's", nwF:"العب مع ناس بمستواك", nwL:"مباريات كل أسبوع · جوائز", hmPlay:"العب", hmComp:"تنافس", hmNews:"الأخبار", snMt:"🎾 المباريات المفتوحة جايّة قريباً. خليك متابع!", snBt:"🗓️ حجز الملاعب جاي قريباً. خليك متابع!", muMute:"اكتم الموسيقى", muOn:"شغّل الموسيقى", lbKick:"هالأسبوع", lbYou:"إنت", lbSub:"{c} · بيتصفّر يوم الاثنين", snSoonL:"قريباً", snM1:"مباريات", snM2:"مفتوحة", snMc1:"بمستواك", snMc2:"كل ليلة", snB1:"حجز", snB2:"الملاعب", snBc1:"Core · Trio · Let's", snBc2:"بثواني", snL1:"الدوريات", snL2:"الأسبوعية", snLc1:"كل أسبوع", snLc2:"جوايز"});
+Object.assign(W.en, {ciWho:"Tap each player who's here. Anyone not marked counts as a no-show.", ciHere:"Here", ciTapHere:"Tap if here", nsT:"No-shows", nsS:"Players who didn't come to a game they were in (last 60 days). Tap \"They came\" if the desk forgot to mark them.", nsTimes:"{n}×", nsPaused:"Paused", nsOwes:"owes {x}", nsPaid:"paid ✓", nsMarkPaid:"Paid", nsUndo:"They came", nsUndoQ:"Mark this player as here? The no-show is removed.", nsOne:"1 no-show recently", nsMany:"{n} no-shows recently", nsTag:"Didn't show up", kickB:"Remove", kickQ:"Remove {n} from your game? They'll be told and their spot opens again.", kickOk:"{n} was removed.", nNs:"🚫 You missed your game on {w} at {c}. No-show {n} of 3: at 3, booking and joining pause for 2 weeks.", nNs3:"🚫 You missed your game on {w} at {c}. That's 3 no-shows, so booking and joining are paused for 2 weeks.", nNsOwe:"You still owe your share ({x}) at the desk.", nNsOther:"{n} didn't show up to your game on {w}. Sorry about that, the club has been told.", nKicked:"{n} removed you from the game on {w}.", relT:"Shows up {p}%", relGood:"{n} games, never missed one", relGood1:"1 game, never missed", relMissed:"Missed {n} recently · 3 pauses booking for 2 weeks", relPaused:"Booking paused until {d}", instAdd:"Add", instS2:"One tap · opens full screen like an app", instIosT:"Add PlayPal in 2 taps", instIos1:"Tap the Share button at the bottom of Safari", instIos2:"Tap “Add to Home Screen”", rlT:"Top runners", rlMonth:"This month", rlAll:"See all", rlYou:"You", rlOf:"of", rlTo5:"{n} to Top 5", rlFirst:"You're #1 this month 👑", rlNone:"Play a run to get on the board", rlEmpty:"No scores yet this month. Be the first!", rlIn:"Sign in to get on the board", rlSheetT:"Ballie run · Top 10", rlSheetS:"Everyone on PlayPal · resets on the 1st of every month", rlCat:"Cat", stT:"Stats", stRank:"Rank", stRankV:"#{r} of {n}", stTop:"Top {p}%", stMonth:"This month", stMore:"{n} more wins than {m}", stLess:"{n} fewer wins than {m}", stMore1:"1 more win than {m}", stLess1:"1 fewer win than {m}", stWL:"{w} W · {l} L", stBest:"Best in the category", stSame:"Same wins as {m}", stSets:"Sets won", stGames:"Games won", stLoves:"Loves served", stLovesS:"6-0 sets", stLost:"{n} lost", stUpsets:"Upsets", stUpsetsS:"wins vs higher-level teams", stTime:"Time played", stH:"h", stClub:"Most club", stClubS:"{n} matches", stLikes:"Likes from opponents", stShow:"Showed up", stNoShow:"{n} no-show", stTours:"Tournaments", stTitles:"{n} titles", stTitle1:"1 title", stPlayed:"{n} tournaments played", stPlayed1:"1 tournament played", stBadges:"Badges", stLocked:"locked", pfTourK:"Tournament", pfErrT:"Couldn't load the stats. Check the internet and try again.", retry2:"Try again", suaT:"Sign-up Assistant", suaLed:n => `SIGN UP YOUR TEAM ▸ ${n} ▸ SIGN-UP ASSISTANT · 1 MINUTE ▸ `, suaK:"SIGN-UP ASSISTANT · 1 MINUTE", suaS:"sign up your team by chat", suaGo:"Start", nameEn:"Please write your name in English letters, like Omar Haddad.", cxBook:"Cancel this booking", cxLeave:"Leave this match", cxBookQ:"Cancel this booking? The court is freed and the other players are told.", cxLeaveQ:"Leave this match? Your spot opens for someone else.", pCreate:"Create a game", pFind:"Find a game", nwC:"Book a court at Core · Trio · Let's", nwF:"Join a game at your level", nwL:"Weekly matches · prizes", hmPlay:"Play", hmComp:"Compete", hmNews:"News", snMt:"🎾 Open matches are coming soon. Stay tuned!", snBt:"🗓️ Court booking is coming soon. Stay tuned!", muMute:"Mute all sound", muOn:"Turn sound on", lbKick:"This week", lbYou:"You", lbSub:"{c} · resets Monday", snSoonL:"Coming soon", snM1:"Open", snM2:"matches", snMc1:"Your level", snMc2:"Every night", snB1:"Court", snB2:"booking", snBc1:"Core · Trio · Let's", snBc2:"In seconds", snL1:"Box", snL2:"leagues", snLc1:"Weekly", snLc2:"Prizes"});
+Object.assign(W.ar, {ciWho:"اضغط على كل لاعب موجود. يلي ما بتعلّم عليه بينحسب ما إجا.", ciHere:"موجود", ciTapHere:"اضغط إذا موجود", nsT:"ما إجوا", nsS:"لاعبين ما إجوا عمباراة كانوا فيها (آخر ٦٠ يوم). اضغط \"إجا\" إذا الاستقبال نسي يعلّم عليه.", nsTimes:"{n}×", nsPaused:"موقوف", nsOwes:"عليه {x}", nsPaid:"دفع ✓", nsMarkPaid:"دفع", nsUndo:"إجا", nsUndoQ:"تعلّم إنه إجا؟ بتنشال الغيبة.", nsOne:"غاب مرة مؤخراً", nsMany:"غاب {n} مرات مؤخراً", nsTag:"ما إجا", kickB:"شيل", kickQ:"بدك تشيل {n} من لعبتك؟ بيوصله خبر ومكانه بينفتح.", kickOk:"انشال {n}.", nNs:"🚫 ما إجيت على لعبتك يوم {w} بـ{c}. غياب {n} من ٣: بالتالت بيتوقف الحجز والانضمام أسبوعين.", nNs3:"🚫 ما إجيت على لعبتك يوم {w} بـ{c}. هي ٣ غيابات، فالحجز والانضمام موقوفين أسبوعين.", nNsOwe:"لسا عليك حصتك ({x}) بالاستقبال.", nNsOther:"{n} ما إجا على لعبتكن يوم {w}. منعتذر، النادي عرف.", nKicked:"{n} شالك من لعبة يوم {w}.", relT:"بيجي {p}%", relGood:"{n} مباريات، ولا مرة غاب", relGood1:"مباراة وحدة، وما غاب", relMissed:"غاب {n} مؤخراً · ٣ غيابات بتوقف الحجز أسبوعين", relPaused:"الحجز موقوف لـ{d}", instAdd:"أضف", instS2:"كبسة وحدة · بيفتح شاشة كاملة متل التطبيق", instIosT:"أضف PlayPal بكبستين", instIos1:"اكبس زر المشاركة تحت بـSafari", instIos2:"اكبس «إضافة إلى الشاشة الرئيسية»", rlT:"الأوائل", rlMonth:"هالشهر", rlAll:"شوف الكل", rlYou:"إنت", rlOf:"من", rlTo5:"باقيلك {n} لتدخل أول 5", rlFirst:"إنت الأول هالشهر 👑", rlNone:"العب جولة لتطلع عاللوحة", rlEmpty:"ما في نتائج هالشهر لسا. كون الأول!", rlIn:"سجّل دخول لتطلع عاللوحة", rlSheetT:"Ballie run · أفضل 10", rlSheetS:"كل لاعبين PlayPal · بتبلّش من جديد أول كل شهر", rlCat:"فئة", stT:"الإحصائيات", stRank:"الترتيب", stRankV:"#{r} من {n}", stTop:"أفضل {p}%", stMonth:"هالشهر", stMore:"{n} فوز أكتر من {m}", stLess:"{n} فوز أقل من {m}", stMore1:"فوز واحد أكتر من {m}", stLess1:"فوز واحد أقل من {m}", stWL:"{w} فوز · {l} خسارة", stBest:"الأول بالفئة", stSame:"نفس عدد الفوز متل {m}", stSets:"أشواط ربحتها", stGames:"غيمات ربحتها", stLoves:"أشواط ٦-٠", stLovesS:"ربحتها ٦-٠", stLost:"خسرت {n}", stUpsets:"مفاجآت", stUpsetsS:"فوز على فرق مستواها أعلى", stTime:"وقت اللعب", stH:"س", stClub:"أكتر نادي", stClubS:"{n} مباراة", stLikes:"إعجابات من الخصوم", stShow:"الحضور", stNoShow:"{n} غياب", stTours:"البطولات", stTitles:"{n} ألقاب", stTitle1:"لقب واحد", stPlayed:"لعبت {n} بطولات", stPlayed1:"لعبت بطولة وحدة", stBadges:"الشارات", stLocked:"مقفلة", pfTourK:"بطولة", pfErrT:"ما قدرنا نحمّل الإحصائيات. تأكد من النت وجرّب مرة تانية.", retry2:"جرّب مرة تانية", suaT:"مساعد التسجيل", suaLed:n => `سجّل فريقك ◂ ${n} ◂ مساعد التسجيل · دقيقة وحدة ◂ `, suaK:"مساعد التسجيل · دقيقة وحدة", suaS:"سجّل فريقك بالدردشة", suaGo:"يلا", nameEn:"اكتب اسمك بالأحرف الإنجليزية، مثلاً Omar Haddad.", cxBook:"ألغِ هالحجز", cxLeave:"انسحب من المباراة", cxBookQ:"بدك تلغي الحجز؟ الملعب بيتحرر وباقي اللاعبين بيوصلهن خبر.", cxLeaveQ:"بدك تنسحب؟ مكانك بينفتح لحدا تاني.", pCreate:"اعمل لعبة", pFind:"لاقي لعبة", nwC:"احجز ملعب بـ Core · Trio · Let's", nwF:"العب مع ناس بمستواك", nwL:"مباريات كل أسبوع · جوائز", hmPlay:"العب", hmComp:"تنافس", hmNews:"الأخبار", snMt:"🎾 المباريات المفتوحة جايّة قريباً. خليك متابع!", snBt:"🗓️ حجز الملاعب جاي قريباً. خليك متابع!", muMute:"اكتم كل الصوت", muOn:"شغّل الصوت", lbKick:"هالأسبوع", lbYou:"إنت", lbSub:"{c} · بيتصفّر يوم الاثنين", snSoonL:"قريباً", snM1:"مباريات", snM2:"مفتوحة", snMc1:"بمستواك", snMc2:"كل ليلة", snB1:"حجز", snB2:"الملاعب", snBc1:"Core · Trio · Let's", snBc2:"بثواني", snL1:"الدوريات", snL2:"الأسبوعية", snLc1:"كل أسبوع", snLc2:"جوايز"});
 Object.assign(W.en, {snT:"Coming soon", snLock:"Unlocking next", snSoon:"Soon", snM:"Open matches", snMs:"Join games at your level, any night of the week.", snB:"Court booking", snBs:"Book Core, Trio and Let's Padel courts in seconds.", snL:"Leagues", snLs:"Weekly box leagues. Climb, get promoted, win prizes.", snUnl:"Unlocking soon", snLt:"🏆 Leagues are coming soon. Stay tuned!"});
 Object.assign(W.ar, {snT:"قريباً", snLock:"عم ينفتح", snSoon:"قريباً", snM:"مباريات مفتوحة", snMs:"انضم لمباريات بمستواك بأي ليلة بالأسبوع.", snB:"حجز الملاعب", snBs:"احجز ملاعب Core وTrio وLet's Padel بثواني.", snL:"الدوريات", snLs:"دوريات أسبوعية. اطلع، ترقّى، واربح جوايز.", snUnl:"عم ينفتح قريباً", snLt:"🏆 الدوريات جايّة قريباً. خليك متابع!"});
 Object.assign(W.en, {rsQk:"Your rank", rsQt:"What's your rank?", rsQs:"Take the 60-second quiz and get your tier card.", rsK:"Your rank"});
 Object.assign(W.ar, {rsQk:"تصنيفك", rsQt:"شو تصنيفك؟", rsQs:"اعمل اختبار الـ٦٠ ثانية وخود بطاقتك.", rsK:"تصنيفك"});
 Object.assign(W.en, {aNeed:"Category A needs approval from PlayPal. You start in Gold (B) and we check your request.", aPend:"Category A request sent. You'll get a notification when it's approved.", aWants:"Wants Category A", aYes:"Approve A", aNo:"Not now", aYesQ:"Approve this player for Category A? They get their Diamond card right away.", aNoQ:"Keep this player in their current category? They can still earn A by winning.", nAReq:"🔷 {n} ({x}) asks for Category A. Open Me → Settings → Levels to check.", nANo:"Your Category A request wasn't approved for now. Keep winning matches to climb there!"});
 Object.assign(W.ar, {aNeed:"الفئة A بدها موافقة من بلاي بال. بتبلش بالذهبي (B) ومنراجع طلبك.", aPend:"انبعت طلب الفئة A. رح يوصلك إشعار لما ينقبل.", aWants:"بده الفئة A", aYes:"وافق على A", aNo:"مو هلأ", aYesQ:"توافق على هاللاعب بالفئة A؟ بتوصله بطاقته الماسية فوراً.", aNoQ:"تخلّي هاللاعب بفئته الحالية؟ فيه يوصل A بالربح.", nAReq:"🔷 {n} ({x}) طالب الفئة A. افتح أنا ← الإعدادات ← مستويات لازم تتأكد.", nANo:"طلبك للفئة A ما انقبل هلأ. كفّي ربح لتوصل لهونيك!"});
+
+/* ---------- levels the Playtomic way (v139) ---------- */
+Object.assign(W.en, {of7:"/ 7", relRing:"reliable", lvRelT:"Level reliability", lvRelS:"How sure PlayPal is about your level. New players move more; it grows with every competitive match.",
+  lvMatches:"{n} competitive matches", lvLast:"last match", lvHist:"Level history", lvHistE:"Your graph starts after your first rated match.",
+  lvGuideBtn:"What does my level mean?", lvGuideT:"What your level means", lvGuideS:"Levels go from 0 to 7. Your rank and tournament category come from your level.",
+  lvYou:"you", lvD0:"Just starting, learning the rules", lvD1:"Rallies, simple shots, starting to use the walls", lvD2:"Consistent, uses the back wall, basic net play",
+  lvD3:"Good control, bandeja, plays tactically", lvD4:"Strong all-round, víbora, pace and placement", lvD5:"Advanced to pro",
+  dmT:"Demotion series", dmTag:"⚠️ Stay {w}–{l}", dmTxt:"Lose 2 of 3 and you drop to {t}. Win 2 to stay {t2}.",
+  dmOnK:"⚠️ Demotion series", dmOnS:"You dropped below the {t} line. Win 2 of your next 3 to stay.", dmSaved:"You won the series and stay {t}.",
+  dmOff:"Back above the line: you stay {t}.", dmDown:"You lost the series.",
+  q8:"How often do you play?", q8a:"Less than once a month", q8b:"1–3 times a month", q8c:"Every week", q8d:"3+ times a week",
+  q9:"Have you played tournaments?", q9a:"Never", q9b:"Friendly club events", q9c:"Yes, ranked tournaments",
+  stT:"Your starting level", stInfo:"You start near the bottom of {t}.", stB1:"Win and you climb fast: new players move the most.",
+  stB2:"Drop below the line and you play a demotion series: lose 2 of 3 to go down.", stB3:"You take this quiz once. After that, only matches or a coach change your level.",
+  lvOnce:"You already have your level. It now changes with your competitive matches, or a coach levelling.",
+  coachT:"Get levelled by a coach", coachS:"Not sure your level is right? Ask PlayPal for a coach levelling session. The coach sets your level and your reliability goes to 50%.",
+  coachBtn:"Ask for a coach levelling", coachSent:"Sent ✓ PlayPal will contact you on WhatsApp.", coachAgain:"Already sent today ✓",
+  nLvlReq:"🎓 {n} asks for a coach levelling ({x}). Set their level in Admin → Players.", admRel50:"Changing the level counts as a coach levelling: the player's reliability goes to 50%.",
+  gtT:"Game type", gtComp:"🏆 Competitive", gtFr:"🤝 Friendly", gtCompS:"Changes everyone's level. Scores must be real sets: 6-0 to 6-4, 7-5 or 7-6.", gtFrS:"Just for fun: the score is kept, levels don't change.",
+  gtChange:"Change", gtFrNote:"Friendly game: levels don't change.", resAll:"Level changes", resSetsNote:"Competitive scores must be real sets: 6-0 to 6-4, 7-5 or 7-6. A 3rd set can be a match tie-break (10-8).",
+  errSets:"Check the set scores: a set ends 6-0 to 6-4, 7-5 or 7-6.", errOnce:"You already have a level. It now changes with your match results."});
+Object.assign(W.ar, {of7:"/ 7", relRing:"دقة", lvRelT:"دقة المستوى", lvRelS:"قديش بلاي بال متأكد من مستواك. اللاعب الجديد بيتحرك أكتر، والدقة بتزيد مع كل مباراة تنافسية.",
+  lvMatches:"{n} مباراة تنافسية", lvLast:"آخر مباراة", lvHist:"تاريخ المستوى", lvHistE:"الرسم بيبلش بعد أول مباراة محسوبة.",
+  lvGuideBtn:"شو يعني مستواي؟", lvGuideT:"شو يعني مستواك", lvGuideS:"المستويات من ٠ لـ ٧. رتبتك وفئتك بالبطولات بتطلع من مستواك.",
+  lvYou:"إنت", lvD0:"لسا عم تبلش، عم تتعلم القوانين", lvD1:"تبادل كرات، ضربات بسيطة، عم تبلش تستعمل الحيطان", lvD2:"ثابت، بتستعمل الحيط الخلفي، لعب بسيط عالشبكة",
+  lvD3:"تحكم منيح، بانديخا، بتلعب بتكتيك", lvD4:"قوي بكل شي، فيبورا، سرعة ودقة", lvD5:"متقدم لمحترف",
+  dmT:"سلسلة الهبوط", dmTag:"⚠️ بقاء {w}–{l}", dmTxt:"إذا خسرت ٢ من ٣ بتنزل لـ{t}. اربح ٢ لتبقى {t2}.",
+  dmOnK:"⚠️ سلسلة الهبوط", dmOnS:"نزلت تحت خط {t}. اربح ٢ من ٣ مباريات الجاية لتبقى.", dmSaved:"ربحت السلسلة وبقيت {t}.",
+  dmOff:"رجعت فوق الخط: بقيت {t}.", dmDown:"خسرت السلسلة.",
+  q8:"قديش بتلعب؟", q8a:"أقل من مرة بالشهر", q8b:"١–٣ مرات بالشهر", q8c:"كل أسبوع", q8d:"٣ مرات أو أكتر بالأسبوع",
+  q9:"لعبت بطولات؟", q9a:"أبداً", q9b:"فعاليات ودية بالنادي", q9c:"إيه، بطولات مصنّفة",
+  stT:"مستواك بالبداية", stInfo:"بتبلش قريب من أول {t}.", stB1:"اربح وبتطلع بسرعة: اللاعب الجديد بيتحرك أكتر شي.",
+  stB2:"إذا نزلت تحت الخط بتلعب سلسلة هبوط: إذا خسرت ٢ من ٣ بتنزل.", stB3:"الاختبار مرة وحدة بس. بعدها بس المباريات أو المدرب بيغيروا مستواك.",
+  lvOnce:"عندك مستوى. هلأ بيتغير مع مبارياتك التنافسية، أو بتقييم من مدرب.",
+  coachT:"تقييم مستوى مع مدرب", coachS:"مو متأكد إنو مستواك صح؟ اطلب جلسة تقييم مع مدرب. المدرب بيحدد مستواك ودقة مستواك بتصير ٥٠٪.",
+  coachBtn:"اطلب تقييم مع مدرب", coachSent:"انبعت ✓ بلاي بال رح يتواصل معك عالواتساب.", coachAgain:"انبعت اليوم ✓",
+  nLvlReq:"🎓 {n} بدو تقييم مستوى مع مدرب ({x}). حدد مستواه من الأدمن ← اللاعبين.", admRel50:"تغيير المستوى بينحسب تقييم مدرب: دقة مستوى اللاعب بتصير ٥٠٪.",
+  gtT:"نوع المباراة", gtComp:"🏆 تنافسية", gtFr:"🤝 ودية", gtCompS:"بتغير مستوى الكل. النتيجة لازم تكون سيتات حقيقية: ٦-٠ لـ ٦-٤، ٧-٥ أو ٧-٦.", gtFrS:"للمتعة بس: النتيجة بتنحفظ، والمستويات ما بتتغير.",
+  gtChange:"غيّر", gtFrNote:"مباراة ودية: المستويات ما بتتغير.", resAll:"تغيّر المستويات", resSetsNote:"النتائج التنافسية لازم تكون سيتات حقيقية: ٦-٠ لـ ٦-٤، ٧-٥ أو ٧-٦. السيت الثالث ممكن يكون تاي بريك (١٠-٨).",
+  errSets:"تأكد من نتيجة السيتات: السيت بينتهي ٦-٠ لـ ٦-٤، ٧-٥ أو ٧-٦.", errOnce:"عندك مستوى. هلأ بيتغير مع نتائج مبارياتك."});
 Object.assign(W.en, {rnT:"Ballie run", rnTap:"Tap to jump", rnOver:"Game over", rnRec:"New record!", rnAgain:"Tap to play again", rnB1:"Warm-up", rnB2:"Rally", rnB3:"Pro runner"});
 Object.assign(W.ar, {rnT:"ركضة بولي", rnTap:"اضغط لتنط", rnOver:"خسرت", rnRec:"رقم قياسي جديد!", rnAgain:"اضغط لتلعب كمان", rnB1:"إحماء", rnB2:"تبادل", rnB3:"عدّاء محترف"});
 Object.assign(W.en, {plLeftE:"Take the quiz or join a tournament to reveal your tier", plTagE:"Unranked", plSubE:"Take the quiz or join a tournament to reveal your tier", provNoteE:"Your rank starts at the category you pick. Then every match, league and tournament moves you up or down.", gmTour:"Your tournament matches show here. See the events →", omTour:"Play a tournament", om3T:"Open matches are on their way", om3S:"Soon you'll join games with players at your level, right here. Until then, play a tournament and get your rank.",
@@ -5750,7 +5896,7 @@ V.me = () => { if (!S.user) return V.auth();
    <div class="row">${S.staff.length ? `<button class="pill" data-go="manager">${t("meMgr")}</button>` : ""}${bell()}</div></div>
   <div class="seg">${[["card", "meCard"], ["games", "meGames"], ["set", "meSet"]].map(([k, l]) => `<button data-metab="${k}" aria-pressed="${tab === k}">${k === "set" ? "⚙️ " : ""}${t(l)}${k === "games" && todo ? `<i class="dot"></i>` : ""}</button>`).join("")}</div>`;
  let body = "";
-  if (tab === "card") body = `${p.is_admin ? `<button class="cta wide adm-entry" data-go="admin"><span>Admin dashboard</span><b>→</b></button>` : ""}${walletCard()}${playerCard(S.card)}${relLine()}${meBoardCard()}${seasonCard()}<button class="cta wide pfbtn" data-profile="me">📊 ${t("pfMine")} →</button>`;
+  if (tab === "card") body = `${p.is_admin ? `<button class="cta wide adm-entry" data-go="admin"><span>Admin dashboard</span><b>→</b></button>` : ""}${walletCard()}${playerCard(S.card)}${lvBox(S.lvInfo, true)}${relLine()}${meBoardCard()}${seasonCard()}<button class="cta wide pfbtn" data-profile="me">📊 ${t("pfMine")} →</button>`;
  else if (tab === "games"){ const up = upcoming(), past = S.mine.filter(b => !up.includes(b));
    body = `${todo ? `<h2>⚑ ${t("meToDo")}</h2><div class="glist">${pendingScores().map(gameRow).join("")}</div>` : ""}
     ${schedSec()}
@@ -5761,7 +5907,7 @@ V.me = () => { if (!S.user) return V.auth();
     ${(S.results || []).length > 5 ? `<details class="card pastg"><summary>${t("moreRes")} · ${S.results.length - 5}</summary><div class="glist" style="gap:8px">${S.results.slice(5).map(resultRow).join("")}</div></details>` : ""}
     ${past.filter(b => b.result !== "pending").length ? `<details class="card pastg"><summary>${t("pastG")} · ${past.filter(b => b.result !== "pending").length}</summary><div class="glist">${past.filter(b => b.result !== "pending").map(gameRow).join("")}</div></details>` : ""}`; }
  else body = `<form id="pf" class="card" style="display:flex;flex-direction:column;gap:10px"><label class="fld"><span>${t("name")}</span><input id="p-name" value="${esc(p.full_name)}"></label><label class="fld"><span>${t("phone")}</span><input id="p-phone" value="${esc(p.phone)}" inputmode="tel" dir="ltr"></label><span class="note">${esc(S.user.email || "")}</span><button class="ghost" type="submit">${t("save")}</button></form>
-  ${pushCard(false)}${alertCard()}
+  ${S.profile && S.profile.level_set ? coachCard() : ""}${pushCard(false)}${alertCard()}
   <div class="card"><div class="set"><span>${t("dark")}</span><button class="tg" data-dark aria-pressed="${document.documentElement.dataset.theme === "dark"}" aria-label="${t("dark")}"></button></div><div class="set"><span>🎵 ${t("musT")}</span><button class="tg" data-music aria-pressed="${musicOn()}" aria-label="${t("musT")}"></button></div><div class="set"><span>🔊 ${t("sndT")}</span><button class="tg" data-snd aria-pressed="${ls.get("pl-snd") !== "0"}" aria-label="${t("sndT")}"></button></div><div class="set"><span>Language · اللغة</span><button class="pill" data-lang>${lang === "en" ? "عربي" : "English"}</button></div></div>
   ${S.staff.length ? `<button class="cta wide" data-go="manager">${t("mgr")} · ${esc(S.staff.map(c => c.name).join(", "))} →</button>`
    : `<form id="staffF" class="card" style="display:flex;flex-direction:column;gap:10px"><b>${t("staffQ")}</b><label class="fld"><span>${t("staffCode")}</span><input id="s-code" autocomplete="off" dir="ltr"></label><button class="ghost" type="submit">${t("staffJoin")}</button></form>`}
@@ -6428,6 +6574,13 @@ let cpIO = null;
 function cpWatch(){ if (!("IntersectionObserver" in window)) return; if (!cpIO) cpIO = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle("up", e.intersectionRatio > .55)), {threshold: [0, .55, 1]});
   document.querySelectorAll(".cpop:not([data-w])").forEach(el => { el.dataset.w = "1"; cpIO.observe(el); }); }
 new MutationObserver(() => { if (document.querySelector(".cpop:not([data-w])")) cpWatch(); }).observe(document.getElementById("app") || document.body, {childList: true, subtree: true});
+/* level texts (v139): kept last so they win over older wording */
+Object.assign(W.en, {lvIntro:"Answer a few quick questions. You start near the bottom of your category, then every competitive match moves you up or down.",
+  provNote:"You start near the bottom of your category. Going up to Gold or Diamond takes a promotion series; dropping a category takes a demotion series.", provNoteE:"You start near the bottom of your category. Going up to Gold or Diamond takes a promotion series; dropping a category takes a demotion series.",
+  lvNote:"Levels go from 0 to 7. Category E (Iron) is below 1.5, D (Bronze) 1.5–2.5, C (Silver) 2.5–3.5, B (Gold) 3.5–4.5, A (Diamond) 4.5 and up."});
+Object.assign(W.ar, {lvIntro:"جاوب على كم سؤال سريع. بتبلش قريب من أول فئتك، وبعدها كل مباراة تنافسية بتطلعك أو بتنزلك.",
+  provNote:"بتبلش قريب من أول فئتك. الطلوع للذهبي أو الماسي بدو سلسلة ترقية، والنزول فئة بدو سلسلة هبوط.", provNoteE:"بتبلش قريب من أول فئتك. الطلوع للذهبي أو الماسي بدو سلسلة ترقية، والنزول فئة بدو سلسلة هبوط.",
+  lvNote:"المستويات من ٠ لـ ٧. الفئة E (حديدي) تحت ١.٥، D (برونزي) ١.٥–٢.٥، C (فضي) ٢.٥–٣.٥، B (ذهبي) ٣.٥–٤.٥، A (ماسي) ٤.٥ وفوق."});
 render();
 boot();
 
