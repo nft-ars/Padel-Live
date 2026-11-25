@@ -3131,11 +3131,13 @@ const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;
 let NMK = 0;
 function schedSecret(){ return !canEdit && !!(CFG && CFG.hide_sched); }
 function secretNow(){ return NMK === 0 && schedSecret(); }
+/* groups stay hidden from players until the draw is done (when a draw is set, or match times are hidden) */
+function groupsHidden(){ return !canEdit && !(CFG && CFG.draw && CFG.draw.res) && ((CFG && CFG.draw && CFG.draw.at) || !!(CFG && CFG.hide_sched)); }
 function keepNames(f){ return function(){ NMK++; try { return f.apply(this, arguments); } finally { NMK--; } }; }
-const nm = id => (drawPend() && !canEdit ? "" : secretNow() ? "" : (cur().names[id] || "")).trim(); /* names stay hidden until the live draw */
+const nm = id => (drawPend() && !canEdit ? "" : groupsHidden() ? "" : secretNow() ? "" : (cur().names[id] || "")).trim(); /* names stay hidden until the live draw */
 var SUOPEN = false;
 function preTeams(){ return !canEdit && (drawPend() || (SUOPEN && !(CFG.draw && CFG.draw.res))) && view.tab !== "teams"; }
-const label = id => preTeams() || secretNow() ? "TBD" : (nm(id) || ("Team " + id));
+const label = id => preTeams() || secretNow() || groupsHidden() ? "TBD" : (nm(id) || ("Team " + id));
 const cvar = (c, soft) => `var(${CATV[c]}${soft ? "-soft" : ""})`;
 function mins(t){ const m = /(\d+):(\d+)\s*(AM|PM)/.exec(t); let h = +m[1] % 12 + (m[3] === "PM" ? 12 : 0); if (m[3] === "AM" && h < 6) h += 24; return h * 60 + +m[2]; }
 function fmt(v){ let h = Math.floor(v / 60) % 24, m = v % 60; const ap = h >= 12 ? "PM" : "AM"; h = h % 12 || 12; return `${h}:${String(m).padStart(2,"0")} ${ap}`; }
@@ -3277,7 +3279,7 @@ const involves = (m, id) => !!id && !secretNow() && (m.A.id === id || m.B.id ===
 /* ---------- rendering pieces ---------- */
 function teamLine(side, score, won, lost, flag){
   const id = side.id, n = id ? nm(id) : "";
-  const name = id ? (secretNow() ? "TBD" : n ? `${esc(n)}<span class="id">${esc(id)}</span>` : `Team ${esc(id)}`) : esc(side.ph);
+  const name = id ? (secretNow() || groupsHidden() ? "TBD" : n ? `${esc(n)}<span class="id">${esc(id)}</span>` : `Team ${esc(id)}`) : esc(side.ph);
   const me = id && id === myTeam ? ` <span class="you">You</span>` : "";
   return `<div class="row"><span class="tm${won ? " won" : ""}${id ? "" : " ph"}">${name}${me}${won && flag ? ` <span class="flag">${flag}</span>` : ""}</span>${score != null ? `<span class="sc${lost ? " lose" : ""}">${score}</span>` : ""}</div>`;
 }
@@ -3442,7 +3444,7 @@ function vSchedule(){
   return h;
 }
 function vStandings(){
-  let h = `<div class="filters" role="group" aria-label="Category">${CATS.map(c => `<button class="chip" data-cat="${c}" aria-pressed="${view.cat === c || (view.cat === "all" && c === CATS[0])}">${CATL[c]}</button>`).join("")}</div>`;
+  let h = (groupsHidden() ? `<div class="sec-hide grp-hide"><b>🎱 Names appear after the live draw</b><span>The group leaders are placed and everyone else is drawn at random.</span><span dir="rtl" lang="ar">الأسماء بتظهر بعد القرعة المباشرة</span></div>` : "") + (canEdit && !(CFG.draw && CFG.draw.res) && ((CFG.draw && CFG.draw.at) || CFG.hide_sched) ? `<div class="sec-hide org"><b>🔒 Group names are hidden from players</b><span>They see TBD until the draw is done.</span></div>` : "") + `<div class="filters" role="group" aria-label="Category">${CATS.map(c => `<button class="chip" data-cat="${c}" aria-pressed="${view.cat === c || (view.cat === "all" && c === CATS[0])}">${CATL[c]}</button>`).join("")}</div>`;
   const c = view.cat === "all" ? CATS[0] : view.cat;
   const fx = KFIX && KFIX[c], qset = fx ? new Set(fx.flatMap(x => [x.a, x.b])) : null;
   const done = catDone(c), sd = fx ? {thirds: []} : seedsOf(c), four = fx ? true : GROUPS[c] * 2 >= 8 || GROUPS[c] === 2, bestThirds = new Set(four ? [] : sd.thirds.slice(0, 8 - GROUPS[c] * 2).map(r => r.id));
@@ -3510,7 +3512,7 @@ function vTeams(){
   for (const c of CATS){ const n = GROUPS[c] * SZ(c);
     h += `<section class="sec"><div class="cat-head" style="background:${cvar(c)}">${CATN[c]}<small>${n} teams · ${GROUPS[c]} groups of ${SZ(c)}</small></div><div class="teams">`;
     for (let i = 1; i <= n; i++){ const id = c + i;
-      h += `<div class="team${id === myTeam ? " me" : ""}"><span class="badge" style="background:${cvar(c)}">${id}</span>${editMode ? `<input id="nm-${id}" data-n="${id}" value="${esc(nm(id))}" placeholder="Player 1 / Player 2" aria-label="Names for ${id}">` : `<span class="tm${nm(id) ? "" : " ph"}">${esc(nm(id) || "Names after the draw")}</span>`}</div>`; }
+      h += `<div class="team${id === myTeam ? " me" : ""}"><span class="badge" style="background:${cvar(c)}">${groupsHidden() && !editMode ? i : id}</span>${editMode ? `<input id="nm-${id}" data-n="${id}" value="${esc(nm(id))}" placeholder="Player 1 / Player 2" aria-label="Names for ${id}">` : `<span class="tm${nm(id) ? "" : " ph"}">${esc(nm(id) || "Names after the draw")}</span>`}</div>`; }
     h += `</div></section>`; }
   return h;
 }
@@ -4572,7 +4574,7 @@ function suWhy(){ const fee = CFG.fee ? +CFG.fee : 0, prize = (CFG.facts || []).
     ${per ? `<div class="su-w hot"><small>Prize per category</small><b>${money(per)}</b><span>🥇 ${money(per * sp[0] / 100)} · 🥈 ${money(per * (sp[1] || 0) / 100)}</span></div>` : ""}</div>
     </div>`; }
 function suCard(mine){ const I = SU.info, ok = mine.status === "confirmed", fee = CFG.fee ? +CFG.fee : 0;
-  return `<div class="su-in${ok ? " ok" : ""}"><div class="su-in-h"><i>${ok ? "✅" : "⏳"}</i><div><b>${ok ? "You're in!" : "Your team is signed up"}</b><span>${esc(mine.team)} · ${esc(CATN[mine.cat] || mine.cat)}${mine.slot && !drawPend() && !preTeams() && !schedSecret() ? ` · Team ${esc(mine.slot)}` : ""}</span></div></div><p class="su-s su-who">You're on this team. Didn't sign up yourself? Your partner added you. Something wrong? Use <b>Contact support</b> above. · إذا ما سجّلت إنت، شريكك ضافك.</p>
+  return `<div class="su-in${ok ? " ok" : ""}"><div class="su-in-h"><i>${ok ? "✅" : "⏳"}</i><div><b>${ok ? "You're in!" : "Your team is signed up"}</b><span>${esc(mine.team)} · ${esc(CATN[mine.cat] || mine.cat)}${mine.slot && !drawPend() && !preTeams() && !schedSecret() && !groupsHidden() ? ` · Team ${esc(mine.slot)}` : ""}</span></div></div><p class="su-s su-who">You're on this team. Didn't sign up yourself? Your partner added you. Something wrong? Use <b>Contact support</b> above. · إذا ما سجّلت إنت، شريكك ضافك.</p>
         <ol class="su-next"><li class="${ok ? "sn-done" : "sn-now"}"><b>${ok ? "Confirmed by the organizer" : "The organizer confirms your team"}</b><span>${ok ? "Your place is saved." : "You'll get a notification as soon as it's confirmed."}</span></li>
         <li class="${ok ? "sn-now" : ""}"><b>${drawOn() ? "Watch the live draw" : "Check your matches"}</b><span>${drawOn() ? "See which group you land in, live." : "Your times show on the Schedule after sign-up closes."}</span></li>
         <li><b>Pay at the desk${fee ? ` · $${fee}` : ""}</b><span>Show your entry pass (QR) when you check in. If you don't pay, you don't play.</span></li></ol>
