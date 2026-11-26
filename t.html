@@ -4567,10 +4567,10 @@ document.addEventListener("submit", async e => {
   if (!/^\d{6}$/.test(v)){ DK.msg = "The PIN is 6 digits."; render(); return; }
   DK.checking = true; DK.msg = ""; render();
   try { const r = await sb.rpc("t_desk_pin_list", {p_slug: SLUG, p_pin: v});
-    if (r.error) DK.msg = /t_desk_pin/.test(r.error.message || "") ? "The desk link isn't switched on yet. Ask the organizer." : "Can't check the PIN right now. Check the internet.";
+    if (r.error) DK.msg = /t_desk_pin/.test(r.error.message || "") ? "The desk link isn't switched on yet. Ask the organizer." : "Can't check the PIN right now. (" + [r.error.code, r.error.message].filter(Boolean).join(" ") + ")";
     else if (r.data && r.data.err) DK.msg = r.data.err === "wait" ? "Too many wrong PINs. Wait 10 minutes and try again." : "That PIN isn't right. Ask the organizer.";
     else { DK.pin = v; lsSet(DKKEY, v); CI.desk = r.data; CI.open = true; setTimeout(ciStart, 200); } }
-  catch (x) { DK.msg = "Can't check the PIN right now. Check the internet."; }
+  catch (x) { DK.msg = "Can't check the PIN right now. (" + ((x && x.message) || x) + ")"; }
   DK.checking = false; render();
 });
 document.addEventListener("click", e => { if (!e.target.closest("[data-dkout]")) return; DK.pin = ""; lsSet(DKKEY, ""); CI.desk = null; CI.res = null; ciStop(); render(); });
