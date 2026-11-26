@@ -4166,7 +4166,7 @@ function renderRef(){
   const st0 = (cur().pts || {})[m.id];
   const kind = m.kind === "sets" ? "sets" : m.kind === 9 ? 9 : 6;
   const st = st0 && st0.kind === kind ? st0 : null;
-  const others = refMatches().filter(x => x.id !== m.id).slice(0, 4);
+  const others = refMatches().filter(x => x.id !== m.id);
   const fmtLine = kind === "sets" ? "Best of 3 · super tiebreak to 10" : kind === 9 ? "1 set to 9 · tiebreak at 8-8" : "1 set to 6 · tiebreak at 6-6";
   let body;
   if (!st){
@@ -4191,7 +4191,7 @@ function renderRef(){
         : `<div class="rf-brk"><span>Break</span><button data-rf="brk" data-s="30" data-mid="${m.id}">30 sec</button><button data-rf="brk" data-s="60" data-mid="${m.id}">1 min</button><button data-rf="brk" data-s="120" data-mid="${m.id}">2 min</button></div>`; })()}
       <div class="rf-row"><button class="rf-sec" data-rf="undo" data-mid="${m.id}"${(REF.hist[m.id] || []).length ? "" : " disabled"}>↶ Undo</button>${st.done ? `<button class="rf-sec" data-rf="next">Next match →</button>` : ""}</div></div>`;
   }
-  const up = others.length ? `<div class="rf-card"><h3>Also on this court</h3>${others.map(x => `<button class="rf-other" data-rf="pick" data-mid="${x.id}"><span>${esc(DSHORT[x.day])} ${esc(tm(x.time))}</span><b>${esc(sideName(x.A))} vs ${esc(sideName(x.B))}</b></button>`).join("")}</div>` : "";
+  const up = others.length ? `<div class="rf-card"><h3>Other matches on this court (${others.length})</h3>${others.map(x => `<button class="rf-other" data-rf="pick" data-mid="${x.id}"><span>${esc(DSHORT[x.day])} ${esc(tm(x.time))}</span><b>${esc(sideName(x.A))} vs ${esc(sideName(x.B))}</b></button>`).join("")}</div>` : "";
   app.innerHTML = head + `<main class="rf">${courtBar}${REF.msg ? `<p class="rf-msg">${esc(REF.msg)}</p>` : ""}${body}${up}</main>`;
 }
 document.addEventListener("submit", async e => {
