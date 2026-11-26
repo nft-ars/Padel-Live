@@ -189,6 +189,7 @@ header.top .hrow{align-items:center}header.top .hrow .tback2+.kick{margin-inline
 .sec-hide{display:flex;flex-direction:column;gap:4px;margin:12px 0;padding:14px 16px;border-radius:14px;border:1px dashed rgba(255,255,255,.28);background:rgba(255,255,255,.05);color:inherit;font-size:14px;line-height:1.4}.sec-hide b{font-size:15px}.sec-hide span{opacity:.8}.sec-hide.org{border-style:solid;border-color:#2BD9FE}.sec-rev{margin-top:8px;min-height:44px;border-radius:12px;border:0;font-weight:800;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:#05080F;background:linear-gradient(90deg,#2BD9FE,#8A7BFF,#FF9F1C);cursor:pointer}.sec-rev:disabled{opacity:.6}
 .desk-b{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.chip.pay1 small{opacity:.75;font-weight:600}.ci-split{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 .dk-main{padding-top:12px;padding-bottom:40px}.dk-main .desk{margin-top:0}
+.ts.tlv{display:flex;align-items:center;gap:3px;flex-shrink:0}.ts.tlv b{font:800 16px/1 var(--display);min-width:12px;text-align:center;font-variant-numeric:tabular-nums}.ts.tlv em{font:800 12px/1 var(--display);font-style:normal;background:#D9F03A;color:#111;border-radius:5px;padding:3px 4px;min-width:22px;text-align:center;font-variant-numeric:tabular-nums}.ts.tlv i.s{font:700 11px/1 var(--display);font-style:normal;opacity:.6;min-width:8px;text-align:center}.ts.tlv.lead b{color:#D64545}
 </style><style>.phf{display:flex;align-items:stretch;gap:0;border:1px solid var(--line,rgba(127,127,127,.35));border-radius:12px;overflow:hidden;background:var(--card,transparent)}
 .phf .phcc{position:relative;display:flex;align-items:center;padding:0 10px 0 12px;border-inline-end:1px solid var(--line,rgba(127,127,127,.35));white-space:nowrap;font-weight:700;font-size:15px;cursor:pointer;margin:0}
 .phf .phcc:after{content:"▾";font-size:11px;opacity:.6;margin-inline-start:6px}
@@ -3386,10 +3387,16 @@ const EVENTS = T.E;
 function tile(m){
   const done = m.w !== null && m.w !== undefined && m.A.id && m.B.id, live = isLive(m.id) && !done;
   const dim = !matchesFilter(m), mine = involves(m, myTeam);
+  /* live score like the TV: sets (best of 3) · games · point */
+  const P = live ? (cur().pts || {})[m.id] : null, pl = P && !P.done ? (ptsLabel(P) || ["0", "0"]) : null, psw = pl && P.kind === "sets" ? setsWon(P) : null;
+  const pg = pl ? (P.g || [0, 0]) : null, plead = !pl ? -1 : psw && psw[0] !== psw[1] ? (psw[0] > psw[1] ? 0 : 1) : pg[0] !== pg[1] ? (pg[0] > pg[1] ? 0 : 1) : -1;
   const line = (x, i) => { const won = done && m.w === i, lost = done && m.w !== i;
     const n = x.id ? esc(label(x.id)) : `<span class="ph">${esc(x.ph)}</span>`;
-    return `<div class="tl${won ? " won" : ""}${lost ? " lost" : ""}"><span class="tn">${n}${x.id && x.id === myTeam ? ` <span class="you">You</span>` : ""}</span><span class="ts">${m.s && m.s[i] != null && m.s[i] !== "" ? m.s[i] : ""}</span></div>`; };
-  const st = done ? `<span class="tst done">${m.flag || "Final"}</span>` : live ? `<span class="tst live"><span class="dot"></span>Live</span>` : "";
+    const sc = pl ? `<span class="ts tlv${plead === i ? " lead" : ""}">${psw ? `<i class="s">${psw[i]}</i>` : ""}<b>${P.stb ? "–" : pg[i]}</b><em>${esc(pl[i])}</em></span>`
+      : `<span class="ts">${m.s && m.s[i] != null && m.s[i] !== "" ? m.s[i] : ""}</span>`;
+    return `<div class="tl${won ? " won" : ""}${lost ? " lost" : ""}"><span class="tn">${n}${x.id && x.id === myTeam ? ` <span class="you">You</span>` : ""}</span>${sc}</div>`; };
+  const pnote = pl ? (P.stb ? "STB" : P.tb ? "TB" : ptsNote(P) === "Golden point" ? "Golden pt" : ptsNote(P)) : "";
+  const st = done ? `<span class="tst done">${m.flag || "Final"}</span>` : live ? `<span class="tst live"><span class="dot"></span>${pnote ? esc(pnote) : "Live"}</span>` : "";
   return `<div class="tile${m.final ? " final" : ""}${live ? " onlive" : ""}${done ? " isdone" : ""}${dim ? " dim" : ""}${mine ? " mine" : ""}" style="--c:${cvar(m.cat)};--cs:${cvar(m.cat, 1)}">
     <div class="th"><span class="tt">${m.final ? "🥇 " : ""}${esc(shortTag(m.tag))}</span>${st}</div>${line(m.A, 0)}${line(m.B, 1)}</div>`;
 }
@@ -4940,7 +4947,7 @@ document.addEventListener("input", e => { const el = e.target;
 document.addEventListener("change", e => { if (e.target.id === "su-read"){ SU.read = e.target.checked; const b = document.querySelector("[data-suopen]"); if (b) b.disabled = !SU.read; } });
 loadSU().then(async () => { await loadPass(); render(); if (location.hash === "#signup"){ const e = document.querySelector(".su"), nv = document.querySelector("nav.tabs"); if (e) window.scrollTo({top: e.getBoundingClientRect().top + scrollY - (nv ? nv.getBoundingClientRect().height : 0) - 12}); } });
 render();
-setInterval(() => { if (!document.hidden) pull(); }, MODE === "tv" ? 2000 : MODE ? 3000 : 8000);
+let pullK = 0; setInterval(() => { if (document.hidden) return; pullK++; let lv = false; try { lv = allMatches().some(m => isLive(m.id) && !isDoneM(m)); } catch (e) {} if (MODE || lv || pullK % 2 === 0) pull(); }, MODE === "tv" ? 2000 : MODE ? 3000 : 4000);
 /* instant updates: every score change is pushed to the TV and phones the moment it happens (the timer above stays as a backup) */
 let RT = null;
 try { if (sb.channel){ RT = sb.channel("tour-" + SLUG, {config: {broadcast: {self: false}}})
