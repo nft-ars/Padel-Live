@@ -188,6 +188,7 @@ header.top .hrow{align-items:center}header.top .hrow .tback2+.kick{margin-inline
 @media (prefers-reduced-motion:reduce){.v2-lg,.v2-lg::after{animation:none}}
 .sec-hide{display:flex;flex-direction:column;gap:4px;margin:12px 0;padding:14px 16px;border-radius:14px;border:1px dashed rgba(255,255,255,.28);background:rgba(255,255,255,.05);color:inherit;font-size:14px;line-height:1.4}.sec-hide b{font-size:15px}.sec-hide span{opacity:.8}.sec-hide.org{border-style:solid;border-color:#2BD9FE}.sec-rev{margin-top:8px;min-height:44px;border-radius:12px;border:0;font-weight:800;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:#05080F;background:linear-gradient(90deg,#2BD9FE,#8A7BFF,#FF9F1C);cursor:pointer}.sec-rev:disabled{opacity:.6}
 .desk-b{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.chip.pay1 small{opacity:.75;font-weight:600}.ci-split{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+.dk-main{padding-top:12px;padding-bottom:40px}.dk-main .desk{margin-top:0}
 </style><style>.phf{display:flex;align-items:stretch;gap:0;border:1px solid var(--line,rgba(127,127,127,.35));border-radius:12px;overflow:hidden;background:var(--card,transparent)}
 .phf .phcc{position:relative;display:flex;align-items:center;padding:0 10px 0 12px;border-inline-end:1px solid var(--line,rgba(127,127,127,.35));white-space:nowrap;font-weight:700;font-size:15px;cursor:pointer;margin:0}
 .phf .phcc:after{content:"▾";font-size:11px;opacity:.6;margin-inline-start:6px}
@@ -3738,6 +3739,7 @@ const TBACK = `<a class="tback2" href="./#events" aria-label="Back to PlayPal"><
 function render(){
   if (MODE === "ref") return renderRef();
   if (MODE === "tv") return renderTV();
+  if (MODE === "desk") return renderDesk();
   const app = document.getElementById("app"); const f = document.activeElement && document.activeElement.id; const sel = f && document.activeElement.selectionStart;
   const views = {schedule: vSchedule, standings: vStandings, knockouts: vKnockouts, teams: vTeams, info: vInfo, draw: vDraw};
   const vt = view.tab === "draw" && !drawOn() && !canEdit ? "schedule" : view.tab;
@@ -4079,7 +4081,7 @@ function liveTxt(id){
 function doneTxt(id){ const st = (cur().pts || {})[id]; return st && st.done && st.kind === "sets" ? setsText(st) : ""; }
 
 /* ---------- shared bits for referee + TV ---------- */
-const MODE = (() => { try { const h = location.hash.replace("#", ""); if (h === "ref" || h === "tv") return h; const p = (location.pathname.match(/\/(tv|ref)\/?$/) || [])[1]; return p || ""; } catch (e) { return ""; } })();
+const MODE = (() => { try { const h = location.hash.replace("#", ""); if (h === "ref" || h === "tv" || h === "desk") return h; const p = (location.pathname.match(/\/(tv|ref)\/?$/) || [])[1]; return p || ""; } catch (e) { return ""; } })();
 const PINKEY = "pl-refpin-" + SLUG, CTKEY = "pl-refct-" + SLUG;
 const lsGet = k => { try { return localStorage.getItem(k) || ""; } catch (e) { return ""; } };
 const lsSet = (k, v) => { try { if (v) localStorage.setItem(k, v); else localStorage.removeItem(k); } catch (e) {} };
@@ -4423,6 +4425,9 @@ function orgTools(){
     <p class="org-msg" id="org-msg"></p>
     <div class="org-row"><span><b>Referee link</b><code>${esc(root)}/ref</code><small class="org-long">Long link (always this tournament): ${esc(base)}#ref</small></span><button class="btn small" data-copy="${esc(root)}/ref">Copy</button></div>
     <div class="org-row"><span><b>TV link</b><code>${esc(root)}/tv</code><small class="org-long">Long link (always this tournament): ${esc(base)}#tv</small></span><button class="btn small" data-copy="${esc(root)}/tv">Copy</button></div>
+    <form id="dkF" class="org-row"><label>Payments desk PIN (6 digits)<input id="org-dkpin" inputmode="numeric" maxlength="6" placeholder="e.g. 730158"></label><button class="btn" type="submit">Save PIN</button></form>
+    <p class="org-msg" id="org-dkmsg"></p>
+    <div class="org-row"><span><b>Payments desk link</b><code>${esc(base)}#desk</code><small class="org-long">Desk staff see only the payments desk: teams, scan, who paid. Nothing else.</small></span><button class="btn small" data-copy="${esc(base)}#desk">Copy</button></div>
     <p class="org-note">Give referees the link and the PIN. Each referee picks their court and taps + point after every point. Open the TV link on the club TVs' browser.</p></div></section>`;
 }
 document.addEventListener("submit", async e => {
@@ -4431,6 +4436,13 @@ document.addEventListener("submit", async e => {
   if (!/^\d{6}$/.test(v)){ msg.textContent = "Use exactly 6 digits."; return; }
   const r = await sb.rpc("t_set_pin", { p_slug: SLUG, p_pin: v });
   msg.textContent = r.error ? r.error.message : "Saved. Referees can log in with " + v + ".";
+});
+document.addEventListener("submit", async e => {
+  if (!e.target || e.target.id !== "dkF") return; e.preventDefault();
+  const v = (document.getElementById("org-dkpin").value || "").trim(), msg = document.getElementById("org-dkmsg");
+  if (!/^\d{6}$/.test(v)){ msg.textContent = "Use exactly 6 digits."; return; }
+  const r = await sb.rpc("t_set_desk_pin", { p_slug: SLUG, p_pin: v });
+  msg.textContent = r.error ? (/t_set_desk_pin/.test(r.error.message || "") ? "Run Step 80 on the SQL page first." : r.error.message) : "Saved. Desk staff log in with " + v + ".";
 });
 document.addEventListener("click", async e => {
   const b = e.target.closest("[data-copy]"); if (!b) return;
@@ -4522,7 +4534,49 @@ function qrSvg(text){ const m = PLQR(text), n = m.length, q = 3, S2 = n + q * 2;
 /* ---------- check-in pass (player) and desk (organizer) ---------- */
 var CI = { pass: null, desk: null, open: false, res: null, f: "all", q: "" };
 async function loadPass(){ try { const r = await sb.rpc("t_my_pass", {p_slug: SLUG}); CI.pass = r.error ? null : r.data; } catch (e) {} }
-async function loadDesk(){ try { const r = await sb.rpc("t_desk", {p_slug: SLUG}); CI.desk = r.error ? null : r.data; } catch (e) {} }
+/* desk link (#desk): staff log in with the desk PIN and see only the Payments desk */
+const DKKEY = "pl-deskpin-" + SLUG, DK = { pin: lsGet(DKKEY), msg: "", checking: false };
+function dkErr(d){ if (!d || !d.err) return false; if (d.err === "pin"){ DK.pin = ""; lsSet(DKKEY, ""); DK.msg = "The desk PIN isn't right or was changed. Ask the organizer."; CI.desk = null; }
+  else if (d.err === "wait"){ DK.msg = "Too many wrong PINs. Wait 10 minutes and try again."; } else { alertMsg(d.err); return true; } render(); return true; }
+async function dRpc(fn, a){
+  if (MODE !== "desk") return sb.rpc(fn, a);
+  const P = {p_slug: SLUG, p_pin: DK.pin};
+  const r = fn === "t_desk" ? await sb.rpc("t_desk_pin_list", P)
+    : fn === "t_checkin" ? await sb.rpc("t_desk_pin_scan", {...P, p_key: a.p_key})
+    : fn === "t_set_paid_player" ? await sb.rpc("t_desk_pin_pay", {...P, p_entry: a.p_entry, p_who: a.p_who, p_paid: a.p_paid})
+    : await sb.rpc("t_desk_pin_pay", {...P, p_entry: a.p_entry, p_who: 0, p_paid: a.p_paid});
+  if (r.error && /t_desk_pin/.test(r.error.message || "")) return {error: {message: "The desk link isn't switched on yet. Ask the organizer (Step 80)."}};
+  if (!r.error && r.data && r.data.err){ dkErr(r.data); return {error: {message: "", quiet: true}}; }
+  return r;
+}
+function renderDesk(){
+  const app = document.getElementById("app"); document.body.classList.add("refmode");
+  const head = `<header class="rf-top"><div><b>Payments desk</b><span>${esc(TNAME)}</span></div>${DK.pin ? `<button class="rf-link" data-dkout>Log out</button>` : ""}</header>`;
+  if (!DK.pin){
+    app.innerHTML = head + `<main class="rf"><form id="dkPin" class="rf-card"><h2>Enter the desk PIN</h2><p>The organizer gives you a 6-digit PIN for the payments desk.</p>
+      <input id="dk-pin" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="••••••" aria-label="Desk PIN">
+      <button class="rf-big" type="submit"${DK.checking ? " disabled" : ""}>Continue</button>${DK.msg ? `<p class="rf-msg">${esc(DK.msg)}</p>` : ""}</form></main>`;
+    return;
+  }
+  CI.open = true;
+  app.innerHTML = head + `<main class="wrap gut dk-main">${status ? `<p class="rf-msg">${esc(status)}</p>` : ""}${CI.desk ? deskBox() : `<p class="su-s" style="padding:30px 0;text-align:center">Loading teams…</p>`}</main>`;
+}
+document.addEventListener("submit", async e => {
+  if (!e.target || e.target.id !== "dkPin") return; e.preventDefault();
+  const v = (document.getElementById("dk-pin").value || "").trim();
+  if (!/^\d{6}$/.test(v)){ DK.msg = "The PIN is 6 digits."; render(); return; }
+  DK.checking = true; DK.msg = ""; render();
+  try { const r = await sb.rpc("t_desk_pin_list", {p_slug: SLUG, p_pin: v});
+    if (r.error) DK.msg = /t_desk_pin/.test(r.error.message || "") ? "The desk link isn't switched on yet. Ask the organizer." : "Can't check the PIN right now. Check the internet.";
+    else if (r.data && r.data.err) DK.msg = r.data.err === "wait" ? "Too many wrong PINs. Wait 10 minutes and try again." : "That PIN isn't right. Ask the organizer.";
+    else { DK.pin = v; lsSet(DKKEY, v); CI.desk = r.data; CI.open = true; setTimeout(ciStart, 200); } }
+  catch (x) { DK.msg = "Can't check the PIN right now. Check the internet."; }
+  DK.checking = false; render();
+});
+document.addEventListener("click", e => { if (!e.target.closest("[data-dkout]")) return; DK.pin = ""; lsSet(DKKEY, ""); CI.desk = null; CI.res = null; ciStop(); render(); });
+if (MODE === "desk"){ setInterval(async () => { if (!document.hidden && DK.pin && !CI.res){ await loadDesk(); const f = document.activeElement && document.activeElement.id; if (f !== "ci-q" && f !== "ci-code") render(); } }, 15000);
+  setTimeout(async () => { if (DK.pin){ await loadDesk(); render(); setTimeout(ciStart, 200); } }, 600); }
+async function loadDesk(){ try { const r = await dRpc("t_desk", {p_slug: SLUG}); if (r.error && r.error.quiet) return; CI.desk = r.error ? (MODE === "desk" ? CI.desk : null) : r.data; } catch (e) {} }
 const feeTxt = f => f ? `$${(+f).toLocaleString("en-US")}` : "";
 function passBox(){ const p = CI.pass; if (!p || p.status !== "confirmed" || editMode) return "";
   return `<section class="sec pass"><h2>Your entry pass <small>${p.paid ? "Paid, see you on court" : p.my_paid ? "Your half is paid ✓ · your partner still pays at the desk" : "Show it at the desk when you pay"}</small></h2>
@@ -4557,20 +4611,20 @@ async function ciStart(){ if (ciBusy) return; ciStop(); const v = document.getEl
     const det = new BarcodeDetector({formats: ["qr_code"]}); ciBusy = false;
     ciTimer = setInterval(async () => { if (!CI.open || CI.res){ ciStop(); return; } try { const vv = document.getElementById("ciVid") || v; const c = await det.detect(vv); if (c && c[0] && c[0].rawValue){ ciStop(); ciDo(c[0].rawValue); } } catch (e) {} }, 350);
   } catch (e) { ciBusy = false; const box = document.querySelector(".ci-cam"); if (box) box.innerHTML = `<p class="su-s">Camera not available. Type the team's 4-digit code instead.</p>`; } }
-async function ciDo(key){ const r = await sb.rpc("t_checkin", {p_slug: SLUG, p_key: key}); if (r.error){ alertMsg(r.error.message); ciStart(); return; }
+async function ciDo(key){ const r = await dRpc("t_checkin", {p_slug: SLUG, p_key: key}); if (r.error){ if (!r.error.quiet) alertMsg(r.error.message); if (MODE !== "desk" || DK.pin) ciStart(); return; }
   CI.res = r.data; try { navigator.vibrate && navigator.vibrate(80); } catch (e) {} await loadDesk(); render(); }
 function alertMsg(m){ status = m; render(); setTimeout(() => { if (status === m){ status = ""; render(); } }, 4000); }
 document.addEventListener("click", async e => { const el = e.target.closest("[data-ciopen],[data-cinext],[data-cigo],[data-cipaid],[data-cif],[data-dpaid],[data-dpay],[data-cipay],[data-din]"); if (!el) return; const d = el.dataset;
   if ("ciopen" in d){ CI.open = !CI.open; CI.res = null; if (CI.open){ await loadDesk(); render(); setTimeout(ciStart, 150); } else { ciStop(); render(); } return; }
   if ("cinext" in d){ CI.res = null; render(); setTimeout(ciStart, 150); return; }
   if ("cigo" in d){ const v = (document.getElementById("ci-code") || {}).value || ""; if (v.replace(/\D/g, "").length < 4) return; ciStop(); ciDo(v); return; }
-  if (d.cipaid){ const r = await sb.rpc("t_set_paid", {p_entry: d.cipaid, p_paid: true}); if (r.error){ alertMsg(r.error.message); return; } CI.res.paid = true; CI.res.paid1 = CI.res.paid2 = true; await loadDesk(); render(); return; }
+  if (d.cipaid){ const r = await dRpc("t_set_paid", {p_entry: d.cipaid, p_paid: true}); if (r.error){ if (!r.error.quiet) alertMsg(r.error.message); return; } CI.res.paid = true; CI.res.paid1 = CI.res.paid2 = true; await loadDesk(); render(); return; }
   if (d.cif){ CI.f = d.cif; render(); return; }
-  if (d.dpay || d.cipay){ const [id, k, v] = (d.dpay || d.cipay + "|1").split("|"); const r = await sb.rpc("t_set_paid_player", {p_entry: id, p_who: +k, p_paid: v === "1"});
-    if (r.error){ alertMsg(/t_set_paid_player/.test(r.error.message || "") ? "Run Step 79 on the SQL page first." : r.error.message); return; }
+  if (d.dpay || d.cipay){ const [id, k, v] = (d.dpay || d.cipay + "|1").split("|"); const r = await dRpc("t_set_paid_player", {p_entry: id, p_who: +k, p_paid: v === "1"});
+    if (r.error){ if (r.error.quiet) return; alertMsg(/t_set_paid_player/.test(r.error.message || "") ? "Run Step 79 on the SQL page first." : r.error.message); return; }
     if (CI.res && CI.res.id === id && r.data){ CI.res.paid1 = r.data.paid1; CI.res.paid2 = r.data.paid2; CI.res.paid = r.data.paid; }
     await loadDesk(); render(); return; }
-  if (d.dpaid){ const [id, v] = d.dpaid.split("|"); const r = await sb.rpc("t_set_paid", {p_entry: id, p_paid: v === "1"}); if (r.error){ alertMsg(r.error.message); return; } await loadDesk(); render(); return; }
+  if (d.dpaid){ const [id, v] = d.dpaid.split("|"); const r = await dRpc("t_set_paid", {p_entry: id, p_paid: v === "1"}); if (r.error){ if (!r.error.quiet) alertMsg(r.error.message); return; } await loadDesk(); render(); return; }
   if (d.din){ const [id, v] = d.din.split("|"); const r = await sb.rpc("t_set_checkin", {p_entry: id, p_in: v === "1"}); if (r.error){ alertMsg(r.error.message); return; } await loadDesk(); render(); return; }
 });
 document.addEventListener("input", e => { if (e.target.id === "ci-q"){ CI.q = e.target.value; const pos = e.target.selectionStart; render(); const n = document.getElementById("ci-q"); if (n){ n.focus(); try { n.setSelectionRange(pos, pos); } catch (x) {} } } });
@@ -4768,7 +4822,7 @@ async function pcFlow(run){ const box = () => PC.el;
   await pcBot(L.req, 700); await pcBot(L.next(CFG.fee ? +CFG.fee : 0), 900);
   return pcEnd(true); }
 
-function pcCan(){ const I = SU.info; return !!(I && I.open && MODE !== "tv" && MODE !== "ref" && !editMode); }
+function pcCan(){ const I = SU.info; return !!(I && I.open && !MODE && !editMode); }
 function pcAuto(){ if (PC.auto) return; PC.auto = true; if (!pcCan()) return;
   if (location.hash === "#chat"){ try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {} setTimeout(() => { if (!PC.el && pcCan()) pcOpen(); }, 600); } }
 async function pcEnd(done){ const L = pcL(); await pcChoices([[L.close, "x"]]); pcClose(); if (done) setTimeout(instPop, 500); }
