@@ -130,7 +130,7 @@ body{margin:0;font:14px/1.4 system-ui,-apple-system,sans-serif}img{max-width:100
 .ci-res.ok{background:rgba(46,158,91,.14)}.ci-res.again{background:rgba(232,162,58,.16)}
 .ci-big{font-size:44px;line-height:1}.ci-who{font-size:20px;font-weight:800}.ci-due{font-size:16px;color:#C2410C}
 .desk-l{display:flex;flex-direction:column;gap:8px}
-.desk-r{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 12px;border-radius:12px;background:var(--card,#fff);border:1px solid var(--line,rgba(0,0,0,.08))}
+.desk-r{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12)}.desk-r b{color:#fff}.desk-r .su-s{color:rgba(255,255,255,.65)}
 .desk-r>div:first-child{display:flex;flex-direction:column;gap:2px;min-width:0}
 .desk-b{display:flex;gap:6px;flex:none}.desk-b .chip.on{background:#2E9E5B;color:#fff;border-color:#2E9E5B}
 html:root{--catX:#D9669E;--catX-soft:rgba(217,102,158,.16)}
@@ -187,6 +187,7 @@ header.top .hrow{align-items:center}header.top .hrow .tback2+.kick{margin-inline
 .village2.paused .v2-lg,.village2.paused .v2-lg::after{animation-play-state:paused}
 @media (prefers-reduced-motion:reduce){.v2-lg,.v2-lg::after{animation:none}}
 .sec-hide{display:flex;flex-direction:column;gap:4px;margin:12px 0;padding:14px 16px;border-radius:14px;border:1px dashed rgba(255,255,255,.28);background:rgba(255,255,255,.05);color:inherit;font-size:14px;line-height:1.4}.sec-hide b{font-size:15px}.sec-hide span{opacity:.8}.sec-hide.org{border-style:solid;border-color:#2BD9FE}.sec-rev{margin-top:8px;min-height:44px;border-radius:12px;border:0;font-weight:800;font-size:15px;letter-spacing:.04em;text-transform:uppercase;color:#05080F;background:linear-gradient(90deg,#2BD9FE,#8A7BFF,#FF9F1C);cursor:pointer}.sec-rev:disabled{opacity:.6}
+.desk-b{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}.chip.pay1 small{opacity:.75;font-weight:600}.ci-split{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
 </style><style>.phf{display:flex;align-items:stretch;gap:0;border:1px solid var(--line,rgba(127,127,127,.35));border-radius:12px;overflow:hidden;background:var(--card,transparent)}
 .phf .phcc{position:relative;display:flex;align-items:center;padding:0 10px 0 12px;border-inline-end:1px solid var(--line,rgba(127,127,127,.35));white-space:nowrap;font-weight:700;font-size:15px;cursor:pointer;margin:0}
 .phf .phcc:after{content:"▾";font-size:11px;opacity:.6;margin-inline-start:6px}
@@ -4524,27 +4525,30 @@ async function loadPass(){ try { const r = await sb.rpc("t_my_pass", {p_slug: SL
 async function loadDesk(){ try { const r = await sb.rpc("t_desk", {p_slug: SLUG}); CI.desk = r.error ? null : r.data; } catch (e) {} }
 const feeTxt = f => f ? `$${(+f).toLocaleString("en-US")}` : "";
 function passBox(){ const p = CI.pass; if (!p || p.status !== "confirmed" || editMode) return "";
-  return `<section class="sec pass"><h2>Your entry pass <small>${p.paid ? "Paid, see you on court" : "Show it at the desk when you pay"}</small></h2>
+  return `<section class="sec pass"><h2>Your entry pass <small>${p.paid ? "Paid, see you on court" : p.my_paid ? "Your half is paid ✓ · your partner still pays at the desk" : "Show it at the desk when you pay"}</small></h2>
     <div class="pass-card"><div class="pass-q">${qrSvg("PLT:" + p.id)}</div>
     <div class="pass-i"><b>${esc(p.team)}</b><span class="su-s">${esc(CATN[p.cat] || p.cat)}${p.slot && !drawPend() ? ` · Team ${esc(p.slot)}` : ""}</span>
     <span class="pass-code">Code <b dir="ltr">${esc(p.code || "")}</b></span>
     <span class="tag ${p.paid ? "ok" : "due"}">${p.paid ? "✓ Paid" : `Pay at the desk${p.fee ? " · " + feeTxt(p.fee) : ""}`}</span></div></div></section>`; }
 function ciAttach(){ const v = document.getElementById("ciVid"); if (!v || CI.res) return; if (ciStream){ if (v.srcObject !== ciStream){ v.srcObject = ciStream; v.play().catch(() => {}); } } else ciStart(); }
 function deskBox(){ if (!CI.open || !CI.desk) return ""; setTimeout(ciAttach, 0);
-  const L = CI.desk, paid = L.filter(x => x.paid).length, inn = L.filter(x => x.in).length, r = CI.res, q = CI.q.trim().toLowerCase();
-  const list = L.filter(x => (CI.f === "all" || (CI.f === "unpaid" && !x.paid) || (CI.f === "paid" && x.paid)) && (!q || [x.team, x.p1, x.p2, x.code, x.slot].join(" ").toLowerCase().includes(q)));
-  const fee = +CFG.fee || 0;
-  return `<section class="sec desk"><h2>Payments desk <small>Paid ${paid} of ${L.length} teams${fee ? ` · Collected $${(paid * fee).toLocaleString("en-US")} of ${feeTxt(L.length * fee)}` : ""}</small></h2>
+  const L = CI.desk, pp = x => (x.paid1 || x.paid ? 1 : 0) + (x.paid2 || x.paid ? 1 : 0), paid = L.filter(x => pp(x) === 2).length, half = L.filter(x => pp(x) === 1).length, inn = L.filter(x => x.in).length, r = CI.res, q = CI.q.trim().toLowerCase();
+  const list = L.filter(x => (CI.f === "all" || (CI.f === "unpaid" && pp(x) < 2) || (CI.f === "paid" && pp(x) === 2)) && (!q || [x.team, x.p1, x.p2, x.code, x.slot].join(" ").toLowerCase().includes(q)));
+  const fee = +CFG.fee || 0, halves = L.reduce((n, x) => n + pp(x), 0), each = fee / 2;
+  const pBtn = (x, k) => { const on = !!(x["paid" + k] || x.paid), nm = k === 1 ? x.p1 : x.p2; return `<button class="chip pay1${on ? " on" : ""}" data-dpay="${x.id}|${k}|${on ? 0 : 1}">${on ? "✓" : "💵"} ${esc((nm || "").split(" ")[0])}${each ? ` <small>$${each.toLocaleString("en-US")}</small>` : ""}</button>`; };
+  return `<section class="sec desk"><h2>Payments desk <small>Paid ${paid} of ${L.length} teams${half ? ` · ${half} half paid` : ""}${fee ? ` · Collected $${(halves * each).toLocaleString("en-US")} of ${feeTxt(L.length * fee)}` : ""}</small></h2>
     ${r ? `<div class="ci-res ${r.paid ? "ok" : "again"}"><span class="ci-big">${r.paid ? "✓" : "💵"}</span><b>${r.paid ? "Paid" : "Not paid yet"}</b>
       <span class="ci-who">${esc(r.team)}</span><span class="su-s">${esc(CATN[r.cat] || r.cat)}${r.slot ? ` · Team ${esc(r.slot)}` : ""} · ${esc(r.p1 || "")} + ${esc(r.p2 || "")}</span>
-      ${r.paid ? "" : `${r.fee ? `<span class="ci-due">To pay: <b>${feeTxt(r.fee)}</b></span>` : ""}<button class="btn primary" data-cipaid="${r.id}">💵 Mark as paid (cash)</button>`}
+      ${r.paid ? "" : `${r.fee ? `<span class="ci-due">To pay: <b>${feeTxt(r.fee)}</b>${r.paid1 || r.paid2 ? ` · ${feeTxt(r.fee / 2)} already paid by ${esc(((r.paid1 ? r.p1 : r.p2) || "").split(" ")[0])}` : ` · or ${feeTxt(r.fee / 2)} each`}</span>` : ""}
+        <div class="ci-split">${[1, 2].map(k => r["paid" + k] ? `<span class="chip on">✓ ${esc(((k === 1 ? r.p1 : r.p2) || "").split(" ")[0])} paid</span>` : `<button class="btn" data-cipay="${r.id}|${k}">💵 ${esc(((k === 1 ? r.p1 : r.p2) || "").split(" ")[0])} paid${r.fee ? " " + feeTxt(r.fee / 2) : ""}</button>`).join("")}</div>
+        ${r.paid1 || r.paid2 ? "" : `<button class="btn primary" data-cipaid="${r.id}">💵 Both paid${r.fee ? " " + feeTxt(r.fee) : ""}</button>`}`}
       <button class="btn" data-cinext>Scan next team</button></div>`
     : `<div class="ci-cam">${"BarcodeDetector" in window ? `<video id="ciVid" playsinline muted></video><i class="ci-frame"></i>` : `<p class="su-s">This browser can't scan. Type the team's 4-digit code instead.</p>`}</div>
       <div class="ci-code"><input id="ci-code" inputmode="numeric" maxlength="4" placeholder="4-digit code" dir="ltr"><button class="btn primary" data-cigo>Find</button></div>`}
-    <div class="su-cats"><button class="chip" data-cif="all" aria-pressed="${CI.f === "all"}">All ${L.length}</button><button class="chip" data-cif="paid" aria-pressed="${CI.f === "paid"}">Paid ${paid}</button><button class="chip" data-cif="unpaid" aria-pressed="${CI.f === "unpaid"}">Not paid ${L.length - paid}</button></div>
+    <div class="su-cats"><button class="chip" data-cif="all" aria-pressed="${CI.f === "all"}">All ${L.length}</button><button class="chip" data-cif="paid" aria-pressed="${CI.f === "paid"}">Paid ${paid}</button><button class="chip" data-cif="unpaid" aria-pressed="${CI.f === "unpaid"}">Not fully paid ${L.length - paid}</button></div>
     <input id="ci-q" class="ci-q" placeholder="Search a team, player or code" value="${esc(CI.q)}">
     <div class="desk-l">${list.map(x => `<div class="desk-r"><div><b>${esc(x.team)}</b><span class="su-s">${esc(CATN[x.cat] || x.cat)}${x.slot ? ` · ${esc(x.slot)}` : ""} · code ${esc(x.code || "")}</span><span class="su-s">${esc(x.p1)} + ${esc(x.p2)}</span></div>
-      <div class="desk-b"><button class="chip${x.paid ? " on" : ""}" data-dpaid="${x.id}|${x.paid ? 0 : 1}">${x.paid ? "✓ Paid" : "💵 Not paid"}</button></div></div>`).join("") || `<p class="su-s">No teams.</p>`}</div></section>`; }
+      <div class="desk-b">${pBtn(x, 1)}${pBtn(x, 2)}</div></div>`).join("") || `<p class="su-s">No teams.</p>`}</div></section>`; }
 var ciStream = null, ciTimer = null;
 function ciStop(){ if (ciTimer){ clearInterval(ciTimer); ciTimer = null; } if (ciStream){ ciStream.getTracks().forEach(x => x.stop()); ciStream = null; } }
 var ciBusy = false;
@@ -4556,12 +4560,16 @@ async function ciStart(){ if (ciBusy) return; ciStop(); const v = document.getEl
 async function ciDo(key){ const r = await sb.rpc("t_checkin", {p_slug: SLUG, p_key: key}); if (r.error){ alertMsg(r.error.message); ciStart(); return; }
   CI.res = r.data; try { navigator.vibrate && navigator.vibrate(80); } catch (e) {} await loadDesk(); render(); }
 function alertMsg(m){ status = m; render(); setTimeout(() => { if (status === m){ status = ""; render(); } }, 4000); }
-document.addEventListener("click", async e => { const el = e.target.closest("[data-ciopen],[data-cinext],[data-cigo],[data-cipaid],[data-cif],[data-dpaid],[data-din]"); if (!el) return; const d = el.dataset;
+document.addEventListener("click", async e => { const el = e.target.closest("[data-ciopen],[data-cinext],[data-cigo],[data-cipaid],[data-cif],[data-dpaid],[data-dpay],[data-cipay],[data-din]"); if (!el) return; const d = el.dataset;
   if ("ciopen" in d){ CI.open = !CI.open; CI.res = null; if (CI.open){ await loadDesk(); render(); setTimeout(ciStart, 150); } else { ciStop(); render(); } return; }
   if ("cinext" in d){ CI.res = null; render(); setTimeout(ciStart, 150); return; }
   if ("cigo" in d){ const v = (document.getElementById("ci-code") || {}).value || ""; if (v.replace(/\D/g, "").length < 4) return; ciStop(); ciDo(v); return; }
-  if (d.cipaid){ const r = await sb.rpc("t_set_paid", {p_entry: d.cipaid, p_paid: true}); if (r.error){ alertMsg(r.error.message); return; } CI.res.paid = true; await loadDesk(); render(); return; }
+  if (d.cipaid){ const r = await sb.rpc("t_set_paid", {p_entry: d.cipaid, p_paid: true}); if (r.error){ alertMsg(r.error.message); return; } CI.res.paid = true; CI.res.paid1 = CI.res.paid2 = true; await loadDesk(); render(); return; }
   if (d.cif){ CI.f = d.cif; render(); return; }
+  if (d.dpay || d.cipay){ const [id, k, v] = (d.dpay || d.cipay + "|1").split("|"); const r = await sb.rpc("t_set_paid_player", {p_entry: id, p_who: +k, p_paid: v === "1"});
+    if (r.error){ alertMsg(/t_set_paid_player/.test(r.error.message || "") ? "Run Step 79 on the SQL page first." : r.error.message); return; }
+    if (CI.res && CI.res.id === id && r.data){ CI.res.paid1 = r.data.paid1; CI.res.paid2 = r.data.paid2; CI.res.paid = r.data.paid; }
+    await loadDesk(); render(); return; }
   if (d.dpaid){ const [id, v] = d.dpaid.split("|"); const r = await sb.rpc("t_set_paid", {p_entry: id, p_paid: v === "1"}); if (r.error){ alertMsg(r.error.message); return; } await loadDesk(); render(); return; }
   if (d.din){ const [id, v] = d.din.split("|"); const r = await sb.rpc("t_set_checkin", {p_entry: id, p_in: v === "1"}); if (r.error){ alertMsg(r.error.message); return; } await loadDesk(); render(); return; }
 });
@@ -4593,10 +4601,10 @@ en: { title: "Sign-up Assistant", online: "online", pick: "Pick an answer above"
   closed: "Sign-up for this tournament is closed 🙏", hasAcc: "Do you already have a PlayPal account?", yes: "Yes, sign me in", no: "No, I'm new",
   signedIn: "You're logged in to your account ✓\nNow let's sign up your team.", nameQ: "Great, let's make one. What's your <b>full name</b>?\n<i>Write it in English letters</i> (example: Omar Haddad)",
   namePh: "First and last name in English", nameEn: "Please write your name in <b>English letters</b> 🙏\nExample: <b>Omar Haddad</b>", name2: "Please write your first <b>and</b> last name 🙏",
-  nice: n => `Nice to meet you, ${n}! What's your <b>WhatsApp number</b>?`, phQ: "What's your <b>WhatsApp number</b>?", phBad: "That doesn't look right. Try like <b>9XX XXX XXX</b>",
+  nice: n => `Nice to meet you, ${n}! What's your <b>WhatsApp number</b>?`, phQ: "What's your <b>WhatsApp number</b>, or the <b>email</b> you signed up with?", phBad: "That doesn't look right. Try like <b>9XX XXX XXX</b>",
   pwNew: "Last one: choose a <b>password</b> (at least 6 characters).", pwQ: "And your <b>password</b>?", pw: "Password", pwBad: "At least 6 characters please 🔒",
   wait: "One moment…", made: "✅ Your account is ready. Welcome to PlayPal!\nNow let's sign up your team.", back: n => `✅ Welcome back${n ? ", " + n : ""}!`,
-  authErr: "That didn't work:", retry: "Try again", other: "I'll use the form instead",
+  authErr: "That didn't work:", loginHelp: "If you made your account with an <b>email</b>, type the email instead of the number. Forgot your password? Message PlayPal on WhatsApp and we'll reset it.", retry: "Try again", other: "I'll use the form instead",
   another: c => `Want to sign up another team?\nAny category, any partner.`, anotherY: "Yes, another team", already: (tm, c, ok) => `You're already on a team in this tournament:${tm}\n${ok ? "✅ Confirmed by the organizer." : "⏳ Waiting for the organizer to confirm."}\nIf you didn't sign up yourself, your partner added you. Not right? Ask the organizer via <b>Contact support</b> in the Info tab.`, waiting: "You already sent an invite. We're waiting for your partner to join ⏳ You can see it on the page.",
   catQ: "Which <b>category</b> will your team play?", unsure: "Not sure 🤔", full: "Full",
   catHelp: "No problem:\n• <b>D</b>: you play for fun, still learning\n• <b>C</b>: you play every week, good rallies\n• <b>B</b>: strong player, plays matches often\nThe organizer checks every team, so pick your best guess.",
@@ -4617,10 +4625,10 @@ ar: { title: "مساعد التسجيل", online: "متصل", pick: "اختار 
   closed: "التسجيل بهالبطولة مسكّر 🙏", hasAcc: "عندك حساب على PlayPal؟", yes: "إيه، سجّلني دخول", no: "لا، أنا جديد",
   signedIn: "دخلت على حسابك ✓\nهلأ خلينا نسجّل فريقك.", nameQ: "تمام، خلينا نعملك حساب. شو <b>اسمك الكامل</b>؟\n<i>اكتبه بالأحرف الإنجليزية</i> (مثلاً: Omar Haddad)",
   namePh: "الاسم والكنية بالإنجليزي", nameEn: "لو سمحت اكتب اسمك <b>بالأحرف الإنجليزية</b> 🙏\nمثلاً: <b>Omar Haddad</b>", name2: "اكتب اسمك <b>والكنية</b> لو سمحت 🙏",
-  nice: n => `أهلين ${n}! شو <b>رقم الواتساب</b> تبعك؟`, phQ: "شو <b>رقم الواتساب</b> تبعك؟", phBad: "الرقم مو مزبوط. جرّب هيك: <b>9XX XXX XXX</b>",
+  nice: n => `أهلين ${n}! شو <b>رقم الواتساب</b> تبعك؟`, phQ: "شو <b>رقم الواتساب</b> تبعك، أو <b>الإيميل</b> يلي سجّلت فيه؟", phBad: "الرقم مو مزبوط. جرّب هيك: <b>9XX XXX XXX</b>",
   pwNew: "آخر شي: اختار <b>كلمة سر</b> (٦ أحرف عالأقل).", pwQ: "و<b>كلمة السر</b>؟", pw: "كلمة السر", pwBad: "٦ أحرف عالأقل لو سمحت 🔒",
   wait: "لحظة…", made: "✅ صار عندك حساب. أهلاً فيك بـ PlayPal!\nهلأ خلينا نسجّل فريقك.", back: n => `✅ أهلاً فيك من جديد${n ? " يا " + n : ""}!`,
-  authErr: "ما زبطت:", retry: "جرّب مرة تانية", other: "رح استعمل الفورم",
+  authErr: "ما زبطت:", loginHelp: "إذا عملت حسابك بـ<b>إيميل</b>، اكتب الإيميل بدل الرقم. نسيت كلمة السر؟ راسل بلاي بال عالواتساب ومنرجّعلك ياها.", retry: "جرّب مرة تانية", other: "رح استعمل الفورم",
   another: c => `بدك تسجّل فريق تاني؟\nأي فئة ومع أي شريك.`, anotherY: "إيه، فريق تاني", already: (tm, c, ok) => `إنت موجود بفريق بهالبطولة:${tm}\n${ok ? "✅ المنظّم أكّد الفريق." : "⏳ عم ننتظر المنظّم يأكّد."}\nإذا ما سجّلت إنت، يعني شريكك ضافك. في غلط؟ احكي المنظّم من <b>Contact support</b> بتبويب Info.`, waiting: "بعتت دعوة من قبل. عم ننتظر شريكك يدخل ⏳ فيك تشوفها بالصفحة.",
   catQ: "بأي <b>فئة</b> بدو يلعب فريقك؟", unsure: "مو متأكد 🤔", full: "مليانة",
   catHelp: "ولا يهمك:\n• <b>D</b>: بتلعب للمتعة وعم تتعلم\n• <b>C</b>: بتلعب كل أسبوع وتبادلاتك منيحة\n• <b>B</b>: لاعب قوي وبتلعب مباريات كتير\nالمنظّم بيراجع كل فريق، فاختار أقرب شي إلك.",
@@ -4687,16 +4695,19 @@ async function pcFlow(run){ const box = () => PC.el;
         name = name.replace(/\s+/g, " ").split(" ").map(w => w[0].toUpperCase() + w.slice(1)).join(" ");
         await pcBot(L.nice(esc(name.split(" ")[0]))); }
       else await pcBot(L.phQ);
-      ph = await pcAsk("9XX XXX XXX", {num: true, check: v => /^\+\d{8,15}$/.test(v) || /^0?9\d{8}$/.test(v) ? null : L.phBad});
+      ph = acc === "up" ? await pcAsk("9XX XXX XXX", {num: true, check: v => /^\+\d{8,15}$/.test(v) || /^0?9\d{8}$/.test(v) ? null : L.phBad})
+        : await pcAsk("9XX XXX XXX / email", {ltr: true, check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()) || /^\+\d{8,15}$/.test(v.replace(/[\s-]/g, "")) || /^0?9\d{8}$/.test(v.replace(/[\s-]/g, "")) ? null : L.phBad});
       await pcBot(acc === "up" ? L.pwNew : L.pwQ);
       pass = await pcAsk(L.pw, {pw: true, newpw: acc === "up", check: v => v.length < 6 ? L.pwBad : null});
       await pcBot(L.wait, 200); let r = null, em = "";
       if (acc === "up"){ const ps = await sb.rpc("phone_signup", {p_name: name, p_phone: phFull("963", ph), p_pass: pass}); if (ps.error) r = ps; else em = ps.data; }
-      else { const pl = await sb.rpc("phone_login", {p_phone: phFull("963", ph), p_pass: pass}); if (pl.error) r = pl; else if (!pl.data) r = {error: {message: PC.lang === "ar" ? "الرقم أو كلمة السر غلط." : "Wrong phone number or password."}}; else em = pl.data; }
+      else if (ph.includes("@")) em = ph.trim().toLowerCase();
+      else { const pl = await sb.rpc("phone_login", {p_phone: phFull("963", ph.replace(/[\s-]/g, "")), p_pass: pass}); if (pl.error) r = pl; else if (!pl.data) r = {error: {message: PC.lang === "ar" ? "الرقم أو كلمة السر غلط." : "Wrong phone number or password."}}; else em = pl.data; }
       if (!r) r = await sb.auth.signInWithPassword({email: em, password: pass});
       pcAlive(run);
       if (!r.error){ await loadSU(); pcAlive(run); await pcBot(acc === "up" ? L.made : L.back(""), 500); break; }
-      await pcBot(`${L.authErr} ${esc(r.error.message)}`, 300);
+      await pcBot(`${L.authErr} ${esc(/invalid login credentials/i.test(r.error.message || "") ? (PC.lang === "ar" ? "الإيميل أو كلمة السر غلط." : "Wrong email or password.") : r.error.message)}`, 300);
+      if (acc !== "up") await pcBot(L.loginHelp, 300);
       if (await pcChoices([[L.retry, "r"], [L.other, "f"]]) === "f"){ pcClose(); SU.open = true; SU.read = true; render(); return; } }
   } else await pcBot(L.signedIn, 350);
   const I = SU.info, mines = suMine(), free = suFree();
