@@ -3246,7 +3246,10 @@ function resolve(c){
   const KD = kdefOf(c);
   for (const [k, a, b] of KD){
     const side = src => {
-      if (src[0] === "q"){ const q = sd.qf[src[1]]; const ph = q[src[2] + 2]; return { id: done ? q[src[2]].id : null, ph: typeof ph === "string" ? ph : seedPh(ph) }; }
+      if (src[0] === "q"){ const q = sd.qf[src[1]]; const ph = q[src[2] + 2], t = q[src[2]];
+        /* fixed group brackets (2, 4 or 8 groups): a spot is known as soon as ITS group is finished */
+        const known = done || ((G === 2 || G === 4 || G === 8) && t && t.g && table(c, t.g).done);
+        return { id: known ? t.id : null, ph: typeof ph === "string" ? ph : seedPh(ph) }; }
       const w = out[src[1]]; return { id: w && w.win, ph: `Winner ${klab(src[1])}` };
     };
     const A = side(a), B = side(b), sets = k.startsWith("SF") || k === "F", tb = k.startsWith("R"), r = res(`${c}-${k}`, sets ? "sets" : tb ? 6 : 9);
