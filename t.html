@@ -3262,7 +3262,7 @@ function check(s, kind, flag){
   if (a === b) return "No draws";
   if (kind === "sets") return (hi === 2 && lo <= 1) ? "" : "Sets: 2-0 or 2-1";
   if (kind === "tb") return (hi >= 10 && hi - lo >= 2 && (hi === 10 || hi - lo === 2)) ? "" : "Super tiebreak: first to 10, win by 2";
-  if (kind === 9) return hi === 9 ? "" : "Winner needs 9";
+  if (kind === 9) return (hi === 9 && lo <= 7) || (hi === 10 && (lo === 8 || lo === 9)) ? "" : "Set to 9: 9-x, 10-8 or 10-9";
   return ((hi === 6 && lo <= 4) || (hi === 7 && lo >= 5)) ? "" : "Set to 6: 6-x, 7-5 or 7-6";
 }
 
@@ -4017,7 +4017,7 @@ function refreshBar(){ const top = document.querySelector(".admin .adm-top"); if
   const sb = document.querySelector(".savebar"); if (sb){ const tmp = document.createElement("div"); tmp.innerHTML = saveBar(); if (tmp.firstElementChild) sb.replaceWith(tmp.firstElementChild); } }
 
 /* ---------- padel scoring engine ---------- */
-/* kind: 6 = one set to 6 (tiebreak at 6-6), 9 = one set to 9 (tiebreak at 8-8), "sets" = best of 3 sets to 6, third set = super tiebreak to 10 */
+/* kind: 6 = one set to 6 (tiebreak at 6-6), 9 = one set to 9 (at 8-8 play to 10, at 9-9 super tiebreak to 10), "sets" = best of 3 sets to 6, third set = super tiebreak to 10 */
 function newPts(kind){ return { kind, sets: [], g: [0, 0], p: [0, 0], d: 0, tb: false, stb: false, done: false, win: null, n: 0 }; }
 function clonePts(x){ return JSON.parse(JSON.stringify(x)); }
 function setsWon(st){ const w = [0, 0]; for (const s of st.sets) w[s[0] > s[1] ? 0 : 1]++; return w; }
@@ -4034,8 +4034,8 @@ function gameTo(st, i){
   const a = st.g[i], b = st.g[1 - i];
   if (st.tb){ finishSet(st, i); return; }
   if (st.kind === 9){
-    if (a === 9){ finishSet(st, i); return; }
-    if (a === 8 && b === 8) st.tb = true;
+    if (a >= 9 && a - b >= 2){ finishSet(st, i); return; }   /* 9-0…9-7, or 10-8 */
+    if (a === 9 && b === 9) st.tb = true;                        /* 9-9: super tiebreak to 10 → 10-9 */
   } else {
     if (a >= 6 && a - b >= 2){ finishSet(st, i); return; }
     if (a === 6 && b === 6) st.tb = true;
@@ -4050,7 +4050,7 @@ function pointTo(st0, i){
   }
   if (st.tb){
     st.p[i]++;
-    if (st.p[i] >= 7 && st.p[i] - st.p[1 - i] >= 2) gameTo(st, i);
+    if (st.p[i] >= (st.kind === 9 ? 10 : 7) && st.p[i] - st.p[1 - i] >= 2) gameTo(st, i);
     return st;
   }
   const [a, b] = st.p;
@@ -4071,7 +4071,7 @@ function advOf(st){ if (!st || st.done || st.tb || st.stb) return null; const [a
 function ptsNote(st){
   if (!st || st.done) return "";
   if (st.stb) return "Super tiebreak to 10";
-  if (st.tb) return "Tiebreak to 7";
+  if (st.tb) return st.kind === 9 ? "Super tiebreak to 10" : "Tiebreak to 7";
   const [a, b] = st.p; if (a === b && a >= 3) return st.d >= 2 ? "Golden point" : "Deuce";
   return "";
 }
@@ -4167,7 +4167,7 @@ function renderRef(){
   const kind = m.kind === "sets" ? "sets" : m.kind === 9 ? 9 : 6;
   const st = st0 && st0.kind === kind ? st0 : null;
   const others = refMatches().filter(x => x.id !== m.id);
-  const fmtLine = kind === "sets" ? "Best of 3 · super tiebreak to 10" : kind === 9 ? "1 set to 9 · tiebreak at 8-8" : "1 set to 6 · tiebreak at 6-6";
+  const fmtLine = kind === "sets" ? "Best of 3 · super tiebreak to 10" : kind === 9 ? "1 set to 9 · 8-8 → to 10 · 9-9 → super tiebreak" : "1 set to 6 · tiebreak at 6-6";
   let body;
   if (!st){
     body = `<div class="rf-card rf-match"><span class="tag" style="background:${cvar(m.cat, 1)};color:${cvar(m.cat)}">${esc(m.tag)}</span><p class="rf-when">${esc(DSHORT[m.day])} · not before ${esc(tm(m.time))}</p>
